@@ -36,10 +36,10 @@ export default function Home() {
   // 之後繼續加...
 };
 
-  const surprise = surprises[todayStr] || {
-    type: '準備中...',
-    message: '連載從 2/6 正式開始，今天先看昨天的信吧～'
-  };
+  const surprise = surprises[todayStr as keyof typeof surprises] || {
+  type: '準備中...',
+  message: '連載從 2/6 正式開始，今天先看昨天的信吧～'
+};
 
   // 前一天的連載信
   const yesterdayEpisode = (episodes as Episode[]).find(ep => ep.date === yesterdayStr);
