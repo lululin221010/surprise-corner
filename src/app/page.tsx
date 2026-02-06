@@ -1,48 +1,42 @@
+import clientPromise from '@/lib/mongodb'; // 或 '@/app/lib/mongodb'，看你放哪
 import { format, subDays } from 'date-fns';
-import episodes from '../../data/episodes.json';   // 從 src/app 往上兩層到根目錄的 data
-import SurpriseButton from './SurpriseButton';  // ← 加這一行
+import episodes from '@/data/episodes.json';
+import SurpriseButton from './SurpriseButton';
 
-interface Episode {
-  episode: number;
-  date: string;
-  title: string;
-  content: string;
+interface Surprise {
+  type: string;
+  message: string;
 }
 
-export default function Home() {
+export default async function Home() {
   const today = new Date();
   const todayStr = format(today, 'yyyy-MM-dd');
   const yesterday = subDays(today, 1);
   const yesterdayStr = format(yesterday, 'yyyy-MM-dd');
 
-  // 驚喜資料（每天短內容，從 2/6 開始正式驚喜）
-  const surprises = {
-  '2026-02-04': { 
-    type: '開站日', 
-    message: '今天是 Surprise Corner 第一次和你見面！' 
-  },
-  '2026-02-05': { 
-    type: '工具日', 
-    message: '今天來玩一個超可愛的線上小工具！' 
-  },
-  '2026-02-06': { 
-    type: '故事日', 
-    message: '今天分享一篇短篇科幻故事' 
-  },
-  '2026-02-07': { 
-    type: '音樂日', 
-    message: '今天來聽 AI 生成的電音片段' 
-  },
-  // 之後繼續加...
-};
+  // 從 MongoDB 讀取今天的驚喜
+  let surprise: Surprise = {
+    type: '準備中...',
+    message: '連載從 2/6 正式開始，今天先看昨天的信吧～'
+  };
 
-  const surprise = surprises[todayStr as keyof typeof surprises] || {
-  type: '準備中...',
-  message: '連載從 2/6 正式開始，今天先看昨天的信吧～'
-};
+  try {
+    const client = await clientPromise;
+    const db = client.db('SurpriseCornerDB');
+    const surpriseData = await db
+      .collection('surprises')
+      .findOne<Surprise>({ date: todayStr });
+
+    if (surpriseData) {
+      surprise = surpriseData;
+    }
+  } catch (error) {
+    console.error('讀取驚喜資料失敗:', error);
+    // 錯誤時保持預設值，不影響頁面顯示
+  }
 
   // 前一天的連載信
-  const yesterdayEpisode = (episodes as Episode[]).find(ep => ep.date === yesterdayStr);
+  const yesterdayEpisode = (episodes as any[]).find(ep => ep.date === yesterdayStr);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-pink-950 text-white flex flex-col items-center p-8">
@@ -54,7 +48,7 @@ export default function Home() {
         每天不一樣的小驚喜，等你來發現
       </p>
 
-      {/* 驚喜卡片 + 按鈕 */}
+      {/* 驚喜卡片 */}
       <div className="
         bg-white/10 backdrop-blur-md p-10 rounded-3xl 
         border border-white/20 max-w-3xl w-full text-center mb-16
@@ -76,7 +70,10 @@ export default function Home() {
         </p>
 
         {/* 驚喜互動按鈕 */}
-        <SurpriseButton />
+        <SurpriseButton 
+          type={surprise.type}
+          message={surprise.message}
+        />
       </div>
 
       {/* 連載信區塊 */}
