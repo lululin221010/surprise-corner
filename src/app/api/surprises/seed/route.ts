@@ -1,9 +1,12 @@
+import { NextResponse } from 'next/server';
+import clientPromise from '@/lib/mongodb';
+
 // 30 天的驚喜內容庫存
-export const surprisesData = [
+const surprisesData = [
   {
     date: "2026-02-06",
     title: "🌟 今日金句",
-    content: "「成功不是終點，失敗也不是末日，最重要的是繼續前進的勇氣。」— 邱吉爾",
+    content: "「成功不是終點，失敗也不是末日,最重要的是繼續前進的勇氣。」— 邱吉爾",
     category: "quote",
     tags: ["勵志", "名言"],
   },
@@ -197,17 +200,56 @@ export const surprisesData = [
     tags: ["手作", "創意"],
   },
   {
-    date: "2026-03-06",
+    date: "2026-03-07",
     title: "🌊 大自然療癒",
     content: "海邊散步、森林浴，大自然是最好的療癒師。",
     category: "nature",
     tags: ["自然", "放鬆"],
   },
   {
-    date: "2026-03-07",
+    date: "2026-03-08",
     title: "💌 寫封信",
     content: "手寫一封信給重要的人，比訊息更有溫度。",
     category: "letter",
     tags: ["書寫", "情感"],
   },
 ];
+
+export async function POST() {
+  try {
+    const client = await clientPromise;
+    const db = client.db('SurpriseCornerDB');
+    const collection = db.collection('surprises');
+
+    // 批量插入資料（如果日期已存在則跳過）
+    const result = await collection.insertMany(
+      surprisesData.map(item => ({
+        ...item,
+        createdAt: new Date(),
+      })),
+      { ordered: false } // 遇到重複不停止
+    ).catch(err => {
+      // 忽略重複錯誤
+      if (err.code === 11000) {
+        return { insertedCount: 0 };
+      }
+      throw err;
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: `成功匯入 ${result.insertedCount} 筆資料`,
+      total: surprisesData.length,
+    });
+
+  } catch (error) {
+    console.error('匯入資料錯誤:', error);
+    return NextResponse.json(
+      { error: '匯入失敗' },
+      { status: 500 }
+    );
+  }
+}
+
+// ⭐ 重要：加上這行解決 Vercel 編譯錯誤
+export const dynamic = 'force-dynamic';
