@@ -12,11 +12,13 @@ export async function GET() {
     const taipeiDate = new Date(today.getTime() + (8 * 60 * 60 * 1000));
     const dateString = taipeiDate.toISOString().split('T')[0];
 
+    console.log('尋找日期:', dateString);
+
     const surprise = await collection.findOne({ date: dateString });
 
     if (!surprise) {
       return NextResponse.json(
-        { error: '今天還沒有驚喜' },
+        { error: '今天還沒有驚喜', date: dateString },
         { status: 404 }
       );
     }
@@ -31,6 +33,5 @@ export async function GET() {
   }
 }
 
-export const revalidate = 0; // 不快取
-// ⭐ 重要：加上這行解決 Vercel 編譯錯誤
+export const revalidate = 0;
 export const dynamic = 'force-dynamic';
