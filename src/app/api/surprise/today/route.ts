@@ -32,3 +32,5 @@ export async function GET() {
 }
 
 export const revalidate = 0; // 不快取
+// ⭐ 重要：加上這行解決 Vercel 編譯錯誤
+export const dynamic = 'force-dynamic';

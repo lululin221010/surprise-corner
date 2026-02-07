@@ -56,3 +56,5 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: '伺服器錯誤' }, { status: 500 });
   }
 }
+// ⭐ 重要：加上這行解決 Vercel 編譯錯誤
+export const dynamic = 'force-dynamic';
