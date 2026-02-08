@@ -1,31 +1,67 @@
-import { NextResponse } from 'next/server';
+// 📄 檔案路徑：src/app/api/surprise/update/route.ts
+// 功能：更新或新增驚喜資料
+
+import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-export async function GET() {
+export async function POST(request: NextRequest) {
   try {
+    const body = await request.json();
+    const { date, type, message, toolUrl, story, imageUrl } = body;
+
+    // 必填欄位檢查
+    if (!date || !type || !message) {
+      return NextResponse.json(
+        { error: '缺少必要欄位：date, type, message' },
+        { status: 400 }
+      );
+    }
+
+    // 日期格式驗證
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      return NextResponse.json(
+        { error: '日期格式應為 yyyy-MM-dd' },
+        { status: 400 }
+      );
+    }
+
     const client = await clientPromise;
     const db = client.db('SurpriseCornerDB');
     const collection = db.collection('surprises');
 
-    // 獲取今天的日期 (台灣時區 UTC+8)
-    const today = new Date();
-    const taipeiDate = new Date(today.getTime() + (8 * 60 * 60 * 1000));
-    const dateString = taipeiDate.toISOString().split('T')[0];
+    // 更新或新增（upsert: true）
+    const result = await collection.updateOne(
+      { date: date },
+      {
+        $set: {
+          type,
+          message,
+          toolUrl: toolUrl || null,
+          story: story || null,
+          imageUrl: imageUrl || null,
+          updatedAt: new Date()
+        },
+        $setOnInsert: {
+          createdAt: new Date()
+        }
+      },
+      { upsert: true }
+    );
 
-    console.log('尋找日期:', dateString);
-
-    const surprise = await collection.findOne({ date: dateString });
-
-    if (!surprise) {
-      return NextResponse.json(
-        { error: '今天還沒有驚喜', date: dateString },
-        { status: 404 }
-      );
+    if (result.matchedCount > 0 || result.upsertedCount > 0) {
+      return NextResponse.json({
+        success: true,
+        message: result.matchedCount > 0 ? '更新成功' : '新增成功',
+        date
+      });
     }
 
-    return NextResponse.json(surprise);
+    return NextResponse.json(
+      { success: false, error: '更新失敗' },
+      { status: 500 }
+    );
   } catch (error) {
-    console.error('獲取今日驚喜失敗:', error);
+    console.error('更新驚喜失敗:', error);
     return NextResponse.json(
       { error: '伺服器錯誤' },
       { status: 500 }
@@ -33,5 +69,5 @@ export async function GET() {
   }
 }
 
-export const revalidate = 0;
+// ⭐ 重要：解決 Vercel 編譯錯誤
 export const dynamic = 'force-dynamic';

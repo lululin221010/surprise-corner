@@ -1,3 +1,6 @@
+// 📄 檔案路徑：src/app/api/surprise/update/route.ts
+// 功能：更新或新增驚喜資料
+
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
@@ -14,9 +17,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 日期格式簡單驗證
+    // 日期格式驗證
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      return NextResponse.json({ error: '日期格式應為 yyyy-MM-dd' }, { status: 400 });
+      return NextResponse.json(
+        { error: '日期格式應為 yyyy-MM-dd' },
+        { status: 400 }
+      );
     }
 
     const client = await clientPromise;
@@ -50,11 +56,18 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ success: false, error: '更新失敗' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: '更新失敗' },
+      { status: 500 }
+    );
   } catch (error) {
     console.error('更新驚喜失敗:', error);
-    return NextResponse.json({ error: '伺服器錯誤' }, { status: 500 });
+    return NextResponse.json(
+      { error: '伺服器錯誤' },
+      { status: 500 }
+    );
   }
 }
-// ⭐ 重要：加上這行解決 Vercel 編譯錯誤
+
+// ⭐ 重要：解決 Vercel 編譯錯誤
 export const dynamic = 'force-dynamic';
