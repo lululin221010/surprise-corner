@@ -3,7 +3,7 @@
 // 功能：管理後台（密碼保護，離開自動登出）
 
 import { useState, useEffect } from 'react';
-
+import { CSSProperties } from 'react';
 const ADMIN_PASSWORD = 'admin080511'; // ← 改成你想要的密碼
 
 const TYPES = ['每日名言', '有趣冷知識', '今日小挑戰', '療癒小故事', 'AI科技趣聞', '生活小技巧'];
@@ -63,7 +63,7 @@ export default function AdminPage() {
     }
   };
 
-  const inputStyle = {
+  const inputStyle CSSProperties = {
     width: '100%', background: 'rgba(0,0,0,0.3)',
     border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px',
     color: '#fff', padding: '0.7rem 1rem', fontSize: '0.95rem',
