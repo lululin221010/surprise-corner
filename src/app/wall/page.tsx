@@ -34,7 +34,7 @@ export default async function WallPage() {
         >
           <p style={{ margin: "0 0 10px" }}>{p.text}</p>
           <div style={{ display: "flex", gap: "12px", fontSize: "0.85rem" }}>
-            <Link href={`/wall/${p._id}`}>查看作品 →</Link>
+            <Link href={`/wall/${p._id.toString()}`}>查看作品 →</Link>
             {p.creatorId && (
               <Link href={`/creator/${p.creatorId}`}>作者頁 →</Link>
             )}
