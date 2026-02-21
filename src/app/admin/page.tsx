@@ -63,7 +63,7 @@ export default function AdminPage() {
     }
   };
 
-  const inputStyle CSSProperties = {
+  const inputStyle: CSSProperties = {
     width: '100%', background: 'rgba(0,0,0,0.3)',
     border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px',
     color: '#fff', padding: '0.7rem 1rem', fontSize: '0.95rem',
