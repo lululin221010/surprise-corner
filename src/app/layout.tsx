@@ -1,6 +1,6 @@
 // 📄 檔案路徑：src/app/layout.tsx
 // 功能：全域佈局 + SEO 設定
-
+import Navbar from '@/components/Navbar';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -72,7 +72,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-TW">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+  <Navbar />
+  {children}
+</body>
     </html>
   );
 }

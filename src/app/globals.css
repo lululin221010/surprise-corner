@@ -1,16 +1,15 @@
 /* 📄 檔案路徑：src/app/globals.css */
 /* 功能：全域樣式 + Tailwind CSS */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: theme(colors.gray.200);
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: theme(colors.white);
+    color: theme(colors.gray.900);
   }
 }
 
