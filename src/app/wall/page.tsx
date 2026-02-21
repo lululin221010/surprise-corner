@@ -6,7 +6,11 @@ export default async function WallPage() {
   const client = await clientPromise;
   const db = client.db();
   const posts = await db.collection("wall").find({}).sort({ createdAt: -1 }).limit(50).toArray();
-  const serialized = posts.map(p => ({ ...p, _id: p._id.toString() }));
+  const serialized = posts.map(p => ({
+  _id: p._id.toString(),
+  text: p.text as string,
+  creatorId: p.creatorId as string | null,
+}));
 
   return (
     <main style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #1a1040 100%)', color: '#fff', padding: '3rem 1rem' }}>
