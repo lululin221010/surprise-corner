@@ -22,6 +22,14 @@ const FEATURES = [
     glow: 'rgba(124,58,237,0.4)',
   },
   {
+  icon: '🔥',
+  title: '作品牆',
+  desc: '大家用 AI 生成的驚喜創作，每天都有新內容出現。',
+  href: '/wall',
+  color: '#ef4444',
+  glow: 'rgba(239,68,68,0.4)',
+},
+  {
     icon: '🤖',
     title: 'AI 科技快訊',
     desc: '每小時自動更新最新人工智慧動態，讓你走在時代前端。',
