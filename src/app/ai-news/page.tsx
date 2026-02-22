@@ -15,6 +15,10 @@ const SOURCE_COLORS: Record<string, string> = {
   'TechCrunch': '#0a8a4c',
   'The Verge': '#ff3b30',
   'BBC Tech': '#bb1919',
+  'iThome': '#0066cc',
+  '科技新報': '#e65c00',
+  '鉅亨網': '#c0392b',
+  'MoneyDJ': '#27ae60',
 };
 
 function timeAgo(dateStr: string) {
