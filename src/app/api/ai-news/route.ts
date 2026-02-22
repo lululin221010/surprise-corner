@@ -106,3 +106,7 @@ export async function GET() {
 
     allNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
     return NextResponse.json({ news: allNews.slice(0, 20) });
+  } catch {
+    return NextResponse.json({ news: [] }, { status: 500 });
+  }
+}
