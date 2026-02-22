@@ -39,6 +39,107 @@ async function submitToWall(text: string): Promise<string | null> {
   } catch { return null; }
 }
 
+const cardStyle = {
+  background: 'rgba(255,255,255,0.07)',
+  border: '1px solid rgba(167,139,250,0.25)',
+  borderRadius: '16px', padding: '1.5rem',
+  backdropFilter: 'blur(10px)',
+};
+
+const btnStyle = (active = false) => ({
+  background: active ? 'linear-gradient(135deg, #7c3aed, #ec4899)' : 'rgba(255,255,255,0.08)',
+  color: '#fff', border: 'none', borderRadius: '30px',
+  padding: '0.5rem 1.2rem', cursor: 'pointer',
+  fontWeight: active ? 700 : 400, fontSize: '0.85rem', transition: 'all 0.2s',
+});
+
+const inputStyle: React.CSSProperties = {
+  width: '100%', background: 'rgba(0,0,0,0.3)',
+  border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px',
+  color: '#fff', padding: '0.7rem 1rem', fontSize: '0.95rem',
+  outline: 'none', boxSizing: 'border-box',
+};
+
+// ✅ AiToolPanel 移到外面，不在 ToolsPage 裡面
+interface AiPanelProps {
+  type: string;
+  placeholder: string;
+  label: string;
+  emoji: string;
+  signs?: string[];
+}
+
+function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
+  const [localInput, setLocalInput] = useState('');
+  const [selectedSign, setSelectedSign] = useState(signs?.[0] || '');
+  const [aiResult, setAiResult] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [wallMsg, setWallMsg] = useState('');
+
+  async function handleGenerate() {
+    const val = type === 'fortune' ? selectedSign : localInput;
+    if (!val.trim()) return;
+    setAiLoading(true); setAiResult(''); setWallMsg('');
+    try {
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, input: val }),
+      });
+      const data = await res.json();
+      setAiResult(data.result || '生成失敗，請再試一次');
+    } catch { setAiResult('網路錯誤，請再試一次'); }
+    setAiLoading(false);
+  }
+
+  async function handleSubmitWall() {
+    if (!aiResult) return;
+    const id = await submitToWall(aiResult);
+    if (id) setWallMsg('✅ 已公開到作品牆！');
+    else setWallMsg('❌ 送出失敗，請再試');
+  }
+
+  return (
+    <div style={{ ...cardStyle, textAlign: 'center' }}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem' }}>{emoji} {label}</h2>
+      {type === 'fortune' ? (
+        <select value={selectedSign} onChange={e => setSelectedSign(e.target.value)}
+          style={{ ...inputStyle, marginBottom: '1rem', cursor: 'pointer' }}>
+          {signs?.map(s => <option key={s} value={s}>{s}</option>)}
+        </select>
+      ) : (
+        <input
+          value={localInput}
+          onChange={e => setLocalInput(e.target.value)}
+          placeholder={placeholder}
+          style={{ ...inputStyle, marginBottom: '1rem', textAlign: 'center' }}
+          onKeyDown={e => e.key === 'Enter' && handleGenerate()}
+        />
+      )}
+      <button onClick={handleGenerate} disabled={aiLoading}
+        style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem', opacity: aiLoading ? 0.7 : 1 }}>
+        {aiLoading ? '生成中...' : '✨ 立即生成'}
+      </button>
+
+      {aiResult && (
+        <div style={{ marginTop: '1.5rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem' }}>
+          <p style={{ color: '#f3f4f6', fontSize: '1.1rem', lineHeight: 1.9, margin: '0 0 1rem', fontStyle: 'italic' }}>
+            「{aiResult}」
+          </p>
+          {!wallMsg ? (
+            <button onClick={handleSubmitWall}
+              style={{ ...btnStyle(), border: '1px solid rgba(167,139,250,0.4)', padding: '0.5rem 1.2rem' }}>
+              🔥 公開到作品牆
+            </button>
+          ) : (
+            <p style={{ color: '#a78bfa', fontSize: '0.9rem', margin: 0 }}>{wallMsg}</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState<'wordcount'|'quote'|'todo'|'timer'|'love'|'birthday'|'fortune'|'healing'>('wordcount');
   const [text, setText] = useState('');
@@ -49,17 +150,6 @@ export default function ToolsPage() {
   const [timerInput, setTimerInput] = useState('25');
   const [timerRunning, setTimerRunning] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>|null>(null);
-
-  // AI 工具 state
-  const [aiInput, setAiInput] = useState('');
-  const [aiResult, setAiResult] = useState('');
-  const [aiLoading, setAiLoading] = useState(false);
-  const [wallMsg, setWallMsg] = useState('');
-  const [selectedSign, setSelectedSign] = useState(SIGNS[0]);
-
-  useEffect(() => {
-    setAiResult(''); setAiInput(''); setWallMsg('');
-  }, [activeTab]);
 
   useEffect(() => {
     if (timerRunning && timerSeconds > 0) {
@@ -83,91 +173,6 @@ export default function ToolsPage() {
     { key: 'fortune',   label: '🔮 今日運勢' },
     { key: 'healing',   label: '✍️ AI療癒小語' },
   ] as const;
-
-  const cardStyle = {
-    background: 'rgba(255,255,255,0.07)',
-    border: '1px solid rgba(167,139,250,0.25)',
-    borderRadius: '16px', padding: '1.5rem',
-    backdropFilter: 'blur(10px)',
-  };
-
-  const btnStyle = (active = false) => ({
-    background: active ? 'linear-gradient(135deg, #7c3aed, #ec4899)' : 'rgba(255,255,255,0.08)',
-    color: '#fff', border: 'none', borderRadius: '30px',
-    padding: '0.5rem 1.2rem', cursor: 'pointer',
-    fontWeight: active ? 700 : 400, fontSize: '0.85rem', transition: 'all 0.2s',
-  });
-
-  const inputStyle = {
-    width: '100%', background: 'rgba(0,0,0,0.3)',
-    border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px',
-    color: '#fff', padding: '0.7rem 1rem', fontSize: '0.95rem',
-    outline: 'none', boxSizing: 'border-box' as const,
-  };
-
-  async function handleGenerate(type: string) {
-    const val = type === 'fortune' ? selectedSign : aiInput;
-    if (!val.trim()) return;
-    setAiLoading(true); setAiResult(''); setWallMsg('');
-    try {
-      const res = await fetch('/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, input: val }),
-      });
-      const data = await res.json();
-      setAiResult(data.result || '生成失敗，請再試一次');
-    } catch { setAiResult('網路錯誤，請再試一次'); }
-    setAiLoading(false);
-  }
-
-  async function handleSubmitWall() {
-    if (!aiResult) return;
-    const id = await submitToWall(aiResult);
-    if (id) setWallMsg('✅ 已公開到作品牆！');
-    else setWallMsg('❌ 送出失敗，請再試');
-  }
-
-  // AI 工具共用 UI
-  function AiToolPanel({ type, placeholder, label, emoji }: { type: string; placeholder: string; label: string; emoji: string }) {
-    return (
-      <div style={{ ...cardStyle, textAlign: 'center' }}>
-        <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem' }}>{emoji} {label}</h2>
-        {type === 'fortune' ? (
-          <select value={selectedSign} onChange={e => setSelectedSign(e.target.value)}
-            style={{ ...inputStyle, marginBottom: '1rem', cursor: 'pointer' }}>
-            {SIGNS.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-        ) : (
-          <input value={aiInput} onChange={e => setAiInput(e.target.value)}
-            placeholder={placeholder}
-            style={{ ...inputStyle, marginBottom: '1rem', textAlign: 'center' }}
-            onKeyDown={e => e.key === 'Enter' && handleGenerate(type)}
-          />
-        )}
-        <button onClick={() => handleGenerate(type)} disabled={aiLoading}
-          style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem', opacity: aiLoading ? 0.7 : 1 }}>
-          {aiLoading ? '生成中...' : '✨ 立即生成'}
-        </button>
-
-        {aiResult && (
-          <div style={{ marginTop: '1.5rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem' }}>
-            <p style={{ color: '#f3f4f6', fontSize: '1.1rem', lineHeight: 1.9, margin: '0 0 1rem', fontStyle: 'italic' }}>
-              「{aiResult}」
-            </p>
-            {!wallMsg ? (
-              <button onClick={handleSubmitWall}
-                style={{ ...btnStyle(), border: '1px solid rgba(167,139,250,0.4)', padding: '0.5rem 1.2rem' }}>
-                🔥 公開到作品牆
-              </button>
-            ) : (
-              <p style={{ color: '#a78bfa', fontSize: '0.9rem', margin: 0 }}>{wallMsg}</p>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', padding: '2rem 1rem' }}>
@@ -264,10 +269,10 @@ export default function ToolsPage() {
           </div>
         )}
 
-        {activeTab === 'love'     && <AiToolPanel type="love"     emoji="💌" label="AI 告白生成器" placeholder="輸入對方的名字或暱稱..." />}
-        {activeTab === 'birthday' && <AiToolPanel type="birthday" emoji="🎂" label="AI 生日祝福"   placeholder="輸入對方的名字或暱稱..." />}
-        {activeTab === 'fortune'  && <AiToolPanel type="fortune"  emoji="🔮" label="今日運勢"       placeholder="" />}
-        {activeTab === 'healing'  && <AiToolPanel type="healing"  emoji="✍️" label="AI 療癒小語"   placeholder="輸入你現在的心情..." />}
+        {activeTab === 'love'     && <AiToolPanel key="love"     type="love"     emoji="💌" label="AI 告白生成器" placeholder="輸入對方的名字或暱稱..." />}
+        {activeTab === 'birthday' && <AiToolPanel key="birthday" type="birthday" emoji="🎂" label="AI 生日祝福"   placeholder="輸入對方的名字或暱稱..." />}
+        {activeTab === 'fortune'  && <AiToolPanel key="fortune"  type="fortune"  emoji="🔮" label="今日運勢"       placeholder="" signs={SIGNS} />}
+        {activeTab === 'healing'  && <AiToolPanel key="healing"  type="healing"  emoji="✍️" label="AI 療癒小語"   placeholder="輸入你現在的心情..." />}
 
         <div style={{ marginTop:'2rem', background:'linear-gradient(135deg,rgba(245,158,11,0.15),rgba(236,72,153,0.15))', border:'1px solid rgba(245,158,11,0.3)', borderRadius:'16px', padding:'1.2rem', textAlign:'center' }}>
           <p style={{ color:'#fcd34d', fontWeight:700, margin:'0 0 0.3rem' }}>✨ 工具用完了，去找今日驚喜？</p>
