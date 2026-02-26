@@ -1,4 +1,3 @@
-// 📁 路徑：src/app/api/generate/route.ts
 import { NextResponse } from "next/server";
 
 const PROMPTS: Record<string, (input: string) => string> = {
@@ -14,18 +13,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "參數錯誤" }, { status: 400 });
   }
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: PROMPTS[type](input) }] }],
-        }),
-      }
-    );
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "llama-3.1-8b-instant",
+        messages: [{ role: "user", content: PROMPTS[type](input) }],
+        max_tokens: 200,
+      }),
+    });
     const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    console.log("Groq status:", res.status);
+    const text = data.choices?.[0]?.message?.content;
     return NextResponse.json({ result: text || "生成失敗" });
   } catch {
     return NextResponse.json({ error: "生成失敗" }, { status: 500 });

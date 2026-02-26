@@ -1,7 +1,8 @@
-// 📁 路徑：src/app/tools/page.tsx
 'use client';
+//  路徑：src/app/tools/page.tsx
 
 import { useState, useEffect, useRef } from 'react';
+import TodoNotice from '@/components/TodoNotice';
 
 const QUOTES = [
   '每一天都是嶄新的開始，別讓昨天的遺憾佔據今天的空間。',
@@ -18,7 +19,17 @@ const QUOTES = [
 
 const SIGNS = ['牡羊座','金牛座','雙子座','巨蟹座','獅子座','處女座','天秤座','天蠍座','射手座','摩羯座','水瓶座','雙魚座'];
 
+const RANDOM_PAGES = [
+  { href: '/ai-news', label: '🗞 AI快訊' },
+  { href: '/creator', label: '✍️ 創作空間' },
+  { href: '/novels', label: '📚 連載小說' },
+  { href: '/random', label: '🎲 隨機驚喜' },
+  { href: '/wall', label: '🔥 作品牆' },
+  { href: 'https://still-time-corner.vercel.app/', label: '✨ Still Time Corner' },
+];
+
 function getCreatorId() {
+  if (typeof window === 'undefined') return '';
   let id = localStorage.getItem('creatorId');
   if (!id) {
     id = 'cr_' + Math.random().toString(36).substring(2, 10);
@@ -60,7 +71,6 @@ const inputStyle: React.CSSProperties = {
   outline: 'none', boxSizing: 'border-box',
 };
 
-// ✅ AiToolPanel 移到外面，不在 ToolsPage 裡面
 interface AiPanelProps {
   type: string;
   placeholder: string;
@@ -70,6 +80,7 @@ interface AiPanelProps {
 }
 
 function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
+  const [randomPage] = useState(() => RANDOM_PAGES[Math.floor(Math.random() * RANDOM_PAGES.length)]);
   const [localInput, setLocalInput] = useState('');
   const [selectedSign, setSelectedSign] = useState(signs?.[0] || '');
   const [aiResult, setAiResult] = useState('');
@@ -144,12 +155,34 @@ export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState<'wordcount'|'quote'|'todo'|'timer'|'love'|'birthday'|'fortune'|'healing'>('wordcount');
   const [text, setText] = useState('');
   const [quote, setQuote] = useState(QUOTES[0]);
+
+  // ✅ 待辦清單：從 LocalStorage 讀取
   const [todos, setTodos] = useState<{text:string;done:boolean}[]>([]);
   const [todoInput, setTodoInput] = useState('');
+  const [todosLoaded, setTodosLoaded] = useState(false);
+
   const [timerSeconds, setTimerSeconds] = useState(0);
   const [timerInput, setTimerInput] = useState('25');
   const [timerRunning, setTimerRunning] = useState(false);
+  const [randomPage] = useState(() => RANDOM_PAGES[Math.floor(Math.random() * RANDOM_PAGES.length)]);
   const timerRef = useRef<ReturnType<typeof setInterval>|null>(null);
+
+  // ✅ 讀取 LocalStorage 待辦清單
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('sc_todos');
+      if (saved) setTodos(JSON.parse(saved));
+    } catch {}
+    setTodosLoaded(true);
+  }, []);
+
+  // ✅ 儲存待辦清單到 LocalStorage
+  useEffect(() => {
+    if (!todosLoaded) return;
+    try {
+      localStorage.setItem('sc_todos', JSON.stringify(todos));
+    } catch {}
+  }, [todos, todosLoaded]);
 
   useEffect(() => {
     if (timerRunning && timerSeconds > 0) {
@@ -176,6 +209,9 @@ export default function ToolsPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', padding: '2rem 1rem' }}>
+      {/* ✅ 待辦清單首次使用提示 */}
+      <TodoNotice />
+
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: 0 }}>🛠 實用工具箱</h1>
@@ -220,7 +256,12 @@ export default function ToolsPage() {
 
         {activeTab === 'todo' && (
           <div style={cardStyle}>
-            <h2 style={{ color: '#e9d5ff', margin: '0 0 1rem' }}>📋 今日待辦</h2>
+            <h2 style={{ color: '#e9d5ff', margin: '0 0 0.4rem' }}>📋 待辦清單</h2>
+            {/* ✅ 資料說明提示 */}
+            <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 1rem' }}>
+              💾 資料儲存於你的瀏覽器，僅自己可見｜
+              <a href="/privacy" style={{ color: '#a78bfa', textDecoration: 'none' }}>隱私權政策</a>
+            </p>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
               <input value={todoInput} onChange={e => setTodoInput(e.target.value)}
                 onKeyDown={e => { if (e.key==='Enter'&&todoInput.trim()) { setTodos([...todos,{text:todoInput.trim(),done:false}]); setTodoInput(''); }}}
@@ -240,7 +281,14 @@ export default function ToolsPage() {
                     <button onClick={() => setTodos(todos.filter((_,j) => j!==i))} style={{ background:'none', border:'none', color:'#ef4444', cursor:'pointer', fontSize:'1.1rem' }}>✕</button>
                   </div>
                 ))}
-                <div style={{ color:'#9ca3af', fontSize:'0.8rem', textAlign:'right', marginTop:'0.3rem' }}>完成 {todos.filter(t=>t.done).length} / {todos.length}</div>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'0.3rem' }}>
+                  <span style={{ color:'#9ca3af', fontSize:'0.8rem' }}>完成 {todos.filter(t=>t.done).length} / {todos.length}</span>
+                  <button
+                    onClick={() => { if (confirm('確定清除所有已完成項目？')) setTodos(todos.filter(t => !t.done)); }}
+                    style={{ background:'none', border:'none', color:'#6b7280', cursor:'pointer', fontSize:'0.75rem' }}>
+                    清除已完成
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -275,11 +323,16 @@ export default function ToolsPage() {
         {activeTab === 'healing'  && <AiToolPanel key="healing"  type="healing"  emoji="✍️" label="AI 療癒小語"   placeholder="輸入你現在的心情..." />}
 
         <div style={{ marginTop:'2rem', background:'linear-gradient(135deg,rgba(245,158,11,0.15),rgba(236,72,153,0.15))', border:'1px solid rgba(245,158,11,0.3)', borderRadius:'16px', padding:'1.2rem', textAlign:'center' }}>
-          <p style={{ color:'#fcd34d', fontWeight:700, margin:'0 0 0.3rem' }}>✨ 工具用完了，去找今日驚喜？</p>
-          <a href="https://still-time-corner.vercel.app/" target="_blank" rel="noopener noreferrer"
+          <p style={{ color:'#fcd34d', fontWeight:700, margin:'0 0 0.3rem' }}>✨ 工具用完了，去逛逛其他地方？</p>
+          <a href={randomPage.href} target={randomPage.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
             style={{ display:'inline-block', background:'linear-gradient(135deg,#f59e0b,#ec4899)', color:'#fff', padding:'0.5rem 1.5rem', borderRadius:'30px', textDecoration:'none', fontWeight:700, marginTop:'0.5rem', fontSize:'0.9rem' }}>
-            前往 Still Time Corner →
+            前往 {randomPage.label} →
           </a>
+        </div>
+
+        {/* ✅ 頁腳隱私權連結 */}
+        <div style={{ textAlign:'center', marginTop:'2rem', paddingBottom:'1rem' }}>
+          <a href="/privacy" style={{ color:'#4b5563', fontSize:'0.75rem', textDecoration:'none' }}>隱私權政策</a>
         </div>
       </div>
     </div>
