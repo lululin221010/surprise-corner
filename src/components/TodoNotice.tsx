@@ -12,8 +12,14 @@ export default function TodoNotice() {
     if (!seen) setShow(true);
   }, []);
 
-  const handleClose = () => {
+  // 了解了 → 永久不再顯示
+  const handleConfirm = () => {
     localStorage.setItem('sc_todo_notice_seen', '1');
+    setShow(false);
+  };
+
+  // 下次再說 → 只關閉，下次進來還會出現
+  const handleLater = () => {
     setShow(false);
   };
 
@@ -80,15 +86,24 @@ export default function TodoNotice() {
               </p>
             </div>
 
+            {/* 主要按鈕：永久不再顯示 */}
             <button
-              onClick={handleClose}
-              style={{ width:'100%', background:'linear-gradient(135deg,#7c3aed,#ec4899)', color:'#fff', border:'none', borderRadius:'30px', padding:'0.9rem', fontSize:'1rem', fontWeight:700, cursor:'pointer', boxShadow:'0 4px 20px rgba(124,58,237,0.4)' }}
+              onClick={handleConfirm}
+              style={{ width:'100%', background:'linear-gradient(135deg,#7c3aed,#ec4899)', color:'#fff', border:'none', borderRadius:'30px', padding:'0.9rem', fontSize:'1rem', fontWeight:700, cursor:'pointer', boxShadow:'0 4px 20px rgba(124,58,237,0.4)', marginBottom:'0.7rem' }}
             >
               了解了，開始使用 🚀
             </button>
 
+            {/* 次要按鈕：下次再說 */}
+            <button
+              onClick={handleLater}
+              style={{ width:'100%', background:'transparent', color:'#6b7280', border:'1px solid rgba(107,114,128,0.3)', borderRadius:'30px', padding:'0.6rem', fontSize:'0.88rem', fontWeight:500, cursor:'pointer' }}
+            >
+              下次再說
+            </button>
+
             <p style={{ textAlign:'center', color:'#4b5563', fontSize:'0.72rem', marginTop:'0.8rem', marginBottom:0 }}>
-              此提示只顯示一次・<a href="/privacy" style={{ color:'#6b7280', textDecoration:'none' }}>查看隱私權政策</a>
+              「了解了」後此提示不再顯示・<a href="/privacy" style={{ color:'#6b7280', textDecoration:'none' }}>隱私權政策</a>
             </p>
           </motion.div>
         </motion.div>
