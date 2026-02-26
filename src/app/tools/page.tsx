@@ -1,5 +1,5 @@
 'use client';
-//  路徑：src/app/tools/page.tsx
+// 📄 路徑：src/app/tools/page.tsx
 
 import { useState, useEffect, useRef } from 'react';
 import TodoNotice from '@/components/TodoNotice';
@@ -209,8 +209,8 @@ export default function ToolsPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', padding: '2rem 1rem' }}>
-      {/* ✅ 待辦清單首次使用提示 */}
-      <TodoNotice />
+
+      {/* ✅ 修正：TodoNotice 移除出頁面頂層，改放在 todo tab 裡 */}
 
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -256,6 +256,9 @@ export default function ToolsPage() {
 
         {activeTab === 'todo' && (
           <div style={cardStyle}>
+            {/* ✅ 修正：TodoNotice 只在 todo tab 裡顯示 */}
+            <TodoNotice />
+
             <h2 style={{ color: '#e9d5ff', margin: '0 0 0.4rem' }}>📋 待辦清單</h2>
             {/* ✅ 資料說明提示 */}
             <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 1rem' }}>
