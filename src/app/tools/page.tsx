@@ -71,6 +71,18 @@ const inputStyle: React.CSSProperties = {
   outline: 'none', boxSizing: 'border-box',
 };
 
+// ✅ 字數計算函式：中文字 + 英文單詞 + 數字，符號與空白不計入
+function calcWordCount(text: string): number {
+  if (!text) return 0;
+  // 中文字（含全形）
+  const chineseChars = (text.match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g) || []).length;
+  // 英文單詞（連續字母算一個詞）
+  const englishWords = (text.match(/[a-zA-Z]+/g) || []).length;
+  // 數字（連續數字算一個）
+  const numbers = (text.match(/[0-9]+/g) || []).length;
+  return chineseChars + englishWords + numbers;
+}
+
 interface AiPanelProps {
   type: string;
   placeholder: string;
@@ -156,7 +168,6 @@ export default function ToolsPage() {
   const [text, setText] = useState('');
   const [quote, setQuote] = useState(QUOTES[0]);
 
-  // ✅ 待辦清單：從 LocalStorage 讀取
   const [todos, setTodos] = useState<{text:string;done:boolean}[]>([]);
   const [todoInput, setTodoInput] = useState('');
   const [todosLoaded, setTodosLoaded] = useState(false);
@@ -167,7 +178,6 @@ export default function ToolsPage() {
   const [randomPage] = useState(() => RANDOM_PAGES[Math.floor(Math.random() * RANDOM_PAGES.length)]);
   const timerRef = useRef<ReturnType<typeof setInterval>|null>(null);
 
-  // ✅ 讀取 LocalStorage 待辦清單
   useEffect(() => {
     try {
       const saved = localStorage.getItem('sc_todos');
@@ -176,7 +186,6 @@ export default function ToolsPage() {
     setTodosLoaded(true);
   }, []);
 
-  // ✅ 儲存待辦清單到 LocalStorage
   useEffect(() => {
     if (!todosLoaded) return;
     try {
@@ -193,7 +202,9 @@ export default function ToolsPage() {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerRunning, timerSeconds]);
 
-  const wordCount = text.replace(/\s/g, '').length;
+  // ✅ 修正後的字數計算
+  const wordCount = calcWordCount(text);
+  const charCount = text.replace(/\s/g, '').length; // 總字元數（不含空白，含符號）
   const lineCount = text ? text.split('\n').length : 0;
 
   const tabs = [
@@ -209,9 +220,6 @@ export default function ToolsPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', padding: '2rem 1rem' }}>
-
-      {/* ✅ 修正：TodoNotice 移除出頁面頂層，改放在 todo tab 裡 */}
-
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: 0 }}>🛠 實用工具箱</h1>
@@ -233,8 +241,13 @@ export default function ToolsPage() {
               placeholder="在這裡貼上或輸入你的文字..."
               style={{ width: '100%', height: '200px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', color: '#fff', padding: '0.8rem', fontSize: '0.95rem', resize: 'vertical', boxSizing: 'border-box', outline: 'none' }}
             />
+            {/* ✅ 修正後的統計區塊，標籤說明更清楚 */}
             <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-              {[{label:'字數（不含空白）',value:wordCount},{label:'總字元數',value:text.length},{label:'行數',value:lineCount}].map(stat => (
+              {[
+                { label: '字數（中文字／英文詞／數字）', value: wordCount },
+                { label: '總字元數（含符號，不含空白）', value: charCount },
+                { label: '行數', value: lineCount },
+              ].map(stat => (
                 <div key={stat.label} style={{ flex: 1, background: 'rgba(124,58,237,0.2)', borderRadius: '10px', padding: '0.8rem', textAlign: 'center' }}>
                   <div style={{ color: '#c4b5fd', fontSize: '0.8rem' }}>{stat.label}</div>
                   <div style={{ color: '#fff', fontSize: '1.8rem', fontWeight: 800 }}>{stat.value}</div>
@@ -256,11 +269,8 @@ export default function ToolsPage() {
 
         {activeTab === 'todo' && (
           <div style={cardStyle}>
-            {/* ✅ 修正：TodoNotice 只在 todo tab 裡顯示 */}
             <TodoNotice />
-
             <h2 style={{ color: '#e9d5ff', margin: '0 0 0.4rem' }}>📋 待辦清單</h2>
-            {/* ✅ 資料說明提示 */}
             <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 1rem' }}>
               💾 資料儲存於你的瀏覽器，僅自己可見｜
               <a href="/privacy" style={{ color: '#a78bfa', textDecoration: 'none' }}>隱私權政策</a>
@@ -333,7 +343,6 @@ export default function ToolsPage() {
           </a>
         </div>
 
-        {/* ✅ 頁腳隱私權連結 */}
         <div style={{ textAlign:'center', marginTop:'2rem', paddingBottom:'1rem' }}>
           <a href="/privacy" style={{ color:'#4b5563', fontSize:'0.75rem', textDecoration:'none' }}>隱私權政策</a>
         </div>
