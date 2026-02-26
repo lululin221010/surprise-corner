@@ -1,5 +1,5 @@
 // 📄 路徑：src/app/layout.tsx
-// 功能：全域佈局 + SEO 設定 + Footer 隱私權連結
+// 功能：全域佈局 + SEO 設定 + Footer
 
 import Navbar from '@/components/Navbar';
 import type { Metadata } from 'next';
@@ -15,29 +15,16 @@ export const metadata: Metadata = {
     template: '%s | Surprise Corner',
   },
   description: '每天都有新的驚喜等你發現！獲取靈感、學習新知、療癒心情。每日更新，天天不重複。',
-  keywords: [
-    '每日驚喜', '靈感', '創意', '生活提案',
-    '心靈療癒', '每日一句', '正能量', '每日更新',
-  ],
+  keywords: ['每日驚喜', '靈感', '創意', '生活提案', '心靈療癒', '每日一句', '正能量', '每日更新'],
   authors: [{ name: 'Surprise Corner' }],
   creator: 'Surprise Corner',
   publisher: 'Surprise Corner',
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   openGraph: {
-    type: 'website',
-    locale: 'zh_TW',
-    url: '/',
-    siteName: 'Surprise Corner',
+    type: 'website', locale: 'zh_TW', url: '/', siteName: 'Surprise Corner',
     title: 'Surprise Corner - 每天不一樣的小驚喜',
     description: '每天都有新的驚喜等你發現！',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Surprise Corner' }],
@@ -61,37 +48,48 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* ✅ 全站 Footer */}
         <footer style={{
           textAlign: 'center',
-          padding: '1.5rem 1rem',
+          padding: '1.5rem 1rem 2rem',
           borderTop: '1px solid rgba(167,139,250,0.1)',
           background: 'rgba(0,0,0,0.2)',
         }}>
-          <p style={{ color: '#374151', fontSize: '0.75rem', margin: '0 0 0.2rem' }}>
-            © 2026 Surprise Corner・All Rights Reserved
-          </p>
-          <p style={{ color: '#374151', fontSize: '0.72rem', margin: '0 0 0.4rem' }}>
-            本網站使用 AI 輔助開發與內容生成
-          </p>
-          <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="/privacy" style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}>
-              隱私權政策
-            </a>
+          {/* ✅ Ko-fi 打賞按鈕 */}
+          <div style={{ marginBottom: '1rem' }}>
             <a
-              href="https://line.me/R/ti/p/@983agawb"
+              href="https://ko-fi.com/surprisecorner"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                background: 'linear-gradient(135deg, #FF5E5B, #ff8c42)',
+                color: '#fff', textDecoration: 'none',
+                padding: '0.6rem 1.6rem', borderRadius: '30px',
+                fontSize: '0.9rem', fontWeight: 700,
+                boxShadow: '0 4px 15px rgba(255,94,91,0.35)',
+              }}
             >
+              ☕ 請我喝杯咖啡
+            </a>
+          </div>
+
+          {/* 連結列 */}
+          <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '0.6rem' }}>
+            <a href="/privacy" style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}>隱私權政策</a>
+            <a href="https://line.me/R/ti/p/@983agawb" target="_blank" rel="noopener noreferrer"
+              style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}>
               聯絡我們 LINE @983agawb
             </a>
-            <a
-              href="https://still-time-corner.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}
-            >
+            <a href="https://still-time-corner.vercel.app/" target="_blank" rel="noopener noreferrer"
+              style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}>
               有的沒的小舖 ✨
             </a>
           </div>
+
+          <p style={{ color: '#374151', fontSize: '0.75rem', margin: '0 0 0.2rem' }}>
+            © 2026 Surprise Corner・All Rights Reserved
+          </p>
+          <p style={{ color: '#374151', fontSize: '0.72rem', margin: 0 }}>
+            本網站使用 AI 輔助開發與內容生成
+          </p>
         </footer>
       </body>
     </html>
