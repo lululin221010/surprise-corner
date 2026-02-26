@@ -71,14 +71,11 @@ const inputStyle: React.CSSProperties = {
   outline: 'none', boxSizing: 'border-box',
 };
 
-// ✅ 字數計算函式：中文字 + 英文單詞 + 數字，符號與空白不計入
+// ✅ 字數計算函式
 function calcWordCount(text: string): number {
   if (!text) return 0;
-  // 中文字（含全形）
   const chineseChars = (text.match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g) || []).length;
-  // 英文單詞（連續字母算一個詞）
   const englishWords = (text.match(/[a-zA-Z]+/g) || []).length;
-  // 數字（連續數字算一個）
   const numbers = (text.match(/[0-9]+/g) || []).length;
   return chineseChars + englishWords + numbers;
 }
@@ -163,8 +160,470 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
   );
 }
 
+// ============================================================
+// 🔐 密碼產生器
+// ============================================================
+function PasswordGenerator() {
+  const [length, setLength] = useState(16);
+  const [useUpper, setUseUpper] = useState(true);
+  const [useLower, setUseLower] = useState(true);
+  const [useNumbers, setUseNumbers] = useState(true);
+  const [useSymbols, setUseSymbols] = useState(true);
+  const [password, setPassword] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  function generate() {
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    let chars = '';
+    if (useUpper) chars += upper;
+    if (useLower) chars += lower;
+    if (useNumbers) chars += numbers;
+    if (useSymbols) chars += symbols;
+    if (!chars) { setPassword('請至少選一種字元類型'); return; }
+    let pwd = '';
+    for (let i = 0; i < length; i++) {
+      pwd += chars[Math.floor(Math.random() * chars.length)];
+    }
+    setPassword(pwd);
+    setCopied(false);
+  }
+
+  function copy() {
+    if (!password) return;
+    navigator.clipboard.writeText(password).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+  }
+
+  const strength = () => {
+    let s = 0;
+    if (useUpper) s++; if (useLower) s++; if (useNumbers) s++; if (useSymbols) s++;
+    if (length >= 16) s++; if (length >= 20) s++;
+    if (s <= 2) return { label: '弱', color: '#ef4444' };
+    if (s <= 4) return { label: '中', color: '#f59e0b' };
+    return { label: '強', color: '#10b981' };
+  };
+
+  const st = strength();
+
+  return (
+    <div style={cardStyle}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>🔐 密碼產生器</h2>
+
+      <div style={{ marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#c4b5fd', fontSize: '0.85rem', marginBottom: '0.4rem' }}>
+          <span>密碼長度</span><span>{length} 位</span>
+        </div>
+        <input type="range" min={6} max={32} value={length} onChange={e => setLength(Number(e.target.value))}
+          style={{ width: '100%', accentColor: '#7c3aed' }} />
+      </div>
+
+      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.2rem' }}>
+        {[
+          { label: '大寫 A-Z', val: useUpper, set: setUseUpper },
+          { label: '小寫 a-z', val: useLower, set: setUseLower },
+          { label: '數字 0-9', val: useNumbers, set: setUseNumbers },
+          { label: '符號 !@#', val: useSymbols, set: setUseSymbols },
+        ].map(opt => (
+          <button key={opt.label} onClick={() => opt.set(!opt.val)}
+            style={{ ...btnStyle(opt.val), fontSize: '0.8rem', padding: '0.4rem 0.9rem' }}>
+            {opt.label}
+          </button>
+        ))}
+      </div>
+
+      <button onClick={generate} style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', fontSize: '1rem', marginBottom: '1rem' }}>
+        🎲 產生密碼
+      </button>
+
+      {password && (
+        <div style={{ background: 'rgba(0,0,0,0.4)', borderRadius: '10px', padding: '1rem', position: 'relative' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <span style={{ color: st.color, fontSize: '0.8rem', fontWeight: 700 }}>強度：{st.label}</span>
+            <button onClick={copy} style={{ ...btnStyle(copied), fontSize: '0.8rem', padding: '0.3rem 0.8rem' }}>
+              {copied ? '✅ 已複製' : '📋 複製'}
+            </button>
+          </div>
+          <p style={{ color: '#f3f4f6', fontFamily: 'monospace', fontSize: '1rem', margin: 0, wordBreak: 'break-all', letterSpacing: '0.05em' }}>
+            {password}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// 📅 年齡／日期計算器
+// ============================================================
+function DateCalculator() {
+  const [mode, setMode] = useState<'age'|'diff'>('age');
+  const [birthDate, setBirthDate] = useState('');
+  const [dateA, setDateA] = useState('');
+  const [dateB, setDateB] = useState('');
+  const [result, setResult] = useState('');
+
+  function calcAge() {
+    if (!birthDate) return;
+    const birth = new Date(birthDate);
+    const now = new Date();
+    let years = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days = now.getDate() - birth.getDate();
+    if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (months < 0) { years--; months += 12; }
+    const totalDays = Math.floor((now.getTime() - birth.getTime()) / 86400000);
+    setResult(`🎂 你已經 ${years} 歲 ${months} 個月 ${days} 天\n📆 共活了 ${totalDays.toLocaleString()} 天`);
+  }
+
+  function calcDiff() {
+    if (!dateA || !dateB) return;
+    const a = new Date(dateA), b = new Date(dateB);
+    const diff = Math.abs(b.getTime() - a.getTime());
+    const days = Math.floor(diff / 86400000);
+    const weeks = Math.floor(days / 7);
+    const months = Math.abs((b.getFullYear() - a.getFullYear()) * 12 + b.getMonth() - a.getMonth());
+    setResult(`📅 相差 ${days.toLocaleString()} 天\n📅 約 ${weeks.toLocaleString()} 週\n📅 約 ${months} 個月`);
+  }
+
+  return (
+    <div style={cardStyle}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.2rem', textAlign: 'center' }}>📅 年齡／日期計算器</h2>
+      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '1.2rem' }}>
+        <button onClick={() => { setMode('age'); setResult(''); }} style={btnStyle(mode === 'age')}>🎂 年齡計算</button>
+        <button onClick={() => { setMode('diff'); setResult(''); }} style={btnStyle(mode === 'diff')}>📆 日期差距</button>
+      </div>
+
+      {mode === 'age' ? (
+        <>
+          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>出生日期</label>
+          <input type="date" value={birthDate} onChange={e => setBirthDate(e.target.value)}
+            style={{ ...inputStyle, marginTop: '0.4rem', marginBottom: '1rem', colorScheme: 'dark' }} />
+          <button onClick={calcAge} style={{ ...btnStyle(true), width: '100%', padding: '0.8rem' }}>計算年齡</button>
+        </>
+      ) : (
+        <>
+          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>開始日期</label>
+          <input type="date" value={dateA} onChange={e => setDateA(e.target.value)}
+            style={{ ...inputStyle, marginTop: '0.4rem', marginBottom: '0.8rem', colorScheme: 'dark' }} />
+          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>結束日期</label>
+          <input type="date" value={dateB} onChange={e => setDateB(e.target.value)}
+            style={{ ...inputStyle, marginTop: '0.4rem', marginBottom: '1rem', colorScheme: 'dark' }} />
+          <button onClick={calcDiff} style={{ ...btnStyle(true), width: '100%', padding: '0.8rem' }}>計算差距</button>
+        </>
+      )}
+
+      {result && (
+        <div style={{ marginTop: '1rem', background: 'rgba(124,58,237,0.2)', borderRadius: '10px', padding: '1rem' }}>
+          {result.split('\n').map((line, i) => (
+            <p key={i} style={{ color: '#f3f4f6', margin: i === 0 ? 0 : '0.3rem 0 0', fontSize: '1rem' }}>{line}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// 💱 匯率換算器（使用免費 API）
+// ============================================================
+function CurrencyConverter() {
+  const CURRENCIES = ['TWD','USD','JPY','EUR','GBP','KRW','CNY','HKD','AUD','CAD','SGD','THB'];
+  const [amount, setAmount] = useState('1000');
+  const [from, setFrom] = useState('TWD');
+  const [to, setTo] = useState('JPY');
+  const [result, setResult] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [updateTime, setUpdateTime] = useState('');
+
+  async function convert() {
+    if (!amount || isNaN(Number(amount))) return;
+    setLoading(true); setResult('');
+    try {
+      const res = await fetch(`https://api.frankfurter.app/latest?from=${from}&to=${to}`);
+      const data = await res.json();
+      const rate = data.rates[to];
+      const converted = (Number(amount) * rate).toFixed(2);
+      setResult(`${Number(amount).toLocaleString()} ${from} = ${Number(converted).toLocaleString()} ${to}`);
+      setUpdateTime(`匯率更新時間：${data.date}`);
+    } catch {
+      setResult('❌ 無法取得匯率，請稍後再試');
+    }
+    setLoading(false);
+  }
+
+  const selectStyle: React.CSSProperties = {
+    ...inputStyle, cursor: 'pointer', width: 'auto', flex: 1,
+  };
+
+  return (
+    <div style={cardStyle}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>💱 匯率換算器</h2>
+
+      <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>金額</label>
+      <input type="number" value={amount} onChange={e => setAmount(e.target.value)}
+        style={{ ...inputStyle, marginTop: '0.4rem', marginBottom: '1rem' }}
+        onKeyDown={e => e.key === 'Enter' && convert()} />
+
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
+        <select value={from} onChange={e => setFrom(e.target.value)} style={selectStyle}>
+          {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+        <button onClick={() => { const tmp = from; setFrom(to); setTo(tmp); setResult(''); }}
+          style={{ ...btnStyle(), padding: '0.7rem', fontSize: '1.1rem', flexShrink: 0 }}>⇄</button>
+        <select value={to} onChange={e => setTo(e.target.value)} style={selectStyle}>
+          {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
+
+      <button onClick={convert} disabled={loading}
+        style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', opacity: loading ? 0.7 : 1 }}>
+        {loading ? '查詢中...' : '💱 立即換算'}
+      </button>
+
+      {result && (
+        <div style={{ marginTop: '1rem', background: 'rgba(124,58,237,0.2)', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
+          <p style={{ color: '#f3f4f6', fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.3rem' }}>{result}</p>
+          {updateTime && <p style={{ color: '#9ca3af', fontSize: '0.75rem', margin: 0 }}>{updateTime}</p>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// 🎨 顏色代碼轉換器
+// ============================================================
+function ColorConverter() {
+  const [hex, setHex] = useState('#7c3aed');
+  const [pickerColor, setPickerColor] = useState('#7c3aed');
+  const [copied, setCopied] = useState('');
+
+  function hexToRgb(h: string) {
+    const r = parseInt(h.slice(1,3),16), g = parseInt(h.slice(3,5),16), b = parseInt(h.slice(5,7),16);
+    return { r, g, b };
+  }
+  function rgbToHsl(r: number, g: number, b: number) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r,g,b), min = Math.min(r,g,b);
+    let h = 0, s = 0, l = (max+min)/2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+      switch(max) {
+        case r: h = ((g-b)/d + (g<b?6:0))/6; break;
+        case g: h = ((b-r)/d + 2)/6; break;
+        case b: h = ((r-g)/d + 4)/6; break;
+      }
+    }
+    return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
+  }
+
+  function isValidHex(h: string) { return /^#[0-9A-Fa-f]{6}$/.test(h); }
+
+  function handleHexInput(val: string) {
+    setHex(val);
+    if (isValidHex(val)) setPickerColor(val);
+  }
+
+  function handlePicker(val: string) {
+    setPickerColor(val);
+    setHex(val);
+  }
+
+  function copyText(text: string, key: string) {
+    navigator.clipboard.writeText(text).then(() => { setCopied(key); setTimeout(() => setCopied(''), 2000); });
+  }
+
+  const validHex = isValidHex(hex) ? hex : pickerColor;
+  const { r, g, b } = hexToRgb(validHex);
+  const { h, s, l } = rgbToHsl(r, g, b);
+
+  const codes = [
+    { label: 'HEX', value: validHex.toUpperCase(), key: 'hex' },
+    { label: 'RGB', value: `rgb(${r}, ${g}, ${b})`, key: 'rgb' },
+    { label: 'HSL', value: `hsl(${h}, ${s}%, ${l}%)`, key: 'hsl' },
+  ];
+
+  return (
+    <div style={cardStyle}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>🎨 顏色代碼轉換器</h2>
+
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
+        <div style={{ width: '80px', height: '80px', borderRadius: '12px', background: validHex, border: '2px solid rgba(167,139,250,0.4)', flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>輸入 HEX 顏色碼</label>
+          <input value={hex} onChange={e => handleHexInput(e.target.value)}
+            placeholder="#7c3aed"
+            style={{ ...inputStyle, marginTop: '0.4rem', fontFamily: 'monospace' }} />
+        </div>
+        <input type="color" value={pickerColor} onChange={e => handlePicker(e.target.value)}
+          style={{ width: '48px', height: '48px', border: 'none', background: 'none', cursor: 'pointer', borderRadius: '8px', flexShrink: 0 }} />
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {codes.map(code => (
+          <div key={code.key} style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', padding: '0.7rem 1rem', gap: '0.8rem' }}>
+            <span style={{ color: '#9ca3af', fontSize: '0.8rem', width: '35px', flexShrink: 0 }}>{code.label}</span>
+            <span style={{ color: '#f3f4f6', fontFamily: 'monospace', flex: 1 }}>{code.value}</span>
+            <button onClick={() => copyText(code.value, code.key)}
+              style={{ ...btnStyle(copied === code.key), fontSize: '0.75rem', padding: '0.3rem 0.7rem', flexShrink: 0 }}>
+              {copied === code.key ? '✅' : '複製'}
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// 🎲 隨機決策器
+// ============================================================
+function RandomDecider() {
+  const [options, setOptions] = useState(['選項一', '選項二', '選項三']);
+  const [inputVal, setInputVal] = useState('');
+  const [result, setResult] = useState('');
+  const [spinning, setSpinning] = useState(false);
+
+  function addOption() {
+    if (!inputVal.trim()) return;
+    setOptions([...options, inputVal.trim()]);
+    setInputVal('');
+  }
+
+  function decide() {
+    if (options.length < 2) return;
+    setSpinning(true);
+    setResult('');
+    let count = 0;
+    const interval = setInterval(() => {
+      setResult(options[Math.floor(Math.random() * options.length)]);
+      count++;
+      if (count > 15) {
+        clearInterval(interval);
+        setResult(options[Math.floor(Math.random() * options.length)]);
+        setSpinning(false);
+      }
+    }, 80);
+  }
+
+  return (
+    <div style={cardStyle}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>🎲 隨機決策器</h2>
+      <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', margin: '0 0 1rem' }}>選不了嗎？讓命運決定！</p>
+
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.8rem' }}>
+        <input value={inputVal} onChange={e => setInputVal(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addOption()}
+          placeholder="輸入一個選項..." style={{ ...inputStyle, flex: 1 }} />
+        <button onClick={addOption} style={{ ...btnStyle(true), flexShrink: 0 }}>+ 新增</button>
+      </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem', minHeight: '36px' }}>
+        {options.map((opt, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem', fontSize: '0.85rem', color: '#e9d5ff' }}>
+            {opt}
+            <button onClick={() => setOptions(options.filter((_,j)=>j!==i))}
+              style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '0.9rem', padding: '0', lineHeight: 1 }}>✕</button>
+          </div>
+        ))}
+      </div>
+
+      <button onClick={decide} disabled={spinning || options.length < 2}
+        style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', fontSize: '1rem', opacity: spinning ? 0.7 : 1 }}>
+        {spinning ? '🎰 決定中...' : '🎲 幫我決定！'}
+      </button>
+
+      {result && !spinning && (
+        <div style={{ marginTop: '1.2rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
+          <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
+          <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>✨ {result}</p>
+        </div>
+      )}
+      {spinning && result && (
+        <div style={{ marginTop: '1.2rem', background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
+          <p style={{ color: '#a78bfa', fontSize: '1.3rem', fontWeight: 700, margin: 0 }}>{result}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// 📊 BMI 計算器
+// ============================================================
+function BmiCalculator() {
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [result, setResult] = useState<{bmi:number;label:string;color:string;tip:string}|null>(null);
+
+  function calc() {
+    const h = Number(height) / 100;
+    const w = Number(weight);
+    if (!h || !w || h <= 0 || w <= 0) return;
+    const bmi = w / (h * h);
+    let label = '', color = '', tip = '';
+    if (bmi < 18.5) { label = '體重過輕'; color = '#60a5fa'; tip = '建議適當增加營養攝取與肌力訓練 💪'; }
+    else if (bmi < 24) { label = '正常體重'; color = '#10b981'; tip = '繼續保持健康的生活方式，你做得很好！🌟'; }
+    else if (bmi < 27) { label = '體重過重'; color = '#f59e0b'; tip = '建議增加有氧運動，注意飲食均衡 🏃'; }
+    else if (bmi < 30) { label = '輕度肥胖'; color = '#f97316'; tip = '建議諮詢醫師或營養師，制定健康計畫 🩺'; }
+    else { label = '中重度肥胖'; color = '#ef4444'; tip = '強烈建議就醫評估，制定個人健康計畫 🏥'; }
+    setResult({ bmi: Math.round(bmi * 10) / 10, label, color, tip });
+  }
+
+  return (
+    <div style={cardStyle}>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>📊 BMI 計算器</h2>
+
+      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>身高（公分）</label>
+          <input type="number" value={height} onChange={e => setHeight(e.target.value)}
+            placeholder="例：170" style={{ ...inputStyle, marginTop: '0.4rem' }} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>體重（公斤）</label>
+          <input type="number" value={weight} onChange={e => setWeight(e.target.value)}
+            placeholder="例：65" style={{ ...inputStyle, marginTop: '0.4rem' }} />
+        </div>
+      </div>
+
+      <button onClick={calc} style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', marginBottom: result ? '1rem' : 0 }}>
+        📊 計算 BMI
+      </button>
+
+      {result && (
+        <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '1.2rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '3rem', fontWeight: 800, color: result.color, lineHeight: 1 }}>{result.bmi}</div>
+          <div style={{ color: result.color, fontWeight: 700, fontSize: '1.1rem', margin: '0.3rem 0' }}>{result.label}</div>
+          <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0.5rem 0 0' }}>{result.tip}</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+            {[{range:'< 18.5',label:'過輕',c:'#60a5fa'},{range:'18.5-24',label:'正常',c:'#10b981'},{range:'24-27',label:'過重',c:'#f59e0b'},{range:'27+',label:'肥胖',c:'#ef4444'}].map(s => (
+              <div key={s.label} style={{ textAlign: 'center' }}>
+                <div style={{ color: s.c, fontSize: '0.7rem', fontWeight: 700 }}>{s.label}</div>
+                <div style={{ color: '#6b7280', fontSize: '0.65rem' }}>{s.range}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <p style={{ color: '#4b5563', fontSize: '0.7rem', textAlign: 'center', margin: '0.8rem 0 0' }}>
+        ⚠️ BMI 僅供參考，實際健康狀況請諮詢醫師
+      </p>
+    </div>
+  );
+}
+
+// ============================================================
+// 主頁面
+// ============================================================
 export default function ToolsPage() {
-  const [activeTab, setActiveTab] = useState<'wordcount'|'quote'|'todo'|'timer'|'love'|'birthday'|'fortune'|'healing'>('wordcount');
+  const [activeTab, setActiveTab] = useState<
+    'wordcount'|'quote'|'todo'|'timer'|'love'|'birthday'|'fortune'|'healing'|
+    'password'|'date'|'currency'|'color'|'decide'|'bmi'
+  >('wordcount');
   const [text, setText] = useState('');
   const [quote, setQuote] = useState(QUOTES[0]);
 
@@ -188,9 +647,7 @@ export default function ToolsPage() {
 
   useEffect(() => {
     if (!todosLoaded) return;
-    try {
-      localStorage.setItem('sc_todos', JSON.stringify(todos));
-    } catch {}
+    try { localStorage.setItem('sc_todos', JSON.stringify(todos)); } catch {}
   }, [todos, todosLoaded]);
 
   useEffect(() => {
@@ -202,20 +659,41 @@ export default function ToolsPage() {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerRunning, timerSeconds]);
 
-  // ✅ 修正後的字數計算
   const wordCount = calcWordCount(text);
-  const charCount = text.replace(/\s/g, '').length; // 總字元數（不含空白，含符號）
+  const charCount = text.replace(/\s/g, '').length;
   const lineCount = text ? text.split('\n').length : 0;
 
-  const tabs = [
-    { key: 'wordcount', label: '📝 字數計算' },
-    { key: 'quote',     label: '✨ 名言產生' },
-    { key: 'todo',      label: '📋 待辦清單' },
-    { key: 'timer',     label: '⏱ 倒數計時' },
-    { key: 'love',      label: '💌 AI告白' },
-    { key: 'birthday',  label: '🎂 AI生日祝福' },
-    { key: 'fortune',   label: '🔮 今日運勢' },
-    { key: 'healing',   label: '✍️ AI療癒小語' },
+  // 分組顯示 Tab
+  const tabGroups = [
+    {
+      label: '寫作工具',
+      tabs: [
+        { key: 'wordcount', label: '📝 字數計算' },
+        { key: 'quote',     label: '✨ 名言產生' },
+        { key: 'todo',      label: '📋 待辦清單' },
+        { key: 'timer',     label: '⏱ 倒數計時' },
+      ],
+    },
+    {
+      label: 'AI 工具',
+      tabs: [
+        { key: 'love',      label: '💌 AI告白' },
+        { key: 'birthday',  label: '🎂 AI生日祝福' },
+        { key: 'fortune',   label: '🔮 今日運勢' },
+        { key: 'healing',   label: '✍️ AI療癒小語' },
+      ],
+    },
+    {
+      label: '實用工具',
+      tabs: [
+        { key: 'password',  label: '🔐 密碼產生' },
+        { key: 'date',      label: '📅 日期計算' },
+        { key: 'currency',  label: '💱 匯率換算' },
+        { key: 'color',     label: '🎨 顏色代碼' },
+        { key: 'decide',    label: '🎲 隨機決策' },
+        { key: 'bmi',       label: '📊 BMI計算' },
+      ],
+    },
   ] as const;
 
   return (
@@ -226,114 +704,131 @@ export default function ToolsPage() {
           <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>寫作、靈感、計劃、專注，一站搞定</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '1.5rem' }}>
-          {tabs.map(tab => (
-            <button key={tab.key} style={btnStyle(activeTab === tab.key)} onClick={() => setActiveTab(tab.key as any)}>
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {activeTab === 'wordcount' && (
-          <div style={cardStyle}>
-            <h2 style={{ color: '#e9d5ff', margin: '0 0 1rem' }}>📝 字數計算器</h2>
-            <textarea value={text} onChange={e => setText(e.target.value)}
-              placeholder="在這裡貼上或輸入你的文字..."
-              style={{ width: '100%', height: '200px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', color: '#fff', padding: '0.8rem', fontSize: '0.95rem', resize: 'vertical', boxSizing: 'border-box', outline: 'none' }}
-            />
-            {/* ✅ 修正後的統計區塊，標籤說明更清楚 */}
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-              {[
-                { label: '字數（中文字／英文詞／數字）', value: wordCount },
-                { label: '總字元數（含符號，不含空白）', value: charCount },
-                { label: '行數', value: lineCount },
-              ].map(stat => (
-                <div key={stat.label} style={{ flex: 1, background: 'rgba(124,58,237,0.2)', borderRadius: '10px', padding: '0.8rem', textAlign: 'center' }}>
-                  <div style={{ color: '#c4b5fd', fontSize: '0.8rem' }}>{stat.label}</div>
-                  <div style={{ color: '#fff', fontSize: '1.8rem', fontWeight: 800 }}>{stat.value}</div>
-                </div>
+        {/* Tab 分組 */}
+        {tabGroups.map(group => (
+          <div key={group.label} style={{ marginBottom: '0.8rem' }}>
+            <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 0.4rem 0.2rem', letterSpacing: '0.05em' }}>
+              {group.label}
+            </p>
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              {group.tabs.map(tab => (
+                <button key={tab.key} style={btnStyle(activeTab === tab.key)} onClick={() => setActiveTab(tab.key as any)}>
+                  {tab.label}
+                </button>
               ))}
             </div>
           </div>
-        )}
+        ))}
 
-        {activeTab === 'quote' && (
-          <div style={{ ...cardStyle, textAlign: 'center' }}>
-            <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem' }}>✨ 今日名言</h2>
-            <div style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '2rem', marginBottom: '1.5rem' }}>
-              <p style={{ color: '#f3f4f6', fontSize: '1.2rem', lineHeight: 1.8, margin: 0, fontStyle: 'italic' }}>「{quote}」</p>
-            </div>
-            <button onClick={() => setQuote(QUOTES[Math.floor(Math.random()*QUOTES.length)])} style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem' }}>🎲 換一句</button>
-          </div>
-        )}
-
-        {activeTab === 'todo' && (
-          <div style={cardStyle}>
-            <TodoNotice />
-            <h2 style={{ color: '#e9d5ff', margin: '0 0 0.4rem' }}>📋 待辦清單</h2>
-            <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 1rem' }}>
-              💾 資料儲存於你的瀏覽器，僅自己可見｜
-              <a href="/privacy" style={{ color: '#a78bfa', textDecoration: 'none' }}>隱私權政策</a>
-            </p>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-              <input value={todoInput} onChange={e => setTodoInput(e.target.value)}
-                onKeyDown={e => { if (e.key==='Enter'&&todoInput.trim()) { setTodos([...todos,{text:todoInput.trim(),done:false}]); setTodoInput(''); }}}
-                placeholder="輸入待辦事項，按 Enter 新增"
-                style={{ flex:1, background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color:'#fff', padding:'0.6rem 1rem', fontSize:'0.9rem', outline:'none' }}
+        <div style={{ marginTop: '1.5rem' }}>
+          {/* 原有功能 */}
+          {activeTab === 'wordcount' && (
+            <div style={cardStyle}>
+              <h2 style={{ color: '#e9d5ff', margin: '0 0 1rem' }}>📝 字數計算器</h2>
+              <textarea value={text} onChange={e => setText(e.target.value)}
+                placeholder="在這裡貼上或輸入你的文字..."
+                style={{ width: '100%', height: '200px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', color: '#fff', padding: '0.8rem', fontSize: '0.95rem', resize: 'vertical', boxSizing: 'border-box', outline: 'none' }}
               />
-              <button onClick={() => { if (todoInput.trim()) { setTodos([...todos,{text:todoInput.trim(),done:false}]); setTodoInput(''); }}} style={btnStyle(true)}>+ 新增</button>
-            </div>
-            {todos.length === 0 ? (
-              <p style={{ color: '#6b7280', textAlign: 'center', padding: '1rem' }}>還沒有待辦事項，加一個吧！</p>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {todos.map((todo, i) => (
-                  <div key={i} style={{ display:'flex', alignItems:'center', gap:'0.8rem', background:'rgba(0,0,0,0.2)', borderRadius:'8px', padding:'0.7rem 1rem' }}>
-                    <input type="checkbox" checked={todo.done} onChange={() => setTodos(todos.map((t,j) => j===i?{...t,done:!t.done}:t))} style={{ cursor:'pointer', width:'18px', height:'18px' }} />
-                    <span style={{ flex:1, color:todo.done?'#6b7280':'#f3f4f6', textDecoration:todo.done?'line-through':'none' }}>{todo.text}</span>
-                    <button onClick={() => setTodos(todos.filter((_,j) => j!==i))} style={{ background:'none', border:'none', color:'#ef4444', cursor:'pointer', fontSize:'1.1rem' }}>✕</button>
+              <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                {[
+                  { label: '字數（中文字／英文詞／數字）', value: wordCount },
+                  { label: '總字元數（含符號，不含空白）', value: charCount },
+                  { label: '行數', value: lineCount },
+                ].map(stat => (
+                  <div key={stat.label} style={{ flex: 1, background: 'rgba(124,58,237,0.2)', borderRadius: '10px', padding: '0.8rem', textAlign: 'center' }}>
+                    <div style={{ color: '#c4b5fd', fontSize: '0.8rem' }}>{stat.label}</div>
+                    <div style={{ color: '#fff', fontSize: '1.8rem', fontWeight: 800 }}>{stat.value}</div>
                   </div>
                 ))}
-                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'0.3rem' }}>
-                  <span style={{ color:'#9ca3af', fontSize:'0.8rem' }}>完成 {todos.filter(t=>t.done).length} / {todos.length}</span>
-                  <button
-                    onClick={() => { if (confirm('確定清除所有已完成項目？')) setTodos(todos.filter(t => !t.done)); }}
-                    style={{ background:'none', border:'none', color:'#6b7280', cursor:'pointer', fontSize:'0.75rem' }}>
-                    清除已完成
-                  </button>
-                </div>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
 
-        {activeTab === 'timer' && (
-          <div style={{ ...cardStyle, textAlign: 'center' }}>
-            <h2 style={{ color: '#e9d5ff', margin: '0 0 1rem' }}>⏱ 番茄倒數計時</h2>
-            <div style={{ fontSize:'5rem', fontWeight:800, color:timerRunning?'#a78bfa':'#fff', letterSpacing:'0.05em', margin:'1rem 0' }}>
-              {String(Math.floor(timerSeconds/60)).padStart(2,'0')}:{String(timerSeconds%60).padStart(2,'0')}
+          {activeTab === 'quote' && (
+            <div style={{ ...cardStyle, textAlign: 'center' }}>
+              <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem' }}>✨ 今日名言</h2>
+              <div style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '2rem', marginBottom: '1.5rem' }}>
+                <p style={{ color: '#f3f4f6', fontSize: '1.2rem', lineHeight: 1.8, margin: 0, fontStyle: 'italic' }}>「{quote}」</p>
+              </div>
+              <button onClick={() => setQuote(QUOTES[Math.floor(Math.random()*QUOTES.length)])} style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem' }}>🎲 換一句</button>
             </div>
-            <div style={{ display:'flex', gap:'0.5rem', justifyContent:'center', marginBottom:'1rem', flexWrap:'wrap' }}>
-              {[5,10,25,45].map(min => (
-                <button key={min} style={btnStyle()} onClick={() => { setTimerSeconds(min*60); setTimerRunning(false); }}>{min} 分鐘</button>
-              ))}
-            </div>
-            <div style={{ display:'flex', gap:'0.5rem', justifyContent:'center', marginBottom:'1.5rem' }}>
-              <input value={timerInput} onChange={e => setTimerInput(e.target.value)} type="number" min="1" max="180"
-                style={{ width:'80px', background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color:'#fff', padding:'0.5rem', textAlign:'center', outline:'none' }} />
-              <button style={btnStyle()} onClick={() => { setTimerSeconds(Number(timerInput)*60); setTimerRunning(false); }}>自訂分鐘</button>
-            </div>
-            <div style={{ display:'flex', gap:'1rem', justifyContent:'center' }}>
-              <button style={{ ...btnStyle(true), padding:'0.7rem 2rem', fontSize:'1rem' }} onClick={() => setTimerRunning(!timerRunning)}>{timerRunning?'⏸ 暫停':'▶ 開始'}</button>
-              <button style={{ ...btnStyle(), padding:'0.7rem 1.5rem', fontSize:'1rem' }} onClick={() => { setTimerSeconds(Number(timerInput)*60); setTimerRunning(false); }}>🔄 重置</button>
-            </div>
-          </div>
-        )}
+          )}
 
-        {activeTab === 'love'     && <AiToolPanel key="love"     type="love"     emoji="💌" label="AI 告白生成器" placeholder="輸入對方的名字或暱稱..." />}
-        {activeTab === 'birthday' && <AiToolPanel key="birthday" type="birthday" emoji="🎂" label="AI 生日祝福"   placeholder="輸入對方的名字或暱稱..." />}
-        {activeTab === 'fortune'  && <AiToolPanel key="fortune"  type="fortune"  emoji="🔮" label="今日運勢"       placeholder="" signs={SIGNS} />}
-        {activeTab === 'healing'  && <AiToolPanel key="healing"  type="healing"  emoji="✍️" label="AI 療癒小語"   placeholder="輸入你現在的心情..." />}
+          {activeTab === 'todo' && (
+            <div style={cardStyle}>
+              <TodoNotice />
+              <h2 style={{ color: '#e9d5ff', margin: '0 0 0.4rem' }}>📋 待辦清單</h2>
+              <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 1rem' }}>
+                💾 資料儲存於你的瀏覽器，僅自己可見｜
+                <a href="/privacy" style={{ color: '#a78bfa', textDecoration: 'none' }}>隱私權政策</a>
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                <input value={todoInput} onChange={e => setTodoInput(e.target.value)}
+                  onKeyDown={e => { if (e.key==='Enter'&&todoInput.trim()) { setTodos([...todos,{text:todoInput.trim(),done:false}]); setTodoInput(''); }}}
+                  placeholder="輸入待辦事項，按 Enter 新增"
+                  style={{ flex:1, background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color:'#fff', padding:'0.6rem 1rem', fontSize:'0.9rem', outline:'none' }}
+                />
+                <button onClick={() => { if (todoInput.trim()) { setTodos([...todos,{text:todoInput.trim(),done:false}]); setTodoInput(''); }}} style={btnStyle(true)}>+ 新增</button>
+              </div>
+              {todos.length === 0 ? (
+                <p style={{ color: '#6b7280', textAlign: 'center', padding: '1rem' }}>還沒有待辦事項，加一個吧！</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {todos.map((todo, i) => (
+                    <div key={i} style={{ display:'flex', alignItems:'center', gap:'0.8rem', background:'rgba(0,0,0,0.2)', borderRadius:'8px', padding:'0.7rem 1rem' }}>
+                      <input type="checkbox" checked={todo.done} onChange={() => setTodos(todos.map((t,j) => j===i?{...t,done:!t.done}:t))} style={{ cursor:'pointer', width:'18px', height:'18px' }} />
+                      <span style={{ flex:1, color:todo.done?'#6b7280':'#f3f4f6', textDecoration:todo.done?'line-through':'none' }}>{todo.text}</span>
+                      <button onClick={() => setTodos(todos.filter((_,j) => j!==i))} style={{ background:'none', border:'none', color:'#ef4444', cursor:'pointer', fontSize:'1.1rem' }}>✕</button>
+                    </div>
+                  ))}
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'0.3rem' }}>
+                    <span style={{ color:'#9ca3af', fontSize:'0.8rem' }}>完成 {todos.filter(t=>t.done).length} / {todos.length}</span>
+                    <button onClick={() => { if (confirm('確定清除所有已完成項目？')) setTodos(todos.filter(t => !t.done)); }}
+                      style={{ background:'none', border:'none', color:'#6b7280', cursor:'pointer', fontSize:'0.75rem' }}>
+                      清除已完成
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'timer' && (
+            <div style={{ ...cardStyle, textAlign: 'center' }}>
+              <h2 style={{ color: '#e9d5ff', margin: '0 0 1rem' }}>⏱ 番茄倒數計時</h2>
+              <div style={{ fontSize:'5rem', fontWeight:800, color:timerRunning?'#a78bfa':'#fff', letterSpacing:'0.05em', margin:'1rem 0' }}>
+                {String(Math.floor(timerSeconds/60)).padStart(2,'0')}:{String(timerSeconds%60).padStart(2,'0')}
+              </div>
+              <div style={{ display:'flex', gap:'0.5rem', justifyContent:'center', marginBottom:'1rem', flexWrap:'wrap' }}>
+                {[5,10,25,45].map(min => (
+                  <button key={min} style={btnStyle()} onClick={() => { setTimerSeconds(min*60); setTimerRunning(false); }}>{min} 分鐘</button>
+                ))}
+              </div>
+              <div style={{ display:'flex', gap:'0.5rem', justifyContent:'center', marginBottom:'1.5rem' }}>
+                <input value={timerInput} onChange={e => setTimerInput(e.target.value)} type="number" min="1" max="180"
+                  style={{ width:'80px', background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color:'#fff', padding:'0.5rem', textAlign:'center', outline:'none' }} />
+                <button style={btnStyle()} onClick={() => { setTimerSeconds(Number(timerInput)*60); setTimerRunning(false); }}>自訂分鐘</button>
+              </div>
+              <div style={{ display:'flex', gap:'1rem', justifyContent:'center' }}>
+                <button style={{ ...btnStyle(true), padding:'0.7rem 2rem', fontSize:'1rem' }} onClick={() => setTimerRunning(!timerRunning)}>{timerRunning?'⏸ 暫停':'▶ 開始'}</button>
+                <button style={{ ...btnStyle(), padding:'0.7rem 1.5rem', fontSize:'1rem' }} onClick={() => { setTimerSeconds(Number(timerInput)*60); setTimerRunning(false); }}>🔄 重置</button>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'love'     && <AiToolPanel key="love"     type="love"     emoji="💌" label="AI 告白生成器" placeholder="輸入對方的名字或暱稱..." />}
+          {activeTab === 'birthday' && <AiToolPanel key="birthday" type="birthday" emoji="🎂" label="AI 生日祝福"   placeholder="輸入對方的名字或暱稱..." />}
+          {activeTab === 'fortune'  && <AiToolPanel key="fortune"  type="fortune"  emoji="🔮" label="今日運勢"       placeholder="" signs={SIGNS} />}
+          {activeTab === 'healing'  && <AiToolPanel key="healing"  type="healing"  emoji="✍️" label="AI 療癒小語"   placeholder="輸入你現在的心情..." />}
+
+          {/* 新增 6 個工具 */}
+          {activeTab === 'password' && <PasswordGenerator />}
+          {activeTab === 'date'     && <DateCalculator />}
+          {activeTab === 'currency' && <CurrencyConverter />}
+          {activeTab === 'color'    && <ColorConverter />}
+          {activeTab === 'decide'   && <RandomDecider />}
+          {activeTab === 'bmi'      && <BmiCalculator />}
+        </div>
 
         <div style={{ marginTop:'2rem', background:'linear-gradient(135deg,rgba(245,158,11,0.15),rgba(236,72,153,0.15))', border:'1px solid rgba(245,158,11,0.3)', borderRadius:'16px', padding:'1.2rem', textAlign:'center' }}>
           <p style={{ color:'#fcd34d', fontWeight:700, margin:'0 0 0.3rem' }}>✨ 工具用完了，去逛逛其他地方？</p>
