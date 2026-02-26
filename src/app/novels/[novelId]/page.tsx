@@ -8,6 +8,16 @@ import chaptersData from '@/data/chapters.json'
 
 const FREE_CHAPTERS = 10
 
+// ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
+function isPublishedByDate(publishedAt: string): boolean {
+  const now = new Date()
+  // 取得台灣今天日期字串 YYYY-MM-DD
+  const taiwanToday = new Date(now.getTime() + 8 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10)
+  return publishedAt <= taiwanToday
+}
+
 interface Props { params: Promise<{ novelId: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,8 +39,13 @@ export default async function NovelPage({ params }: Props) {
     .filter(c => c.novelId === novelId && c.isPublished)
     .sort((a, b) => a.chapterNumber - b.chapterNumber)
 
-  const freeChapters = chapters.filter(c => c.chapterNumber <= FREE_CHAPTERS)
-  const lockedChapters = chapters.filter(c => c.chapterNumber > FREE_CHAPTERS)
+  // ✅ 同時判斷：章節數 <= FREE_CHAPTERS 且 發布日期已到
+  const freeChapters = chapters.filter(
+    c => c.chapterNumber <= FREE_CHAPTERS && isPublishedByDate(c.publishedAt)
+  )
+  const lockedChapters = chapters.filter(
+    c => c.chapterNumber > FREE_CHAPTERS || !isPublishedByDate(c.publishedAt)
+  )
 
   return (
     <>
@@ -93,7 +108,7 @@ export default async function NovelPage({ params }: Props) {
         <div className="chapters-section">
           <p className="chapters-label">章節目錄</p>
 
-          {/* 免費章節 */}
+          {/* 免費且已發布章節 */}
           {freeChapters.map(chapter => (
             <Link
               key={chapter.id}
@@ -106,11 +121,12 @@ export default async function NovelPage({ params }: Props) {
             </Link>
           ))}
 
-          {/* 鎖定章節 */}
+          {/* 鎖定章節（未到日期 or 超過免費章節數） */}
           {lockedChapters.map(chapter => (
             <div key={chapter.id} className="chapter-row locked">
               <span className="chapter-num">{chapter.chapterNumber}</span>
               <span className="chapter-title">{chapter.title}</span>
+              <span className="chapter-date">{chapter.publishedAt}</span>
               <span className="chapter-lock">🔒</span>
             </div>
           ))}

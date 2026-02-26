@@ -9,16 +9,35 @@ import chaptersData from '@/data/chapters.json'
 // ✅ 免費開放章節數
 const FREE_CHAPTERS = 10
 
+// ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
+function isPublishedByDate(publishedAt: string): boolean {
+  const now = new Date()
+  const taiwanToday = new Date(now.getTime() + 8 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10)
+  return publishedAt <= taiwanToday
+}
+
+// ✅ 判斷章節是否應被鎖定
+function isChapterLocked(chapter: { chapterNumber: number; publishedAt: string }): boolean {
+  // 超過免費章節數 → 鎖
+  if (chapter.chapterNumber > FREE_CHAPTERS) return true
+  // 發布日期未到 → 鎖
+  if (!isPublishedByDate(chapter.publishedAt)) return true
+  return false
+}
+
 // ✅ 計算下一個更新日（每週一、三、五）
 function getNextUpdateDay(): string {
-  const today = new Date()
-  const day = today.getDay() // 0=日,1=一,2=二,3=三,4=四,5=五,6=六
+  const now = new Date()
+  const taiwanNow = new Date(now.getTime() + 8 * 60 * 60 * 1000)
+  const day = taiwanNow.getDay() // 0=日,1=一,...,6=六
   const updateDays = [1, 3, 5]
   for (let i = 1; i <= 7; i++) {
     const next = (day + i) % 7
     if (updateDays.includes(next)) {
-      const nextDate = new Date(today)
-      nextDate.setDate(today.getDate() + i)
+      const nextDate = new Date(taiwanNow)
+      nextDate.setDate(taiwanNow.getDate() + i)
       return nextDate.toLocaleDateString('zh-TW', { month: 'long', day: 'numeric', weekday: 'short' })
     }
   }
@@ -52,8 +71,8 @@ export default async function ChapterPage({ params }: Props) {
   const prevChapter = currentIndex > 0 ? sortedChapters[currentIndex - 1] : null
   const nextChapter = currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : null
 
-  // ✅ 第 11 章起顯示鎖章畫面
-  if (chapter.chapterNumber > FREE_CHAPTERS) {
+  // ✅ 鎖章判斷：超過免費章節數 OR 發布日期未到
+  if (isChapterLocked(chapter)) {
     const nextUpdate = getNextUpdateDay()
     return (
       <main style={{ minHeight: '100vh', background: '#0c0b08', color: '#d8ccb8', fontFamily: 'Georgia, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
@@ -67,7 +86,9 @@ export default async function ChapterPage({ params }: Props) {
           </h2>
 
           <p style={{ color: '#6a5a4a', lineHeight: 1.9, margin: '0 0 0.3rem', fontSize: '0.9rem' }}>
-            免費章節（第 1～{FREE_CHAPTERS} 章）已全數開放
+            {chapter.chapterNumber <= FREE_CHAPTERS
+              ? `本章將於 ${chapter.publishedAt} 開放`
+              : `免費章節（第 1～${FREE_CHAPTERS} 章）已全數開放`}
           </p>
 
           {/* 更新時程 */}
@@ -153,7 +174,7 @@ export default async function ChapterPage({ params }: Props) {
           <p key={i} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
         ))}
 
-        {/* ✅ 第 10 章結尾：免費章節讀完提示 */}
+        {/* ✅ 第 FREE_CHAPTERS 章結尾：免費章節讀完提示 */}
         {chapter.chapterNumber === FREE_CHAPTERS && (
           <div style={{
             margin: '3rem 0 0',
@@ -200,11 +221,11 @@ export default async function ChapterPage({ params }: Props) {
 
             <Link href={'/novels/' + novel.id} style={{ padding: '10px 24px', border: '1px solid rgba(180,144,80,0.25)', color: '#8a7060', textDecoration: 'none', fontSize: '0.8rem' }}>目錄</Link>
 
-            {/* 下一章：超過免費章節顯示🔒 */}
+            {/* 下一章：超過免費章節或未到發布日顯示🔒 */}
             {nextChapter ? (
               <Link href={'/novels/' + novel.id + '/' + nextChapter.id} style={{ flex: 1, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
-                <div style={{ fontSize: '0.75rem', color: nextChapter.chapterNumber > FREE_CHAPTERS ? '#4a3a2a' : '#b49050' }}>
-                  {nextChapter.chapterNumber > FREE_CHAPTERS ? '🔒 ' : ''}下一章 →
+                <div style={{ fontSize: '0.75rem', color: isChapterLocked(nextChapter) ? '#4a3a2a' : '#b49050' }}>
+                  {isChapterLocked(nextChapter) ? '🔒 ' : ''}下一章 →
                 </div>
                 <div style={{ fontSize: '0.85rem', color: '#8a7a6a' }}>{nextChapter.title}</div>
               </Link>
