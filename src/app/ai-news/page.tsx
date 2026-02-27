@@ -96,15 +96,13 @@ const TABS = [
   { key: 'AI',   label: 'AI 科技', icon: '🤖' },
   { key: '股市', label: '股市',    icon: '📈' },
   { key: '棒球', label: '棒球',    icon: '⚾' },
-  { key: '美食', label: '美食',    icon: '🍜' },
-  { key: '旅遊', label: '旅遊',    icon: '✈️' },
+ 
 ];
 
 const CATEGORY_BADGE: Record<string, { bg: string; color: string; label: string }> = {
   '棒球': { bg: '#1a4731', color: '#6ee7b7', label: '⚾ 棒球' },
   '股市': { bg: '#14532d', color: '#86efac', label: '📈 股市' },
-  '美食': { bg: '#7c2d12', color: '#fdba74', label: '🍜 美食' },
-  '旅遊': { bg: '#0c4a6e', color: '#7dd3fc', label: '✈️ 旅遊' },
+  
 };
 
 export default function NewsPage() {
