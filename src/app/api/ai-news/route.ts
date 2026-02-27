@@ -19,15 +19,44 @@ const RSS_FEEDS = [
   { url: 'https://www.cna.com.tw/rss/aife.aspx', source: '中央社財經', keywords: ['股', '投資', '台積電', 'ETF'], category: '股市' },
 ];
 
+// ✅ 圖片黑名單：這些是 logo/icon/tracker，不是新聞圖，直接排除
+const IMAGE_BLACKLIST = [
+  'yahoo.com/images',
+  'yahoo.com/news/images',
+  's.yimg.com/os/mit/media',   // Yahoo 品牌 logo
+  's.yimg.com/rz/l',           // Yahoo 追蹤圖
+  'l.yimg.com',
+  'media.zenfs.com/en/bloomberg', // Bloomberg 小 icon
+  '1x1',
+  'pixel',
+  'track',
+  'beacon',
+  'spacer',
+  'logo',
+  '.gif',
+  'udn.com/img/nophoto',       // 聯合報無圖預設
+];
+
+// ✅ 判斷圖片是否有效（不在黑名單、長寬比合理）
+function isValidImage(url: string): boolean {
+  if (!url || !url.startsWith('http')) return false;
+  const lower = url.toLowerCase();
+  return !IMAGE_BLACKLIST.some(bad => lower.includes(bad));
+}
+
 function extractImage(content: string): string {
   const mediaContent = content.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
-  if (mediaContent && mediaContent.match(/\.(jpg|jpeg|png|webp|gif)/i)) return mediaContent;
+  if (mediaContent && isValidImage(mediaContent) && mediaContent.match(/\.(jpg|jpeg|png|webp)/i)) return mediaContent;
+
   const mediaThumbnail = content.match(/<media:thumbnail[^>]+url="([^"]+)"/i)?.[1];
-  if (mediaThumbnail) return mediaThumbnail;
+  if (mediaThumbnail && isValidImage(mediaThumbnail)) return mediaThumbnail;
+
   const enclosure = content.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image/i)?.[1];
-  if (enclosure) return enclosure;
+  if (enclosure && isValidImage(enclosure)) return enclosure;
+
   const imgSrc = content.match(/<img[^>]+src="([^"]+)"/i)?.[1];
-  if (imgSrc && !imgSrc.includes('pixel') && !imgSrc.includes('1x1')) return imgSrc;
+  if (imgSrc && isValidImage(imgSrc)) return imgSrc;
+
   return '';
 }
 
@@ -51,7 +80,7 @@ function parseRSS(xml: string, source: string, keywords: string[], category: str
         link, pubDate, source,
         description: description.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').trim().slice(0, 150) + '...',
         category,
-        image,
+        image, // 黑名單已過濾，空字串表示沒圖 → 前端顯示主題漸層
       });
     }
     if (items.length >= 8) break;
@@ -75,13 +104,14 @@ async function fetchOgImage(url: string): Promise<string> {
       html += new TextDecoder().decode(value);
       if (html.length > 10000) { reader.cancel(); break; }
     }
-    const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
-    if (ogMatch?.[1]) {
-      const img = ogMatch[1];
-      if (!img.includes('1x1') && !img.includes('pixel') && !img.includes('track') && img.startsWith('http')) return img;
-    }
+    const ogMatch =
+      html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    if (ogMatch?.[1] && isValidImage(ogMatch[1])) return ogMatch[1];
+
     const tw = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
-    if (tw?.[1]?.startsWith('http')) return tw[1];
+    if (tw?.[1] && isValidImage(tw[1])) return tw[1];
+
     return '';
   } catch { return ''; }
 }
@@ -111,23 +141,28 @@ export async function GET() {
     const selected: typeof allNews = [];
     const seen = new Set<string>();
     for (const cat of categories) {
-      const catItems = allNews.filter(i => i.category === cat).sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()).slice(0, 10);
+      const catItems = allNews.filter(i => i.category === cat)
+        .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
+        .slice(0, 10);
       for (const item of catItems) {
         if (!seen.has(item.link)) { seen.add(item.link); selected.push(item); }
       }
     }
     selected.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+
+    // ✅ 只對沒有圖片的新聞才去抓 og:image（節省時間）
     const noImg = selected.filter(i => !i.image);
+    console.log('[ai-news] 需要補圖：' + noImg.length + ' 則');
     for (let i = 0; i < noImg.length; i += 10) {
       await Promise.allSettled(noImg.slice(i, i + 10).map(async item => {
         const img = await fetchOgImage(item.link);
         if (img) item.image = img;
       }));
     }
+
     return NextResponse.json({ news: selected });
   } catch (err) {
     console.error('[ai-news] 全域錯誤:', err);
     return NextResponse.json({ news: [] }, { status: 500 });
   }
 }
-
