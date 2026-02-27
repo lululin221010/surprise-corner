@@ -165,9 +165,6 @@ export default function WallPage() {
               <p style={{ margin: '0 0 1rem', lineHeight: 1.8, fontSize: '1rem' }}>{p.text}</p>
               <div style={{ display: 'flex', gap: '12px' }}>
                 <Link href={`/wall/${p._id}`} style={{ color: '#a78bfa', fontSize: '0.85rem' }}>查看作品 →</Link>
-                {p.creatorId && (
-                  <Link href={`/creator/${p.creatorId}`} style={{ color: '#f472b6', fontSize: '0.85rem' }}>作者頁 →</Link>
-                )}
               </div>
             </div>
           ))

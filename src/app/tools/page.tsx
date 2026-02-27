@@ -175,7 +175,7 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
         <input
           value={localInput}
           onChange={e => setLocalInput(e.target.value)}
-          placeholder={placeholder}
+          placeholder={type === 'love' || type === 'birthday' || type === 'healing' ? '寫下你對他想說的話...' : placeholder}
           style={{ ...inputStyle, marginBottom: '1rem', textAlign: 'center' }}
           onKeyDown={e => e.key === 'Enter' && handleGenerate()}
         />
