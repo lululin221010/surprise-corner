@@ -9,20 +9,25 @@ interface NewsItem {
   pubDate: string;
   source: string;
   description: string;
-  image?: string; // ✅ 新增：若 API 有提供圖片網址
+  image?: string;
+  category?: string; // 'AI' | '股市' | '棒球'
 }
 
 const SOURCE_COLORS: Record<string, string> = {
   'TechCrunch': '#0a8a4c',
   'The Verge': '#ff3b30',
   'BBC Tech': '#bb1919',
+  'BBC Sport': '#bb1919',
   'iThome': '#0066cc',
   '科技新報': '#e65c00',
   '鉅亨網': '#c0392b',
   'MoneyDJ': '#27ae60',
+  'TSNA': '#1a6f38',
+  'Yahoo MLB': '#6001d2',
+  'MLB官網': '#002d72',
+  '聯合新聞網': '#c8102e',
 };
 
-// ✅ 依標題關鍵字決定 emoji + 漸層色（每張卡片獨一無二）
 const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] = [
   { keywords: ['AI', '人工智慧', 'ChatGPT', 'GPT', 'Gemini', 'Claude', 'LLM', 'OpenAI', 'Anthropic'],
     icon: '🤖', gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)' },
@@ -54,6 +59,9 @@ const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] =
     icon: '⚔️', gradient: 'linear-gradient(135deg, #92400e, #451a03)' },
   { keywords: ['climate', 'energy', '能源', '氣候', '太陽能', '綠能'],
     icon: '🌿', gradient: 'linear-gradient(135deg, #166534, #052e16)' },
+  // ⚾ 棒球主題
+  { keywords: ['棒球', 'WBC', 'MLB', '中職', '台灣隊', 'baseball', 'pitcher', 'home run', '投手', '打者', '球員'],
+    icon: '⚾', gradient: 'linear-gradient(135deg, #1a4731, #0d2b1d)' },
 ];
 
 function getThemeForTitle(title: string): { icon: string; gradient: string } {
@@ -75,7 +83,6 @@ function timeAgo(dateStr: string) {
   return `${Math.floor(hours / 24)} 天前`;
 }
 
-// ✅ 圖片區塊元件（有圖用圖，沒圖依標題關鍵字選漸層色+emoji）
 function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) {
   const [imgError, setImgError] = useState(false);
   const { icon, gradient: bg } = getThemeForTitle(item.title);
@@ -106,29 +113,107 @@ function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) 
   );
 }
 
-export default function AINewsPage() {
-  const [news, setNews] = useState<NewsItem[]>([]);
+// Tab 設定
+const TABS = [
+  { key: 'all',      label: '全部',   icon: '📡' },
+  { key: 'AI',       label: 'AI 科技', icon: '🤖' },
+  { key: '股市',     label: '股市',   icon: '📈' },
+  { key: '棒球',     label: '棒球',   icon: '⚾' },
+];
+
+export default function NewsPage() {
+  const [allNews, setAllNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('all');
 
   useEffect(() => {
-    fetch('/api/ai-news')
-      .then(r => r.json())
-      .then(data => { setNews(data.news || []); setLoading(false); })
-      .catch(() => setLoading(false));
+    // 同時抓 AI 快訊 + 棒球新聞
+    Promise.allSettled([
+      fetch('/api/ai-news').then(r => r.json()),
+      fetch('/api/baseball-news').then(r => r.json()),
+    ]).then(results => {
+      const aiNews: NewsItem[] = (results[0].status === 'fulfilled' ? results[0].value.news : []) || [];
+      const baseballRaw: NewsItem[] = (results[1].status === 'fulfilled' ? results[1].value.news : []) || [];
+
+      // 棒球新聞標記 category
+      const baseballNews = baseballRaw.map(item => ({ ...item, category: '棒球' }));
+
+      // 合併後依時間排序
+      const merged = [...aiNews, ...baseballNews].sort(
+        (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+      );
+      setAllNews(merged);
+      setLoading(false);
+    });
   }, []);
 
-  const featured = news[0];       // 第一則：大圖置頂
-  const rest = news.slice(1);     // 其餘：2欄網格
+  // Tab 篩選
+  const filtered = activeTab === 'all'
+    ? allNews
+    : allNews.filter(item => item.category === activeTab);
+
+  const featured = filtered[0];
+  const rest = filtered.slice(1);
+
+  // Tab 數量徽章
+  const countFor = (key: string) =>
+    key === 'all' ? allNews.length : allNews.filter(i => i.category === key).length;
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)', padding: '2rem 1rem' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* ── Header ── */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🤖</div>
-          <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: 0 }}>AI 科技快訊</h1>
-          <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>最新人工智慧與科技動態，每小時自動更新</p>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>📡</div>
+          <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: 0 }}>最新快訊</h1>
+          <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>AI 科技・股市・棒球，每小時自動更新</p>
+        </div>
+
+        {/* ── Tab 切換 ── */}
+        <div style={{
+          display: 'flex', gap: '0.5rem', justifyContent: 'center',
+          marginBottom: '2rem', flexWrap: 'wrap',
+        }}>
+          {TABS.map(tab => {
+            const isActive = activeTab === tab.key;
+            const count = countFor(tab.key);
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.4rem',
+                  padding: '0.5rem 1.2rem',
+                  borderRadius: '30px',
+                  border: isActive ? '2px solid #a78bfa' : '2px solid rgba(167,139,250,0.3)',
+                  background: isActive ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.05)',
+                  color: isActive ? '#e9d5ff' : '#9ca3af',
+                  fontWeight: isActive ? 700 : 500,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <span>{tab.icon}</span>
+                <span>{tab.label}</span>
+                {count > 0 && (
+                  <span style={{
+                    background: isActive ? '#7c3aed' : 'rgba(124,58,237,0.4)',
+                    color: '#fff',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    padding: '1px 7px',
+                    borderRadius: '20px',
+                    minWidth: '20px',
+                    textAlign: 'center',
+                  }}>
+                    {count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
 
         {/* ── Loading ── */}
@@ -140,13 +225,13 @@ export default function AINewsPage() {
         )}
 
         {/* ── 無資料 ── */}
-        {!loading && news.length === 0 && (
+        {!loading && filtered.length === 0 && (
           <div style={{ textAlign: 'center', color: '#a78bfa', padding: '3rem' }}>
             <p>目前無法取得新聞，請稍後再試</p>
           </div>
         )}
 
-        {/* ── ✅ 置頂精選新聞（第一則，大圖） ── */}
+        {/* ── 置頂精選（第一則，大圖） ── */}
         {!loading && featured && (
           <a
             href={featured.link}
@@ -173,7 +258,7 @@ export default function AINewsPage() {
           >
             <NewsImage item={featured} height={280} />
             <div style={{ padding: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.7rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.7rem', flexWrap: 'wrap' }}>
                 <span style={{
                   background: SOURCE_COLORS[featured.source] || '#6d28d9',
                   color: '#fff', fontSize: '0.75rem',
@@ -181,6 +266,9 @@ export default function AINewsPage() {
                 }}>
                   {featured.source}
                 </span>
+                {featured.category === '棒球' && (
+                  <span style={{ background: '#1a4731', color: '#6ee7b7', fontSize: '0.72rem', padding: '2px 8px', borderRadius: '20px', fontWeight: 700 }}>⚾ 棒球</span>
+                )}
                 <span style={{ color: '#a78bfa', fontSize: '0.75rem', fontWeight: 600 }}>🔥 精選</span>
                 <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{timeAgo(featured.pubDate)}</span>
               </div>
@@ -194,7 +282,7 @@ export default function AINewsPage() {
           </a>
         )}
 
-        {/* ── ✅ 其餘新聞：2 欄卡片網格 ── */}
+        {/* ── 其餘新聞：2 欄卡片網格 ── */}
         {!loading && rest.length > 0 && (
           <div style={{
             display: 'grid',
@@ -230,7 +318,7 @@ export default function AINewsPage() {
               >
                 <NewsImage item={item} height={160} />
                 <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
                     <span style={{
                       background: SOURCE_COLORS[item.source] || '#6d28d9',
                       color: '#fff', fontSize: '0.68rem',
@@ -238,6 +326,9 @@ export default function AINewsPage() {
                     }}>
                       {item.source}
                     </span>
+                    {item.category === '棒球' && (
+                      <span style={{ background: '#1a4731', color: '#6ee7b7', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '20px', fontWeight: 700 }}>⚾</span>
+                    )}
                     <span style={{ color: '#9ca3af', fontSize: '0.72rem' }}>{timeAgo(item.pubDate)}</span>
                   </div>
                   <h2 style={{ color: '#f3f4f6', fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.4rem', lineHeight: 1.5, flex: 1 }}>
@@ -254,7 +345,7 @@ export default function AINewsPage() {
           </div>
         )}
 
-        {/* ── 導流 Still Time Corner ── */}
+        {/* ── 導流 ── */}
         <div style={{
           marginTop: '3rem',
           background: 'linear-gradient(135deg, #f59e0b22, #ec489922)',
