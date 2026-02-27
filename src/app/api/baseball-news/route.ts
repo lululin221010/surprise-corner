@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 1800; // 30分鐘更新一次
+export const revalidate = 7200; // 2小時更新一次
 
 const FETCH_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (compatible; SurpriseCornerBot/1.0; +https://surprise-corner.vercel.app)',
