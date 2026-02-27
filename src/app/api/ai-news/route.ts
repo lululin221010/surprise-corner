@@ -1,7 +1,14 @@
 // 📁 路徑：src/app/api/ai-news/route.ts
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic'; // ✅ 每次都重新抓，不快取失敗結果
 export const revalidate = 3600;
+
+// ✅ 加上瀏覽器 User-Agent，避免被 RSS 來源封鎖
+const FETCH_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (compatible; SurpriseCornerBot/1.0; +https://surprise-corner.vercel.app)',
+  'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+};
 
 const RSS_FEEDS = [
   {
@@ -51,25 +58,19 @@ const SOURCE_CATEGORY: Record<string, string> = {
   'MoneyDJ': '股市',
 };
 
-// 從各種 RSS 格式中萃取圖片 URL
 function extractImage(content: string): string {
-  // 1. <media:content url="...">
   const mediaContent = content.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
   if (mediaContent && mediaContent.match(/\.(jpg|jpeg|png|webp|gif)/i)) return mediaContent;
 
-  // 2. <media:thumbnail url="...">
   const mediaThumbnail = content.match(/<media:thumbnail[^>]+url="([^"]+)"/i)?.[1];
   if (mediaThumbnail) return mediaThumbnail;
 
-  // 3. <enclosure url="..." type="image/...">
   const enclosure = content.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image/i)?.[1];
   if (enclosure) return enclosure;
 
-  // 4. <img src="..."> inside description/content
   const imgSrc = content.match(/<img[^>]+src="([^"]+)"/i)?.[1];
   if (imgSrc && !imgSrc.includes('pixel') && !imgSrc.includes('1x1')) return imgSrc;
 
-  // 5. og:image 或其他 image tag
   const ogImage = content.match(/image[^>]*>([^<]+)/i)?.[1]?.trim();
   if (ogImage && ogImage.startsWith('http')) return ogImage;
 
@@ -100,7 +101,6 @@ function parseRSS(xml: string, source: string, keywords: string[]) {
     const description = content.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/)?.[1]
       || content.match(/<description>([\s\S]*?)<\/description>/)?.[1] || '';
 
-    // 圖片：從整個 item 內容搜尋
     const image = extractImage(content + description);
 
     if (keywords.length > 0) {
@@ -140,17 +140,43 @@ export async function GET() {
     await Promise.allSettled(
       RSS_FEEDS.map(async (feed) => {
         try {
-          const res = await fetch(feed.url, { next: { revalidate: 3600 } });
+          // ✅ 加 User-Agent + 8 秒 timeout 避免一個卡住影響全部
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 8000);
+
+          const res = await fetch(feed.url, {
+            headers: FETCH_HEADERS,
+            signal: controller.signal,
+            next: { revalidate: 3600 },
+          });
+          clearTimeout(timer);
+
+          if (!res.ok) {
+            console.warn(`[ai-news] ${feed.source} 回應 ${res.status}`);
+            return;
+          }
+
           const xml = await res.text();
           const items = parseRSS(xml, feed.source, feed.keywords);
+          console.log(`[ai-news] ${feed.source} 抓到 ${items.length} 則`);
           allNews.push(...items);
-        } catch {}
+        } catch (err) {
+          // ✅ 單一來源失敗不影響其他來源
+          console.warn(`[ai-news] ${feed.source} 失敗:`, err instanceof Error ? err.message : err);
+        }
       })
     );
 
     allNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+
+    // ✅ 若完全抓不到，回傳明確錯誤訊息方便 debug
+    if (allNews.length === 0) {
+      return NextResponse.json({ news: [], error: '所有來源皆無法取得' }, { status: 200 });
+    }
+
     return NextResponse.json({ news: allNews.slice(0, 30) });
-  } catch {
+  } catch (err) {
+    console.error('[ai-news] 全域錯誤:', err);
     return NextResponse.json({ news: [] }, { status: 500 });
   }
 }

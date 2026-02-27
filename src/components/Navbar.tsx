@@ -29,6 +29,7 @@ export default function Navbar() {
       {/* ✅ Logo — 加大尺寸 + 首頁時加紫色光暈框 */}
       <Link
         href="/"
+        title="🏠 回首頁"
         style={{
           textDecoration: 'none',
           marginRight: '1rem',
