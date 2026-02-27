@@ -14,13 +14,13 @@ const RSS_FEEDS = [
   { url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', source: 'BBC Tech', keywords: ['AI', 'robot', 'artificial intelligence'], category: 'AI' },
   { url: 'https://www.ithome.com.tw/rss', source: 'iThome', keywords: ['AI', '人工智慧', '機器學習', 'ChatGPT', 'Gemini'], category: 'AI' },
   { url: 'https://technews.tw/feed/', source: '科技新報', keywords: ['AI', '人工智慧', '科技'], category: 'AI' },
-  { url: 'https://news.cnyes.com/rss/cat/tw_stock', source: '鉅亨網台股', keywords: [], category: '股市' },
-  { url: 'https://news.cnyes.com/rss/cat/us_stock', source: '鉅亨網美股', keywords: [], category: '股市' },
-  { url: 'https://www.moneydj.com/KMDJ/RSS/RSSIcon.aspx?svc=NW', source: 'MoneyDJ', keywords: [], category: '股市' },
-  { url: 'https://www.cna.com.tw/rss/alife.aspx', source: '中央社生活', keywords: ['美食', '餐廳', '料理', '小吃', '飲食', '食物', '吃', '飯', '麵'], category: '美食' },
-  { url: 'https://udn.com/rssfeed/news/2/life?ch=news', source: '聯合新聞生活', keywords: ['美食', '餐廳', '料理', '小吃', '飲食'], category: '美食' },
+  { url: 'https://tw.stock.yahoo.com/rss', source: 'Yahoo 股市', keywords: [], category: '股市' },
+  { url: 'https://money.udn.com/rssfeed/news/1001/5591?ch=money', source: '經濟日報股市', keywords: [], category: '股市' },
+  { url: 'https://www.cna.com.tw/rss/aife.aspx', source: '中央社財經', keywords: ['股', '投資', '台積電', 'ETF'], category: '股市' },
+  { url: 'https://www.cna.com.tw/rss/alife.aspx', source: '中央社美食', keywords: ['美食', '餐廳', '料理', '小吃', '飲食', '吃'], category: '美食' },
+  { url: 'https://udn.com/rssfeed/news/2/life?ch=news', source: '聯合新聞美食', keywords: ['美食', '餐廳', '料理', '小吃'], category: '美食' },
   { url: 'https://www.cna.com.tw/rss/alife.aspx', source: '中央社旅遊', keywords: ['旅遊', '旅行', '景點', '飯店', '出國', '觀光'], category: '旅遊' },
-  { url: 'https://udn.com/rssfeed/news/2/life?ch=news', source: '聯合新聞旅遊', keywords: ['旅遊', '旅行', '景點', '飯店', '出國', '觀光'], category: '旅遊' },
+  { url: 'https://udn.com/rssfeed/news/2/life?ch=news', source: '聯合新聞旅遊', keywords: ['旅遊', '旅行', '景點', '飯店', '出國'], category: '旅遊' },
 ];
 
 function extractImage(content: string): string {
@@ -100,13 +100,13 @@ export async function GET() {
           const timer = setTimeout(() => controller.abort(), 8000);
           const res = await fetch(feed.url, { headers: FETCH_HEADERS, signal: controller.signal, next: { revalidate: 3600 } });
           clearTimeout(timer);
-          if (!res.ok) { console.warn(`[ai-news] ${feed.source} ${res.status}`); return; }
+          if (!res.ok) { console.warn('[ai-news] ' + feed.source + ' ' + res.status); return; }
           const xml = await res.text();
           const items = parseRSS(xml, feed.source, feed.keywords, feed.category);
-          console.log(`[ai-news] ${feed.source} (${feed.category}) => ${items.length} 則`);
+          console.log('[ai-news] ' + feed.source + ' (' + feed.category + ') => ' + items.length + ' 則');
           allNews.push(...items);
         } catch (err) {
-          console.warn(`[ai-news] ${feed.source} 失敗:`, err instanceof Error ? err.message : err);
+          console.warn('[ai-news] ' + feed.source + ' 失敗:', err instanceof Error ? err.message : err);
         }
       })
     );
@@ -134,3 +134,4 @@ export async function GET() {
     return NextResponse.json({ news: [] }, { status: 500 });
   }
 }
+
