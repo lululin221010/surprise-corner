@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const links = [
-  { href: '/', label: '🏠 首頁' },
+  // ✅ 移除「首頁」，Logo 本身即為首頁入口
   { href: '/novels', label: '📖 連載小說' },
   { href: '/ai-news', label: '🤖 AI快訊' },
   { href: '/tools', label: '🛠 工具箱' },
@@ -15,6 +15,8 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const isHome = pathname === '/';
+
   return (
     <nav style={{
       position: 'sticky', top: 0, zIndex: 999,
@@ -24,19 +26,36 @@ export default function Navbar() {
       padding: '0.5rem 1.5rem', flexWrap: 'wrap',
     }}>
 
-      {/* ✅ Logo */}
-      <Link href="/" style={{ textDecoration: 'none', marginRight: '0.5rem', flexShrink: 0 }}>
+      {/* ✅ Logo — 加大尺寸 + 首頁時加紫色光暈框 */}
+      <Link
+        href="/"
+        style={{
+          textDecoration: 'none',
+          marginRight: '1rem',
+          flexShrink: 0,
+          display: 'block',
+          borderRadius: '10px',
+          padding: '3px 6px',
+          border: isHome
+            ? '1.5px solid rgba(167,139,250,0.7)'
+            : '1.5px solid transparent',
+          boxShadow: isHome
+            ? '0 0 10px rgba(167,139,250,0.4)'
+            : 'none',
+          transition: 'all 0.3s ease',
+        }}
+      >
         <Image
           src="/logo.png"
           alt="Surprise Corner"
-          width={160}
-          height={38}
+          width={190}   /* ✅ 原本 160 → 190，更明顯 */
+          height={45}   /* ✅ 原本 38 → 45 */
           style={{ objectFit: 'contain', display: 'block' }}
           priority
         />
       </Link>
 
-      {/* 主要導覽連結 */}
+      {/* 主要導覽連結（不含首頁） */}
       {links.map(link => (
         <Link key={link.href} href={link.href} style={{
           color: pathname === link.href ? '#c4b5fd' : '#9ca3af',
@@ -49,7 +68,7 @@ export default function Navbar() {
         </Link>
       ))}
 
-      {/* ✅ 隱私權政策（靠右，小字） */}
+      {/* ✅ 隱私權政策（靠右，小字）— 維持原有邏輯不動 */}
       <Link
         href="/privacy"
         style={{
