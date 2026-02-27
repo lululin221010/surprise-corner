@@ -326,29 +326,49 @@ function DateCalculator() {
 }
 
 // ============================================================
-// 💱 匯率換算器（使用免費 API）
+// 💱 匯率換算器
+// 📄 路徑：src/app/tools/page.tsx 中的 CurrencyConverter function
+// ✅ 修復：改用 open.er-api.com（免費、穩定、無需 API key）
 // ============================================================
 function CurrencyConverter() {
   const CURRENCIES = ['TWD','USD','JPY','EUR','GBP','KRW','CNY','HKD','AUD','CAD','SGD','THB'];
   const [amount, setAmount] = useState('1000');
-  const [from, setFrom] = useState('TWD');
-  const [to, setTo] = useState('JPY');
+  const [from, setFrom] = useState('USD');
+  const [to, setTo] = useState('TWD');
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
   const [updateTime, setUpdateTime] = useState('');
 
   async function convert() {
     if (!amount || isNaN(Number(amount))) return;
-    setLoading(true); setResult('');
+    setLoading(true); setResult(''); setUpdateTime('');
     try {
-      const res = await fetch(`https://api.frankfurter.app/latest?from=${from}&to=${to}`);
+      // ✅ 改用 open.er-api.com，免費、不需要 API key
+      const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+      if (!res.ok) throw new Error('API 錯誤');
       const data = await res.json();
+      if (data.result !== 'success') throw new Error('查詢失敗');
       const rate = data.rates[to];
+      if (!rate) throw new Error('找不到匯率');
       const converted = (Number(amount) * rate).toFixed(2);
       setResult(`${Number(amount).toLocaleString()} ${from} = ${Number(converted).toLocaleString()} ${to}`);
-      setUpdateTime(`匯率更新時間：${data.date}`);
-    } catch {
-      setResult('❌ 無法取得匯率，請稍後再試');
+      // 顯示更新時間
+      const updateDate = new Date(data.time_last_update_utc);
+      setUpdateTime(`匯率更新時間：${updateDate.toLocaleDateString('zh-TW')}`);
+    } catch (e) {
+      // ✅ 備用：改用 exchangerate.host
+      try {
+        const res2 = await fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`);
+        const data2 = await res2.json();
+        if (data2.success && data2.result) {
+          setResult(`${Number(amount).toLocaleString()} ${from} = ${Number(data2.result.toFixed(2)).toLocaleString()} ${to}`);
+          setUpdateTime(`匯率更新時間：${new Date().toLocaleDateString('zh-TW')}`);
+        } else {
+          throw new Error('備用 API 也失敗');
+        }
+      } catch {
+        setResult('❌ 無法取得匯率，請稍後再試');
+      }
     }
     setLoading(false);
   }
@@ -370,8 +390,11 @@ function CurrencyConverter() {
         <select value={from} onChange={e => setFrom(e.target.value)} style={selectStyle}>
           {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
-        <button onClick={() => { const tmp = from; setFrom(to); setTo(tmp); setResult(''); }}
-          style={{ ...btnStyle(), padding: '0.7rem', fontSize: '1.1rem', flexShrink: 0 }}>⇄</button>
+        <button
+          onClick={() => { const tmp = from; setFrom(to); setTo(tmp); setResult(''); setUpdateTime(''); }}
+          style={{ ...btnStyle(), padding: '0.7rem', fontSize: '1.1rem', flexShrink: 0 }}>
+          ⇄
+        </button>
         <select value={to} onChange={e => setTo(e.target.value)} style={selectStyle}>
           {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
@@ -384,7 +407,9 @@ function CurrencyConverter() {
 
       {result && (
         <div style={{ marginTop: '1rem', background: 'rgba(124,58,237,0.2)', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
-          <p style={{ color: '#f3f4f6', fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.3rem' }}>{result}</p>
+          <p style={{ color: result.startsWith('❌') ? '#fca5a5' : '#f3f4f6', fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.3rem' }}>
+            {result}
+          </p>
           {updateTime && <p style={{ color: '#9ca3af', fontSize: '0.75rem', margin: 0 }}>{updateTime}</p>}
         </div>
       )}
