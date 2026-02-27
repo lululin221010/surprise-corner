@@ -22,27 +22,49 @@ const SOURCE_COLORS: Record<string, string> = {
   'MoneyDJ': '#27ae60',
 };
 
-// ✅ 各來源沒有圖片時，用漸層色區塊代替
-const SOURCE_GRADIENTS: Record<string, string> = {
-  'TechCrunch':  'linear-gradient(135deg, #0a8a4c, #0d6e3e)',
-  'The Verge':   'linear-gradient(135deg, #ff3b30, #c0392b)',
-  'BBC Tech':    'linear-gradient(135deg, #bb1919, #8b0000)',
-  'iThome':      'linear-gradient(135deg, #0066cc, #004499)',
-  '科技新報':    'linear-gradient(135deg, #e65c00, #b84700)',
-  '鉅亨網':      'linear-gradient(135deg, #c0392b, #922b21)',
-  'MoneyDJ':     'linear-gradient(135deg, #27ae60, #1e8449)',
-};
+// ✅ 依標題關鍵字決定 emoji + 漸層色（每張卡片獨一無二）
+const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] = [
+  { keywords: ['AI', '人工智慧', 'ChatGPT', 'GPT', 'Gemini', 'Claude', 'LLM', 'OpenAI', 'Anthropic'],
+    icon: '🤖', gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)' },
+  { keywords: ['robot', 'robotics', '機器人'],
+    icon: '🦾', gradient: 'linear-gradient(135deg, #0f766e, #134e4a)' },
+  { keywords: ['chip', 'semiconductor', '晶片', '半導體', 'NVIDIA', 'Intel', 'AMD', 'TSMC', '台積電'],
+    icon: '🔬', gradient: 'linear-gradient(135deg, #1d4ed8, #1e3a8a)' },
+  { keywords: ['iPhone', 'Apple', 'Mac', 'iPad', 'Vision'],
+    icon: '🍎', gradient: 'linear-gradient(135deg, #374151, #111827)' },
+  { keywords: ['Android', 'Google', 'Samsung', '三星', 'Pixel'],
+    icon: '📱', gradient: 'linear-gradient(135deg, #0369a1, #0c4a6e)' },
+  { keywords: ['Tesla', 'EV', 'electric', '電動車', '自駕'],
+    icon: '🚗', gradient: 'linear-gradient(135deg, #dc2626, #7f1d1d)' },
+  { keywords: ['stock', '股票', '投資', '漲', '跌', '大盤', 'ETF', '台股'],
+    icon: '📈', gradient: 'linear-gradient(135deg, #15803d, #14532d)' },
+  { keywords: ['crypto', 'bitcoin', 'BTC', 'ETH', '加密', '幣'],
+    icon: '₿', gradient: 'linear-gradient(135deg, #d97706, #92400e)' },
+  { keywords: ['security', 'hack', 'cyber', '資安', '駭客', '漏洞'],
+    icon: '🔐', gradient: 'linear-gradient(135deg, #7c3aed, #4c1d95)' },
+  { keywords: ['space', 'SpaceX', 'NASA', '太空', '火箭'],
+    icon: '🚀', gradient: 'linear-gradient(135deg, #0f172a, #1e3a5f)' },
+  { keywords: ['health', 'medical', '醫療', '健康', '病'],
+    icon: '🏥', gradient: 'linear-gradient(135deg, #0891b2, #164e63)' },
+  { keywords: ['game', 'gaming', 'Xbox', 'PlayStation', 'PS5', 'Nintendo', '遊戲'],
+    icon: '🎮', gradient: 'linear-gradient(135deg, #7c3aed, #be185d)' },
+  { keywords: ['job', 'layoff', 'hire', '裁員', '職缺', '求職'],
+    icon: '💼', gradient: 'linear-gradient(135deg, #475569, #1e293b)' },
+  { keywords: ['war', 'military', '戰爭', '軍事', '國防'],
+    icon: '⚔️', gradient: 'linear-gradient(135deg, #92400e, #451a03)' },
+  { keywords: ['climate', 'energy', '能源', '氣候', '太陽能', '綠能'],
+    icon: '🌿', gradient: 'linear-gradient(135deg, #166534, #052e16)' },
+];
 
-// ✅ 各來源的 Emoji icon（沒圖時顯示在色塊上）
-const SOURCE_ICONS: Record<string, string> = {
-  'TechCrunch': '🚀',
-  'The Verge':  '⚡',
-  'BBC Tech':   '📡',
-  'iThome':     '💻',
-  '科技新報':   '🤖',
-  '鉅亨網':     '📈',
-  'MoneyDJ':    '💹',
-};
+function getThemeForTitle(title: string): { icon: string; gradient: string } {
+  const lower = title.toLowerCase();
+  for (const theme of KEYWORD_THEMES) {
+    if (theme.keywords.some(k => lower.includes(k.toLowerCase()))) {
+      return { icon: theme.icon, gradient: theme.gradient };
+    }
+  }
+  return { icon: '📰', gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)' };
+}
 
 function timeAgo(dateStr: string) {
   if (!dateStr) return '';
@@ -53,11 +75,10 @@ function timeAgo(dateStr: string) {
   return `${Math.floor(hours / 24)} 天前`;
 }
 
-// ✅ 圖片區塊元件（有圖用圖，沒圖用漸層色塊）
+// ✅ 圖片區塊元件（有圖用圖，沒圖依標題關鍵字選漸層色+emoji）
 function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) {
   const [imgError, setImgError] = useState(false);
-  const bg = SOURCE_GRADIENTS[item.source] || 'linear-gradient(135deg, #6d28d9, #4c1d95)';
-  const icon = SOURCE_ICONS[item.source] || '📰';
+  const { icon, gradient: bg } = getThemeForTitle(item.title);
 
   if (item.image && !imgError) {
     return (
