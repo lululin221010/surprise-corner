@@ -17,10 +17,10 @@ const RSS_FEEDS = [
   { url: 'https://tw.stock.yahoo.com/rss', source: 'Yahoo 股市', keywords: [], category: '股市' },
   { url: 'https://money.udn.com/rssfeed/news/1001/5591?ch=money', source: '經濟日報股市', keywords: [], category: '股市' },
   { url: 'https://www.cna.com.tw/rss/aife.aspx', source: '中央社財經', keywords: ['股', '投資', '台積電', 'ETF'], category: '股市' },
-  { url: 'https://www.cna.com.tw/rss/alife.aspx', source: '中央社美食', keywords: ['美食', '餐廳', '料理', '小吃', '飲食', '吃'], category: '美食' },
-  { url: 'https://udn.com/rssfeed/news/2/life?ch=news', source: '聯合新聞美食', keywords: ['美食', '餐廳', '料理', '小吃'], category: '美食' },
-  { url: 'https://www.cna.com.tw/rss/alife.aspx', source: '中央社旅遊', keywords: ['旅遊', '旅行', '景點', '飯店', '出國', '觀光'], category: '旅遊' },
-  { url: 'https://udn.com/rssfeed/news/2/life?ch=news', source: '聯合新聞旅遊', keywords: ['旅遊', '旅行', '景點', '飯店', '出國'], category: '旅遊' },
+ { url: 'https://consumer.technews.tw/feed/', source: '食力', keywords: [], category: '美食' },
+{ url: 'https://www.cna.com.tw/rss/alife.aspx', source: '中央社美食', keywords: ['吃', '食', '餐', '廚', '料理', '烹'], category: '美食' },
+{ url: 'https://travel.ettoday.net/rss.xml', source: 'ETtoday旅遊', keywords: [], category: '旅遊' },
+{ url: 'https://www.cna.com.tw/rss/atravel.aspx', source: '中央社旅遊', keywords: [], category: '旅遊' },
 ];
 
 function extractImage(content: string): string {
