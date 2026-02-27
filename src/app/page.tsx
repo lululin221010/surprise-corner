@@ -10,6 +10,7 @@ const TYPEWRITER_TEXTS = [
   '連載小說，每週更新原創故事 📖',
   '最新 AI 科技快訊，掌握未來趨勢 🤖',
   '實用工具箱，讓你的生活更有效率 🛠',
+  'Podcast 上線！用耳朵聽世界 🎙️',   // ✅ 新增打字機文字
 ];
 
 const FEATURES = [
@@ -22,13 +23,13 @@ const FEATURES = [
     glow: 'rgba(124,58,237,0.4)',
   },
   {
-  icon: '🔥',
-  title: '作品牆',
-  desc: '大家用 AI 生成的驚喜創作，每天都有新內容出現。',
-  href: '/wall',
-  color: '#ef4444',
-  glow: 'rgba(239,68,68,0.4)',
-},
+    icon: '🔥',
+    title: '作品牆',
+    desc: '大家用 AI 生成的驚喜創作，每天都有新內容出現。',
+    href: '/wall',
+    color: '#ef4444',
+    glow: 'rgba(239,68,68,0.4)',
+  },
   {
     icon: '🤖',
     title: 'AI 科技快訊',
@@ -36,6 +37,14 @@ const FEATURES = [
     href: '/ai-news',
     color: '#0ea5e9',
     glow: 'rgba(14,165,233,0.4)',
+  },
+  {
+    icon: '🎙️',
+    title: 'Podcast 節目',
+    desc: '每集一個主題，AI・棒球・生活・故事，用耳朵探索世界。',   // ✅ 新增
+    href: '/podcast',
+    color: '#ec4899',
+    glow: 'rgba(236,72,153,0.4)',
   },
   {
     icon: '🛠',

@@ -7,10 +7,11 @@ import { usePathname } from 'next/navigation';
 
 const links = [
   // ✅ 移除「首頁」，Logo 本身即為首頁入口
-  { href: '/novels', label: '📖 連載小說' },
+  { href: '/novels',  label: '📖 連載小說' },
   { href: '/ai-news', label: '🤖 AI快訊' },
-  { href: '/tools', label: '🛠 工具箱' },
-  { href: '/admin', label: '⚙️ 管理' },
+  { href: '/podcast', label: '🎙️ Podcast' },   // ✅ 新增
+  { href: '/tools',   label: '🛠 工具箱' },
+  { href: '/admin',   label: '⚙️ 管理' },
 ];
 
 export default function Navbar() {
@@ -49,14 +50,14 @@ export default function Navbar() {
         <Image
           src="/logo.png"
           alt="Surprise Corner"
-          width={190}   /* ✅ 原本 160 → 190，更明顯 */
-          height={45}   /* ✅ 原本 38 → 45 */
+          width={190}
+          height={45}
           style={{ objectFit: 'contain', display: 'block' }}
           priority
         />
       </Link>
 
-      {/* 主要導覽連結（不含首頁） */}
+      {/* 主要導覽連結 */}
       {links.map(link => (
         <Link key={link.href} href={link.href} style={{
           color: pathname === link.href ? '#c4b5fd' : '#9ca3af',
@@ -69,7 +70,7 @@ export default function Navbar() {
         </Link>
       ))}
 
-      {/* ✅ 隱私權政策（靠右，小字）— 維持原有邏輯不動 */}
+      {/* ✅ 隱私權政策（靠右，小字）*/}
       <Link
         href="/privacy"
         style={{
