@@ -22,6 +22,19 @@ const SOURCE_COLORS: Record<string, string> = {
   '科技新報': '#e65c00',
   '鉅亨網': '#c0392b',
   'MoneyDJ': '#27ae60',
+  // ✅ 財經
+  'Yahoo 財經': '#6001d2',
+  '經濟日報': '#c0392b',
+  '中央社財經': '#1a6f38',
+  // ✅ 生活
+  '聯合報生活': '#c8102e',
+  'ETtoday': '#e67e22',
+  '中央社生活': '#2471a3',
+  // ✅ 健康
+  '健康遠見': '#1e8449',
+  '康健雜誌': '#117a65',
+  'ETtoday健康': '#d35400',
+  // 原有
   'TSNA': '#1a6f38',
   'Yahoo MLB': '#6001d2',
   'MLB官網': '#002d72',
@@ -41,7 +54,7 @@ const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] =
     icon: '🔬', gradient: 'linear-gradient(135deg, #1d4ed8, #1e3a8a)' },
   { keywords: ['iPhone', 'Apple', 'Mac', 'iPad'],
     icon: '🍎', gradient: 'linear-gradient(135deg, #374151, #111827)' },
-  { keywords: ['stock', '股票', '投資', '漲', '跌', '大盤', 'ETF', '台股'],
+  { keywords: ['stock', '股票', '投資', '漲', '跌', '大盤', 'ETF', '台股', '理財', '財經', '基金'],
     icon: '📈', gradient: 'linear-gradient(135deg, #15803d, #14532d)' },
   { keywords: ['crypto', 'bitcoin', 'BTC', '加密', '幣'],
     icon: '₿', gradient: 'linear-gradient(135deg, #d97706, #92400e)' },
@@ -51,14 +64,25 @@ const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] =
     icon: '🍜', gradient: 'linear-gradient(135deg, #c2410c, #7c2d12)' },
   { keywords: ['旅遊', '旅行', '景點', '飯店', '訂房', '出遊', '旅報'],
     icon: '✈️', gradient: 'linear-gradient(135deg, #0369a1, #0c4a6e)' },
+  // ✅ 生活關鍵字
+  { keywords: ['生活', '消費', '購物', '天氣', '社會', '奇聞', '民生', '環境', '教育'],
+    icon: '🏡', gradient: 'linear-gradient(135deg, #be185d, #831843)' },
+  // ✅ 健康關鍵字
+  { keywords: ['健康', '醫療', '醫學', '養生', '癌症', '疾病', '運動', '飲食', '心理', '睡眠'],
+    icon: '💊', gradient: 'linear-gradient(135deg, #047857, #064e3b)' },
   { keywords: ['security', 'hack', '資安', '駭客'],
     icon: '🔐', gradient: 'linear-gradient(135deg, #7c3aed, #4c1d95)' },
   { keywords: ['game', 'gaming', 'Xbox', 'PlayStation', 'PS5', 'Nintendo', '遊戲'],
     icon: '🎮', gradient: 'linear-gradient(135deg, #7c3aed, #be185d)' },
 ];
 
-function getThemeForTitle(title: string): { icon: string; gradient: string } {
-  const lower = title.toLowerCase();
+function getThemeForItem(item: NewsItem): { icon: string; gradient: string } {
+  // ✅ 先用分類決定主題，再用標題關鍵字細化
+  if (item.category === '財經') return { icon: '📈', gradient: 'linear-gradient(135deg, #15803d, #14532d)' };
+  if (item.category === '生活') return { icon: '🏡', gradient: 'linear-gradient(135deg, #be185d, #831843)' };
+  if (item.category === '健康') return { icon: '💊', gradient: 'linear-gradient(135deg, #047857, #064e3b)' };
+
+  const lower = (item.title || '').toLowerCase();
   for (const theme of KEYWORD_THEMES) {
     if (theme.keywords.some(k => lower.includes(k.toLowerCase()))) {
       return { icon: theme.icon, gradient: theme.gradient };
@@ -78,7 +102,7 @@ function timeAgo(dateStr: string) {
 
 function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) {
   const [imgError, setImgError] = useState(false);
-  const { icon, gradient: bg } = getThemeForTitle(item.title);
+  const { icon, gradient: bg } = getThemeForItem(item);
   if (item.image && !imgError) {
     return <img src={item.image} alt={item.title} onError={() => setImgError(true)}
       style={{ width: '100%', height, objectFit: 'cover', borderRadius: '10px 10px 0 0', display: 'block' }} />;
@@ -91,18 +115,23 @@ function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) 
   );
 }
 
+// ✅ 新增 財經、生活、健康 Tab
 const TABS = [
   { key: 'all',  label: '全部',    icon: '📡' },
   { key: 'AI',   label: 'AI 科技', icon: '🤖' },
-  { key: '股市', label: '股市',    icon: '📈' },
+  { key: '財經', label: '財經理財', icon: '📈' },
+  { key: '生活', label: '生活',    icon: '🏡' },
+  { key: '健康', label: '健康',    icon: '💊' },
   { key: '棒球', label: '棒球',    icon: '⚾' },
- 
 ];
 
+// ✅ 新增 財經、生活、健康 badge 樣式
 const CATEGORY_BADGE: Record<string, { bg: string; color: string; label: string }> = {
   '棒球': { bg: '#1a4731', color: '#6ee7b7', label: '⚾ 棒球' },
-  '股市': { bg: '#14532d', color: '#86efac', label: '📈 股市' },
-  
+  '財經': { bg: '#14532d', color: '#86efac', label: '📈 財經' },
+  '生活': { bg: '#831843', color: '#fbcfe8', label: '🏡 生活' },
+  '健康': { bg: '#064e3b', color: '#6ee7b7', label: '💊 健康' },
+  'AI':   { bg: '#4c1d95', color: '#ddd6fe', label: '🤖 AI' },
 };
 
 export default function NewsPage() {
@@ -138,7 +167,8 @@ export default function NewsPage() {
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>📡</div>
           <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: 0 }}>最新快訊</h1>
-          <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>AI 科技・股市・棒球・美食・旅遊，每小時自動更新</p>
+          {/* ✅ 更新描述文字 */}
+          <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>AI 科技・財經理財・生活・健康・棒球，每小時自動更新</p>
         </div>
 
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '2rem', flexWrap: 'wrap' }}>

@@ -14,19 +14,29 @@ const RSS_FEEDS = [
   { url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', source: 'BBC Tech', keywords: ['AI', 'robot', 'artificial intelligence'], category: 'AI' },
   { url: 'https://www.ithome.com.tw/rss', source: 'iThome', keywords: ['AI', '人工智慧', '機器學習', 'ChatGPT', 'Gemini'], category: 'AI' },
   { url: 'https://technews.tw/feed/', source: '科技新報', keywords: ['AI', '人工智慧', '科技'], category: 'AI' },
-  { url: 'https://tw.stock.yahoo.com/rss', source: 'Yahoo 股市', keywords: [], category: '股市' },
-  { url: 'https://money.udn.com/rssfeed/news/1001/5591?ch=money', source: '經濟日報股市', keywords: [], category: '股市' },
-  { url: 'https://www.cna.com.tw/rss/aife.aspx', source: '中央社財經', keywords: ['股', '投資', '台積電', 'ETF'], category: '股市' },
+  // ✅ 股市 → 財經
+  { url: 'https://tw.stock.yahoo.com/rss', source: 'Yahoo 財經', keywords: [], category: '財經' },
+  { url: 'https://money.udn.com/rssfeed/news/1001/5591?ch=money', source: '經濟日報', keywords: [], category: '財經' },
+  { url: 'https://www.cna.com.tw/rss/aife.aspx', source: '中央社財經', keywords: ['股', '投資', '台積電', 'ETF', '理財', '經濟'], category: '財經' },
+  { url: 'https://www.moneydj.com/rss/news.xml', source: 'MoneyDJ', keywords: [], category: '財經' },
+  // ✅ 新增：生活
+  { url: 'https://udn.com/rssfeed/news/2/6638?ch=udn', source: '聯合報生活', keywords: [], category: '生活' },
+  { url: 'https://www.ettoday.net/news/rss2.xml', source: 'ETtoday', keywords: ['生活', '消費', '購物', '社會', '奇聞', '趣味', '天氣'], category: '生活' },
+  { url: 'https://www.cna.com.tw/rss/aipl.aspx', source: '中央社生活', keywords: ['生活', '社會', '消費', '環境', '教育', '民生'], category: '生活' },
+  // ✅ 新增：健康
+  { url: 'https://health.gvm.com.tw/rss', source: '健康遠見', keywords: [], category: '健康' },
+  { url: 'https://www.commonhealth.com.tw/rss/rss.action', source: '康健雜誌', keywords: [], category: '健康' },
+  { url: 'https://health.ettoday.net/news/rss.xml', source: 'ETtoday健康', keywords: [], category: '健康' },
 ];
 
 // ✅ 圖片黑名單：這些是 logo/icon/tracker，不是新聞圖，直接排除
 const IMAGE_BLACKLIST = [
   'yahoo.com/images',
   'yahoo.com/news/images',
-  's.yimg.com/os/mit/media',   // Yahoo 品牌 logo
-  's.yimg.com/rz/l',           // Yahoo 追蹤圖
+  's.yimg.com/os/mit/media',
+  's.yimg.com/rz/l',
   'l.yimg.com',
-  'media.zenfs.com/en/bloomberg', // Bloomberg 小 icon
+  'media.zenfs.com/en/bloomberg',
   '1x1',
   'pixel',
   'track',
@@ -34,10 +44,9 @@ const IMAGE_BLACKLIST = [
   'spacer',
   'logo',
   '.gif',
-  'udn.com/img/nophoto',       // 聯合報無圖預設
+  'udn.com/img/nophoto',
 ];
 
-// ✅ 判斷圖片是否有效（不在黑名單、長寬比合理）
 function isValidImage(url: string): boolean {
   if (!url || !url.startsWith('http')) return false;
   const lower = url.toLowerCase();
@@ -80,7 +89,7 @@ function parseRSS(xml: string, source: string, keywords: string[], category: str
         link, pubDate, source,
         description: description.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').trim().slice(0, 150) + '...',
         category,
-        image, // 黑名單已過濾，空字串表示沒圖 → 前端顯示主題漸層
+        image,
       });
     }
     if (items.length >= 8) break;
@@ -137,7 +146,9 @@ export async function GET() {
       })
     );
     if (allNews.length === 0) return NextResponse.json({ news: [], error: '所有來源皆無法取得' });
-    const categories = ['AI', '股市', '美食', '旅遊'];
+
+    // ✅ 新增 生活、健康 分類
+    const categories = ['AI', '財經', '生活', '健康'];
     const selected: typeof allNews = [];
     const seen = new Set<string>();
     for (const cat of categories) {
