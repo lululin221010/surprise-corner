@@ -2,6 +2,7 @@
 // 📁 路徑：src/components/Navbar.tsx
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const links = [
@@ -20,8 +21,21 @@ export default function Navbar() {
       background: 'rgba(15,12,41,0.9)', backdropFilter: 'blur(10px)',
       borderBottom: '1px solid rgba(167,139,250,0.2)',
       display: 'flex', alignItems: 'center', gap: '0.5rem',
-      padding: '0.8rem 1.5rem', flexWrap: 'wrap',
+      padding: '0.5rem 1.5rem', flexWrap: 'wrap',
     }}>
+
+      {/* ✅ Logo */}
+      <Link href="/" style={{ textDecoration: 'none', marginRight: '0.5rem', flexShrink: 0 }}>
+        <Image
+          src="/logo.png"
+          alt="Surprise Corner"
+          width={160}
+          height={38}
+          style={{ objectFit: 'contain', display: 'block' }}
+          priority
+        />
+      </Link>
+
       {/* 主要導覽連結 */}
       {links.map(link => (
         <Link key={link.href} href={link.href} style={{
