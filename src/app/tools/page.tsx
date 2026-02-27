@@ -89,17 +89,22 @@ interface AiPanelProps {
 }
 
 function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
-  const [randomPage] = useState(() => RANDOM_PAGES[Math.floor(Math.random() * RANDOM_PAGES.length)]);
   const [localInput, setLocalInput] = useState('');
   const [selectedSign, setSelectedSign] = useState(signs?.[0] || '');
   const [aiResult, setAiResult] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
+
+  // ✅ 新增欄位
+  const [toName, setToName] = useState('');       // 寫給誰（必填）
+  const [fromName, setFromName] = useState('');   // 你的暱稱（可空白=匿名）
+  const [shareId, setShareId] = useState('');     // 送出後的作品 ID
   const [wallMsg, setWallMsg] = useState('');
+  const [copied, setCopied] = useState(false);
 
   async function handleGenerate() {
     const val = type === 'fortune' ? selectedSign : localInput;
     if (!val.trim()) return;
-    setAiLoading(true); setAiResult(''); setWallMsg('');
+    setAiLoading(true); setAiResult(''); setWallMsg(''); setShareId(''); setCopied(false);
     try {
       const res = await fetch('/api/generate', {
         method: 'POST',
@@ -114,14 +119,53 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
 
   async function handleSubmitWall() {
     if (!aiResult) return;
-    const id = await submitToWall(aiResult);
-    if (id) setWallMsg('✅ 已公開到作品牆！');
-    else setWallMsg('❌ 送出失敗，請再試');
+    // ✅ 告白/生日 類型需要填寫收件人
+    const needsTo = type === 'love' || type === 'birthday' || type === 'healing';
+    if (needsTo && !toName.trim()) {
+      setWallMsg('❌ 請填寫寫給誰！');
+      return;
+    }
+    try {
+      let creatorId = localStorage.getItem('creatorId');
+      if (!creatorId) {
+        creatorId = 'cr_' + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem('creatorId', creatorId);
+      }
+      const res = await fetch('/api/wall', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: aiResult,
+          to: toName.trim() || '你',
+          from: fromName.trim(),   // 空白 = 匿名
+          label: type,
+          creatorId,
+        }),
+      });
+      const data = await res.json();
+      if (data.id) {
+        setShareId(data.id.toString());
+        setWallMsg('ok');
+      } else {
+        setWallMsg('❌ 送出失敗，請再試');
+      }
+    } catch { setWallMsg('❌ 網路錯誤，請再試'); }
   }
+
+  function copyShareLink() {
+    const url = `${window.location.origin}/wall/${shareId}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
+  }
+
+  const needsToField = type === 'love' || type === 'birthday' || type === 'healing';
 
   return (
     <div style={{ ...cardStyle, textAlign: 'center' }}>
       <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem' }}>{emoji} {label}</h2>
+
       {type === 'fortune' ? (
         <select value={selectedSign} onChange={e => setSelectedSign(e.target.value)}
           style={{ ...inputStyle, marginBottom: '1rem', cursor: 'pointer' }}>
@@ -136,6 +180,7 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
           onKeyDown={e => e.key === 'Enter' && handleGenerate()}
         />
       )}
+
       <button onClick={handleGenerate} disabled={aiLoading}
         style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem', opacity: aiLoading ? 0.7 : 1 }}>
         {aiLoading ? '生成中...' : '✨ 立即生成'}
@@ -143,16 +188,85 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
 
       {aiResult && (
         <div style={{ marginTop: '1.5rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem' }}>
-          <p style={{ color: '#f3f4f6', fontSize: '1.1rem', lineHeight: 1.9, margin: '0 0 1rem', fontStyle: 'italic' }}>
+          <p style={{ color: '#f3f4f6', fontSize: '1.1rem', lineHeight: 1.9, margin: '0 0 1.2rem', fontStyle: 'italic' }}>
             「{aiResult}」
           </p>
-          {!wallMsg ? (
-            <button onClick={handleSubmitWall}
-              style={{ ...btnStyle(), border: '1px solid rgba(167,139,250,0.4)', padding: '0.5rem 1.2rem' }}>
-              🔥 公開到作品牆
-            </button>
-          ) : (
-            <p style={{ color: '#a78bfa', fontSize: '0.9rem', margin: 0 }}>{wallMsg}</p>
+
+          {/* ✅ 尚未送出：顯示寫給誰 + 你的暱稱 */}
+          {wallMsg !== 'ok' && (
+            <div style={{ textAlign: 'left' }}>
+              {needsToField && (
+                <>
+                  {/* 寫給誰（必填） */}
+                  <div style={{ marginBottom: '0.7rem' }}>
+                    <label style={{ color: '#c4b5fd', fontSize: '0.82rem', display: 'block', marginBottom: '0.3rem' }}>
+                      💌 寫給誰？<span style={{ color: '#f87171', fontSize: '0.75rem' }}>（必填）</span>
+                    </label>
+                    <input
+                      value={toName}
+                      onChange={e => setToName(e.target.value)}
+                      placeholder="例：小花、媽媽、我最好的朋友"
+                      maxLength={20}
+                      style={{ ...inputStyle, fontSize: '0.9rem' }}
+                    />
+                  </div>
+
+                  {/* 你的暱稱（可匿名） */}
+                  <div style={{ marginBottom: '1rem' }}>
+                    <label style={{ color: '#c4b5fd', fontSize: '0.82rem', display: 'block', marginBottom: '0.3rem' }}>
+                      🙈 你的暱稱？<span style={{ color: '#6b7280', fontSize: '0.75rem' }}>（不填就是匿名）</span>
+                    </label>
+                    <input
+                      value={fromName}
+                      onChange={e => setFromName(e.target.value)}
+                      placeholder="不填 = 匿名送出"
+                      maxLength={20}
+                      style={{ ...inputStyle, fontSize: '0.9rem' }}
+                    />
+                  </div>
+                </>
+              )}
+
+              <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button onClick={handleSubmitWall}
+                  style={{ ...btnStyle(true), padding: '0.6rem 1.5rem' }}>
+                  🔥 公開到作品牆
+                </button>
+              </div>
+
+              {wallMsg && wallMsg !== 'ok' && (
+                <p style={{ color: '#fca5a5', fontSize: '0.85rem', margin: '0.6rem 0 0', textAlign: 'center' }}>{wallMsg}</p>
+              )}
+            </div>
+          )}
+
+          {/* ✅ 送出成功：顯示分享連結 */}
+          {wallMsg === 'ok' && shareId && (
+            <div style={{
+              background: 'rgba(16,185,129,0.12)',
+              border: '1px solid rgba(16,185,129,0.3)',
+              borderRadius: '12px', padding: '1rem', textAlign: 'center',
+            }}>
+              <p style={{ color: '#6ee7b7', fontWeight: 700, fontSize: '0.95rem', margin: '0 0 0.3rem' }}>
+                ✅ 已公開到作品牆！
+              </p>
+              <p style={{ color: '#9ca3af', fontSize: '0.82rem', margin: '0 0 0.8rem' }}>
+                📤 複製連結，傳給 {toName || '對方'} 來看你的心意 💜
+              </p>
+              <button onClick={copyShareLink}
+                style={{
+                  background: copied ? 'rgba(16,185,129,0.3)' : 'linear-gradient(135deg,#7c3aed,#ec4899)',
+                  color: '#fff', border: 'none', borderRadius: '30px',
+                  padding: '0.6rem 1.8rem', fontSize: '0.88rem', fontWeight: 700,
+                  cursor: 'pointer', width: '100%', transition: 'all 0.2s',
+                }}>
+                {copied ? '✅ 連結已複製！快傳給他/她！' : '🔗 複製這頁連結'}
+              </button>
+              <a href={`/wall/${shareId}`} target="_blank" rel="noopener noreferrer"
+                style={{ display: 'block', color: '#a78bfa', fontSize: '0.78rem', marginTop: '0.5rem', textDecoration: 'none' }}>
+                預覽作品頁 →
+              </a>
+            </div>
           )}
         </div>
       )}
