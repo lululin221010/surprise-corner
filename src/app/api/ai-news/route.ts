@@ -23,21 +23,29 @@ const RSS_FEEDS = [
   { url: 'https://www.moneydj.com/rss/news.xml', source: 'MoneyDJ', keywords: [], category: '財經' },
 
   // ── 娛樂演藝（圖片豐富！）─────────────────────────────────────────
-  { url: 'https://www.setn.com/rss.aspx?tid=7', source: '三立娛樂', keywords: [], category: '娛樂' },
-  { url: 'https://www.ettoday.net/news/rss/newslist/category=2.xml', source: 'ETtoday 娛樂', keywords: [], category: '娛樂' },
-  { url: 'https://udn.com/rssfeed/news/2/6?ch=udn', source: '聯合報娛樂', keywords: ['娛樂', '演藝', '明星', '電影', '音樂', '戲劇', '藝人', '韓劇', '綜藝'], category: '娛樂' },
+  // ETtoday 娛樂：用主 RSS 加關鍵字過濾，最穩定
+  { url: 'https://www.ettoday.net/news/rss2.xml', source: 'ETtoday 娛樂', keywords: ['明星', '藝人', '演員', '歌手', '電影', '韓劇', '綜藝', '偶像', '音樂', '戲劇', '婚', '戀愛', '走紅毯', '頒獎'], category: '娛樂' },
+  // 中央社娛樂 RSS，官方提供
   { url: 'https://www.cna.com.tw/rss/amov.aspx', source: '中央社娛樂', keywords: [], category: '娛樂' },
+  // 自由時報娛樂
+  { url: 'https://ent.ltn.com.tw/rss/news.xml', source: '自由娛樂', keywords: [], category: '娛樂' },
+  // 聯合報娛樂（加強關鍵字比對）
+  { url: 'https://udn.com/rssfeed/news/2/6638?ch=udn', source: '聯合報娛樂', keywords: ['娛樂', '演藝', '明星', '電影', '音樂', '戲劇', '藝人', '韓劇', '綜藝', '影視'], category: '娛樂' },
 
   // ── 運動（棒球＋籃球＋世棒賽等）────────────────────────────────────
-  { url: 'https://www.ettoday.net/news/rss/newslist/category=12.xml', source: 'ETtoday 運動', keywords: [], category: '運動' },
+  // ETtoday 運動：用主 RSS 加關鍵字過濾
+  { url: 'https://www.ettoday.net/news/rss2.xml', source: 'ETtoday 運動', keywords: ['棒球', '籃球', '足球', 'MLB', 'NBA', '中職', '世界棒球', 'WBC', '運動', '體育', '賽事', '選手'], category: '運動' },
   { url: 'https://udn.com/rssfeed/news/2/5?ch=udn', source: '聯合報運動', keywords: [], category: '運動' },
-  { url: 'https://www.setn.com/rss.aspx?tid=33', source: '三立運動', keywords: [], category: '運動' },
   { url: 'https://feeds.bbci.co.uk/sport/rss.xml', source: 'BBC Sport', keywords: ['baseball', 'basketball', 'tennis', 'football', 'sport'], category: '運動' },
+  // 自由時報體育
+  { url: 'https://sports.ltn.com.tw/rss/news.xml', source: '自由體育', keywords: [], category: '運動' },
 
   // ── 生活 ─────────────────────────────────────────────────────────────
-  { url: 'https://www.setn.com/rss.aspx?tid=97', source: '三立生活', keywords: [], category: '生活' },
-  { url: 'https://www.ettoday.net/news/rss/newslist/category=10.xml', source: 'ETtoday 社會', keywords: [], category: '生活' },
-  { url: 'https://www.cna.com.tw/rss/aipl.aspx', source: '中央社生活', keywords: ['生活', '社會', '消費', '環境', '教育', '民生'], category: '生活' },
+  { url: 'https://www.cna.com.tw/rss/aipl.aspx', source: '中央社生活', keywords: ['生活', '社會', '消費', '環境', '教育', '民生', '天氣'], category: '生活' },
+  // 自由時報生活
+  { url: 'https://news.ltn.com.tw/rss/life.xml', source: '自由生活', keywords: [], category: '生活' },
+  // ETtoday 主 RSS 過濾生活
+  { url: 'https://www.ettoday.net/news/rss2.xml', source: 'ETtoday 生活', keywords: ['生活', '消費', '購物', '美食', '天氣', '奇聞', '趣聞', '社會', '民眾'], category: '生活' },
 
   // ── 健康 ─────────────────────────────────────────────────────────────
   { url: 'https://health.gvm.com.tw/rss', source: '健康遠見', keywords: [], category: '健康' },
