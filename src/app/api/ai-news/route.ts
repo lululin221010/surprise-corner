@@ -125,6 +125,55 @@ function parseRSS(xml: string, source: string, keywords: string[]) {
   return items;
 }
 
+// ✅ 從文章頁面抓 og:image（排除廣告追蹤圖、1x1像素）
+async function fetchOgImage(url: string): Promise<string> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000); // 最多等 5 秒
+
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; SurpriseCornerBot/1.0)',
+        'Accept': 'text/html',
+      },
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+
+    if (!res.ok) return '';
+
+    // 只讀前 10KB，og:image 一定在 <head> 裡，不需要整頁
+    const reader = res.body?.getReader();
+    if (!reader) return '';
+    let html = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      html += new TextDecoder().decode(value);
+      if (html.length > 10000) { reader.cancel(); break; }
+    }
+
+    // 抓 og:image
+    const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    if (ogMatch?.[1]) {
+      const img = ogMatch[1];
+      // 過濾廣告像素圖、太小的圖、追蹤用圖
+      if (!img.includes('1x1') && !img.includes('pixel') && !img.includes('track') && img.startsWith('http')) {
+        return img;
+      }
+    }
+
+    // 備援：twitter:image
+    const twitterMatch = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
+    if (twitterMatch?.[1]?.startsWith('http')) return twitterMatch[1];
+
+    return '';
+  } catch {
+    return '';
+  }
+}
+
 export async function GET() {
   try {
     const allNews: {
@@ -140,7 +189,6 @@ export async function GET() {
     await Promise.allSettled(
       RSS_FEEDS.map(async (feed) => {
         try {
-          // ✅ 加 User-Agent + 8 秒 timeout 避免一個卡住影響全部
           const controller = new AbortController();
           const timer = setTimeout(() => controller.abort(), 8000);
 
@@ -161,7 +209,6 @@ export async function GET() {
           console.log(`[ai-news] ${feed.source} 抓到 ${items.length} 則`);
           allNews.push(...items);
         } catch (err) {
-          // ✅ 單一來源失敗不影響其他來源
           console.warn(`[ai-news] ${feed.source} 失敗:`, err instanceof Error ? err.message : err);
         }
       })
@@ -169,12 +216,31 @@ export async function GET() {
 
     allNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 
-    // ✅ 若完全抓不到，回傳明確錯誤訊息方便 debug
     if (allNews.length === 0) {
       return NextResponse.json({ news: [], error: '所有來源皆無法取得' }, { status: 200 });
     }
 
-    return NextResponse.json({ news: allNews.slice(0, 30) });
+    const top30 = allNews.slice(0, 30);
+
+    // ✅ 對沒有圖片的文章，並行去抓 og:image（最多同時 10 篇，避免超時）
+    const noImageItems = top30.filter(item => !item.image);
+    const chunks = [];
+    for (let i = 0; i < noImageItems.length; i += 10) {
+      chunks.push(noImageItems.slice(i, i + 10));
+    }
+    for (const chunk of chunks) {
+      await Promise.allSettled(
+        chunk.map(async (item) => {
+          const img = await fetchOgImage(item.link);
+          if (img) {
+            item.image = img;
+            console.log(`[ai-news] og:image 補抓成功: ${item.source} - ${img.slice(0, 60)}`);
+          }
+        })
+      );
+    }
+
+    return NextResponse.json({ news: top30 });
   } catch (err) {
     console.error('[ai-news] 全域錯誤:', err);
     return NextResponse.json({ news: [] }, { status: 500 });
