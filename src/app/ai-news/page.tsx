@@ -25,20 +25,15 @@ const SOURCE_COLORS: Record<string, string> = {
   '經濟日報': '#c0392b',
   '中央社財經': '#1a6f38',
   'MoneyDJ': '#27ae60',
-  // 娛樂
-  '三立娛樂': '#d81b60',
-  'ETtoday 娛樂': '#e67e22',
-  '聯合報娛樂': '#c8102e',
-  '中央社娛樂': '#7b1fa2',
   // 運動
-  'ETtoday 運動': '#1565c0',
   '聯合報運動': '#0d47a1',
-  '三立運動': '#283593',
   'BBC Sport': '#bb1919',
+  '自由體育': '#1a237e',
+  'NOWnews 運動': '#1565c0',
   // 生活
-  '三立生活': '#00838f',
-  'ETtoday 社會': '#e67e22',
   '中央社生活': '#2471a3',
+  '自由生活': '#00695c',
+  'NOWnews 生活': '#00838f',
   // 健康
   '健康遠見': '#1e8449',
   '康健雜誌': '#117a65',
@@ -80,7 +75,6 @@ function getThemeForItem(item: NewsItem): { icon: string; gradient: string } {
   if (item.category === '財經') return { icon: '📈', gradient: 'linear-gradient(135deg, #15803d, #14532d)' };
   if (item.category === '生活') return { icon: '🏡', gradient: 'linear-gradient(135deg, #0369a1, #0c4a6e)' };
   if (item.category === '健康') return { icon: '💊', gradient: 'linear-gradient(135deg, #047857, #064e3b)' };
-  if (item.category === '娛樂') return { icon: '🎭', gradient: 'linear-gradient(135deg, #be185d, #4a044e)' };
   if (item.category === '運動') return { icon: '🏅', gradient: 'linear-gradient(135deg, #1565c0, #0d47a1)' };
 
   const lower = (item.title || '').toLowerCase();
@@ -116,12 +110,10 @@ function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) 
   );
 }
 
-// ✅ 新增「娛樂演藝」Tab，「棒球」改為「運動」
 const TABS = [
   { key: 'all',  label: '全部',    icon: '📡' },
   { key: 'AI',   label: 'AI 科技', icon: '🤖' },
   { key: '財經', label: '財經理財', icon: '📈' },
-  { key: '娛樂', label: '娛樂演藝', icon: '🎭' },
   { key: '運動', label: '運動',    icon: '🏅' },
   { key: '生活', label: '生活',    icon: '🏡' },
   { key: '健康', label: '健康',    icon: '💊' },
@@ -130,7 +122,6 @@ const TABS = [
 const CATEGORY_BADGE: Record<string, { bg: string; color: string; label: string }> = {
   'AI':   { bg: '#4c1d95', color: '#ddd6fe', label: '🤖 AI' },
   '財經': { bg: '#14532d', color: '#86efac', label: '📈 財經' },
-  '娛樂': { bg: '#4a044e', color: '#f9a8d4', label: '🎭 娛樂' },
   '運動': { bg: '#0d47a1', color: '#bfdbfe', label: '🏅 運動' },
   '生活': { bg: '#0c4a6e', color: '#bae6fd', label: '🏡 生活' },
   '健康': { bg: '#064e3b', color: '#6ee7b7', label: '💊 健康' },
@@ -170,7 +161,7 @@ export default function NewsPage() {
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>📡</div>
           <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: 0 }}>最新快訊</h1>
-          <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>AI 科技・財經理財・娛樂演藝・運動・生活・健康，每小時自動更新</p>
+          <p style={{ color: '#a78bfa', marginTop: '0.5rem' }}>AI 科技・財經理財・運動・生活・健康，每小時自動更新</p>
         </div>
 
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '2rem', flexWrap: 'wrap' }}>
