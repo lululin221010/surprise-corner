@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 export const revalidate = 3600;
 
 const RSS_FEEDS = [
-  // 原本英文 AI 新聞
   {
     url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
     source: 'The Verge',
@@ -17,7 +16,6 @@ const RSS_FEEDS = [
     keywords: ['AI', 'robot', 'artificial intelligence'],
     category: 'AI',
   },
-  // 中文科技新聞
   {
     url: 'https://www.ithome.com.tw/rss',
     source: 'iThome',
@@ -30,7 +28,6 @@ const RSS_FEEDS = [
     keywords: ['AI', '人工智慧', '科技', '投資'],
     category: 'AI',
   },
-  // 股市財經
   {
     url: 'https://news.cnyes.com/rss/cat/tw_stock',
     source: '鉅亨網',
@@ -54,19 +51,57 @@ const SOURCE_CATEGORY: Record<string, string> = {
   'MoneyDJ': '股市',
 };
 
+// 從各種 RSS 格式中萃取圖片 URL
+function extractImage(content: string): string {
+  // 1. <media:content url="...">
+  const mediaContent = content.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
+  if (mediaContent && mediaContent.match(/\.(jpg|jpeg|png|webp|gif)/i)) return mediaContent;
+
+  // 2. <media:thumbnail url="...">
+  const mediaThumbnail = content.match(/<media:thumbnail[^>]+url="([^"]+)"/i)?.[1];
+  if (mediaThumbnail) return mediaThumbnail;
+
+  // 3. <enclosure url="..." type="image/...">
+  const enclosure = content.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image/i)?.[1];
+  if (enclosure) return enclosure;
+
+  // 4. <img src="..."> inside description/content
+  const imgSrc = content.match(/<img[^>]+src="([^"]+)"/i)?.[1];
+  if (imgSrc && !imgSrc.includes('pixel') && !imgSrc.includes('1x1')) return imgSrc;
+
+  // 5. og:image 或其他 image tag
+  const ogImage = content.match(/image[^>]*>([^<]+)/i)?.[1]?.trim();
+  if (ogImage && ogImage.startsWith('http')) return ogImage;
+
+  return '';
+}
+
 function parseRSS(xml: string, source: string, keywords: string[]) {
-  const items: { title: string; link: string; pubDate: string; source: string; description: string; category: string }[] = [];
+  const items: {
+    title: string;
+    link: string;
+    pubDate: string;
+    source: string;
+    description: string;
+    category: string;
+    image: string;
+  }[] = [];
+
   const itemMatches = xml.matchAll(/<item>([\s\S]*?)<\/item>/g);
 
   for (const match of itemMatches) {
     const content = match[1];
+
     const title = content.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1]
       || content.match(/<title>(.*?)<\/title>/)?.[1] || '';
     const link = content.match(/<link>(.*?)<\/link>/)?.[1]
       || content.match(/<link\s[^>]*href="([^"]+)"/)?.[1] || '';
     const pubDate = content.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || '';
-    const description = content.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/)?.[1]
-      || content.match(/<description>(.*?)<\/description>/)?.[1] || '';
+    const description = content.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/)?.[1]
+      || content.match(/<description>([\s\S]*?)<\/description>/)?.[1] || '';
+
+    // 圖片：從整個 item 內容搜尋
+    const image = extractImage(content + description);
 
     if (keywords.length > 0) {
       const text = (title + description).toLowerCase();
@@ -76,12 +111,13 @@ function parseRSS(xml: string, source: string, keywords: string[]) {
 
     if (title && link) {
       items.push({
-        title: title.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/<[^>]+>/g, ''),
+        title: title.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/<[^>]+>/g, '').trim(),
         link,
         pubDate,
         source,
-        description: description.replace(/<[^>]+>/g, '').slice(0, 120) + '...',
+        description: description.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').trim().slice(0, 150) + '...',
         category: SOURCE_CATEGORY[source] || 'AI',
+        image,
       });
     }
     if (items.length >= 6) break;
@@ -91,7 +127,15 @@ function parseRSS(xml: string, source: string, keywords: string[]) {
 
 export async function GET() {
   try {
-    const allNews: { title: string; link: string; pubDate: string; source: string; description: string; category: string }[] = [];
+    const allNews: {
+      title: string;
+      link: string;
+      pubDate: string;
+      source: string;
+      description: string;
+      category: string;
+      image: string;
+    }[] = [];
 
     await Promise.allSettled(
       RSS_FEEDS.map(async (feed) => {
@@ -105,7 +149,7 @@ export async function GET() {
     );
 
     allNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-    return NextResponse.json({ news: allNews.slice(0, 20) });
+    return NextResponse.json({ news: allNews.slice(0, 30) });
   } catch {
     return NextResponse.json({ news: [] }, { status: 500 });
   }

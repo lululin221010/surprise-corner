@@ -393,75 +393,99 @@ function CurrencyConverter() {
 }
 
 // ============================================================
-// 🎨 顏色代碼轉換器
+// 🎨 顏色代碼轉換器（RGB 滑桿版）
 // ============================================================
 function ColorConverter() {
-  const [hex, setHex] = useState('#7c3aed');
-  const [pickerColor, setPickerColor] = useState('#7c3aed');
+  const [r, setR] = useState(124);
+  const [g, setG] = useState(58);
+  const [b, setB] = useState(237);
+  const [hexInput, setHexInput] = useState('#7c3aed');
   const [copied, setCopied] = useState('');
 
-  function hexToRgb(h: string) {
-    const r = parseInt(h.slice(1,3),16), g = parseInt(h.slice(3,5),16), b = parseInt(h.slice(5,7),16);
-    return { r, g, b };
-  }
+  function toHex(n: number) { return n.toString(16).padStart(2,'0'); }
+  const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+
   function rgbToHsl(r: number, g: number, b: number) {
-    r /= 255; g /= 255; b /= 255;
-    const max = Math.max(r,g,b), min = Math.min(r,g,b);
-    let h = 0, s = 0, l = (max+min)/2;
+    const rr = r/255, gg = g/255, bb = b/255;
+    const max = Math.max(rr,gg,bb), min = Math.min(rr,gg,bb);
+    let h = 0, s = 0; const l = (max+min)/2;
     if (max !== min) {
       const d = max - min;
       s = l > 0.5 ? d/(2-max-min) : d/(max+min);
       switch(max) {
-        case r: h = ((g-b)/d + (g<b?6:0))/6; break;
-        case g: h = ((b-r)/d + 2)/6; break;
-        case b: h = ((r-g)/d + 4)/6; break;
+        case rr: h = ((gg-bb)/d + (gg<bb?6:0))/6; break;
+        case gg: h = ((bb-rr)/d + 2)/6; break;
+        case bb: h = ((rr-gg)/d + 4)/6; break;
       }
     }
     return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
   }
 
-  function isValidHex(h: string) { return /^#[0-9A-Fa-f]{6}$/.test(h); }
-
   function handleHexInput(val: string) {
-    setHex(val);
-    if (isValidHex(val)) setPickerColor(val);
+    setHexInput(val);
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+      setR(parseInt(val.slice(1,3),16));
+      setG(parseInt(val.slice(3,5),16));
+      setB(parseInt(val.slice(5,7),16));
+    }
   }
 
-  function handlePicker(val: string) {
-    setPickerColor(val);
-    setHex(val);
+  function handleSlider(channel: 'r'|'g'|'b', val: number) {
+    if (channel === 'r') setR(val);
+    if (channel === 'g') setG(val);
+    if (channel === 'b') setB(val);
+    setHexInput(`#${toHex(channel==='r'?val:r)}${toHex(channel==='g'?val:g)}${toHex(channel==='b'?val:b)}`);
   }
 
   function copyText(text: string, key: string) {
     navigator.clipboard.writeText(text).then(() => { setCopied(key); setTimeout(() => setCopied(''), 2000); });
   }
 
-  const validHex = isValidHex(hex) ? hex : pickerColor;
-  const { r, g, b } = hexToRgb(validHex);
   const { h, s, l } = rgbToHsl(r, g, b);
-
   const codes = [
-    { label: 'HEX', value: validHex.toUpperCase(), key: 'hex' },
+    { label: 'HEX', value: hex.toUpperCase(), key: 'hex' },
     { label: 'RGB', value: `rgb(${r}, ${g}, ${b})`, key: 'rgb' },
     { label: 'HSL', value: `hsl(${h}, ${s}%, ${l}%)`, key: 'hsl' },
+  ];
+
+  const sliders = [
+    { label: '🔴 紅色 R', channel: 'r' as const, val: r, color: '#ef4444', track: `linear-gradient(to right, #000, #ff0000)` },
+    { label: '🟢 綠色 G', channel: 'g' as const, val: g, color: '#10b981', track: `linear-gradient(to right, #000, #00ff00)` },
+    { label: '🔵 藍色 B', channel: 'b' as const, val: b, color: '#60a5fa', track: `linear-gradient(to right, #000, #0000ff)` },
   ];
 
   return (
     <div style={cardStyle}>
       <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>🎨 顏色代碼轉換器</h2>
 
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
-        <div style={{ width: '80px', height: '80px', borderRadius: '12px', background: validHex, border: '2px solid rgba(167,139,250,0.4)', flexShrink: 0 }} />
-        <div style={{ flex: 1 }}>
-          <label style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>輸入 HEX 顏色碼</label>
-          <input value={hex} onChange={e => handleHexInput(e.target.value)}
-            placeholder="#7c3aed"
-            style={{ ...inputStyle, marginTop: '0.4rem', fontFamily: 'monospace' }} />
+      {/* 顏色預覽大區塊 */}
+      <div style={{ width: '100%', height: '100px', borderRadius: '12px', background: hex, border: '2px solid rgba(167,139,250,0.3)', marginBottom: '1.2rem', transition: 'background 0.1s' }} />
+
+      {/* RGB 滑桿 */}
+      {sliders.map(sl => (
+        <div key={sl.channel} style={{ marginBottom: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+            <span style={{ color: '#c4b5fd', fontSize: '0.85rem' }}>{sl.label}</span>
+            <span style={{ color: '#f3f4f6', fontFamily: 'monospace', fontSize: '0.85rem', minWidth: '30px', textAlign: 'right' }}>{sl.val}</span>
+          </div>
+          <input type="range" min={0} max={255} value={sl.val}
+            onChange={e => handleSlider(sl.channel, Number(e.target.value))}
+            style={{ width: '100%', accentColor: sl.color, height: '6px' }} />
         </div>
-        <input type="color" value={pickerColor} onChange={e => handlePicker(e.target.value)}
-          style={{ width: '48px', height: '48px', border: 'none', background: 'none', cursor: 'pointer', borderRadius: '8px', flexShrink: 0 }} />
+      ))}
+
+      {/* HEX 直接輸入 */}
+      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1.2rem' }}>
+        <span style={{ color: '#9ca3af', fontSize: '0.85rem', flexShrink: 0 }}>或直接輸入 HEX：</span>
+        <input value={hexInput} onChange={e => handleHexInput(e.target.value)}
+          placeholder="#7c3aed"
+          style={{ ...inputStyle, fontFamily: 'monospace', flex: 1 }} />
+        <input type="color" value={hex} onChange={e => handleHexInput(e.target.value)}
+          title="點擊開啟拾色器"
+          style={{ width: '42px', height: '42px', border: 'none', background: 'none', cursor: 'pointer', borderRadius: '8px', flexShrink: 0 }} />
       </div>
 
+      {/* 複製區 */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         {codes.map(code => (
           <div key={code.key} style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', padding: '0.7rem 1rem', gap: '0.8rem' }}>
@@ -469,7 +493,7 @@ function ColorConverter() {
             <span style={{ color: '#f3f4f6', fontFamily: 'monospace', flex: 1 }}>{code.value}</span>
             <button onClick={() => copyText(code.value, code.key)}
               style={{ ...btnStyle(copied === code.key), fontSize: '0.75rem', padding: '0.3rem 0.7rem', flexShrink: 0 }}>
-              {copied === code.key ? '✅' : '複製'}
+              {copied === code.key ? '✅ 已複製' : '複製'}
             </button>
           </div>
         ))}
@@ -481,16 +505,28 @@ function ColorConverter() {
 // ============================================================
 // 🎲 隨機決策器
 // ============================================================
+const DECIDE_PRESETS = [
+  { label: '🍜 今天吃什麼', options: ['火鍋', '便當', '拉麵', '自己煮', '叫外送'] },
+  { label: '🎬 今晚看什麼', options: ['Netflix 劇', '電影', 'YouTube', '直播', '早點睡'] },
+  { label: '☕ 下午喝什麼', options: ['珍奶', '美式咖啡', '綠茶', '可樂', '白開水'] },
+  { label: '🏖 週末去哪', options: ['待在家', '逛街', '爬山', '看展', '找朋友'] },
+];
+
 function RandomDecider() {
-  const [options, setOptions] = useState(['選項一', '選項二', '選項三']);
+  const [options, setOptions] = useState<string[]>([]);
   const [inputVal, setInputVal] = useState('');
   const [result, setResult] = useState('');
   const [spinning, setSpinning] = useState(false);
 
   function addOption() {
     if (!inputVal.trim()) return;
-    setOptions([...options, inputVal.trim()]);
+    setOptions(prev => [...prev, inputVal.trim()]);
     setInputVal('');
+  }
+
+  function loadPreset(preset: typeof DECIDE_PRESETS[0]) {
+    setOptions(preset.options);
+    setResult('');
   }
 
   function decide() {
@@ -511,40 +547,65 @@ function RandomDecider() {
 
   return (
     <div style={cardStyle}>
-      <h2 style={{ color: '#e9d5ff', margin: '0 0 1.5rem', textAlign: 'center' }}>🎲 隨機決策器</h2>
-      <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', margin: '0 0 1rem' }}>選不了嗎？讓命運決定！</p>
+      <h2 style={{ color: '#e9d5ff', margin: '0 0 0.5rem', textAlign: 'center' }}>🎲 隨機決策器</h2>
+      <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', margin: '0 0 1.2rem' }}>選不了嗎？讓命運決定！</p>
 
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.8rem' }}>
-        <input value={inputVal} onChange={e => setInputVal(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && addOption()}
-          placeholder="輸入一個選項..." style={{ ...inputStyle, flex: 1 }} />
-        <button onClick={addOption} style={{ ...btnStyle(true), flexShrink: 0 }}>+ 新增</button>
-      </div>
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem', minHeight: '36px' }}>
-        {options.map((opt, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem', fontSize: '0.85rem', color: '#e9d5ff' }}>
-            {opt}
-            <button onClick={() => setOptions(options.filter((_,j)=>j!==i))}
-              style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '0.9rem', padding: '0', lineHeight: 1 }}>✕</button>
-          </div>
+      {/* 快速範例情境 */}
+      <p style={{ color: '#c4b5fd', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>👇 點一個常見情境快速開始：</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem' }}>
+        {DECIDE_PRESETS.map(preset => (
+          <button key={preset.label} onClick={() => loadPreset(preset)}
+            style={{ ...btnStyle(JSON.stringify(options) === JSON.stringify(preset.options)), fontSize: '0.8rem', padding: '0.4rem 0.9rem' }}>
+            {preset.label}
+          </button>
         ))}
       </div>
 
+      {/* 自訂輸入 */}
+      <p style={{ color: '#c4b5fd', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>✏️ 或自己輸入選項：</p>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.8rem' }}>
+        <input value={inputVal} onChange={e => setInputVal(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addOption()}
+          placeholder="輸入一個選項，按 Enter 新增" style={{ ...inputStyle, flex: 1 }} />
+        <button onClick={addOption} style={{ ...btnStyle(true), flexShrink: 0 }}>+ 新增</button>
+      </div>
+
+      {/* 目前選項 */}
+      {options.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem' }}>
+          {options.map((opt, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem', fontSize: '0.85rem', color: '#e9d5ff' }}>
+              {opt}
+              <button onClick={() => { setOptions(options.filter((_,j)=>j!==i)); setResult(''); }}
+                style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '0.9rem', padding: '0', lineHeight: 1 }}>✕</button>
+            </div>
+          ))}
+          <button onClick={() => { setOptions([]); setResult(''); }}
+            style={{ ...btnStyle(), fontSize: '0.75rem', padding: '0.3rem 0.7rem' }}>清除全部</button>
+        </div>
+      )}
+
+      {options.length < 2 && (
+        <p style={{ color: '#6b7280', fontSize: '0.8rem', textAlign: 'center', margin: '0 0 1rem' }}>
+          請先點選情境，或輸入至少 2 個選項
+        </p>
+      )}
+
       <button onClick={decide} disabled={spinning || options.length < 2}
-        style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', fontSize: '1rem', opacity: spinning ? 0.7 : 1 }}>
+        style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', fontSize: '1rem', opacity: (spinning || options.length < 2) ? 0.5 : 1 }}>
         {spinning ? '🎰 決定中...' : '🎲 幫我決定！'}
       </button>
 
-      {result && !spinning && (
-        <div style={{ marginTop: '1.2rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
-          <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
-          <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>✨ {result}</p>
-        </div>
-      )}
       {spinning && result && (
         <div style={{ marginTop: '1.2rem', background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
           <p style={{ color: '#a78bfa', fontSize: '1.3rem', fontWeight: 700, margin: 0 }}>{result}</p>
+        </div>
+      )}
+      {result && !spinning && (
+        <div style={{ marginTop: '1.2rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
+          <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
+          <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.8rem' }}>✨ {result}</p>
+          <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem' }}>🔄 再抽一次</button>
         </div>
       )}
     </div>
