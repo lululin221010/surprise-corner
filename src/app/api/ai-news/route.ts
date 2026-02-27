@@ -1,16 +1,16 @@
 // 📁 路徑：src/app/api/ai-news/route.ts
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic'; // ✅ 每次都重新抓，不快取失敗結果
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
-// ✅ 加上瀏覽器 User-Agent，避免被 RSS 來源封鎖
 const FETCH_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (compatible; SurpriseCornerBot/1.0; +https://surprise-corner.vercel.app)',
   'Accept': 'application/rss+xml, application/xml, text/xml, */*',
 };
 
 const RSS_FEEDS = [
+  // ── AI 科技 ──
   {
     url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
     source: 'The Verge',
@@ -32,9 +32,10 @@ const RSS_FEEDS = [
   {
     url: 'https://technews.tw/feed/',
     source: '科技新報',
-    keywords: ['AI', '人工智慧', '科技', '投資'],
+    keywords: ['AI', '人工智慧', '科技'],
     category: 'AI',
   },
+  // ── 股市 ──
   {
     url: 'https://news.cnyes.com/rss/cat/tw_stock',
     source: '鉅亨網',
@@ -47,16 +48,33 @@ const RSS_FEEDS = [
     keywords: [],
     category: '股市',
   },
+  // ── 美食 ──
+  {
+    url: 'https://feeds.feedburner.com/etoday/food',
+    source: 'ETtoday 美食',
+    keywords: [],
+    category: '美食',
+  },
+  {
+    url: 'https://www.agriharvest.tw/feed',
+    source: '上下游',
+    keywords: ['美食', '餐廳', '小吃', '料理', '食物', '飲食'],
+    category: '美食',
+  },
+  // ── 旅遊 ──
+  {
+    url: 'https://feeds.feedburner.com/etoday/travel',
+    source: 'ETtoday 旅遊',
+    keywords: [],
+    category: '旅遊',
+  },
+  {
+    url: 'https://www.ttnews.com.tw/rss.xml',
+    source: 'TTNews 旅報',
+    keywords: [],
+    category: '旅遊',
+  },
 ];
-
-const SOURCE_CATEGORY: Record<string, string> = {
-  'The Verge': 'AI',
-  'BBC Tech': 'AI',
-  'iThome': 'AI',
-  '科技新報': 'AI',
-  '鉅亨網': '股市',
-  'MoneyDJ': '股市',
-};
 
 function extractImage(content: string): string {
   const mediaContent = content.match(/<media:content[^>]+url="([^"]+)"/i)?.[1];
@@ -77,7 +95,8 @@ function extractImage(content: string): string {
   return '';
 }
 
-function parseRSS(xml: string, source: string, keywords: string[]) {
+// ✅ 修正：直接傳入 category，不再透過 SOURCE_CATEGORY 查表（避免股市變 AI 的 bug）
+function parseRSS(xml: string, source: string, keywords: string[], category: string) {
   const items: {
     title: string;
     link: string;
@@ -116,7 +135,7 @@ function parseRSS(xml: string, source: string, keywords: string[]) {
         pubDate,
         source,
         description: description.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').trim().slice(0, 150) + '...',
-        category: SOURCE_CATEGORY[source] || 'AI',
+        category, // ✅ 直接用傳入的 category，100% 正確
         image,
       });
     }
@@ -125,11 +144,10 @@ function parseRSS(xml: string, source: string, keywords: string[]) {
   return items;
 }
 
-// ✅ 從文章頁面抓 og:image（排除廣告追蹤圖、1x1像素）
 async function fetchOgImage(url: string): Promise<string> {
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 5000); // 最多等 5 秒
+    const timer = setTimeout(() => controller.abort(), 5000);
 
     const res = await fetch(url, {
       headers: {
@@ -142,7 +160,6 @@ async function fetchOgImage(url: string): Promise<string> {
 
     if (!res.ok) return '';
 
-    // 只讀前 10KB，og:image 一定在 <head> 裡，不需要整頁
     const reader = res.body?.getReader();
     if (!reader) return '';
     let html = '';
@@ -153,18 +170,15 @@ async function fetchOgImage(url: string): Promise<string> {
       if (html.length > 10000) { reader.cancel(); break; }
     }
 
-    // 抓 og:image
     const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
       || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
     if (ogMatch?.[1]) {
       const img = ogMatch[1];
-      // 過濾廣告像素圖、太小的圖、追蹤用圖
       if (!img.includes('1x1') && !img.includes('pixel') && !img.includes('track') && img.startsWith('http')) {
         return img;
       }
     }
 
-    // 備援：twitter:image
     const twitterMatch = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
     if (twitterMatch?.[1]?.startsWith('http')) return twitterMatch[1];
 
@@ -205,8 +219,9 @@ export async function GET() {
           }
 
           const xml = await res.text();
-          const items = parseRSS(xml, feed.source, feed.keywords);
-          console.log(`[ai-news] ${feed.source} 抓到 ${items.length} 則`);
+          // ✅ 傳入 feed.category
+          const items = parseRSS(xml, feed.source, feed.keywords, feed.category);
+          console.log(`[ai-news] ${feed.source} (${feed.category}) 抓到 ${items.length} 則`);
           allNews.push(...items);
         } catch (err) {
           console.warn(`[ai-news] ${feed.source} 失敗:`, err instanceof Error ? err.message : err);
@@ -220,10 +235,9 @@ export async function GET() {
       return NextResponse.json({ news: [], error: '所有來源皆無法取得' }, { status: 200 });
     }
 
-    const top30 = allNews.slice(0, 30);
+    const top40 = allNews.slice(0, 40); // 來源變多，取 40 則
 
-    // ✅ 對沒有圖片的文章，並行去抓 og:image（最多同時 10 篇，避免超時）
-    const noImageItems = top30.filter(item => !item.image);
+    const noImageItems = top40.filter(item => !item.image);
     const chunks = [];
     for (let i = 0; i < noImageItems.length; i += 10) {
       chunks.push(noImageItems.slice(i, i + 10));
@@ -234,13 +248,12 @@ export async function GET() {
           const img = await fetchOgImage(item.link);
           if (img) {
             item.image = img;
-            console.log(`[ai-news] og:image 補抓成功: ${item.source} - ${img.slice(0, 60)}`);
           }
         })
       );
     }
 
-    return NextResponse.json({ news: top30 });
+    return NextResponse.json({ news: top40 });
   } catch (err) {
     console.error('[ai-news] 全域錯誤:', err);
     return NextResponse.json({ news: [] }, { status: 500 });
