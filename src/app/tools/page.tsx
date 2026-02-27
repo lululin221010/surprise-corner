@@ -503,32 +503,99 @@ function ColorConverter() {
 }
 
 // ============================================================
-// 🎲 隨機決策器
+// 🎲 隨機決策器（支援自訂情境）
+// 📄 貼回路徑：src/app/tools/page.tsx 中的 RandomDecider function
 // ============================================================
+
+// ① 把頁面頂部的 DECIDE_PRESETS 常數改成這樣（加上 id 欄位）：
 const DECIDE_PRESETS = [
-  { label: '🍜 今天吃什麼', options: ['火鍋', '便當', '拉麵', '自己煮', '叫外送'] },
-  { label: '🎬 今晚看什麼', options: ['Netflix 劇', '電影', 'YouTube', '直播', '早點睡'] },
-  { label: '☕ 下午喝什麼', options: ['珍奶', '美式咖啡', '綠茶', '可樂', '白開水'] },
-  { label: '🏖 週末去哪', options: ['待在家', '逛街', '爬山', '看展', '找朋友'] },
+  { id: 'eat',     label: '🍜 今天吃什麼', options: ['火鍋', '便當', '拉麵', '自己煮', '叫外送'] },
+  { id: 'watch',   label: '🎬 今晚看什麼', options: ['Netflix 劇', '電影', 'YouTube', '直播', '早點睡'] },
+  { id: 'drink',   label: '☕ 下午喝什麼', options: ['珍奶', '美式咖啡', '綠茶', '可樂', '白開水'] },
+  { id: 'weekend', label: '🏖 週末去哪',   options: ['待在家', '逛街', '爬山', '看展', '找朋友'] },
 ];
 
+// ② 把整個 RandomDecider function 換成這個：
 function RandomDecider() {
+  // 自訂情境（從 localStorage 讀取）
+  const [customPresets, setCustomPresets] = useState<{ id: string; label: string; options: string[] }[]>([]);
+  const [presetsLoaded, setPresetsLoaded] = useState(false);
+
+  // 建立新情境的狀態
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [newScenarioLabel, setNewScenarioLabel] = useState('');
+  const [newScenarioOptions, setNewScenarioOptions] = useState<string[]>([]);
+  const [newOptionInput, setNewOptionInput] = useState('');
+
+  // 決策器主體狀態
+  const [activePresetId, setActivePresetId] = useState<string | null>(null);
   const [options, setOptions] = useState<string[]>([]);
   const [inputVal, setInputVal] = useState('');
   const [result, setResult] = useState('');
   const [spinning, setSpinning] = useState(false);
 
+  // 讀取 localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('sc_decide_presets');
+      if (saved) setCustomPresets(JSON.parse(saved));
+    } catch {}
+    setPresetsLoaded(true);
+  }, []);
+
+  // 儲存 localStorage
+  useEffect(() => {
+    if (!presetsLoaded) return;
+    try { localStorage.setItem('sc_decide_presets', JSON.stringify(customPresets)); } catch {}
+  }, [customPresets, presetsLoaded]);
+
+  // 載入某個情境
+  function loadPreset(preset: { id: string; label: string; options: string[] }) {
+    setActivePresetId(preset.id);
+    setOptions([...preset.options]);
+    setResult('');
+  }
+
+  // 新增選項到決策器
   function addOption() {
     if (!inputVal.trim()) return;
     setOptions(prev => [...prev, inputVal.trim()]);
     setInputVal('');
+    setActivePresetId(null); // 手動加了就不算預設情境
   }
 
-  function loadPreset(preset: typeof DECIDE_PRESETS[0]) {
-    setOptions(preset.options);
-    setResult('');
+  // 新增選項到新情境表單
+  function addNewScenarioOption() {
+    if (!newOptionInput.trim()) return;
+    setNewScenarioOptions(prev => [...prev, newOptionInput.trim()]);
+    setNewOptionInput('');
   }
 
+  // 儲存新情境
+  function saveNewScenario() {
+    if (!newScenarioLabel.trim() || newScenarioOptions.length < 2) return;
+    const newPreset = {
+      id: 'custom_' + Date.now(),
+      label: newScenarioLabel.trim(),
+      options: [...newScenarioOptions],
+    };
+    setCustomPresets(prev => [...prev, newPreset]);
+    // 存完後自動載入這個情境
+    loadPreset(newPreset);
+    // 重置表單
+    setNewScenarioLabel('');
+    setNewScenarioOptions([]);
+    setNewOptionInput('');
+    setShowCreateForm(false);
+  }
+
+  // 刪除自訂情境
+  function deleteCustomPreset(id: string) {
+    setCustomPresets(prev => prev.filter(p => p.id !== id));
+    if (activePresetId === id) { setOptions([]); setResult(''); setActivePresetId(null); }
+  }
+
+  // 抽籤動畫
   function decide() {
     if (options.length < 2) return;
     setSpinning(true);
@@ -545,23 +612,105 @@ function RandomDecider() {
     }, 80);
   }
 
+  const allPresets = [...DECIDE_PRESETS, ...customPresets];
+
   return (
     <div style={cardStyle}>
       <h2 style={{ color: '#e9d5ff', margin: '0 0 0.5rem', textAlign: 'center' }}>🎲 隨機決策器</h2>
       <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center', margin: '0 0 1.2rem' }}>選不了嗎？讓命運決定！</p>
 
-      {/* 快速範例情境 */}
-      <p style={{ color: '#c4b5fd', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>👇 點一個常見情境快速開始：</p>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem' }}>
-        {DECIDE_PRESETS.map(preset => (
-          <button key={preset.label} onClick={() => loadPreset(preset)}
-            style={{ ...btnStyle(JSON.stringify(options) === JSON.stringify(preset.options)), fontSize: '0.8rem', padding: '0.4rem 0.9rem' }}>
-            {preset.label}
-          </button>
+      {/* 情境按鈕列 */}
+      <p style={{ color: '#c4b5fd', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>👇 點一個情境快速開始：</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
+        {allPresets.map(preset => (
+          <div key={preset.id} style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <button
+              onClick={() => loadPreset(preset)}
+              style={{ ...btnStyle(activePresetId === preset.id), fontSize: '0.8rem', padding: '0.4rem 0.9rem',
+                borderRadius: customPresets.find(p => p.id === preset.id) ? '20px 0 0 20px' : '20px' }}>
+              {preset.label}
+            </button>
+            {/* 自訂情境才顯示刪除按鈕 */}
+            {customPresets.find(p => p.id === preset.id) && (
+              <button
+                onClick={() => deleteCustomPreset(preset.id)}
+                title="刪除此情境"
+                style={{ background: 'rgba(239,68,68,0.2)', border: 'none', borderRadius: '0 20px 20px 0',
+                  color: '#f87171', cursor: 'pointer', padding: '0.4rem 0.5rem', fontSize: '0.75rem',
+                  lineHeight: 1, height: '100%' }}>
+                ✕
+              </button>
+            )}
+          </div>
         ))}
+
+        {/* ➕ 新增情境按鈕 */}
+        <button
+          onClick={() => { setShowCreateForm(!showCreateForm); setNewScenarioLabel(''); setNewScenarioOptions([]); setNewOptionInput(''); }}
+          style={{ ...btnStyle(showCreateForm), fontSize: '0.8rem', padding: '0.4rem 0.9rem',
+            border: '1px dashed rgba(167,139,250,0.5)', background: showCreateForm ? 'rgba(124,58,237,0.3)' : 'transparent' }}>
+          ➕ 建立新情境
+        </button>
       </div>
 
-      {/* 自訂輸入 */}
+      {/* 建立新情境表單 */}
+      {showCreateForm && (
+        <div style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '12px', padding: '1rem', marginBottom: '1rem',
+          border: '1px solid rgba(167,139,250,0.2)' }}>
+          <p style={{ color: '#a78bfa', fontSize: '0.85rem', fontWeight: 700, margin: '0 0 0.8rem' }}>✏️ 建立新情境</p>
+
+          {/* 情境名稱 */}
+          <input
+            value={newScenarioLabel}
+            onChange={e => setNewScenarioLabel(e.target.value)}
+            placeholder="情境名稱，例：🏋️ 今天練什麼"
+            style={{ ...inputStyle, marginBottom: '0.6rem' }}
+          />
+
+          {/* 新增選項 */}
+          <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '0.6rem' }}>
+            <input
+              value={newOptionInput}
+              onChange={e => setNewOptionInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && addNewScenarioOption()}
+              placeholder="輸入一個選項，按 Enter"
+              style={{ ...inputStyle, flex: 1 }}
+            />
+            <button onClick={addNewScenarioOption} style={{ ...btnStyle(true), flexShrink: 0 }}>+ 新增</button>
+          </div>
+
+          {/* 已輸入的選項 */}
+          {newScenarioOptions.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
+              {newScenarioOptions.map((opt, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem',
+                  background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem',
+                  fontSize: '0.82rem', color: '#e9d5ff' }}>
+                  {opt}
+                  <button onClick={() => setNewScenarioOptions(prev => prev.filter((_, j) => j !== i))}
+                    style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '0.9rem', padding: 0 }}>✕</button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {newScenarioOptions.length < 2 && (
+            <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 0.6rem' }}>請至少輸入 2 個選項</p>
+          )}
+
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button
+              onClick={saveNewScenario}
+              disabled={!newScenarioLabel.trim() || newScenarioOptions.length < 2}
+              style={{ ...btnStyle(true), flex: 1, opacity: (!newScenarioLabel.trim() || newScenarioOptions.length < 2) ? 0.4 : 1 }}>
+              💾 儲存情境
+            </button>
+            <button onClick={() => setShowCreateForm(false)} style={{ ...btnStyle(), flexShrink: 0 }}>取消</button>
+          </div>
+        </div>
+      )}
+
+      {/* 手動輸入選項區 */}
       <p style={{ color: '#c4b5fd', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>✏️ 或自己輸入選項：</p>
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.8rem' }}>
         <input value={inputVal} onChange={e => setInputVal(e.target.value)}
@@ -574,13 +723,15 @@ function RandomDecider() {
       {options.length > 0 && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem' }}>
           {options.map((opt, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem', fontSize: '0.85rem', color: '#e9d5ff' }}>
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem',
+              background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem',
+              fontSize: '0.85rem', color: '#e9d5ff' }}>
               {opt}
-              <button onClick={() => { setOptions(options.filter((_,j)=>j!==i)); setResult(''); }}
+              <button onClick={() => { setOptions(options.filter((_, j) => j !== i)); setResult(''); setActivePresetId(null); }}
                 style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '0.9rem', padding: '0', lineHeight: 1 }}>✕</button>
             </div>
           ))}
-          <button onClick={() => { setOptions([]); setResult(''); }}
+          <button onClick={() => { setOptions([]); setResult(''); setActivePresetId(null); }}
             style={{ ...btnStyle(), fontSize: '0.75rem', padding: '0.3rem 0.7rem' }}>清除全部</button>
         </div>
       )}
@@ -592,7 +743,8 @@ function RandomDecider() {
       )}
 
       <button onClick={decide} disabled={spinning || options.length < 2}
-        style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', fontSize: '1rem', opacity: (spinning || options.length < 2) ? 0.5 : 1 }}>
+        style={{ ...btnStyle(true), width: '100%', padding: '0.8rem', fontSize: '1rem',
+          opacity: (spinning || options.length < 2) ? 0.5 : 1 }}>
         {spinning ? '🎰 決定中...' : '🎲 幫我決定！'}
       </button>
 
@@ -602,7 +754,8 @@ function RandomDecider() {
         </div>
       )}
       {result && !spinning && (
-        <div style={{ marginTop: '1.2rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
+        <div style={{ marginTop: '1.2rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))',
+          borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
           <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
           <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.8rem' }}>✨ {result}</p>
           <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem' }}>🔄 再抽一次</button>
