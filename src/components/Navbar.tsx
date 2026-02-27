@@ -24,7 +24,7 @@ export default function Navbar() {
       background: 'rgba(15,12,41,0.9)', backdropFilter: 'blur(10px)',
       borderBottom: '1px solid rgba(167,139,250,0.2)',
       display: 'flex', alignItems: 'center', gap: '0.5rem',
-      padding: '0.5rem 1.5rem', flexWrap: 'wrap',
+      padding: '0.4rem 1.5rem', flexWrap: 'wrap',
     }}>
 
       {/* ✅ Logo — 加大尺寸 + 首頁時加紫色光暈框 */}
@@ -50,8 +50,8 @@ export default function Navbar() {
         <Image
           src="/logo.png"
           alt="Surprise Corner"
-          width={190}
-          height={45}
+          width={240}    /* ✅ 190 → 240，讓文字清晰可見 */
+          height={58}    /* ✅ 45 → 58，等比放大 */
           style={{ objectFit: 'contain', display: 'block' }}
           priority
         />
