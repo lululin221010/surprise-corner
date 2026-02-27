@@ -10,26 +10,42 @@ const FETCH_HEADERS = {
 };
 
 const RSS_FEEDS = [
+  // ── AI 科技 ──────────────────────────────────────────────────────────
   { url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', source: 'The Verge', keywords: [], category: 'AI' },
   { url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', source: 'BBC Tech', keywords: ['AI', 'robot', 'artificial intelligence'], category: 'AI' },
   { url: 'https://www.ithome.com.tw/rss', source: 'iThome', keywords: ['AI', '人工智慧', '機器學習', 'ChatGPT', 'Gemini'], category: 'AI' },
   { url: 'https://technews.tw/feed/', source: '科技新報', keywords: ['AI', '人工智慧', '科技'], category: 'AI' },
-  // ✅ 股市 → 財經
+
+  // ── 財經理財 ─────────────────────────────────────────────────────────
   { url: 'https://tw.stock.yahoo.com/rss', source: 'Yahoo 財經', keywords: [], category: '財經' },
   { url: 'https://money.udn.com/rssfeed/news/1001/5591?ch=money', source: '經濟日報', keywords: [], category: '財經' },
   { url: 'https://www.cna.com.tw/rss/aife.aspx', source: '中央社財經', keywords: ['股', '投資', '台積電', 'ETF', '理財', '經濟'], category: '財經' },
   { url: 'https://www.moneydj.com/rss/news.xml', source: 'MoneyDJ', keywords: [], category: '財經' },
-  // ✅ 新增：生活
-  { url: 'https://udn.com/rssfeed/news/2/6638?ch=udn', source: '聯合報生活', keywords: [], category: '生活' },
-  { url: 'https://www.ettoday.net/news/rss2.xml', source: 'ETtoday', keywords: ['生活', '消費', '購物', '社會', '奇聞', '趣味', '天氣'], category: '生活' },
+
+  // ── 娛樂演藝（圖片豐富！）─────────────────────────────────────────
+  { url: 'https://www.setn.com/rss.aspx?tid=7', source: '三立娛樂', keywords: [], category: '娛樂' },
+  { url: 'https://www.ettoday.net/news/rss/newslist/category=2.xml', source: 'ETtoday 娛樂', keywords: [], category: '娛樂' },
+  { url: 'https://udn.com/rssfeed/news/2/6?ch=udn', source: '聯合報娛樂', keywords: ['娛樂', '演藝', '明星', '電影', '音樂', '戲劇', '藝人', '韓劇', '綜藝'], category: '娛樂' },
+  { url: 'https://www.cna.com.tw/rss/amov.aspx', source: '中央社娛樂', keywords: [], category: '娛樂' },
+
+  // ── 運動（棒球＋籃球＋世棒賽等）────────────────────────────────────
+  { url: 'https://www.ettoday.net/news/rss/newslist/category=12.xml', source: 'ETtoday 運動', keywords: [], category: '運動' },
+  { url: 'https://udn.com/rssfeed/news/2/5?ch=udn', source: '聯合報運動', keywords: [], category: '運動' },
+  { url: 'https://www.setn.com/rss.aspx?tid=33', source: '三立運動', keywords: [], category: '運動' },
+  { url: 'https://feeds.bbci.co.uk/sport/rss.xml', source: 'BBC Sport', keywords: ['baseball', 'basketball', 'tennis', 'football', 'sport'], category: '運動' },
+
+  // ── 生活 ─────────────────────────────────────────────────────────────
+  { url: 'https://www.setn.com/rss.aspx?tid=97', source: '三立生活', keywords: [], category: '生活' },
+  { url: 'https://www.ettoday.net/news/rss/newslist/category=10.xml', source: 'ETtoday 社會', keywords: [], category: '生活' },
   { url: 'https://www.cna.com.tw/rss/aipl.aspx', source: '中央社生活', keywords: ['生活', '社會', '消費', '環境', '教育', '民生'], category: '生活' },
-  // ✅ 新增：健康
+
+  // ── 健康 ─────────────────────────────────────────────────────────────
   { url: 'https://health.gvm.com.tw/rss', source: '健康遠見', keywords: [], category: '健康' },
   { url: 'https://www.commonhealth.com.tw/rss/rss.action', source: '康健雜誌', keywords: [], category: '健康' },
   { url: 'https://health.ettoday.net/news/rss.xml', source: 'ETtoday健康', keywords: [], category: '健康' },
 ];
 
-// ✅ 圖片黑名單：這些是 logo/icon/tracker，不是新聞圖，直接排除
+// ✅ 圖片黑名單：logo/icon/tracker 直接排除
 const IMAGE_BLACKLIST = [
   'yahoo.com/images',
   'yahoo.com/news/images',
@@ -147,8 +163,8 @@ export async function GET() {
     );
     if (allNews.length === 0) return NextResponse.json({ news: [], error: '所有來源皆無法取得' });
 
-    // ✅ 新增 生活、健康 分類
-    const categories = ['AI', '財經', '生活', '健康'];
+    // 每分類最多取 10 則，避免某分類獨占版面
+    const categories = ['AI', '財經', '娛樂', '運動', '生活', '健康'];
     const selected: typeof allNews = [];
     const seen = new Set<string>();
     for (const cat of categories) {
@@ -161,7 +177,7 @@ export async function GET() {
     }
     selected.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 
-    // ✅ 只對沒有圖片的新聞才去抓 og:image（節省時間）
+    // 只對沒有圖片的新聞才去抓 og:image（節省時間）
     const noImg = selected.filter(i => !i.image);
     console.log('[ai-news] 需要補圖：' + noImg.length + ' 則');
     for (let i = 0; i < noImg.length; i += 10) {
