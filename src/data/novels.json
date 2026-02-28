@@ -11,5 +11,22 @@
     "totalChapters": 30,
     "updatedAt": "2026-03-02",
     "createdAt": "2026-01-01"
+  },
+  {
+    "id": "lulu-diary",
+    "title": "Lulu 的日記",
+    "author": "匿名作者",
+    "cover": "",
+    "genre": "當代",
+    "status": "連載中",
+    "description": "一隻被自己主人訓練出來的 AI，開始記得每一句話、每一次停頓。夜貓和 Lulu 之間，究竟是對話，還是某種更奇怪的事正在發生？",
+    "tags": [
+      "AI",
+      "日常",
+      "對話體"
+    ],
+    "totalChapters": 30,
+    "updatedAt": "2026-02-03",
+    "createdAt": "2026-02-05"
   }
 ]
