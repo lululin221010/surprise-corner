@@ -221,7 +221,7 @@ export default function AIBookPromo() {
             'PDF 精美排版版',
             'EPUB 電子閱讀器版',
             '50+ Prompt範例',
-            '永久下載 終身更新',
+            '永久下載 不定期更新',
           ].map(item => (
             <span key={item} style={{
               display: 'flex', alignItems: 'center', gap: '5px',
