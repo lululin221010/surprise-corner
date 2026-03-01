@@ -1183,6 +1183,34 @@ export default function ToolsPage() {
           {activeTab === 'bmi'      && <BmiCalculator />}
         </div>
 
+        {/* ── 媒體工具入口 ── */}
+        <div style={{ marginTop: '2rem', marginBottom: '0.8rem' }}>
+          <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 0.8rem 0.2rem', letterSpacing: '0.05em' }}>媒體工具</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.8rem' }}>
+            {[
+              { href: '/tools/audio-to-text', icon: '🎙️', title: '音訊轉文字',   desc: 'Groq Whisper 極速辨識' },
+              { href: '/tools/watermark',      icon: '🖼️', title: '圖片加浮水印', desc: '位置、透明度自由調整' },
+              { href: '/tools/id-photo',       icon: '🪪', title: '證件照製作',   desc: '1吋／2吋，換背景色' },
+            ].map(tool => (
+              <a key={tool.href} href={tool.href} style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(167,139,250,0.25)',
+                  borderRadius: '14px', padding: '1.1rem 1rem',
+                  transition: 'all 0.2s', cursor: 'pointer',
+                }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(167,139,250,0.6)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(167,139,250,0.25)'; (e.currentTarget as HTMLElement).style.transform = 'none'; }}
+                >
+                  <div style={{ fontSize: '1.8rem', marginBottom: '0.4rem' }}>{tool.icon}</div>
+                  <div style={{ color: '#e9d5ff', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.2rem' }}>{tool.title}</div>
+                  <div style={{ color: '#6b7280', fontSize: '0.78rem' }}>{tool.desc}</div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
         <div style={{ marginTop:'2rem', background:'linear-gradient(135deg,rgba(245,158,11,0.15),rgba(236,72,153,0.15))', border:'1px solid rgba(245,158,11,0.3)', borderRadius:'16px', padding:'1.2rem', textAlign:'center' }}>
           <p style={{ color:'#fcd34d', fontWeight:700, margin:'0 0 0.3rem' }}>✨ 工具用完了，去逛逛其他地方？</p>
           <a href={randomPage.href} target={randomPage.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
