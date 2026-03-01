@@ -49,6 +49,8 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   alternates: { canonical: '/' },
+  manifest: '/manifest.json',
+  themeColor: '#7c3aed',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -60,6 +62,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        {/* ✅ PWA 支援 */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#7c3aed" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="驚喜角落" />
       </head>
       <body className={inter.className}>
         <Navbar />
