@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>影音AI工具完全指南｜免費預覽版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07001a;--bg2:#0d0030;--p1:#7c3aed;--p2:#a855f7;--p3:#c4b5fd;--gold:#fbbf24;--gold2:#f59e0b;--text:#e2d9f3;--dim:#a89bc0;--border:rgba(124,58,237,.25);--card:rgba(255,255,255,.04);--r:16px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-size:16px;line-height:1.85;min-height:100vh;overflow-x:hidden}
+#stars-bg{position:fixed;inset:0;background:radial-gradient(ellipse 130% 80% at 50% 0%,#1a0050 0%,#0d0030 45%,#07001a 100%);z-index:-2}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
+.buy-sticky{position:fixed;bottom:24px;right:24px;z-index:999;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1c1917;font-weight:900;font-size:14px;padding:13px 22px;border-radius:100px;box-shadow:0 8px 32px rgba(251,191,36,.5);text-decoration:none;transition:transform .2s,box-shadow .2s;display:flex;align-items:center;gap:7px}
+.buy-sticky:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(251,191,36,.7)}
+@media(max-width:640px){.buy-sticky{bottom:14px;right:14px;font-size:12px;padding:11px 16px}}
+/* ── Hero ── */
+.hero{max-width:900px;margin:0 auto;padding:72px 24px 48px;text-align:center}
+.badge{display:inline-block;background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.4);color:var(--p2);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:100px;margin-bottom:28px}
+.book-cover{width:130px;height:182px;background:linear-gradient(160deg,#1a0050 0%,#2d0080 55%,#0d0030 100%);border-radius:10px 4px 4px 10px;box-shadow:8px 12px 40px rgba(124,58,237,.6),-4px 0 0 rgba(0,0,0,.5),inset -4px 0 8px rgba(0,0,0,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 14px;margin:0 auto 28px;position:relative;overflow:hidden}
+.book-cover::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.book-cover-icon{font-size:36px;margin-bottom:10px}
+.book-cover-title{font-family:'Noto Serif TC',serif;font-size:10px;font-weight:900;color:#e2d9f3;text-align:center;line-height:1.7}
+.book-cover-sub{font-size:7.5px;color:var(--p3);margin-top:8px}
+.hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(26px,5vw,46px);font-weight:900;background:linear-gradient(135deg,#e2d9f3 0%,var(--p3) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;line-height:1.3}
+.hero-sub{color:var(--dim);font-size:16px;max-width:580px;margin:0 auto 28px;line-height:1.85}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
+.tag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 13px;font-size:13px;color:var(--p3)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:480px;margin:0 auto 36px}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 6px;text-align:center}
+.stat-n{font-size:26px;font-weight:900;color:var(--p2)}
+.stat-l{font-size:11px;color:var(--dim);margin-top:2px}
+.free-note{display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#86efac;font-size:13px;font-weight:700;padding:8px 18px;border-radius:100px}
+/* ── Layout ── */
+.container{max-width:840px;margin:0 auto;padding:0 24px 80px}
+.divider{border:none;border-top:1px solid rgba(124,58,237,.2);margin:48px 0}
+/* ── Chapter header ── */
+.ch-hd{display:flex;align-items:center;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.ch-num{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;font-size:12px;font-weight:900;padding:5px 14px;border-radius:100px;white-space:nowrap}
+.ch-title{font-family:'Noto Serif TC',serif;font-size:clamp(21px,3vw,28px);font-weight:900;color:var(--text)}
+.free-lbl{background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3);color:#86efac;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;white-space:nowrap}
+/* ── Prose ── */
+.prose h3{font-family:'Noto Serif TC',serif;font-size:19px;font-weight:900;color:var(--p3);margin:34px 0 12px;padding-left:14px;border-left:3px solid var(--p1)}
+.prose p{color:var(--dim);margin-bottom:15px}
+.prose strong{color:var(--text)}
+.prose ul,.prose ol{padding-left:22px;margin-bottom:15px;display:flex;flex-direction:column;gap:7px}
+.prose li{color:var(--dim)}
+.prose li strong{color:var(--p3)}
+.prose blockquote{border-left:3px solid var(--gold);background:rgba(251,191,36,.06);padding:14px 20px;border-radius:0 12px 12px 0;margin:20px 0;color:var(--dim)}
+.prose blockquote strong{color:var(--gold)}
+/* ── Myth cards ── */
+.myth{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:18px 22px;margin:10px 0}
+.myth-x{color:#f87171;font-weight:700;font-size:14px;margin-bottom:6px}
+.myth-o{color:#86efac;font-size:14px;line-height:1.75}
+/* ── Roadmap ── */
+.roadmap{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+.rm-step{display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px}
+.rm-n{background:var(--p1);color:#fff;font-size:13px;font-weight:900;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rm-t strong{color:var(--text);display:block;margin-bottom:2px}
+.rm-t span{color:var(--dim);font-size:14px}
+/* ── Summary box ── */
+.sum-box{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(168,85,247,.05));border:1px solid rgba(124,58,237,.3);border-radius:var(--r);padding:26px 28px;margin:36px 0}
+.sum-title{font-size:15px;font-weight:900;color:var(--p2);margin-bottom:14px}
+.sum-list{display:flex;flex-direction:column;gap:9px}
+.sum-item{display:flex;align-items:flex-start;gap:9px;color:var(--dim);font-size:15px}
+.sum-item::before{content:'✓';color:#86efac;font-weight:900;flex-shrink:0;margin-top:2px}
+/* ── Locked chapters ── */
+.locked-sec{margin-top:56px}
+.locked-title{font-family:'Noto Serif TC',serif;font-size:20px;font-weight:900;color:var(--dim);margin-bottom:22px;text-align:center}
+.locked-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.locked-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;position:relative;overflow:hidden;transition:border-color .2s,background .2s}
+.locked-card:hover{border-color:rgba(124,58,237,.5);background:rgba(124,58,237,.08)}
+.lc-badge{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.lc-num{background:rgba(124,58,237,.2);color:var(--p2);font-size:10px;font-weight:900;padding:2px 8px;border-radius:100px}
+.lc-lock{font-size:13px;color:var(--dim);margin-left:auto}
+.locked-card h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.4}
+.lc-tools{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.lc-tool{background:rgba(124,58,237,.15);color:var(--p3);font-size:11px;padding:2px 7px;border-radius:5px;border:1px solid rgba(124,58,237,.2)}
+.lc-preview{font-size:12px;color:var(--dim);filter:blur(4px);user-select:none;line-height:1.65}
+.lc-overlay{position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(to top,var(--bg2),transparent);pointer-events:none}
+/* ── CTA ── */
+.cta{margin-top:60px;background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(168,85,247,.07));border:1px solid rgba(124,58,237,.35);border-radius:24px;padding:44px 28px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cta h2{font-family:'Noto Serif TC',serif;font-size:clamp(20px,3vw,30px);font-weight:900;color:var(--text);margin-bottom:10px}
+.cta-desc{color:var(--dim);font-size:15px;margin-bottom:28px;line-height:1.85}
+.price-row{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.price-old{font-size:17px;color:var(--dim);text-decoration:line-through}
+.price-new{font-size:42px;font-weight:900;color:var(--gold);line-height:1}
+.price-badge{background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.35);color:#f87171;font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px}
+.cta-btn{display:inline-flex;flex-direction:column;align-items:center;gap:4px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1c1917;font-weight:900;font-size:17px;padding:17px 44px;border-radius:100px;text-decoration:none;box-shadow:0 8px 32px rgba(251,191,36,.45);transition:transform .2s,box-shadow .2s}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(251,191,36,.65)}
+.cta-btn small{font-size:12px;font-weight:400;opacity:.8}
+.includes{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.inc{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--dim)}
+.inc::before{content:'✓';color:#86efac;font-weight:900}
+.cta-note{margin-top:18px;font-size:12px;color:var(--dim)}
+.cta-link{color:var(--p2);text-decoration:underline}
+footer{text-align:center;padding:28px 24px;color:var(--dim);font-size:12px;border-top:1px solid rgba(255,255,255,.06)}
+</style>
+</head>
+<body>
+<div id="stars-bg"></div>
+<div id="stars"></div>
+<a href="#cta" class="buy-sticky">🔓 購買完整版 NT$380</a>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="badge">📚 免費預覽版 · 第一章完整內容</div>
+  <div class="book-cover">
+    <div class="book-cover-icon">🎬</div>
+    <div class="book-cover-title">影音AI工具<br>完全指南</div>
+    <div class="book-cover-sub">Video &amp; Audio AI Complete Guide</div>
+  </div>
+  <h1>影音AI工具完全指南</h1>
+  <p class="hero-sub">從零學會 Sora、Midjourney、Suno、ElevenLabs 等 20+ 款熱門AI工具。繁體中文，口語化易讀，完全不需要技術背景。</p>
+  <div class="hero-tags">
+    <span class="tag">🎬 AI影片生成</span><span class="tag">🎨 AI圖片生成</span>
+    <span class="tag">🎵 AI音樂創作</span><span class="tag">🎙️ AI配音克隆</span>
+    <span class="tag">✂️ AI剪輯後製</span><span class="tag">⚡ Prompt技巧</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">完整章節</div></div>
+    <div class="stat"><div class="stat-n">20+</div><div class="stat-l">工具介紹</div></div>
+    <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Prompt範例</div></div>
+    <div class="stat"><div class="stat-n">15K</div><div class="stat-l">字完整內容</div></div>
+  </div>
+  <div class="free-note">🎁 你正在閱讀免費預覽版 — 第一章全文免費</div>
+</div>
+
+<!-- Main content -->
+<div class="container">
+
+  <!-- Chapter 1 完整內容 -->
+  <div class="ch-hd">
+    <span class="ch-num">第一章</span>
+    <h2 class="ch-title">什麼是影音AI？新手入門</h2>
+    <span class="free-lbl">FREE</span>
+  </div>
+
+  <div class="prose">
+    <h3>1.1 生成式AI的崛起</h3>
+    <p>2022年底，ChatGPT的出現讓全世界見識到AI驚人的語言能力。然而，AI的革命才剛開始——生成式AI（Generative AI）的浪潮早已從文字延伸到圖片、音樂、影片、聲音等所有媒體形式，正在徹底改變每一個創意工作者的生存方式。</p>
+    <p>生成式AI能夠根據你的指令（Prompt），<strong>從零創造出全新內容</strong>：</p>
+    <ul>
+      <li>逼真的圖片與插畫</li>
+      <li>完整的影片片段</li>
+      <li>原創音樂和歌曲</li>
+      <li>自然流暢的語音配音</li>
+    </ul>
+    <p>不同於過去只會「分析」和「分類」的AI，生成式AI是真正意義上的<strong>「創作」工具</strong>。</p>
+
+    <h3>1.2 影音AI能幫你做什麼？</h3>
+    <p>製作一支30秒廣告影片，以前需要導演、攝影師、剪輯師、配樂師整個團隊，費用可能高達數十萬元。現在，<strong>一個人、一台電腦、幾個AI工具，就能完成類似品質的作品</strong>。</p>
+    <p>影音AI的主要應用場景：</p>
+    <ul>
+      <li><strong>社群媒體創作</strong>：YouTube Shorts、Instagram Reels、TikTok短影音</li>
+      <li><strong>產品展示</strong>：電商產品Demo、功能說明影片</li>
+      <li><strong>教育課程</strong>：線上課程錄製、教學影片製作</li>
+      <li><strong>品牌行銷</strong>：廣告影片、活動宣傳短片</li>
+      <li><strong>個人創作</strong>：音樂MV、藝術短片、實驗作品</li>
+      <li><strong>播客與有聲書</strong>：AI配音、聲音克隆、多語言版本</li>
+    </ul>
+
+    <h3>1.3 打破四個常見迷思</h3>
+    <div class="myth">
+      <div class="myth-x">❌ 迷思一：「AI會取代所有創作者」</div>
+      <div class="myth-o">✅ 事實：AI是工具，不是替代品。就像Photoshop沒有取代設計師，AI讓創作者效率大增，但仍需要人的創意和判斷力。<strong>懂得用AI的創作者，會取代不懂AI的創作者。</strong></div>
+    </div>
+    <div class="myth">
+      <div class="myth-x">❌ 迷思二：「需要程式背景才能用AI工具」</div>
+      <div class="myth-o">✅ 事實：現代AI工具幾乎都有直覺化介面，只需要會打字就能使用。<strong>本書介紹的所有工具，完全不需要任何程式知識。</strong></div>
+    </div>
+    <div class="myth">
+      <div class="myth-x">❌ 迷思三：「AI生成的內容品質很差、很假」</div>
+      <div class="myth-o">✅ 事實：2024-2025年的AI工具品質已有驚人進步。掌握正確的Prompt技巧後，AI生成的內容<strong>足以用於商業用途</strong>，甚至難以與人類作品區分。</div>
+    </div>
+    <div class="myth">
+      <div class="myth-x">❌ 迷思四：「用AI工具很貴」</div>
+      <div class="myth-o">✅ 事實：本書介紹的許多工具都提供免費版本。第七章整理了<strong>完全零預算的工作流程</strong>，付費方案通常每月$10-30 USD，遠比聘請專業團隊便宜。</div>
+    </div>
+
+    <h3>1.4 你的學習路線圖</h3>
+    <p>建議依以下順序學習，從最直觀、最快看到成果的開始：</p>
+    <div class="roadmap">
+      <div class="rm-step"><div class="rm-n">1</div><div class="rm-t"><strong>圖片生成（Midjourney、DALL-E、Ideogram）</strong><span>最直觀，幾十秒就能看到結果，快速感受AI的創造力</span></div></div>
+      <div class="rm-step"><div class="rm-n">2</div><div class="rm-t"><strong>音樂生成（Suno）</strong><span>體驗AI創造聽覺內容的樂趣，完全不需要任何音樂知識</span></div></div>
+      <div class="rm-step"><div class="rm-n">3</div><div class="rm-t"><strong>影片生成（Runway、Kling）</strong><span>進入最令人興奮的影片創作，文字和圖片都能變成動態影片</span></div></div>
+      <div class="rm-step"><div class="rm-n">4</div><div class="rm-t"><strong>AI配音（ElevenLabs）</strong><span>為你的影片加入專業人聲，完整支援繁體中文</span></div></div>
+      <div class="rm-step"><div class="rm-n">5</div><div class="rm-t"><strong>整合工具（CapCut AI）</strong><span>串接所有AI素材，剪輯成完整作品並自動生成字幕</span></div></div>
+    </div>
+
+    <h3>1.5 選工具的三個原則</h3>
+    <p>面對琳瑯滿目的AI工具，選擇時問自己三個問題：</p>
+    <ul>
+      <li><strong>用途是什麼？</strong> 每個工具各有所長，先確定你最常用的場景</li>
+      <li><strong>使用頻率如何？</strong> 高頻使用的功能才值得付費訂閱</li>
+      <li><strong>現在的預算？</strong> 先從免費版入門，有明確需求再升級</li>
+    </ul>
+    <blockquote><strong>💡 本書建議</strong>：第七章有完整的「零預算免費工作流程」，從零開始可以完全不花錢。確認真的需要某個功能後，再考慮付費升級。</blockquote>
+  </div>
+
+  <div class="sum-box">
+    <div class="sum-title">📝 第一章重點整理</div>
+    <div class="sum-list">
+      <div class="sum-item">生成式AI已能創造圖片、影片、音樂、語音等所有媒體類型</div>
+      <div class="sum-item">AI是提升效率的工具，懂得用AI的創作者更有競爭力</div>
+      <div class="sum-item">完全不需要程式知識，只需要創意和清晰的文字描述</div>
+      <div class="sum-item">建議從圖片生成入門，逐步擴展到影片和音樂</div>
+      <div class="sum-item">很多優質工具有免費版本，零預算也能開始創作</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Locked chapters 2-8 -->
+  <div class="locked-sec">
+    <p class="locked-title">📖 以下章節收錄於完整付費版</p>
+    <div class="locked-grid">
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第二章</span><span class="lc-lock">🔒</span></div>
+        <h4>AI文字生影片工具</h4>
+        <div class="lc-tools"><span class="lc-tool">Sora</span><span class="lc-tool">Runway</span><span class="lc-tool">Kling</span><span class="lc-tool">Pika</span></div>
+        <div class="lc-preview">Sora業界頂尖品質完整評測、Runway Gen-3電影感攝影機控制技巧、Kling中文Prompt完整教學、Pika Pikaffects特效完整列表及使用時機…</div>
+        <div class="lc-overlay"></div>
+      </div>
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第三章</span><span class="lc-lock">🔒</span></div>
+        <h4>AI圖片生成工具</h4>
+        <div class="lc-tools"><span class="lc-tool">Midjourney</span><span class="lc-tool">DALL-E 3</span><span class="lc-tool">Ideogram</span><span class="lc-tool">Flux</span></div>
+        <div class="lc-preview">Midjourney進階參數--style、--sref、--cref完整教學、DALL-E 3中文Prompt技巧、Ideogram生成含文字設計圖、Flux四個免費使用管道…</div>
+        <div class="lc-overlay"></div>
+      </div>
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第四章</span><span class="lc-lock">🔒</span></div>
+        <h4>AI音樂生成工具</h4>
+        <div class="lc-tools"><span class="lc-tool">Suno</span><span class="lc-tool">Udio</span><span class="lc-tool">Stable Audio</span></div>
+        <div class="lc-preview">Suno Custom Mode自訂歌詞完整步驟、Udio複雜編曲技巧、Stable Audio生成精確30秒廣告配樂、商業授權注意事項完整說明…</div>
+        <div class="lc-overlay"></div>
+      </div>
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第五章</span><span class="lc-lock">🔒</span></div>
+        <h4>AI配音與聲音克隆</h4>
+        <div class="lc-tools"><span class="lc-tool">ElevenLabs</span><span class="lc-tool">Play.ht</span></div>
+        <div class="lc-preview">ElevenLabs繁體中文配音完整步驟、聲音克隆只需1分鐘錄音的實作教學、有聲書一鍵生成工作流程、聲音克隆倫理使用守則…</div>
+        <div class="lc-overlay"></div>
+      </div>
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第六章</span><span class="lc-lock">🔒</span></div>
+        <h4>AI影片剪輯與後製</h4>
+        <div class="lc-tools"><span class="lc-tool">CapCut AI</span><span class="lc-tool">Adobe Firefly</span></div>
+        <div class="lc-preview">CapCut AI自動繁體中文字幕操作、AI去背一鍵完成、Adobe Generative Fill革命性修圖技術、商業合法授權使用指南…</div>
+        <div class="lc-overlay"></div>
+      </div>
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第七章</span><span class="lc-lock">🔒</span></div>
+        <h4>免費工具總整理與推薦組合</h4>
+        <div class="lc-tools"><span class="lc-tool">零預算方案</span><span class="lc-tool">$20方案</span><span class="lc-tool">$100方案</span></div>
+        <div class="lc-preview">完全零預算的完整工作流程、YouTuber、行銷人員、電商、企業各自最佳工具組合，以及如何避免浪費訂閱費用的實用建議…</div>
+        <div class="lc-overlay"></div>
+      </div>
+      <div class="locked-card">
+        <div class="lc-badge"><span class="lc-num">第八章</span><span class="lc-lock">🔒</span></div>
+        <h4>實戰應用案例與Prompt技巧</h4>
+        <div class="lc-tools"><span class="lc-tool">SCAQ公式</span><span class="lc-tool">完整案例</span><span class="lc-tool">常見錯誤</span></div>
+        <div class="lc-preview">黃金Prompt公式SCAQ、50+攝影機運動與情緒關鍵詞對照表、零預算AI廣告影片完整製作案例、商業授權避坑指南…</div>
+        <div class="lc-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta" id="cta">
+    <h2>🔓 解鎖完整版，學會所有工具</h2>
+    <p class="cta-desc">完整版包含全部8章、20+款工具詳細教學、50+個實用Prompt範例，<br>以及一套完整的零預算AI影音創作工作流程。</p>
+    <div class="price-row">
+      <span class="price-old">NT$680</span>
+      <span class="price-new">NT$380</span>
+      <span class="price-badge">🔥 限時特惠</span>
+    </div>
+    <a href="https://still-time-corner.vercel.app/digital" class="cta-btn">
+      🛒 立即購買完整版
+      <small>PDF + EPUB · 永久使用 · PayPal / 銀行轉帳</small>
+    </a>
+    <div class="includes">
+      <span class="inc">完整8章 15,000字</span>
+      <span class="inc">PDF 精美排版版</span>
+      <span class="inc">EPUB 電子閱讀器版</span>
+      <span class="inc">50+ Prompt範例庫</span>
+      <span class="inc">永久下載終身更新</span>
+    </div>
+    <p class="cta-note">💳 支援 PayPal（USD）和銀行轉帳（TWD）·
+      <a href="https://still-time-corner.vercel.app/digital" class="cta-link">前往購買頁面 →</a>
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <p>《影音AI工具完全指南》免費預覽版 · 版權所有 © 2025 有的沒的小舖</p>
+  <p style="margin-top:6px"><a href="https://still-time-corner.vercel.app" style="color:var(--p2);text-decoration:none">still-time-corner.vercel.app</a></p>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('stars');
+  const n=window.innerWidth<640?150:280;
+  for(let i=0;i<n;i++){
+    const s=document.createElement('div');
+    const sz=(Math.random()*2+0.4).toFixed(1);
+    const dur=(Math.random()*3+1.5).toFixed(1);
+    const del=(Math.random()*5).toFixed(1);
+    s.style.cssText=[
+      'position:absolute',
+      `left:${(Math.random()*100).toFixed(2)}%`,
+      `top:${(Math.random()*100).toFixed(2)}%`,
+      `width:${sz}px`,`height:${sz}px`,
+      `background:rgba(255,255,255,${(Math.random()*.7+.15).toFixed(2)})`,
+      'border-radius:50%',
+      `animation:twinkle ${dur}s ease-in-out ${del}s infinite alternate`
+    ].join(';');
+    c.appendChild(s);
+  }
+})();
+document.querySelector('.buy-sticky').addEventListener('click',function(e){
+  e.preventDefault();
+  document.getElementById('cta').scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>

@@ -245,7 +245,7 @@ export default function AIBookPromo() {
           border: '1px solid rgba(255,255,255,0.08)',
         }}>
           <span style={{ color: '#9ca3b0', fontSize: '13px' }}>還不確定適不適合你？ </span>
-          <a href="https://still-time-corner.vercel.app/digital" style={{ color: '#a855f7', fontSize: '13px', textDecoration: 'underline' }}>
+          <a href="/ebook/ai-ebook-free.html" target="_blank" rel="noopener noreferrer" style={{ color: '#a855f7', fontSize: '13px', textDecoration: 'underline' }}>
             先讀免費預覽（第一章完整）→
           </a>
         </div>

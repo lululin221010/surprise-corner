@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-TW" xml:lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>影音AI工具完全指南</title>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  《影音AI工具完全指南》EPUB 來源檔                           ║
+  ║                                                              ║
+  ║  轉換為 EPUB 的方法（免費）：                                ║
+  ║  1. 下載 Calibre（calibre-ebook.com，完全免費）              ║
+  ║  2. 打開 Calibre → 點「加入書籍」→ 選此 HTML 檔案           ║
+  ║  3. 點「轉換書籍」→ 輸出格式選 EPUB                         ║
+  ║  4. 完成！可以在 iPad、Kindle（需轉MOBI）、手機閱讀          ║
+  ║                                                              ║
+  ║  轉換為 PDF：瀏覽器開啟 → Ctrl+P → 另存為PDF               ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<style>
+  body { font-family: "Noto Serif TC", "Microsoft JhengHei", serif; font-size: 1em; line-height: 1.9; color: #1a1a2e; max-width: 700px; margin: 0 auto; padding: 1em; }
+  h1 { font-size: 2em; text-align: center; margin: 1em 0 0.3em; color: #4c1d95; }
+  h2 { font-size: 1.6em; color: #5b21b6; margin-top: 2em; padding-bottom: 0.3em; border-bottom: 2px solid #ddd6fe; }
+  h3 { font-size: 1.25em; color: #7c3aed; margin-top: 1.5em; }
+  h4 { font-size: 1.05em; color: #1a1a2e; margin-top: 1em; }
+  p { margin: 0.7em 0; color: #3a3a5a; }
+  ul, ol { padding-left: 1.5em; margin: 0.5em 0; }
+  li { margin: 0.3em 0; color: #3a3a5a; }
+  strong { color: #1a1a2e; }
+  blockquote { border-left: 3px solid #f59e0b; padding: 0.5em 1em; background: #fffbeb; margin: 1em 0; font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.9em; }
+  th { background: #5b21b6; color: white; padding: 0.5em 0.8em; text-align: left; }
+  td { padding: 0.5em 0.8em; border-bottom: 1px solid #e5e7eb; }
+  tr:nth-child(even) td { background: #f9f5ff; }
+  .cover { text-align: center; padding: 3em 1em; background: linear-gradient(160deg, #1a0050, #2d0080, #070017); color: white; border-radius: 8px; margin-bottom: 2em; }
+  .cover h1 { color: white; }
+  .cover p { color: rgba(255,255,255,0.8); }
+  .chapter-start { page-break-before: always; }
+  .note { background: #f0fdf4; border-left: 3px solid #22c55e; padding: 0.6em 1em; margin: 0.8em 0; border-radius: 0 6px 6px 0; }
+  .warning { background: #fef2f2; border-left: 3px solid #ef4444; padding: 0.6em 1em; margin: 0.8em 0; border-radius: 0 6px 6px 0; }
+  .prompt { background: #f3f0fa; border: 1px solid #ddd6fe; border-radius: 6px; padding: 0.8em 1em; margin: 0.6em 0; font-family: monospace; font-size: 0.9em; color: #3a3060; white-space: pre-wrap; }
+  .tool-header { background: #f7f4ff; border: 1px solid #e0d9f5; border-radius: 8px; padding: 1em; margin: 1.5em 0 0.5em; }
+  .summary { background: #f3f0fa; border: 1px solid #ddd6fe; border-radius: 8px; padding: 1em 1.2em; margin: 1.5em 0; }
+  .summary h4 { color: #5b21b6; margin-top: 0; }
+  hr { border: none; border-top: 1px solid #e5e7eb; margin: 2em 0; }
+  .toc { margin: 2em 0; }
+  .toc li { margin: 0.5em 0; font-size: 1em; }
+  .toc a { color: #7c3aed; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <h1>影音AI工具<br/>完全指南</h1>
+  <p style="font-size:1.1em;letter-spacing:2px;margin-top:0.5em">Video &amp; Audio AI Complete Guide</p>
+  <hr style="border-color:rgba(255,255,255,0.3);margin:1.5em auto;width:60%"/>
+  <p>從零學會 Sora、Midjourney、Suno、ElevenLabs<br/>等 20+ 款熱門AI工具</p>
+  <p style="font-size:0.85em;opacity:0.7;margin-top:2em">© 2025 有的沒的小舖 · still-time-corner.vercel.app</p>
+</div>
+
+<!-- 目錄 -->
+<h2>目錄</h2>
+<ul class="toc">
+  <li><a href="#ch1">第一章：什麼是影音AI？新手入門</a></li>
+  <li><a href="#ch2">第二章：AI文字生影片工具（Sora、Runway、Kling、Pika）</a></li>
+  <li><a href="#ch3">第三章：AI圖片生成工具（Midjourney、DALL-E 3、Ideogram、Flux）</a></li>
+  <li><a href="#ch4">第四章：AI音樂生成工具（Suno、Udio、Stable Audio）</a></li>
+  <li><a href="#ch5">第五章：AI配音與聲音克隆（ElevenLabs、Play.ht）</a></li>
+  <li><a href="#ch6">第六章：AI影片剪輯與後製（CapCut AI、Adobe Firefly）</a></li>
+  <li><a href="#ch7">第七章：免費工具總整理與推薦組合</a></li>
+  <li><a href="#ch8">第八章：實戰應用案例與Prompt技巧</a></li>
+</ul>
+
+<hr/>
+
+<!-- ══ 第一章 ══ -->
+<h2 id="ch1" class="chapter-start">第一章：什麼是影音AI？新手入門</h2>
+
+<h3>1.1 生成式AI的崛起</h3>
+<p>2022年底，ChatGPT讓全世界見識到AI驚人的語言能力。然而，AI的革命才剛開始——生成式AI（Generative AI）早已從文字延伸到圖片、音樂、影片、聲音等所有媒體形式。</p>
+<p>生成式AI能根據你的指令（Prompt），<strong>從零創造出</strong>：逼真的圖片、完整的影片片段、原創音樂和歌曲、自然流暢的語音配音。</p>
+
+<h3>1.2 影音AI能幫你做什麼？</h3>
+<p>製作一支30秒廣告影片，以前需要整個團隊，費用可能高達數十萬元。現在，<strong>一個人加幾個AI工具，就能完成類似品質的作品</strong>。</p>
+<ul>
+  <li><strong>社群媒體創作</strong>：YouTube Shorts、IG Reels、TikTok</li>
+  <li><strong>產品展示</strong>：電商Demo影片</li>
+  <li><strong>教育課程</strong>：線上課程、教學影片</li>
+  <li><strong>品牌行銷</strong>：廣告影片、活動宣傳</li>
+  <li><strong>播客與有聲書</strong>：AI配音、聲音克隆</li>
+</ul>
+
+<h3>1.3 打破四個常見迷思</h3>
+<p><strong>迷思一：AI會取代所有創作者。</strong><br/>事實：懂得用AI的創作者，會取代不懂AI的創作者。AI是工具，不是替代品。</p>
+<p><strong>迷思二：需要程式背景才能使用。</strong><br/>事實：本書介紹的所有工具完全不需要程式知識，只需要會打字。</p>
+<p><strong>迷思三：AI生成品質很差。</strong><br/>事實：2024-2025年的AI工具品質已可用於商業用途，掌握Prompt技巧是關鍵。</p>
+<p><strong>迷思四：用AI工具很貴。</strong><br/>事實：許多工具有免費版，付費方案通常每月$10-30 USD。第七章有完整零預算方案。</p>
+
+<h3>1.4 你的學習路線圖</h3>
+<ol>
+  <li>圖片生成（Midjourney、DALL-E、Ideogram）— 最直觀</li>
+  <li>音樂生成（Suno）— 不需音樂知識</li>
+  <li>影片生成（Runway、Kling）— 文字變動態影片</li>
+  <li>AI配音（ElevenLabs）— 加入專業人聲</li>
+  <li>整合工具（CapCut AI）— 串接所有素材</li>
+</ol>
+
+<h3>1.5 選工具的三個原則</h3>
+<ol>
+  <li><strong>用途是什麼？</strong> 每個工具各有所長</li>
+  <li><strong>使用頻率如何？</strong> 高頻使用才值得付費</li>
+  <li><strong>現在的預算？</strong> 先從免費版入門</li>
+</ol>
+<div class="note">💡 <strong>提醒</strong>：第七章有完整的零預算工作流程，從零開始可以完全不花錢。</div>
+
+<div class="summary"><h4>📝 第一章重點整理</h4>
+<ul>
+  <li>生成式AI已能創造所有媒體類型</li>
+  <li>AI是提升效率的工具，懂得用AI的人更有競爭力</li>
+  <li>完全不需要程式知識</li>
+  <li>建議從圖片生成入門</li>
+  <li>很多優質工具有免費版</li>
+</ul></div>
+
+<!-- ══ 第二章 ══ -->
+<h2 id="ch2" class="chapter-start">第二章：AI文字生影片工具</h2>
+
+<div class="tool-header">
+<h3>Sora（OpenAI）</h3>
+<p><strong>簡介：</strong>業界頂尖文字生影片工具，物理現實感最佳，可生成最長20秒1080p影片。</p>
+<p><strong>適合誰：</strong>廣告行銷人員、YouTube創作者、電影製作人。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>配額</th></tr>
+<tr><td>ChatGPT Plus（附帶）</td><td>$20</td><td>50支480p/月</td></tr>
+<tr><td>ChatGPT Pro（附帶）</td><td>$200</td><td>500支1080p/月</td></tr>
+</table>
+<h4>操作步驟</h4>
+<ol><li>前往 sora.com，用ChatGPT帳號登入</li><li>輸入影片描述</li><li>選擇時長和比例</li><li>生成並下載</li></ol>
+<h4>實用Prompt範例</h4>
+<div class="prompt">一隻橘色的貓坐在雨中的咖啡館窗邊，望向街道，電影感光影，慢動作</div>
+<div class="prompt">繁忙的台北西門町夜景，霓虹燈在雨中反光，行人撐著各色雨傘，鳥瞰視角緩慢旋轉，電影感</div>
+<p><strong>✅ 優點：</strong>品質頂尖、物理感最逼真、操作直覺<br/>
+<strong>❌ 缺點：</strong>需付費訂閱、中文Prompt稍弱</p>
+</div>
+
+<div class="tool-header">
+<h3>Runway Gen-3 Alpha</h3>
+<p><strong>簡介：</strong>電影感最強的AI影片平台，精細攝影機控制，被好萊塢製作人廣泛使用。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>積分</th></tr>
+<tr><td>免費版</td><td>$0</td><td>125積分（~10支）</td></tr>
+<tr><td>Standard</td><td>$15</td><td>625積分</td></tr>
+<tr><td>Pro</td><td>$35</td><td>2,250積分</td></tr>
+</table>
+<h4>實用Prompt範例</h4>
+<div class="prompt">慢動作特寫，一朵白玫瑰在晨露中，水滴在花瓣上滾落，柔和散景，夢幻氛圍</div>
+<p><strong>✅ 優點：</strong>電影感頂尖、攝影機控制豐富、有免費版<br/>
+<strong>❌ 缺點：</strong>免費版配額很少、學習曲線高</p>
+</div>
+
+<div class="tool-header">
+<h3>Kling AI（可靈）— 快手科技</h3>
+<p><strong>簡介：</strong>中文Prompt支援最好，免費版每日有配額，「首尾圖控制」功能獨特。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>積分</th></tr>
+<tr><td>免費版</td><td>$0</td><td>每日贈送約3-5支</td></tr>
+<tr><td>標準版</td><td>~$19.9</td><td>3,000積分</td></tr>
+</table>
+<h4>實用Prompt範例（中文）</h4>
+<div class="prompt">清晨茶園，晨霧繚繞，採茶少女輕盈行走，攝影機緩慢跟隨，電影感，翠綠色調</div>
+<p><strong>✅ 優點：</strong>中文最好、免費版慷慨、首尾圖控制獨特<br/>
+<strong>❌ 缺點：</strong>部分功能需APP、國際知名度較低</p>
+</div>
+
+<div class="tool-header">
+<h3>Pika</h3>
+<p><strong>簡介：</strong>操作最簡單，「Pikaffects」特效豐富，社群創作者最愛，學習曲線幾乎為零。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>積分</th></tr>
+<tr><td>免費版</td><td>$0</td><td>150積分/月</td></tr>
+<tr><td>Basic</td><td>$8</td><td>700積分</td></tr>
+</table>
+<p><strong>✅ 優點：</strong>操作最簡單、特效豐富、生成速度快<br/>
+<strong>❌ 缺點：</strong>最長只支援3秒、品質略低</p>
+</div>
+
+<div class="summary"><h4>📝 第二章重點整理</h4>
+<ul>
+  <li>Sora：品質頂尖，需ChatGPT Plus（$20/月）</li>
+  <li>Runway：電影感最強，有免費版（配額少）</li>
+  <li>Kling：中文最友好，免費版慷慨，新手首選</li>
+  <li>Pika：最易用，特效好玩，社群創作者首選</li>
+  <li>建議先用Kling或Pika免費版練習</li>
+</ul></div>
+
+<!-- ══ 第三章 ══ -->
+<h2 id="ch3" class="chapter-start">第三章：AI圖片生成工具</h2>
+
+<div class="tool-header">
+<h3>Midjourney</h3>
+<p><strong>簡介：</strong>全球最受歡迎的AI圖片工具，藝術感業界最強，無免費版但品質值得付費。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>配額</th></tr>
+<tr><td>Basic</td><td>$10</td><td>200張fast</td></tr>
+<tr><td>Standard</td><td>$30</td><td>無限relax + 15h fast</td></tr>
+</table>
+<h4>進階技巧</h4>
+<ul>
+  <li><code>--ar 16:9</code> — 設定長寬比</li>
+  <li><code>--style raw</code> — 減少AI藝術加工</li>
+  <li><code>--no glasses</code> — 排除不要的元素</li>
+</ul>
+<h4>實用Prompt範例</h4>
+<div class="prompt">beautiful taiwanese night market scene, golden hour, bokeh background, Canon 5D, f/1.8, documentary photography style</div>
+<div class="prompt">cozy library cat reading books, warm lamp light, Studio Ghibli style, hand-drawn illustration</div>
+<p><strong>✅ 優點：</strong>藝術感業界最頂、社群資源豐富<br/>
+<strong>❌ 缺點：</strong>完全無免費版、中文Prompt效果一般</p>
+</div>
+
+<div class="tool-header">
+<h3>DALL-E 3（OpenAI）</h3>
+<p><strong>簡介：</strong>整合於ChatGPT，對話式修改直覺，中文Prompt理解最好，文字渲染最精準。</p>
+<table>
+<tr><th>方案</th><th>費用</th></tr>
+<tr><td>ChatGPT免費版</td><td>$0（每日有限）</td></tr>
+<tr><td>ChatGPT Plus</td><td>$20/月</td></tr>
+</table>
+<h4>實用Prompt範例（中文）</h4>
+<div class="prompt">繁體中文書籍封面，書名《台北的秋天》，現代簡約風，橘色+米白，城市天際線剪影</div>
+<p><strong>✅ 優點：</strong>中文最好、文字渲染精準、有免費版<br/>
+<strong>❌ 缺點：</strong>藝術風格不如Midjourney</p>
+</div>
+
+<div class="tool-header">
+<h3>Ideogram</h3>
+<p><strong>簡介：</strong>文字渲染業界最強，適合Logo、海報設計，免費版每天10張。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>配額</th></tr>
+<tr><td>免費版</td><td>$0</td><td>每天10張慢速</td></tr>
+<tr><td>Basic</td><td>$8</td><td>400張fast + 無限慢速</td></tr>
+</table>
+<h4>實用Prompt範例</h4>
+<div class="prompt">minimalist coffee brand logo 'Morning Brew', simple cup icon, forest green and gold, vector style</div>
+<p><strong>✅ 優點：</strong>文字渲染最佳、免費版夠用<br/>
+<strong>❌ 缺點：</strong>人物生成不穩定</p>
+</div>
+
+<div class="tool-header">
+<h3>Flux（Black Forest Labs）</h3>
+<p><strong>簡介：</strong>細節和真實感頂尖，人物生成最穩定，多個免費使用管道。</p>
+<p><strong>免費使用管道：</strong>Perchance.org（完全免費）、fal.ai（免費積分）、Replicate（按量計費）</p>
+<h4>實用Prompt範例</h4>
+<div class="prompt">professional asian woman headshot, business attire, natural smile, studio lighting, white background, ultra-sharp</div>
+<p><strong>✅ 優點：</strong>細節頂尖、人物生成最穩、多免費管道<br/>
+<strong>❌ 缺點：</strong>無官方統一平台</p>
+</div>
+
+<div class="summary"><h4>📝 第三章重點整理</h4>
+<ul>
+  <li>Midjourney：藝術感最強，必須付費（$10起）</li>
+  <li>DALL-E 3：中文最友好，與ChatGPT整合</li>
+  <li>Ideogram：文字渲染最佳，免費版每天10張</li>
+  <li>Flux：細節頂尖，多管道免費使用</li>
+  <li>建議組合：DALL-E 3（日常）+ Ideogram（設計）+ Flux（人物）</li>
+</ul></div>
+
+<!-- ══ 第四章 ══ -->
+<h2 id="ch4" class="chapter-start">第四章：AI音樂生成工具</h2>
+
+<div class="tool-header">
+<h3>Suno</h3>
+<p><strong>簡介：</strong>全球最受歡迎AI音樂平台，根據文字描述生成含人聲的完整歌曲，免費版每日約10首。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>配額</th><th>商業授權</th></tr>
+<tr><td>免費版</td><td>$0</td><td>約10首/天</td><td>❌</td></tr>
+<tr><td>Pro</td><td>$10</td><td>約500首</td><td>✅</td></tr>
+</table>
+<h4>Custom Mode操作</h4>
+<ol><li>開啟Custom Mode</li><li>在Lyrics欄位輸入歌詞</li><li>在Style描述音樂風格</li><li>填入歌名並生成</li></ol>
+<h4>實用Prompt範例</h4>
+<div class="prompt">upbeat Taiwanese pop song about chasing dreams in the city, female vocalist, catchy hook, modern production</div>
+<div class="prompt">relaxing lo-fi hip hop, cozy study music, gentle piano, soft rain sounds, peaceful and warm</div>
+</div>
+
+<div class="tool-header">
+<h3>Udio</h3>
+<p><strong>簡介：</strong>音樂細節最豐富，免費版每月150首。由Google DeepMind前研究員創辦。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>配額</th></tr>
+<tr><td>免費版</td><td>$0</td><td>150首/月</td></tr>
+<tr><td>Standard</td><td>$12</td><td>1,200首</td></tr>
+</table>
+</div>
+
+<div class="tool-header">
+<h3>Stable Audio（Stability AI）</h3>
+<p><strong>簡介：</strong>精確控制時長（最長3分鐘），44.1kHz高品質，純器樂表現優秀。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>配額</th></tr>
+<tr><td>免費版</td><td>$0</td><td>20次/月</td></tr>
+<tr><td>Pro</td><td>$11.99</td><td>500次/月</td></tr>
+</table>
+<div class="prompt">uplifting corporate background music, exactly 30 seconds, orchestral, inspiring, momentum building</div>
+</div>
+
+<div class="summary"><h4>📝 第四章重點整理</h4>
+<ul><li>Suno：最易用，免費版每日10首</li><li>Udio：音樂細節豐富，免費版150首/月超值</li><li>Stable Audio：時長控制最準確，適合廣告配樂</li></ul></div>
+
+<!-- ══ 第五章 ══ -->
+<h2 id="ch5" class="chapter-start">第五章：AI配音與聲音克隆</h2>
+
+<div class="tool-header">
+<h3>ElevenLabs</h3>
+<p><strong>簡介：</strong>業界頂尖AI語音生成和聲音克隆平台，繁體中文支援優秀，29種語言，500+聲音庫。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>字元/月</th><th>聲音克隆</th></tr>
+<tr><td>免費版</td><td>$0</td><td>10,000（~10分鐘）</td><td>❌</td></tr>
+<tr><td>Starter</td><td>$5</td><td>30,000</td><td>❌</td></tr>
+<tr><td>Creator</td><td>$22</td><td>100,000</td><td>✅</td></tr>
+</table>
+<h4>聲音克隆步驟</h4>
+<ol><li>準備1-2分鐘清晰錄音（無背景雜音）</li><li>進入Voice Lab → Add Voice</li><li>上傳錄音樣本，命名儲存</li><li>即可使用克隆聲音生成語音</li></ol>
+<div class="warning">⚠️ <strong>重要</strong>：聲音克隆必須獲得本人同意，嚴禁用於詐騙或冒充他人。</div>
+</div>
+
+<div class="tool-header">
+<h3>Play.ht</h3>
+<p><strong>簡介：</strong>多人對話語音生成優秀，Ultra Realistic模式接近真人，適合播客創作者和企業API整合。</p>
+<table>
+<tr><th>方案</th><th>月費</th><th>說明</th></tr>
+<tr><td>免費試用</td><td>$0</td><td>12,500字元（前30天）</td></tr>
+<tr><td>Unlimited</td><td>$99</td><td>無限生成</td></tr>
+</table>
+</div>
+
+<div class="summary"><h4>📝 第五章重點整理</h4>
+<ul><li>ElevenLabs：語音品質頂尖，中文好，一般用戶首選</li><li>Play.ht：對話語音強，API靈活，適合技術/企業</li><li>⚠️ 聲音克隆必須在合法授權情況下使用</li></ul></div>
+
+<!-- ══ 第六章 ══ -->
+<h2 id="ch6" class="chapter-start">第六章：AI影片剪輯與後製</h2>
+
+<div class="tool-header">
+<h3>CapCut AI（剪映）</h3>
+<p><strong>簡介：</strong>字節跳動旗下免費影片剪輯工具，AI自動字幕準確率高達95%以上，繁體中文支援優秀。</p>
+<p><strong>方案：</strong>基礎版完全免費（含大部分AI功能）；Pro版 ~$9.99/月。</p>
+<h4>主要AI功能操作</h4>
+<p><strong>自動字幕：</strong>上傳影片 → 字幕 → 自動字幕 → 繁體中文 → 生成</p>
+<p><strong>AI去背：</strong>選片段 → 影片效果 → AI去背 → 一鍵完成</p>
+<p><strong>文字生影片：</strong>AI創作 → 輸入主題/腳本 → 自動生成</p>
+</div>
+
+<div class="tool-header">
+<h3>Adobe Firefly</h3>
+<p><strong>簡介：</strong>商業安全的AI創作引擎，所有素材均來自授權，Generative Fill是革命性功能。</p>
+<p><strong>方案：</strong>免費試用25積分；Creative Cloud $54.99/月（含1,000積分）。</p>
+<h4>Generative Fill操作</h4>
+<ol>
+<li>在Photoshop中選取要修改的區域</li>
+<li>點擊Generative Fill</li>
+<li>輸入你想在該區域生成的內容描述</li>
+<li>Generate，從3個選項選擇</li>
+</ol>
+</div>
+
+<div class="summary"><h4>📝 第六章重點整理</h4>
+<ul><li>CapCut AI：免費、易用、繁體中文字幕出色</li><li>Adobe Firefly：商業授權安全，Generative Fill革命性</li></ul></div>
+
+<!-- ══ 第七章 ══ -->
+<h2 id="ch7" class="chapter-start">第七章：免費工具總整理與推薦組合</h2>
+
+<h3>7.1 完全免費工作流程</h3>
+<table>
+<tr><th>需求</th><th>推薦工具</th><th>免費配額</th></tr>
+<tr><td>圖片生成</td><td>DALL-E 3 + Ideogram</td><td>每日有限張</td></tr>
+<tr><td>影片生成</td><td>Kling + Pika免費版</td><td>每月150積分</td></tr>
+<tr><td>音樂生成</td><td>Suno免費版</td><td>每日10首</td></tr>
+<tr><td>AI配音</td><td>ElevenLabs免費版</td><td>每月10,000字元</td></tr>
+<tr><td>剪輯字幕</td><td>CapCut AI</td><td>無限</td></tr>
+<tr><td>高品質圖片</td><td>Flux via Perchance.org</td><td>完全免費</td></tr>
+</table>
+
+<h3>7.2 小預算方案（$30/月）</h3>
+<ul>
+<li>ChatGPT Plus $20 → DALL-E 3 + Sora + GPT-4o無限使用</li>
+<li>Suno Pro $10 → 商業授權音樂500首/月</li>
+</ul>
+
+<h3>7.3 中高階方案（$97/月）</h3>
+<table>
+<tr><th>工具</th><th>月費</th><th>功能</th></tr>
+<tr><td>Midjourney Standard</td><td>$30</td><td>無限圖片</td></tr>
+<tr><td>Runway Pro</td><td>$35</td><td>電影感影片</td></tr>
+<tr><td>ElevenLabs Creator</td><td>$22</td><td>聲音克隆</td></tr>
+<tr><td>Suno Pro</td><td>$10</td><td>商業音樂</td></tr>
+</table>
+
+<h3>7.4 依情境推薦組合</h3>
+<p><strong>YouTube創作者（$30/月）：</strong>Midjourney Basic + Suno Pro + CapCut AI（免費）</p>
+<p><strong>社群行銷（完全免費）：</strong>Ideogram + Pika/Kling免費版 + ElevenLabs免費版</p>
+<p><strong>企業培訓（$50/月）：</strong>ElevenLabs Creator + Runway Standard + CapCut AI</p>
+
+<div class="summary"><h4>📝 第七章重點整理</h4>
+<ul><li>零預算完全可以建立完整創作流程</li><li>ChatGPT Plus（$20）是最超值的單一訂閱</li><li>先確認使用頻率再決定是否付費</li><li>定期檢視訂閱，避免閒置浪費</li></ul></div>
+
+<!-- ══ 第八章 ══ -->
+<h2 id="ch8" class="chapter-start">第八章：實戰應用案例與Prompt技巧</h2>
+
+<h3>8.1 Prompt黃金公式：SCAQ</h3>
+<p><strong>S</strong>ubject（主體）+ <strong>C</strong>ontext（情境）+ <strong>A</strong>esthetic（風格）+ <strong>Q</strong>uality（品質）</p>
+<div class="prompt">範例：「一位身穿和服的女性（S），
+站在京都竹林小徑，夕陽餘暉灑落（C），
+電影感、Kodak底片色調（A），
+超高清細節（Q）」</div>
+
+<h3>8.2 影片Prompt關鍵詞表</h3>
+<table>
+<tr><th>效果</th><th>關鍵詞</th></tr>
+<tr><td>慢慢推近</td><td>slowly zoom in</td></tr>
+<tr><td>緩慢後退</td><td>pulling back, zoom out</td></tr>
+<tr><td>跟拍主角</td><td>camera follows subject</td></tr>
+<tr><td>鳥瞰俯拍</td><td>aerial view, bird's eye view</td></tr>
+<tr><td>環繞旋轉</td><td>slow orbit around subject</td></tr>
+<tr><td>手持感</td><td>handheld camera, slight shake</td></tr>
+<tr><td>壯闊史詩</td><td>epic, cinematic, grand scale</td></tr>
+<tr><td>溫暖親切</td><td>warm, cozy, golden hour</td></tr>
+</table>
+
+<h3>8.3 圖片Prompt風格對照</h3>
+<table>
+<tr><th>想要的效果</th><th>使用的詞彙</th></tr>
+<tr><td>電影感</td><td>cinematic, film still, movie scene</td></tr>
+<tr><td>平面設計</td><td>flat design, vector art, minimalist</td></tr>
+<tr><td>水墨國畫</td><td>Chinese ink painting, traditional brush art</td></tr>
+<tr><td>商業攝影</td><td>commercial photography, product shot</td></tr>
+</table>
+
+<h3>8.4 音樂Prompt場景建議</h3>
+<table>
+<tr><th>使用場景</th><th>推薦關鍵詞</th></tr>
+<tr><td>YouTube廣告</td><td>corporate, inspiring, 60 seconds</td></tr>
+<tr><td>放鬆/專注</td><td>lo-fi, ambient, peaceful, study music</td></tr>
+<tr><td>運動/激勵</td><td>high energy, EDM, motivational</td></tr>
+<tr><td>睡眠/冥想</td><td>ambient, gentle, 432hz</td></tr>
+</table>
+
+<h3>8.5 實戰案例：零預算AI咖啡廣告（15秒）</h3>
+<p><strong>Step 1</strong> — 用DALL-E 3生成咖啡廳視覺素材</p>
+<div class="prompt">精緻咖啡廳內裝，清晨陽光從木框玻璃窗灑入，白色陶瓷杯中熱咖啡冒著熱氣，大理石桌面，溫暖金色調，商業攝影質感</div>
+<p><strong>Step 2</strong> — 用Suno生成背景音樂</p>
+<div class="prompt">sophisticated jazz cafe background, 15 seconds, gentle piano and upright bass, morning mood</div>
+<p><strong>Step 3</strong> — 用ElevenLabs生成旁白（選溫暖成熟聲音）</p>
+<div class="prompt">每一個清晨，都值得一杯好咖啡。Brew Coffee，喚醒你最美好的一天。</div>
+<p><strong>Step 4</strong> — 用Kling生成影片</p>
+<div class="prompt">咖啡緩緩從手沖壺倒入白色陶瓷杯，熱氣升騰，慢動作特寫，咖啡廳窗邊，晨光灑落，商業廣告質感</div>
+<p><strong>Step 5</strong> — 用CapCut AI整合剪輯：匯入影片、音樂、旁白，加品牌文字，輸出9:16。<br/><strong>總費用：$0</strong></p>
+
+<h3>8.6 常見錯誤與解決方法</h3>
+<p><strong>錯誤：Prompt太簡短</strong><br/>❌「一個人站在山頂」→ ✅「登山者站在雪山頂峰，俯瞰雲海，清晨陽光穿透雲層，史詩感，廣角鏡頭，冷色調」</p>
+<p><strong>錯誤：描述自相矛盾</strong><br/>❌「極簡的豪華宴會廳」→ ✅「現代高端餐廳，低調奢華，深色木材和金屬，柔和燈光」</p>
+<p><strong>錯誤：期待超越工具限制</strong><br/>AI影片目前最長20-30秒高品質，分段生成再剪輯是正確做法。</p>
+
+<h3>8.7 AI工具使用倫理守則</h3>
+<div class="warning">
+<ul>
+<li><strong>聲音克隆：</strong>必須取得本人同意，嚴禁詐騙或冒充</li>
+<li><strong>深偽影片：</strong>不可製作冒充真實人物的不實內容</li>
+<li><strong>商業授權：</strong>使用前確認每個工具的授權政策</li>
+<li><strong>透明度：</strong>向受眾說明作品包含AI生成元素</li>
+</ul>
+</div>
+
+<div class="summary"><h4>📝 第八章重點整理</h4>
+<ul>
+<li>使用SCAQ公式結構化所有Prompt</li>
+<li>攝影機運動和情緒關鍵詞大幅提升影片品質</li>
+<li>從小專案開始，逐步整合多工具流程</li>
+<li>商業使用務必確認授權條款</li>
+<li>AI工具持續進化，保持學習習慣</li>
+</ul></div>
+
+<hr/>
+<p style="text-align:center;color:#6b7280;font-size:0.85em">
+《影音AI工具完全指南》完整版 · © 2025 有的沒的小舖<br/>
+still-time-corner.vercel.app<br/><br/>
+<strong>轉換為EPUB：</strong>使用 Calibre（免費）開啟此檔 → 轉換書籍 → 輸出EPUB
+</p>
+
+</body>
+</html>
