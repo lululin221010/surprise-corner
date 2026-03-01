@@ -2,6 +2,7 @@
 // 📄 路徑：src/app/ai-news/page.tsx
 
 import { useEffect, useState } from 'react';
+import AIBookPromo from '@/components/AIBookPromo';
 
 interface NewsItem {
   title: string;
@@ -275,6 +276,11 @@ export default function NewsPage() {
               padding: '0.6rem 1.5rem', borderRadius: '30px', textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem' }}>
             前往小舖 →
           </a>
+        </div>
+
+        {/* ── 電子書促銷區塊 ── */}
+        <div style={{ marginTop: '3rem' }}>
+          <AIBookPromo />
         </div>
 
       </div>
