@@ -1,7 +1,7 @@
 'use client';
 // 📄 路徑：src/app/ai-news/page.tsx
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AIBookPromo from '@/components/AIBookPromo';
 
 interface NewsItem {
@@ -72,6 +72,39 @@ const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] =
     icon: '🎮', gradient: 'linear-gradient(135deg, #7c3aed, #be185d)' },
 ];
 
+// Unsplash 隨機圖關鍵字（依分類 / 標題關鍵字）
+function getUnsplashKeyword(item: NewsItem): string {
+  if (item.category === '財經') return 'finance,business,stock-market';
+  if (item.category === '健康') return 'health,wellness,medicine';
+  if (item.category === '生活') return 'lifestyle,city,daily-life';
+  if (item.category === '運動') return 'sports,athlete';
+
+  const lower = (item.title || '').toLowerCase();
+  if (['ai', '人工智慧', 'chatgpt', 'gpt', 'gemini', 'claude', 'llm', 'openai', 'anthropic'].some(k => lower.includes(k)))
+    return 'artificial-intelligence,technology';
+  if (['robot', 'robotics', '機器人'].some(k => lower.includes(k)))
+    return 'robot,futuristic';
+  if (['chip', 'semiconductor', '晶片', '半導體', 'nvidia', 'intel', 'amd', 'tsmc', '台積電'].some(k => lower.includes(k)))
+    return 'semiconductor,circuit,technology';
+  if (['iphone', 'apple', 'mac', 'ipad'].some(k => lower.includes(k)))
+    return 'apple,smartphone,technology';
+  if (['crypto', 'bitcoin', 'btc', '加密', '幣'].some(k => lower.includes(k)))
+    return 'cryptocurrency,blockchain';
+  if (['棒球', 'wbc', 'mlb', '中職', 'baseball'].some(k => lower.includes(k)))
+    return 'baseball';
+  if (['籃球', 'nba', 'basketball'].some(k => lower.includes(k)))
+    return 'basketball';
+  if (['足球', 'soccer', 'football'].some(k => lower.includes(k)))
+    return 'soccer,football';
+  if (['明星', '藝人', '演員', '韓劇', '電影', '音樂', '歌手'].some(k => lower.includes(k)))
+    return 'entertainment,music,concert';
+  if (['security', 'hack', '資安', '駭客'].some(k => lower.includes(k)))
+    return 'cybersecurity,technology';
+  if (['game', 'gaming', '遊戲'].some(k => lower.includes(k)))
+    return 'gaming,esports';
+  return 'technology,digital,innovation';
+}
+
 function getThemeForItem(item: NewsItem): { icon: string; gradient: string } {
   if (item.category === '財經') return { icon: '📈', gradient: 'linear-gradient(135deg, #15803d, #14532d)' };
   if (item.category === '生活') return { icon: '🏡', gradient: 'linear-gradient(135deg, #0369a1, #0c4a6e)' };
@@ -98,14 +131,49 @@ function timeAgo(dateStr: string) {
 
 function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) {
   const [imgError, setImgError] = useState(false);
+  const [unsplashError, setUnsplashError] = useState(false);
   const { icon, gradient: bg } = getThemeForItem(item);
+
+  const baseWrap: React.CSSProperties = {
+    position: 'relative', width: '100%', height,
+    borderRadius: '10px 10px 0 0', overflow: 'hidden', flexShrink: 0,
+  };
+  const imgFill: React.CSSProperties = {
+    width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+  };
+  const badge: React.CSSProperties = {
+    position: 'absolute', bottom: 7, right: 8,
+    background: 'rgba(0,0,0,0.52)', color: '#d1d5db',
+    fontSize: '0.6rem', padding: '2px 8px', borderRadius: '10px',
+    backdropFilter: 'blur(4px)', letterSpacing: '0.03em', whiteSpace: 'nowrap',
+  };
+
+  // 1️⃣ 有真實新聞圖片
   if (item.image && !imgError) {
-    return <img src={item.image} alt={item.title} onError={() => setImgError(true)}
-      style={{ width: '100%', height, objectFit: 'cover', borderRadius: '10px 10px 0 0', display: 'block' }} />;
+    return (
+      <div style={baseWrap}>
+        <img src={item.image} alt={item.title} onError={() => setImgError(true)} style={imgFill} />
+      </div>
+    );
   }
+
+  // 2️⃣ 無圖 → Unsplash 隨機圖 + 「非新聞圖片」標籤
+  if (!unsplashError) {
+    const keyword = getUnsplashKeyword(item);
+    const unsplashUrl = `https://source.unsplash.com/800x400/?${encodeURIComponent(keyword)}`;
+    return (
+      <div style={baseWrap}>
+        <img src={unsplashUrl} alt="" onError={() => setUnsplashError(true)} style={imgFill} />
+        <span style={badge}>非新聞圖片</span>
+      </div>
+    );
+  }
+
+  // 3️⃣ Unsplash 也失敗 → emoji 漸層
   return (
     <div style={{ width: '100%', height, background: bg, borderRadius: '10px 10px 0 0',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: height > 150 ? '3.5rem' : '2rem' }}>
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontSize: height > 150 ? '3.5rem' : '2rem', flexShrink: 0 }}>
       {icon}
     </div>
   );
