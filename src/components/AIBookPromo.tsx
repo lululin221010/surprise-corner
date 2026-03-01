@@ -185,7 +185,7 @@ export default function AIBookPromo() {
 
         {/* 購買按鈕 */}
         <a
-          href="/digital"
+          href="https://still-time-corner.vercel.app/digital"
           style={{
             display: 'inline-flex', flexDirection: 'column' as const, alignItems: 'center', gap: '4px',
             background: 'linear-gradient(135deg, #fbbf24, #f59e0b, #d97706)',
@@ -245,7 +245,7 @@ export default function AIBookPromo() {
           border: '1px solid rgba(255,255,255,0.08)',
         }}>
           <span style={{ color: '#9ca3b0', fontSize: '13px' }}>還不確定適不適合你？ </span>
-          <a href="/digital" style={{ color: '#a855f7', fontSize: '13px', textDecoration: 'underline' }}>
+          <a href="https://still-time-corner.vercel.app/digital" style={{ color: '#a855f7', fontSize: '13px', textDecoration: 'underline' }}>
             先讀免費預覽（第一章完整）→
           </a>
         </div>
@@ -272,6 +272,6 @@ export default function AIBookPromo() {
   如果網站有 Google Fonts，請確認已載入：
   'Noto Sans TC' (weights: 400, 700, 900)
 
-  href="/digital" 指向數位商品購買頁面，
+  href="https://still-time-corner.vercel.app/digital" 指向數位商品購買頁面，
   如果網址不同請修改。
 */
