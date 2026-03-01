@@ -31,6 +31,7 @@ export default function Navbar() {
       <Link
         href="/"
         title="🏠 回首頁"
+        className="site-logo"
         style={{
           textDecoration: 'none',
           marginRight: '1rem',
