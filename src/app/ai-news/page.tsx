@@ -72,40 +72,6 @@ const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] =
     icon: '🎮', gradient: 'linear-gradient(135deg, #7c3aed, #be185d)' },
 ];
 
-// Unsplash 隨機圖關鍵字（單一關鍵字，不用逗號，避免 URL 編碼問題）
-function getUnsplashKeyword(item: NewsItem): string {
-  // 優先以分類判斷
-  if (item.category === '財經') return 'finance';
-  if (item.category === '健康') return 'healthcare';
-  if (item.category === '生活') return 'lifestyle';
-  if (item.category === '運動') return 'sports';
-  if (item.category === '娛樂') return 'entertainment';
-
-  // AI 分類：依標題細分
-  const lower = (item.title || '').toLowerCase();
-  if (['robot', 'robotics', '機器人'].some(k => lower.includes(k)))
-    return 'robot';
-  if (['chip', 'semiconductor', '晶片', '半導體', 'nvidia', 'intel', 'amd', 'tsmc', '台積電'].some(k => lower.includes(k)))
-    return 'semiconductor';
-  if (['iphone', 'apple', 'mac', 'ipad'].some(k => lower.includes(k)))
-    return 'apple';
-  if (['crypto', 'bitcoin', 'btc', '加密', '幣'].some(k => lower.includes(k)))
-    return 'cryptocurrency';
-  if (['棒球', 'wbc', 'mlb', '中職', 'baseball'].some(k => lower.includes(k)))
-    return 'baseball';
-  if (['籃球', 'nba', 'basketball'].some(k => lower.includes(k)))
-    return 'basketball';
-  if (['足球', 'soccer', 'football'].some(k => lower.includes(k)))
-    return 'soccer';
-  if (['明星', '藝人', '演員', '韓劇', '電影', '音樂', '歌手'].some(k => lower.includes(k)))
-    return 'concert';
-  if (['security', 'hack', '資安', '駭客'].some(k => lower.includes(k)))
-    return 'cybersecurity';
-  if (['game', 'gaming', '遊戲'].some(k => lower.includes(k)))
-    return 'gaming';
-  // AI 類預設
-  return 'technology';
-}
 
 function getThemeForItem(item: NewsItem): { icon: string; gradient: string } {
   if (item.category === '財經') return { icon: '📈', gradient: 'linear-gradient(135deg, #15803d, #14532d)' };
@@ -159,13 +125,16 @@ function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) 
     );
   }
 
-  // 2️⃣ 無圖 → Unsplash 隨機圖 + 「非新聞圖片」標籤
+  // 2️⃣ 無圖 → picsum.photos 隨機圖（穩定）+ 「非新聞圖片」標籤
+  // 用標題前 30 字作 seed，同篇新聞永遠顯示同一張圖；比 source.unsplash.com 穩定
   if (!unsplashError) {
-    const keyword = getUnsplashKeyword(item);
-    const unsplashUrl = `https://source.unsplash.com/800x400/?${keyword}`;
+    const seed = (item.title || 'news')
+      .replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '-')
+      .slice(0, 30);
+    const fallbackUrl = `https://picsum.photos/seed/${encodeURIComponent(seed)}/800/400`;
     return (
       <div style={baseWrap}>
-        <img src={unsplashUrl} alt="" onError={() => setUnsplashError(true)} style={imgFill} />
+        <img src={fallbackUrl} alt="" onError={() => setUnsplashError(true)} style={imgFill} />
         <span style={badge}>非新聞圖片</span>
       </div>
     );
