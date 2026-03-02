@@ -72,37 +72,39 @@ const KEYWORD_THEMES: { keywords: string[]; icon: string; gradient: string }[] =
     icon: '🎮', gradient: 'linear-gradient(135deg, #7c3aed, #be185d)' },
 ];
 
-// Unsplash 隨機圖關鍵字（依分類 / 標題關鍵字）
+// Unsplash 隨機圖關鍵字（單一關鍵字，不用逗號，避免 URL 編碼問題）
 function getUnsplashKeyword(item: NewsItem): string {
-  if (item.category === '財經') return 'finance,business,stock-market';
-  if (item.category === '健康') return 'health,wellness,medicine';
-  if (item.category === '生活') return 'lifestyle,city,daily-life';
-  if (item.category === '運動') return 'sports,athlete';
+  // 優先以分類判斷
+  if (item.category === '財經') return 'finance';
+  if (item.category === '健康') return 'healthcare';
+  if (item.category === '生活') return 'lifestyle';
+  if (item.category === '運動') return 'sports';
+  if (item.category === '娛樂') return 'entertainment';
 
+  // AI 分類：依標題細分
   const lower = (item.title || '').toLowerCase();
-  if (['ai', '人工智慧', 'chatgpt', 'gpt', 'gemini', 'claude', 'llm', 'openai', 'anthropic'].some(k => lower.includes(k)))
-    return 'artificial-intelligence,technology';
   if (['robot', 'robotics', '機器人'].some(k => lower.includes(k)))
-    return 'robot,futuristic';
+    return 'robot';
   if (['chip', 'semiconductor', '晶片', '半導體', 'nvidia', 'intel', 'amd', 'tsmc', '台積電'].some(k => lower.includes(k)))
-    return 'semiconductor,circuit,technology';
+    return 'semiconductor';
   if (['iphone', 'apple', 'mac', 'ipad'].some(k => lower.includes(k)))
-    return 'apple,smartphone,technology';
+    return 'apple';
   if (['crypto', 'bitcoin', 'btc', '加密', '幣'].some(k => lower.includes(k)))
-    return 'cryptocurrency,blockchain';
+    return 'cryptocurrency';
   if (['棒球', 'wbc', 'mlb', '中職', 'baseball'].some(k => lower.includes(k)))
     return 'baseball';
   if (['籃球', 'nba', 'basketball'].some(k => lower.includes(k)))
     return 'basketball';
   if (['足球', 'soccer', 'football'].some(k => lower.includes(k)))
-    return 'soccer,football';
+    return 'soccer';
   if (['明星', '藝人', '演員', '韓劇', '電影', '音樂', '歌手'].some(k => lower.includes(k)))
-    return 'entertainment,music,concert';
+    return 'concert';
   if (['security', 'hack', '資安', '駭客'].some(k => lower.includes(k)))
-    return 'cybersecurity,technology';
+    return 'cybersecurity';
   if (['game', 'gaming', '遊戲'].some(k => lower.includes(k)))
-    return 'gaming,esports';
-  return 'technology,digital,innovation';
+    return 'gaming';
+  // AI 類預設
+  return 'technology';
 }
 
 function getThemeForItem(item: NewsItem): { icon: string; gradient: string } {
@@ -160,7 +162,7 @@ function NewsImage({ item, height = 180 }: { item: NewsItem; height?: number }) 
   // 2️⃣ 無圖 → Unsplash 隨機圖 + 「非新聞圖片」標籤
   if (!unsplashError) {
     const keyword = getUnsplashKeyword(item);
-    const unsplashUrl = `https://source.unsplash.com/800x400/?${encodeURIComponent(keyword)}`;
+    const unsplashUrl = `https://source.unsplash.com/800x400/?${keyword}`;
     return (
       <div style={baseWrap}>
         <img src={unsplashUrl} alt="" onError={() => setUnsplashError(true)} style={imgFill} />
@@ -184,6 +186,7 @@ const TABS = [
   { key: 'AI',   label: 'AI 科技', icon: '🤖' },
   { key: '財經', label: '財經理財', icon: '📈' },
   { key: '運動', label: '運動',    icon: '🏅' },
+  { key: '娛樂', label: '娛樂',    icon: '🎭' },
   { key: '生活', label: '生活',    icon: '🏡' },
   { key: '健康', label: '健康',    icon: '💊' },
 ];
@@ -192,6 +195,7 @@ const CATEGORY_BADGE: Record<string, { bg: string; color: string; label: string 
   'AI':   { bg: '#4c1d95', color: '#ddd6fe', label: '🤖 AI' },
   '財經': { bg: '#14532d', color: '#86efac', label: '📈 財經' },
   '運動': { bg: '#0d47a1', color: '#bfdbfe', label: '🏅 運動' },
+  '娛樂': { bg: '#831843', color: '#fbcfe8', label: '🎭 娛樂' },
   '生活': { bg: '#0c4a6e', color: '#bae6fd', label: '🏡 生活' },
   '健康': { bg: '#064e3b', color: '#6ee7b7', label: '💊 健康' },
 };
