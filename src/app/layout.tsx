@@ -120,6 +120,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             本網站使用 AI 輔助開發與內容生成
           </p>
         </footer>
+         <script dangerouslySetInnerHTML={{ __html: `
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(function(err) { console.warn('SW failed:', err); });
+          }
+        `}} />
       </body>
     </html>
   );

@@ -1,29 +1,13 @@
-{
-  "name": "Surprise Corner",
+﻿{
+  "name": "驚喜角落",
   "short_name": "驚喜角落",
-  "description": "連載小說、AI快訊、Podcast，每天都有新驚喜",
+  "description": "AI快訊、連載小說、Podcast",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f0a1e",
-  "theme_color": "#7c3aed",
-  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#8b5cf6",
   "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    }
+    { "src": "/favicon.ico", "sizes": "192x192", "type": "image/x-icon" },
+    { "src": "/favicon.ico", "sizes": "512x512", "type": "image/x-icon" }
   ]
 }
