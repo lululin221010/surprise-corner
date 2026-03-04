@@ -179,12 +179,12 @@ export default async function NovelPage({ params }: Props) {
                 等待期間，去小舖找找驚喜？
               </p>
               <a
-                href="https://still-time-corner.vercel.app/"
+               href={novel.shopUrl || "https://still-time-corner.vercel.app/digital"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shop-btn"
               >
-                ✨ Still Time Corner →
+                🔑 前往小舖解鎖完整版 →
               </a>
             </div>
           )}
