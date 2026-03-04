@@ -163,6 +163,7 @@ function Typewriter() {
 export default function Home() {
   const [surprise, setSurprise] = useState<{ title?: string; content?: string; message?: string; type?: string } | null>(null);
   const [revealed, setRevealed] = useState(false);
+const [showInstall, setShowInstall] = useState(false);
   const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
   useEffect(() => {
@@ -200,6 +201,58 @@ export default function Home() {
             Surprise Corner
           </h1>
           <Typewriter />
+        <button
+            onClick={() => setShowInstall(true)}
+            style={{
+              marginTop: '1rem', background: 'rgba(124,58,237,0.3)',
+              border: '1px solid rgba(196,181,253,0.4)', color: '#c4b5fd',
+              borderRadius: '30px', padding: '0.5rem 1.4rem',
+              fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer',
+            }}
+          >
+            📲 加入桌面，隨時追更新！
+          </button>
+
+          {showInstall && (
+            <div onClick={() => setShowInstall(false)} style={{
+              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+              zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem',
+            }}>
+              <div onClick={e => e.stopPropagation()} style={{
+                background: '#1e1b4b', border: '1px solid rgba(196,181,253,0.3)',
+                borderRadius: '24px', padding: '2rem', maxWidth: '400px', width: '100%',
+              }}>
+                <h3 style={{ color: '#e9d5ff', fontSize: '1.3rem', fontWeight: 800, marginBottom: '1.5rem', textAlign: 'center' }}>
+                  📲 加入桌面
+                </h3>
+                <div style={{ marginBottom: '1rem' }}>
+                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>💻 電腦版 Chrome</p>
+                  {['用 Chrome 開啟驚喜角落', '點網址列右側 ⊕ 安裝按鈕', '點「安裝 Surprise Corner」', '完成！開始功能表出現圖示'].map((s, i) => (
+                    <div key={i} style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.5rem', alignItems: 'center' }}>
+                      <span style={{ background: '#7c3aed', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i+1}</span>
+                      <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>📱 手機版 Chrome</p>
+                  {['用 Chrome 開啟驚喜角落', '點右上角 ⋮ 選單', '選「新增到主畫面」', '完成！桌面出現圖示'].map((s, i) => (
+                    <div key={i} style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.5rem', alignItems: 'center' }}>
+                      <span style={{ background: '#ec4899', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i+1}</span>
+                      <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => setShowInstall(false)} style={{
+                  width: '100%', background: 'linear-gradient(135deg, #7c3aed, #ec4899)',
+                  color: '#fff', border: 'none', borderRadius: '12px',
+                  padding: '0.8rem', fontWeight: 700, cursor: 'pointer',
+                }}>
+                  關閉
+                </button>
+              </div>
+            </div>
+          )}  
           <p style={{ color: '#7c7a9e', fontSize: '0.85rem', marginTop: '0.5rem' }}>今天日期：{today}</p>
         </header>
 
