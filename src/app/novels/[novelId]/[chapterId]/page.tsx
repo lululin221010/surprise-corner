@@ -7,7 +7,7 @@ import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 
 // ✅ 免費開放章節數
-const FREE_CHAPTERS = 10
+// isFree 由 chapters.json 控制
 
 // ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
 function isPublishedByDate(publishedAt: string): boolean {
@@ -19,9 +19,9 @@ function isPublishedByDate(publishedAt: string): boolean {
 }
 
 // ✅ 判斷章節是否應被鎖定
-function isChapterLocked(chapter: { chapterNumber: number; publishedAt: string }): boolean {
+function isChapterLocked(chapter: any): boolean {
   // 超過免費章節數 → 鎖
-  if (chapter.chapterNumber > FREE_CHAPTERS) return true
+  if (!chapter.isFree) return true
   // 發布日期未到 → 鎖
   if (!isPublishedByDate(chapter.publishedAt)) return true
   return false
@@ -72,6 +72,8 @@ export default async function ChapterPage({ params }: Props) {
   const nextChapter = currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : null
 
   // ✅ 鎖章判斷：超過免費章節數 OR 發布日期未到
+  const isPaidLocked = !chapter.isFree && isPublishedByDate(chapter.publishedAt)
+
   if (isChapterLocked(chapter)) {
     const nextUpdate = getNextUpdateDay()
     return (
@@ -79,16 +81,16 @@ export default async function ChapterPage({ params }: Props) {
         <div style={{ maxWidth: 480, width: '100%', textAlign: 'center' }}>
 
           {/* 鎖頭 */}
-          <div style={{ fontSize: '3.5rem', marginBottom: '1.5rem', opacity: 0.8 }}>🔒</div>
+          <div style={{ fontSize: '3.5rem', marginBottom: '1.5rem', opacity: 0.8 }}>{isPaidLocked ? '🔐' : '🔒'}</div>
 
           <h2 style={{ color: '#e8dcc8', fontSize: '1.5rem', fontWeight: 400, margin: '0 0 0.8rem', letterSpacing: '0.05em' }}>
-            第 {chapter.chapterNumber} 章・尚未開放
+            第 {chapter.chapterNumber} 章・{isPaidLocked ? '付費章節' : '尚未開放'}
           </h2>
 
           <p style={{ color: '#6a5a4a', lineHeight: 1.9, margin: '0 0 0.3rem', fontSize: '0.9rem' }}>
-            {chapter.chapterNumber <= FREE_CHAPTERS
+            {chapter.isFree
               ? `本章將於 ${chapter.publishedAt} 開放`
-              : `免費章節（第 1～${FREE_CHAPTERS} 章）已全數開放`}
+              : `免費章節（免費章節）已全數開放`}
           </p>
 
           {/* 更新時程 */}
@@ -175,7 +177,7 @@ export default async function ChapterPage({ params }: Props) {
         ))}
 
         {/* ✅ 第 FREE_CHAPTERS 章結尾：免費章節讀完提示 */}
-        {chapter.chapterNumber === FREE_CHAPTERS && (
+        {chapter.isFree && nextChapter && !nextChapter.isFree && (
           <div style={{
             margin: '3rem 0 0',
             padding: '2rem',

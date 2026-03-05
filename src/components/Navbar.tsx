@@ -9,9 +9,9 @@ const links = [
   // ✅ 移除「首頁」，Logo 本身即為首頁入口
   { href: '/novels',  label: '📖 連載小說' },
   { href: '/ai-news', label: '🤖 AI快訊' },
-  { href: '/podcast', label: '🎙️ Podcast' },   // ✅ 新增
+  { href: '/podcast', label: '🎙️ Podcast' },
   { href: '/tools',   label: '🛠 工具箱' },
-  { href: '/admin',   label: '⚙️ 管理' },
+  // ✅ 管理頁面已從導覽列移除（直接輸入 /admin 仍可進入）
 ];
 
 export default function Navbar() {
@@ -51,8 +51,8 @@ export default function Navbar() {
         <Image
           src="/logo.png"
           alt="Surprise Corner"
-          width={240}    /* ✅ 190 → 240，讓文字清晰可見 */
-          height={58}    /* ✅ 45 → 58，等比放大 */
+          width={240}
+          height={58}
           style={{ objectFit: 'contain', display: 'block' }}
           priority
         />
