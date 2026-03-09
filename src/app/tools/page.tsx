@@ -25,8 +25,7 @@ const RANDOM_PAGES = [
   { href: '/novels', label: '📚 連載小說' },
   { href: '/random', label: '🎲 隨機驚喜' },
   { href: '/wall', label: '🔥 作品牆' },
-  { href: 'https://still-time-corner.vercel.app/', label: '✨ Still Time Corner' },
-];
+  ];
 
 function getCreatorId() {
   if (typeof window === 'undefined') return '';

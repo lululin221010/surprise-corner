@@ -173,7 +173,14 @@ export default function NewsPage() {
   const [allNews, setAllNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
-
+  const [randomPage] = useState(() => {
+  const pages = [
+    { href: '/novels', label: '📚 連載小說' },
+    { href: '/podcast', label: '🎙 Podcast' },
+    { href: '/tools', label: '🛠 工具箱' },
+  ];
+  return pages[Math.floor(Math.random() * pages.length)];
+});
   useEffect(() => {
     Promise.allSettled([
       fetch('/api/ai-news').then(r => r.json()),
@@ -309,15 +316,14 @@ export default function NewsPage() {
         )}
 
         <div style={{ marginTop: '3rem', background: 'linear-gradient(135deg, #f59e0b22, #ec489922)',
-          border: '1px solid rgba(245,158,11,0.3)', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
-          <p style={{ color: '#fcd34d', fontWeight: 700, fontSize: '1rem', margin: '0 0 0.5rem' }}>✨ 看完新聞，去找點靈感？</p>
-          <p style={{ color: '#d1d5db', fontSize: '0.9rem', margin: '0 0 1rem' }}>Still Time Corner — 每天一個小驚喜等著你</p>
-          <a href="https://still-time-corner.vercel.app/" target="_blank" rel="noopener noreferrer"
-            style={{ display: 'inline-block', background: 'linear-gradient(135deg, #f59e0b, #ec4899)', color: '#fff',
-              padding: '0.6rem 1.5rem', borderRadius: '30px', textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem' }}>
-            前往小舖 →
-          </a>
-        </div>
+  border: '1px solid rgba(245,158,11,0.3)', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
+  <p style={{ color: '#fcd34d', fontWeight: 700, fontSize: '1rem', margin: '0 0 0.5rem' }}>📰 新聞看完了，去逛逛其他地方？</p>
+  <a href={randomPage.href}
+    style={{ display: 'inline-block', background: 'linear-gradient(135deg, #f59e0b, #ec4899)', color: '#fff',
+      padding: '0.6rem 1.5rem', borderRadius: '30px', textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem' }}>
+    前往 {randomPage.label} →
+  </a>
+</div>
 
         {/* ── 電子書促銷區塊 ── */}
         <div style={{ marginTop: '3rem' }}>
