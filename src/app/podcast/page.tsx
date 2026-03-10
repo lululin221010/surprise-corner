@@ -100,10 +100,10 @@ export default function PodcastPage() {
               Surprise Corner Podcast
             </h1>
             <p style={{ color: '#c4b5fd', fontSize: '1rem', margin: '0 0 1.4rem' }}>
-              每集一個主題，用聲音帶你探索 AI・棒球・生活・故事
+              
             </p>
             <div style={{ display: 'flex', gap: '0.7rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['🎵 由 NotebookLM 生成', '📅 不定期更新', '⏱ 每集 10–15 分鐘'].map(t => (
+              {['🎵 由 NotebookLM 生成', '📅 不定期更新',].map(t => (
                 <span key={t} style={{
                   background: 'rgba(124,58,237,0.25)', border: '1px solid rgba(167,139,250,0.35)',
                   color: '#e9d5ff', padding: '0.3rem 1rem', borderRadius: '20px',
