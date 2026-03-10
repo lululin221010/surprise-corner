@@ -98,6 +98,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               ☕ 請我喝杯咖啡
             </a>
+            <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
+              點擊按鈕 → 選金額 → 用 PayPal 或信用卡付款，超快！
+            </p>
           </div>
 
           {/* 連結列 */}

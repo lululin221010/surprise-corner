@@ -280,6 +280,9 @@ export default function PodcastPage() {
               }}>
               ☕ 前往 Ko-fi 支持
             </a>
+            <p style={{ marginTop: '0.75rem', color: 'rgba(209,213,219,0.6)', fontSize: '0.78rem' }}>
+              點擊後選金額（預設 $5），填名字留言，再用 PayPal 或信用卡付款即可 💛
+            </p>
           </div>
 
         </div>
