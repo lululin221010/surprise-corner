@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 
-// ✅ 與主站邏輯一致
+// ✅ 改用 isFree 欄位判斷，不再用章節編號上限
 const FREE_CHAPTERS = 10
 
 function isPublishedByDate(publishedAt: string): boolean {
@@ -54,14 +54,18 @@ export default function EbookPage() {
     )
   }
 
+  // ✅ 修正：同時符合 isFree === true 且日期已到，才放入電子書
   const publishedChapters = (chaptersData as any[])
     .filter(c =>
       c.novelId === novelId &&
       c.isPublished &&
-      c.chapterNumber <= FREE_CHAPTERS &&
+      c.isFree === true &&
       isPublishedByDate(c.publishedAt)
     )
     .sort((a, b) => a.chapterNumber - b.chapterNumber)
+
+  // ✅ 顯示實際免費章節數
+  const freeCount = publishedChapters.length
 
   const handlePrint = () => {
     setIsPrinting(true)
@@ -97,7 +101,6 @@ export default function EbookPage() {
           font-family: 'Noto Serif TC', Georgia, serif;
         }
 
-        /* 進度條 */
         .progress-bar {
           position: fixed;
           top: 0; left: 0;
@@ -108,7 +111,6 @@ export default function EbookPage() {
           print-color-adjust: exact;
         }
 
-        /* 頂部導覽 */
         .ebook-nav {
           position: sticky;
           top: 0;
@@ -182,7 +184,6 @@ export default function EbookPage() {
 
         .btn-back:hover { color: #8a7060; }
 
-        /* 封面區 */
         .ebook-cover {
           max-width: 680px;
           margin: 0 auto;
@@ -248,7 +249,6 @@ export default function EbookPage() {
           font-style: italic;
         }
 
-        /* 目錄 */
         .toc-section {
           max-width: 680px;
           margin: 0 auto;
@@ -291,7 +291,6 @@ export default function EbookPage() {
           font-size: 0.72rem;
         }
 
-        /* 章節內容 */
         .chapters-body {
           max-width: 680px;
           margin: 0 auto;
@@ -350,7 +349,6 @@ export default function EbookPage() {
           letter-spacing: 0.02em;
         }
 
-        /* 電子書尾頁 */
         .ebook-footer {
           max-width: 680px;
           margin: 0 auto;
@@ -383,7 +381,6 @@ export default function EbookPage() {
           letter-spacing: 0.08em;
         }
 
-        /* 閱讀進度提示 */
         .reading-tip {
           position: fixed;
           bottom: 24px;
@@ -398,65 +395,20 @@ export default function EbookPage() {
           z-index: 50;
         }
 
-        /* ── 列印樣式 ─────────────────────────────── */
         @media print {
-          @page {
-            size: A4;
-            margin: 25mm 20mm;
-          }
-
-          .progress-bar,
-          .ebook-nav,
-          .reading-tip,
-          .ebook-footer .footer-shop,
-          .btn-print,
-          .btn-back { display: none !important; }
-
-          .ebook-root {
-            background: white !important;
-            color: #1a1008 !important;
-          }
-
-          .ebook-cover {
-            page-break-after: always;
-            padding: 80px 40px;
-          }
-
-          .cover-title {
-            color: #1a1008 !important;
-            font-size: 3rem;
-          }
-
-          .cover-genre, .cover-author, .cover-desc, .cover-meta {
-            color: #5a4a3a !important;
-          }
-
-          .toc-section {
-            page-break-after: always;
-          }
-
+          @page { size: A4; margin: 25mm 20mm; }
+          .progress-bar, .ebook-nav, .reading-tip, .ebook-footer .footer-shop, .btn-print, .btn-back { display: none !important; }
+          .ebook-root { background: white !important; color: #1a1008 !important; }
+          .ebook-cover { page-break-after: always; padding: 80px 40px; }
+          .cover-title { color: #1a1008 !important; font-size: 3rem; }
+          .cover-genre, .cover-author, .cover-desc, .cover-meta { color: #5a4a3a !important; }
+          .toc-section { page-break-after: always; }
           .toc-label, .toc-row, .toc-num { color: #4a3a2a !important; }
-
-          .chapter-block {
-            page-break-before: always;
-            border-bottom: none;
-          }
-
+          .chapter-block { page-break-before: always; border-bottom: none; }
           .chapter-heading { color: #1a1008 !important; }
           .chapter-eyebrow, .chapter-dateline { color: #8a7060 !important; }
-
-          .chapter-paragraph {
-            color: #2a1f12 !important;
-            font-size: 11pt;
-            line-height: 1.9;
-          }
-
-          .chapter-rule {
-            background: #c4a060 !important;
-            print-color-adjust: exact;
-            -webkit-print-color-adjust: exact;
-          }
-
+          .chapter-paragraph { color: #2a1f12 !important; font-size: 11pt; line-height: 1.9; }
+          .chapter-rule { background: #c4a060 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
           .ebook-footer { page-break-before: always; }
           .footer-text { color: #5a4a3a !important; }
         }
@@ -473,12 +425,10 @@ export default function EbookPage() {
 
       <div className="ebook-root" ref={contentRef}>
 
-        {/* 閱讀進度條 */}
         {mounted && (
           <div className="progress-bar" style={{ width: `${progress}%` }} />
         )}
 
-        {/* 頂部導覽 */}
         <nav className="ebook-nav">
           <div className="ebook-nav-left">
             <Link href={`/novels/${novelId}`} className="btn-back">← 目錄</Link>
@@ -487,17 +437,12 @@ export default function EbookPage() {
             <span className="ebook-badge">電子書</span>
           </div>
           <div className="ebook-nav-actions">
-            <button
-              className="btn-print"
-              onClick={handlePrint}
-              disabled={isPrinting}
-            >
+            <button className="btn-print" onClick={handlePrint} disabled={isPrinting}>
               ⬇ <span className="label">下載 PDF</span>
             </button>
           </div>
         </nav>
 
-        {/* 封面 */}
         <div className="ebook-cover">
           <p className="cover-ornament">✦ &nbsp; SURPRISE CORNER &nbsp; ✦</p>
           <h1 className="cover-title">{novel.title}</h1>
@@ -506,7 +451,7 @@ export default function EbookPage() {
           <div className="cover-line" />
           <p className="cover-desc">{novel.description}</p>
           <div className="cover-meta">
-            <span>共 {publishedChapters.length} 章</span>
+            <span>共 {freeCount} 章</span>
             <span>·</span>
             <span>約 {totalWords.toLocaleString()} 字</span>
             <span>·</span>
@@ -514,11 +459,10 @@ export default function EbookPage() {
           </div>
         </div>
 
-        {/* 目錄 */}
         {publishedChapters.length > 0 && (
           <div className="toc-section">
             <p className="toc-label">目　錄</p>
-            {publishedChapters.map((c, i) => (
+            {publishedChapters.map((c) => (
               <div key={c.id} className="toc-row">
                 <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
                 <span>{c.title}</span>
@@ -529,7 +473,6 @@ export default function EbookPage() {
           </div>
         )}
 
-        {/* 無可閱讀章節 */}
         {publishedChapters.length === 0 && (
           <div style={{ textAlign: 'center', padding: '80px 40px', color: '#5a4a3a', fontSize: '0.9rem' }}>
             <p>目前還沒有可閱讀的章節，請稍後再回來 💜</p>
@@ -539,7 +482,6 @@ export default function EbookPage() {
           </div>
         )}
 
-        {/* 章節內容 */}
         <div className="chapters-body">
           {publishedChapters.map((chapter) => {
             const paragraphs = chapter.content.split('\n').filter((p: string) => p.trim())
@@ -557,12 +499,11 @@ export default function EbookPage() {
           })}
         </div>
 
-        {/* 尾頁 */}
         {publishedChapters.length > 0 && (
           <div className="ebook-footer">
             <div className="footer-ornament">✦</div>
             <p className="footer-text">
-              本電子書為免費試讀版，包含第 1 至第 {FREE_CHAPTERS} 章。<br />
+              本電子書為免費試讀版，包含第 1 至第 {freeCount} 章。<br />
               更多章節每週一・三・五更新，歡迎回到網站繼續閱讀。<br /><br />
               surprise-corner.vercel.app
             </p>
@@ -577,7 +518,6 @@ export default function EbookPage() {
           </div>
         )}
 
-        {/* 閱讀進度提示 */}
         {mounted && progress > 5 && progress < 98 && (
           <div className="reading-tip">
             已讀 {Math.round(progress)}%

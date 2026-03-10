@@ -1,5 +1,4 @@
 // 📄 路徑：src/app/novels/[novelId]/page.tsx
-// ✏️ 修改：在 novel-hero-info 末尾加入「電子書」入口按鈕
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -7,6 +6,7 @@ import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 
+// ✅ 改用 isFree 欄位，FREE_CHAPTERS 僅保留給電子書尾頁文字說明
 const FREE_CHAPTERS = 10
 
 // ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
@@ -39,14 +39,16 @@ export default async function NovelPage({ params }: Props) {
     .filter(c => c.novelId === novelId && c.isPublished)
     .sort((a, b) => a.chapterNumber - b.chapterNumber)
 
+  // ✅ 修正：用 isFree === true 且日期已到，才算免費可讀章節
   const freeChapters = chapters.filter(
-    c => c.chapterNumber <= FREE_CHAPTERS && isPublishedByDate(c.publishedAt)
-  )
-  const lockedChapters = chapters.filter(
-    c => c.chapterNumber > FREE_CHAPTERS || !isPublishedByDate(c.publishedAt)
+    c => c.isFree === true && isPublishedByDate(c.publishedAt)
   )
 
-  // ✅ 計算可讀電子書章節數
+  // ✅ 修正：isFree !== true 或日期未到，都算鎖定章節
+  const lockedChapters = chapters.filter(
+    c => c.isFree !== true || !isPublishedByDate(c.publishedAt)
+  )
+
   const ebookAvailable = freeChapters.length > 0
 
   return (
@@ -65,33 +67,18 @@ export default async function NovelPage({ params }: Props) {
         .novel-hero-tags { display: flex; gap: 8px; }
         .novel-tag { font-size: 0.75rem; color: #5a4a3a; }
 
-        /* ✅ 新增：電子書按鈕 */
-        .ebook-btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+        .ebook-btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
         .ebook-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
+          display: inline-flex; align-items: center; gap: 6px;
           padding: 7px 18px;
           background: linear-gradient(135deg, rgba(180,144,80,0.2), rgba(160,80,100,0.18));
           border: 1px solid rgba(180,144,80,0.3);
-          color: #c4a060;
-          text-decoration: none;
-          font-family: Georgia, serif;
-          font-size: 0.8rem;
-          letter-spacing: 0.06em;
+          color: #c4a060; text-decoration: none;
+          font-family: Georgia, serif; font-size: 0.8rem; letter-spacing: 0.06em;
           transition: all 0.2s;
         }
-        .ebook-btn:hover {
-          background: linear-gradient(135deg, rgba(180,144,80,0.35), rgba(160,80,100,0.3));
-          border-color: rgba(180,144,80,0.5);
-          color: #d4b070;
-        }
-        .ebook-btn-hint {
-          font-size: 0.72rem;
-          color: #4a3a2a;
-          line-height: 1.6;
-          padding-top: 2px;
-        }
+        .ebook-btn:hover { background: linear-gradient(135deg, rgba(180,144,80,0.35), rgba(160,80,100,0.3)); border-color: rgba(180,144,80,0.5); color: #d4b070; }
+        .ebook-btn-hint { font-size: 0.72rem; color: #4a3a2a; line-height: 1.6; padding-top: 2px; }
 
         .chapters-section { max-width: 760px; margin: 0 auto; padding: 40px 32px 0; }
         .chapters-label { font-size: 0.75rem; letter-spacing: 0.25em; color: #7a6050; margin: 0 0 20px; }
@@ -133,14 +120,14 @@ export default async function NovelPage({ params }: Props) {
               ))}
             </div>
 
-            {/* ✅ 新增：電子書入口 */}
+            {/* 電子書入口：有免費章節才顯示 */}
             {ebookAvailable && (
               <div className="ebook-btn-row">
                 <Link href={`/novels/${novelId}/ebook`} className="ebook-btn">
                   📖 電子書試讀
                 </Link>
                 <span className="ebook-btn-hint">
-                  免費開放前 {FREE_CHAPTERS} 章・可下載 PDF
+                  免費開放前 {freeChapters.length} 章・可下載 PDF
                 </span>
               </div>
             )}
@@ -179,7 +166,7 @@ export default async function NovelPage({ params }: Props) {
                 等待期間，去小舖找找驚喜？
               </p>
               <a
-               href={novel.shopUrl || "https://still-time-corner.vercel.app/digital"}
+                href={novel.shopUrl || "https://still-time-corner.vercel.app/digital"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shop-btn"
