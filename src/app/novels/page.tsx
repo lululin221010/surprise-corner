@@ -42,7 +42,7 @@ export default function NovelsPage() {
       <main className="novels-page">
         <header className="novels-header">
           <h1 className="novels-title">連載小說</h1>
-          <p className="novels-subtitle">每週更新 · 原創故事</p>
+          <p className="novels-subtitle">睡前・等車・最好的陪伴 💜</p>
         </header>
 
         <div className="novels-grid">
