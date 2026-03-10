@@ -33,6 +33,11 @@ export default function NovelsPage() {
         .novel-status-completed { background: rgba(100,100,180,0.15); color: #8080c0; border: 1px solid rgba(100,100,180,0.2); }
         .novel-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .novel-tag { font-size: 0.75rem; color: #6a5a4a; }
+        .novel-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+        .novel-read-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; border-radius: 20px; background: rgba(180,144,80,0.12); border: 1px solid rgba(180,144,80,0.35); color: #b49050; font-size: 0.82rem; letter-spacing: 0.08em; font-family: Georgia, serif; transition: all 0.25s; white-space: nowrap; }
+        .novel-card:hover .novel-read-btn { background: rgba(180,144,80,0.22); border-color: rgba(180,144,80,0.6); color: #d4b070; }
+        .novel-read-btn-arrow { font-size: 0.9rem; transition: transform 0.25s; }
+        .novel-card:hover .novel-read-btn-arrow { transform: translateX(4px); }
       `}</style>
       <main className="novels-page">
         <header className="novels-header">
@@ -60,10 +65,16 @@ export default function NovelsPage() {
                   <span>共 {novel.totalChapters} 章</span>
                   <span>更新於 {novel.updatedAt}</span>
                 </div>
-                <div className="novel-tags">
-                  {novel.tags.map(tag => (
-                    <span key={tag} className="novel-tag">#{tag}</span>
-                  ))}
+                <div className="novel-footer">
+                  <div className="novel-tags">
+                    {novel.tags.map(tag => (
+                      <span key={tag} className="novel-tag">#{tag}</span>
+                    ))}
+                  </div>
+                  <span className="novel-read-btn">
+                    開始閱讀
+                    <span className="novel-read-btn-arrow">→</span>
+                  </span>
                 </div>
               </div>
             </Link>
