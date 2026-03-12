@@ -1,4 +1,4 @@
-// 📄 路徑：src/app/novels/[novelId]/page.tsx
+// 📄 檔案路徑：src/app/novels/[novelId]/page.tsx
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -6,16 +6,32 @@ import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 
-// ✅ 改用 isFree 欄位，FREE_CHAPTERS 僅保留給電子書尾頁文字說明
 const FREE_CHAPTERS = 10
 
-// ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
 function isPublishedByDate(publishedAt: string): boolean {
   const now = new Date()
   const taiwanToday = new Date(now.getTime() + 8 * 60 * 60 * 1000)
     .toISOString()
     .slice(0, 10)
   return publishedAt <= taiwanToday
+}
+
+// 每本小說對應的角色聊天頁面
+const NOVEL_CHAT: Record<string, { path: string; label: string; color: string; border: string; textColor: string }> = {
+  'lulu-diary': {
+    path: '/chat/lulu',
+    label: '🐱 找 Lulu 聊聊',
+    color: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(168,85,247,0.15))',
+    border: 'rgba(167,139,250,0.35)',
+    textColor: '#c4b5fd',
+  },
+  'the-last-signal': {
+    path: '/chat/signal',
+    label: '📡 跟 林悅 說說話',
+    color: 'linear-gradient(135deg, rgba(14,165,233,0.2), rgba(2,132,199,0.15))',
+    border: 'rgba(125,211,252,0.35)',
+    textColor: '#7dd3fc',
+  },
 }
 
 interface Props { params: Promise<{ novelId: string }> }
@@ -39,17 +55,16 @@ export default async function NovelPage({ params }: Props) {
     .filter(c => c.novelId === novelId && c.isPublished)
     .sort((a, b) => a.chapterNumber - b.chapterNumber)
 
-  // ✅ 修正：用 isFree === true 且日期已到，才算免費可讀章節
   const freeChapters = chapters.filter(
     c => c.isFree === true && isPublishedByDate(c.publishedAt)
   )
 
-  // ✅ 修正：isFree !== true 或日期未到，都算鎖定章節
   const lockedChapters = chapters.filter(
     c => c.isFree !== true || !isPublishedByDate(c.publishedAt)
   )
 
   const ebookAvailable = freeChapters.length > 0
+  const chatInfo = NOVEL_CHAT[novelId]
 
   return (
     <>
@@ -100,7 +115,7 @@ export default async function NovelPage({ params }: Props) {
 
       <main className="novel-page">
 
-        {/* 小說資訊 Hero */}
+        {/* 小說 Hero */}
         <div className="novel-hero">
           <div className="novel-cover-box">
             <span>{novel.title[0]}</span>
@@ -120,15 +135,39 @@ export default async function NovelPage({ params }: Props) {
               ))}
             </div>
 
-            {/* 電子書入口：有免費章節才顯示 */}
+            {/* 電子書按鈕 */}
             {ebookAvailable && (
               <div className="ebook-btn-row">
                 <Link href={`/novels/${novelId}/ebook`} className="ebook-btn">
-                  📖 電子書試讀
+                  📖 免費試讀電子書
                 </Link>
                 <span className="ebook-btn-hint">
-                  免費開放前 {freeChapters.length} 章・可下載 PDF
+                  前 {freeChapters.length} 章免費，可匯出 PDF
                 </span>
+              </div>
+            )}
+
+            {/* 角色聊天按鈕 */}
+            {chatInfo && (
+              <div style={{ marginTop: '4px' }}>
+                <Link
+                  href={chatInfo.path}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '6px',
+                    padding: '7px 18px',
+                    background: chatInfo.color,
+                    border: `1px solid ${chatInfo.border}`,
+                    color: chatInfo.textColor,
+                    textDecoration: 'none',
+                    fontFamily: 'Georgia, serif',
+                    fontSize: '0.8rem',
+                    letterSpacing: '0.06em',
+                    borderRadius: '4px',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {chatInfo.label}
+                </Link>
               </div>
             )}
           </div>
@@ -162,8 +201,8 @@ export default async function NovelPage({ params }: Props) {
           {lockedChapters.length > 0 && (
             <div className="lock-notice">
               <p>
-                每週一・三・五更新一章，記得常回來 💜<br />
-                等待期間，去小舖找找驚喜？
+                後續章節為付費內容，前往小舖解鎖完整故事。<br />
+                一次購買，永久閱讀。
               </p>
               <a
                 href={novel.shopUrl || "https://still-time-corner.vercel.app/digital"}
@@ -171,14 +210,14 @@ export default async function NovelPage({ params }: Props) {
                 rel="noopener noreferrer"
                 className="shop-btn"
               >
-                🔑 前往小舖解鎖完整版 →
+                🛒 前往小舖購買完整版
               </a>
             </div>
           )}
 
           <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
             <Link href="/novels" style={{ fontSize: '0.82rem', color: '#5a4a3a', textDecoration: 'none', letterSpacing: '0.05em' }}>
-              ← 所有小說
+              ← 返回小說列表
             </Link>
           </div>
         </div>

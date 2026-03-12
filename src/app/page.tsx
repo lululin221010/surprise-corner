@@ -1,16 +1,16 @@
 'use client';
 // 📄 檔案路徑：src/app/page.tsx
-// 功能：首頁 - 粒子動畫 + 打字機效果 + 霓虹卡片
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 
 const TYPEWRITER_TEXTS = [
-  '每天不一樣的小驚喜，等你來發現 ✨',
-  '連載小說，每週更新原創故事 📖',
-  '最新 AI 科技快訊，掌握未來趨勢 🤖',
-  '實用工具箱，讓你的生活更有效率 🛠',
-  'Podcast 上線！用耳朵聽世界 🎙️',   // ✅ 新增打字機文字
+  '每天不一樣的小驚喜，等你來揭曉',
+  '連載小說，每週更新原創故事',
+  '最新 AI 新聞，輕鬆掌握科技脈動',
+  '留下你的心情，與陌生人共鳴',
+  'Podcast 節目，用耳朵探索世界',
+  '跟小說角色對話，你說，她記得',
 ];
 
 const FEATURES = [
@@ -41,23 +41,39 @@ const FEATURES = [
   {
     icon: '🎙️',
     title: 'Podcast 節目',
-    desc: '每集一個主題，AI・棒球・生活・故事，用耳朵探索世界。',   // ✅ 新增
+    desc: '每集一個主題，AI、棒球、生活、故事，用耳朵探索世界。',
     href: '/podcast',
     color: '#ec4899',
     glow: 'rgba(236,72,153,0.4)',
   },
   {
-    icon: '🛠',
+    icon: '🐱',
+    title: '找 Lulu 聊聊',
+    desc: '她記得你說過的每一句話。來自小說《Lulu的日記》的 AI 貓咪。',
+    href: '/chat/lulu',
+    color: '#a855f7',
+    glow: 'rgba(168,85,247,0.4)',
+  },
+  {
+    icon: '📡',
+    title: '跟 林悅 說說話',
+    desc: '廢土紀元的信號監聽員。她收到了來自九萬公里外的訊號…',
+    href: '/chat/signal',
+    color: '#0284c7',
+    glow: 'rgba(2,132,199,0.4)',
+  },
+  {
+    icon: '⚙️',
     title: '實用工具箱',
-    desc: '字數計算、名言產生、待辦清單、番茄計時，一站搞定。',
+    desc: '音訊轉文字、圖片加浮水印、證件照製作，免費好用。',
     href: '/tools',
     color: '#10b981',
     glow: 'rgba(16,185,129,0.4)',
   },
   {
-    icon: '🎁',
+    icon: '🛒',
     title: 'Still Time Corner',
-    desc: '每日驚喜小舖，療癒心情的好物等著你去發現。',
+    desc: '前往小舖，購買電子書與數位商品。',
     href: 'https://still-time-corner.vercel.app/',
     color: '#f59e0b',
     glow: 'rgba(245,158,11,0.4)',
@@ -163,7 +179,7 @@ function Typewriter() {
 export default function Home() {
   const [surprise, setSurprise] = useState<{ title?: string; content?: string; message?: string; type?: string } | null>(null);
   const [revealed, setRevealed] = useState(false);
-const [showInstall, setShowInstall] = useState(false);
+  const [showInstall, setShowInstall] = useState(false);
   const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
   useEffect(() => {
@@ -201,7 +217,7 @@ const [showInstall, setShowInstall] = useState(false);
             Surprise Corner
           </h1>
           <Typewriter />
-        <button
+          <button
             onClick={() => setShowInstall(true)}
             style={{
               marginTop: '1rem', background: 'rgba(124,58,237,0.3)',
@@ -210,7 +226,7 @@ const [showInstall, setShowInstall] = useState(false);
               fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer',
             }}
           >
-            📲 加入桌面，隨時追更新！
+            📲 加入桌面，隨時追更！
           </button>
 
           {showInstall && (
@@ -226,19 +242,19 @@ const [showInstall, setShowInstall] = useState(false);
                   📲 加入桌面
                 </h3>
                 <div style={{ marginBottom: '1rem' }}>
-                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>💻 電腦版 Chrome</p>
-                  {['用 Chrome 開啟驚喜角落', '點網址列右側 ⊕ 安裝按鈕', '點「安裝 Surprise Corner」', '完成！開始功能表出現圖示'].map((s, i) => (
+                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🍎 iPhone / Chrome</p>
+                  {['用 Chrome 開啟本站', '點右上角三個點', '點「新增至主畫面」', '確認，桌面就出現了'].map((s, i) => (
                     <div key={i} style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.5rem', alignItems: 'center' }}>
-                      <span style={{ background: '#7c3aed', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i+1}</span>
+                      <span style={{ background: '#7c3aed', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
                       <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
                     </div>
                   ))}
                 </div>
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>📱 手機版 Chrome</p>
-                  {['用 Chrome 開啟驚喜角落', '點右上角 ⋮ 選單', '選「新增到主畫面」', '完成！桌面出現圖示'].map((s, i) => (
+                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🤖 Android / Chrome</p>
+                  {['用 Chrome 開啟本站', '點右上角三個點', '點「安裝應用程式」', '確認，主畫面出現圖示'].map((s, i) => (
                     <div key={i} style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.5rem', alignItems: 'center' }}>
-                      <span style={{ background: '#ec4899', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i+1}</span>
+                      <span style={{ background: '#ec4899', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
                       <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
                     </div>
                   ))}
@@ -252,11 +268,11 @@ const [showInstall, setShowInstall] = useState(false);
                 </button>
               </div>
             </div>
-          )}  
+          )}
           <p style={{ color: '#7c7a9e', fontSize: '0.85rem', marginTop: '0.5rem' }}>今天日期：{today}</p>
         </header>
 
-        {/* 今日驚喜卡 */}
+        {/* 今日驚喜 */}
         <div style={{ maxWidth: '600px', margin: '0 auto 4rem', padding: '0 1rem', animation: 'fadeInUp 1s ease 0.2s both' }}>
           <div style={{
             background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)',
@@ -285,7 +301,7 @@ const [showInstall, setShowInstall] = useState(false);
               </>
             ) : surprise ? (
               <>
-                <div style={{ fontSize: '2rem', marginBottom: '0.8rem' }}>🌟</div>
+                <div style={{ fontSize: '2rem', marginBottom: '0.8rem' }}>🎉</div>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '0 0 1rem', color: '#e9d5ff' }}>
                   {surprise.title || surprise.type}
                 </h2>
@@ -299,20 +315,20 @@ const [showInstall, setShowInstall] = useState(false);
                     color: '#fff', padding: '0.6rem 1.5rem', borderRadius: '30px',
                     textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem',
                   }}>
-                  意猶未盡？去小舖逛逛 →
+                  🛒 逛逛小舖，發現更多
                 </a>
               </>
             ) : (
               <>
-                <div style={{ fontSize: '2rem', marginBottom: '0.8rem' }}>📬</div>
+                <div style={{ fontSize: '2rem', marginBottom: '0.8rem' }}>🌙</div>
                 <h2 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '0 0 0.5rem' }}>準備中...</h2>
-                <p style={{ color: '#9ca3af' }}>連載從 2/6 正式開始，每天都有新驚喜等著你！</p>
+                <p style={{ color: '#9ca3af' }}>每天 早上 8 點更新，明天再來看今天的驚喜吧！</p>
               </>
             )}
           </div>
         </div>
 
-        {/* 功能卡片 */}
+        {/* 探索更多 */}
         <section style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1rem 6rem' }}>
           <h2 style={{ textAlign: 'center', fontSize: '1.8rem', fontWeight: 800, marginBottom: '2rem', color: '#e9d5ff' }}>
             探索更多 🚀
