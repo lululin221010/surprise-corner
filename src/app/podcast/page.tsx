@@ -1,8 +1,10 @@
 'use client';
 // 📄 檔案路徑：src/app/podcast/page.tsx
-// 功能：Podcast 節目頁面（聽眾版）— 集數列表 + 錄音間背景 + 播放氛圍圖
+// 功能：Podcast 節目頁面 — 集數列表 + 嵌入式 MP3 播放器（Vercel Blob）
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+
+const BASE = 'https://88lwhikbeo2pkibc.public.blob.vercel-storage.com/podcast';
 
 interface Episode {
   ep: number;
@@ -12,40 +14,85 @@ interface Episode {
   glow: string;
   date: string;
   duration: string;
-  notebooklmUrl?: string;
+  audioUrl: string;
   tags: string[];
-  coverImage: string; // Unsplash 免費氛圍圖（播放時顯示）
+  coverImage: string;
 }
 
 // ✏️ 每次新增集數只要在這裡加一筆資料即可
-// notebooklmUrl：到 NotebookLM → Audio Overview → Share → 複製連結貼這裡
 const EPISODES: Episode[] = [
   {
     ep: 1,
-    title: 'Surprise Corner 是什麼？品牌初登場',
-    desc: '介紹 Surprise Corner 的誕生故事：每天不一樣的小驚喜、連載小說、AI快訊，一個療癒你心情的角落。',
+    title: 'AI 驚喜與兔崽子書店',
+    desc: '介紹 Surprise Corner 的誕生故事：每天不一樣的小驚喜、連載小說、AI 快訊，還有那間藏在角落的兔崽子書店。',
     color: '#7c3aed',
     glow: 'rgba(124,58,237,0.5)',
     date: '2026/02',
-    duration: '約 10 分鐘',
-    tags: ['品牌介紹', '網站導覽'],
-    // Unsplash 免費圖：麥克風錄音氛圍
+    duration: '約 20 分鐘',
+    audioUrl: `${BASE}/ep01-surprise-corner-intro.mp3`,
+    tags: ['品牌介紹', 'AI', '兔崽子書店'],
     coverImage: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&auto=format&fit=crop&q=80',
-    // notebooklmUrl: 'https://notebooklm.google.com/...',
   },
-  // 新增 EP02 範例（取消註解後填入資料）：
-  // {
-  //   ep: 2,
-  //   title: '本週 AI 大事件',
-  //   desc: '這週最值得知道的 3 件 AI 大事，用輕鬆的方式帶你聽懂趨勢。',
-  //   color: '#0ea5e9',
-  //   glow: 'rgba(14,165,233,0.5)',
-  //   date: '2026/03',
-  //   duration: '約 12 分鐘',
-  //   tags: ['AI科技', '本週快訊'],
-  //   coverImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80',
-  //   notebooklmUrl: '',
-  // },
+  {
+    ep: 2,
+    title: '上班族低風險副業實戰地圖',
+    desc: '別再說沒時間！這集整理出上班族最適合的低門檻副業路線，從選項到執行，有地圖就不會迷路。',
+    color: '#0ea5e9',
+    glow: 'rgba(14,165,233,0.5)',
+    date: '2026/03',
+    duration: '約 21 分鐘',
+    audioUrl: `${BASE}/ep02-side-hustle-map.mp3`,
+    tags: ['副業', '職場', '理財'],
+    coverImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80',
+  },
+  {
+    ep: 3,
+    title: '台股紅綠燈：戰勝投資心魔',
+    desc: '台股漲跌背後，最大的敵人其實是自己。這集用紅綠燈法則幫你整理投資情緒，看清買賣時機。',
+    color: '#16a34a',
+    glow: 'rgba(22,163,74,0.5)',
+    date: '2026/03',
+    duration: '約 20 分鐘',
+    audioUrl: `${BASE}/ep03-taiwan-stock.mp3`,
+    tags: ['台股', '投資', '理財心理'],
+    coverImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80',
+  },
+  {
+    ep: 4,
+    title: 'AI 從打字停頓讀懂你的孤獨',
+    desc: 'AI 分析你的訊息節奏，就能看出你今天是否感到孤獨？科技與情感的邊界，比你想的更模糊。',
+    color: '#db2777',
+    glow: 'rgba(219,39,119,0.5)',
+    date: '2026/03',
+    duration: '約 20 分鐘',
+    audioUrl: `${BASE}/ep04-ai-loneliness.mp3`,
+    tags: ['AI科技', '心理', '孤獨'],
+    coverImage: 'https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=800&auto=format&fit=crop&q=80',
+  },
+  {
+    ep: 5,
+    title: '台北廢墟收到的太空求救',
+    desc: '在台北某處廢棄建築裡，一台舊設備接收到了不明訊號。這是故事，也是對城市與宇宙的想像。',
+    color: '#d97706',
+    glow: 'rgba(217,119,6,0.5)',
+    date: '2026/03',
+    duration: '約 11 分鐘',
+    audioUrl: `${BASE}/ep05-taipei-ruin.mp3`,
+    tags: ['短篇故事', '科幻', '台北'],
+    coverImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=80',
+  },
+  {
+    ep: 6,
+    title: '用 AI 一人拍大片',
+    desc: '從腳本、分鏡到後製，一個人搭配 AI 工具也能做出電影等級的作品？這集帶你看實戰流程。',
+    color: '#e11d48',
+    glow: 'rgba(225,29,72,0.5)',
+    date: '2026/03',
+    duration: '約 23 分鐘',
+    audioUrl: `${BASE}/ep06-ai-film.mp3`,
+    tags: ['AI創作', '影片製作', '一人團隊'],
+    coverImage: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80',
+  },
 ];
 
 // 音波動畫
@@ -64,8 +111,112 @@ function SoundWave({ color }: { color: string }) {
   );
 }
 
+// 格式化時間（秒 → m:ss）
+function fmt(s: number) {
+  if (!isFinite(s) || isNaN(s)) return '--:--';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+// 嵌入式音頻播放器
+function AudioPlayer({ url, color }: { url: string; color: string }) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState('0:00');
+  const [duration, setDuration] = useState('--:--');
+
+  const togglePlay = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (playing) { a.pause(); setPlaying(false); }
+    else { a.play(); setPlaying(true); }
+  };
+
+  const onTimeUpdate = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    setCurrentTime(fmt(a.currentTime));
+    setProgress(a.duration ? (a.currentTime / a.duration) * 100 : 0);
+  };
+
+  const onLoadedMetadata = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    setDuration(fmt(a.duration));
+  };
+
+  const onEnded = () => setPlaying(false);
+
+  const seek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const a = audioRef.current;
+    if (!a || !a.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    a.currentTime = ratio * a.duration;
+  };
+
+  return (
+    <div style={{ padding: '0 1.5rem 1.2rem' }}>
+      <audio
+        ref={audioRef}
+        src={url}
+        onTimeUpdate={onTimeUpdate}
+        onLoadedMetadata={onLoadedMetadata}
+        onEnded={onEnded}
+        preload="metadata"
+      />
+      <div style={{
+        background: 'rgba(0,0,0,0.3)', borderRadius: '14px', padding: '1rem 1.2rem',
+        border: `1px solid ${color}44`,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {/* 播放 / 暫停 */}
+          <button
+            onClick={togglePlay}
+            style={{
+              width: '46px', height: '46px', borderRadius: '50%', border: 'none',
+              background: `linear-gradient(135deg,${color},${color}bb)`,
+              color: '#fff', fontSize: '1.1rem', cursor: 'pointer', flexShrink: 0,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: `0 4px 14px ${color}66`,
+            }}
+          >
+            {playing ? '⏸' : '▶'}
+          </button>
+
+          {/* 進度條 + 時間 */}
+          <div style={{ flex: 1 }}>
+            <div
+              onClick={seek}
+              style={{
+                height: '6px', background: 'rgba(255,255,255,0.12)',
+                borderRadius: '4px', cursor: 'pointer', marginBottom: '0.4rem',
+              }}
+            >
+              <div style={{
+                height: '100%', width: `${progress}%`,
+                background: `linear-gradient(90deg,${color},${color}cc)`,
+                borderRadius: '4px', transition: 'width 0.15s',
+              }} />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#9ca3af' }}>
+              <span>{currentTime}</span>
+              <span>{duration}</span>
+            </div>
+          </div>
+
+          {/* 音波動畫（播放中才顯示） */}
+          {playing && <SoundWave color={color} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PodcastPage() {
-  const [playingEp, setPlayingEp] = useState<number | null>(null);
+  const [activeEp, setActiveEp] = useState<number | null>(null);
 
   return (
     <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -77,7 +228,7 @@ export default function PodcastPage() {
         backgroundSize: 'cover', backgroundPosition: 'center',
         filter: 'brightness(0.22) saturate(1.5)',
       }} />
-      {/* 漸層遮罩讓文字清楚 */}
+      {/* 漸層遮罩 */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 1,
         background: 'linear-gradient(180deg, rgba(15,12,41,0.72) 0%, rgba(48,43,99,0.55) 50%, rgba(15,12,41,0.88) 100%)',
@@ -100,10 +251,10 @@ export default function PodcastPage() {
               Surprise Corner Podcast
             </h1>
             <p style={{ color: '#c4b5fd', fontSize: '1rem', margin: '0 0 1.4rem' }}>
-              
+              AI・理財・故事・創作，一個療癒你心情的角落
             </p>
             <div style={{ display: 'flex', gap: '0.7rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['🎵 由 NotebookLM 生成', '📅 不定期更新',].map(t => (
+              {['🎵 由 NotebookLM 生成', '📅 不定期更新', '🎧 直接線上收聽'].map(t => (
                 <span key={t} style={{
                   background: 'rgba(124,58,237,0.25)', border: '1px solid rgba(167,139,250,0.35)',
                   color: '#e9d5ff', padding: '0.3rem 1rem', borderRadius: '20px',
@@ -120,7 +271,7 @@ export default function PodcastPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             {EPISODES.map(ep => {
-              const isActive = playingEp === ep.ep;
+              const isActive = activeEp === ep.ep;
               return (
                 <div key={ep.ep} style={{
                   background: isActive
@@ -133,24 +284,23 @@ export default function PodcastPage() {
                   transition: 'all 0.35s ease',
                 }}>
 
-                  {/* 播放中：顯示氛圍封面圖 + 音波 */}
+                  {/* 展開時：氛圍封面圖 */}
                   {isActive && (
-                    <div style={{ position: 'relative', height: '210px', overflow: 'hidden' }}>
+                    <div style={{ position: 'relative', height: '180px', overflow: 'hidden' }}>
                       <img
                         src={ep.coverImage}
                         alt={ep.title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55) saturate(1.4)' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.5) saturate(1.4)' }}
                       />
                       <div style={{
                         position: 'absolute', inset: 0,
                         display: 'flex', flexDirection: 'column',
                         alignItems: 'center', justifyContent: 'center', gap: '0.8rem',
-                        background: 'linear-gradient(135deg, rgba(15,12,41,0.4), rgba(124,58,237,0.2))',
+                        background: 'linear-gradient(135deg, rgba(15,12,41,0.35), rgba(124,58,237,0.15))',
                       }}>
-                        <div style={{ fontSize: '2.8rem', filter: 'drop-shadow(0 0 16px rgba(255,255,255,0.9))' }}>🎙️</div>
-                        <SoundWave color={ep.color} />
+                        <div style={{ fontSize: '2.5rem', filter: 'drop-shadow(0 0 16px rgba(255,255,255,0.9))' }}>🎙️</div>
                         <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', textShadow: '0 1px 6px rgba(0,0,0,0.9)' }}>
-                          正在收聽中...
+                          點擊播放按鈕開始收聽
                         </span>
                       </div>
                     </div>
@@ -188,37 +338,29 @@ export default function PodcastPage() {
                       </p>
                     </div>
 
-                    {/* 播放 / 鎖定 按鈕 */}
+                    {/* 展開 / 收合 按鈕 */}
                     <div style={{ flexShrink: 0 }}>
-                      {ep.notebooklmUrl ? (
-                        <a
-                          href={ep.notebooklmUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => setPlayingEp(isActive ? null : ep.ep)}
-                          style={{
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            width: '50px', height: '50px', borderRadius: '50%',
-                            background: `linear-gradient(135deg,${ep.color},${ep.color}bb)`,
-                            boxShadow: `0 4px 18px ${ep.glow}`,
-                            textDecoration: 'none', fontSize: '1.4rem',
-                            transition: 'transform 0.2s',
-                          }}
-                          onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
-                          onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-                        >
-                          {isActive ? '⏸' : '▶️'}
-                        </a>
-                      ) : (
-                        <div style={{
+                      <button
+                        onClick={() => setActiveEp(isActive ? null : ep.ep)}
+                        style={{
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          width: '50px', height: '50px', borderRadius: '50%',
-                          background: 'rgba(255,255,255,0.07)',
-                          fontSize: '1.2rem',
-                        }} title="音檔準備中">🔒</div>
-                      )}
+                          width: '50px', height: '50px', borderRadius: '50%', border: 'none',
+                          background: `linear-gradient(135deg,${ep.color},${ep.color}bb)`,
+                          boxShadow: `0 4px 18px ${ep.glow}`,
+                          cursor: 'pointer', fontSize: '1.2rem', color: '#fff',
+                          transition: 'transform 0.2s',
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.1)')}
+                        onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                        title={isActive ? '收合' : '展開播放器'}
+                      >
+                        {isActive ? '▼' : '▶'}
+                      </button>
                     </div>
                   </div>
+
+                  {/* 嵌入式音頻播放器（展開時顯示） */}
+                  {isActive && <AudioPlayer url={ep.audioUrl} color={ep.color} />}
 
                   {/* 標籤 */}
                   <div style={{ padding: '0 1.5rem 1.2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -228,12 +370,6 @@ export default function PodcastPage() {
                         fontSize: '0.73rem', padding: '2px 10px', borderRadius: '20px', fontWeight: 600,
                       }}>#{tag}</span>
                     ))}
-                    {!ep.notebooklmUrl && (
-                      <span style={{
-                        background: 'rgba(107,114,128,0.18)', color: '#6b7280',
-                        fontSize: '0.73rem', padding: '2px 10px', borderRadius: '20px',
-                      }}>音檔準備中</span>
-                    )}
                   </div>
                 </div>
               );
