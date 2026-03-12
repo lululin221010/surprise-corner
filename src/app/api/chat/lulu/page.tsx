@@ -156,12 +156,11 @@ export default function LuluChatPage() {
       }}>
         <a href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
           style={{
-            display: 'block',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(168,85,247,0.1))',
             border: '1px solid rgba(167,139,250,0.3)',
             borderRadius: '12px', padding: '0.8rem 1.2rem',
             textDecoration: 'none', marginBottom: '0.8rem',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           }}>
           <span style={{ color: '#e9d5ff', fontSize: '0.82rem' }}>
             📖 想知道 Lulu 的完整故事？
