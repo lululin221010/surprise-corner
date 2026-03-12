@@ -38,6 +38,21 @@
   - `ai-ebook-full.html`（完整版）
   - `ai-ebook-epub.html`（EPUB 來源）
 
+### Podcast（/podcast）
+- 頁面：`src/app/podcast/page.tsx`
+- 集數資料直接寫在 `page.tsx` 的 `EPISODES` 陣列（episodes.json 目前未使用）
+- 音頻使用 **NotebookLM 分享連結**，不上傳音檔到 Vercel，無容量問題
+- 新增集數流程：
+  1. 到 NotebookLM 上傳書籍前 1/3 內容（避免把整本書說完）
+  2. 在「新增記事」寫入限制指令（只介紹前幾章，結尾導流到小舖）
+  3. 生成語音摘要 → 點分享 → 複製連結
+  4. 在 `EPISODES` 陣列新增一筆，填入 `notebooklmUrl`
+- 音頻格式：NotebookLM 下載為 m4a，若需轉 mp3 用 cloudconvert.com（免費）
+- Podcast 開場腳本原則：
+  - 只用前 1/3 內容，不爆雷
+  - 結尾必須導流到小舖：`still-time-corner.vercel.app`
+  - 已完成五本書的開場腳本（台股紅綠燈、斜槓致富方程式、影音AI工具完全指南、最後的信號、Lulu的日記）
+
 ## 環境變數
 - `GROQ_API_KEY`：Groq API 金鑰（以 `gsk_` 開頭），已設定於 Vercel
 
