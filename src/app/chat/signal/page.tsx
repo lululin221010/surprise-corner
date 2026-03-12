@@ -72,7 +72,7 @@ export default function SignalChatPage() {
           <div style={{ color: '#7dd3fc', fontSize: '0.75rem' }}>廢土紀元信號監聽員・2287年</div>
         </div>
         <div style={{ marginLeft: 'auto' }}>
-          <a href="/novels/signal" style={{
+          <a href="/novels/the-last-signal" style={{
             background: 'rgba(14,165,233,0.2)',
             border: '1px solid rgba(125,211,252,0.3)',
             color: '#bae6fd', padding: '0.4rem 1rem', borderRadius: '20px',
