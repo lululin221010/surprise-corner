@@ -51,6 +51,9 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   manifest: '/manifest.json',
   themeColor: '#7c3aed',
+  verification: {
+    google: 'Umi39AtQ8M5fxUEzoE6vhMTtWtNIAvePvtrYFFxeFsg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
