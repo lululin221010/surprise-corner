@@ -71,7 +71,8 @@ export default async function NovelPage({ params }: Props) {
       <style>{`
         .novel-page { min-height: 100vh; background: #0c0b08; color: #d8ccb8; font-family: Georgia, serif; padding-bottom: 80px; }
         .novel-hero { max-width: 760px; margin: 0 auto; padding: 60px 32px 48px; display: flex; gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .novel-cover-box { flex-shrink: 0; width: 120px; height: 168px; background: linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); border: 1px solid rgba(180,144,80,0.3); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(180,144,80,0.6); }
+        .novel-cover-box { flex-shrink: 0; width: 120px; height: 168px; background: linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); border: 1px solid rgba(180,144,80,0.3); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(180,144,80,0.6); overflow: hidden; border-radius: 4px; }
+        .novel-cover-img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .novel-hero-info { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
         .novel-hero-genre { font-size: 0.75rem; letter-spacing: 0.25em; color: #b49050; }
         .novel-hero-title { font-size: 2.2rem; font-weight: 400; color: #e8dcc8; margin: 0; line-height: 1.3; }
@@ -118,7 +119,11 @@ export default async function NovelPage({ params }: Props) {
         {/* 小說 Hero */}
         <div className="novel-hero">
           <div className="novel-cover-box">
-            <span>{novel.title[0]}</span>
+            {(novel as any).cover ? (
+              <img src={(novel as any).cover} alt={novel.title} className="novel-cover-img" />
+            ) : (
+              <span>{novel.title[0]}</span>
+            )}
           </div>
           <div className="novel-hero-info">
             <span className="novel-hero-genre">{novel.genre}</span>

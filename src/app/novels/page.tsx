@@ -109,6 +109,11 @@ export default function NovelsPage() {
                 <div className="novel-meta">
                   <span className="novel-status novel-status-ongoing">{novel.status}</span>
                   <span>共 {novel.totalChapters} 章</span>
+                  {(novel as any).scheduleNote && (
+                    <span style={{ color: '#b49050', fontSize: '0.78rem', letterSpacing: '0.05em' }}>
+                      {(novel as any).scheduleNote}
+                    </span>
+                  )}
                   <span>更新於 {novel.updatedAt}</span>
                 </div>
                 <div className="novel-footer">

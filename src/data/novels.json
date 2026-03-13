@@ -10,8 +10,9 @@
     "description": "一個工程師意外截獲來自深空的訊號，解碼過程中逐漸發現地球上某個隱藏組織的秘密。",
     "tags": ["科幻", "懸疑", "太空"],
     "totalChapters": 30,
-    "updatedAt": "2026-04-09",
-    "createdAt": "2026-01-01",
+    "updatedAt": "2026-03-15",
+    "createdAt": "2026-03-15",
+    "scheduleNote": "奇數日更新",
     "shopUrl": "https://still-time-corner.vercel.app/digital"
   },
   {
@@ -25,8 +26,9 @@
     "description": "一個普通上班族與 AI 助理的日常，記錄那些微小卻真實的生活片段。",
     "tags": ["AI", "日常", "上班族"],
     "totalChapters": 30,
-    "updatedAt": "2026-03-10",
-    "createdAt": "2026-02-05",
+    "updatedAt": "2026-03-16",
+    "createdAt": "2026-03-15",
+    "scheduleNote": "偶數日更新",
     "shopUrl": "https://still-time-corner.vercel.app/digital"
   },
   {
@@ -40,8 +42,9 @@
     "description": "靈魂不是消失了，它只是換了一個地方，繼續守候著你。那些關於離去與重逢、關於另一個維度裡的愛，我們試著輕輕說清楚。",
     "tags": ["療癒", "靈性", "哲理"],
     "totalChapters": 10,
-    "updatedAt": "2026-03-13",
-    "createdAt": "2026-03-13",
+    "updatedAt": "2026-03-15",
+    "createdAt": "2026-03-15",
+    "scheduleNote": "前 1 章免費試讀",
     "shopUrl": "https://still-time-corner.vercel.app/digital"
   },
   {
