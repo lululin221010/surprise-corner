@@ -14,6 +14,20 @@
     "shopUrl": "https://still-time-corner.vercel.app/digital"
   },
   {
+    "id": "soul-journey",
+    "title": "靈魂的轉運站",
+    "author": "盧林說的",
+    "cover": "",
+    "genre": "療癒散文",
+    "status": "連載中",
+    "description": "靈魂不是消失了，它只是換了一個地方，繼續守候著你。那些關於離去與重逢、關於另一個維度裡的愛，我們試著輕輕說清楚。",
+    "tags": ["療癒", "靈性", "哲理"],
+    "totalChapters": 10,
+    "updatedAt": "2026-03-13",
+    "createdAt": "2026-03-13",
+    "shopUrl": "https://still-time-corner.vercel.app/digital"
+  },
+  {
     "id": "lulu-diary",
     "title": "Lulu 的日記",
     "author": "盧林說的",

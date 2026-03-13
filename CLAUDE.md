@@ -59,6 +59,16 @@
   - 結尾導流到小舖：`still-time-corner.vercel.app`
   - 已完成五本書腳本（台股紅綠燈、斜槓致富方程式、影音AI工具完全指南、最後的信號、Lulu的日記）
 
+### 連載小說（/novels）
+- 小說列表：`src/data/novels.json`
+- 章節資料：`src/data/chapters.json`（lulu-diary / the-last-signal）
+- 動態路由：`src/app/novels/[novelId]/page.tsx`
+- **靈魂的轉運站（soul-journey）** — 新增（2026-03-13）
+  - 獨立章節元件：`src/app/novels/soul-journey/chapter-1.tsx`（isLocked 參數控制加鎖）
+  - 頁面路由：`src/app/novels/soul-journey/chapter-1/page.tsx`（URL：/novels/soul-journey/chapter-1）
+  - 第一章為免費，後續章節可設 `isLocked={true}` 加鎖導流至小舖
+  - 已加入 `novels.json`（id: soul-journey）
+
 ### Ko-fi 贊助（/podcast 頁底部）
 - 連結：https://ko-fi.com/surprisecorner
 - **Stripe 台灣收款不支援（已測試無法設定）**
