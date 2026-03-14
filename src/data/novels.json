@@ -8,7 +8,11 @@
     "status": "連載中",
     "category": "serial",
     "description": "一個工程師意外截獲來自深空的訊號，解碼過程中逐漸發現地球上某個隱藏組織的秘密。",
-    "tags": ["科幻", "懸疑", "太空"],
+    "tags": [
+      "科幻",
+      "懸疑",
+      "太空"
+    ],
     "totalChapters": 30,
     "updatedAt": "2026-03-15",
     "createdAt": "2026-03-15",
@@ -24,7 +28,11 @@
     "status": "連載中",
     "category": "serial",
     "description": "一個普通上班族與 AI 助理的日常，記錄那些微小卻真實的生活片段。",
-    "tags": ["AI", "日常", "上班族"],
+    "tags": [
+      "AI",
+      "日常",
+      "上班族"
+    ],
     "totalChapters": 30,
     "updatedAt": "2026-03-16",
     "createdAt": "2026-03-15",
@@ -38,15 +46,20 @@
     "cover": "https://still-time-corner.vercel.app/images/soul-journey-cover.jpg.png",
     "genre": "療癒散文",
     "status": "連載中",
-    "category": "serial",
+    "category": "preview",
     "description": "靈魂不是消失了，它只是換了一個地方，繼續守候著你。那些關於離去與重逢、關於另一個維度裡的愛，我們試著輕輕說清楚。",
-    "tags": ["療癒", "靈性", "哲理"],
+    "tags": [
+      "療癒",
+      "靈性",
+      "哲理"
+    ],
     "totalChapters": 30,
     "updatedAt": "2026-03-15",
     "createdAt": "2026-03-15",
-    "scheduleNote": "前 6 節免費試讀",
+    "scheduleNote": "看看喜不喜歡",
     "shopUrl": "https://still-time-corner.vercel.app/digital",
-    "shopPrice": "NT$ 299"
+    "shopPrice": "NT$ 299",
+    "previewChapters": 6
   },
   {
     "id": "slash-rich",
@@ -57,7 +70,11 @@
     "status": "完結",
     "category": "preview",
     "description": "數位遊牧與 AI 斜槓指南。備不甘現狀？準備翻身嗎？從副業啟動到被動收入，用 AI 工具加速你的斜槓路。完整版 30 章。",
-    "tags": ["副業", "AI", "財務自由"],
+    "tags": [
+      "副業",
+      "AI",
+      "財務自由"
+    ],
     "totalChapters": 30,
     "previewChapters": 6,
     "updatedAt": "2026-03-01",
@@ -74,7 +91,11 @@
     "status": "完結",
     "category": "preview",
     "description": "2026 最新版台股操作指南。用紅綠燈系統判續多空，掌握進出場時機，打造穩健的財務自由之路。完整版 25 章。",
-    "tags": ["台股", "投資", "理財"],
+    "tags": [
+      "台股",
+      "投資",
+      "理財"
+    ],
     "totalChapters": 25,
     "previewChapters": 5,
     "updatedAt": "2026-02-01",
@@ -91,7 +112,11 @@
     "status": "完結",
     "category": "preview",
     "description": "從零學會 Sora、Midjourney、Suno、ElevenLabs 等 20+ 款熱門 AI 工具，繁體中文，完全不需要技術背景。",
-    "tags": ["AI", "影音", "工具"],
+    "tags": [
+      "AI",
+      "影音",
+      "工具"
+    ],
     "totalChapters": 20,
     "previewChapters": 4,
     "updatedAt": "2026-01-01",
@@ -100,4 +125,3 @@
     "shopPrice": "NT$ 380"
   }
 ]
-
