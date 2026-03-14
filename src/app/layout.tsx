@@ -87,23 +87,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ✅ Ko-fi 打賞按鈕 */}
           <div style={{ marginBottom: '1rem' }}>
             <a
-              href="https://ko-fi.com/surprisecorner"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                background: 'linear-gradient(135deg, #FF5E5B, #ff8c42)',
-                color: '#fff', textDecoration: 'none',
-                padding: '0.6rem 1.6rem', borderRadius: '30px',
-                fontSize: '0.9rem', fontWeight: 700,
-                boxShadow: '0 4px 15px rgba(255,94,91,0.35)',
-              }}
-            >
-              ☕ 請我喝杯咖啡
-            </a>
-            <p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
-              點擊按鈕 → 選金額 → 用 PayPal 或信用卡付款，超快！
-            </p>
+             href="https://line.me/R/ti/p/@983agawb"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+    background: 'linear-gradient(135deg, #FF5E5B, #ff8c42)',
+    color: '#fff', textDecoration: 'none',
+    padding: '0.6rem 1.6rem', borderRadius: '30px',
+    fontSize: '0.9rem', fontWeight: 700,
+    boxShadow: '0 4px 15px rgba(255,94,91,0.35)',
+  }}
+>
+  ☕ 請我喝杯咖啡
+</a>
+<p style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
+  點擊按鈕 → 加入 LINE → 私訊取得轉帳資訊，感謝支持！
+</p>
           </div>
 
           {/* 連結列 */}
