@@ -151,7 +151,7 @@ export default function NovelsPage() {
                   <span className="novel-status novel-status-completed">{novel.status}</span>
                   <span>完整版 {novel.totalChapters} 章</span>
                   {novel.previewChapters && (
-                    <span style={{ color: '#50b478' }}>免費試看前 {novel.previewChapters} 章</span>
+                    <span style={{ color: '#50b478' }}>看看喜不喜歡</span>
                   )}
                 </div>
                 <div className="novel-footer">
@@ -162,7 +162,7 @@ export default function NovelsPage() {
                   </div>
                   <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                     <Link href={`/novels/${novel.id}`} className="novel-read-btn">
-                      免費試看
+                      看看喜不喜歡
                       <span className="novel-read-btn-arrow">→</span>
                     </Link>
                     <a
