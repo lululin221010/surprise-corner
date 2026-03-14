@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "id": "the-last-signal",
     "title": "最後的信號",
@@ -41,11 +41,12 @@
     "category": "serial",
     "description": "靈魂不是消失了，它只是換了一個地方，繼續守候著你。那些關於離去與重逢、關於另一個維度裡的愛，我們試著輕輕說清楚。",
     "tags": ["療癒", "靈性", "哲理"],
-    "totalChapters": 10,
+    "totalChapters": 30,
     "updatedAt": "2026-03-15",
     "createdAt": "2026-03-15",
-    "scheduleNote": "前 1 章免費試讀",
-    "shopUrl": "https://still-time-corner.vercel.app/digital"
+    "scheduleNote": "前 6 節免費試讀",
+    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "shopPrice": "NT$ 299"
   },
   {
     "id": "slash-rich",
@@ -99,3 +100,4 @@
     "shopPrice": "NT$ 380"
   }
 ]
+
