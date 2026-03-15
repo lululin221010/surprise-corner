@@ -99,7 +99,7 @@ export default function NovelsPage() {
         </div>
         <div className="novels-grid">
           {serials.map((novel: any) => (
-            <Link key={novel.id} href={`/novels/${novel.id}`} className="novel-card">
+            <Link key={novel.id} href={`/novels/${novel.id}/ebook`} className="novel-card">
               <NovélCover cover={novel.cover} title={novel.title} />
               <div className="novel-info">
                 <span className="novel-genre">{novel.genre}</span>
@@ -160,9 +160,9 @@ export default function NovelsPage() {
                       <span key={tag} className="novel-tag">#{tag}</span>
                     ))}
                   </div>
-                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                    <Link href={`/novels/${novel.id}`} className="novel-read-btn">
-                      看看喜不喜歡
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Link href={`/novels/${novel.id}/ebook`} className="novel-read-btn">
+                      👀 看看喜不喜歡
                       <span className="novel-read-btn-arrow">→</span>
                     </Link>
                     <a
@@ -171,7 +171,7 @@ export default function NovelsPage() {
                       rel="noopener noreferrer"
                       className="novel-buy-btn"
                     >
-                      {novel.shopPrice || ''} 購買完整版 ↗
+                      {(novel as any).shopPrice || 'NT$???'} 購買完整版 ↗
                     </a>
                   </div>
                 </div>

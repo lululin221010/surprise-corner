@@ -45,7 +45,7 @@
     "author": "盧林說的",
     "cover": "https://still-time-corner.vercel.app/images/soul-journey/cover.png",
     "genre": "療癒散文",
-    "status": "連載中",
+    "status": "完結",
     "category": "preview",
     "description": "靈魂不是消失了，它只是換了一個地方，繼續守候著你。那些關於離去與重逢、關於另一個維度裡的愛，我們試著輕輕說清楚。",
     "tags": [
@@ -56,10 +56,9 @@
     "totalChapters": 10,
     "updatedAt": "2026-03-15",
     "createdAt": "2026-03-15",
-    "scheduleNote": "第一章免費試讀",
     "shopUrl": "https://still-time-corner.vercel.app/digital",
     "shopPrice": "NT$ 299",
-    "previewChapters": 1
+    "previewChapters": 3
   },
   {
     "id": "slash-rich",

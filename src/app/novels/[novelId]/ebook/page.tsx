@@ -363,23 +363,57 @@ export default function EbookPage() {
           opacity: 0.5;
         }
 
+        .footer-hook {
+          font-size: 1.1rem;
+          color: #d8ccb8;
+          margin-bottom: 8px;
+          letter-spacing: 0.05em;
+        }
+
         .footer-text {
           font-size: 0.82rem;
           color: #4a3a2a;
           line-height: 2;
-          margin-bottom: 24px;
+          margin-bottom: 28px;
+        }
+
+        .footer-btns {
+          display: flex;
+          gap: 14px;
+          justify-content: center;
+          flex-wrap: wrap;
         }
 
         .footer-shop {
           display: inline-block;
           padding: 0.7rem 2rem;
-          background: linear-gradient(135deg, rgba(180,144,80,0.2), rgba(160,80,100,0.2));
-          border: 1px solid rgba(180,144,80,0.25);
+          background: linear-gradient(135deg, rgba(180,144,80,0.25), rgba(160,80,100,0.2));
+          border: 1px solid rgba(180,144,80,0.35);
           color: #c4a060;
+          text-decoration: none;
+          font-size: 0.85rem;
+          letter-spacing: 0.08em;
+          transition: all 0.2s;
+        }
+
+        .footer-shop:hover {
+          background: linear-gradient(135deg, rgba(180,144,80,0.4), rgba(160,80,100,0.35));
+          border-color: rgba(180,144,80,0.55);
+          color: #d4b070;
+        }
+
+        .footer-browse {
+          display: inline-block;
+          padding: 0.7rem 2rem;
+          border: 1px solid rgba(255,255,255,0.1);
+          color: #6a5a4a;
           text-decoration: none;
           font-size: 0.82rem;
           letter-spacing: 0.08em;
+          transition: all 0.2s;
         }
+
+        .footer-browse:hover { color: #9a8a7a; border-color: rgba(255,255,255,0.2); }
 
         .reading-tip {
           position: fixed;
@@ -437,9 +471,14 @@ export default function EbookPage() {
             <span className="ebook-badge">電子書</span>
           </div>
           <div className="ebook-nav-actions">
-            <button className="btn-print" onClick={handlePrint} disabled={isPrinting}>
-              ⬇ <span className="label">下載 PDF</span>
-            </button>
+            <a
+              href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-print"
+            >
+              🛒 <span className="label">購買完整版</span>
+            </a>
           </div>
         </nav>
 
@@ -502,19 +541,24 @@ export default function EbookPage() {
         {publishedChapters.length > 0 && (
           <div className="ebook-footer">
             <div className="footer-ornament">✦</div>
+            <p className="footer-hook">喜歡這個故事？</p>
             <p className="footer-text">
-              本電子書為免費試讀版，包含第 1 至第 {freeCount} 章。<br />
-              更多章節每週一・三・五更新，歡迎回到網站繼續閱讀。<br /><br />
-              surprise-corner.vercel.app
+              這是免費試讀版，完整版收錄全部內容。<br />
+              前往小舖購買後，店長透過 LINE 寄送完整閱讀連結。
             </p>
-            <a
-              href="https://still-time-corner.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-shop"
-            >
-              ✨ Still Time Corner 小舖 →
-            </a>
+            <div className="footer-btns">
+              <a
+                href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-shop"
+              >
+                前往小舖購買完整版 →
+              </a>
+              <Link href="/novels" className="footer-browse">
+                繼續逛驚喜站 →
+              </Link>
+            </div>
           </div>
         )}
 
