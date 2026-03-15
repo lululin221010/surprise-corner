@@ -1,5 +1,25 @@
 [
   {
+    "id": "lulu-life",
+    "title": "魯魯來了",
+    "author": "盧林說的",
+    "cover": "",
+    "genre": "生活紀錄",
+    "status": "連載中",
+    "category": "serial",
+    "description": "家裡多了一雙藍色眼睛。爸爸反對、媽媽說貓沒感情，但魯魯用牠自己的方式，悄悄住進了每個人心裡。圖文不定期更新。",
+    "tags": [
+      "貓咪",
+      "日常",
+      "療癒"
+    ],
+    "totalChapters": 0,
+    "updatedAt": "2026-03-15",
+    "createdAt": "2026-03-15",
+    "scheduleNote": "不定期更新",
+    "shopUrl": "https://still-time-corner.vercel.app/digital"
+  },
+  {
     "id": "the-last-signal",
     "title": "最後的信號",
     "author": "盧林說的",

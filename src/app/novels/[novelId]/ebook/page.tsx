@@ -351,6 +351,47 @@ export default function EbookPage() {
           font-weight: 400;
         }
 
+        /* ── 圖片 & 影片 ─────────────── */
+        .chapter-figure {
+          margin: 2em 0;
+          text-align: center;
+        }
+
+        .chapter-img {
+          max-width: 100%;
+          width: 100%;
+          border-radius: 8px;
+          border: 1px solid rgba(180,144,80,0.15);
+          display: block;
+          margin: 0 auto;
+        }
+
+        .chapter-figcaption {
+          font-size: 0.82rem;
+          color: #7a6a58;
+          margin-top: 10px;
+          letter-spacing: 0.05em;
+          font-style: italic;
+        }
+
+        .chapter-video {
+          margin: 2em 0;
+          position: relative;
+          padding-bottom: 56.25%;
+          height: 0;
+          overflow: hidden;
+          border-radius: 8px;
+          border: 1px solid rgba(180,144,80,0.15);
+        }
+
+        .chapter-video iframe {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+
         .ebook-footer {
           max-width: 680px;
           margin: 0 auto;
@@ -528,9 +569,38 @@ export default function EbookPage() {
                 <h2 className="chapter-heading">{chapter.title}</h2>
                 <p className="chapter-dateline">{chapter.publishedAt} &nbsp;·&nbsp; {chapter.wordCount} 字</p>
                 <div className="chapter-rule" />
-                {paragraphs.map((para: string, i: number) => (
-                  <p key={i} className="chapter-paragraph">{para}</p>
-                ))}
+                {paragraphs.map((para: string, i: number) => {
+                  // 圖片：![說明](url)
+                  const imgMatch = para.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)
+                  if (imgMatch) {
+                    return (
+                      <figure key={i} className="chapter-figure">
+                        <img src={imgMatch[2]} alt={imgMatch[1]} className="chapter-img" />
+                        {imgMatch[1] && <figcaption className="chapter-figcaption">{imgMatch[1]}</figcaption>}
+                      </figure>
+                    )
+                  }
+                  // 影片：[video](youtube-url 或 直接 URL)
+                  const vidMatch = para.match(/^\[video\]\(([^)]+)\)$/)
+                  if (vidMatch) {
+                    const url = vidMatch[1]
+                    const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/)
+                    if (ytMatch) {
+                      return (
+                        <div key={i} className="chapter-video">
+                          <iframe
+                            src={`https://www.youtube.com/embed/${ytMatch[1]}`}
+                            title="影片"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                      )
+                    }
+                  }
+                  // 一般文字段落
+                  return <p key={i} className="chapter-paragraph">{para}</p>
+                })}
               </div>
             )
           })}
