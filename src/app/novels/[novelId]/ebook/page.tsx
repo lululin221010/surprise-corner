@@ -243,9 +243,9 @@ export default function EbookPage() {
         .cover-desc {
           max-width: 460px;
           margin: 0 auto 32px;
-          font-size: 0.95rem;
-          color: #8a7a6a;
-          line-height: 1.9;
+          font-size: 1rem;
+          color: #a89880;
+          line-height: 2;
           font-style: italic;
         }
 
@@ -267,10 +267,10 @@ export default function EbookPage() {
           display: flex;
           align-items: baseline;
           gap: 8px;
-          padding: 8px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.03);
-          font-size: 0.88rem;
-          color: #8a7a6a;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          font-size: 0.95rem;
+          color: #a89880;
         }
 
         .toc-num {
@@ -316,9 +316,9 @@ export default function EbookPage() {
 
         .chapter-heading {
           font-family: 'Playfair Display', 'Noto Serif TC', serif;
-          font-size: 1.8rem;
-          font-weight: 400;
-          color: #e8dcc8;
+          font-size: 1.9rem;
+          font-weight: 500;
+          color: #f0e4d0;
           text-align: center;
           margin-bottom: 12px;
           letter-spacing: 0.06em;
@@ -340,13 +340,14 @@ export default function EbookPage() {
         }
 
         .chapter-paragraph {
-          font-size: 1.05rem;
-          line-height: 2.1;
-          color: #c8bcaa;
+          font-size: 1.12rem;
+          line-height: 2.15;
+          color: #d8cebb;
           margin-bottom: 1.8em;
           text-align: justify;
           text-indent: 2em;
-          letter-spacing: 0.02em;
+          letter-spacing: 0.03em;
+          font-weight: 400;
         }
 
         .ebook-footer {
