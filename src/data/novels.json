@@ -43,7 +43,7 @@
     "id": "soul-journey",
     "title": "靈魂的轉運站",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/soul-journey-cover.jpg.png",
+    "cover": "https://still-time-corner.vercel.app/images/soul-journey/cover.png",
     "genre": "療癒散文",
     "status": "連載中",
     "category": "preview",
@@ -53,13 +53,13 @@
       "靈性",
       "哲理"
     ],
-    "totalChapters": 30,
-    "updatedAt": "2026-03-16",
+    "totalChapters": 10,
+    "updatedAt": "2026-03-15",
     "createdAt": "2026-03-15",
-    "scheduleNote": "看看喜不喜歡",
-    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "scheduleNote": "第一章免費試讀",
+    "shopUrl": "https://still-time-corner.vercel.app/soul-journey",
     "shopPrice": "NT$ 299",
-    "previewChapters": 6
+    "previewChapters": 1
   },
   {
     "id": "slash-rich",
