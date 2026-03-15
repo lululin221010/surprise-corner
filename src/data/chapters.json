@@ -890,7 +890,7 @@
     "wordCount": 1000,
     "publishedAt": "2026-03-22",
     "isPublished": true,
-    "isFree": false,
+    "isFree": true,
     "price": 0,
     "priceFullBook": 299,
     "shopUrl": "https://still-time-corner.vercel.app/digital"

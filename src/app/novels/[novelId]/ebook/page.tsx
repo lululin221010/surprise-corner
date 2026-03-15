@@ -54,13 +54,14 @@ export default function EbookPage() {
     )
   }
 
-  // ✅ 修正：同時符合 isFree === true 且日期已到，才放入電子書
+  // ✅ 修正：isFree === true、日期已到、且有實際內容才顯示
   const publishedChapters = (chaptersData as any[])
     .filter(c =>
       c.novelId === novelId &&
       c.isPublished &&
       c.isFree === true &&
-      isPublishedByDate(c.publishedAt)
+      isPublishedByDate(c.publishedAt) &&
+      c.content && c.content.trim().length > 0
     )
     .sort((a, b) => a.chapterNumber - b.chapterNumber)
 
@@ -88,8 +89,8 @@ export default function EbookPage() {
           --paper: #f5f0e8;
           --gold: #b49050;
           --dark-bg: #0c0b08;
-          --dark-text: #d8ccb8;
-          --dark-muted: #6a5a4a;
+          --dark-text: #e2dace;
+          --dark-muted: #7a6a58;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -133,11 +134,11 @@ export default function EbookPage() {
 
         .ebook-nav-title {
           font-size: 0.85rem;
-          color: #8a7060;
+          color: #9a8878;
           letter-spacing: 0.05em;
         }
 
-        .nav-divider { color: #3a2a1a; }
+        .nav-divider { color: #5a4a38; }
 
         .ebook-badge {
           font-size: 0.7rem;
@@ -214,13 +215,13 @@ export default function EbookPage() {
         .cover-genre {
           font-size: 0.78rem;
           letter-spacing: 0.35em;
-          color: #7a6050;
+          color: #9a8070;
           margin-bottom: 8px;
         }
 
         .cover-author {
           font-size: 0.88rem;
-          color: #6a5a4a;
+          color: #8a7868;
           letter-spacing: 0.1em;
           margin-bottom: 36px;
         }
@@ -237,14 +238,14 @@ export default function EbookPage() {
           justify-content: center;
           gap: 24px;
           font-size: 0.78rem;
-          color: #4a3a2a;
+          color: #7a6a58;
         }
 
         .cover-desc {
           max-width: 460px;
           margin: 0 auto 32px;
           font-size: 1rem;
-          color: #a89880;
+          color: #b8a890;
           line-height: 2;
           font-style: italic;
         }
@@ -259,7 +260,7 @@ export default function EbookPage() {
         .toc-label {
           font-size: 0.72rem;
           letter-spacing: 0.4em;
-          color: #7a6050;
+          color: #9a8070;
           margin-bottom: 24px;
         }
 
@@ -268,27 +269,27 @@ export default function EbookPage() {
           align-items: baseline;
           gap: 8px;
           padding: 10px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.04);
-          font-size: 0.95rem;
-          color: #a89880;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          font-size: 0.97rem;
+          color: #baaE96;
         }
 
         .toc-num {
-          color: #4a3a2a;
-          font-size: 0.75rem;
+          color: #7a6a58;
+          font-size: 0.78rem;
           width: 28px;
           flex-shrink: 0;
         }
 
         .toc-dots {
           flex: 1;
-          border-bottom: 1px dotted rgba(255,255,255,0.06);
+          border-bottom: 1px dotted rgba(255,255,255,0.08);
           margin-bottom: 3px;
         }
 
         .toc-page {
-          color: #4a3a2a;
-          font-size: 0.72rem;
+          color: #7a6a58;
+          font-size: 0.75rem;
         }
 
         .chapters-body {
@@ -307,18 +308,18 @@ export default function EbookPage() {
         }
 
         .chapter-eyebrow {
-          font-size: 0.7rem;
+          font-size: 0.72rem;
           letter-spacing: 0.4em;
-          color: #7a6050;
+          color: #9a8878;
           margin-bottom: 20px;
           text-align: center;
         }
 
         .chapter-heading {
           font-family: 'Playfair Display', 'Noto Serif TC', serif;
-          font-size: 1.9rem;
+          font-size: 2rem;
           font-weight: 500;
-          color: #f0e4d0;
+          color: #f5ead8;
           text-align: center;
           margin-bottom: 12px;
           letter-spacing: 0.06em;
@@ -326,8 +327,8 @@ export default function EbookPage() {
 
         .chapter-dateline {
           text-align: center;
-          font-size: 0.72rem;
-          color: #3a2a1a;
+          font-size: 0.75rem;
+          color: #7a6a58;
           margin-bottom: 40px;
           letter-spacing: 0.1em;
         }
@@ -340,9 +341,9 @@ export default function EbookPage() {
         }
 
         .chapter-paragraph {
-          font-size: 1.12rem;
-          line-height: 2.15;
-          color: #d8cebb;
+          font-size: 1.16rem;
+          line-height: 2.2;
+          color: #e5ddd0;
           margin-bottom: 1.8em;
           text-align: justify;
           text-indent: 2em;
@@ -366,14 +367,14 @@ export default function EbookPage() {
 
         .footer-hook {
           font-size: 1.1rem;
-          color: #d8ccb8;
+          color: #e0d8c8;
           margin-bottom: 8px;
           letter-spacing: 0.05em;
         }
 
         .footer-text {
-          font-size: 0.82rem;
-          color: #4a3a2a;
+          font-size: 0.85rem;
+          color: #7a6a58;
           line-height: 2;
           margin-bottom: 28px;
         }
@@ -423,8 +424,8 @@ export default function EbookPage() {
           background: rgba(20,16,10,0.9);
           border: 1px solid rgba(180,144,80,0.2);
           padding: 8px 16px;
-          font-size: 0.72rem;
-          color: #6a5a4a;
+          font-size: 0.75rem;
+          color: #8a7a68;
           letter-spacing: 0.08em;
           backdrop-filter: blur(4px);
           z-index: 50;
@@ -491,11 +492,7 @@ export default function EbookPage() {
           <div className="cover-line" />
           <p className="cover-desc">{novel.description}</p>
           <div className="cover-meta">
-            <span>共 {freeCount} 章</span>
-            <span>·</span>
             <span>約 {totalWords.toLocaleString()} 字</span>
-            <span>·</span>
-            <span>免費試讀版</span>
           </div>
         </div>
 
@@ -544,7 +541,7 @@ export default function EbookPage() {
             <div className="footer-ornament">✦</div>
             <p className="footer-hook">喜歡這個故事？</p>
             <p className="footer-text">
-              這是免費試讀版，完整版收錄全部內容。<br />
+              完整版收錄全部精彩內容。<br />
               前往小舖購買後，店長透過 LINE 寄送完整閱讀連結。
             </p>
             <div className="footer-btns">

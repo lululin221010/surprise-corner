@@ -150,9 +150,6 @@ export default function NovelsPage() {
                 <div className="novel-meta">
                   <span className="novel-status novel-status-completed">{novel.status}</span>
                   <span>完整版 {novel.totalChapters} 章</span>
-                  {novel.previewChapters && (
-                    <span style={{ color: '#50b478' }}>看看喜不喜歡</span>
-                  )}
                 </div>
                 <div className="novel-footer">
                   <div className="novel-tags">
