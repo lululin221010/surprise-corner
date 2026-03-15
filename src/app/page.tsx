@@ -238,9 +238,29 @@ export default function Home() {
                 background: '#1e1b4b', border: '1px solid rgba(196,181,253,0.3)',
                 borderRadius: '24px', padding: '2rem', maxWidth: '400px', width: '100%',
               }}>
-                <h3 style={{ color: '#e9d5ff', fontSize: '1.3rem', fontWeight: 800, marginBottom: '1.5rem', textAlign: 'center' }}>
-                  📲 加入桌面
-                </h3>
+                <h3 style={{ color: '#e9d5ff', fontSize: '1.3rem', fontWeight: 800, marginBottom: '1rem', textAlign: 'center' }}>
+  📲 加入桌面
+</h3>
+<div style={{
+  display: 'flex', alignItems: 'center', gap: '0.5rem',
+  background: 'rgba(0,0,0,0.3)', borderRadius: '10px',
+  padding: '0.5rem 0.8rem', marginBottom: '1.2rem',
+  border: '1px solid rgba(196,181,253,0.2)',
+}}>
+  <span style={{ color: '#a78bfa', fontSize: '0.82rem', flex: 1, userSelect: 'all', letterSpacing: '0.01em' }}>
+    surprise-corner.vercel.app
+  </span>
+  <button
+    onClick={() => navigator.clipboard.writeText('https://surprise-corner.vercel.app')}
+    style={{
+      background: 'rgba(124,58,237,0.4)', border: '1px solid rgba(196,181,253,0.3)',
+      color: '#c4b5fd', borderRadius: '6px', padding: '0.25rem 0.6rem',
+      fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap',
+    }}
+  >
+    複製
+  </button>
+</div>
                 <div style={{ marginBottom: '1rem' }}>
                   <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🍎 iPhone / Chrome</p>
                   {['用 Chrome 開啟本站', '點右上角三個點', '點「新增至主畫面」', '確認，桌面就出現了'].map((s, i) => (
