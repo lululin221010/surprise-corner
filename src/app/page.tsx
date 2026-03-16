@@ -283,13 +283,13 @@ const [copied, setCopied] = useState(false);
 </button>
 </div>
                 <div style={{ marginBottom: '1rem' }}>
-                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🍎 iPhone / Chrome</p>
-                  {['用 Chrome 開啟本站', '點右上角三個點', '點「新增至主畫面」', '確認，桌面就出現了'].map((s, i) => (
-                    <div key={i} style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.5rem', alignItems: 'center' }}>
-                      <span style={{ background: '#7c3aed', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
-                      <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
-                    </div>
-                  ))}
+                  <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🍎 iPhone Safari</p>
+  {['用 Safari 開啟本站', '點畫面下方中間的 □↑ 分享按鈕', '向下滑找到「加入主畫面」', '點右上角「新增」完成'].map((s, i) => (
+    <div key={i} style={{ display: 'flex', gap: '0.8rem', marginBottom: '0.5rem', alignItems: 'center' }}>
+      <span style={{ background: '#7c3aed', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 800, flexShrink: 0 }}>{i + 1}</span>
+      <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
+    </div>
+  ))}
                 </div>
                 <div style={{ marginBottom: '1.5rem' }}>
                   <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🤖 Android / Chrome</p>
