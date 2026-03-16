@@ -151,7 +151,12 @@ export default async function ChapterPage({ params }: Props) {
   }
 
   // ✅ 正常顯示章節內容（原有樣式完整保留）
-  const paragraphs = chapter.content.split('\n').filter((p: string) => p.trim())
+  const hasVideo = chapter.videoUrl && chapter.content.includes('[[VIDEO]]')
+  const contentParts = hasVideo
+    ? chapter.content.split('[[VIDEO]]')
+    : [chapter.content]
+  const paragraphsBefore = contentParts[0].split('\n').filter((p: string) => p.trim())
+  const paragraphsAfter = contentParts[1] ? contentParts[1].split('\n').filter((p: string) => p.trim()) : []
 
   return (
     <main style={{ minHeight: '100vh', background: '#0c0b08', color: '#d8ccb8', fontFamily: 'Georgia, serif' }}>
@@ -172,8 +177,26 @@ export default async function ChapterPage({ params }: Props) {
 
         <div style={{ width: 40, height: 1, background: 'rgba(180,144,80,0.3)', margin: '0 auto 48px' }} />
 
-        {paragraphs.map((para: string, i: number) => (
-          <p key={i} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
+        {paragraphsBefore.map((para: string, i: number) => (
+          <p key={`before-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
+        ))}
+
+        {hasVideo && (
+          <div style={{ margin: '2rem 0' }}>
+            <iframe
+              width="100%"
+              style={{ aspectRatio: '9/16', maxWidth: 360, margin: '1.5rem auto', display: 'block', borderRadius: 12 } as React.CSSProperties}
+              src={chapter.videoUrl}
+              title="魯魯撞牆"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
+
+        {paragraphsAfter.map((para: string, i: number) => (
+          <p key={`after-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
         ))}
 
         {/* ✅ 第 FREE_CHAPTERS 章結尾：免費章節讀完提示 */}
