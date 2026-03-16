@@ -151,8 +151,9 @@ export default async function ChapterPage({ params }: Props) {
   }
 
   // ✅ 正常顯示章節內容（原有樣式完整保留）
-  const hasVideo = chapter.videoUrl && chapter.content.includes('[[VIDEO]]')
-  const contentParts = hasVideo
+  const videoUrl = (chapter as any).videoUrl as string | undefined
+  const hasVideo = !!videoUrl && chapter.content.includes('[[VIDEO]]')
+  const contentParts = chapter.content.includes('[[VIDEO]]')
     ? chapter.content.split('[[VIDEO]]')
     : [chapter.content]
   const paragraphsBefore = contentParts[0].split('\n').filter((p: string) => p.trim())
@@ -186,7 +187,7 @@ export default async function ChapterPage({ params }: Props) {
             <iframe
               width="100%"
               style={{ aspectRatio: '9/16', maxWidth: 360, margin: '1.5rem auto', display: 'block', borderRadius: 12 } as React.CSSProperties}
-              src={chapter.videoUrl}
+              src={videoUrl}
               title="魯魯撞牆"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
