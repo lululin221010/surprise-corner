@@ -61,7 +61,7 @@ export default function EbookPage() {
       c.isPublished &&
       c.isFree === true &&
       isPublishedByDate(c.publishedAt) &&
-      c.content && c.content.trim().length > 0
+      c.content && (Array.isArray(c.content) ? c.content.length > 0 : c.content.trim().length > 0)
     )
     .sort((a, b) => a.chapterNumber - b.chapterNumber)
 
@@ -562,7 +562,9 @@ export default function EbookPage() {
 
         <div className="chapters-body">
           {publishedChapters.map((chapter) => {
-            const paragraphs = chapter.content.split('\n').filter((p: string) => p.trim())
+            const paragraphs = Array.isArray(chapter.content)
+              ? chapter.content.filter((p: string) => p && p.trim())
+              : chapter.content.split('\n').filter((p: string) => p.trim())
             return (
               <div key={chapter.id} className="chapter-block" id={`ch-${chapter.chapterNumber}`}>
                 <p className="chapter-eyebrow">第 {chapter.chapterNumber} 章</p>
