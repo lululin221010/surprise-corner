@@ -100,10 +100,10 @@ export default async function NovelPage({ params }: Props) {
         .chapters-label { font-size: 0.75rem; letter-spacing: 0.25em; color: #7a6050; margin: 0 0 20px; }
         .chapter-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); text-decoration: none; color: inherit; transition: padding-left 0.2s; }
         .chapter-row:hover { padding-left: 8px; }
-        .chapter-row.locked { opacity: 0.45; cursor: default; pointer-events: none; }
-        .chapter-num { font-size: 0.75rem; color: #4a3a2a; width: 28px; flex-shrink: 0; text-align: right; }
-        .chapter-title { flex: 1; font-size: 0.95rem; color: #b8a898; }
-        .chapter-date { font-size: 0.75rem; color: #4a3a2a; }
+        .chapter-row.locked { opacity: 0.55; cursor: default; pointer-events: none; }
+        .chapter-num { font-size: 0.75rem; color: #7a6a58; width: 28px; flex-shrink: 0; text-align: right; }
+        .chapter-title { flex: 1; font-size: 0.95rem; color: #c8b8a8; }
+        .chapter-date { font-size: 0.75rem; color: #9a8878; }
         .chapter-lock { font-size: 0.85rem; }
         .lock-notice { margin: 28px 0 0; padding: 20px; border: 1px solid rgba(180,144,80,0.15); text-align: center; }
         .lock-notice p { color: #6a5a4a; font-size: 0.85rem; margin: 0 0 12px; line-height: 1.8; }
