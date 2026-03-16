@@ -179,7 +179,8 @@ function Typewriter() {
 export default function Home() {
   const [surprise, setSurprise] = useState<{ title?: string; content?: string; message?: string; type?: string } | null>(null);
   const [revealed, setRevealed] = useState(false);
-  const [showInstall, setShowInstall] = useState(false);
+ const [showInstall, setShowInstall] = useState(false);
+const [copied, setCopied] = useState(false);
   const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
   useEffect(() => {
@@ -251,15 +252,35 @@ export default function Home() {
     surprise-corner.vercel.app
   </span>
   <button
-    onClick={() => navigator.clipboard.writeText('https://surprise-corner.vercel.app')}
-    style={{
-      background: 'rgba(124,58,237,0.4)', border: '1px solid rgba(196,181,253,0.3)',
-      color: '#c4b5fd', borderRadius: '6px', padding: '0.25rem 0.6rem',
-      fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap',
-    }}
-  >
-    複製
-  </button>
+  onClick={() => {
+    const url = 'https://surprise-corner.vercel.app';
+    const doCopy = () => {
+      const el = document.createElement('input');
+      el.value = url;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).catch(doCopy);
+    } else {
+      doCopy();
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }}
+  style={{
+    background: copied ? 'rgba(16,185,129,0.4)' : 'rgba(124,58,237,0.4)',
+    border: `1px solid ${copied ? 'rgba(16,185,129,0.5)' : 'rgba(196,181,253,0.3)'}`,
+    color: copied ? '#6ee7b7' : '#c4b5fd',
+    borderRadius: '6px', padding: '0.25rem 0.6rem',
+    fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap',
+    transition: 'all 0.3s ease',
+  }}
+>
+  {copied ? '已複製 ✓' : '複製'}
+</button>
 </div>
                 <div style={{ marginBottom: '1rem' }}>
                   <p style={{ color: '#c4b5fd', fontWeight: 700, marginBottom: '0.8rem' }}>🍎 iPhone / Chrome</p>
