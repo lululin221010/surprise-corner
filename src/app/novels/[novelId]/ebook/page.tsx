@@ -580,6 +580,21 @@ export default function EbookPage() {
                       </figure>
                     )
                   }
+                  // [[VIDEO]] 佔位符 → 用 chapter.videoUrl 嵌入
+                  if (para.trim() === '[[VIDEO]]') {
+                    const vUrl = (chapter as any).videoUrl as string | undefined
+                    if (!vUrl) return null
+                    return (
+                      <div key={i} className="chapter-video">
+                        <iframe
+                          src={vUrl}
+                          title="影片"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    )
+                  }
                   // 影片：[video](youtube-url 或 直接 URL)
                   const vidMatch = para.match(/^\[video\]\(([^)]+)\)$/)
                   if (vidMatch) {
