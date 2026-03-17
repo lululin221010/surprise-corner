@@ -176,7 +176,20 @@ export default async function ChapterPage({ params }: Props) {
           </div>
         </header>
 
-        <div style={{ width: 40, height: 1, background: 'rgba(180,144,80,0.3)', margin: '0 auto 48px' }} />
+        {/* ✅ 章節插圖 */}
+        {(chapter as any).imageUrl && (
+          <div style={{ margin: '0 auto 48px', textAlign: 'center' }}>
+            <img
+              src={(chapter as any).imageUrl}
+              alt={chapter.title}
+              style={{ maxWidth: '100%', maxHeight: 420, objectFit: 'cover', borderRadius: 4, opacity: 0.9 }}
+            />
+          </div>
+        )}
+
+        {!(chapter as any).imageUrl && (
+          <div style={{ width: 40, height: 1, background: 'rgba(180,144,80,0.3)', margin: '0 auto 48px' }} />
+        )}
 
         {paragraphsBefore.map((para: string, i: number) => (
           <p key={`before-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
