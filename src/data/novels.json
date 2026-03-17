@@ -23,7 +23,7 @@
     "id": "the-last-signal",
     "title": "最後的信號",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/cover_lulu_diary.png",
+    "cover": "/images/the-last-signal/cover.png",
     "genre": "科幻",
     "status": "連載中",
     "category": "serial",
@@ -152,7 +152,11 @@
     "status": "完結",
     "category": "preview",
     "description": "當身邊最愛的人漸漸老去，當角色悄悄互換，我們都在學習如何送別。這本書寫給所有正在照顧父母的你，那些說不出口的累、那些沒有說出口的對不起，都在這裡被溫柔看見。",
-    "tags": ["照顧", "生命", "家人"],
+    "tags": [
+      "照顧",
+      "生命",
+      "家人"
+    ],
     "totalChapters": 10,
     "previewChapters": 3,
     "updatedAt": "2026-03-16",
