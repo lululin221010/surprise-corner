@@ -37,7 +37,8 @@
     "updatedAt": "2026-03-17",
     "createdAt": "2026-03-15",
     "scheduleNote": "奇數日更新",
-    "shopUrl": "https://still-time-corner.vercel.app/digital"
+    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "freeWindow": 5
   },
   {
     "id": "lulu-diary",
@@ -57,7 +58,8 @@
     "updatedAt": "2026-03-16",
     "createdAt": "2026-03-15",
     "scheduleNote": "偶數日更新",
-    "shopUrl": "https://still-time-corner.vercel.app/digital"
+    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "freeWindow": 5
   },
   {
     "id": "soul-journey",

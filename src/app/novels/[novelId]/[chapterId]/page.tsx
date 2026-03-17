@@ -6,9 +6,6 @@ import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 
-// ✅ 免費開放章節數
-// isFree 由 chapters.json 控制
-
 // ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
 function isPublishedByDate(publishedAt: string): boolean {
   const now = new Date()
@@ -18,13 +15,25 @@ function isPublishedByDate(publishedAt: string): boolean {
   return publishedAt <= taiwanToday
 }
 
+// ✅ 計算滾動免費窗口：novelId 最新 N 章的 id 集合
+function getRollingFreeIds(novelId: string, windowSize: number): Set<string> {
+  const published = (chaptersData as any[])
+    .filter(c => c.novelId === novelId && isPublishedByDate(c.publishedAt))
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  return new Set(published.slice(0, windowSize).map((c: any) => c.id))
+}
+
 // ✅ 判斷章節是否應被鎖定
-function isChapterLocked(chapter: any): boolean {
-  // 超過免費章節數 → 鎖
-  if (!chapter.isFree) return true
-  // 發布日期未到 → 鎖
+function isChapterLocked(chapter: any, novel: any): boolean {
+  // 發布日期未到 → 鎖（無論任何模式）
   if (!isPublishedByDate(chapter.publishedAt)) return true
-  return false
+  // 連載滾動窗口模式（novel.freeWindow 存在時啟用）
+  if (novel?.freeWindow) {
+    const freeIds = getRollingFreeIds(novel.id, novel.freeWindow)
+    return !freeIds.has(chapter.id)
+  }
+  // 一般模式：看 isFree 欄位
+  return !chapter.isFree
 }
 
 // ✅ 計算下一個更新日（每週一、三、五）
@@ -71,10 +80,10 @@ export default async function ChapterPage({ params }: Props) {
   const prevChapter = currentIndex > 0 ? sortedChapters[currentIndex - 1] : null
   const nextChapter = currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : null
 
-  // ✅ 鎖章判斷：超過免費章節數 OR 發布日期未到
-  const isPaidLocked = !chapter.isFree && isPublishedByDate(chapter.publishedAt)
+  // ✅ 鎖章判斷
+  const isPaidLocked = isChapterLocked(chapter, novel) && isPublishedByDate(chapter.publishedAt)
 
-  if (isChapterLocked(chapter)) {
+  if (isChapterLocked(chapter, novel)) {
     const nextUpdate = getNextUpdateDay()
     return (
       <main style={{ minHeight: '100vh', background: '#0c0b08', color: '#d8ccb8', fontFamily: 'Georgia, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
@@ -263,8 +272,8 @@ export default async function ChapterPage({ params }: Props) {
             {/* 下一章：超過免費章節或未到發布日顯示🔒 */}
             {nextChapter ? (
               <Link href={'/novels/' + novel.id + '/' + nextChapter.id} style={{ flex: 1, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
-                <div style={{ fontSize: '0.75rem', color: isChapterLocked(nextChapter) ? '#4a3a2a' : '#b49050' }}>
-                  {isChapterLocked(nextChapter) ? '🔒 ' : ''}下一章 →
+                <div style={{ fontSize: '0.75rem', color: isChapterLocked(nextChapter, novel) ? '#4a3a2a' : '#b49050' }}>
+                  {isChapterLocked(nextChapter, novel) ? '🔒 ' : ''}下一章 →
                 </div>
                 <div style={{ fontSize: '0.85rem', color: '#8a7a6a' }}>{nextChapter.title}</div>
               </Link>

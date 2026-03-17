@@ -8,15 +8,20 @@ import { useParams } from 'next/navigation'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 
-// ✅ 改用 isFree 欄位判斷，不再用章節編號上限
-const FREE_CHAPTERS = 10
-
 function isPublishedByDate(publishedAt: string): boolean {
   const now = new Date()
   const taiwanToday = new Date(now.getTime() + 8 * 60 * 60 * 1000)
     .toISOString()
     .slice(0, 10)
   return publishedAt <= taiwanToday
+}
+
+// ✅ 滾動窗口：最新 N 章的 id 集合
+function getRollingFreeIds(novelId: string, windowSize: number): Set<string> {
+  const published = (chaptersData as any[])
+    .filter(c => c.novelId === novelId && isPublishedByDate(c.publishedAt))
+    .sort((a: any, b: any) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  return new Set(published.slice(0, windowSize).map((c: any) => c.id))
 }
 
 export default function EbookPage() {
@@ -54,16 +59,23 @@ export default function EbookPage() {
     )
   }
 
-  // ✅ 修正：isFree === true、日期已到、且有實際內容才顯示
+  // ✅ 決定哪些章節是免費的（滾動窗口 or isFree 欄位）
+  const novelAny = novel as any
+  const freeIds = novelAny.freeWindow
+    ? getRollingFreeIds(novelId, novelAny.freeWindow)
+    : null
+
   const publishedChapters = (chaptersData as any[])
-    .filter(c =>
-      c.novelId === novelId &&
-      c.isPublished &&
-      c.isFree === true &&
-      isPublishedByDate(c.publishedAt) &&
-      c.content && (Array.isArray(c.content) ? c.content.length > 0 : c.content.trim().length > 0)
-    )
-    .sort((a, b) => a.chapterNumber - b.chapterNumber)
+    .filter(c => {
+      if (c.novelId !== novelId || !c.isPublished) return false
+      if (!isPublishedByDate(c.publishedAt)) return false
+      if (!c.content || (Array.isArray(c.content) ? c.content.length === 0 : !c.content.trim())) return false
+      // 滾動窗口模式
+      if (freeIds) return freeIds.has(c.id)
+      // 一般模式
+      return c.isFree === true
+    })
+    .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
 
   // ✅ 顯示實際免費章節數
   const freeCount = publishedChapters.length
