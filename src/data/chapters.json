@@ -95,7 +95,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch07.png"
   },
   {
     "id": "lulu-008",
@@ -109,7 +110,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch08.png"
   },
   {
     "id": "lulu-009",
@@ -123,7 +125,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch09.png"
   },
   {
     "id": "lulu-010",
@@ -207,7 +210,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch15.png"
   },
   {
     "id": "lulu-016",
@@ -291,7 +295,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch21.png"
   },
   {
     "id": "lulu-022",
@@ -333,7 +338,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch24.png"
   },
   {
     "id": "lulu-025",
@@ -375,7 +381,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch27.png"
   },
   {
     "id": "lulu-028",
@@ -417,7 +424,8 @@
     "isFree": false,
     "price": 15,
     "priceFullBook": 99,
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b"
+    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "imageUrl": "/images/lulu-diary/ch30.png"
   },
   {
     "id": "chapter-001",
