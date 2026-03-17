@@ -178,7 +178,9 @@ export default async function ChapterPage({ params }: Props) {
 
       <article style={{ maxWidth: 680, margin: '0 auto', padding: '60px 32px 80px' }}>
         <header style={{ textAlign: 'center', marginBottom: 64 }}>
-          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '0.3em', color: '#7a6050', marginBottom: 16 }}>第 {chapter.chapterNumber} 章</span>
+          {!chapter.title.match(/^第[一二三四五六七八九十百\d]/) && (
+            <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '0.3em', color: '#7a6050', marginBottom: 16 }}>第 {chapter.chapterNumber} 章</span>
+          )}
           <h1 style={{ fontSize: '2rem', fontWeight: 400, color: '#e8dcc8', margin: '0 0 20px' }}>{chapter.title}</h1>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 10, fontSize: '0.78rem', color: '#4a3a2a' }}>
             <span>{chapter.publishedAt}</span><span>·</span><span>{chapter.wordCount} 字</span>
