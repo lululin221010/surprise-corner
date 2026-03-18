@@ -268,10 +268,8 @@ export default async function ChapterPage({ params }: Props) {
           </div>
         )}
 
-        {/* 🐾 讀者留言區（只有魯魯來了才顯示） */}
-        {novelId === 'lulu-life' && (
-          <CommentSection chapterId={chapterId} novelId={novelId} />
-        )}
+        {/* 🐾 讀者留言區（各小說角色聊天：林悅 / 魯魯 / 等） */}
+        <CommentSection chapterId={chapterId} novelId={novelId} />
 
         <footer style={{ marginTop: 80, paddingTop: 40, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
