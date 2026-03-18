@@ -650,10 +650,7 @@ export default function EbookPage() {
                     />
                   </div>
                 )}
-                {/* 🐾 讀者留言區（只有魯魯來了才顯示） */}
-                {novelId === 'lulu-life' && (
-                  <CommentSection chapterId={chapter.id} novelId={novelId} />
-                )}
+                {/* 試看區不顯示互動聊天，只有連載章節頁才有角色聊天 */}
               </div>
             )
           })}
