@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
+import CommentSection from '@/components/CommentSection'
 
 // ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
 function isPublishedByDate(publishedAt: string): boolean {
@@ -266,6 +267,9 @@ export default async function ChapterPage({ params }: Props) {
             </a>
           </div>
         )}
+
+        {/* 🐾 讀者留言區 */}
+        <CommentSection chapterId={chapterId} novelId={novelId} />
 
         <footer style={{ marginTop: 80, paddingTop: 40, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>

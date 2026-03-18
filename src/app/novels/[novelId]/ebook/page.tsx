@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
+import CommentSection from '@/components/CommentSection'
 
 function isPublishedByDate(publishedAt: string): boolean {
   const now = new Date()
@@ -649,6 +650,8 @@ export default function EbookPage() {
                     />
                   </div>
                 )}
+                {/* 🐾 讀者留言區（每集底部） */}
+                <CommentSection chapterId={chapter.id} novelId={novelId} />
               </div>
             )
           })}
