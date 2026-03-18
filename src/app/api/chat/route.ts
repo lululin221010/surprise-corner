@@ -1,5 +1,36 @@
 // 📄 src/app/api/chat/route.ts
 import { NextRequest, NextResponse } from 'next/server';
+import clientPromise from '@/lib/mongodb';
+
+const DAILY_LIMIT = 60; // 3 次 session × 20 則
+
+async function checkIpLimit(req: NextRequest): Promise<boolean> {
+  try {
+    const ip =
+      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      req.headers.get('x-real-ip') ||
+      'unknown';
+    // 台灣時間 UTC+8
+    const taiwanDate = new Date(Date.now() + 8 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
+
+    const client = await clientPromise;
+    const col = client.db().collection('chatRateLimits');
+
+    const record = await col.findOne({ ip, date: taiwanDate });
+    if (record && record.count >= DAILY_LIMIT) return false; // 超過上限
+
+    await col.updateOne(
+      { ip, date: taiwanDate },
+      { $inc: { count: 1 }, $setOnInsert: { ip, date: taiwanDate } },
+      { upsert: true }
+    );
+    return true;
+  } catch {
+    return true; // MongoDB 掛掉時不擋用戶
+  }
+}
 
 const CHARACTERS = {
   lulu: {
@@ -44,6 +75,11 @@ const CHARACTERS = {
 
 export async function POST(req: NextRequest) {
   try {
+    const allowed = await checkIpLimit(req);
+    if (!allowed) {
+      return NextResponse.json({ error: 'daily_limit' }, { status: 429 });
+    }
+
     const { messages, character } = await req.json();
     const char = CHARACTERS[character as keyof typeof CHARACTERS];
     if (!char) return NextResponse.json({ error: '找不到角色' }, { status: 400 });

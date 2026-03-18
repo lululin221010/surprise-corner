@@ -16,17 +16,19 @@ export default function LuluChatPage() {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [dailyBlocked, setDailyBlocked] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const userMsgCount = messages.filter(m => m.role === 'user').length;
   const isLimitReached = userMsgCount >= MAX_USER_MSGS;
+  const isNearLimit = userMsgCount >= 15 && !isLimitReached;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   async function sendMessage() {
-    if (!input.trim() || loading || isLimitReached) return;
+    if (!input.trim() || loading || isLimitReached || dailyBlocked) return;
     const userMsg: Message = { role: 'user', content: input.trim() };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
@@ -39,6 +41,11 @@ export default function LuluChatPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: newMessages, character: 'lulu' }),
       });
+      if (res.status === 429) {
+        setDailyBlocked(true);
+        setLoading(false);
+        return;
+      }
       const data = await res.json();
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
     } catch {
@@ -183,7 +190,22 @@ export default function LuluChatPage() {
         borderTop: '1px solid rgba(139,92,246,0.2)',
         padding: '1rem',
       }}>
-        {isLimitReached ? (
+        {dailyBlocked ? (
+          <div style={{
+            maxWidth: '680px', margin: '0 auto',
+            background: 'rgba(124,58,237,0.06)',
+            border: '1px solid rgba(167,139,250,0.2)',
+            borderRadius: '12px', padding: '0.9rem 1.2rem',
+            textAlign: 'center',
+          }}>
+            <p style={{ color: '#a78bfa', fontSize: '0.88rem', margin: '0 0 0.4rem' }}>
+              ……今天我們說了太多了。明天再繼續吧。
+            </p>
+            <p style={{ color: '#4b5563', fontSize: '0.75rem', margin: 0 }}>
+              每日上限為 3 次對話，明天台灣時間 00:00 重置
+            </p>
+          </div>
+        ) : isLimitReached ? (
           <div style={{
             maxWidth: '680px', margin: '0 auto',
             background: 'rgba(124,58,237,0.08)',
@@ -199,6 +221,14 @@ export default function LuluChatPage() {
             </p>
           </div>
         ) : (
+          {isNearLimit && (
+            <p style={{
+              maxWidth: '680px', margin: '0 auto 0.5rem',
+              color: '#a78bfa', fontSize: '0.75rem', textAlign: 'center', opacity: 0.7,
+            }}>
+              🐾 還剩 {MAX_USER_MSGS - userMsgCount} 則
+            </p>
+          )}
           <div style={{
             maxWidth: '680px', margin: '0 auto',
             display: 'flex', gap: '0.75rem', alignItems: 'flex-end',
