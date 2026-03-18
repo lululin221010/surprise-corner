@@ -632,6 +632,16 @@ export default function EbookPage() {
                   // 一般文字段落
                   return <p key={i} className="chapter-paragraph">{para}</p>
                 })}
+                {/* 🐾 魯魯碎碎念照片 */}
+                {(chapter as any).photoUrl && (
+                  <div style={{ margin: '2rem auto 0', textAlign: 'center', maxWidth: 320 }}>
+                    <img
+                      src={(chapter as any).photoUrl}
+                      alt="魯魯"
+                      style={{ width: '100%', borderRadius: 16, objectFit: 'cover', opacity: 0.92, boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }}
+                    />
+                  </div>
+                )}
               </div>
             )
           })}
