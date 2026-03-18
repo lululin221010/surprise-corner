@@ -284,6 +284,13 @@ export default function EbookPage() {
           border-bottom: 1px solid rgba(255,255,255,0.06);
           font-size: 0.97rem;
           color: #baaE96;
+          text-decoration: none;
+          transition: color 0.2s, padding-left 0.2s;
+          cursor: pointer;
+        }
+        a.toc-row:hover {
+          color: #e8c880;
+          padding-left: 6px;
         }
 
         .toc-num {
@@ -555,12 +562,12 @@ export default function EbookPage() {
           <div className="toc-section">
             <p className="toc-label">目　錄</p>
             {publishedChapters.map((c) => (
-              <div key={c.id} className="toc-row">
+              <Link key={c.id} href={`/novels/${novelId}/${c.id}`} className="toc-row">
                 <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
                 <span>{c.title}</span>
                 <span className="toc-dots" />
                 <span className="toc-page">{c.publishedAt}</span>
-              </div>
+              </Link>
             ))}
           </div>
         )}
