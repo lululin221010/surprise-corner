@@ -224,6 +224,17 @@ export default async function ChapterPage({ params }: Props) {
           <p key={`after-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
         ))}
 
+        {/* 🐾 魯魯碎碎念照片（章節底部） */}
+        {(chapter as any).photoUrl && (
+          <div style={{ margin: '2.5rem auto 0', textAlign: 'center', maxWidth: 340 }}>
+            <img
+              src={(chapter as any).photoUrl}
+              alt="魯魯"
+              style={{ width: '100%', borderRadius: 16, objectFit: 'cover', opacity: 0.92, boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }}
+            />
+          </div>
+        )}
+
         {/* ✅ 第 FREE_CHAPTERS 章結尾：免費章節讀完提示 */}
         {chapter.isFree && nextChapter && !nextChapter.isFree && (
           <div style={{
