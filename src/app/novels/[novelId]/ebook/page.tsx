@@ -526,14 +526,16 @@ export default function EbookPage() {
             <span className="ebook-badge">電子書</span>
           </div>
           <div className="ebook-nav-actions">
-            <a
-              href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-print"
-            >
-              🛒 <span className="label">購買完整版</span>
-            </a>
+            {(novel as any).forSale !== false && (
+              <a
+                href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-print"
+              >
+                🛒 <span className="label">購買完整版</span>
+              </a>
+            )}
           </div>
         </nav>
 
@@ -639,23 +641,47 @@ export default function EbookPage() {
           <div className="ebook-footer">
             <div className="footer-ornament">✦</div>
             <p className="footer-hook">喜歡這個故事？</p>
-            <p className="footer-text">
-              完整版收錄全部精彩內容。<br />
-              前往小舖購買後，店長透過 LINE 寄送完整閱讀連結。
-            </p>
-            <div className="footer-btns">
-              <a
-                href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-shop"
-              >
-                前往小舖購買完整版 →
-              </a>
-              <Link href="/novels" className="footer-browse">
-                繼續逛驚喜角落 →
-              </Link>
-            </div>
+            {(novel as any).forSale === false ? (
+              <>
+                <p className="footer-text">
+                  連載更新中，歡迎繼續追蹤 🐾<br />
+                  小舖還有更多精采的書等你探索。
+                </p>
+                <div className="footer-btns">
+                  <a
+                    href="https://still-time-corner.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-shop"
+                  >
+                    去小舖看看其他精采的書 →
+                  </a>
+                  <Link href="/novels" className="footer-browse">
+                    繼續逛驚喜角落 →
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="footer-text">
+                  完整版收錄全部精彩內容。<br />
+                  前往小舖購買後，店長透過 LINE 寄送完整閱讀連結。
+                </p>
+                <div className="footer-btns">
+                  <a
+                    href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-shop"
+                  >
+                    前往小舖購買完整版 →
+                  </a>
+                  <Link href="/novels" className="footer-browse">
+                    繼續逛驚喜角落 →
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         )}
 

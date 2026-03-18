@@ -98,11 +98,14 @@ export default async function NovelPage({ params }: Props) {
 
         .chapters-section { max-width: 760px; margin: 0 auto; padding: 40px 32px 0; }
         .chapters-label { font-size: 0.75rem; letter-spacing: 0.25em; color: #7a6050; margin: 0 0 20px; }
-        .chapter-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); text-decoration: none; color: inherit; transition: padding-left 0.2s; }
-        .chapter-row:hover { padding-left: 8px; }
+        .chapter-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); text-decoration: none; color: inherit; transition: all 0.2s; }
+        .chapter-row:hover { padding-left: 8px; background: rgba(180,144,80,0.05); border-radius: 6px; }
+        .chapter-row:hover .chapter-title { color: #e8c880; }
+        .chapter-row:hover .chapter-arrow { opacity: 1; }
         .chapter-row.locked { opacity: 0.55; cursor: default; pointer-events: none; }
         .chapter-num { font-size: 0.75rem; color: #7a6a58; width: 28px; flex-shrink: 0; text-align: right; }
-        .chapter-title { flex: 1; font-size: 0.95rem; color: #c8b8a8; }
+        .chapter-title { flex: 1; font-size: 0.95rem; color: #c8b8a8; transition: color 0.2s; }
+        .chapter-arrow { font-size: 0.8rem; color: #b49050; opacity: 0; transition: opacity 0.2s; }
         .chapter-date { font-size: 0.75rem; color: #9a8878; }
         .chapter-lock { font-size: 0.85rem; }
         .lock-notice { margin: 28px 0 0; padding: 20px; border: 1px solid rgba(180,144,80,0.15); text-align: center; }
@@ -191,6 +194,7 @@ export default async function NovelPage({ params }: Props) {
               <span className="chapter-num">{chapter.chapterNumber}</span>
               <span className="chapter-title">{chapter.title}</span>
               <span className="chapter-date">{chapter.publishedAt}</span>
+              <span className="chapter-arrow">→</span>
             </Link>
           ))}
 
