@@ -8,6 +8,8 @@ interface Message {
   content: string;
 }
 
+const MAX_USER_MSGS = 20;
+
 export default function LuluChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: '你好。我在這裡。\n\n有什麼想說的嗎？' }
@@ -16,12 +18,15 @@ export default function LuluChatPage() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  const userMsgCount = messages.filter(m => m.role === 'user').length;
+  const isLimitReached = userMsgCount >= MAX_USER_MSGS;
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   async function sendMessage() {
-    if (!input.trim() || loading) return;
+    if (!input.trim() || loading || isLimitReached) return;
     const userMsg: Message = { role: 'user', content: input.trim() };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
@@ -178,40 +183,57 @@ export default function LuluChatPage() {
         borderTop: '1px solid rgba(139,92,246,0.2)',
         padding: '1rem',
       }}>
-        <div style={{
-          maxWidth: '680px', margin: '0 auto',
-          display: 'flex', gap: '0.75rem', alignItems: 'flex-end',
-        }}>
-          <textarea
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }}}
-            placeholder="跟 Lulu 說說話…"
-            rows={1}
-            style={{
-              flex: 1, background: 'rgba(255,255,255,0.07)',
-              border: '1px solid rgba(167,139,250,0.3)',
-              borderRadius: '14px', padding: '0.75rem 1rem',
-              color: '#f3f4f6', fontSize: '0.9rem', resize: 'none',
-              outline: 'none', lineHeight: 1.5,
-              fontFamily: 'inherit',
-            }}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={loading || !input.trim()}
-            style={{
-              width: '44px', height: '44px', borderRadius: '50%', border: 'none',
-              background: loading || !input.trim()
-                ? 'rgba(124,58,237,0.3)'
-                : 'linear-gradient(135deg,#7c3aed,#a855f7)',
-              color: '#fff', fontSize: '1.1rem', cursor: loading ? 'not-allowed' : 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: loading ? 'none' : '0 4px 16px rgba(124,58,237,0.4)',
-              flexShrink: 0,
-            }}
-          >↑</button>
-        </div>
+        {isLimitReached ? (
+          <div style={{
+            maxWidth: '680px', margin: '0 auto',
+            background: 'rgba(124,58,237,0.08)',
+            border: '1px solid rgba(167,139,250,0.25)',
+            borderRadius: '12px', padding: '0.9rem 1.2rem',
+            textAlign: 'center',
+          }}>
+            <p style={{ color: '#a78bfa', fontSize: '0.88rem', margin: '0 0 0.4rem' }}>
+              ……我需要安靜一下了。我們今天說了很多。
+            </p>
+            <p style={{ color: '#4b5563', fontSize: '0.75rem', margin: 0 }}>
+              重新整理頁面可開始新的對話
+            </p>
+          </div>
+        ) : (
+          <div style={{
+            maxWidth: '680px', margin: '0 auto',
+            display: 'flex', gap: '0.75rem', alignItems: 'flex-end',
+          }}>
+            <textarea
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }}}
+              placeholder="跟 Lulu 說說話…"
+              rows={1}
+              style={{
+                flex: 1, background: 'rgba(255,255,255,0.07)',
+                border: '1px solid rgba(167,139,250,0.3)',
+                borderRadius: '14px', padding: '0.75rem 1rem',
+                color: '#f3f4f6', fontSize: '0.9rem', resize: 'none',
+                outline: 'none', lineHeight: 1.5,
+                fontFamily: 'inherit',
+              }}
+            />
+            <button
+              onClick={sendMessage}
+              disabled={loading || !input.trim()}
+              style={{
+                width: '44px', height: '44px', borderRadius: '50%', border: 'none',
+                background: loading || !input.trim()
+                  ? 'rgba(124,58,237,0.3)'
+                  : 'linear-gradient(135deg,#7c3aed,#a855f7)',
+                color: '#fff', fontSize: '1.1rem', cursor: loading ? 'not-allowed' : 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: loading ? 'none' : '0 4px 16px rgba(124,58,237,0.4)',
+                flexShrink: 0,
+              }}
+            >↑</button>
+          </div>
+        )}
         <p style={{ color: '#4b5563', fontSize: '0.72rem', textAlign: 'center', margin: '0.5rem 0 0' }}>
           Lulu 是虛構角色，來自小說《Lulu的日記》
         </p>

@@ -8,6 +8,8 @@ interface Message {
   content: string;
 }
 
+const MAX_USER_MSGS = 20;
+
 export default function SignalChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: '訊號連線中……\n\n我是林悅。你找我有什麼事？' }
@@ -16,12 +18,15 @@ export default function SignalChatPage() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  const userMsgCount = messages.filter(m => m.role === 'user').length;
+  const isLimitReached = userMsgCount >= MAX_USER_MSGS;
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   async function sendMessage() {
-    if (!input.trim() || loading) return;
+    if (!input.trim() || loading || isLimitReached) return;
     const userMsg: Message = { role: 'user', content: input.trim() };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
@@ -178,40 +183,57 @@ export default function SignalChatPage() {
         borderTop: '1px solid rgba(14,165,233,0.2)',
         padding: '1rem',
       }}>
-        <div style={{
-          maxWidth: '680px', margin: '0 auto',
-          display: 'flex', gap: '0.75rem', alignItems: 'flex-end',
-        }}>
-          <textarea
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }}}
-            placeholder="傳送訊號給林悅…"
-            rows={1}
-            style={{
-              flex: 1, background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(14,165,233,0.3)',
-              borderRadius: '14px', padding: '0.75rem 1rem',
-              color: '#f0f9ff', fontSize: '0.9rem', resize: 'none',
-              outline: 'none', lineHeight: 1.5,
-              fontFamily: 'inherit',
-            }}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={loading || !input.trim()}
-            style={{
-              width: '44px', height: '44px', borderRadius: '50%', border: 'none',
-              background: loading || !input.trim()
-                ? 'rgba(14,165,233,0.3)'
-                : 'linear-gradient(135deg,#0ea5e9,#0284c7)',
-              color: '#fff', fontSize: '1.1rem', cursor: loading ? 'not-allowed' : 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: loading ? 'none' : '0 4px 16px rgba(14,165,233,0.4)',
-              flexShrink: 0,
-            }}
-          >↑</button>
-        </div>
+        {isLimitReached ? (
+          <div style={{
+            maxWidth: '680px', margin: '0 auto',
+            background: 'rgba(14,165,233,0.08)',
+            border: '1px solid rgba(14,165,233,0.25)',
+            borderRadius: '12px', padding: '0.9rem 1.2rem',
+            textAlign: 'center',
+          }}>
+            <p style={{ color: '#7dd3fc', fontSize: '0.88rem', margin: '0 0 0.4rem' }}>
+              ……訊號配額已用盡。本次連線到此為止。
+            </p>
+            <p style={{ color: '#4b5563', fontSize: '0.75rem', margin: 0 }}>
+              重新整理頁面可開始新的對話
+            </p>
+          </div>
+        ) : (
+          <div style={{
+            maxWidth: '680px', margin: '0 auto',
+            display: 'flex', gap: '0.75rem', alignItems: 'flex-end',
+          }}>
+            <textarea
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }}}
+              placeholder="傳送訊號給林悅…"
+              rows={1}
+              style={{
+                flex: 1, background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(14,165,233,0.3)',
+                borderRadius: '14px', padding: '0.75rem 1rem',
+                color: '#f0f9ff', fontSize: '0.9rem', resize: 'none',
+                outline: 'none', lineHeight: 1.5,
+                fontFamily: 'inherit',
+              }}
+            />
+            <button
+              onClick={sendMessage}
+              disabled={loading || !input.trim()}
+              style={{
+                width: '44px', height: '44px', borderRadius: '50%', border: 'none',
+                background: loading || !input.trim()
+                  ? 'rgba(14,165,233,0.3)'
+                  : 'linear-gradient(135deg,#0ea5e9,#0284c7)',
+                color: '#fff', fontSize: '1.1rem', cursor: loading ? 'not-allowed' : 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: loading ? 'none' : '0 4px 16px rgba(14,165,233,0.4)',
+                flexShrink: 0,
+              }}
+            >↑</button>
+          </div>
+        )}
         <p style={{ color: '#4b5563', fontSize: '0.72rem', textAlign: 'center', margin: '0.5rem 0 0' }}>
           林悅是虛構角色，來自小說《最後的信號》
         </p>
