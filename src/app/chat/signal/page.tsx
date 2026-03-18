@@ -221,6 +221,7 @@ export default function SignalChatPage() {
             </p>
           </div>
         ) : (
+          <>
           {isNearLimit && (
             <p style={{
               maxWidth: '680px', margin: '0 auto 0.5rem',
@@ -263,6 +264,7 @@ export default function SignalChatPage() {
               }}
             >↑</button>
           </div>
+          </>
         )}
         <p style={{ color: '#4b5563', fontSize: '0.72rem', textAlign: 'center', margin: '0.5rem 0 0' }}>
           林悅是虛構角色，來自小說《最後的信號》

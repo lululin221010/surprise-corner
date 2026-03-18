@@ -221,6 +221,7 @@ export default function LuluChatPage() {
             </p>
           </div>
         ) : (
+          <>
           {isNearLimit && (
             <p style={{
               maxWidth: '680px', margin: '0 auto 0.5rem',
@@ -263,6 +264,7 @@ export default function LuluChatPage() {
               }}
             >↑</button>
           </div>
+          </>
         )}
         <p style={{ color: '#4b5563', fontSize: '0.72rem', textAlign: 'center', margin: '0.5rem 0 0' }}>
           Lulu 是虛構角色，來自小說《Lulu的日記》
