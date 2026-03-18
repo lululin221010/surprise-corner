@@ -5,7 +5,7 @@
 - 技術：Next.js App Router，TypeScript（`.tsx`）
 
 ## 代號系統
-- **SS** = 驚喜站 `surprise-corner-src`
+- **SS** = 驚喜角落 `surprise-corner-src`
 - **ST** = 小舖 `my-bookstore-next-V2`
 - **CC** = Claude Code（終端機 AI 工程師）
 - **C** = Claude（網頁版 AI 策略顧問）

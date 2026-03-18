@@ -653,7 +653,7 @@ export default function EbookPage() {
                 前往小舖購買完整版 →
               </a>
               <Link href="/novels" className="footer-browse">
-                繼續逛驚喜站 →
+                繼續逛驚喜角落 →
               </Link>
             </div>
           </div>
