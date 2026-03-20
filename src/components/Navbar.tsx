@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 const links = [
   // ✅ 移除「首頁」，Logo 本身即為首頁入口
@@ -17,6 +18,26 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const [clickCount, setClickCount] = useState(0);
+  const [pendingCount, setPendingCount] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/admin/comments?approved=false')
+      .then(r => r.json())
+      .then(data => setPendingCount((data.comments || []).length))
+      .catch(() => {});
+  }, [pathname]);
+
+  function handleLogoClick() {
+    setClickCount(n => {
+      const next = n + 1;
+      if (next >= 5) {
+        window.location.href = '/admin/comments';
+        return 0;
+      }
+      return next;
+    });
+  }
 
   return (
     <nav style={{
