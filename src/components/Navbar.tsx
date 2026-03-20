@@ -112,7 +112,7 @@ export default function Navbar() {
       </Link>
       {pendingCount > 0 && (
         <div
-          onClick={() => setActionMsg('此路不通 🚫')}
+          onClick={() => { setActionMsg('此路不通 🚫'); setTimeout(() => setActionMsg(''), 2000); }}
           style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', cursor: 'pointer', flexShrink: 0, boxShadow: '0 0 6px rgba(239,68,68,0.8)' }}
           title=""
         />
