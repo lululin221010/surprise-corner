@@ -154,6 +154,7 @@ export default function AdminCommentsPage() {
           <h2 style={{ color: '#e8c880', margin: '0 0 1.5rem', fontSize: '1.1rem' }}>後台入口</h2>
           <input
             type="password"
+            autoComplete="new-password"
             value={pwInput}
             onChange={e => { setPwInput(e.target.value); setPwError(false); }}
             onKeyDown={e => e.key === 'Enter' && handleLogin()}
