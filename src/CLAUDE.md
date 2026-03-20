@@ -163,3 +163,12 @@ Get-Content "完整路徑\檔案名稱" -Encoding UTF8
 <CommentSection chapterId="lulu-s-01-xx" novelId="lulu-life" />
 chapterId 跟章節編號走，忘記加 = 那章沒有留言區
 目前進度：第一、二集已加，第三集起新增時記得加
+
+
+## SS 後台安全升級 — 待辦
+| 優先度 | 項目 |
+|--------|------|
+| 中 | 建立 /admin/login 獨立頁面 |
+| 中 | 修改 middleware 正確攔截 /admin/* |
+| 低 | 加入 session 過期機制（目前無登出） |
+| 低 | 考慮將 SS GitHub 改為 Private |
