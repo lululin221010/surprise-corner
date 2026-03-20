@@ -54,6 +54,7 @@ export default function Navbar() {
         href="/"
         title="🏠 回首頁"
         className="site-logo"
+        onClick={handleLogoClick}
         style={{
           textDecoration: 'none',
           marginRight: '1rem',
