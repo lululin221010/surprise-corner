@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "id": "lulu-001",
     "novelId": "lulu-diary",
@@ -2448,7 +2448,7 @@
     "photoUrl": "/images/lulu-life/ch02.jpg",
     "wordCount": 620,
     "publishedAt": "2026-03-20",
-    "isPublished": false,
+    "isPublished": true,
     "isFree": true,
     "price": 0,
     "priceFullBook": 0
