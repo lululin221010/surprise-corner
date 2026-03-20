@@ -68,3 +68,25 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: '伺服器錯誤' }, { status: 500 });
   }
 }
+
+// POST /api/admin/comments - 站長直接發文，自動 approved
+export async function POST(req: NextRequest) {
+  try {
+    const { chapterId, novelId, nickname, content } = await req.json();
+    if (!chapterId || !content) return NextResponse.json({ error: '缺少欄位' }, { status: 400 });
+    const db = await dbConnect();
+    await db.collection('chapter_comments').insertOne({
+      chapterId,
+      novelId: novelId || '',
+      nickname: nickname || '站長',
+      petName: '',
+      content,
+      approved: true,
+      createdAt: new Date(),
+    });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('POST /api/admin/comments error:', err);
+    return NextResponse.json({ error: '伺服器錯誤' }, { status: 500 });
+  }
+}
