@@ -19,6 +19,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const [clickCount, setClickCount] = useState(0);
+  const [actionMsg, setActionMsg] = useState('');
   const [pendingCount, setPendingCount] = useState(0);
 
   useEffect(() => {
@@ -108,6 +109,19 @@ export default function Navbar() {
       >
         🔐 隱私權
       </Link>
+      {pendingCount > 0 && (
+        <div
+          onClick={() => setActionMsg('此路不通 🚫')}
+          style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444', cursor: 'pointer', flexShrink: 0, boxShadow: '0 0 6px rgba(239,68,68,0.8)' }}
+          title=""
+        />
+      )}
+      {actionMsg && (
+        <div style={{ position: 'fixed', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(30,20,10,0.95)', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 10, padding: '0.5rem 1.2rem', color: '#e8c880', fontSize: '0.85rem', zIndex: 9999 }}
+          onClick={() => setActionMsg('')}>
+          {actionMsg}
+        </div>
+      )}
     </nav>
   );
 }
