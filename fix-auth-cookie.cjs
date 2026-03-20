@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿const fs = require("fs");
+const content = `import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const { password } = await req.json();
@@ -21,3 +22,6 @@ export async function DELETE() {
   res.cookies.delete('admin_token');
   return res;
 }
+`;
+fs.writeFileSync("src/app/api/admin/auth/route.ts", content, "utf8");
+console.log("done");
