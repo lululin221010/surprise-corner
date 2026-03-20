@@ -29,8 +29,14 @@ export default function AdminCommentsPage() {
   const [pwInput, setPwInput] = useState('');
   const [pwError, setPwError] = useState(false);
 
-  function handleLogin() {
-    if (pwInput === 'admin080511') { setAuthed(true); setPwError(false); }
+  async function handleLogin() {
+    const res = await fetch('/api/admin/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pwInput }),
+    });
+    const data = await res.json();
+    if (data.success) { setAuthed(true); setPwError(false); }
     else { setPwError(true); setPwInput(''); }
   }
 
