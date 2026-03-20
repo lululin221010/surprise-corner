@@ -101,13 +101,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 >
   ☕ 請我喝杯咖啡
 </a>
-<p style={{ marginTop: '0.6rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', lineHeight: 2 }}>
-  ① 點按鈕 &nbsp;→&nbsp; ②{' '}
+  <p style={{ marginTop: '0.6rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.85)', lineHeight: 2 }}>
+  ① 點按鈕 &nbsp;→&nbsp; {' '}
   <a href="https://line.me/R/ti/p/@983agawb" target="_blank" rel="noopener noreferrer"
     style={{ color: '#06c755', textDecoration: 'underline' }}>
     加入 LINE 好友
   </a>
   &nbsp;→&nbsp; ③ 私訊「請喝咖啡」取得轉帳資訊 感謝打賞支持
+  <br />
+  <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)' }}>
+    （手機點擊直接開啟 LINE，電腦請掃描 QR Code）
+  </span>
+
 </p>
           </div>
 
