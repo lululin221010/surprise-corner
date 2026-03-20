@@ -157,3 +157,9 @@ Get-Content "完整路徑\檔案名稱" -Encoding UTF8
 |------|------|
 | 驚喜站 | `C:\Users\user\Desktop\MyProjects01\surprise-corner-src` |
 | 小舖 | `C:\Users\user\Desktop\MyProjects01\my-bookstore-next-V2` |
+
+## 連載小說章節規範
+每章頁面底部必須加：
+<CommentSection chapterId="lulu-s-01-xx" novelId="lulu-life" />
+chapterId 跟章節編號走，忘記加 = 那章沒有留言區
+目前進度：第一、二集已加，第三集起新增時記得加
