@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿const fs = require("fs");
+const content = `import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -19,3 +20,6 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/admin/comments'],
 };
+`;
+fs.writeFileSync("middleware.ts", content, "utf8");
+console.log("done");
