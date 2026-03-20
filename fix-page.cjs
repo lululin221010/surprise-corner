@@ -1,4 +1,5 @@
-'use client';
+﻿const fs = require("fs");
+const content = `'use client';
 
 // 後台留言管理頁 /admin/comments
 import { useEffect, useState } from 'react';
@@ -29,7 +30,7 @@ export default function AdminCommentsPage() {
   async function fetchComments(f: FilterType) {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/comments?approved=${f}`);
+      const res = await fetch(\`/api/admin/comments?approved=\${f}\`);
       const data = await res.json();
       setComments(data.comments || []);
     } catch {
@@ -87,7 +88,7 @@ export default function AdminCommentsPage() {
 
   function formatDate(dateStr: string) {
     const d = new Date(dateStr);
-    return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+    return \`\${d.getFullYear()}/\${d.getMonth() + 1}/\${d.getDate()} \${d.getHours().toString().padStart(2,'0')}:\${d.getMinutes().toString().padStart(2,'0')}\`;
   }
 
   const btnStyle = (active: boolean) => ({
@@ -134,7 +135,7 @@ export default function AdminCommentsPage() {
                 background: 'rgba(255,255,255,0.04)',
                 borderRadius: 10,
                 padding: '1rem 1.2rem',
-                borderLeft: `3px solid ${c.approved ? 'rgba(80,200,120,0.5)' : 'rgba(232,200,128,0.4)'}`,
+                borderLeft: \`3px solid \${c.approved ? 'rgba(80,200,120,0.5)' : 'rgba(232,200,128,0.4)'}\`,
               }}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <span style={{ color: '#e8c880', fontWeight: 600 }}>{c.nickname}</span>
@@ -214,3 +215,6 @@ export default function AdminCommentsPage() {
     </div>
   );
 }
+`;
+fs.writeFileSync("src/app/admin/comments/page.tsx", content, "utf8");
+console.log(content.includes("replyTarget"));

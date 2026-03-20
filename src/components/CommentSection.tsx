@@ -115,6 +115,12 @@ export default function CommentSection({ chapterId, novelId }: Props) {
               <p style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, whiteSpace: 'pre-wrap' }}>
                 {c.content}
               </p>
+              {c.reply && (
+                <div style={{ marginTop: '0.75rem', background: 'rgba(232,200,128,0.07)', borderRadius: 8, padding: '0.6rem 0.9rem', borderLeft: '2px solid rgba(232,200,128,0.5)' }}>
+                  <span style={{ color: '#b49050', fontSize: '0.78rem', fontWeight: 600 }}>✍️ 站長：</span>
+                  <p style={{ color: '#d8ccb8', fontSize: '0.85rem', margin: '0.3rem 0 0', whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{c.reply}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>

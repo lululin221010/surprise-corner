@@ -97,3 +97,63 @@ Sena 精選 AI 協作系列：
 ## 工作習慣
 - 每次完成任務後自動 commit + push main
 - Claude Code session 常當掉，每次新 session 先讀此檔案
+
+# 工作協議 — 改動原則
+
+## 🔴 大改前必須提供原始檔
+
+當任何一個改動涉及以下情況時，**Claude 必須先索取原始檔，不可自行推斷**：
+
+- 改動超過 30 行
+- 涉及多個檔案同時修改
+- 修改 API route（`/api/...`）
+- 修改共用元件（`/components/...`）
+- 修改資料庫操作邏輯
+
+> ❌ 禁止行為：依據截圖、亂碼輸出、或記憶推斷原始碼內容後直接覆寫
+
+---
+
+## 📋 標準提供方式
+
+請用以下 PowerShell 指令取得原始檔內容後貼給 Claude：
+
+```powershell
+Get-Content "完整路徑\檔案名稱" -Encoding UTF8
+```
+
+若出現亂碼，改用：
+
+```powershell
+[System.IO.File]::ReadAllText("完整路徑\檔案名稱", [System.Text.Encoding]::UTF8)
+```
+
+---
+
+## ✅ 改動流程
+
+1. 妹描述需求
+2. Claude 列出**需要哪些原始檔**
+3. 妹提供原始檔內容
+4. Claude 確認後才輸出修改稿
+5. 妹貼上執行，本機 `npm run dev` 確認
+6. 沒問題再 git push
+
+---
+
+## 📝 改動說明格式
+
+每次改動 Claude 必須說明：
+
+- **改了什麼**（新增 / 修改 / 刪除哪些部分）
+- **沒動什麼**（確認哪些功能維持原樣）
+- **可能影響範圍**（哪些頁面或功能需要一併確認）
+
+---
+
+## 🗂 專案路徑速查
+
+| 專案 | 路徑 |
+|------|------|
+| 驚喜站 | `C:\Users\user\Desktop\MyProjects01\surprise-corner-src` |
+| 小舖 | `C:\Users\user\Desktop\MyProjects01\my-bookstore-next-V2` |
