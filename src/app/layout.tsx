@@ -109,7 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   </a>
   &nbsp;→&nbsp; ③ 私訊「請喝咖啡」取得轉帳資訊 感謝打賞支持
   <br />
-  <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)' }}>
+  <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.85)' }}>
     （手機點擊直接開啟 LINE，電腦請掃描 QR Code）
   </span>
 
