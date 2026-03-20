@@ -9,6 +9,7 @@ interface Comment {
   petName?: string;
   content: string;
   createdAt: string;
+  reply?: string;
 }
 
 interface Props {
