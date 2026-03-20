@@ -207,7 +207,7 @@ export default function AIBookPromo() {
         >
           🔓 立即購買完整版
           <small style={{ fontSize: '12px', fontWeight: 400, opacity: 0.8 }}>
-            PDF + EPUB · 永久使用 · PayPal / 銀行轉帳
+            PDF · 永久使用 · 銀行轉帳
           </small>
         </a>
 
@@ -219,7 +219,6 @@ export default function AIBookPromo() {
           {[
             '完整8章 15,000字',
             'PDF 精美排版版',
-            'EPUB 電子閱讀器版',
             '50+ Prompt範例',
             '下載後永久使用',
           ].map(item => (
