@@ -1218,14 +1218,7 @@ export default function ToolsPage() {
             🌟 前往許願牆 →
           </a>
         </div>
-        <div style={{ marginTop:'2rem', background:'linear-gradient(135deg,rgba(124,58,237,0.15),rgba(99,102,241,0.15))', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'16px', padding:'1.2rem', textAlign:'center' }}>
-          <p style={{ color:'#c4b5fd', fontWeight:700, margin:'0 0 0.3rem' }}>🛠️ 找不到你想要的工具？</p>
-          <p style={{ color:'#9ca3af', fontSize:'0.85rem', margin:'0 0 0.6rem' }}>來許願牆說說看，做出來會通知你！</p>
-          <a href="/wall?tab=許願牆"
-            style={{ display:'inline-block', background:'linear-gradient(135deg,#7c3aed,#6366f1)', color:'#fff', padding:'0.5rem 1.5rem', borderRadius:'30px', textDecoration:'none', fontWeight:700, fontSize:'0.9rem' }}>
-            🌟 前往許願牆 →
-          </a>
-        </div>
+
         <div style={{ marginTop:'2rem', background:'linear-gradient(135deg,rgba(245,158,11,0.15),rgba(236,72,153,0.15))', border:'1px solid rgba(245,158,11,0.3)', borderRadius:'16px', padding:'1.2rem', textAlign:'center' }}>
           <p style={{ color:'#fcd34d', fontWeight:700, margin:'0 0 0.3rem' }}>✨ 工具用完了，去逛逛其他地方？</p>
           <a href={randomPage.href} target={randomPage.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
@@ -1241,4 +1234,5 @@ export default function ToolsPage() {
     </div>
   );
 }
+
 

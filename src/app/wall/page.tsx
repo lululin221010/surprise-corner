@@ -27,10 +27,12 @@ export default function WallPage() {
   const searchParams = useSearchParams();
   const initTab = searchParams.get('tab') || 'all';
   const [activeTab, setActiveTab] = useState(initTab);
+  const initLabel = searchParams.get('tab') && searchParams.get('tab') !== 'all' ? searchParams.get('tab')! : '魯魯讀者';
+  const initTo = searchParams.get('tab') === '許願牆' ? '工具精靈 🧰' : '';
   const [text, setText] = useState('');
-  const [to, setTo] = useState('');
+  const [to, setTo] = useState(initTo);
   const [from, setFrom] = useState('');
-  const [label, setLabel] = useState('魯魯讀者');
+  const [label, setLabel] = useState(initLabel);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
 
@@ -234,4 +236,6 @@ export default function WallPage() {
     </main>
   );
 }
+
+
 
