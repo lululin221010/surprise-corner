@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -21,7 +21,7 @@ const TABS = [
   { key: '許願牆',  label: '🛠️ 工具許願' },
 ];
 
-export default function WallPage() {
+function WallContent() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
@@ -236,6 +236,15 @@ export default function WallPage() {
     </main>
   );
 }
+
+export default function WallPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight:'100vh', background:'#0f0c29' }} />}>
+      <WallContent />
+    </Suspense>
+  );
+}
+
 
 
 
