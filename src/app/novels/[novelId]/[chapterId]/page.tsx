@@ -270,7 +270,7 @@ export default async function ChapterPage({ params }: Props) {
 
         {/* 🐾 跟魯魯說說話（留言板，只有魯魯來了才顯示） */}
         {novelId === 'lulu-life' && (
-          <CommentSection chapterId={chapterId} novelId={novelId} />
+          <CommentSection chapterId={novelId} novelId={novelId} />
         )}
 
         <footer style={{ marginTop: 80, paddingTop: 40, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
