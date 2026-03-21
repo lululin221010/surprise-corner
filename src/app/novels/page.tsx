@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
+import chaptersData from '@/data/chapters.json'
 
 export const metadata: Metadata = {
   title: '連載小說・試看空間 | Surprise Corner',
@@ -25,7 +26,15 @@ function NovélCover({ cover, title }: { cover: string; title: string }) {
     </div>
   )
 }
-
+function getLastPublishedDate(novelId: string): string {
+  const chapters = (chaptersData as any[])
+    .filter(c => {
+  const today = new Date().toISOString().slice(0, 10)
+  return c.novelId === novelId && c.isPublished === true && c.publishedAt <= today
+})
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  return chapters[0]?.publishedAt ?? ''
+}
 export default function NovelsPage() {
   const serials = novelsData.filter((n: any) => n.category === 'serial')
   const previews = novelsData.filter((n: any) => n.category === 'preview')
@@ -114,7 +123,7 @@ export default function NovelsPage() {
                       {(novel as any).scheduleNote}
                     </span>
                   )}
-                  <span>更新於 {novel.updatedAt}</span>
+                  <span>更新於 {getLastPublishedDate(novel.id) || novel.updatedAt}</span>
                 </div>
                 <div className="novel-footer">
                   <div className="novel-tags">

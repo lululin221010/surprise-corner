@@ -257,3 +257,27 @@ chapterId 跟章節編號走，忘記加 = 那章沒有留言區
 - 需要 cc 評估開發
 
 ### 優先度：中
+
+Spotify 上架 Podcast 用 Spotify for Podcasters：
+podcasters.spotify.com
+免費，上傳 MP3 就好，SS 的音檔都已經有了 ✅
+
+今天完成事項：
+
+✅ CommentSection 改用 novelId 統一留言區
+✅ MongoDB 舊留言批次更新
+✅ Threads 帳號確認公開
+✅ IG/Threads 第二則文案準備好
+
+待完成：
+
+ 純文字發文測試 Threads
+ Threads 連結欄位填 SS 首頁
+ Spotify Podcast 上架
+ git push（CommentSection 修改還沒 push！）
+
+記得先 push！
+powershellgit add .
+git commit -m "fix: CommentSection 改用 novelId 統一留言區"
+git push
+下次開新對話先讀 CLAUDE.md 🐱
