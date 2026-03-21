@@ -30,7 +30,7 @@ export default function CommentSection({ chapterId, novelId }: Props) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`/api/comments?chapterId=${encodeURIComponent(chapterId)}`)
+    fetch(`/api/comments?chapterId=${encodeURIComponent(novelId)}`)
       .then((r) => r.json())
       .then((data) => {
         setComments(data.comments || []);
@@ -50,7 +50,7 @@ export default function CommentSection({ chapterId, novelId }: Props) {
       const res = await fetch('/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chapterId, novelId, nickname, petName, content }),
+        body: JSON.stringify({ chapterId: novelId, novelId, nickname, petName, content }),
       });
       const data = await res.json();
       if (!res.ok) {
