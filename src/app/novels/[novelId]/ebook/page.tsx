@@ -701,6 +701,38 @@ export default function EbookPage() {
                 </div>
               </>
             )}
+
+            {/* 角色聊天 CTA：看完故事後引導去和角色說說話 */}
+            {(novelId === 'lulu-diary' || novelId === 'the-last-signal') && (
+              <div style={{
+                marginTop: '2rem',
+                padding: '1.5rem',
+                background: 'rgba(168,85,247,0.08)',
+                border: '1px solid rgba(168,85,247,0.2)',
+                borderRadius: '16px',
+              }}>
+                <p style={{ fontSize: '0.88rem', color: '#c4b5fd', marginBottom: '0.8rem', lineHeight: 1.7 }}>
+                  {novelId === 'lulu-diary'
+                    ? '💬 看完 Lulu 的故事，有沒有想和她說說話？'
+                    : '💬 看完林悅的故事，有沒有想問她那個訊號的事？'}
+                </p>
+                <Link
+                  href={novelId === 'lulu-diary' ? '/chat/lulu' : '/chat/signal'}
+                  style={{
+                    display: 'inline-block',
+                    background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
+                    color: '#fff',
+                    borderRadius: '10px',
+                    padding: '0.6rem 1.4rem',
+                    fontWeight: 700,
+                    fontSize: '0.88rem',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {novelId === 'lulu-diary' ? '🐱 和 Lulu 聊聊' : '📡 和林悅說說話'} →
+                </Link>
+              </div>
+            )}
           </div>
         )}
 
