@@ -216,7 +216,7 @@ Podcast 開場腳本原則：
 ### SS 驚喜站
 - [ ] **/chat/lulu 和林悅說話頁「看小說」按鈕**：章節全上鎖，需與連載解鎖機制結合
 - [ ] **試看文章底部**：免費章節廣告改為卡片設計「連載更新了喔來看看」or「去小舖找找驚喜？」
-- [ ] **[[VIDEO]] 佔位符渲染**：chapter component 加影片 embed 邏輯
+- ✅ **[[VIDEO]] 佔位符渲染**：已正常顯示 YouTube embed（2026-03-23 確認）
 - [ ] 純文字發文測試 Threads
 - [ ] Threads 連結欄位填 SS 首頁
 - [ ] Spotify Podcast 上架（EP07、EP08 已上傳 Blob，待 Spotify）
