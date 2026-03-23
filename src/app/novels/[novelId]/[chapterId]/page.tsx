@@ -233,6 +233,11 @@ export default async function ChapterPage({ params }: Props) {
               alt="魯魯"
               style={{ width: '100%', borderRadius: 16, objectFit: 'cover', opacity: 0.92, boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }}
             />
+            {(chapter as any).photoCaption && (
+              <p style={{ marginTop: '0.6rem', fontSize: '0.75rem', color: '#9a8878', fontStyle: 'italic' }}>
+                ✨ {(chapter as any).photoCaption}
+              </p>
+            )}
           </div>
         )}
 
