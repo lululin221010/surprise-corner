@@ -49,6 +49,7 @@ function WallContent() {
         to: p.to || '',
         from: p.from || '',
         label: p.label || '',
+        reply: p.reply || '',
         creatorId: p.creatorId,
       })));
     } catch {
@@ -223,14 +224,13 @@ function WallContent() {
               {p.reply && (
                 <div style={{
                   background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.25)',
-                  borderRadius: '10px', padding: '0.6rem 0.9rem', marginBottom: '0.9rem',
+                  borderRadius: '10px', padding: '0.6rem 0.9rem',
                   borderLeft: '3px solid rgba(167,139,250,0.6)',
                 }}>
                   <span style={{ fontSize: '0.75rem', color: '#a78bfa', fontWeight: 600 }}>✍️ 站長回覆：</span>
                   <p style={{ margin: '0.25rem 0 0', fontSize: '0.88rem', color: '#d8ccb8', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>{p.reply}</p>
                 </div>
               )}
-              <Link href={`/wall/${p._id}`} style={{ color: '#a78bfa', fontSize: '0.85rem' }}>查看作品 →</Link>
             </div>
           ))
         )}
