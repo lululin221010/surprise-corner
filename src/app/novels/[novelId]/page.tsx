@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
+import WallPostForm from '@/components/WallPostForm'
 
 const FREE_CHAPTERS = 10
 
@@ -222,6 +223,14 @@ export default async function NovelPage({ params }: Props) {
                 🛒 前往小舖購買完整版
               </a>
             </div>
+          )}
+
+          {/* 🐾 留言到作品牆（免費章節讀完後） */}
+          {freeChapters.length > 0 && (
+            <WallPostForm
+              label={novelId === 'lulu-life' ? '魯魯讀者' : '連載讀者'}
+              defaultTo={novelId === 'lulu-life' ? '魯魯' : ''}
+            />
           )}
 
           <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
