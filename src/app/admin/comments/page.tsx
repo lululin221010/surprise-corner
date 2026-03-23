@@ -467,6 +467,8 @@ export default function AdminCommentsPage() {
             ))}
           </div>
         )}
+          </>
+        )}
       </div>
 
       {/* 章節留言回覆彈窗 */}
@@ -498,8 +500,6 @@ export default function AdminCommentsPage() {
           </div>
         </div>
       )}
-          </>
-        )}
     </div>
   );
 }
