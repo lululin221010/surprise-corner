@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-// WallPostForm.tsx — 精簡留言表單，發布到作品牆 /wall
+// WallPostForm.tsx — 精簡留言表單，發布到互動牆 /wall
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -57,7 +57,7 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
       }}>
         <div style={{ fontSize: '1.8rem', marginBottom: '0.6rem' }}>🐾</div>
         <p style={{ color: '#e8c880', fontWeight: 600, margin: '0 0 0.5rem', fontSize: '0.95rem' }}>
-          已發布到作品牆！
+          已發布到互動牆！
         </p>
         <Link
           href="/wall"
@@ -67,7 +67,7 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
             letterSpacing: '0.05em',
           }}
         >
-          前往作品牆查看 →
+          前往互動牆查看 →
         </Link>
       </div>
     );
@@ -84,7 +84,7 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
         fontWeight: 400, letterSpacing: '0.12em',
         marginBottom: '1.2rem',
       }}>
-        🐾 留下你的話，發布到作品牆
+        🐾 留下你的話，發布到互動牆
       </h3>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
@@ -160,13 +160,13 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
               transition: 'all 0.2s',
             }}
           >
-            {submitting ? '送出中…' : '🚀 發布到作品牆'}
+            {submitting ? '送出中…' : '🚀 發布到互動牆'}
           </button>
           <Link
             href="/wall"
             style={{ color: '#4a3a2a', fontSize: '0.78rem', textDecoration: 'none', letterSpacing: '0.05em' }}
           >
-            查看作品牆 →
+            查看互動牆 →
           </Link>
         </div>
 

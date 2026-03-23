@@ -1,4 +1,4 @@
-// 📁 路徑：src/app/privacy/page.tsx
+﻿// 📁 路徑：src/app/privacy/page.tsx
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
           <Section title="二、我們收集哪些資料？">
             <P>本站依功能收集以下資料：</P>
             <ul style={{ paddingLeft:'1.4rem', margin:0 }}>
-              <Item><strong style={{ color:'#e9d5ff' }}>留言牆內容</strong>：你主動提交的文字，儲存於 MongoDB 雲端資料庫，公開顯示於作品牆。</Item>
+              <Item><strong style={{ color:'#e9d5ff' }}>留言牆內容</strong>：你主動提交的文字，儲存於 MongoDB 雲端資料庫，公開顯示於互動牆。</Item>
               <Item><strong style={{ color:'#e9d5ff' }}>創作者 ID</strong>：系統自動產生的匿名識別碼，儲存於你的瀏覽器 LocalStorage，用於識別你的留言。</Item>
               <Item><strong style={{ color:'#e9d5ff' }}>待辦清單</strong>：儲存於你的瀏覽器 LocalStorage，完全不會上傳至伺服器，本站無法存取。</Item>
               <Item><strong style={{ color:'#e9d5ff' }}>AI 生成輸入內容</strong>：你輸入的關鍵字或心情文字，僅用於當次 AI 生成，不會被記錄或儲存。</Item>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
 
           <Section title="五、AI 生成內容">
             <P>本站使用 AI 服務產生告白、祝福、運勢、療癒小語等內容。AI 生成結果為參考娛樂用途，不構成任何專業建議。</P>
-            <P>若你選擇將 AI 生成內容公開至作品牆，即表示同意該內容以匿名方式公開展示。</P>
+            <P>若你選擇將 AI 生成內容公開至互動牆，即表示同意該內容以匿名方式公開展示。</P>
           </Section>
 
           <Section title="六、資料安全">

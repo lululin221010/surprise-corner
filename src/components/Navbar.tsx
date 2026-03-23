@@ -23,10 +23,13 @@ export default function Navbar() {
   const [pendingCount, setPendingCount] = useState(0);
 
   useEffect(() => {
-    fetch('/api/admin/comments?approved=false')
-      .then(r => r.json())
-      .then(data => setPendingCount((data.comments || []).length))
-      .catch(() => {});
+    // 同時查章節留言 + 互動牆待審核，合計顯示紅點
+    Promise.all([
+      fetch('/api/admin/comments?approved=false').then(r => r.json()).catch(() => ({ comments: [] })),
+      fetch('/api/admin/wall?approved=false').then(r => r.json()).catch(() => ({ posts: [] })),
+    ]).then(([cData, wData]) => {
+      setPendingCount((cData.comments || []).length + (wData.posts || []).length);
+    });
   }, [pathname]);
 
   function handleLogoClick() {

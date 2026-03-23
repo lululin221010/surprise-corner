@@ -61,7 +61,7 @@ export default function WallIdPage() {
       <div style={{ textAlign: 'center' }}>
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>😢</div>
         <p style={{ color: '#9ca3af' }}>找不到這則作品</p>
-        <Link href="/wall" style={{ color: '#a78bfa', marginTop: '1rem', display: 'inline-block' }}>← 回作品牆</Link>
+        <Link href="/wall" style={{ color: '#a78bfa', marginTop: '1rem', display: 'inline-block' }}>← 回互動牆</Link>
       </div>
     </main>
   );
@@ -157,7 +157,7 @@ export default function WallIdPage() {
             )}
             <Link href="/wall"
               style={{ background: 'rgba(167,139,250,0.2)', color: '#a78bfa', padding: '0.5rem 1.2rem', borderRadius: '20px', textDecoration: 'none', fontSize: '0.85rem' }}>
-              ← 回作品牆
+              ← 回互動牆
             </Link>
             <Link href="/random"
               style={{ background: 'linear-gradient(135deg,#7c3aed,#ec4899)', color: '#fff', padding: '0.5rem 1.2rem', borderRadius: '20px', textDecoration: 'none', fontSize: '0.85rem' }}>

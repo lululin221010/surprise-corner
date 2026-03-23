@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 // 後台留言管理頁 /admin/comments
 import { useEffect, useState } from 'react';
@@ -32,7 +32,7 @@ type ModeType = 'comments' | 'wall';
 export default function AdminCommentsPage() {
   const [mode, setMode] = useState<ModeType>('comments');
 
-  // ── 作品牆狀態 ──
+  // ── 互動牆狀態 ──
   const [wallPosts, setWallPosts] = useState<WallPost[]>([]);
   const [wallLoading, setWallLoading] = useState(true);
   const [wallFilter, setWallFilter] = useState<FilterType>('false');
@@ -80,7 +80,7 @@ export default function AdminCommentsPage() {
   }
 
   async function wallDelete(id: string) {
-    if (!confirm('確定刪除這則作品牆貼文？')) return;
+    if (!confirm('確定刪除這則互動牆貼文？')) return;
     await fetch('/api/admin/wall', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -257,15 +257,15 @@ export default function AdminCommentsPage() {
               borderColor: mode === m ? '#b49050' : '#444',
               color: mode === m ? '#e8c880' : '#888',
             }}>
-              {m === 'comments' ? '📖 章節留言' : '🔥 作品牆'}
+              {m === 'comments' ? '📖 章節留言' : '🔥 互動牆'}
             </button>
           ))}
         </div>
 
-        {/* ── 作品牆模式 ── */}
+        {/* ── 互動牆模式 ── */}
         {mode === 'wall' && (
           <>
-            <p style={{ color: '#666', fontSize: '0.82rem', marginBottom: '1.5rem' }}>審核作品牆貼文，通過後才會公開顯示</p>
+            <p style={{ color: '#666', fontSize: '0.82rem', marginBottom: '1.5rem' }}>審核互動牆貼文，通過後才會公開顯示</p>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
               {(['false', 'true', 'all'] as FilterType[]).map(f => (
                 <button key={f} style={btnStyle(wallFilter === f)} onClick={() => setWallFilter(f)}>
@@ -330,7 +330,7 @@ export default function AdminCommentsPage() {
               </div>
             )}
 
-            {/* 作品牆回覆彈窗 */}
+            {/* 互動牆回覆彈窗 */}
             {wallReplyTarget && (
               <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999, padding: '1rem' }}>
                 <div style={{ background: '#1a1812', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 14, padding: '1.5rem', width: '100%', maxWidth: 480 }}>

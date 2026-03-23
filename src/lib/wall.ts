@@ -1,4 +1,4 @@
-// 📁 路徑：src/lib/wall.ts
+﻿// 📁 路徑：src/lib/wall.ts
 
 // 取得或建立 creatorId
 export function getCreatorId(): string {
@@ -11,7 +11,7 @@ export function getCreatorId(): string {
 }
 
 /**
- * 將 AI 生成內容送到作品牆
+ * 將 AI 生成內容送到互動牆
  * 回傳作品 ID，可用來跳轉到作品頁
  *
  * 使用範例：

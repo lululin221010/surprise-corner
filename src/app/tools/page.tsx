@@ -24,7 +24,7 @@ const RANDOM_PAGES = [
   { href: '/creator', label: '✍️ 創作空間' },
   { href: '/novels', label: '📚 連載小說' },
   { href: '/random', label: '🎲 隨機驚喜' },
-  { href: '/wall', label: '🔥 作品牆' },
+  { href: '/wall', label: '🔥 互動牆' },
   ];
 
 function getCreatorId() {
@@ -229,7 +229,7 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
               <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <button onClick={handleSubmitWall}
                   style={{ ...btnStyle(true), padding: '0.6rem 1.5rem' }}>
-                  🔥 公開到作品牆
+                  🔥 公開到互動牆
                 </button>
               </div>
 
@@ -247,7 +247,7 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
               borderRadius: '12px', padding: '1rem', textAlign: 'center',
             }}>
               <p style={{ color: '#6ee7b7', fontWeight: 700, fontSize: '0.95rem', margin: '0 0 0.3rem' }}>
-                ✅ 已公開到作品牆！
+                ✅ 已公開到互動牆！
               </p>
               <p style={{ color: '#9ca3af', fontSize: '0.82rem', margin: '0 0 0.8rem' }}>
                 📤 複製連結，傳給 {toName || '對方'} 來看你的心意 💜

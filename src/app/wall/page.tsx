@@ -86,7 +86,7 @@ function WallContent() {
         setMessage({ type: 'err', text: err.error || '送出失敗，請稍後再試' });
         return;
       }
-      setMessage({ type: 'ok', text: '✅ 已成功發布到作品牆！' });
+      setMessage({ type: 'ok', text: '✅ 已成功發布到互動牆！' });
       setText('');
       setTo('');
       setFrom('');

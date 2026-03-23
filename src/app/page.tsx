@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 檔案路徑：src/app/page.tsx
 
 import { useEffect, useState, useRef } from 'react';
@@ -24,7 +24,7 @@ const FEATURES = [
   },
   {
     icon: '🔥',
-    title: '作品牆',
+    title: '互動牆',
     desc: '大家用 AI 生成的驚喜創作，每天都有新內容出現。',
     href: '/wall',
     color: '#ef4444',
