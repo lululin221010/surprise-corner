@@ -707,6 +707,11 @@ export default function EbookPage() {
               </>
             )}
 
+            {/* 留言表單 → 發布到作品牆 */}
+            <div style={{ marginTop: '2.5rem' }}>
+              <WallPostForm label={novelId === 'lulu-life' ? '魯魯讀者' : '連載讀者'} />
+            </div>
+
             {/* 角色聊天 CTA：看完故事後引導去和角色說說話 */}
             {(novelId === 'lulu-diary' || novelId === 'the-last-signal') && (
               <div style={{
