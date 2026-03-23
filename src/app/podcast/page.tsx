@@ -93,6 +93,30 @@ const EPISODES: Episode[] = [
     tags: ['AI創作', '影片製作', '一人團隊'],
     coverImage: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&auto=format&fit=crop&q=80',
   },
+  {
+    ep: 7,
+    title: '長照路上的崩潰與解脫',
+    desc: '照顧家人是愛，但也可能是一條讓人喘不過氣的路。這集聊聊長照者的心理重量，以及如何在不放棄自己的前提下撐下去。',
+    color: '#f59e0b',
+    glow: 'rgba(245,158,11,0.5)',
+    date: '2026/03',
+    duration: '約 26 分鐘',
+    audioUrl: `${BASE}/ep07-caregiver-burnout.m4a`,
+    tags: ['長照', '照顧者', '情感療癒'],
+    coverImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&auto=format&fit=crop&q=80',
+  },
+  {
+    ep: 8,
+    title: '離世是靈魂計畫好的畢業',
+    desc: '如果死亡不是終點，而是靈魂早就安排好的一場畢業典禮呢？這集從不同角度重新看待「離開」這件事。',
+    color: '#8b5cf6',
+    glow: 'rgba(139,92,246,0.5)',
+    date: '2026/03',
+    duration: '約 27 分鐘',
+    audioUrl: `${BASE}/ep08-soul-graduation.m4a`,
+    tags: ['靈魂', '生命觀', '療癒'],
+    coverImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=80',
+  },
 ];
 
 // 音波動畫
@@ -392,32 +416,36 @@ export default function PodcastPage() {
             </p>
           </div>
 
-          {/* Ko-fi */}
+          {/* 請魯魯吃罐罐 */}
           <div style={{
             marginTop: '2rem',
-            background: 'linear-gradient(135deg,rgba(245,158,11,0.15),rgba(236,72,153,0.15))',
-            border: '1px solid rgba(245,158,11,0.3)',
+            background: 'linear-gradient(135deg,rgba(251,191,36,0.12),rgba(249,115,22,0.12))',
+            border: '1px solid rgba(251,191,36,0.35)',
             borderRadius: '16px', padding: '1.5rem', textAlign: 'center',
             backdropFilter: 'blur(8px)',
           }}>
-            <p style={{ color: '#fcd34d', fontWeight: 700, fontSize: '1rem', margin: '0 0 0.4rem' }}>
-              ☕ 喜歡這個節目？請我喝杯咖啡！
+            <div style={{ fontSize: '2.2rem', marginBottom: '0.4rem' }}>🐾</div>
+            <p style={{ color: '#fcd34d', fontWeight: 800, fontSize: '1.05rem', margin: '0 0 0.4rem' }}>
+              喜歡這個節目？請魯魯吃罐罐！
             </p>
-            <p style={{ color: '#d1d5db', fontSize: '0.88rem', margin: '0 0 1rem' }}>
-              你的支持讓每集節目更有動力繼續做下去 💜
+            <p style={{ color: '#d1d5db', fontSize: '0.88rem', margin: '0 0 0.3rem' }}>
+              你的支持讓節目繼續做，也讓魯魯罐頭不斷糧 🥫
             </p>
-            <a href="https://ko-fi.com/surprisecorner" target="_blank" rel="noopener noreferrer"
+            <p style={{ color: '#9ca3af', fontSize: '0.8rem', margin: '0 0 1.2rem' }}>
+              加 LINE 私訊「請罐罐」，我會回傳轉帳帳號，一罐 NT$50 起，數量不限 😄
+            </p>
+            <a href="https://line.me/R/ti/p/@983agawb" target="_blank" rel="noopener noreferrer"
               style={{
                 display: 'inline-block',
-                background: 'linear-gradient(135deg,#FF5E5B,#ff8c42)',
+                background: 'linear-gradient(135deg,#06C755,#00a040)',
                 color: '#fff', padding: '0.65rem 2rem', borderRadius: '30px',
                 textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem',
-                boxShadow: '0 4px 16px rgba(255,94,91,0.4)',
+                boxShadow: '0 4px 16px rgba(6,199,85,0.4)',
               }}>
-              ☕ 前往 Ko-fi 支持
+              💬 加 LINE 請罐罐
             </a>
-            <p style={{ marginTop: '0.75rem', color: 'rgba(209,213,219,0.6)', fontSize: '0.78rem' }}>
-              點擊後選金額（預設 $5），填名字留言，再用 PayPal 或信用卡付款即可 💛
+            <p style={{ marginTop: '0.75rem', color: 'rgba(209,213,219,0.5)', fontSize: '0.75rem' }}>
+              每一罐都會被魯魯親自認證好吃 🐈
             </p>
           </div>
 
