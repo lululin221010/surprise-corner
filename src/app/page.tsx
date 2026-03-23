@@ -71,6 +71,14 @@ const FEATURES = [
     glow: 'rgba(16,185,129,0.4)',
   },
   {
+    icon: '🐱',
+    title: '魯魯跑酷',
+    desc: '幫魯魯躲掃地機器人！免安裝、手機電腦都能玩的跑酷小遊戲。',
+    href: '/games/lulu-run',
+    color: '#f472b6',
+    glow: 'rgba(244,114,182,0.4)',
+  },
+  {
     icon: '🛒',
     title: 'Still Time Corner',
     desc: '前往小舖，購買電子書與數位商品。',
