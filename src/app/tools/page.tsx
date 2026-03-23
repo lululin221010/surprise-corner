@@ -1187,7 +1187,7 @@ export default function ToolsPage() {
           <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0 0 0.8rem 0.2rem', letterSpacing: '0.05em' }}>小遊戲</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.8rem' }}>
             {[
-              { href: '/games/lulu-run', icon: '🐱', title: '魯魯跑酷', desc: '躲開障礙，幫魯魯跑遠一點！' },
+              { href: '/games', icon: '🎮', title: '小遊戲', desc: '魯魯跑酷、塔羅占卜，放空玩一玩！' },
             ].map(tool => (
               <a key={tool.href} href={tool.href} style={{ textDecoration: 'none' }}>
                 <div style={{
