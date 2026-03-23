@@ -12,6 +12,7 @@ interface Post {
   to?: string;
   from?: string;
   label?: string;
+  reply?: string;
   creatorId?: string;
 }
 
@@ -114,11 +115,23 @@ export default function WallIdPage() {
           </div>
 
           {/* 寄件人 */}
-          <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.8rem' }}>
+          <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: post.reply ? '1rem' : '1.8rem' }}>
             — 來自 <span style={{ color: '#a78bfa', fontWeight: 600 }}>
               {post.from?.trim() ? post.from : '匿名'}
             </span>
           </p>
+
+          {/* 站長回覆 */}
+          {post.reply && (
+            <div style={{
+              background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.3)',
+              borderRadius: '12px', padding: '0.85rem 1.1rem', marginBottom: '1.8rem',
+              borderLeft: '3px solid rgba(167,139,250,0.7)',
+            }}>
+              <p style={{ margin: '0 0 0.3rem', fontSize: '0.75rem', color: '#a78bfa', fontWeight: 700 }}>✍️ 站長回覆</p>
+              <p style={{ margin: 0, fontSize: '0.92rem', color: '#d8ccb8', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{post.reply}</p>
+            </div>
+          )}
 
           {/* ✅ 分享連結按鈕 */}
           <div style={{
