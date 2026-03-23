@@ -31,10 +31,19 @@ const GAMES = [
     glow: 'rgba(147,51,234,0.3)',
     tag: '占卜',
   },
+  {
+    href: '/horoscope',
+    icon: '⭐',
+    title: '每日星座運勢',
+    desc: '12星座今日運勢，愛情、事業、財運、健康一次看。',
+    color: '#f59e0b',
+    glow: 'rgba(245,158,11,0.3)',
+    tag: '星座',
+  },
 ];
 
 const COMING_SOON = [
-  { icon: '⭐', title: '星座運勢', desc: '今日星座＋流年分析，看看老天爺給你安排了什麼。' },
+  { icon: '🧧', title: '八字命盤', desc: '輸入生日算出天干地支，解析你的命格個性。' },
   { icon: '🃏', title: '魯魯記憶配對', desc: '翻牌配對魯魯的照片，考驗你的記憶力。' },
   { icon: '🎯', title: '幸運轉盤', desc: '轉出今日關鍵字，帶著它去過一天。' },
 ];
