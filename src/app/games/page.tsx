@@ -14,6 +14,15 @@ const GAMES = [
     tag: '動作',
   },
   {
+    href: '/games/lulu-fish',
+    icon: '🐟',
+    title: '魯魯抓魚',
+    desc: '30 秒限時！點擊飄過的魚，大魚 3 分、中魚 2 分、小魚 1 分。',
+    color: '#0ea5e9',
+    glow: 'rgba(14,165,233,0.3)',
+    tag: '反應',
+  },
+  {
     href: '/tarot',
     icon: '🔮',
     title: '塔羅占卜',
@@ -25,7 +34,7 @@ const GAMES = [
 ];
 
 const COMING_SOON = [
-  { icon: '🐟', title: '魯魯抓魚', desc: '30 秒內點擊飄過的魚，看你抓幾條！' },
+  { icon: '⭐', title: '星座運勢', desc: '今日星座＋流年分析，看看老天爺給你安排了什麼。' },
   { icon: '🃏', title: '魯魯記憶配對', desc: '翻牌配對魯魯的照片，考驗你的記憶力。' },
   { icon: '🎯', title: '幸運轉盤', desc: '轉出今日關鍵字，帶著它去過一天。' },
 ];
