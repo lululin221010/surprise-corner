@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
-import CommentSection from '@/components/CommentSection'
+import WallPostForm from '@/components/WallPostForm'
 
 function isPublishedByDate(publishedAt: string): boolean {
   const now = new Date()

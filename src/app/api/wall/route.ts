@@ -34,6 +34,8 @@ export async function POST(req: Request) {
     from: body.from?.trim().slice(0, 20) || '', // ✅ 寄件人（空白=匿名）
     label: body.label || '',                    // ✅ 類型標籤
     creatorId: body.creatorId || null,
+    approved: false,                            // ✅ 預設待審核
+    reply: '',
     ip,
     createdAt: new Date(),
   });
@@ -41,10 +43,14 @@ export async function POST(req: Request) {
   return NextResponse.json({ ok: true, id: result.insertedId });
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const label = searchParams.get('label');
   const client = await clientPromise;
   const db = client.db();
-  const posts = await db.collection("wall").find({})
+  const query: Record<string, any> = { approved: true };
+  if (label) query.label = label;
+  const posts = await db.collection("wall").find(query)
     .sort({ createdAt: -1 }).limit(50).toArray();
   return NextResponse.json(posts);
 }

@@ -15,9 +15,81 @@ interface Comment {
   reply?: string;
 }
 
+interface WallPost {
+  _id: string;
+  text: string;
+  to: string;
+  from: string;
+  label: string;
+  approved: boolean;
+  reply: string;
+  createdAt: string;
+}
+
 type FilterType = 'false' | 'true' | 'all';
+type ModeType = 'comments' | 'wall';
 
 export default function AdminCommentsPage() {
+  const [mode, setMode] = useState<ModeType>('comments');
+
+  // ── 作品牆狀態 ──
+  const [wallPosts, setWallPosts] = useState<WallPost[]>([]);
+  const [wallLoading, setWallLoading] = useState(true);
+  const [wallFilter, setWallFilter] = useState<FilterType>('false');
+  const [wallReplyTarget, setWallReplyTarget] = useState<WallPost | null>(null);
+  const [wallReplyText, setWallReplyText] = useState('');
+  const [wallReplying, setWallReplying] = useState(false);
+  const [wallMsg, setWallMsg] = useState('');
+
+  async function fetchWall(f: FilterType) {
+    setWallLoading(true);
+    try {
+      const res = await fetch(`/api/admin/wall?approved=${f}`);
+      const data = await res.json();
+      setWallPosts(data.posts || []);
+    } catch { setWallPosts([]); } finally { setWallLoading(false); }
+  }
+
+  useEffect(() => { if (mode === 'wall') fetchWall(wallFilter); }, [mode, wallFilter]);
+
+  async function wallApprove() {
+    if (!wallReplyTarget) return;
+    setWallReplying(true);
+    await fetch('/api/admin/wall', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: wallReplyTarget._id, approved: true, reply: wallReplyText }),
+    });
+    setWallReplying(false);
+    setWallReplyTarget(null);
+    setWallReplyText('');
+    setWallMsg(wallReplyText.trim() ? '✅ 已核准並回覆' : '✅ 已核准');
+    setTimeout(() => setWallMsg(''), 2500);
+    fetchWall(wallFilter);
+  }
+
+  async function wallReject(id: string) {
+    await fetch('/api/admin/wall', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, approved: false }),
+    });
+    setWallMsg('↩️ 已取消核准');
+    setTimeout(() => setWallMsg(''), 2000);
+    fetchWall(wallFilter);
+  }
+
+  async function wallDelete(id: string) {
+    if (!confirm('確定刪除這則作品牆貼文？')) return;
+    await fetch('/api/admin/wall', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    setWallMsg('🗑 已刪除');
+    setTimeout(() => setWallMsg(''), 2000);
+    fetchWall(wallFilter);
+  }
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>('false');
@@ -173,8 +245,124 @@ export default function AdminCommentsPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#0c0b08', color: '#d8ccb8', padding: '2rem', fontFamily: 'sans-serif' }}>
       <div style={{ maxWidth: 860, margin: '0 auto' }}>
-        <h1 style={{ color: '#e8c880', fontSize: '1.3rem', marginBottom: '0.5rem' }}>🐾 留言管理</h1>
-        <p style={{ color: '#666', fontSize: '0.82rem', marginBottom: '1.5rem' }}>審核讀者留言，通過後才會公開顯示</p>
+        <h1 style={{ color: '#e8c880', fontSize: '1.3rem', marginBottom: '1rem' }}>🐾 留言管理</h1>
+
+        {/* Mode 切換 */}
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
+          {(['comments', 'wall'] as ModeType[]).map(m => (
+            <button key={m} onClick={() => setMode(m)} style={{
+              padding: '6px 18px', borderRadius: 6, border: '1px solid',
+              cursor: 'pointer', fontSize: '0.85rem',
+              background: mode === m ? '#4a3a2a' : 'transparent',
+              borderColor: mode === m ? '#b49050' : '#444',
+              color: mode === m ? '#e8c880' : '#888',
+            }}>
+              {m === 'comments' ? '📖 章節留言' : '🔥 作品牆'}
+            </button>
+          ))}
+        </div>
+
+        {/* ── 作品牆模式 ── */}
+        {mode === 'wall' && (
+          <>
+            <p style={{ color: '#666', fontSize: '0.82rem', marginBottom: '1.5rem' }}>審核作品牆貼文，通過後才會公開顯示</p>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
+              {(['false', 'true', 'all'] as FilterType[]).map(f => (
+                <button key={f} style={btnStyle(wallFilter === f)} onClick={() => setWallFilter(f)}>
+                  {f === 'false' ? '⏳ 待審核' : f === 'true' ? '✅ 已核准' : '📋 全部'}
+                </button>
+              ))}
+            </div>
+            {wallMsg && (
+              <div style={{ background: 'rgba(232,200,128,0.1)', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 8, padding: '0.5rem 1rem', marginBottom: '1rem', color: '#e8c880', fontSize: '0.85rem' }}>
+                {wallMsg}
+              </div>
+            )}
+            {wallLoading ? (
+              <p style={{ color: '#666' }}>載入中…</p>
+            ) : wallPosts.length === 0 ? (
+              <p style={{ color: '#666' }}>{wallFilter === 'false' ? '目前沒有待審核的貼文 🎉' : '沒有貼文'}</p>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {wallPosts.map(p => (
+                  <div key={p._id} style={{
+                    background: 'rgba(255,255,255,0.04)', borderRadius: 10, padding: '1rem 1.2rem',
+                    borderLeft: `3px solid ${p.approved ? 'rgba(80,200,120,0.5)' : 'rgba(232,200,128,0.4)'}`,
+                  }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center', marginBottom: '0.5rem' }}>
+                      {p.label && <span style={{ fontSize: '0.72rem', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.3)', borderRadius: 20, padding: '2px 10px' }}>{p.label}</span>}
+                      <span style={{ color: '#e8c880', fontWeight: 600 }}>寫給：{p.to}</span>
+                      {p.from && <span style={{ color: '#b49050', fontSize: '0.8rem' }}>from {p.from}</span>}
+                      <span style={{ color: '#555', fontSize: '0.75rem' }}>{new Date(p.createdAt).toLocaleString('zh-TW')}</span>
+                      <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: p.approved ? '#50c878' : '#e8a050' }}>
+                        {p.approved ? '✅ 已核准' : '⏳ 待審核'}
+                      </span>
+                    </div>
+                    <p style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 0.75rem', whiteSpace: 'pre-wrap' }}>{p.text}</p>
+                    {p.reply && (
+                      <div style={{ background: 'rgba(232,200,128,0.06)', borderRadius: 8, padding: '0.6rem 0.9rem', marginBottom: '0.75rem', borderLeft: '2px solid rgba(232,200,128,0.5)' }}>
+                        <span style={{ color: '#b49050', fontSize: '0.75rem', fontWeight: 600 }}>✍️ 站長回覆：</span>
+                        <p style={{ color: '#d8ccb8', fontSize: '0.85rem', margin: '0.3rem 0 0', whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{p.reply}</p>
+                      </div>
+                    )}
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      {!p.approved && (
+                        <button onClick={() => { setWallReplyTarget(p); setWallReplyText(''); }} style={{ padding: '4px 14px', background: 'rgba(80,200,120,0.15)', border: '1px solid rgba(80,200,120,0.4)', borderRadius: 6, color: '#50c878', fontSize: '0.8rem', cursor: 'pointer' }}>
+                          ✅ 核准
+                        </button>
+                      )}
+                      {p.approved && (
+                        <>
+                          <button onClick={() => { setWallReplyTarget(p); setWallReplyText(p.reply || ''); }} style={{ padding: '4px 14px', background: 'rgba(232,200,128,0.1)', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 6, color: '#e8c880', fontSize: '0.8rem', cursor: 'pointer' }}>
+                            ✍️ {p.reply ? '編輯回覆' : '新增回覆'}
+                          </button>
+                          <button onClick={() => wallReject(p._id)} style={{ padding: '4px 14px', background: 'rgba(232,160,80,0.1)', border: '1px solid rgba(232,160,80,0.35)', borderRadius: 6, color: '#e8a050', fontSize: '0.8rem', cursor: 'pointer' }}>
+                            ↩️ 取消核准
+                          </button>
+                        </>
+                      )}
+                      <button onClick={() => wallDelete(p._id)} style={{ padding: '4px 14px', background: 'rgba(200,80,80,0.1)', border: '1px solid rgba(200,80,80,0.3)', borderRadius: 6, color: '#c85050', fontSize: '0.8rem', cursor: 'pointer' }}>
+                        🗑 刪除
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 作品牆回覆彈窗 */}
+            {wallReplyTarget && (
+              <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999, padding: '1rem' }}>
+                <div style={{ background: '#1a1812', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 14, padding: '1.5rem', width: '100%', maxWidth: 480 }}>
+                  <h3 style={{ color: '#e8c880', margin: '0 0 0.5rem', fontSize: '1rem' }}>✍️ 站長回覆</h3>
+                  <p style={{ color: '#888', fontSize: '0.8rem', margin: '0 0 1rem' }}>
+                    回覆 <strong style={{ color: '#d8ccb8' }}>{wallReplyTarget.from || '匿名'}</strong> 的貼文（可留空，直接核准）
+                  </p>
+                  <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 8, padding: '0.7rem 0.9rem', marginBottom: '1rem', fontSize: '0.85rem', color: '#aaa', lineHeight: 1.5 }}>
+                    {wallReplyTarget.text}
+                  </div>
+                  <textarea value={wallReplyText} onChange={e => setWallReplyText(e.target.value)}
+                    placeholder="寫下你的回覆，或留空直接核准..." rows={4}
+                    style={{ width: '100%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 8, color: '#eee', padding: '0.6rem 0.75rem', fontSize: '0.9rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                  />
+                  <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem', justifyContent: 'flex-end' }}>
+                    <button onClick={() => { setWallReplyTarget(null); setWallReplyText(''); }} style={{ padding: '6px 16px', background: 'transparent', border: '1px solid #444', borderRadius: 8, color: '#888', cursor: 'pointer', fontSize: '0.85rem' }}>
+                      取消
+                    </button>
+                    <button onClick={wallApprove} disabled={wallReplying} style={{ padding: '6px 20px', background: wallReplying ? '#444' : 'linear-gradient(135deg, #50c878, #3a9a5a)', border: 'none', borderRadius: 8, color: '#fff', cursor: wallReplying ? 'not-allowed' : 'pointer', fontSize: '0.85rem', fontWeight: 600 }}>
+                      {wallReplying ? '送出中...' : wallReplyText.trim() ? '✅ 核准並回覆' : '✅ 直接核准'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* ── 章節留言模式 ── */}
+        {mode === 'comments' && (
+          <>
+            <p style={{ color: '#666', fontSize: '0.82rem', marginBottom: '1.5rem' }}>審核讀者留言，通過後才會公開顯示</p>
 
         {/* 站長發文區塊 */}
         <div style={{ marginBottom: '1.5rem', border: '1px solid rgba(232,200,128,0.2)', borderRadius: 10, overflow: 'hidden' }}>
@@ -281,6 +469,7 @@ export default function AdminCommentsPage() {
         )}
       </div>
 
+      {/* 章節留言回覆彈窗 */}
       {replyTarget && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999, padding: '1rem' }}>
           <div style={{ background: '#1a1812', border: '1px solid rgba(232,200,128,0.3)', borderRadius: 14, padding: '1.5rem', width: '100%', maxWidth: 480 }}>
@@ -309,6 +498,8 @@ export default function AdminCommentsPage() {
           </div>
         </div>
       )}
+          </>
+        )}
     </div>
   );
 }
