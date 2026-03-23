@@ -61,13 +61,16 @@
 - Ko-fi 贊助連結整合於 Podcast 頁面
 - Spotify 上架：用 podcasters.spotify.com，免費，上傳 MP3 即可，SS 音檔已備妥 ✅
 
-**目前已上傳 6 集（~115MB，Hobby 方案 512MB 上限，剩約 400MB）：**
+**目前已上傳 8 集（~155MB，Hobby 方案 512MB 上限，剩約 357MB）：**
 - ep01-surprise-corner-intro.mp3（AI 驚喜與兔崽子書店）
 - ep02-side-hustle-map.mp3（上班族低風險副業實戰地圖）
 - ep03-taiwan-stock.mp3（台股紅綠燈：戰勝投資心魔）
 - ep04-ai-loneliness.mp3（AI 從打字停頓讀懂你的孤獨）
 - ep05-taipei-ruin.mp3（台北廢墟收到的太空求救）
 - ep06-ai-film.mp3（用 AI 一人拍大片）
+- ep07（長照路上的崩潰與解脫）
+- ep08（離世是靈魂計畫好的畢業）
+- 贊助文字已改為「請魯魯吃罐罐」
 
 **新增集數流程：**
 1. NotebookLM 上傳書籍前 1/5 內容，新增記事寫限制指令（只介紹前幾章，結尾導流小舖）
@@ -131,14 +134,15 @@ Podcast 開場腳本原則：
   - 前 3 節（soul-s-01-01/02/03）`isFree: true`，其餘 `isFree: false`
 - the-last-signal / lulu-diary：各自獨立命名
 
-#### 章節留言區規範
+#### 章節留言區規範（2026-03-23 更新）
 每章頁面底部必須加：
 ```jsx
-<CommentSection chapterId="lulu-s-01-xx" novelId="lulu-life" />
+<WallPostForm label="魯魯讀者" />
 ```
-- `chapterId` 跟章節編號走，忘記加 = 那章沒有留言區
-- 目前進度：第一、二集已加，第三集起新增時記得加
-- ✅ `CommentSection` 已改用 `novelId` 統一留言區
+- 改用 `WallPostForm`，留言發到 `wall` collection（`approved: false`）
+- 後台在 `/admin/comments` 的「互動牆」tab 審核，通過後顯示在 `/wall?tab=魯魯讀者`
+- ⚠️ **舊版 CommentSection 已廢棄**，寫入 `chapter_comments` collection，不再使用
+- 舊留言（18則）已遷移至 wall collection（`_migrated: true` 標記）
 
 #### novels/page.tsx UX（2026-03 更新）
 - 連載小說區：卡片連結直接到 `/novels/${id}/ebook`（不過渡頁）
@@ -207,23 +211,20 @@ Podcast 開場腳本原則：
 
 ---
 
-## 🔴 待辦清單
+## 🔴 待辦清單（2026-03-23 更新）
 
 ### SS 驚喜站
-- [ ] **favicon**：將 ico 放入 `public/favicon.ico`，確認 `layout.js` 有引用
-- [ ] **/chat/lulu 和林悅說話頁「看小說」按鈕**：章節全上鎖，需與連載解鎖機制結合，已發布章節應可免費閱讀
-- [ ] **魯魯日記日期不符**：列表顯示「更新於 2026-03-26」，ebook 目錄顯示「2026-03-16」，不標示預排日期
+- [ ] **/chat/lulu 和林悅說話頁「看小說」按鈕**：章節全上鎖，需與連載解鎖機制結合
 - [ ] **試看文章底部**：免費章節廣告改為卡片設計「連載更新了喔來看看」or「去小舖找找驚喜？」
-- [ ] **Podcast 上架**：2 筆新集數待上架
-- [ ] **git push**（CommentSection 修改還沒 push！）
-  ```bash
-  git add .
-  git commit -m "fix: CommentSection 改用 novelId 統一留言區"
-  git push
-  ```
+- [ ] **[[VIDEO]] 佔位符渲染**：chapter component 加影片 embed 邏輯
 - [ ] 純文字發文測試 Threads
 - [ ] Threads 連結欄位填 SS 首頁
-- [ ] Spotify Podcast 上架
+- [ ] Spotify Podcast 上架（EP07、EP08 已上傳 Blob，待 Spotify）
+
+### 魯魯來了連載進度
+- 目前：第十三集（帶魯魯回家）已上線，publishedAt: 2026-04-11
+- 下一集：第十四集「名字的由來」
+- 預告鏈：10→牠們都很好/11→那雙不一樣的眼睛/12→遇見那天/13→帶魯魯回家/14→名字的由來
 
 ### SS 聊天功能
 - [ ] 對話記憶（localStorage，重新整理不忘記）
