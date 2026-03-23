@@ -203,9 +203,18 @@ export default async function ChapterPage({ params }: Props) {
           <div style={{ width: 40, height: 1, background: 'rgba(180,144,80,0.3)', margin: '0 auto 48px' }} />
         )}
 
-        {paragraphsBefore.map((para: string, i: number) => (
-          <p key={`before-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
-        ))}
+        {paragraphsBefore.map((para: string, i: number) => {
+          const imgMatch = para.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)
+          if (imgMatch) {
+            return (
+              <figure key={`before-${i}`} style={{ margin: '2rem auto', textAlign: 'center', maxWidth: 480 }}>
+                <img src={imgMatch[2]} alt={imgMatch[1]} style={{ width: '100%', borderRadius: 12, objectFit: 'cover', opacity: 0.92, boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }} />
+                {imgMatch[1] && <figcaption style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#9a8878', fontStyle: 'italic' }}>✨ {imgMatch[1]}</figcaption>}
+              </figure>
+            )
+          }
+          return <p key={`before-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
+        })}
 
         {hasVideo && (
           <div style={{ margin: '2rem 0' }}>
@@ -221,9 +230,18 @@ export default async function ChapterPage({ params }: Props) {
           </div>
         )}
 
-        {paragraphsAfter.map((para: string, i: number) => (
-          <p key={`after-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
-        ))}
+        {paragraphsAfter.map((para: string, i: number) => {
+          const imgMatch = para.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)
+          if (imgMatch) {
+            return (
+              <figure key={`after-${i}`} style={{ margin: '2rem auto', textAlign: 'center', maxWidth: 480 }}>
+                <img src={imgMatch[2]} alt={imgMatch[1]} style={{ width: '100%', borderRadius: 12, objectFit: 'cover', opacity: 0.92, boxShadow: '0 4px 24px rgba(0,0,0,0.4)' }} />
+                {imgMatch[1] && <figcaption style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#9a8878', fontStyle: 'italic' }}>✨ {imgMatch[1]}</figcaption>}
+              </figure>
+            )
+          }
+          return <p key={`after-${i}`} style={{ fontSize: '1.05rem', lineHeight: 2, color: '#c8bcaa', margin: '0 0 1.8em', textAlign: 'justify' }}>{para}</p>
+        })}
 
         {/* 🐾 魯魯碎碎念照片（章節底部） */}
         {(chapter as any).photoUrl && (
