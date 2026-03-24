@@ -1,7 +1,7 @@
 // 📄 檔案路徑：src/app/novels/[novelId]/page.tsx
 
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
@@ -47,8 +47,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// 連載小說直接導向 /ebook 頁，不顯示章節目錄頁
+const SERIAL_NOVEL_IDS = ['lulu-diary', 'the-last-signal']
+
 export default async function NovelPage({ params }: Props) {
   const { novelId } = await params
+
+  if (SERIAL_NOVEL_IDS.includes(novelId)) {
+    redirect(`/novels/${novelId}/ebook`)
+  }
+
   const novel = novelsData.find(n => n.id === novelId)
   if (!novel) notFound()
 

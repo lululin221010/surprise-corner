@@ -17,6 +17,12 @@ function isPublishedByDate(publishedAt: string): boolean {
   return publishedAt <= taiwanToday
 }
 
+// 連載小說：全集免費，依發布日期解鎖
+const SERIAL_NOVELS: Record<string, { schedule: string }> = {
+  'lulu-diary':      { schedule: '偶數日更新' },
+  'the-last-signal': { schedule: '奇數日更新' },
+}
+
 // ✅ 滾動窗口：最新 N 章的 id 集合
 function getRollingFreeIds(novelId: string, windowSize: number): Set<string> {
   const published = (chaptersData as any[])
@@ -60,23 +66,35 @@ export default function EbookPage() {
     )
   }
 
-  // ✅ 決定哪些章節是免費的（滾動窗口 or isFree 欄位）
-  const novelAny = novel as any
-  const freeIds = novelAny.freeWindow
-    ? getRollingFreeIds(novelId, novelAny.freeWindow)
-    : null
+  const isSerial = novelId in SERIAL_NOVELS
+  const serialInfo = SERIAL_NOVELS[novelId]
 
-  const publishedChapters = (chaptersData as any[])
-    .filter(c => {
-      if (c.novelId !== novelId || !c.isPublished) return false
-      if (!isPublishedByDate(c.publishedAt)) return false
-      if (!c.content || (Array.isArray(c.content) ? c.content.length === 0 : !c.content.trim())) return false
-      // 滾動窗口模式
-      if (freeIds) return freeIds.has(c.id)
-      // 一般模式
-      return c.isFree === true
-    })
-    .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
+  // 連載小說：顯示全部章節，依日期解鎖
+  // 其他小說：沿用 isFree / freeWindow 邏輯
+  let publishedChapters: any[] = []
+  let futureChapters: any[] = []
+
+  if (isSerial) {
+    const allChapters = (chaptersData as any[])
+      .filter(c => c.novelId === novelId && c.isPublished)
+      .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
+    publishedChapters = allChapters.filter(c => isPublishedByDate(c.publishedAt))
+    futureChapters = allChapters.filter(c => !isPublishedByDate(c.publishedAt))
+  } else {
+    const novelAny = novel as any
+    const freeIds = novelAny.freeWindow
+      ? getRollingFreeIds(novelId, novelAny.freeWindow)
+      : null
+    publishedChapters = (chaptersData as any[])
+      .filter(c => {
+        if (c.novelId !== novelId || !c.isPublished) return false
+        if (!isPublishedByDate(c.publishedAt)) return false
+        if (!c.content || (Array.isArray(c.content) ? c.content.length === 0 : !c.content.trim())) return false
+        if (freeIds) return freeIds.has(c.id)
+        return c.isFree === true
+      })
+      .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
+  }
 
   // ✅ 顯示實際免費章節數
   const freeCount = publishedChapters.length
@@ -528,7 +546,7 @@ export default function EbookPage() {
 
         <nav className="ebook-nav">
           <div className="ebook-nav-left">
-            <Link href={`/novels/${novelId}`} className="btn-back">← 目錄</Link>
+            <Link href={isSerial ? '/novels' : `/novels/${novelId}`} className="btn-back">← 小說列表</Link>
             <span className="ebook-nav-title">{novel.title}</span>
             <span className="nav-divider">/</span>
             <span className="ebook-badge">電子書</span>
@@ -547,6 +565,17 @@ export default function EbookPage() {
           </div>
         </nav>
 
+        {/* 連載說明橫幅 */}
+        {isSerial && (
+          <div style={{ background: 'rgba(180,144,80,0.08)', borderBottom: '1px solid rgba(180,144,80,0.12)', padding: '10px 24px', textAlign: 'center', fontSize: '0.8rem', color: '#9a8878', letterSpacing: '0.04em', lineHeight: 1.8 }}>
+            📖 本連載<strong style={{ color: '#b49050' }}>全集免費</strong>，{serialInfo?.schedule}更新一集
+            　｜　不想等？
+            <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer" style={{ color: '#b49050', textDecoration: 'underline', marginLeft: 4 }}>
+              購買電子書一次看完 →
+            </a>
+          </div>
+        )}
+
         <div className="ebook-cover">
           <p className="cover-ornament">✦ &nbsp; SURPRISE CORNER &nbsp; ✦</p>
           <h1 className="cover-title">{novel.title}</h1>
@@ -559,7 +588,7 @@ export default function EbookPage() {
           </div>
         </div>
 
-        {publishedChapters.length > 0 && (
+        {(publishedChapters.length > 0 || futureChapters.length > 0) && (
           <div className="toc-section">
             <p className="toc-label">目　錄</p>
             {publishedChapters.map((c) => (
@@ -569,6 +598,16 @@ export default function EbookPage() {
                 <span className="toc-dots" />
                 <span className="toc-page">{c.publishedAt}</span>
               </Link>
+            ))}
+            {futureChapters.map((c) => (
+              <div key={c.id} className="toc-row" style={{ opacity: 0.4, cursor: 'default' }}>
+                <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
+                <span>{c.title}</span>
+                <span className="toc-dots" />
+                <span className="toc-page" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                  🔒 {c.publishedAt}
+                </span>
+              </div>
             ))}
           </div>
         )}
