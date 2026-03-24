@@ -67,6 +67,15 @@ const GAMES = [
     glow: 'rgba(147,51,234,0.3)',
     tag: '命理',
   },
+  {
+    href: '/name-numerology',
+    icon: '📝',
+    title: '姓名學',
+    desc: '三才五格筆劃姓名學，輸入筆劃數算出五格吉凶與命格分析。',
+    color: '#ec4899',
+    glow: 'rgba(236,72,153,0.3)',
+    tag: '命理',
+  },
 ];
 
 const COMING_SOON = [
