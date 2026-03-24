@@ -18,10 +18,10 @@ function isPublishedByDate(publishedAt: string): boolean {
 }
 
 // 連載小說：全集免費，依發布日期解鎖
-const SERIAL_NOVELS: Record<string, { schedule: string }> = {
+const SERIAL_NOVELS: Record<string, { schedule: string; previewAll?: boolean }> = {
   'lulu-diary':      { schedule: '偶數日更新' },
   'the-last-signal': { schedule: '奇數日更新' },
-  'lulu-life':       { schedule: '不定期更新' },
+  'lulu-life':       { schedule: '不定期更新', previewAll: true },  // 20章電子書，全部已連載章節都顯示
 }
 
 // ✅ 滾動窗口：最新 N 章的 id 集合
@@ -99,7 +99,9 @@ export default function EbookPage() {
 
   // ✅ 連載小說：試讀只顯示前 1/5 章節內文
   const allChapterCount = (chaptersData as any[]).filter(c => c.novelId === novelId && c.isPublished).length
-  const previewCount = isSerial ? Math.max(1, Math.ceil(allChapterCount / 5)) : publishedChapters.length
+  const previewCount = isSerial
+    ? (serialInfo?.previewAll ? publishedChapters.length : Math.max(1, Math.ceil(allChapterCount / 5)))
+    : publishedChapters.length
   const previewChapters = isSerial ? publishedChapters.slice(0, previewCount) : publishedChapters
 
   // ✅ 顯示實際免費章節數
