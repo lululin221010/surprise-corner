@@ -283,7 +283,7 @@ export default function EbookPage() {
         }
 
         .toc-section {
-          max-width: 680px;
+          max-width: 760px;
           margin: 0 auto;
           padding: 48px 40px;
           border-bottom: 1px solid rgba(255,255,255,0.04);
@@ -296,13 +296,23 @@ export default function EbookPage() {
           margin-bottom: 24px;
         }
 
+        .toc-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0 32px;
+        }
+
+        @media (max-width: 600px) {
+          .toc-grid { grid-template-columns: 1fr; }
+        }
+
         .toc-row {
           display: flex;
           align-items: baseline;
           gap: 8px;
-          padding: 10px 0;
+          padding: 8px 0;
           border-bottom: 1px solid rgba(255,255,255,0.06);
-          font-size: 0.97rem;
+          font-size: 0.88rem;
           color: #baaE96;
           text-decoration: none;
           transition: color 0.2s, padding-left 0.2s;
@@ -592,24 +602,26 @@ export default function EbookPage() {
         {(publishedChapters.length > 0 || futureChapters.length > 0) && (
           <div className="toc-section">
             <p className="toc-label">目　錄</p>
-            {publishedChapters.map((c) => (
-              <Link key={c.id} href={`/novels/${novelId}/${c.id}`} className="toc-row">
-                <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
-                <span>{c.title}</span>
-                <span className="toc-dots" />
-                <span className="toc-page">{c.publishedAt}</span>
-              </Link>
-            ))}
-            {futureChapters.map((c) => (
-              <div key={c.id} className="toc-row" style={{ opacity: 0.4, cursor: 'default' }}>
-                <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
-                <span>{c.title}</span>
-                <span className="toc-dots" />
-                <span className="toc-page" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                  🔒 {c.publishedAt}
-                </span>
-              </div>
-            ))}
+            <div className="toc-grid">
+              {publishedChapters.map((c) => (
+                <Link key={c.id} href={`/novels/${novelId}/${c.id}`} className="toc-row">
+                  <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
+                  <span>{c.title}</span>
+                  <span className="toc-dots" />
+                  <span className="toc-page">{c.publishedAt}</span>
+                </Link>
+              ))}
+              {futureChapters.map((c) => (
+                <div key={c.id} className="toc-row" style={{ opacity: 0.4, cursor: 'default' }}>
+                  <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
+                  <span>{c.title}</span>
+                  <span className="toc-dots" />
+                  <span className="toc-page" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    🔒 {c.publishedAt}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
