@@ -35,6 +35,13 @@ function WallContent() {
   const [from, setFrom] = useState('');
   const [label, setLabel] = useState(initLabel);
   const [submitting, setSubmitting] = useState(false);
+
+  const LABEL_HINTS: Record<string, { to: string; content: string }> = {
+    '魯魯讀者':  { to: '魯魯、未來的自己…', content: '例：魯魯你好可愛！那集「帶魯魯回家」讓我笑了好久，謝謝你出現在我們家 🐱' },
+    '連載讀者':  { to: '林必哀、作者…',     content: '例：最後的信號第三章讓我睡不著，那個結尾到底是什麼意思？！等不及下集了' },
+    'Podcast':   { to: '主持人、自己…',      content: '例：EP02 副業那集讓我鼓起勇氣開始接案，謝謝你說了那句「不完美也可以開始」' },
+    '許願牆':    { to: '工具精靈 🧰',        content: '例：希望下次能加入語音轉文字工具！或是推薦一個可以免費做簡報的 AI？' },
+  };
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
 
   async function loadPosts(tab: string) {
@@ -152,7 +159,7 @@ function WallContent() {
             ))}
           </div>
           <input value={to} onChange={e => setTo(e.target.value)}
-            placeholder="寫給誰？（必填，例：魯魯、未來的自己）" maxLength={20}
+            placeholder={`寫給誰？（必填，例：${LABEL_HINTS[label]?.to || '魯魯、未來的自己…'}）`} maxLength={20}
             style={{
               width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', padding: '0.7rem 1rem',
@@ -168,7 +175,7 @@ function WallContent() {
             }}
           />
           <textarea value={text} onChange={e => setText(e.target.value)}
-            placeholder="輸入你想說的話、一段故事、或今天的心情..." maxLength={300} rows={3}
+            placeholder={LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...'} maxLength={300} rows={3}
             style={{
               width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', padding: '0.9rem 1rem',
