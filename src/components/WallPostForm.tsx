@@ -15,6 +15,7 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
   const [text, setText]     = useState('');
   const [petName, setPetName] = useState('');
   const [isStory, setIsStory] = useState(false);
+  const [isBookWish, setIsBookWish] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone]     = useState(false);
   const [error, setError]   = useState('');
@@ -35,7 +36,7 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
       const res = await fetch('/api/wall', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, label, creatorId }),
+        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, isBookWish: isBookWish || undefined, label, creatorId }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -139,17 +140,24 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
           />
         )}
 
-        {/* 連載讀者：故事分享 checkbox */}
+        {/* 連載讀者：故事分享 + 書型許願（互斥） */}
         {label === '連載讀者' && (
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-            <input
-              type="checkbox" checked={isStory} onChange={e => setIsStory(e.target.checked)}
-              style={{ width: 15, height: 15, accentColor: '#b49050', cursor: 'pointer' }}
-            />
-            <span style={{ color: '#a09070', fontSize: '0.83rem' }}>
-              📖 我有個小故事想分享給 Surprise Corner 的朋友
-            </span>
-          </label>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <input
+                type="checkbox" checked={isStory} onChange={e => { setIsStory(e.target.checked); if (e.target.checked) setIsBookWish(false); }}
+                style={{ width: 15, height: 15, accentColor: '#b49050', cursor: 'pointer' }}
+              />
+              <span style={{ color: '#a09070', fontSize: '0.83rem' }}>📖 我有個小故事想分享給 Surprise Corner 的朋友</span>
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <input
+                type="checkbox" checked={isBookWish} onChange={e => { setIsBookWish(e.target.checked); if (e.target.checked) setIsStory(false); }}
+                style={{ width: 15, height: 15, accentColor: '#b49050', cursor: 'pointer' }}
+              />
+              <span style={{ color: '#a09070', fontSize: '0.83rem' }}>📚 許願下一本想看的書型（心理／愛情／懸疑...）</span>
+            </label>
+          </div>
         )}
 
         {/* 內容 */}
@@ -159,7 +167,7 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
           </label>
           <textarea
             value={text} onChange={e => setText(e.target.value)}
-            placeholder="分享你的感受、今天的心情，或是對故事的想法…" maxLength={300} rows={3}
+            placeholder={isStory ? '例：最後的信號第三章讓我睡不著，那個結尾到底是什麼意思？！等不及下集了' : isBookWish ? '例：希望下一本是懸疑驚悚！或是溫暖的家庭故事也好～' : '分享你的感受、今天的心情，或是對故事的想法…'} maxLength={300} rows={3}
             style={{
               width: '100%', padding: '0.6rem 0.75rem', boxSizing: 'border-box',
               background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(180,144,80,0.2)',
