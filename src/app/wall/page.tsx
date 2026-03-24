@@ -37,6 +37,7 @@ function WallContent() {
   const [from, setFrom] = useState('');
   const [petName, setPetName] = useState('');
   const [isStory, setIsStory] = useState(false);
+  const [isBookWish, setIsBookWish] = useState(false);
   const [label, setLabel] = useState(initLabel);
   const [submitting, setSubmitting] = useState(false);
 
@@ -95,7 +96,7 @@ function WallContent() {
       const res = await fetch('/api/wall', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, label, creatorId }),
+        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, isBookWish: isBookWish || undefined, label, creatorId }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -106,6 +107,8 @@ function WallContent() {
       setText('');
       setTo(label === '許願牆' ? '工具精靈 🧰' : '');
       setFrom('');
+      setIsStory(false);
+      setIsBookWish(false);
       await loadPosts(activeTab);
     } catch {
       setMessage({ type: 'err', text: '網路錯誤，請稍後再試' });
@@ -192,18 +195,21 @@ function WallContent() {
             />
           )}
           {label === '連載讀者' && (
-            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', marginBottom: '0.5rem' }}>
-              <input
-                type="checkbox" checked={isStory} onChange={e => setIsStory(e.target.checked)}
-                style={{ width: 16, height: 16, accentColor: '#a78bfa', cursor: 'pointer' }}
-              />
-              <span style={{ color: '#c4b5fd', fontSize: '0.88rem' }}>
-                📖 我有個小故事想分享給 Surprise Corner 的朋友
-              </span>
-            </label>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '0.5rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                <input type="checkbox" checked={isStory} onChange={e => { setIsStory(e.target.checked); if (e.target.checked) setIsBookWish(false); }}
+                  style={{ width: 16, height: 16, accentColor: '#a78bfa', cursor: 'pointer' }} />
+                <span style={{ color: '#c4b5fd', fontSize: '0.88rem' }}>📖 我有個小故事想分享給 Surprise Corner 的朋友</span>
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                <input type="checkbox" checked={isBookWish} onChange={e => { setIsBookWish(e.target.checked); if (e.target.checked) setIsStory(false); }}
+                  style={{ width: 16, height: 16, accentColor: '#a78bfa', cursor: 'pointer' }} />
+                <span style={{ color: '#c4b5fd', fontSize: '0.88rem' }}>📚 許願下一本想看的書型（心理／愛情／懸疑…）</span>
+              </label>
+            </div>
           )}
           <textarea value={text} onChange={e => setText(e.target.value)}
-            placeholder={isStory ? STORY_HINT : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={3}
+            placeholder={isStory ? STORY_HINT : isBookWish ? '例：希望下一本是懸疑驚悚！或是溫暖的家庭故事、愛情小說也好 💜' : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={3}
             style={{
               width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', padding: '0.9rem 1rem',
