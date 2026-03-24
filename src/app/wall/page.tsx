@@ -21,7 +21,7 @@ const TABS = [
   { key: '魯魯讀者', label: '📖 魯魯讀者' },
   { key: '連載讀者', label: '📚 連載讀者' },
   { key: 'Podcast', label: '🎵 Podcast 聽眾' },
-  { key: '許願牆',  label: '🛠️ 工具許願' },
+  { key: '許願牆',  label: '🎮 小遊戲/工具許願' },
 ];
 
 function WallContent() {
@@ -44,7 +44,7 @@ function WallContent() {
     '魯魯讀者':  { to: '魯魯、未來的自己…', content: '例：魯魯你好可愛！那集「帶魯魚回家」讓我笑了好久，謝謝你出現在我們家 🐱' },
     '連載讀者':  { to: '林必哀、作者…',     content: '例：最後的信號第三章讓我睡不著，那個結尾到底是什麼意思？！等不及下集了' },
     'Podcast':   { to: '主持人、自己…',      content: '例：EP02 副業那集讓我鼓起勇氣開始接案，謝謝你說了那句「不完美也可以開始」' },
-    '許願牆':    { to: '工具精靈 🧰',        content: '例：希望下次能加入語音轉文字工具！或是推薦一個可以免費做簡報的 AI？' },
+    '許願牆':    { to: '工具精靈 🧰',        content: '例：希望魯魯抓魚可以加難度！或是推薦一個免費做簡報的 AI 工具？' },
   };
   const STORY_HINT = '用一兩句話說個你的小故事，不用很長，生活裡一個讓你有感覺的瞬間就好 ✨';
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
@@ -104,7 +104,7 @@ function WallContent() {
       }
       setMessage({ type: 'ok', text: '✅ 已成功發布到互動牆！' });
       setText('');
-      setTo('');
+      setTo(label === '許願牆' ? '工具精靈 🧰' : '');
       setFrom('');
       await loadPosts(activeTab);
     } catch {
@@ -134,7 +134,13 @@ function WallContent() {
 
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '2rem' }}>
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => { setActiveTab(tab.key); if (tab.key !== 'all') setLabel(tab.key); }} style={{
+            <button key={tab.key} onClick={() => {
+              setActiveTab(tab.key);
+              if (tab.key !== 'all') {
+                setLabel(tab.key);
+                setTo(tab.key === '許願牆' ? '工具精靈 🧰' : '');
+              }
+            }} style={{
               padding: '0.45rem 1.1rem', borderRadius: '30px', fontSize: '0.85rem',
               fontWeight: activeTab === tab.key ? 700 : 400, cursor: 'pointer',
               border: activeTab === tab.key ? '1px solid rgba(167,139,250,0.8)' : '1px solid rgba(167,139,250,0.25)',
@@ -165,12 +171,15 @@ function WallContent() {
               </button>
             ))}
           </div>
-          <input value={to} onChange={e => setTo(e.target.value)}
+          <input value={to} onChange={e => label !== '許願牆' && setTo(e.target.value)}
+            readOnly={label === '許願牆'}
             placeholder={`寫給誰？（必填，例：${LABEL_HINTS[label]?.to || '魯魯、未來的自己…'}）`} maxLength={20}
             style={{
-              width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
+              width: '100%', boxSizing: 'border-box',
+              background: label === '許願牆' ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', padding: '0.7rem 1rem',
               color: '#f3f4f6', fontSize: '0.9rem', outline: 'none', marginBottom: '0.6rem', fontFamily: 'inherit',
+              cursor: label === '許願牆' ? 'default' : 'text',
             }}
           />
           <input value={from} onChange={e => setFrom(e.target.value)}
