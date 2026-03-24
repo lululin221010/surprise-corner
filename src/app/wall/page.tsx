@@ -33,6 +33,7 @@ function WallContent() {
   const [text, setText] = useState('');
   const [to, setTo] = useState(initTo);
   const [from, setFrom] = useState('');
+  const [petName, setPetName] = useState('');
   const [label, setLabel] = useState(initLabel);
   const [submitting, setSubmitting] = useState(false);
 
@@ -88,7 +89,7 @@ function WallContent() {
       const res = await fetch('/api/wall', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), label, creatorId }),
+        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, label, creatorId }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -174,6 +175,16 @@ function WallContent() {
               color: '#f3f4f6', fontSize: '0.9rem', outline: 'none', marginBottom: '0.6rem', fontFamily: 'inherit',
             }}
           />
+          {label === '魯魯讀者' && (
+            <input value={petName} onChange={e => setPetName(e.target.value)}
+              placeholder="🐾 你家毛孩叫什麼名字？（選填）" maxLength={20}
+              style={{
+                width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
+                border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', padding: '0.7rem 1rem',
+                color: '#f3f4f6', fontSize: '0.9rem', outline: 'none', marginBottom: '0.6rem', fontFamily: 'inherit',
+              }}
+            />
+          )}
           <textarea value={text} onChange={e => setText(e.target.value)}
             placeholder={LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...'} maxLength={300} rows={3}
             style={{
