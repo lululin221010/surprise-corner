@@ -25,7 +25,7 @@ const FEATURES = [
   {
     icon: '🔥',
     title: '互動牆',
-    desc: '大家用 AI 生成的驚喜創作，每天都有新內容出現。',
+    desc: '喜歡驚喜角落的朋友們的互動區，留言、分享、說說你的心情。',
     href: '/wall',
     color: '#ef4444',
     glow: 'rgba(239,68,68,0.4)',
