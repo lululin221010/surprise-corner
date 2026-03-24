@@ -568,11 +568,11 @@ export default function EbookPage() {
         {/* 連載說明橫幅 */}
         {isSerial && (
           <div style={{ background: 'rgba(180,144,80,0.08)', borderBottom: '1px solid rgba(180,144,80,0.12)', padding: '10px 24px', textAlign: 'center', fontSize: '0.8rem', color: '#9a8878', letterSpacing: '0.04em', lineHeight: 1.8 }}>
-            📖 本連載<strong style={{ color: '#b49050' }}>全集免費</strong>，{serialInfo?.schedule}更新一集
-            　｜　不想等？
-            <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer" style={{ color: '#b49050', textDecoration: 'underline', marginLeft: 4 }}>
-              購買電子書一次看完 →
+            🎁 優惠期間小舖開放此連載免費，想一次看完可至
+            <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer" style={{ color: '#b49050', textDecoration: 'underline', margin: '0 4px' }}>
+              數位商店
             </a>
+            購買電子書
           </div>
         )}
 
