@@ -302,8 +302,10 @@ export default function NameNumerologyPage() {
               <p style={{ color:'#d1d5db', fontSize:'0.88rem', lineHeight:1.75, margin:0 }}>{result.overall}</p>
             </div>
 
-            <p style={{ color:'#4b5563', fontSize:'0.72rem', textAlign:'center' }}>
-              ✨ 姓名學派別眾多，本工具採傳統三才五格筆劃法，僅供娛樂參考
+            <p style={{ color:'#4b5563', fontSize:'0.72rem', textAlign:'center', lineHeight:1.8 }}>
+              ✨ 姓名學派別眾多，本工具採傳統三才五格筆劃法，僅供娛樂參考<br/>
+              大吉者恭喜，好名字繼續努力配得上它 🎉<br/>
+              大凶者也別慌，名字只是參考——請勿找父母算帳 😂
             </p>
           </div>
         )}
