@@ -134,7 +134,7 @@ function WallContent() {
 
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '2rem' }}>
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
+            <button key={tab.key} onClick={() => { setActiveTab(tab.key); if (tab.key !== 'all') setLabel(tab.key); }} style={{
               padding: '0.45rem 1.1rem', borderRadius: '30px', fontSize: '0.85rem',
               fontWeight: activeTab === tab.key ? 700 : 400, cursor: 'pointer',
               border: activeTab === tab.key ? '1px solid rgba(167,139,250,0.8)' : '1px solid rgba(167,139,250,0.25)',
