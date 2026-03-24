@@ -12,7 +12,7 @@ const links = [
   { href: '/ai-news',       label: '🤖 AI快訊' },
   { href: '/podcast',       label: '🎙️ Podcast' },
   { href: '/tools',         label: '🛠 工具箱' },
-  { href: '/games/lulu-run', label: '🐱 魯魯跑酷' },
+  { href: '/games', label: '🎮 小遊戲' },
   // ✅ 管理頁面已從導覽列移除（直接輸入 /admin 仍可進入）
 ];
 
