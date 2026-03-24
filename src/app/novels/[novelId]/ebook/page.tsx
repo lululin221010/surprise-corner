@@ -97,6 +97,11 @@ export default function EbookPage() {
       .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
   }
 
+  // ✅ 連載小說：試讀只顯示前 1/5 章節內文
+  const allChapterCount = (chaptersData as any[]).filter(c => c.novelId === novelId && c.isPublished).length
+  const previewCount = isSerial ? Math.max(1, Math.ceil(allChapterCount / 5)) : publishedChapters.length
+  const previewChapters = isSerial ? publishedChapters.slice(0, previewCount) : publishedChapters
+
   // ✅ 顯示實際免費章節數
   const freeCount = publishedChapters.length
 
@@ -634,8 +639,20 @@ export default function EbookPage() {
           </div>
         )}
 
+        {/* 試讀區：連載小說只顯示前 1/5 章節內文 */}
+        {isSerial && previewChapters.length > 0 && (
+          <div style={{ maxWidth: 680, margin: '0 auto', padding: '32px 40px 0', textAlign: 'center' }}>
+            <p style={{ fontSize: '0.72rem', letterSpacing: '0.3em', color: '#7a6a58' }}>
+              ✦ &nbsp; 試　讀 &nbsp; ✦
+            </p>
+            <p style={{ fontSize: '0.8rem', color: '#5a4a38', marginTop: 8 }}>
+              以下為前 {previewChapters.length} 集試讀，更多章節請至上方目錄點選
+            </p>
+          </div>
+        )}
+
         <div className="chapters-body">
-          {publishedChapters.map((chapter) => {
+          {previewChapters.map((chapter) => {
             const paragraphs = Array.isArray(chapter.content)
               ? chapter.content.filter((p: string) => p && p.trim())
               : chapter.content.split('\n').filter((p: string) => p.trim())
@@ -711,6 +728,19 @@ export default function EbookPage() {
               </div>
             )
           })}
+          {/* 試讀結束提示 */}
+          {isSerial && publishedChapters.length > previewCount && (
+            <div style={{ textAlign: 'center', padding: '48px 20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              <p style={{ fontSize: '0.85rem', color: '#7a6a58', marginBottom: 16 }}>— 試讀結束 —</p>
+              <p style={{ fontSize: '0.9rem', color: '#9a8878', marginBottom: 24 }}>
+                更多章節請至上方目錄點選，或購買電子書一次看完 📖
+              </p>
+              <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-block', padding: '0.6rem 1.8rem', background: 'linear-gradient(135deg, rgba(180,144,80,0.25), rgba(160,80,100,0.2))', border: '1px solid rgba(180,144,80,0.35)', color: '#c4a060', fontSize: '0.85rem', letterSpacing: '0.08em', textDecoration: 'none' }}>
+                前往小舖購買完整版 →
+              </a>
+            </div>
+          )}
         </div>
 
         {publishedChapters.length > 0 && (
