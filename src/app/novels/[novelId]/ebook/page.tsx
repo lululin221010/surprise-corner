@@ -730,7 +730,7 @@ export default function EbookPage() {
             )
           })}
           {/* 試讀結束提示 */}
-          {isSerial && publishedChapters.length > previewCount && (
+          {isSerial && (publishedChapters.length > previewCount || futureChapters.length > 0) && (
             <div style={{ textAlign: 'center', padding: '48px 20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
               <p style={{ fontSize: '0.85rem', color: '#7a6a58', marginBottom: 16 }}>— 試讀結束 —</p>
               <p style={{ fontSize: '0.9rem', color: '#9a8878', marginBottom: 24 }}>
