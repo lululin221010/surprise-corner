@@ -38,6 +38,7 @@ function WallContent() {
   const [petName, setPetName] = useState('');
   const [isStory, setIsStory] = useState(false);
   const [isBookWish, setIsBookWish] = useState(false);
+  const [isPodcastWish, setIsPodcastWish] = useState(false);
   const [label, setLabel] = useState(initLabel);
   const [submitting, setSubmitting] = useState(false);
 
@@ -96,7 +97,7 @@ function WallContent() {
       const res = await fetch('/api/wall', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, isBookWish: isBookWish || undefined, label, creatorId }),
+        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, isBookWish: isBookWish || undefined, isPodcastWish: isPodcastWish || undefined, label, creatorId }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -109,6 +110,7 @@ function WallContent() {
       setFrom('');
       setIsStory(false);
       setIsBookWish(false);
+      setIsPodcastWish(false);
       await loadPosts(activeTab);
     } catch {
       setMessage({ type: 'err', text: '網路錯誤，請稍後再試' });
@@ -208,8 +210,15 @@ function WallContent() {
               </label>
             </div>
           )}
+          {label === 'Podcast' && (
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', marginBottom: '0.5rem' }}>
+              <input type="checkbox" checked={isPodcastWish} onChange={e => setIsPodcastWish(e.target.checked)}
+                style={{ width: 16, height: 16, accentColor: '#a78bfa', cursor: 'pointer' }} />
+              <span style={{ color: '#c4b5fd', fontSize: '0.88rem' }}>🎙️ 想聽主持人解析某個事件或主題</span>
+            </label>
+          )}
           <textarea value={text} onChange={e => setText(e.target.value)}
-            placeholder={isStory ? STORY_HINT : isBookWish ? '例：希望下一本是懸疑驚悚！或是溫暖的家庭故事、愛情小說也好 💜' : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={3}
+            placeholder={isStory ? STORY_HINT : isBookWish ? '例：希望下一本是懸疑驚悚！或是溫暖的家庭故事、愛情小說也好 💜' : isPodcastWish ? '例：想聽你聊 AI 取代工作這件事、或是台灣房價為什麼一直漲？' : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={3}
             style={{
               width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', padding: '0.9rem 1rem',
