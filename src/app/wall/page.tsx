@@ -11,6 +11,8 @@ interface Post {
   from: string;
   label: string;
   reply?: string;
+  petName?: string;
+  isStory?: boolean;
   creatorId: string | null;
 }
 
@@ -34,15 +36,17 @@ function WallContent() {
   const [to, setTo] = useState(initTo);
   const [from, setFrom] = useState('');
   const [petName, setPetName] = useState('');
+  const [isStory, setIsStory] = useState(false);
   const [label, setLabel] = useState(initLabel);
   const [submitting, setSubmitting] = useState(false);
 
   const LABEL_HINTS: Record<string, { to: string; content: string }> = {
-    '魯魯讀者':  { to: '魯魯、未來的自己…', content: '例：魯魯你好可愛！那集「帶魯魯回家」讓我笑了好久，謝謝你出現在我們家 🐱' },
+    '魯魯讀者':  { to: '魯魯、未來的自己…', content: '例：魯魯你好可愛！那集「帶魯魚回家」讓我笑了好久，謝謝你出現在我們家 🐱' },
     '連載讀者':  { to: '林必哀、作者…',     content: '例：最後的信號第三章讓我睡不著，那個結尾到底是什麼意思？！等不及下集了' },
     'Podcast':   { to: '主持人、自己…',      content: '例：EP02 副業那集讓我鼓起勇氣開始接案，謝謝你說了那句「不完美也可以開始」' },
     '許願牆':    { to: '工具精靈 🧰',        content: '例：希望下次能加入語音轉文字工具！或是推薦一個可以免費做簡報的 AI？' },
   };
+  const STORY_HINT = '用一兩句話說個你的小故事，不用很長，生活裡一個讓你有感覺的瞬間就好 ✨';
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
 
   async function loadPosts(tab: string) {
@@ -58,6 +62,8 @@ function WallContent() {
         from: p.from || '',
         label: p.label || '',
         reply: p.reply || '',
+        petName: p.petName || '',
+        isStory: p.isStory || false,
         creatorId: p.creatorId,
       })));
     } catch {
@@ -89,7 +95,7 @@ function WallContent() {
       const res = await fetch('/api/wall', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, label, creatorId }),
+        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, label, creatorId }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -185,8 +191,19 @@ function WallContent() {
               }}
             />
           )}
+          {label === '連載讀者' && (
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', marginBottom: '0.5rem' }}>
+              <input
+                type="checkbox" checked={isStory} onChange={e => setIsStory(e.target.checked)}
+                style={{ width: 16, height: 16, accentColor: '#a78bfa', cursor: 'pointer' }}
+              />
+              <span style={{ color: '#c4b5fd', fontSize: '0.88rem' }}>
+                📖 我有個小故事想分享給 Surprise Corner 的朋友
+              </span>
+            </label>
+          )}
           <textarea value={text} onChange={e => setText(e.target.value)}
-            placeholder={LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...'} maxLength={300} rows={3}
+            placeholder={isStory ? STORY_HINT : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={3}
             style={{
               width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', padding: '0.9rem 1rem',
@@ -225,14 +242,32 @@ function WallContent() {
               background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(196,181,253,0.2)',
               borderRadius: '16px', padding: '1.5rem', marginBottom: '1rem', backdropFilter: 'blur(10px)',
             }}>
-              {p.label && (
-                <span style={{
-                  fontSize: '0.72rem', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.3)',
-                  borderRadius: '20px', padding: '2px 10px', marginBottom: '0.6rem', display: 'inline-block',
-                }}>
-                  {TABS.find(t => t.key === p.label)?.label || p.label}
-                </span>
-              )}
+              <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
+                {p.label && (
+                  <span style={{
+                    fontSize: '0.72rem', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.3)',
+                    borderRadius: '20px', padding: '2px 10px', display: 'inline-block',
+                  }}>
+                    {TABS.find(t => t.key === p.label)?.label || p.label}
+                  </span>
+                )}
+                {p.isStory && (
+                  <span style={{
+                    fontSize: '0.72rem', color: '#f0abfc', border: '1px solid rgba(240,171,252,0.4)',
+                    borderRadius: '20px', padding: '2px 10px', display: 'inline-block',
+                  }}>
+                    📖 故事分享
+                  </span>
+                )}
+                {p.petName && (
+                  <span style={{
+                    fontSize: '0.72rem', color: '#86efac', border: '1px solid rgba(134,239,172,0.3)',
+                    borderRadius: '20px', padding: '2px 10px', display: 'inline-block',
+                  }}>
+                    🐾 {p.petName}
+                  </span>
+                )}
+              </div>
               {p.to && (
                 <p style={{ margin: '0.4rem 0 0.2rem', fontSize: '0.82rem', color: '#c4b5fd' }}>
                   寫給：{p.to}{p.from ? `　from：${p.from}` : '　（匿名）'}
