@@ -40,9 +40,9 @@ const SIGN_DESC: Record<string, { sun:string; moon:string; rising:string }> = {
 // ── 計算太陽星座 ───────────────────────────────────────────
 function getSunSign(month: number, day: number): number {
   const dates: [number,number,number][] = [
-    [0,[3,21]], [1,[4,20]], [2,[5,21]], [3,[6,21]], [4,[7,23]], [5,[8,23]],
-    [6,[9,23]], [7,[10,23]], [8,[11,22]], [9,[12,22]], [10,[1,20]], [11,[2,19]],
-  ].map(([i,[m,d]])=>[i as number, m as number, d as number]);
+    [0,3,21],[1,4,20],[2,5,21],[3,6,21],[4,7,23],[5,8,23],
+    [6,9,23],[7,10,23],[8,11,22],[9,12,22],[10,1,20],[11,2,19],
+  ];
 
   for (let i = dates.length - 1; i >= 0; i--) {
     const [idx, sm, sd] = dates[i];

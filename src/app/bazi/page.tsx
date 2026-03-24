@@ -172,9 +172,7 @@ export default function BaziPage() {
             </div>
             <p style={{ color:'#4b5563', fontSize:'0.72rem', margin:'0 0 1rem' }}>⚠️ 八字以節氣（立春約2/4）為年分界，非農曆也非國曆，以西元年輸入即可</p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:'1rem', marginBottom:'1.2rem' }}>
-            <div>
-            <div>
+          <div style={{ marginBottom:'1.2rem' }}>
               <label style={{ color:'#a78bfa', fontSize:'0.82rem', fontWeight:700, display:'block', marginBottom:'0.4rem' }}>🕐 出生時辰（選填）</label>
               <select value={hour} onChange={e=>setHour(e.target.value)}
                 style={{ width:'100%', background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color: hour ? '#fff' : '#6b7280', padding:'0.65rem 0.9rem', fontSize:'0.95rem', outline:'none', boxSizing:'border-box' }}>
@@ -183,7 +181,6 @@ export default function BaziPage() {
                   <option key={i} value={i} style={{background:'#1a0533'}}>{h} — {BRANCHES[i===23?0:Math.floor((i+1)/2)%12]}時</option>
                 ))}
               </select>
-            </div>
           </div>
           <button onClick={calculate} style={{ width:'100%', background:'linear-gradient(135deg,#7c3aed,#ec4899)', color:'#fff', border:'none', borderRadius:'12px', padding:'0.85rem', fontSize:'1rem', fontWeight:800, cursor:'pointer' }}>
             🔍 排盤
