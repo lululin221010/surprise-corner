@@ -58,10 +58,18 @@ const GAMES = [
     glow: 'rgba(6,182,212,0.3)',
     tag: '星座',
   },
+  {
+    href: '/tarot-year',
+    icon: '🎴',
+    title: '流年塔羅',
+    desc: '生命靈數對應大阿爾克那，看見今年的主題牌與關鍵字。',
+    color: '#9333ea',
+    glow: 'rgba(147,51,234,0.3)',
+    tag: '命理',
+  },
 ];
 
 const COMING_SOON = [
-  { icon: '🎴', title: '流年塔羅', desc: '數字命理＋今年關鍵字，看看這一年的主題牌。' },
   { icon: '🃏', title: '魯魯記憶配對', desc: '翻牌配對魯魯的照片，考驗你的記憶力。' },
   { icon: '🎯', title: '幸運轉盤', desc: '轉出今日關鍵字，帶著它去過一天。' },
 ];

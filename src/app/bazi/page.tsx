@@ -103,7 +103,9 @@ function countElements(pillars: { stemIdx:number; branchIdx:number }[]) {
 type Pillar = { label:string; stemIdx:number; branchIdx:number };
 
 export default function BaziPage() {
-  const [date, setDate]   = useState('');
+  const [year, setYear]   = useState('');
+  const [month, setMonth] = useState('');
+  const [day, setDay]     = useState('');
   const [hour, setHour]   = useState('');
   const [result, setResult] = useState<null | {
     pillars: Pillar[];
@@ -113,8 +115,8 @@ export default function BaziPage() {
   }>(null);
 
   function calculate() {
-    if (!date) return;
-    const [y, m, d] = date.split('-').map(Number);
+    const y = parseInt(year), m = parseInt(month), d = parseInt(day);
+    if (!y || !m || !d) return;
     const h = hour ? parseInt(hour) : -1;
 
     const yearGZ  = getYearGZ(y, m, d);
@@ -152,12 +154,26 @@ export default function BaziPage() {
 
         {/* 輸入區 */}
         <div style={{ background:'rgba(255,255,255,0.06)', border:'1px solid rgba(167,139,250,0.25)', borderRadius:'20px', padding:'1.5rem', marginBottom:'1.5rem' }}>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem', marginBottom:'1.2rem' }}>
-            <div>
-              <label style={{ color:'#a78bfa', fontSize:'0.82rem', fontWeight:700, display:'block', marginBottom:'0.4rem' }}>📅 出生日期</label>
-              <input type="date" value={date} onChange={e=>setDate(e.target.value)}
-                style={{ width:'100%', background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color:'#fff', padding:'0.65rem 0.9rem', fontSize:'0.95rem', outline:'none', boxSizing:'border-box' }} />
+          <div style={{ marginBottom:'0.5rem' }}>
+            <label style={{ color:'#a78bfa', fontSize:'0.82rem', fontWeight:700, display:'block', marginBottom:'0.5rem' }}>📅 出生日期（請輸入西元年）</label>
+            <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:'0.6rem', marginBottom:'0.4rem' }}>
+              <input type="number" placeholder="西元年　例：1990" value={year} onChange={e=>setYear(e.target.value)} min="1900" max="2099"
+                style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color:'#fff', padding:'0.65rem 0.9rem', fontSize:'0.95rem', outline:'none', width:'100%', boxSizing:'border-box' }} />
+              <select value={month} onChange={e=>setMonth(e.target.value)}
+                style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color: month ? '#fff' : '#6b7280', padding:'0.65rem 0.5rem', fontSize:'0.95rem', outline:'none', boxSizing:'border-box' }}>
+                <option value=''>月</option>
+                {Array.from({length:12},(_,i)=><option key={i+1} value={i+1} style={{background:'#1a0533'}}>{i+1} 月</option>)}
+              </select>
+              <select value={day} onChange={e=>setDay(e.target.value)}
+                style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(167,139,250,0.3)', borderRadius:'10px', color: day ? '#fff' : '#6b7280', padding:'0.65rem 0.5rem', fontSize:'0.95rem', outline:'none', boxSizing:'border-box' }}>
+                <option value=''>日</option>
+                {Array.from({length:31},(_,i)=><option key={i+1} value={i+1} style={{background:'#1a0533'}}>{i+1} 日</option>)}
+              </select>
             </div>
+            <p style={{ color:'#4b5563', fontSize:'0.72rem', margin:'0 0 1rem' }}>⚠️ 八字以節氣（立春約2/4）為年分界，非農曆也非國曆，以西元年輸入即可</p>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:'1rem', marginBottom:'1.2rem' }}>
+            <div>
             <div>
               <label style={{ color:'#a78bfa', fontSize:'0.82rem', fontWeight:700, display:'block', marginBottom:'0.4rem' }}>🕐 出生時辰（選填）</label>
               <select value={hour} onChange={e=>setHour(e.target.value)}
