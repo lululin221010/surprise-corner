@@ -21,6 +21,7 @@ function isPublishedByDate(publishedAt: string): boolean {
 const SERIAL_NOVELS: Record<string, { schedule: string }> = {
   'lulu-diary':      { schedule: '偶數日更新' },
   'the-last-signal': { schedule: '奇數日更新' },
+  'lulu-life':       { schedule: '不定期更新' },
 }
 
 // ✅ 滾動窗口：最新 N 章的 id 集合

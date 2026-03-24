@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // 連載小說直接導向 /ebook 頁，不顯示章節目錄頁
-const SERIAL_NOVEL_IDS = ['lulu-diary', 'the-last-signal']
+const SERIAL_NOVEL_IDS = ['lulu-diary', 'the-last-signal', 'lulu-life']
 
 export default async function NovelPage({ params }: Props) {
   const { novelId } = await params
