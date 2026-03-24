@@ -157,7 +157,6 @@ export default function NovelsPage() {
                 <p className="novel-author">作者：{novel.author}</p>
                 <p className="novel-desc">{novel.description}</p>
                 <div className="novel-meta">
-                  <span className="novel-status novel-status-completed">{novel.status}</span>
                   <span>完整版 {novel.totalChapters} 章</span>
                 </div>
                 <div className="novel-footer">
