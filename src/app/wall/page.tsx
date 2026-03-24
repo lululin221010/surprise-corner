@@ -159,18 +159,9 @@ function WallContent() {
           <h2 style={{ color: '#e9d5ff', fontSize: '1rem', fontWeight: 800, margin: '0 0 1rem' }}>
             ✍️ 留下你的心情或故事
           </h2>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
-            {TABS.filter(t => t.key !== 'all').map(tab => (
-              <button key={tab.key} onClick={() => setLabel(tab.key)} style={{
-                padding: '0.3rem 0.9rem', borderRadius: '20px', fontSize: '0.78rem', cursor: 'pointer',
-                border: label === tab.key ? '1px solid rgba(167,139,250,0.8)' : '1px solid rgba(167,139,250,0.25)',
-                background: label === tab.key ? 'rgba(124,58,237,0.35)' : 'rgba(255,255,255,0.05)',
-                color: label === tab.key ? '#e9d5ff' : '#9ca3af', transition: 'all 0.2s',
-              }}>
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          <p style={{ color: '#9ca3af', fontSize: '0.78rem', margin: '0 0 0.8rem' }}>
+            身份：{TABS.find(t => t.key === label)?.label || label}
+          </p>
           <input value={to} onChange={e => label !== '許願牆' && setTo(e.target.value)}
             readOnly={label === '許願牆'}
             placeholder={`寫給誰？（必填，例：${LABEL_HINTS[label]?.to || '魯魯、未來的自己…'}）`} maxLength={20}
