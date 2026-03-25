@@ -120,7 +120,7 @@ export default function WatermarkPage() {
 
   useEffect(() => {
     if (imgRef.current) drawWatermark();
-  }, [drawWatermark]);
+  }, [drawWatermark, imgSrc]);
 
   function handleDownload() {
     const canvas = canvasRef.current;
