@@ -3,6 +3,8 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import chaptersData from '../data/chapters.json';
+import novelsData from '../data/novels.json';
 
 const TYPEWRITER_TEXTS = [
   '每天不一樣的小驚喜，等你來揭曉',
@@ -80,6 +82,20 @@ const FEATURES = [
     external: true,
   },
 ];
+
+// 最新連載章節（模組層級，靜態計算）
+const _now = new Date();
+const _latestCh = [...(chaptersData as any[])]
+  .filter((c: any) => c.isPublished && new Date(c.publishedAt) <= _now)
+  .sort((a: any, b: any) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())[0];
+const _latestNovel = (novelsData as any[]).find((n: any) => n.id === _latestCh?.novelId);
+
+// 最新 Podcast（與 podcast/page.tsx 同步更新）
+const LATEST_PODCAST = {
+  ep: 8,
+  title: '離世是靈魂計畫好的畢業',
+  desc: '如果死亡不是終點，而是靈魂早就安排好的一場畢業典禮呢？這集從不同角度重新看待「離開」這件事。',
+};
 
 // 粒子
 function Particles() {
@@ -179,6 +195,7 @@ function Typewriter() {
 export default function Home() {
   const [surprise, setSurprise] = useState<{ title?: string; content?: string; message?: string; type?: string } | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string } | null>(null);
  const [showInstall, setShowInstall] = useState(false);
 const [copied, setCopied] = useState(false);
   const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -187,6 +204,16 @@ const [copied, setCopied] = useState(false);
     fetch('/api/surprise/today')
       .then(r => r.ok ? r.json() : null)
       .then(data => setSurprise(data))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/ai-news')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        const first = data?.news?.find((n: any) => n.category === 'AI');
+        if (first) setAiNews(first);
+      })
       .catch(() => {});
   }, []);
 
@@ -368,6 +395,82 @@ const [copied, setCopied] = useState(false);
             )}
           </div>
         </div>
+
+        {/* 最新內容速覽 */}
+        <section style={{ maxWidth: '900px', margin: '0 auto', padding: '0 1rem 2rem', animation: 'fadeInUp 1s ease 0.4s both' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#e9d5ff' }}>
+            最新內容 ✨
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+
+            {/* 連載小說最新章節 */}
+            {_latestCh && (
+              <Link href={`/novels/${_latestCh.novelId}/${_latestCh.id}`} style={{ textDecoration: 'none' }}>
+                <div className="feature-card" style={{
+                  background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.3)',
+                  borderRadius: '16px', padding: '1.5rem', height: '100%',
+                }}>
+                  <div style={{ fontSize: '0.75rem', color: '#a78bfa', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '0.08em' }}>
+                    📖 連載小說 · {_latestNovel?.title || ''}
+                  </div>
+                  <h3 style={{ color: '#f3f4f6', fontSize: '1rem', fontWeight: 800, margin: '0 0 0.6rem', lineHeight: 1.4 }}>
+                    {_latestCh.title}
+                  </h3>
+                  <p style={{ color: '#9ca3af', fontSize: '0.83rem', lineHeight: 1.7, margin: '0 0 1rem',
+                    display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    {_latestCh.content?.replace(/---/g, '').replace(/🐾[\s\S]*/g, '').trim().slice(0, 100)}…
+                  </p>
+                  <span style={{ color: '#7c3aed', fontSize: '0.82rem', fontWeight: 700 }}>閱讀更多 →</span>
+                </div>
+              </Link>
+            )}
+
+            {/* AI 快訊最新一則 */}
+            <a href={aiNews?.link || '/ai-news'} target={aiNews?.link ? '_blank' : undefined}
+              rel={aiNews?.link ? 'noopener noreferrer' : undefined} style={{ textDecoration: 'none' }}>
+              <div className="feature-card" style={{
+                background: 'rgba(14,165,233,0.1)', border: '1px solid rgba(14,165,233,0.3)',
+                borderRadius: '16px', padding: '1.5rem', height: '100%',
+              }}>
+                <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '0.08em' }}>
+                  🤖 AI 快訊 {aiNews ? `· ${aiNews.source}` : ''}
+                </div>
+                <h3 style={{ color: '#f3f4f6', fontSize: '1rem', fontWeight: 800, margin: '0 0 0.6rem', lineHeight: 1.4,
+                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  {aiNews ? aiNews.title : '載入中…'}
+                </h3>
+                <p style={{ color: '#9ca3af', fontSize: '0.83rem', lineHeight: 1.7, margin: '0 0 1rem',
+                  display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  {aiNews ? aiNews.description : ''}
+                </p>
+                <span style={{ color: '#0ea5e9', fontSize: '0.82rem', fontWeight: 700 }}>
+                  {aiNews ? '查看原文 →' : '前往快訊 →'}
+                </span>
+              </div>
+            </a>
+
+            {/* Podcast 最新集數 */}
+            <Link href="/podcast" style={{ textDecoration: 'none' }}>
+              <div className="feature-card" style={{
+                background: 'rgba(236,72,153,0.1)', border: '1px solid rgba(236,72,153,0.3)',
+                borderRadius: '16px', padding: '1.5rem', height: '100%',
+              }}>
+                <div style={{ fontSize: '0.75rem', color: '#f472b6', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '0.08em' }}>
+                  🎙️ Podcast · EP{String(LATEST_PODCAST.ep).padStart(2, '0')}
+                </div>
+                <h3 style={{ color: '#f3f4f6', fontSize: '1rem', fontWeight: 800, margin: '0 0 0.6rem', lineHeight: 1.4 }}>
+                  {LATEST_PODCAST.title}
+                </h3>
+                <p style={{ color: '#9ca3af', fontSize: '0.83rem', lineHeight: 1.7, margin: '0 0 1rem',
+                  display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  {LATEST_PODCAST.desc}
+                </p>
+                <span style={{ color: '#ec4899', fontSize: '0.82rem', fontWeight: 700 }}>收聽本集 →</span>
+              </div>
+            </Link>
+
+          </div>
+        </section>
 
         {/* 探索更多 */}
         <section style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1rem 6rem' }}>
