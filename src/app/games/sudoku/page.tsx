@@ -315,6 +315,52 @@ export default function SudokuPage() {
           </button>
         </div>
 
+        <p style={{ color: '#4b5563', fontSize: '0.73rem', textAlign: 'center', lineHeight: 1.7, margin: '0 0 1.5rem' }}>
+          點格子選取 → 點數字填入 · 桌機可直接鍵盤輸入 · 方向鍵移動
+        </p>
+
+        {/* 玩法說明 */}
+        <div style={{
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(167,139,250,0.2)',
+          borderRadius: '14px', padding: '1.2rem 1.4rem',
+        }}>
+          <div style={{ color: '#a78bfa', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.8rem', letterSpacing: '0.05em' }}>
+            📖 玩法規則
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
+            {[
+              { icon: '🔢', text: '將數字 1–9 填入所有空格' },
+              { icon: '➡️', text: '每一「橫列」的 9 格，數字 1–9 各出現恰好一次' },
+              { icon: '⬇️', text: '每一「直行」的 9 格，數字 1–9 各出現恰好一次' },
+              { icon: '⬛', text: '每個粗框「3×3 宮格」，數字 1–9 各出現恰好一次' },
+              { icon: '🔴', text: '數字衝突時格子變紅，找出錯誤並修正' },
+              { icon: '✅', text: '所有格子填對即完成！' },
+            ].map((item, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                <span style={{ fontSize: '0.85rem', flexShrink: 0, marginTop: '0.05rem' }}>{item.icon}</span>
+                <span style={{ color: '#9ca3af', fontSize: '0.82rem', lineHeight: 1.6 }}>{item.text}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: '1rem', paddingTop: '0.8rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ color: '#6b7280', fontSize: '0.75rem', marginBottom: '0.4rem' }}>💡 難度說明</div>
+            <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
+              {[
+                { label: '簡單', color: '#4ade80', desc: '提示較多，適合初學' },
+                { label: '中等', color: '#fbbf24', desc: '需要基本推理' },
+                { label: '困難', color: '#f87171', desc: '需要進階技巧' },
+              ].map(d => (
+                <div key={d.label} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: d.color, display: 'inline-block', flexShrink: 0 }} />
+                  <span style={{ color: d.color, fontSize: '0.78rem', fontWeight: 700 }}>{d.label}</span>
+                  <span style={{ color: '#4b5563', fontSize: '0.75rem' }}>{d.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <p style={{ color: '#374151', fontSize: '0.73rem', textAlign: 'center', lineHeight: 1.7, margin: 0 }}>
           點格子選取 → 點數字填入 · 桌機可直接鍵盤輸入 · 方向鍵移動
         </p>
