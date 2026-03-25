@@ -76,6 +76,15 @@ const GAMES = [
     glow: 'rgba(236,72,153,0.3)',
     tag: '命理',
   },
+  {
+    href: '/games/sudoku',
+    icon: '🔢',
+    title: '數獨',
+    desc: '填滿每行、每列、每個 3×3 宮格，數字 1–9 各一次。三種難度，手機鍵盤支援。',
+    color: '#06b6d4',
+    glow: 'rgba(6,182,212,0.3)',
+    tag: '益智',
+  },
 ];
 
 const COMING_SOON = [
