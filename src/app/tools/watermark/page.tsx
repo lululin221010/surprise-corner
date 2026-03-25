@@ -46,6 +46,8 @@ export default function WatermarkPage() {
   const [color, setColor] = useState('#ffd700');
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [imgInfo, setImgInfo] = useState('');
+  const [inputKey, setInputKey] = useState(0);
+  const [loadMsg, setLoadMsg] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -60,6 +62,9 @@ export default function WatermarkPage() {
       setImgSrc(url);
       setImgInfo(`${img.naturalWidth} × ${img.naturalHeight} px`);
       setResultUrl(null);
+      setInputKey(k => k + 1);
+      setLoadMsg(`✅ 已載入：${f.name}`);
+      setTimeout(() => setLoadMsg(''), 3000);
     };
     img.src = url;
   }
@@ -166,9 +171,15 @@ export default function WatermarkPage() {
             ) : (
               <p style={{ color: '#c4b5fd', margin: 0 }}>拖放圖片或點擊選擇（jpg / png / webp）</p>
             )}
-            <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }}
-              onChange={e => { const f = e.target.files?.[0]; if (f) loadFile(f); e.target.value = ''; }} />
+            <input key={inputKey} ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }}
+              onChange={e => { const f = e.target.files?.[0]; if (f) loadFile(f); }} />
           </div>
+
+          {loadMsg && (
+            <div style={{ marginBottom: '1rem', padding: '0.6rem 1rem', background: 'rgba(74,222,128,0.15)', border: '1px solid rgba(74,222,128,0.4)', borderRadius: '10px', color: '#4ade80', fontSize: '0.9rem' }}>
+              {loadMsg}
+            </div>
+          )}
 
           {/* 浮水印設定 */}
           {imgSrc && (
