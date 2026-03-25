@@ -31,7 +31,8 @@ function WallContent() {
   const initTab = searchParams.get('tab') || 'all';
   const [activeTab, setActiveTab] = useState(initTab);
   const initLabel = searchParams.get('tab') && searchParams.get('tab') !== 'all' ? searchParams.get('tab')! : '魯魯讀者';
-  const initTo = searchParams.get('tab') === '許願牆' ? '工具精靈 🧰' : '';
+  const initTabKey = searchParams.get('tab') || 'all';
+  const initTo = initTabKey !== 'all' ? ({ '魯魯讀者': '魯魯一家', '連載讀者': '兔崽子', 'Podcast': '小舖', '許願牆': '工具精靈 🧰' }[initTabKey] ?? '') : '';
   const [text, setText] = useState('');
   const [to, setTo] = useState(initTo);
   const [from, setFrom] = useState('');
@@ -43,10 +44,18 @@ function WallContent() {
   const [submitting, setSubmitting] = useState(false);
 
   const LABEL_HINTS: Record<string, { to: string; content: string }> = {
-    '魯魯讀者':  { to: '魯魯、未來的自己…', content: '例：魯魯你好可愛！那集「帶魯魚回家」讓我笑了好久，謝謝你出現在我們家 🐱' },
-    '連載讀者':  { to: '林必哀、作者…',     content: '例：最後的信號第三章讓我睡不著，那個結尾到底是什麼意思？！等不及下集了' },
-    'Podcast':   { to: '主持人、自己…',      content: '例：EP02 副業那集讓我鼓起勇氣開始接案，謝謝你說了那句「不完美也可以開始」' },
-    '許願牆':    { to: '工具精靈 🧰',        content: '例：希望魯魯抓魚可以加難度！或是推薦一個免費做簡報的 AI 工具？' },
+    '魯魯讀者':  { to: '魯魯一家',      content: '例：魯魯你好可愛！那集「帶魯魚回家」讓我笑了好久，謝謝你出現在我們家 🐱' },
+    '連載讀者':  { to: '兔崽子',        content: '例：最後的信號第三章讓我睡不著，那個結尾到底是什麼意思？！等不及下集了' },
+    'Podcast':   { to: '小舖',          content: '例：EP02 副業那集讓我鼓起勇氣開始接案，謝謝你說了那句「不完美也可以開始」' },
+    '許願牆':    { to: '工具精靈 🧰',   content: '例：希望魯魯抓魚可以加難度！或是推薦一個免費做簡報的 AI 工具？' },
+  };
+
+  // 固定「寫給誰」的身份
+  const LOCKED_TO: Record<string, string> = {
+    '魯魯讀者': '魯魯一家',
+    '連載讀者': '兔崽子',
+    'Podcast':  '小舖',
+    '許願牆':   '工具精靈 🧰',
   };
   const STORY_HINT = '用一兩句話說個你的小故事，不用很長，生活裡一個讓你有感覺的瞬間就好 ✨';
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
@@ -106,7 +115,7 @@ function WallContent() {
       }
       setMessage({ type: 'ok', text: '✅ 已成功發布到互動牆！' });
       setText('');
-      setTo(label === '許願牆' ? '工具精靈 🧰' : '');
+      setTo(LOCKED_TO[label] ?? '');
       setFrom('');
       setIsStory(false);
       setIsBookWish(false);
@@ -143,7 +152,7 @@ function WallContent() {
               setActiveTab(tab.key);
               if (tab.key !== 'all') {
                 setLabel(tab.key);
-                setTo(tab.key === '許願牆' ? '工具精靈 🧰' : '');
+                setTo(LOCKED_TO[tab.key] ?? '');
               }
             }} style={{
               padding: '0.45rem 1.1rem', borderRadius: '30px', fontSize: '0.85rem',
@@ -167,15 +176,15 @@ function WallContent() {
           <p style={{ color: '#9ca3af', fontSize: '0.78rem', margin: '0 0 0.8rem' }}>
             身份：{TABS.find(t => t.key === label)?.label || label}
           </p>
-          <input value={to} onChange={e => label !== '許願牆' && setTo(e.target.value)}
-            readOnly={label === '許願牆'}
+          <input value={to} onChange={e => !LOCKED_TO[label] && setTo(e.target.value)}
+            readOnly={!!LOCKED_TO[label]}
             placeholder={`寫給誰？（必填，例：${LABEL_HINTS[label]?.to || '魯魯、未來的自己…'}）`} maxLength={20}
             style={{
               width: '100%', boxSizing: 'border-box',
-              background: label === '許願牆' ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.07)',
+              background: LOCKED_TO[label] ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', padding: '0.7rem 1rem',
               color: '#f3f4f6', fontSize: '0.9rem', outline: 'none', marginBottom: '0.6rem', fontFamily: 'inherit',
-              cursor: label === '許願牆' ? 'default' : 'text',
+              cursor: LOCKED_TO[label] ? 'default' : 'text',
             }}
           />
           <input value={from} onChange={e => setFrom(e.target.value)}
