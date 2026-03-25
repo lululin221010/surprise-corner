@@ -9,8 +9,15 @@ interface Props {
   defaultTo?: string;     // 預填「寫給」，如 '魯魯'
 }
 
+const LOCKED_TO: Record<string, string> = {
+  '魯魯讀者': '魯魯一家',
+  '連載讀者': '兔崽子',
+  'Podcast':  '小舖',
+};
+
 export default function WallPostForm({ label, defaultTo = '' }: Props) {
-  const [to, setTo]         = useState(defaultTo);
+  const lockedTo = LOCKED_TO[label] ?? null;
+  const [to, setTo]         = useState(lockedTo || defaultTo);
   const [from, setFrom]     = useState('');
   const [text, setText]     = useState('');
   const [petName, setPetName] = useState('');
@@ -94,21 +101,23 @@ export default function WallPostForm({ label, defaultTo = '' }: Props) {
 
         {/* 寫給 + 你是誰 */}
         <div style={{ display: 'flex', gap: '0.7rem', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 140px' }}>
-            <label style={{ color: '#7a6a58', fontSize: '0.78rem', display: 'block', marginBottom: 4 }}>
-              寫給誰 <span style={{ color: '#e87070' }}>*</span>
-            </label>
-            <input
-              type="text" value={to} onChange={e => setTo(e.target.value)}
-              placeholder="魯魯、未來的自己…" maxLength={20}
-              style={{
-                width: '100%', padding: '0.5rem 0.75rem', boxSizing: 'border-box',
-                background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(180,144,80,0.2)',
-                borderRadius: 6, color: '#d8ccb8', fontSize: '0.9rem', outline: 'none',
-                fontFamily: 'inherit',
-              }}
-            />
-          </div>
+          {!lockedTo && (
+            <div style={{ flex: '1 1 140px' }}>
+              <label style={{ color: '#7a6a58', fontSize: '0.78rem', display: 'block', marginBottom: 4 }}>
+                寫給誰 <span style={{ color: '#e87070' }}>*</span>
+              </label>
+              <input
+                type="text" value={to} onChange={e => setTo(e.target.value)}
+                placeholder="魯魯、未來的自己…" maxLength={20}
+                style={{
+                  width: '100%', padding: '0.5rem 0.75rem', boxSizing: 'border-box',
+                  background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(180,144,80,0.2)',
+                  borderRadius: 6, color: '#d8ccb8', fontSize: '0.9rem', outline: 'none',
+                  fontFamily: 'inherit',
+                }}
+              />
+            </div>
+          )}
           <div style={{ flex: '1 1 140px' }}>
             <label style={{ color: '#7a6a58', fontSize: '0.78rem', display: 'block', marginBottom: 4 }}>
               你是誰 <span style={{ color: '#555', fontWeight: 400 }}>（選填）</span>
