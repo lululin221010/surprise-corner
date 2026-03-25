@@ -167,7 +167,7 @@ export default function WatermarkPage() {
               <p style={{ color: '#c4b5fd', margin: 0 }}>拖放圖片或點擊選擇（jpg / png / webp）</p>
             )}
             <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }}
-              onChange={e => { const f = e.target.files?.[0]; if (f) loadFile(f); }} />
+              onChange={e => { const f = e.target.files?.[0]; if (f) loadFile(f); e.target.value = ''; }} />
           </div>
 
           {/* 浮水印設定 */}
