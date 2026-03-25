@@ -43,7 +43,7 @@ export default function WatermarkPage() {
   const [position, setPosition] = useState('bottom-right');
   const [opacity, setOpacity] = useState(60);
   const [fontSize, setFontSize] = useState(32);
-  const [color, setColor] = useState('#ffffff');
+  const [color, setColor] = useState('#ffd700');
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [imgInfo, setImgInfo] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
