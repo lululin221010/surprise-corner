@@ -166,5 +166,26 @@
     "createdAt": "2026-03-16",
     "shopUrl": "https://still-time-corner.vercel.app/digital",
     "shopPrice": "NT$ 199"
+  },
+  {
+    "id": "daodu",
+    "title": "有的沒的小舖・導讀精選",
+    "author": "盧林說的",
+    "cover": "https://still-time-corner.vercel.app/images/soul-journey/cover.png",
+    "genre": "導讀・免費",
+    "status": "免費下載",
+    "category": "preview",
+    "description": "五本書的導讀精選，讓你快速找到最適合自己的那一本。完全免費，直接閱讀。",
+    "tags": [
+      "免費",
+      "導讀",
+      "精選"
+    ],
+    "totalChapters": 0,
+    "updatedAt": "2026-03-26",
+    "createdAt": "2026-03-26",
+    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "shopPrice": "免費",
+    "directPdfUrl": "https://88lwhikbeo2pkibc.public.blob.vercel-storage.com/ebooks/daodu-preview.pdf"
   }
 ]

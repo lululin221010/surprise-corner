@@ -157,7 +157,10 @@ export default function NovelsPage() {
                 <p className="novel-author">作者：{novel.author}</p>
                 <p className="novel-desc">{novel.description}</p>
                 <div className="novel-meta">
-                  <span>完整版 {novel.totalChapters} 章</span>
+                  {(novel as any).directPdfUrl
+                    ? <span>🎁 完全免費・直接閱讀</span>
+                    : <span>完整版 {novel.totalChapters} 章</span>
+                  }
                 </div>
                 <div className="novel-footer">
                   <div className="novel-tags">
@@ -166,18 +169,32 @@ export default function NovelsPage() {
                     ))}
                   </div>
                   <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
-                    <Link href={`/novels/${novel.id}/ebook`} className="novel-read-btn">
-                      👀 看看喜不喜歡
-                      <span className="novel-read-btn-arrow">→</span>
-                    </Link>
-                    <a
-                      href={novel.shopUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="novel-buy-btn"
-                    >
-                      {(novel as any).shopPrice || 'NT$???'} 購買完整版 ↗
-                    </a>
+                    {(novel as any).directPdfUrl ? (
+                      <a
+                        href={(novel as any).directPdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="novel-read-btn"
+                      >
+                        📖 免費閱讀
+                        <span className="novel-read-btn-arrow">→</span>
+                      </a>
+                    ) : (
+                      <Link href={`/novels/${novel.id}/ebook`} className="novel-read-btn">
+                        👀 看看喜不喜歡
+                        <span className="novel-read-btn-arrow">→</span>
+                      </Link>
+                    )}
+                    {(novel as any).shopPrice !== '免費' && (
+                      <a
+                        href={novel.shopUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="novel-buy-btn"
+                      >
+                        {(novel as any).shopPrice || 'NT$???'} 購買完整版 ↗
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
