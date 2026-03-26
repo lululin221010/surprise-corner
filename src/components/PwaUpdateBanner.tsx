@@ -1,83 +1,56 @@
 'use client';
 // src/components/PwaUpdateBanner.tsx
-// 偵測 Service Worker 更新，取代瀏覽器預設的「應用程式有可用更新」提示
+// 靜默自動更新：SW skipWaiting 後偵測 controllerchange，顯示 3 秒品牌 toast
 import { useEffect, useState } from 'react';
 
 export default function PwaUpdateBanner() {
   const [show, setShow] = useState(false);
-  const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
 
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return;
 
-    navigator.serviceWorker.register('/sw.js').then((registration) => {
-      // 情況一：頁面開啟時就已有 waiting SW（上次更新沒點）
-      if (registration.waiting) {
-        setWaiting(registration.waiting);
-        setShow(true);
-      }
-
-      // 情況二：本次造訪期間偵測到新版本安裝
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        if (!newWorker) return;
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            setWaiting(newWorker);
-            setShow(true);
-          }
-        });
-      });
-    }).catch((err) => {
+    // 註冊 SW
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
       console.warn('SW 註冊失敗:', err);
     });
 
-    // SW 取得控制權後（skipWaiting 完成），自動重新整理頁面
-    let refreshing = false;
+    // 偵測 SW 取得控制權（skipWaiting 完成 = 新版本已生效）
+    // 首次載入時 controller 是 null→有值，不算更新，只偵測「已有 controller 後的切換」
+    let firstActivation = !navigator.serviceWorker.controller;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing) {
-        refreshing = true;
-        window.location.reload();
+      if (firstActivation) {
+        firstActivation = false;
+        return; // 首次安裝不提示
       }
+      // 新版本已靜默生效，顯示 toast 3 秒後消失
+      setShow(true);
+      setTimeout(() => setShow(false), 3000);
     });
   }, []);
-
-  const handleClick = () => {
-    if (waiting) {
-      waiting.postMessage('SKIP_WAITING');
-    }
-    setShow(false);
-  };
 
   if (!show) return null;
 
   return (
     <div
-      onClick={handleClick}
       style={{
         position: 'fixed',
         bottom: '1.25rem',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 9999,
-        cursor: 'pointer',
         background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
         color: 'white',
-        padding: '0.75rem 1.75rem',
+        padding: '0.65rem 1.5rem',
         borderRadius: '2rem',
-        boxShadow: '0 4px 24px rgba(124,58,237,0.45)',
-        fontSize: '0.9rem',
+        boxShadow: '0 4px 20px rgba(124,58,237,0.4)',
+        fontSize: '0.88rem',
         fontWeight: '700',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
         whiteSpace: 'nowrap',
-        userSelect: 'none',
+        pointerEvents: 'none',
         animation: 'pwa-slide-up 0.35s cubic-bezier(0.34,1.56,0.64,1) both',
       }}
-      title="點擊以套用最新版本"
     >
-      ✨ 有新內容囉！點此重新整理
+      ✨ 已更新到最新版本
     </div>
   );
 }

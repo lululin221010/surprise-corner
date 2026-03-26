@@ -1,10 +1,7 @@
 ﻿// src: public/sw.js
-// 不自動 skipWaiting，等 PwaUpdateBanner 發送 SKIP_WAITING 指令後才更新
-self.addEventListener('install', () => { /* 保持 waiting，讓自訂橫幅控制時機 */ });
+// 自動更新：新版本安裝後立即接管，前端偵測到 controllerchange 後顯示「已更新」toast
+self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', () => self.clients.claim());
-self.addEventListener('message', (event) => {
-  if (event.data === 'SKIP_WAITING') self.skipWaiting();
-});
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   event.respondWith(fetch(req).catch(() => caches.match(req)));
