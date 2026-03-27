@@ -21,7 +21,7 @@ function isPublishedByDate(publishedAt: string): boolean {
 const NOVEL_CHAT: Record<string, { path: string; label: string; color: string; border: string; textColor: string }> = {
   'lulu-diary': {
     path: '/chat/lulu',
-    label: '🐱 找 Lulu 聊聊',
+    label: '🐱 找默默聊聊',
     color: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(168,85,247,0.15))',
     border: 'rgba(167,139,250,0.35)',
     textColor: '#c4b5fd',

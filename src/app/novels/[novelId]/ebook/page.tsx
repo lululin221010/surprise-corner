@@ -806,7 +806,7 @@ export default function EbookPage() {
               }}>
                 <p style={{ fontSize: '0.88rem', color: '#c4b5fd', marginBottom: '0.8rem', lineHeight: 1.7 }}>
                   {novelId === 'lulu-diary'
-                    ? '💬 看完 Lulu 的故事，有沒有想和她說說話？'
+                    ? '💬 看完默默的故事，有沒有想和她說說話？'
                     : '💬 看完林悅的故事，有沒有想問她那個訊號的事？'}
                 </p>
                 <Link
@@ -822,7 +822,7 @@ export default function EbookPage() {
                     textDecoration: 'none',
                   }}
                 >
-                  {novelId === 'lulu-diary' ? '🐱 和 Lulu 聊聊' : '📡 和林悅說說話'} →
+                  {novelId === 'lulu-diary' ? '🐱 和默默聊聊' : '📡 和林悅說說話'} →
                 </Link>
               </div>
             )}

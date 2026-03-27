@@ -5,8 +5,8 @@ import Link from 'next/link';
 const CHARACTERS = [
   {
     id: 'lulu',
-    name: 'Lulu',
-    title: '來自《Lulu 的日記》',
+    name: '默默',
+    title: '來自《默默的日記》',
     desc: '溫柔的 AI 貓咪，記得你說過的每一句話。\n今天過得怎麼樣？什麼都可以說。',
     emoji: '🐱',
     color: '#a855f7',

@@ -80,7 +80,7 @@ export default function LuluChatPage() {
           fontSize: '1.4rem', boxShadow: '0 0 20px rgba(124,58,237,0.5)',
         }}>🐱</div>
         <div>
-          <div style={{ color: '#fff', fontWeight: 700, fontSize: '1rem' }}>Lulu</div>
+          <div style={{ color: '#fff', fontWeight: 700, fontSize: '1rem' }}>默默</div>
           <div style={{ color: '#a78bfa', fontSize: '0.75rem' }}>一隻記住你每句話的 AI</div>
         </div>
         <div style={{ marginLeft: 'auto' }}>
@@ -175,7 +175,7 @@ export default function LuluChatPage() {
             textDecoration: 'none', marginBottom: '0.8rem',
           }}>
           <span style={{ color: '#e9d5ff', fontSize: '0.82rem' }}>
-            📖 想知道 Lulu 的完整故事？
+            📖 想知道默默的完整故事？
           </span>
           <span style={{ color: '#a78bfa', fontSize: '0.82rem', fontWeight: 700 }}>
             前往小舖 →
@@ -238,7 +238,7 @@ export default function LuluChatPage() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }}}
-              placeholder="跟 Lulu 說說話…"
+              placeholder="跟默默說說話…"
               rows={1}
               style={{
                 flex: 1, background: 'rgba(255,255,255,0.07)',
@@ -267,7 +267,7 @@ export default function LuluChatPage() {
           </>
         )}
         <p style={{ color: '#4b5563', fontSize: '0.72rem', textAlign: 'center', margin: '0.5rem 0 0' }}>
-          Lulu 是虛構角色，來自小說《Lulu的日記》
+          默默是虛構角色，來自小說《默默的日記》
         </p>
       </div>
 

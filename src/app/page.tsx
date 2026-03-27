@@ -59,7 +59,7 @@ const FEATURES = [
   {
     icon: '💬',
     title: '角色聊天室',
-    desc: 'Lulu 還是林悅？選你想聊的角色，說說你今天的心情。',
+    desc: '默默還是林悅？選你想聊的角色，說說你今天的心情。',
     href: '/chat',
     color: '#a855f7',
     glow: 'rgba(168,85,247,0.4)',
