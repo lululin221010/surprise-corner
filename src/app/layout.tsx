@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    type: 'website', locale: 'zh_TW', url: '/', siteName: 'Surprise Corner',
+    type: 'website', locale: 'zh_TW', url: 'https://surprise-corner.vercel.app', siteName: 'Surprise Corner',
     title: 'Surprise Corner - 每天不一樣的小驚喜',
     description: '每天都有新的驚喜等你發現！',
     images: [{ url: '/icon-512.png', width: 512, height: 512, alt: 'Surprise Corner' }],
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description: '每天都有新的驚喜等你發現！',
     images: ['/icon-512.png'],
   },
-  alternates: { canonical: '/' },
+  alternates: { canonical: 'https://surprise-corner.vercel.app' },
   manifest: '/manifest.json',
   themeColor: '#7c3aed',
   verification: {
