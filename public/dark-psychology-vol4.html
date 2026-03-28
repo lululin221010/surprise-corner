@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>謊言與欺騙：真相沒有你以為的穩固｜暗黑心理學系列第四冊</title>
+<meta name="description" content="盧林著。謊言的心理學、Gaslighting、自我欺騙、認知失調——為什麼你這麼難發現，以及如何在謊言世界保持清醒。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080a0c;
+    --bg2: #0c0f13;
+    --bg3: #111620;
+    --surface: #151b25;
+    --border: rgba(100,160,220,0.12);
+    --text: #e8eef5;
+    --text-muted: #7090a8;
+    --accent: #64a0dc;
+    --gold: #e8c87a;
+    --red: #e8607a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.95; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 5%, rgba(50,100,180,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 5% 95%, rgba(40,80,140,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* LAYOUT */
+  .page-wrap { display: flex; min-height: 100vh; }
+  .toc-sidebar { width: 240px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; padding: 32px 0; background: var(--bg2); border-right: 1px solid var(--border); z-index: 10; }
+  .toc-sidebar::-webkit-scrollbar { width: 3px; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: rgba(100,160,220,0.2); }
+  .toc-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .toc-back { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 14px; transition: color 0.2s; }
+  .toc-back:hover { color: var(--accent); }
+  .toc-series { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .toc-booktitle { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--text); line-height: 1.4; }
+  .toc-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; padding: 0 20px 10px; }
+  .toc-nav { list-style: none; }
+  .toc-nav li a { display: block; padding: 7px 20px; font-size: 0.83rem; color: var(--text-muted); text-decoration: none; line-height: 1.5; border-left: 2px solid transparent; transition: all 0.2s ease; }
+  .toc-nav li a:hover { color: var(--text); border-left-color: rgba(100,160,220,0.4); background: rgba(100,160,220,0.04); }
+  .toc-nav li a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(100,160,220,0.06); }
+  .toc-nav li a.ch-link { padding-left: 32px; font-size: 0.79rem; }
+  .toc-chapter-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); padding: 14px 20px 4px; text-transform: uppercase; }
+
+  .main-content { margin-left: 240px; flex: 1; position: relative; z-index: 1; }
+
+  /* BOOK HERO */
+  .book-hero { padding: 80px 60px 60px; max-width: 760px; border-bottom: 1px solid var(--border); }
+  .book-breadcrumb { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 24px; }
+  .book-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .book-breadcrumb a:hover { color: var(--accent); }
+  .book-vol { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; border: 1px solid rgba(100,160,220,0.3); display: inline-block; padding: 5px 16px; }
+  .book-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .book-title span { color: var(--accent); font-style: italic; }
+  .book-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin-bottom: 32px; }
+  .book-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .book-meta-item { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); }
+  .book-meta-item span { color: var(--text); display: block; margin-top: 4px; font-size: 10px; }
+
+  /* READING */
+  .reading { max-width: 680px; padding: 0 60px 120px; }
+
+  .preface { padding: 60px 0 48px; border-bottom: 1px solid var(--border); }
+  .preface-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+  .preface-body { font-size: 1.05rem; color: var(--text-muted); line-height: 2.15; }
+  .preface-body p { margin-bottom: 1.3em; }
+  .preface-body em { color: var(--text); font-style: normal; font-weight: 500; }
+  .preface-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 32px 0; line-height: 1.8; }
+
+  .chapter { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+  .chapter-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 300; line-height: 1.3; margin-bottom: 36px; }
+  .chapter-title span { color: var(--accent); font-style: italic; }
+
+  .section { margin-bottom: 40px; }
+  .section-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; color: var(--text); line-height: 1.4; }
+  .body-text { font-size: 1rem; color: var(--text-muted); line-height: 2.1; }
+  .body-text p { margin-bottom: 1.3em; }
+  .body-text strong { color: var(--text); font-weight: 500; }
+  .body-text em { color: var(--accent); font-style: normal; }
+
+  /* 動機列表 */
+  .motive-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+  .motive-item { display: flex; gap: 16px; padding: 16px 20px; background: rgba(100,160,220,0.04); border: 1px solid var(--border); align-items: flex-start; }
+  .motive-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-style: italic; color: var(--accent); opacity: 0.25; line-height: 1; flex-shrink: 0; width: 28px; }
+  .motive-body { flex: 1; }
+  .motive-name { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 4px; }
+  .motive-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* 謊言識別測試 */
+  .myth-list { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+  .myth-item { display: flex; gap: 14px; padding: 14px 18px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(100,160,220,0.25); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; align-items: center; }
+  .myth-icon { font-size: 1rem; flex-shrink: 0; }
+
+  /* 對話框（Gaslighting 範例） */
+  .dialogue-block { margin: 24px 0; display: flex; flex-direction: column; gap: 6px; }
+  .dialogue-line { display: flex; gap: 12px; align-items: flex-start; }
+  .dialogue-speaker { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); flex-shrink: 0; padding-top: 3px; min-width: 32px; text-transform: uppercase; }
+  .dialogue-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; font-style: italic; padding: 8px 14px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(100,160,220,0.2); flex: 1; }
+  .dialogue-result { margin-top: 12px; padding: 12px 18px; background: rgba(100,160,220,0.05); border: 1px solid rgba(100,160,220,0.15); font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; border-radius: 0; }
+  .dialogue-result strong { color: var(--accent); }
+
+  /* 真實情境 */
+  .scene-block { margin: 24px 0; }
+  .scene-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+  .scene-item { margin-bottom: 14px; padding: 16px 20px; background: rgba(100,160,220,0.04); border-left: 2px solid rgba(100,160,220,0.2); }
+  .scene-item-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+  .scene-item p { font-size: 0.91rem; color: var(--text-muted); line-height: 1.85; font-style: italic; margin: 0; }
+
+  /* 識別清單 */
+  .red-flag-list { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+  .red-flag { display: flex; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(100,160,220,0.3); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; align-items: flex-start; }
+  .red-flag::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 2px; font-size: 0.8rem; }
+  .red-flag strong { color: var(--text); font-weight: 500; }
+
+  /* 方法列表 */
+  .method-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+  .method-list li { padding: 14px 18px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(100,160,220,0.3); font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+  .method-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+  /* 謊言種類比較 */
+  .lie-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+  .lie-card { padding: 20px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
+  .lie-card:nth-child(1) { border-top: 2px solid #50c896; }
+  .lie-card:nth-child(2) { border-top: 2px solid #e8c87a; }
+  .lie-card:nth-child(3) { border-top: 2px solid #e8607a; }
+  .lie-card-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .lie-card:nth-child(1) .lie-card-label { color: #50c896; }
+  .lie-card:nth-child(2) .lie-card-label { color: #e8c87a; }
+  .lie-card:nth-child(3) .lie-card-label { color: #e8607a; }
+  .lie-card-name { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+  .lie-card-body { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+  .lie-card-cost { font-family: 'Space Mono', monospace; font-size: 9px; margin-top: 8px; color: var(--text-muted); }
+  .lie-card:nth-child(1) .lie-card-cost { color: #50c896; }
+  .lie-card:nth-child(2) .lie-card-cost { color: #e8c87a; }
+  .lie-card:nth-child(3) .lie-card-cost { color: #e8607a; }
+
+  .key-insight { margin: 28px 0; padding: 22px 28px; background: rgba(100,160,220,0.04); border: 1px solid rgba(100,160,220,0.2); }
+  .key-insight p { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--accent); line-height: 1.8; margin: 0; }
+  .key-warn { margin: 20px 0; padding: 16px 20px; background: rgba(232,184,75,0.04); border: 1px solid rgba(232,184,75,0.15); border-left: 3px solid var(--gold); }
+  .key-warn-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .key-warn p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.85; margin: 0; }
+  .key-warn strong { color: var(--text); }
+
+  /* 結語 */
+  .epilogue { padding: 56px 0 48px; }
+  .epilogue-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 300; margin-bottom: 28px; }
+  .epilogue-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .epilogue-body p { margin-bottom: 1.3em; }
+  .epilogue-body strong { color: var(--text); font-weight: 500; }
+  .epilogue-body em { color: var(--accent); font-style: normal; }
+  .epilogue-final { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 36px 0; line-height: 1.8; }
+
+  /* 系列其他冊 */
+  .series-next { background: var(--bg3); border: 1px solid var(--border); padding: 40px; margin: 40px 0; position: relative; overflow: hidden; }
+  .series-next::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .series-next-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .series-next-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 24px; }
+  .next-books { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .next-book { display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); text-decoration: none; }
+  .next-book-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); flex-shrink: 0; }
+  .next-book-title { color: var(--text); }
+  .next-book.current { border-left: 2px solid var(--accent); background: rgba(100,160,220,0.04); }
+  .next-book.current .next-book-title::after { content: '  ←  正在閱讀'; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--accent); }
+  .series-cta-btn { display: inline-block; padding: 12px 32px; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .series-cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .series-cta-btn:hover { color: var(--bg); }
+  .series-cta-btn:hover::before { transform: translateX(0); }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 60px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .main-content { margin-left: 0; }
+    .book-hero { padding: 48px 24px 40px; }
+    .reading { padding: 0 24px 80px; }
+    footer { padding: 24px; }
+    .series-next { padding: 28px 24px; }
+    .lie-types { grid-template-columns: 1fr; }
+    .mobile-toc-btn { display: flex; }
+  }
+  .mobile-toc-btn { display: none; position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--bg); width: 48px; height: 48px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; z-index: 20; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<button class="mobile-toc-btn" onclick="document.querySelector('.toc-sidebar').style.display='block'" title="目錄">☰</button>
+
+<div class="page-wrap">
+<nav class="toc-sidebar">
+  <div class="toc-logo">
+    <a href="/dark-psychology.html" class="toc-back">← 系列導讀</a>
+    <div class="toc-series">暗黑心理學 · Vol.4</div>
+    <div class="toc-booktitle">謊言與欺騙：真相沒有你以為的穩固</div>
+  </div>
+  <div class="toc-label">目錄</div>
+  <ul class="toc-nav">
+    <li><a href="#preface">前言</a></li>
+    <div class="toc-chapter-label">第一章</div>
+    <li><a href="#ch1-1" class="ch-link">1.1 謊言是生存策略</a></li>
+    <li><a href="#ch1-2" class="ch-link">1.2 你也在說謊</a></li>
+    <li><a href="#ch1-3" class="ch-link">1.3 六個動機</a></li>
+    <div class="toc-chapter-label">第二章</div>
+    <li><a href="#ch2-1" class="ch-link">2.1 測謊的迷信</a></li>
+    <li><a href="#ch2-2" class="ch-link">2.2 眼神沒有意義</a></li>
+    <li><a href="#ch2-3" class="ch-link">2.3 什麼真正有用</a></li>
+    <div class="toc-chapter-label">第三章</div>
+    <li><a href="#ch3-1" class="ch-link">3.1 自我欺騙</a></li>
+    <li><a href="#ch3-2" class="ch-link">3.2 認知失調</a></li>
+    <li><a href="#ch3-3" class="ch-link">3.3 那個「但是」</a></li>
+    <div class="toc-chapter-label">第四章</div>
+    <li><a href="#ch4-1" class="ch-link">4.1 煤氣燈效應</a></li>
+    <li><a href="#ch4-2" class="ch-link">4.2 群體謊言</a></li>
+    <li><a href="#ch4-3" class="ch-link">4.3 機構謊言</a></li>
+    <div class="toc-chapter-label">第五章</div>
+    <li><a href="#ch5-1" class="ch-link">5.1 大腦預設相信</a></li>
+    <li><a href="#ch5-2" class="ch-link">5.2 情感依附讓你盲目</a></li>
+    <li><a href="#ch5-3" class="ch-link">5.3 一致性陷阱</a></li>
+    <div class="toc-chapter-label">第六章</div>
+    <li><a href="#ch6-1" class="ch-link">6.1 真相太昂貴</a></li>
+    <li><a href="#ch6-2" class="ch-link">6.2 你準備好了嗎</a></li>
+    <li><a href="#ch6-3" class="ch-link">6.3 謊言的三種差異</a></li>
+    <div class="toc-chapter-label">第七章</div>
+    <li><a href="#ch7-1" class="ch-link">7.1 建立驗證習慣</a></li>
+    <li><a href="#ch7-2" class="ch-link">7.2 保護你的感知</a></li>
+    <li><a href="#ch7-3" class="ch-link">7.3 分層的信任</a></li>
+    <li><a href="#ch7-4" class="ch-link">7.4 與謊言共存</a></li>
+    <li><a href="#epilogue">結語</a></li>
+  </ul>
+</nav>
+
+<div class="main-content">
+
+  <div class="book-hero reveal">
+    <div class="book-breadcrumb">
+      <a href="/psychology.html">心理學系列</a> &nbsp;/&nbsp;
+      <a href="/dark-psychology.html">暗黑心理學</a> &nbsp;/&nbsp; Vol.4
+    </div>
+    <div class="book-vol">暗黑心理學系列 · 第四冊</div>
+    <h1 class="book-title">謊言與欺騙：<br><span>真相沒有你以為的穩固</span></h1>
+    <p class="book-subtitle">為什麼你這麼難發現——以及如何在謊言世界保持清醒</p>
+    <div class="book-meta">
+      <div class="book-meta-item">作者<span>盧林</span></div>
+      <div class="book-meta-item">出品<span>有的沒的小舖</span></div>
+      <div class="book-meta-item">系列<span>暗黑心理學 Vol.4</span></div>
+    </div>
+  </div>
+
+  <div class="reading">
+
+    <!-- 前言 -->
+    <section class="preface reveal" id="preface">
+      <div class="preface-label">前言</div>
+      <div class="preface-body">
+        <p>你問對方：「你今天到底去哪了？」<br>
+        他看著你的眼睛，語氣平穩地說：「就在家啊，一直在家。」<br>
+        眼神沒閃，聲音沒抖，手也沒亂動。</p>
+        <p>你信了。你甚至還替他對朋友辯護：「他不是那種人啦。」</p>
+        <p>後來你才發現，他根本不在家。</p>
+        <p>那一刻，你心裡浮現的不是憤怒，而是徹底的錯愕——<em>我怎麼完全沒看出來？</em></p>
+        <p>這不是你不夠聰明，也不是你太好騙。這就是謊言最可怕的地方：它從來不是破綻百出的蹩腳表演，而是量身訂製、精準打進你最信任的那個缺口。</p>
+        <p>心理學研究顯示，人類平均每天會說 1 到 2 次謊——這個數字包括你、包括我、也包括你現在最信任的那個人。謊言不是例外，它早就成了人類社會的基礎設施。但從來沒有人教過你怎麼辨認它。</p>
+        <p>這本書不會把你變成偏執狂，每天懷疑身邊每一個人。它只想讓你看清楚謊言的結構——它從哪裡來、怎麼運作、為什麼你這麼難發現，以及當你活在一個充滿謊言的世界裡，還能怎麼保護自己。</p>
+      </div>
+      <div class="preface-closing">
+        真相沒有你以為的那麼穩固。<br>
+        但知道這一點，你反而會比任何人都更穩。
+      </div>
+    </section>
+
+    <!-- 第一章 -->
+    <section class="chapter reveal" id="ch1">
+      <div class="chapter-num">Chapter One</div>
+      <h2 class="chapter-title">說謊是人類的<span>預設值</span></h2>
+
+      <div class="section" id="ch1-1">
+        <span class="section-num">1.1</span>
+        <h3 class="section-title">謊言不是道德問題，是生存策略</h3>
+        <div class="body-text">
+          <p>如果你還在把說謊當成「只有壞人才會做的事」，那你已經輸在起跑點上了。</p>
+          <p>演化心理學家 Robin Dunbar 的研究指出，人類大腦額葉的快速發展，很大一部分就是為了處理複雜的社交操作——其中包括欺騙。簡單說，我們的大腦本來就是為說謊而設計的。</p>
+          <p>在早期人類社會，「我不知道獵物在哪」能保住食物，「首領在那邊」能讓自己脫離危險。說謊不是道德敗壞，它是活下去的工具。問題是，這個工具被我們原封不動帶進了現代社會。</p>
+        </div>
+        <div class="scene-block">
+          <div class="scene-label">真實情境</div>
+          <div class="scene-item">
+            <div class="scene-item-tag">感情</div>
+            <p>他說「我只是普通朋友」。在某個技術定義下，他沒說謊；在你真正想問的那個定義下，他就是在騙你。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">職場</div>
+            <p>主管說「這個專案你放心，功勞一定算你的」。他沒有明確說假話，他只是沒告訴你「等事情結束後，我再決定功勞怎麼分配」。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">友情</div>
+            <p>朋友說「我真的很忙」。他可能是忙，但更精確的說法是：「我忙，但如果換成別人邀請，我就不會這麼忙。」</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="ch1-2">
+        <span class="section-num">1.2</span>
+        <h3 class="section-title">你也在說謊，而且你知道</h3>
+        <div class="body-text">
+          <p>在繼續指控別人之前，先低頭看一下自己。</p>
+          <p>社會心理學家 Bella DePaulo 請受試者記錄每天的社交互動，並標記其中的謊言。結果發現，平均每人每天說謊 1.65 次，而且幾乎所有謊言都發生在社交場合。</p>
+        </div>
+        <div class="red-flag-list">
+          <div class="red-flag">「你看起來氣色好多了。」</div>
+          <div class="red-flag">「這個禮物我真的很喜歡。」</div>
+          <div class="red-flag">「我五分鐘後就到。」</div>
+          <div class="red-flag">「我完全沒意見。」</div>
+        </div>
+        <div class="body-text">
+          <p>這些都是「白色謊言」——社會潤滑劑。我們說它們，因為真話的代價太高。重點不是你有沒有說謊——你有。重點是，你說謊的方式，和你無法接受別人對你說謊的方式，是否存在<strong>雙重標準</strong>。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch1-3">
+        <span class="section-num">1.3</span>
+        <h3 class="section-title">謊言的六個動機</h3>
+        <div class="body-text"><p>為什麼人要說謊？研究者歸納出六個核心動機：</p></div>
+        <div class="motive-list">
+          <div class="motive-item">
+            <div class="motive-num">1</div>
+            <div class="motive-body">
+              <div class="motive-name">自我保護</div>
+              <div class="motive-desc">避免懲罰、衝突或後果。</div>
+            </div>
+          </div>
+          <div class="motive-item">
+            <div class="motive-num">2</div>
+            <div class="motive-body">
+              <div class="motive-name">形象管理</div>
+              <div class="motive-desc">讓自己看起來更好、更能幹、更受歡迎。</div>
+            </div>
+          </div>
+          <div class="motive-item">
+            <div class="motive-num">3</div>
+            <div class="motive-body">
+              <div class="motive-name">資源競爭</div>
+              <div class="motive-desc">獲得不該得到的東西，或阻止別人得到他該得到的。</div>
+            </div>
+          </div>
+          <div class="motive-item">
+            <div class="motive-num">4</div>
+            <div class="motive-body">
+              <div class="motive-name">關係維護</div>
+              <div class="motive-desc">避免傷害對方，維持表面的和平。</div>
+            </div>
+          </div>
+          <div class="motive-item">
+            <div class="motive-num">5</div>
+            <div class="motive-body">
+              <div class="motive-name">利他欺騙</div>
+              <div class="motive-desc">讓對方感覺好一點，即使代價是真相。</div>
+            </div>
+          </div>
+          <div class="motive-item">
+            <div class="motive-num">6</div>
+            <div class="motive-body">
+              <div class="motive-name">權力控制</div>
+              <div class="motive-desc">掌握資訊不對稱，讓對方依賴你。</div>
+            </div>
+          </div>
+        </div>
+        <div class="key-warn">
+          <div class="key-warn-label">注意</div>
+          <p>注意第六種。那不是謊言的副產品，<strong>那才是謊言真正的目的</strong>。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第二章 -->
+    <section class="chapter reveal" id="ch2">
+      <div class="chapter-num">Chapter Two</div>
+      <h2 class="chapter-title">你以為你看得出來——<span>你看不出來</span></h2>
+
+      <div class="section" id="ch2-1">
+        <span class="section-num">2.1</span>
+        <h3 class="section-title">測謊的迷信</h3>
+        <div class="body-text"><p>我們來做個小測驗。下列哪些是「說謊的典型訊號」？</p></div>
+        <div class="myth-list">
+          <div class="myth-item"><span class="myth-icon">✗</span>眼睛往右上方看</div>
+          <div class="myth-item"><span class="myth-icon">✗</span>觸摸鼻子或臉</div>
+          <div class="myth-item"><span class="myth-icon">✗</span>避免眼神接觸</div>
+          <div class="myth-item"><span class="myth-icon">✗</span>說話速度變慢</div>
+          <div class="myth-item"><span class="myth-icon">✗</span>肢體語言封閉</div>
+        </div>
+        <div class="key-insight">
+          <p>以上全部不可靠。Aldert Vrij 分析超過 200 個謊言識別實驗後得出結論：普通人識別謊言的準確率大約只有 54%，只比隨機猜測好一點點。受過專業訓練的警探和海關人員，準確率也沒有顯著提升。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch2-2">
+        <span class="section-num">2.2</span>
+        <h3 class="section-title">為什麼眼神接觸沒有意義</h3>
+        <div class="body-text">
+          <p>「眼睛往右上方代表正在編造」這個說法來自早已被科學推翻的 NLP（神經語言程式學）。2012 年愛丁堡大學的研究直接證實，眼球運動方向與說謊完全無關。</p>
+          <p>有人說謊時避開眼神，是因為緊張；但說真話時也會緊張。眼神只反映情緒狀態，不反映真實性。</p>
+        </div>
+        <div class="scene-block">
+          <div class="scene-label">真實情境</div>
+          <div class="scene-item">
+            <div class="scene-item-tag">感情</div>
+            <p>他直視你的眼睛說「我沒有外遇」。你信了，因為「他沒有閃躲」。但一個習慣性說謊的人，早就練習到可以維持完美眼神接觸。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">職場</div>
+            <p>會議上同事侃侃而談，眼神堅定、肢體開放。你覺得他說得有道理，事後才發現那些數字根本是捏造的。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">友情</div>
+            <p>朋友說話時摸了一下鼻子，你突然警覺「他是不是在騙我」。其實他只是鼻子癢。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="ch2-3">
+        <span class="section-num">2.3</span>
+        <h3 class="section-title">那什麼真正有用？</h3>
+        <div class="body-text"><p>真正有效的識謊方式，是<strong>驗證</strong>，而不是觀察表情。心理學家提出的相對有效方法：</p></div>
+        <ul class="method-list">
+          <li><strong>問意外的問題</strong>說謊者通常只準備了一套說詞，遇到突然岔題很容易露餡。</li>
+          <li><strong>請他逆序敘述</strong>從後往前說比從前往後說困難得多，破綻容易出現。</li>
+          <li><strong>保持沉默</strong>說謊者最怕沉默，他們會急著填補。</li>
+          <li><strong>交叉比對</strong>把他的話和其他資訊對照，而不是盯著他的臉。</li>
+        </ul>
+        <div class="key-warn">
+          <div class="key-warn-label">最有效的方法</div>
+          <p>承認自己就是看不出來，然後去<strong>驗證能驗證的部分</strong>。這不舒服，但它是唯一真正有效的策略。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三章 -->
+    <section class="chapter reveal" id="ch3">
+      <div class="chapter-num">Chapter Three</div>
+      <h2 class="chapter-title">你對自己<span>說的謊</span></h2>
+
+      <div class="section" id="ch3-1">
+        <span class="section-num">3.1</span>
+        <h3 class="section-title">自我欺騙：最舒適的謊言</h3>
+        <div class="body-text">
+          <p>說謊不需要對象。你每天都在對自己說謊，而且說得心安理得。</p>
+          <p>心理學把這叫做「自我欺騙」（self-deception）。它不是弱點，它是心理防禦機制，讓你不用面對那些太痛苦、太複雜、或太讓你失望的真相。問題是，它也讓你<strong>永遠卡在原地</strong>。</p>
+        </div>
+        <div class="scene-block">
+          <div class="scene-label">真實情境</div>
+          <div class="scene-item">
+            <div class="scene-item-tag">感情</div>
+            <p>你一遍遍告訴自己「他不是故意的」「他只是有壓力」「他改了就會好了」。每次說完，你都覺得心裡舒服一點。這個謊言不是他說的，是你自己製造的。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">職場</div>
+            <p>你對自己說「我還沒換工作，是因為時機還沒到，不是因為我怕失敗」。這句話聽起來多有說服力啊。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">友情</div>
+            <p>你安慰自己「我們只是比較少聯絡，不是真的疏遠了」。然後又過了半年，你們依然沒有聯絡。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="ch3-2">
+        <span class="section-num">3.2</span>
+        <h3 class="section-title">認知失調：謊言的溫床</h3>
+        <div class="body-text">
+          <p>Leon Festinger 在 1957 年提出認知失調理論：當信念和行為產生矛盾時，人會感到極度不舒服，並想盡辦法消除它——通常是<strong>改變信念，而不是改變行為</strong>。</p>
+          <p>你明明知道那個人對你不好，卻繼續留下。為了消除失調，你的大腦開始努力找理由：「他只有對我這樣，對別人都很好，說明他其實很信任我」「他那樣說是因為他不安全感很重」「哪有關係一直甜蜜的，都這樣啦」。</p>
+        </div>
+        <div class="key-insight">
+          <p>做了再合理化，比改變行為容易多了。這些理由聽起來多合理，因為你的大腦真的很努力在幫你圓謊。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch3-3">
+        <span class="section-num">3.3</span>
+        <h3 class="section-title">你最不想聽到的那個版本</h3>
+        <div class="body-text">
+          <p>有一個簡單的自我欺騙測試：找出你最常說的那句「但是」。</p>
+        </div>
+        <div class="red-flag-list">
+          <div class="red-flag">「他對我不好，但是……」</div>
+          <div class="red-flag">「我知道這樣不對，但是……」</div>
+          <div class="red-flag">「我應該要改變，但是……」</div>
+        </div>
+        <div class="key-warn">
+          <div class="key-warn-label">自我測試</div>
+          <p>「但是」後面那句話，<strong>通常就是你對自己說的最大謊言</strong>。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第四章 -->
+    <section class="chapter reveal" id="ch4">
+      <div class="chapter-num">Chapter Four</div>
+      <h2 class="chapter-title">集體謊言：<span>當所有人都同意一件假的事</span></h2>
+
+      <div class="section" id="ch4-1">
+        <span class="section-num">4.1</span>
+        <h3 class="section-title">煤氣燈效應（Gaslighting）</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-line">
+            <div class="dialogue-speaker">你</div>
+            <div class="dialogue-text">我記得你上次明明答應過我。</div>
+          </div>
+          <div class="dialogue-line">
+            <div class="dialogue-speaker">他</div>
+            <div class="dialogue-text">我從來沒有答應過，你記錯了。</div>
+          </div>
+          <div class="dialogue-line">
+            <div class="dialogue-speaker">你</div>
+            <div class="dialogue-text">你上次明明這樣對我。</div>
+          </div>
+          <div class="dialogue-line">
+            <div class="dialogue-speaker">他</div>
+            <div class="dialogue-text">你太敏感了，你想太多了。</div>
+          </div>
+          <div class="dialogue-result">一次、兩次、三次之後，你開始懷疑：<strong>是不是我的記憶真的有問題？</strong></div>
+        </div>
+        <div class="body-text">
+          <p>這個操作就叫煤氣燈效應（Gaslighting），來自 1944 年的電影《煤氣燈下》。它的核心就是讓你不再相信自己的經驗。一旦你不相信自己，你就只能依賴對方來定義什麼是真的。</p>
+        </div>
+        <div class="scene-block">
+          <div class="scene-label">真實情境</div>
+          <div class="scene-item">
+            <div class="scene-item-tag">感情</div>
+            <p>「你太敏感了」「你就是愛記仇」「你想太多了」。說到最後，你自己都不確定那件事到底有沒有發生過。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">職場</div>
+            <p>「那個決定是你自己提議的」「你在會議上根本沒說話」。你明明記得清清楚楚，但他說得那麼肯定，你開始動搖。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">友情</div>
+            <p>「我們沒有吵架啊，你在說什麼」「你那個表情讓我以為你不想來，所以我就沒找你」。每次都是你的問題。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="ch4-2">
+        <span class="section-num">4.2</span>
+        <h3 class="section-title">群體謊言與沉默的共謀</h3>
+        <div class="body-text">
+          <p>1955 年，Solomon Asch 的從眾實驗顯示：當房間裡其他人故意說出明顯錯誤的答案時，高達 75% 的真實受試者至少有一次跟著說出錯誤答案。</p>
+        </div>
+        <div class="key-insight">
+          <p>你以為你不會？你已經這樣做了。</p>
+        </div>
+        <div class="red-flag-list">
+          <div class="red-flag">辦公室裡每個人都說主管決策很對——你也跟著說了。</div>
+          <div class="red-flag">家族裡沒人提那件事——你也選擇沉默。</div>
+          <div class="red-flag">朋友圈都覺得那個人很好——你把心裡那個「不對勁」的感覺吞了回去。</div>
+        </div>
+        <div class="body-text">
+          <p><strong>沉默，是謊言最安靜、最有效的共謀。</strong></p>
+        </div>
+      </div>
+
+      <div class="section" id="ch4-3">
+        <span class="section-num">4.3</span>
+        <h3 class="section-title">機構謊言：當說謊的是系統</h3>
+        <div class="body-text">
+          <p>有時候謊言不是來自個人，而是來自系統。</p>
+        </div>
+        <div class="red-flag-list">
+          <div class="red-flag">公司說「我們是一個大家庭」，卻在裁員時沒有人提前通知你。</div>
+          <div class="red-flag">組織說「我們重視多元」，升遷名單卻永遠是同一種人。</div>
+          <div class="red-flag">機構說「你的聲音很重要」，你的意見卻進了一個永遠不會被打開的信箱。</div>
+        </div>
+        <div class="key-warn">
+          <div class="key-warn-label">識別方法</div>
+          <p>識別機構謊言只有一個方法：<strong>看行為，不看宣言。</strong>這些謊言特別危險，因為它們披著公信力的外衣。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第五章 -->
+    <section class="chapter reveal" id="ch5">
+      <div class="chapter-num">Chapter Five</div>
+      <h2 class="chapter-title">謊言為什麼有效：<span>信任的結構</span></h2>
+
+      <div class="section" id="ch5-1">
+        <span class="section-num">5.1</span>
+        <h3 class="section-title">你的大腦預設相信</h3>
+        <div class="body-text">
+          <p>認知心理學家 Daniel Gilbert 的研究發現：人類在「理解」一句話的同時，會自動預設它是真的，然後才啟動懷疑機制。懷疑需要額外的認知資源。</p>
+          <p><strong>當你疲累、分心、情緒激動時，懷疑功能就會下線。</strong>說謊者很清楚這一點，他們喜歡在你最脆弱的時候出手。</p>
+        </div>
+        <div class="key-insight">
+          <p>深夜你剛哭完，他說「我真的愛你」。你信了。不是因為那是真的，而是因為你的大腦已經沒有力氣懷疑了。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch5-2">
+        <span class="section-num">5.2</span>
+        <h3 class="section-title">情感依附讓你盲目</h3>
+        <div class="body-text">
+          <p>依附理論告訴我們，我們對親近的人有更強的信任傾向，也更不願意相信負面資訊。你能輕易看穿陌生人的謊言，卻看不穿最親近的人的謊言。不是因為陌生人比較笨，而是因為<strong>懷疑親近的人，代價太大</strong>。</p>
+        </div>
+        <div class="scene-block">
+          <div class="scene-label">真實情境</div>
+          <div class="scene-item">
+            <div class="scene-item-tag">感情</div>
+            <p>你的朋友一眼就看出他在騙你，你卻花了三年才接受。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">職場</div>
+            <p>你尊敬的導師給了錯誤建議，你執行很久才發現。換成陌生人說同樣的話，你當場就會質疑。</p>
+          </div>
+          <div class="scene-item">
+            <div class="scene-item-tag">友情</div>
+            <p>最好的朋友說她從沒說過你的壞話，你選擇相信，因為懷疑她的代價太大。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="ch5-3">
+        <span class="section-num">5.3</span>
+        <h3 class="section-title">一致性陷阱</h3>
+        <div class="body-text">
+          <p>一個人說了九十九次真話，第一百次說謊，你還是會傾向相信他。這就是「一致性偏誤」——我們用過去的行為預測未來，忽略每一次行為其實是獨立的。</p>
+          <p>習慣性說謊者非常懂這一點。他們會先建立一段「可信任的記錄」，小事說真話，大事再說謊——而你的判斷永遠基於那些小事。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第六章 -->
+    <section class="chapter reveal" id="ch6">
+      <div class="chapter-num">Chapter Six</div>
+      <h2 class="chapter-title">真相的<span>代價</span></h2>
+
+      <div class="section" id="ch6-1">
+        <span class="section-num">6.1</span>
+        <h3 class="section-title">有時候，說謊是因為真相太昂貴</h3>
+        <div class="body-text">
+          <p>這一章沒有壞人，只有害怕的人。</p>
+          <p>有些謊言不是出於惡意，而是出於恐懼。</p>
+        </div>
+        <div class="red-flag-list">
+          <div class="red-flag">他說沒有外遇，因為承認會讓他失去家庭。</div>
+          <div class="red-flag">她說她很好，因為說出「我快撐不住了」需要她目前沒有的勇氣。</div>
+          <div class="red-flag">他說他同意，因為在那個環境裡說「不」太危險。</div>
+        </div>
+        <div class="body-text">
+          <p>真相是有代價的，有些人暫時付不起。這不是要你同情所有的謊言，而是要你理解：幾乎每一個謊言背後，都有一個更深、更脆弱的真相。</p>
+          <p>有時候，解開謊言不需要憤怒，需要的是安全感——讓對方知道說出真相不會讓他失去一切。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch6-2">
+        <span class="section-num">6.2</span>
+        <h3 class="section-title">你準備好接受真相了嗎？</h3>
+        <div class="body-text">
+          <p>有一個問題比「他有沒有說謊」更重要：<strong>你有沒有在讓他敢說真話？</strong></p>
+          <p>有些人問問題，但臉上的表情已經告訴對方「你最好說我想聽的答案」。有些人說「你可以告訴我任何事」，但每次對方說了不舒服的真相，就立刻崩潰或翻臉。</p>
+          <p>如果你的反應代價太高，對方就學會了繼續說謊。不是替說謊找藉口，而是問問你自己：<em>你為真相創造了足夠的空間嗎？</em></p>
+        </div>
+      </div>
+
+      <div class="section" id="ch6-3">
+        <span class="section-num">6.3</span>
+        <h3 class="section-title">謊言與謊言之間的差異</h3>
+        <div class="body-text"><p>並非所有謊言都一樣。能辨認這三種差異，比單純「抓謊」重要得多。</p></div>
+        <div class="lie-types">
+          <div class="lie-card">
+            <div class="lie-card-label">善意謊言</div>
+            <div class="lie-card-name">「你做得很好。」</div>
+            <div class="lie-card-body">主要為了維護關係，人性的一部分。</div>
+            <div class="lie-card-cost">代價低</div>
+          </div>
+          <div class="lie-card">
+            <div class="lie-card-label">自我保護謊言</div>
+            <div class="lie-card-name">「我沒有。」</div>
+            <div class="lie-card-body">主要為了保護自己，出於恐懼多於惡意。</div>
+            <div class="lie-card-cost">代價中等</div>
+          </div>
+          <div class="lie-card">
+            <div class="lie-card-label">操控性謊言</div>
+            <div class="lie-card-name">「你記錯了，從來不是這樣。」</div>
+            <div class="lie-card-body">系統性傷害，需要認真對待。</div>
+            <div class="lie-card-cost">代價高</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第七章 -->
+    <section class="chapter reveal" id="ch7">
+      <div class="chapter-num">Chapter Seven</div>
+      <h2 class="chapter-title">在謊言世界<span>保持清醒</span></h2>
+
+      <div class="section" id="ch7-1">
+        <span class="section-num">7.1</span>
+        <h3 class="section-title">放下測謊幻想，建立驗證習慣</h3>
+        <div class="body-text">
+          <p>你已經知道了，你看不出來。那就接受這件事，然後改變策略。</p>
+          <p><strong>不要再問「他有沒有說謊」，改問「我能不能驗證這件事」。</strong>價格、時間、地點、人名、紀錄——這些都能驗證。真正難以驗證的，通常是情感和意圖，而那些，本來就需要時間而不是直覺來判斷。</p>
+          <p>建立一個習慣：重要的事，多找一個資訊來源。不是要你變成偵探，而是不要把所有信任都押在一個沒有驗證的說法上。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch7-2">
+        <span class="section-num">7.2</span>
+        <h3 class="section-title">保護你的感知</h3>
+        <div class="body-text">
+          <p>對抗 Gaslighting，最重要的不是反擊，而是<strong>保存紀錄</strong>。當某件事發生，你有感覺，就把它寫下來。日期、對話、你的感受。不是為了以後打官司，而是讓你自己的記憶有一個不會被動搖的錨。</p>
+          <p>當對方說「沒有這件事」，你可以不跟他爭，但你知道你有那個紀錄。</p>
+        </div>
+        <div class="key-insight">
+          <p>你對自己感知的信任，是對抗操控的最後一道防線。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch7-3">
+        <span class="section-num">7.3</span>
+        <h3 class="section-title">選擇你願意暴露的脆弱</h3>
+        <div class="body-text">
+          <p>信任不是全有或全無。你需要的是<strong>分層的信任</strong>——根據關係深度和時間累積，決定你願意把多少真實的自己暴露出去。</p>
+        </div>
+        <ul class="method-list">
+          <li><strong>對剛認識的人</strong>給出資訊，但保留判斷。</li>
+          <li><strong>對有紀錄的人</strong>根據紀錄給予信任，而不是根據感覺。</li>
+          <li><strong>對親近的人</strong>建立可以說真話的空間，同時觀察他怎麼使用這個空間。</li>
+        </ul>
+        <div class="body-text">
+          <p>這不是冷漠，這是<em>清醒的溫柔</em>。</p>
+        </div>
+      </div>
+
+      <div class="section" id="ch7-4">
+        <span class="section-num">7.4</span>
+        <h3 class="section-title">與謊言共存的姿態</h3>
+        <div class="body-text">
+          <p>最後一件事，也許是最難接受的：你永遠無法活在一個完全沒有謊言的世界。你身邊的人會說謊，機構會說謊，媒體會說謊，你自己也會說謊。</p>
+          <p>你能做的，是知道這一點，然後既不崩潰，也不麻木。</p>
+          <p><strong>保持清醒，不等於保持懷疑。</strong>保持清醒，是在你需要判斷的時候，能夠啟動那個功能——而不是 24 小時開著，把自己活活耗盡。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 結語 -->
+    <section class="epilogue reveal" id="epilogue">
+      <h2 class="epilogue-title">學會帶著不確定感生活</h2>
+      <div class="epilogue-body">
+        <p>讀到這裡，你可能有一種奇怪的感覺：不是更安全了，而是更不安全了。因為你意識到，你以為穩固的那些——那些你確定的事、相信的人、信任的關係——裡面其實都有你不知道的成分。</p>
+        <p>這個感覺是對的。這才是真實的世界。</p>
+        <p>但我想告訴你：帶著這個不確定感生活，不等於懷疑一切。它等於你終於睜開眼睛，看見世界本來的樣子，然後在那個樣子裡，選擇你要相信什麼、要給誰機會、要對什麼事保持距離。</p>
+        <p>這是一種更成熟的信任。不是天真的，也不是憤世嫉俗的，而是<em>帶著眼睛的</em>。</p>
+        <p>謊言讓我們脆弱的方式，不是讓我們受騙，而是讓我們從此不再相信任何人。那才是真正的傷害。</p>
+        <p><strong>繼續相信人——但相信得有智慧一點。</strong><br>
+        繼續給出信任——但把信任的重量，放在有根據的地方。</p>
+      </div>
+      <div class="epilogue-final">
+        世界不誠實，但你可以。<br>
+        這已經足夠。
+      </div>
+    </section>
+
+    <!-- 系列其他冊 -->
+    <div class="series-next reveal">
+      <div class="series-next-label">暗黑心理學系列</div>
+      <div class="series-next-title">探索完整系列</div>
+      <div class="next-books">
+        <a href="/dark-psychology-vol1.html" class="next-book">
+          <span class="next-book-num">Vol.1</span>
+          <span class="next-book-title">操控與控制：看清那條你看不見的線</span>
+        </a>
+        <a href="/dark-psychology-vol2.html" class="next-book">
+          <span class="next-book-num">Vol.2</span>
+          <span class="next-book-title">說服與影響力：為什麼你總是被說動</span>
+        </a>
+        <a href="/dark-psychology-vol3.html" class="next-book">
+          <span class="next-book-num">Vol.3</span>
+          <span class="next-book-title">黑暗人格：識別你身邊的危險之人</span>
+        </a>
+        <div class="next-book current">
+          <span class="next-book-num">Vol.4</span>
+          <span class="next-book-title">謊言與欺騙：真相沒有你以為的穩固</span>
+        </div>
+      </div>
+      <a href="https://still-time-corner.vercel.app" class="series-cta-btn" target="_blank">前往小舖 →</a>
+    </div>
+
+  </div><!-- /reading -->
+
+  <footer>
+    暗黑心理學系列 Vol.4 &nbsp;·&nbsp; 作者：盧林 &nbsp;·&nbsp; 有的沒的小舖出品
+  </footer>
+
+</div><!-- /main-content -->
+</div><!-- /page-wrap -->
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Active TOC link
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav a');
+  const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.toc-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => tocObserver.observe(s));
+
+  // Mobile TOC close on link click
+  document.querySelectorAll('.toc-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        document.querySelector('.toc-sidebar').style.display = '';
+      }
+    });
+  });
+</script>
+</body>
+</html>
