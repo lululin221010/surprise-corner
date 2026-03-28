@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>操控與控制：看清那條你看不見的線｜暗黑心理學系列第一冊</title>
+<meta name="description" content="盧林著。煤氣燈效應、情緒勒索、創傷連結……12種操控面貌完整解析，帶你看清那條讓你慢慢失去自己的線。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0608;
+    --bg2: #110809;
+    --bg3: #180b0c;
+    --surface: #200d0f;
+    --border: rgba(232,96,122,0.12);
+    --text: #f5e8ea;
+    --text-muted: #a07880;
+    --accent: #e8607a;
+    --accent2: #c9a8ff;
+    --gold: #e8c87a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.95; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 5%, rgba(180,50,80,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 5% 95%, rgba(140,40,60,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* LAYOUT */
+  .page-wrap { display: flex; min-height: 100vh; }
+  .toc-sidebar { width: 240px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; padding: 32px 0; background: var(--bg2); border-right: 1px solid var(--border); z-index: 10; }
+  .toc-sidebar::-webkit-scrollbar { width: 3px; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: rgba(232,96,122,0.2); }
+  .toc-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .toc-back { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 14px; transition: color 0.2s; }
+  .toc-back:hover { color: var(--accent); }
+  .toc-series { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .toc-booktitle { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--text); line-height: 1.4; }
+  .toc-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; padding: 0 20px 10px; }
+  .toc-nav { list-style: none; }
+  .toc-nav li a { display: block; padding: 7px 20px; font-size: 0.83rem; color: var(--text-muted); text-decoration: none; line-height: 1.5; border-left: 2px solid transparent; transition: all 0.2s ease; }
+  .toc-nav li a:hover { color: var(--text); border-left-color: rgba(232,96,122,0.4); background: rgba(232,96,122,0.04); }
+  .toc-nav li a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(232,96,122,0.06); }
+  .toc-nav li a.ch-link { padding-left: 32px; font-size: 0.79rem; }
+  .toc-chapter-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); padding: 14px 20px 4px; text-transform: uppercase; }
+
+  .main-content { margin-left: 240px; flex: 1; position: relative; z-index: 1; }
+
+  /* BOOK HERO */
+  .book-hero { padding: 80px 60px 60px; max-width: 760px; border-bottom: 1px solid var(--border); }
+  .book-breadcrumb { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 24px; }
+  .book-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .book-breadcrumb a:hover { color: var(--accent); }
+  .book-vol { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; border: 1px solid rgba(232,96,122,0.3); display: inline-block; padding: 5px 16px; }
+  .book-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .book-title span { color: var(--accent); font-style: italic; }
+  .book-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin-bottom: 32px; }
+  .book-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .book-meta-item { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); }
+  .book-meta-item span { color: var(--text); display: block; margin-top: 4px; font-size: 10px; }
+
+  /* READING CONTENT */
+  .reading { max-width: 680px; padding: 0 60px 120px; }
+
+  /* 前言 */
+  .preface { padding: 60px 0 48px; border-bottom: 1px solid var(--border); }
+  .preface-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+  .preface-body { font-size: 1.05rem; color: var(--text-muted); line-height: 2.15; }
+  .preface-body p { margin-bottom: 1.3em; }
+  .preface-body em { color: var(--text); font-style: normal; font-weight: 500; }
+  .preface-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 32px 0; line-height: 1.8; }
+
+  /* 章節 */
+  .chapter { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+  .chapter-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 300; line-height: 1.3; margin-bottom: 36px; }
+  .chapter-title span { color: var(--accent); font-style: italic; }
+
+  /* 節 */
+  .section { margin-bottom: 40px; }
+  .section-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; color: var(--text); line-height: 1.4; }
+  .body-text { font-size: 1rem; color: var(--text-muted); line-height: 2.1; }
+  .body-text p { margin-bottom: 1.3em; }
+  .body-text strong { color: var(--text); font-weight: 500; }
+  .body-text em { color: var(--accent); font-style: normal; }
+
+  /* 操控手法卡片 */
+  .manipulation-card { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 28px 28px 24px; margin: 32px 0; }
+  .mc-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .mc-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); flex-shrink: 0; }
+  .mc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--text); }
+  .mc-en { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.92rem; color: var(--text-muted); }
+  .mc-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
+  .mc-body { font-size: 0.97rem; color: var(--text-muted); line-height: 2; }
+  .mc-body p { margin-bottom: 1.1em; }
+  .mc-body strong { color: var(--text); font-weight: 500; }
+  .mc-scene { margin: 16px 0; padding: 16px 20px; background: rgba(232,96,122,0.04); border-left: 2px solid rgba(232,96,122,0.25); }
+  .mc-scene-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
+  .mc-scene p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; font-style: italic; margin-bottom: 0.7em; }
+  .mc-scene p:last-child { margin-bottom: 0; }
+  .mc-note { margin-top: 14px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.07); font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .mc-note strong { color: var(--text); }
+
+  /* FOG 框 */
+  .fog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+  .fog-item { padding: 16px 14px; background: rgba(232,96,122,0.04); border: 1px solid rgba(232,96,122,0.15); text-align: center; }
+  .fog-letter { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--accent); opacity: 0.5; font-style: italic; line-height: 1; margin-bottom: 6px; }
+  .fog-word { font-size: 0.88rem; color: var(--text); font-weight: 500; margin-bottom: 4px; }
+  .fog-en { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+
+  /* 引用框 */
+  .key-insight { margin: 32px 0; padding: 24px 28px; background: rgba(232,96,122,0.04); border: 1px solid rgba(232,96,122,0.2); }
+  .key-insight p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--accent); line-height: 1.8; margin: 0; }
+  .key-test { margin: 24px 0; padding: 20px 24px; background: var(--bg3); border: 1px solid var(--border); }
+  .key-test-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+  .key-test p { font-size: 0.97rem; color: var(--text-muted); line-height: 1.9; margin: 0; }
+  .key-test strong { color: var(--text); }
+
+  /* 操作方法 */
+  .method-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+  .method-list li { padding: 14px 18px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(232,96,122,0.3); font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+  .method-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+  /* 結語 */
+  .epilogue { padding: 56px 0 48px; }
+  .epilogue-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 300; margin-bottom: 28px; }
+  .epilogue-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .epilogue-body p { margin-bottom: 1.3em; }
+  .epilogue-body strong { color: var(--text); font-weight: 500; }
+  .epilogue-body em { color: var(--accent); font-style: normal; }
+  .epilogue-final { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 36px 0; line-height: 1.8; }
+
+  /* 系列其他冊 */
+  .series-next { background: var(--bg3); border: 1px solid var(--border); padding: 40px; margin: 40px 0; position: relative; overflow: hidden; }
+  .series-next::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .series-next-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .series-next-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 24px; }
+  .next-books { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .next-book { display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); }
+  .next-book-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); flex-shrink: 0; }
+  .next-book-title { color: var(--text); }
+  .next-book.current { border-left: 2px solid var(--accent); background: rgba(232,96,122,0.04); }
+  .next-book.current .next-book-title::after { content: '  ←  正在閱讀'; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--accent); }
+  .series-cta-btn { display: inline-block; padding: 12px 32px; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .series-cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .series-cta-btn:hover { color: var(--bg); }
+  .series-cta-btn:hover::before { transform: translateX(0); }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 60px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* 手機版 */
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .main-content { margin-left: 0; }
+    .book-hero { padding: 48px 24px 40px; }
+    .reading { padding: 0 24px 80px; }
+    .fog-grid { grid-template-columns: 1fr; }
+    footer { padding: 24px; }
+    .series-next { padding: 28px 24px; }
+    .mobile-toc-btn { display: flex; }
+  }
+  .mobile-toc-btn { display: none; position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--bg); width: 48px; height: 48px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; z-index: 20; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<!-- 手機版目錄按鈕 -->
+<button class="mobile-toc-btn" onclick="document.querySelector('.toc-sidebar').style.display='block'" title="目錄">☰</button>
+
+<div class="page-wrap">
+<!-- 左側目錄 -->
+<nav class="toc-sidebar">
+  <div class="toc-logo">
+    <a href="/dark-psychology.html" class="toc-back">← 系列導讀</a>
+    <div class="toc-series">暗黑心理學 · Vol.1</div>
+    <div class="toc-booktitle">操控與控制：看清那條你看不見的線</div>
+  </div>
+  <div class="toc-label">目錄</div>
+  <ul class="toc-nav">
+    <li><a href="#preface">前言</a></li>
+    <div class="toc-chapter-label">第一章</div>
+    <li><a href="#ch1-1" class="ch-link">1.1 操控的定義</a></li>
+    <li><a href="#ch1-2" class="ch-link">1.2 操控 vs 正常影響</a></li>
+    <li><a href="#ch1-3" class="ch-link">1.3 有意識 vs 無意識</a></li>
+    <div class="toc-chapter-label">第二章</div>
+    <li><a href="#ch2-1" class="ch-link">2.1 煤氣燈效應</a></li>
+    <li><a href="#ch2-2" class="ch-link">2.2 情緒勒索</a></li>
+    <li><a href="#ch2-3" class="ch-link">2.3 愛情轟炸</a></li>
+    <li><a href="#ch2-4" class="ch-link">2.4 冷暴力</a></li>
+    <li><a href="#ch2-5" class="ch-link">2.5 三角化</a></li>
+    <li><a href="#ch2-6" class="ch-link">2.6 移動目標線</a></li>
+    <li><a href="#ch2-7" class="ch-link">2.7 最小化與否定</a></li>
+    <li><a href="#ch2-8" class="ch-link">2.8 受害者化</a></li>
+    <li><a href="#ch2-9" class="ch-link">2.9 過度解釋的要求</a></li>
+    <li><a href="#ch2-10" class="ch-link">2.10 間歇性強化</a></li>
+    <li><a href="#ch2-11" class="ch-link">2.11 孤立</a></li>
+    <li><a href="#ch2-12" class="ch-link">2.12 未來偽造</a></li>
+    <div class="toc-chapter-label">第三章</div>
+    <li><a href="#ch3-1" class="ch-link">3.1 創傷連結</a></li>
+    <li><a href="#ch3-2" class="ch-link">3.2 學習性無助</a></li>
+    <li><a href="#ch3-3" class="ch-link">3.3 認知失調</a></li>
+    <div class="toc-chapter-label">第四章</div>
+    <li><a href="#ch4-1" class="ch-link">4.1 承認正在發生的事</a></li>
+    <li><a href="#ch4-2" class="ch-link">4.2 重建內在聲音</a></li>
+    <li><a href="#ch4-3" class="ch-link">4.3 灰岩法</a></li>
+    <li><a href="#ch4-4" class="ch-link">4.4 設立邊界</a></li>
+    <li><a href="#ch4-5" class="ch-link">4.5 尋求專業幫助</a></li>
+    <li><a href="#epilogue">結語</a></li>
+  </ul>
+</nav>
+
+<!-- 主要內容 -->
+<main class="main-content">
+<div class="book-hero reveal">
+  <div class="book-breadcrumb"><a href="/psychology.html">心理學系列</a> / <a href="/dark-psychology.html">暗黑心理學</a> / 第一冊</div>
+  <div class="book-vol">Dark Psychology · Vol.01</div>
+  <h1 class="book-title">操控與控制<br><span>看清那條你看不見的線</span></h1>
+  <p class="book-subtitle">你不需要等到確定，才有資格保護自己</p>
+  <div class="book-meta">
+    <div class="book-meta-item">作者<span>盧林</span></div>
+    <div class="book-meta-item">出品<span>有的沒的小舖</span></div>
+    <div class="book-meta-item">系列<span>暗黑心理學 · 第一冊</span></div>
+  </div>
+</div>
+
+<div class="reading">
+
+<!-- 前言 -->
+<section class="preface" id="preface">
+  <div class="preface-label reveal">前言</div>
+  <div class="preface-body reveal">
+    <p>你有沒有在一段關係裡，漸漸失去自己？</p>
+    <p>不是突然的。是慢慢的。</p>
+    <p>慢慢地，你開始在說話之前先想「他會怎麼反應」。慢慢地，你開始覺得「算了，不值得為這個吵」。慢慢地，你開始懷疑自己的感受是不是太誇張。慢慢地，你開始覺得——<em>這一切都是你的問題</em>。</p>
+    <p>你不知道從哪一刻開始，那個有主見、有感受、會說「不」的你，不見了。</p>
+  </div>
+  <div class="preface-closing reveal">
+    「這本書，就是要告訴你那條你看不見的線在哪裡<br>它怎麼運作，以及你怎麼把它剪斷<br>不是教你變成操控高手<br>而是讓你終於看清自己正在被牽著走的真相」
+  </div>
+</section>
+
+<!-- 第一章 -->
+<section class="chapter" id="ch1">
+  <div class="chapter-num reveal">第一章</div>
+  <h2 class="chapter-title reveal">操控是什麼？</h2>
+
+  <div class="section" id="ch1-1">
+    <span class="section-num reveal">1.1</span>
+    <h3 class="section-title reveal">操控的定義</h3>
+    <div class="body-text reveal">
+      <p>操控，是指一個人用不誠實、不直接、或利用對方弱點的方式，來影響另一個人的思想、情緒或行為——目的是讓對方按照自己的意願行動，<strong>而不是讓對方自由做出選擇</strong>。</p>
+      <p>注意這個定義裡有幾個關鍵：</p>
+    </div>
+    <ul class="method-list reveal">
+      <li><strong>不誠實</strong>操控者不會直接說「我要你這樣做」，而是繞一個彎，讓你「自己決定」去做他想要你做的事。</li>
+      <li><strong>利用弱點</strong>操控者會精準找到你在乎什麼、害怕什麼、渴望什麼，然後從那個地方下手。</li>
+      <li><strong>剝奪自由選擇</strong>健康的影響是讓你有更多資訊去做決定；操控是讓你在不知情、或在情緒被操弄的狀態下做決定。</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch1-2">
+    <span class="section-num reveal">1.2</span>
+    <h3 class="section-title reveal">操控 vs 正常影響</h3>
+    <div class="body-text reveal">
+      <p>很多人分不清楚「操控」和「正常影響」的差別，甚至擔心自己是不是想太多。這裡有一個最簡單的判斷標準：</p>
+      <p><strong>正常影響：</strong>對方給你真實的資訊，尊重你的感受，讓你有空間說「不」，而且說「不」之後不會有懲罰。</p>
+      <p><strong>操控：</strong>對方給你扭曲的資訊，忽略或否定你的感受，讓你覺得說「不」有代價——愧疚、冷戰、憤怒、或失去這段關係。</p>
+    </div>
+    <div class="key-test reveal">
+      <div class="key-test-label">快速測試</div>
+      <p>在這段關係裡，你說「不」的時候，<strong>感覺自由嗎？還是感覺危險？</strong><br>如果你心裡已經浮現答案，那就別再騙自己了。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch1-3">
+    <span class="section-num reveal">1.3</span>
+    <h3 class="section-title reveal">有意識的操控 vs 無意識的操控</h3>
+    <div class="body-text reveal">
+      <p>這是很多人沒想到的部分：<strong>大多數操控者，自己並不知道自己在操控。</strong></p>
+      <p>有意識的操控者確實存在——他們清楚知道自己在做什麼，甚至以此為傲。但這類人其實是少數。</p>
+      <p>更常見的是無意識的操控：那個人從小就學會用哭泣得到想要的東西、用沉默懲罰別人、用愧疚控制身邊的人——不是因為他壞，而是因為那是他學會的唯一相處方式。</p>
+      <p>這不代表他的行為可以被接受。但理解這一點，可以幫助你不把自己的痛苦完全歸咎於「他是個惡魔」——而是更清醒地看見正在發生的模式，然後決定自己要不要繼續玩這場遊戲。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 第二章 -->
+<section class="chapter" id="ch2">
+  <div class="chapter-num reveal">第二章</div>
+  <h2 class="chapter-title reveal">操控的 <span>12</span> 種面貌</h2>
+
+  <!-- 2.1 煤氣燈效應 -->
+  <div id="ch2-1" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.1</span>
+      <span class="mc-name">煤氣燈效應</span>
+      <span class="mc-en">Gaslighting</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>得名於1944年的電影《煤氣燈下》——片中丈夫故意調暗家中的煤氣燈，卻告訴妻子燈光沒有變暗，讓她懷疑自己的感知。</p>
+      <p>在現實生活中，煤氣燈效應是指：<strong>操控者系統性地否定你的記憶、感受和現實認知，讓你開始懷疑自己。</strong></p>
+      <p>常見語言：「那件事根本沒有發生，你記錯了。」「你太敏感了，我沒有那個意思。」「你最近是不是壓力太大？你想太多了。」「我從來沒說過那句話，你在亂想。」</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你明明記得他昨天答應週末一起去見你父母，結果他卻說：「我什麼時候說過？是你自己亂答應的吧。」你開始翻聊天記錄，卻發現他已經把對話刪掉或改口。你越解釋，他越用「你最近真的很奇怪」來反擊。</p>
+      </div>
+      <p><strong>長期影響：</strong>持續的煤氣燈效應會讓你對自己的判斷力完全失去信心。你開始相信「也許真的是我的問題」，開始在說出感受之前先自我審查，開始需要對方的「確認」才敢相信自己所見所聞。</p>
+      <div class="mc-note">
+        <strong>如何識別：</strong>如果你在一段關係裡，常常覺得「也許是我想太多了」「也許是我記錯了」「也許我真的太敏感」——特別是這個感覺只在和某個特定的人相處後出現——那就值得認真看待。
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.2 情緒勒索 -->
+  <div id="ch2-2" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.2</span>
+      <span class="mc-name">情緒勒索</span>
+      <span class="mc-en">Emotional Blackmail</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>心理學家蘇珊・福沃德（Susan Forward）提出了情緒勒索的核心機制：<strong>恐懼（Fear）、義務（Obligation）、愧疚（Guilt）</strong>，簡稱 FOG。操控者讓你籠罩在這三種情緒的迷霧裡，讓你看不清楚真實的狀況。</p>
+      <div class="fog-grid">
+        <div class="fog-item">
+          <div class="fog-letter">F</div>
+          <div class="fog-word">恐懼</div>
+          <div class="fog-en">Fear</div>
+        </div>
+        <div class="fog-item">
+          <div class="fog-letter">O</div>
+          <div class="fog-word">義務</div>
+          <div class="fog-en">Obligation</div>
+        </div>
+        <div class="fog-item">
+          <div class="fog-letter">G</div>
+          <div class="fog-word">愧疚</div>
+          <div class="fog-en">Guilt</div>
+        </div>
+      </div>
+      <p>恐懼：「如果你這樣做，我不知道我會怎樣。」「你這樣對我，我們還有未來嗎？」<br>義務：「我為你做了那麼多，你難道不應該……」「你是我最親的人，你不幫我誰幫我？」<br>愧疚：「你讓我很失望。」「我以為你是在乎我的。」「你這樣做，我會很難過。」</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你想週末跟朋友聚會，他馬上說：「我最近工作壓力這麼大，你還要丟下我一個人？如果你真的在乎我，就應該陪我。」你最後取消了聚會，心裡卻覺得自己是壞人。</p>
+      </div>
+      <div class="mc-note">
+        <strong>識別關鍵：</strong>情緒勒索的核心特徵是——對方把自己的情緒結果，變成你的責任。
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.3 愛情轟炸 -->
+  <div id="ch2-3" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.3</span>
+      <span class="mc-name">愛情轟炸</span>
+      <span class="mc-en">Love Bombing</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>一開始，對方用過度的熱情、關注、禮物、讚美、承諾把你完全淹沒。你感覺自己從來沒有被這樣愛過，感覺終於找到了那個「懂你的人」。</p>
+      <p>然後，在你已經深深投入之後，這一切突然消失。對方變得冷淡、挑剔、若即若離。你開始拼命追逐那最初的溫度，開始為了讓對方重新變回「那個他」而不斷妥協、討好、改變自己。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>交往第一個月，他每天早晚訊息、送花、規劃未來旅行、說「你是我這輩子最特別的人」。</p>
+        <p>第二個月，他開始不回訊息、批評你穿衣服太隨便、說「你變了」。你開始想「是不是我做錯什麼」，於是更努力討好。</p>
+      </div>
+      <div class="mc-note">
+        這就是愛情轟炸的目的：用最初的「過度給予」創造一個你想永遠回去的黃金標準，然後用<strong>「撤回」</strong>來控制你的行為。
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.4 冷暴力 -->
+  <div id="ch2-4" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.4</span>
+      <span class="mc-name">冷暴力</span>
+      <span class="mc-en">Silent Treatment</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>冷暴力是用沉默、忽視、撤回情感來懲罰對方，迫使對方妥協。它之所以有效，是因為人類對「社交排斥」有本能的恐懼——被無視，對大腦來說和<strong>身體疼痛激活的是同一個區域</strong>。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你拒絕了他想借錢的要求，之後他三天不回訊息、不接電話。你焦慮到睡不著，開始狂發訊息道歉，最後答應借錢，他才「恢復正常」。</p>
+      </div>
+      <div class="mc-note">
+        <strong>和正常需要空間的差異：</strong>需要獨處空間的人會說「我需要一點時間冷靜，我們等一下再談」；冷暴力的人不解釋、不說話、讓你在焦慮中猜測，直到你先低頭。
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.5 三角化 -->
+  <div id="ch2-5" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.5</span>
+      <span class="mc-name">三角化</span>
+      <span class="mc-en">Triangulation</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>三角化是操控者引入第三方來製造不安全感和競爭心理的手法。</p>
+      <p>常見形式：「我前任從來不會這樣對我。」故意讓你知道有人對他感興趣。在你們的衝突中拉入永遠站在他那邊的第三方「評理」。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你跟他吵架，他馬上說：「我跟我妹說了，她也覺得你太小題大作。」你瞬間覺得自己是壞人，開始自我懷疑。</p>
+      </div>
+      <div class="mc-note">三角化的目的是讓你感到不安全、需要競爭、害怕失去——在這種狀態下，你更容易妥協、更難為自己設立邊界。</div>
+    </div>
+  </div>
+
+  <!-- 2.6 移動目標線 -->
+  <div id="ch2-6" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.6</span>
+      <span class="mc-name">移動目標線</span>
+      <span class="mc-en">Moving the Goalposts</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>你努力達到了他的要求，他又提出新的要求。那個認可永遠不會來，因為目標一直在移動。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你按照他的要求減肥十公斤，他卻說：「身材是好了，但你最近怎麼不化妝？」你再化妝，他又說：「你變得太在意外表了。」你永遠追不上那條線。</p>
+      </div>
+      <div class="mc-note">這個手法讓你永遠處於「不夠好」的狀態，永遠在努力、永遠在證明自己，永遠無法真正「達標」。</div>
+    </div>
+  </div>
+
+  <!-- 2.7 最小化與否定 -->
+  <div id="ch2-7" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.7</span>
+      <span class="mc-name">最小化與否定</span>
+      <span class="mc-en">Minimizing and Dismissing</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>當你表達感受或提出問題，對方的反應是讓你覺得「這根本不是問題」：「你大驚小怪。」「哪有那麼嚴重？」「別人都沒意見，只有你有問題。」「你就是玻璃心。」</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你說：「我覺得你跟前任聊天讓我不舒服。」他回：「你怎麼這麼小氣？我們只是朋友而已，你想太多了。」你最後自己覺得不好意思，閉嘴了。</p>
+      </div>
+      <div class="mc-note">久而久之，你開始在說出感受之前先自我審查：「這值得說嗎？他會不會又說我想太多？」</div>
+    </div>
+  </div>
+
+  <!-- 2.8 受害者化 -->
+  <div id="ch2-8" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.8</span>
+      <span class="mc-name">受害者化</span>
+      <span class="mc-en">Playing the Victim</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>操控者把自己塑造成受害者，讓你感到愧疚，進而放棄你的立場。每當你試圖設立邊界或表達不滿，對方就立刻翻轉局面，讓你變成「加害者」。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你說想一個人去旅行，他馬上眼眶泛紅：「我最近這麼辛苦，你還要丟下我？你真的這麼自私嗎？」你最後取消行程，心裡充滿罪惡感。</p>
+      </div>
+      <div class="mc-note">這個手法的厲害之處在於——它<strong>利用你的同理心</strong>。你是一個在乎別人感受的人，所以當對方「受傷」，你的第一反應是退讓，而不是繼續堅持自己的立場。</div>
+    </div>
+  </div>
+
+  <!-- 2.9 過度解釋的要求 -->
+  <div id="ch2-9" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.9</span>
+      <span class="mc-name">過度解釋的要求</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>操控者要求你為每一個決定提供詳細的解釋和理由，然後逐一反駁或否定你的理由，直到你「無話可說」，只好妥協。</p>
+      <div class="key-insight">
+        <p>重要認知：你有權利做出決定，不需要理由。「我不想去」就是一個完整的句子。</p>
+      </div>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你說不想參加他朋友的聚會，他立刻追問：「為什麼？你到底哪裡不舒服？是討厭我朋友嗎？還是討厭我？」你解釋了十分鐘，他還是說「你這樣讓我很沒面子」，最後你只好勉強去。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.10 間歇性強化 -->
+  <div id="ch2-10" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.10</span>
+      <span class="mc-name">間歇性強化</span>
+      <span class="mc-en">Intermittent Reinforcement</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>這是所有操控手法中<strong>最讓人上癮的一種</strong>。間歇性強化來自行為心理學——當獎勵是不可預測的，反而比穩定的獎勵更能讓人上癮。賭博機器之所以讓人停不下來，就是因為你不知道下一把會不會贏。</p>
+      <p>在關係中，操控者時而溫柔體貼，時而冷漠殘忍——你永遠不知道今天面對的是哪一個他。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>他一週前還說你是他的全世界，這週卻三天不理你；突然又發來一堆甜言蜜語，你立刻原諒一切。這種忽冷忽熱讓你上癮，因為「也許下一次他又會變回那個好的他」。</p>
+      </div>
+      <div class="mc-note">這種不可預測性讓你的大腦持續在「追求那個溫柔版本」，讓你越來越難離開。</div>
+    </div>
+  </div>
+
+  <!-- 2.11 孤立 -->
+  <div id="ch2-11" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.11</span>
+      <span class="mc-name">孤立</span>
+      <span class="mc-en">Isolation</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>操控者慢慢把你與支持系統切斷——你的朋友、家人、同事。不一定是明著禁止，而是用更隱微的方式：「你朋友對你根本不好，只有我真心對你。」每次你去見朋友後，他就悶悶不樂，讓你覺得愧疚。</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>你原本每週跟閨蜜喝下午茶，他開始說「她每次都只會抱怨老公，你跟她在一起會不會也變得負面？」你慢慢減少聯絡，最後只剩下他一個人能傾訴。</p>
+      </div>
+      <div class="mc-note">當你的支持系統越來越小，你就越來越依賴操控者，也越來越難看清楚正在發生的事。</div>
+    </div>
+  </div>
+
+  <!-- 2.12 未來偽造 -->
+  <div id="ch2-12" class="manipulation-card reveal">
+    <div class="mc-header">
+      <span class="mc-num">2.12</span>
+      <span class="mc-name">未來偽造</span>
+      <span class="mc-en">Future Faking</span>
+    </div>
+    <div class="mc-divider"></div>
+    <div class="mc-body">
+      <p>操控者用對未來的承諾讓你繼續留下來：「等我穩定了，我們就結婚。」「等這陣子過了，我一定會改變的。」「我保證下次不會這樣了。」</p>
+      <div class="mc-scene">
+        <div class="mc-scene-label">真實情境</div>
+        <p>每次你提出分手，他馬上說：「再給我半年，我一定會辭掉這份爛工作，我們一起出國重新開始。」你心軟了，又等了半年。</p>
+      </div>
+      <div class="mc-note">這些承諾從來不會實現，但它們的功能不是被實現——<strong>而是讓你在每一次考慮離開的時候，有一個理由再等一下。</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 第三章 -->
+<section class="chapter" id="ch3">
+  <div class="chapter-num reveal">第三章</div>
+  <h2 class="chapter-title reveal">為什麼你<span>離不開</span></h2>
+
+  <div class="section" id="ch3-1">
+    <span class="section-num reveal">3.1</span>
+    <h3 class="section-title reveal">創傷連結（Trauma Bonding）</h3>
+    <div class="body-text reveal">
+      <p>你可能有過這樣的經驗：明明知道這段關係對你有害，卻無法離開，甚至在離開之後還是深深思念對方。</p>
+      <p><em>這不是你軟弱，也不是你「賤」。</em>這是一個有神經科學基礎的心理現象，叫做創傷連結（Trauma Bonding）。</p>
+      <p>創傷連結的形成，和間歇性強化密切相關。當一段關係裡同時存在傷害和溫柔，大腦會把那些「好的時光」的記憶放大——因為在高壓力、高痛苦的狀態下得到的短暫解脫，會讓大腦釋放更多的多巴胺，讓那個「好的時刻」感覺比平常更珍貴、更強烈。</p>
+      <p><strong>這就是為什麼受害者常常記得最清楚的，是那些美好的片段，而不是那些傷害。</strong></p>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-2">
+    <span class="section-num reveal">3.2</span>
+    <h3 class="section-title reveal">學習性無助（Learned Helplessness）</h3>
+    <div class="body-text reveal">
+      <p>心理學家馬丁・塞利格曼（Martin Seligman）的研究發現，當一個生物反覆經歷「無論做什麼都改變不了結果」的情境，它會停止嘗試——即使後來情況改變，逃脫已經可能，它也不會再嘗試了。</p>
+      <p>在長期操控的關係裡，你可能也經歷了這個過程：你試過反抗、試過溝通、試過設立邊界，但都沒有用，甚至讓情況更糟。</p>
+      <p>於是你的大腦學到了：「努力也沒用。」「我改變不了這個情況。」</p>
+      <p>這就是為什麼很多在操控關係中待了很久的人，會感覺到一種深深的<strong>無力感和麻木</strong>——不是不想改變，而是已經不相信改變是可能的。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-3">
+    <span class="section-num reveal">3.3</span>
+    <h3 class="section-title reveal">認知失調（Cognitive Dissonance）</h3>
+    <div class="body-text reveal">
+      <p>當你的內心同時存在兩個矛盾的信念——「我愛他」和「他傷害了我」——大腦會感到極度不舒服，並試圖消除這個矛盾。</p>
+      <p>最常見的消除方式，不是承認「這段關係有問題」，而是說服自己「其實沒那麼糟」「他也有好的一面」「也許是我的問題」。</p>
+      <p>因為承認「我深愛的人在操控我」，需要重新審視整段關係、整個自我認知——那個代價，在心理上比繼續留下來要大得多。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 第四章 -->
+<section class="chapter" id="ch4">
+  <div class="chapter-num reveal">第四章</div>
+  <h2 class="chapter-title reveal">如何<span>收回你的主導權</span></h2>
+
+  <div class="section" id="ch4-1">
+    <span class="section-num reveal">4.1</span>
+    <h3 class="section-title reveal">先承認正在發生的事</h3>
+    <div class="body-text reveal">
+      <p>改變的第一步，永遠是看見。在你採取任何行動之前，你需要先允許自己承認：<em>「這不是我想太多。這是真實發生的事。我的感受是真實的。」</em></p>
+      <p>這一步比聽起來困難得多——因為長期的操控已經讓你不相信自己的感受。</p>
+    </div>
+    <div class="key-test reveal">
+      <div class="key-test-label">建議方法</div>
+      <p><strong>記錄。</strong>把讓你感到不舒服的互動寫下來，包括對方說了什麼、你感受到什麼、你怎麼回應的。白紙黑字，幫助你對抗「也許是我想太多了」的內心聲音。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch4-2">
+    <span class="section-num reveal">4.2</span>
+    <h3 class="section-title reveal">重建你的內在聲音</h3>
+    <div class="body-text reveal">
+      <p>長期在操控關係中的人，內在聲音往往已經被對方的聲音取代了。你用他的眼光看自己，用他的標準評判自己。</p>
+      <p>重建內在聲音需要時間，但可以從幾個小練習開始：</p>
+    </div>
+    <ul class="method-list reveal">
+      <li><strong>每天問自己：「今天我真正感受到的是什麼？」</strong>不是「他希望我感受什麼」。</li>
+      <li><strong>練習對小事說「不」</strong>從低風險的情境開始重建說「不」的肌肉。</li>
+      <li><strong>找一個你信任的人說出你的感受</strong>把感受說出口，是讓它變真實的過程。</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch4-3">
+    <span class="section-num reveal">4.3</span>
+    <h3 class="section-title reveal">灰岩法（Grey Rock Method）</h3>
+    <div class="body-text reveal">
+      <p>如果你目前無法或不打算立刻離開這段關係，灰岩法是一個實用的保護策略。</p>
+      <p><strong>概念：</strong>讓自己變成一塊無聊的灰色石頭——不給對方任何情緒反應、不分享任何可以被利用的個人信息、不參與任何挑釁。</p>
+      <p>操控者需要你的情緒反應來維持控制。當你停止給予反應，操控就失去了效果。</p>
+    </div>
+    <div class="key-test reveal">
+      <div class="key-test-label">注意</div>
+      <p>灰岩法是<strong>短期保護策略</strong>，不是長期解決方案。它幫助你在安全離開之前減少傷害，但它不能修復一段有操控模式的關係。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch4-4">
+    <span class="section-num reveal">4.4</span>
+    <h3 class="section-title reveal">設立邊界的現實操作</h3>
+    <div class="body-text reveal">
+      <p>很多人誤解邊界——以為邊界是告訴對方「你不可以這樣做」。但邊界其實是關於<strong>你自己的行動</strong>：「如果你這樣做，我會這樣回應。」</p>
+    </div>
+    <ul class="method-list reveal">
+      <li><strong>清楚說明你的界線是什麼</strong></li>
+      <li><strong>說明如果對方越界，你會怎麼做</strong></li>
+      <li><strong>然後真的這樣做</strong>邊界沒有執行，就只是一句話。對方之所以繼續越界，很多時候是因為他知道你說了但不會真的做到。</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch4-5">
+    <span class="section-num reveal">4.5</span>
+    <h3 class="section-title reveal">什麼時候需要專業幫助</h3>
+    <div class="body-text reveal">
+      <p>如果你有以下情況，強烈建議尋求心理諮詢的協助：</p>
+    </div>
+    <ul class="method-list reveal">
+      <li>長期處於操控關係中（超過一年以上）</li>
+      <li>感到無力、麻木、對生活失去興趣</li>
+      <li>有身體症狀（失眠、頭痛、食慾改變）</li>
+      <li>離開之後仍然無法走出</li>
+      <li>對方的操控已經升級為情感虐待或肢體威脅</li>
+    </ul>
+    <div class="key-insight reveal">
+      <p>尋求幫助不是軟弱，是承認這個傷，比你一個人能處理的更大。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 結語 -->
+<section class="epilogue" id="epilogue">
+  <div class="chapter-num reveal">結語</div>
+  <h2 class="epilogue-title reveal">你不需要等到「確定」才保護自己</h2>
+  <div class="epilogue-body reveal">
+    <p>很多人在意識到自己可能在一段操控關係中之後，第一個問題是：「但我不確定他是故意的。」「但也許真的是我想太多。」「但他也有對我好的時候。」</p>
+    <p><strong>你不需要等到百分之百確定，才有資格保護自己。</strong></p>
+    <p>你只需要問自己一個問題：</p>
+  </div>
+  <div class="epilogue-final reveal">
+    「在這段關係裡<br>我越來越像自己<br>還是越來越不像自己？」
+  </div>
+  <div class="epilogue-body reveal">
+    <p>如果答案是後者，那就是你需要認真看待的訊號。不管對方是有意還是無意，不管他愛不愛你，<em>一段讓你越來越失去自己的關係，不是你值得擁有的關係</em>。</p>
+    <p><strong>你值得的，是一段讓你越來越完整的關係。</strong></p>
+  </div>
+</section>
+
+<!-- 系列其他冊 -->
+<div class="series-next reveal">
+  <div class="series-next-label">暗黑心理學系列</div>
+  <h3 class="series-next-title">繼續探索暗黑心理學完整系列</h3>
+  <div class="next-books">
+    <div class="next-book current">
+      <span class="next-book-num">Vol.1</span>
+      <span class="next-book-title">操控與控制：看清那條你看不見的線</span>
+    </div>
+    <div class="next-book">
+      <span class="next-book-num">Vol.2</span>
+      <span class="next-book-title">說服與影響力：為什麼你總是被說動</span>
+    </div>
+    <div class="next-book">
+      <span class="next-book-num">Vol.3</span>
+      <span class="next-book-title">黑暗人格：識別你身邊的危險之人</span>
+    </div>
+    <div class="next-book">
+      <span class="next-book-num">Vol.4</span>
+      <span class="next-book-title">謊言與欺騙：真相沒有你以為的穩固</span>
+    </div>
+  </div>
+  <a href="https://still-time-corner.vercel.app" class="series-cta-btn" target="_blank" rel="noopener">前往有的沒的小舖</a>
+</div>
+
+</div><!-- end reading -->
+</main>
+</div><!-- end page-wrap -->
+
+<footer>
+  © 有的沒的小舖 · 盧林 著 · 暗黑心理學系列第一冊 · Dark Psychology Vol.1
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Active TOC highlight
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav a');
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.toc-nav a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => scrollObserver.observe(s));
+</script>
+</body>
+</html>
