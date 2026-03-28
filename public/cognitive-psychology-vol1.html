@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你以為你在思考：認知偏誤如何操控你的每個決定｜認知心理學系列第一冊</title>
+<meta name="description" content="盧林著。確認偏誤、錨定效應、可得性捷思、沉沒成本、達克效應、框架效應——你以為你在理性思考，其實你的大腦早就幫你決定好了。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070c0f;
+    --bg2: #0a1015;
+    --bg3: #0d1820;
+    --surface: #111e28;
+    --border: rgba(77,184,232,0.12);
+    --text: #e4f0f8;
+    --text-muted: #6898b0;
+    --accent: #4db8e8;
+    --gold: #e8c87a;
+    --green: #50c896;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.95; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 75% 5%, rgba(40,140,200,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 90%, rgba(30,100,160,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* LAYOUT */
+  .page-wrap { display: flex; min-height: 100vh; }
+  .toc-sidebar { width: 240px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; padding: 32px 0; background: var(--bg2); border-right: 1px solid var(--border); z-index: 10; }
+  .toc-sidebar::-webkit-scrollbar { width: 3px; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: rgba(77,184,232,0.2); }
+  .toc-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .toc-back { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 14px; transition: color 0.2s; }
+  .toc-back:hover { color: var(--accent); }
+  .toc-series { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .toc-booktitle { font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; color: var(--text); line-height: 1.4; }
+  .toc-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; padding: 0 20px 10px; }
+  .toc-nav { list-style: none; }
+  .toc-nav li a { display: block; padding: 7px 20px; font-size: 0.83rem; color: var(--text-muted); text-decoration: none; line-height: 1.5; border-left: 2px solid transparent; transition: all 0.2s ease; }
+  .toc-nav li a:hover { color: var(--text); border-left-color: rgba(77,184,232,0.4); background: rgba(77,184,232,0.04); }
+  .toc-nav li a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(77,184,232,0.06); }
+  .toc-nav li a.ch-link { padding-left: 32px; font-size: 0.79rem; }
+  .toc-chapter-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); padding: 14px 20px 4px; text-transform: uppercase; }
+
+  .main-content { margin-left: 240px; flex: 1; position: relative; z-index: 1; }
+
+  /* BOOK HERO */
+  .book-hero { padding: 80px 60px 60px; max-width: 760px; border-bottom: 1px solid var(--border); }
+  .book-breadcrumb { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 24px; }
+  .book-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .book-breadcrumb a:hover { color: var(--accent); }
+  .book-vol { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; border: 1px solid rgba(77,184,232,0.3); display: inline-block; padding: 5px 16px; }
+  .book-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .book-title span { color: var(--accent); font-style: italic; }
+  .book-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--text-muted); margin-bottom: 32px; line-height: 1.7; }
+  .book-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .book-meta-item { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); }
+  .book-meta-item span { color: var(--text); display: block; margin-top: 4px; font-size: 10px; }
+
+  /* READING */
+  .reading { max-width: 680px; padding: 0 60px 120px; }
+
+  .preface { padding: 60px 0 48px; border-bottom: 1px solid var(--border); }
+  .preface-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+  .preface-body { font-size: 1.05rem; color: var(--text-muted); line-height: 2.15; }
+  .preface-body p { margin-bottom: 1.3em; }
+  .preface-body em { color: var(--text); font-style: normal; font-weight: 500; }
+  .preface-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--accent); text-align: center; padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 32px 0; line-height: 1.8; }
+
+  .chapter { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+  .chapter-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 300; line-height: 1.3; margin-bottom: 12px; }
+  .chapter-title span { color: var(--accent); font-style: italic; }
+  .chapter-en { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 32px; }
+
+  .bias-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--text-muted); padding: 20px 28px; border-left: 2px solid rgba(77,184,232,0.3); margin-bottom: 36px; line-height: 1.85; }
+
+  .section { margin-bottom: 40px; }
+  .section-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; color: var(--text); line-height: 1.4; }
+  .body-text { font-size: 1rem; color: var(--text-muted); line-height: 2.1; }
+  .body-text p { margin-bottom: 1.3em; }
+  .body-text strong { color: var(--text); font-weight: 500; }
+  .body-text em { color: var(--accent); font-style: normal; }
+
+  /* 生活六張臉 */
+  .life-faces { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+  .life-face { padding: 18px 20px; background: rgba(77,184,232,0.03); border: 1px solid var(--border); }
+  .face-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
+  .face-title { font-size: 0.95rem; color: var(--text); font-weight: 500; margin-bottom: 8px; }
+  .face-body { font-size: 0.9rem; color: var(--text-muted); line-height: 1.85; }
+  .face-body em { color: var(--accent); font-style: italic; }
+
+  /* 對話框 */
+  .dialogue-block { margin: 24px 0; display: flex; flex-direction: column; gap: 6px; }
+  .dialogue-scene { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .dialogue-line { display: flex; gap: 12px; align-items: flex-start; }
+  .dialogue-speaker { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); flex-shrink: 0; padding-top: 4px; min-width: 48px; text-transform: uppercase; }
+  .dialogue-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; font-style: italic; padding: 8px 14px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(77,184,232,0.2); flex: 1; }
+  .dialogue-result { margin-top: 12px; padding: 14px 18px; background: rgba(77,184,232,0.04); border: 1px solid rgba(77,184,232,0.12); font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .dialogue-result strong { color: var(--accent); }
+
+  /* 方法列表 */
+  .method-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+  .method-list li { padding: 14px 18px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(77,184,232,0.3); font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+  .method-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+  /* 識別清單 */
+  .bias-list { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+  .bias-item { display: flex; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(77,184,232,0.25); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; align-items: flex-start; }
+  .bias-item::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 2px; font-size: 0.8rem; }
+
+  /* 章節重點 */
+  .chapter-summary { margin: 28px 0 0; padding: 20px 24px; background: rgba(77,184,232,0.04); border: 1px solid rgba(77,184,232,0.15); border-left: 3px solid var(--accent); }
+  .chapter-summary-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .chapter-summary p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.85; margin: 0; }
+  .chapter-summary strong { color: var(--text); }
+
+  /* Key insight */
+  .key-insight { margin: 28px 0; padding: 22px 28px; background: rgba(77,184,232,0.04); border: 1px solid rgba(77,184,232,0.2); }
+  .key-insight p { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--accent); line-height: 1.8; margin: 0; }
+
+  /* 達克效應四階段 */
+  .dk-stages { display: flex; align-items: stretch; gap: 0; margin: 28px 0; }
+  .dk-step { flex: 1; padding: 18px 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); position: relative; }
+  .dk-step:not(:last-child)::after { content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1rem; z-index: 1; }
+  .dk-step:nth-child(1) { border-top: 2px solid #e8607a; }
+  .dk-step:nth-child(2) { border-top: 2px solid #6898b0; }
+  .dk-step:nth-child(3) { border-top: 2px solid #50c896; }
+  .dk-step:nth-child(4) { border-top: 2px solid #4db8e8; }
+  .dk-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .dk-step:nth-child(1) .dk-label { color: #e8607a; }
+  .dk-step:nth-child(2) .dk-label { color: #6898b0; }
+  .dk-step:nth-child(3) .dk-label { color: #50c896; }
+  .dk-step:nth-child(4) .dk-label { color: #4db8e8; }
+  .dk-name { font-size: 0.88rem; color: var(--text); font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+  .dk-body { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* 框架效應比較 */
+  .frame-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 24px 0; }
+  .frame-card { padding: 18px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
+  .frame-card:nth-child(1) { border-top: 2px solid var(--green); }
+  .frame-card:nth-child(2) { border-top: 2px solid #e8607a; }
+  .frame-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .frame-card:nth-child(1) .frame-label { color: var(--green); }
+  .frame-card:nth-child(2) .frame-label { color: #e8607a; }
+  .frame-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .frame-effect { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+  .frame-equal { text-align: center; padding: 10px; font-family: 'Space Mono', monospace; font-size: 9px; color: var(--accent); letter-spacing: 2px; grid-column: 1 / -1; border: 1px solid var(--border); background: rgba(77,184,232,0.03); }
+
+  /* 後記 */
+  .epilogue { padding: 56px 0 48px; }
+  .epilogue-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 300; margin-bottom: 28px; }
+  .epilogue-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .epilogue-body p { margin-bottom: 1.3em; }
+  .epilogue-body strong { color: var(--text); font-weight: 500; }
+  .epilogue-body em { color: var(--accent); font-style: normal; }
+  .epilogue-final { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 36px 0; line-height: 1.8; }
+
+  /* 系列 */
+  .series-next { background: var(--bg3); border: 1px solid var(--border); padding: 40px; margin: 40px 0; position: relative; overflow: hidden; }
+  .series-next::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .series-next-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .series-next-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 24px; }
+  .next-books { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .next-book { display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); text-decoration: none; }
+  .next-book-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); flex-shrink: 0; }
+  .next-book-title { color: var(--text); }
+  .next-book.current { border-left: 2px solid var(--accent); background: rgba(77,184,232,0.04); }
+  .next-book.current .next-book-title::after { content: '  ←  正在閱讀'; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--accent); }
+  .next-book.coming .next-book-title { color: var(--text-muted); }
+  .next-book.coming .next-book-num::after { content: ' 撰寫中'; font-size: 8px; color: var(--text-muted); }
+  .series-cta-btn { display: inline-block; padding: 12px 32px; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .series-cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .series-cta-btn:hover { color: var(--bg); }
+  .series-cta-btn:hover::before { transform: translateX(0); }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 60px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .main-content { margin-left: 0; }
+    .book-hero { padding: 48px 24px 40px; }
+    .reading { padding: 0 24px 80px; }
+    footer { padding: 24px; }
+    .series-next { padding: 28px 24px; }
+    .dk-stages { flex-direction: column; }
+    .dk-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -12px; transform: translateX(-50%); }
+    .frame-compare { grid-template-columns: 1fr; }
+    .mobile-toc-btn { display: flex; }
+  }
+  .mobile-toc-btn { display: none; position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--bg); width: 48px; height: 48px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; z-index: 20; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<button class="mobile-toc-btn" onclick="document.querySelector('.toc-sidebar').style.display='block'" title="目錄">☰</button>
+
+<div class="page-wrap">
+<nav class="toc-sidebar">
+  <div class="toc-logo">
+    <a href="/psychology.html" class="toc-back">← 心理學系列</a>
+    <div class="toc-series">認知心理學 · Vol.1</div>
+    <div class="toc-booktitle">你以為你在思考</div>
+  </div>
+  <div class="toc-label">目錄</div>
+  <ul class="toc-nav">
+    <li><a href="#preface">前言</a></li>
+    <div class="toc-chapter-label">第一章</div>
+    <li><a href="#ch1" class="ch-link">確認偏誤</a></li>
+    <div class="toc-chapter-label">第二章</div>
+    <li><a href="#ch2" class="ch-link">錨定效應</a></li>
+    <div class="toc-chapter-label">第三章</div>
+    <li><a href="#ch3" class="ch-link">可得性捷思</a></li>
+    <div class="toc-chapter-label">第四章</div>
+    <li><a href="#ch4" class="ch-link">沉沒成本謬誤</a></li>
+    <div class="toc-chapter-label">第五章</div>
+    <li><a href="#ch5" class="ch-link">達克效應</a></li>
+    <div class="toc-chapter-label">第六章</div>
+    <li><a href="#ch6" class="ch-link">框架效應</a></li>
+    <li><a href="#epilogue">後記</a></li>
+  </ul>
+</nav>
+
+<div class="main-content">
+
+  <div class="book-hero reveal">
+    <div class="book-breadcrumb">
+      <a href="/psychology.html">心理學系列</a> &nbsp;/&nbsp;
+      <a href="/cognitive-psychology.html">認知心理學</a> &nbsp;/&nbsp; Vol.1
+    </div>
+    <div class="book-vol">認知心理學系列 · 第一冊</div>
+    <h1 class="book-title">你以為你在思考</h1>
+    <p class="book-subtitle">認知偏誤如何在你不知情的情況下，操控你的每個決定</p>
+    <div class="book-meta">
+      <div class="book-meta-item">作者<span>盧林</span></div>
+      <div class="book-meta-item">出品<span>有的沒的小舖</span></div>
+      <div class="book-meta-item">系列<span>認知心理學 Vol.1</span></div>
+      <div class="book-meta-item">涵蓋<span>六大認知偏誤</span></div>
+    </div>
+  </div>
+
+  <div class="reading">
+
+    <!-- 前言 -->
+    <section class="preface reveal" id="preface">
+      <div class="preface-label">前言</div>
+      <div class="preface-body">
+        <p>你今天做了幾個決定？</p>
+        <p>選什麼早餐、要不要回那則訊息、看到特價商品有沒有手滑、跟人吵架時覺得自己有沒有道理——你以為這些都是你「想過之後」的選擇。</p>
+        <p>但你錯了。</p>
+        <p>你的大腦從來不是一台冷靜計算的電腦。它是一台耗電極低、走捷徑優先、隨時準備偷懶的生存機器。幾萬年前，人類祖先需要在0.3秒內決定眼前的動靜是危險還是食物——那時候，「想清楚再說」的人已經被吃掉了。</p>
+        <p>問題是，你現在面對的不是獅子，而是會議室、購物網站、感情糾紛、職場決策。你的大腦還在用石器時代的作業系統，跑著現代生活的複雜任務。</p>
+        <p><em>結果？它一直在出錯。而且你渾然不覺。</em></p>
+        <p>這本書不是要教你「正向思考」，也不是要給你一套成功法則。這本書要做的事只有一件：讓你看見你的大腦怎麼騙你。</p>
+        <p>確認偏誤讓你只看見你想看的證據。錨定效應讓你被第一個數字牽著鼻子走。可得性捷思讓你把「記得住的」當成「常發生的」。沉沒成本讓你為了一個爛決定繼續賠上更多。達克效應讓你在最無知的時候最有自信。框架效應讓你因為說法不同，對同一件事做出完全相反的選擇。</p>
+        <p>每一章，你都會看到一個讓你說出「天啊，這就是我」的認知偏誤。</p>
+      </div>
+      <div class="preface-closing">
+        「人類是會自我說服的動物，而非會思考的動物。」<br>
+        ——心理學家喬納森・海德特（Jonathan Haidt）
+      </div>
+    </section>
+
+    <!-- 第一章 -->
+    <section class="chapter reveal" id="ch1">
+      <div class="chapter-num">Chapter One</div>
+      <h2 class="chapter-title">確認偏誤——<span>你只看見你想看見的世界</span></h2>
+      <div class="chapter-en">Confirmation Bias</div>
+      <div class="bias-quote">「人的心智不像一塊白板，等著被事實填滿；它更像一個律師，先決定勝負，再去找證據。」</div>
+
+      <div class="section">
+        <div class="body-text">
+          <p>你剛剛跟你男友吵了一架。你們的爭吵起點永遠是同一件事：他說你太敏感，你說他太冷漠。吵完之後，你打開手機，開始滑文章。你找到一篇：「情緒迴避型伴侶的七個特徵」。你一條一條讀下去，每讀一條就點一次頭——「對，就是這樣」、「天啊這不就是他嗎」。</p>
+          <p>你截圖傳給閨蜜，說：「你看，我說的沒錯吧。」</p>
+          <p>但你有沒有想過，你根本沒有認真看那篇文章說了什麼？你只是在一大串可能符合任何一段關係的描述裡，把「符合他」的條目放大，然後自動忽略「其實不太符合」的部分？</p>
+          <p>這就是確認偏誤。它不是你刻意在騙自己，<strong>它是你大腦的預設運作模式</strong>。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">定義與研究</span>
+        <h3 class="section-title">你的大腦是一個先下結論的律師</h3>
+        <div class="body-text">
+          <p>確認偏誤（Confirmation Bias）指的是：人傾向於尋找、詮釋、記憶那些能夠支持自己既有信念的資訊，同時自動過濾、淡化、忽略那些與自己信念相矛盾的資訊。</p>
+          <p>心理學家彼得・沃森（Peter Wason）在1960年代做過一個著名實驗：給受試者看數字 2、4、6，規則未知，請他們猜出規則。大多數人猜是「偶數遞增」，然後不斷測試符合這個假設的組合，從不去測試反例。</p>
+          <p>真正的規則是：<em>任何遞增的數字都符合</em>。但沒有人試過 1、3、5，因為大腦一旦形成假說，就只會去尋找支持這個假說的證據，而不是試圖推翻它。</p>
+        </div>
+        <div class="key-insight">
+          <p>我們不是在尋找真相，我們是在尋找「我是對的」的感覺。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">六張臉</span>
+        <h3 class="section-title">確認偏誤在你生活裡的六個樣子</h3>
+        <div class="life-faces">
+          <div class="life-face">
+            <div class="face-num">① 同溫層</div>
+            <div class="face-title">你只追蹤你同意的人</div>
+            <div class="face-body">你的社群媒體首頁是什麼樣子？你以為自己在「關注時事」，其實你在泡一個精心構建的同溫層。你有沒有認真追蹤過一個你不同意的帳號，試著理解他們的論點？</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">② 理由搜尋</div>
+            <div class="face-title">你在找理由，不是在找答案</div>
+            <div class="face-body">你已經決定要辭職了。你上網搜尋「辭職的正確時機」。看到支持辭職的文章就點頭，看到說「穩定才重要」的文章就關掉。<em>你不是在做研究，你是在用理性包裝的情緒決策。</em></div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">③ 選擇性記憶</div>
+            <div class="face-title">你記得的，都是支持你的那一面</div>
+            <div class="face-body">你跟朋友吵過架，事後回想，你記得的版本是他說了什麼過分的話、語氣多差。那些你當時說過的重話，你不是沒說過，你只是不記得了。<em>記憶不是錄像機，它是編輯過的故事，而你永遠是故事裡最正確的那個人。</em></div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">④ 巧合當預兆</div>
+            <div class="face-title">你把巧合當成印證</div>
+            <div class="face-body">你相信星座。每次運勢說「財運亨通」然後你真的賺到錢，你說「好準」。那幾個月沒什麼特別動靜的時候，你不記得了。你記得的，只有符合的那些。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑤ 篩選建議</div>
+            <div class="face-title">你只聽進你想聽的建議</div>
+            <div class="face-body">朋友A說你的創業想法風險高，你心想「他太保守了」。朋友B說「聽起來很有潛力」，你說「B真的很懂我」。你以為自己在廣納意見，其實你只是在篩選支持你的聲音。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑥ 雙重標準</div>
+            <div class="face-title">你對反例視而不見</div>
+            <div class="face-body">你覺得自己做事很有效率。今天你開了一個爛會。你怎麼想？「今天狀況特別糟，不算數。」換成是你的同事，你怎麼說？「他就是沒能力。」同樣的反例，套在自己身上是意外，套在別人身上是本質。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">對話實錄</span>
+        <h3 class="section-title">你的大腦是怎麼運作的</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-scene">場景：志偉與老婆</div>
+          <div class="dialogue-line"><div class="dialogue-speaker">老婆</div><div class="dialogue-text">我上週跟你說我媽身體不太好，你有沒有在聽？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">志偉</div><div class="dialogue-text">有啊，你說她最近膝蓋不好。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">老婆</div><div class="dialogue-text">我說的是她最近情緒很差、可能有憂鬱傾向，我很擔心。膝蓋是更早以前的事。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">志偉</div><div class="dialogue-text">我有在聽，只是記錯細節了，這也叫不聽？</div></div>
+          <div class="dialogue-result">志偉走進房間，開始回想他「認真聽老婆說話」的三個例子，然後告訴自己：「你看，我哪有不聽？我明明很體貼。」他沒有想到的是，那三次他都在滑手機。確認偏誤讓他精準挑出支持自己的三個案例，然後用它們建立了「我是好聆聽者」的結論——<strong>把所有反例推到意識之外</strong>。</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">如何對抗</span>
+        <h3 class="section-title">四個讓反例變得可見的方法</h3>
+        <ul class="method-list">
+          <li><strong>主動找反例，而不是等反例出現</strong>當你形成一個判斷，立刻問自己：「什麼樣的證據會讓我改變這個想法？」如果你想不出來，那代表你不是在思考，你是在固執。</li>
+          <li><strong>問「反對這件事的最強論點是什麼？」</strong>在做重要決定之前，強迫自己用五分鐘列出「為什麼我這個想法是錯的」。律師在上法庭前，一定先研究對方的論點。你呢？</li>
+          <li><strong>找一個不同意你的人，認真聽他說</strong>不是為了反駁。是真的聽。你上一次認真接收一個你不同意的意見，然後回去想了超過十分鐘是什麼時候？</li>
+          <li><strong>記錄你的預測</strong>每次你做判斷，把它記下來。六個月後回來看你對了幾個。你對確認偏誤的免疫力，跟你願意被現實打臉的勇氣成正比。</li>
+        </ul>
+      </div>
+
+      <div class="chapter-summary">
+        <div class="chapter-summary-label">本章重點</div>
+        <p>確認偏誤不是壞習慣，是大腦的預設值。你不是故意只看自己想看的——你的大腦幫你做了這個選擇，而且做得天衣無縫。唯一的解藥，是<strong>刻意、費力地去尋找那些讓你不舒服的反證</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 第二章 -->
+    <section class="chapter reveal" id="ch2">
+      <div class="chapter-num">Chapter Two</div>
+      <h2 class="chapter-title">錨定效應——<span>第一個數字決定你的一切</span></h2>
+      <div class="chapter-en">Anchoring Effect</div>
+      <div class="bias-quote">「你以為你在比較，其實你只是在接受一個你根本沒有選擇的參考點。」</div>
+
+      <div class="section">
+        <div class="body-text">
+          <p>你在逛網拍。你看到一件外套，標價 6,800 元，旁邊有個紅色標籤：「限時特價 3,400 元，折扣 50%！」你買了，你覺得自己賺到了。</p>
+          <p>但你有沒有想過：這件外套真正的市場價是多少？它值 3,400 嗎？還是值 2,000？你根本不知道。你唯一知道的，是它「原價 6,800，現在 3,400」——而這件事讓你覺得它很划算。</p>
+          <p><strong>那個 6,800，從來不是真的。</strong>它是一個被設計出來的數字，專門用來讓你覺得 3,400 很便宜。你上當了。每個人都上當了。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">定義與研究</span>
+        <h3 class="section-title">一個輪盤，改變你對非洲的認知</h3>
+        <div class="body-text">
+          <p>錨定效應（Anchoring Effect）由康納曼和特沃斯基在1970年代提出：人在做判斷時，傾向於過度依賴最先接收到的資訊，即使後來有更好的資訊，這個錨也會持續影響你的判斷。</p>
+          <p>最著名的實驗：研究者要受試者先轉一個輪盤（只停在10或65），然後問：「非洲國家在聯合國的席次佔比是多少？」轉到10的那組，平均猜25%；轉到65的那組，平均猜45%。</p>
+          <p>那個輪盤的數字跟非洲席次根本沒有任何關係，但<em>它就是鑽進你腦子裡，拉著你的判斷走</em>。即使是有豐富工作經驗的房地產估價師，同樣無法避免被開價影響。他們全都以為自己做了客觀的評估。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">五個場景</span>
+        <h3 class="section-title">你的生活裡，到處都是錨</h3>
+        <div class="life-faces">
+          <div class="life-face">
+            <div class="face-num">① 薪水談判</div>
+            <div class="face-title">先開口的人設定了遊戲規則</div>
+            <div class="face-body">如果你先說出現在的薪水，你就被那個數字錨住了。就算你後來發現市場行情更高，你也很難大幅調整，因為心裡有個聲音說「這樣顯得我不一致」。那個數字，是你自己設給自己的枷鎖。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">② 殺價</div>
+            <div class="face-title">你以為你在談判，其實你在他設定的框架裡移動</div>
+            <div class="face-body">賣家開價 45,000，你殺到 38,000，覺得很會談判。但如果賣家一開始開 32,000，你可能直接成交在 30,000，還覺得「差不多合理」。那 8,000 的差距，不是機車的價值改變了，是那個初始的錨改變了你的整個框架。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">③ 菜單設計</div>
+            <div class="face-title">那道你永遠不會點的菜，存在是有目的的</div>
+            <div class="face-body">菜單最頂端擺一道「主廚特選龍蝦料理 $2,800」，接下來的菜在 800 到 1,500 之間。那道 2,800 的龍蝦，餐廳根本沒打算賣給你。它存在的目的，只是讓 1,200 看起來是「合理的中間選擇」。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">④ 感情期待值</div>
+            <div class="face-title">初期的高強度互動，設定了你永遠無法滿足的錨</div>
+            <div class="face-body">關係開始時，對方每天早安、週末必約、每次見面帶小禮物。三個月後這些習慣少了，你開始不開心。但如果從頭到尾都是一週見一次，你可能覺得很正常。你的期望值被最初的高強度設定了錨，從那個錨下滑，就變成「他不愛我了」。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑤ 先前版本陷阱</div>
+            <div class="face-title">「已經砍了」讓你忘記問「這個數字本來就合理嗎」</div>
+            <div class="face-body">你說「原本是 300 萬，我已經砍到 230 萬了」。主管說「還是有點多，但既然已經砍了，就這樣吧。」那個 230 萬被接受，不是因為它合理，而是因為旁邊站著一個 300 萬的錨。高明的提案者都知道：第一版從來不是真正的底線，而是精心設計的錨。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">對話實錄</span>
+        <h3 class="section-title">談判桌上的錨</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-scene">場景：阿雯的薪水談判</div>
+          <div class="dialogue-line"><div class="dialogue-speaker">HR</div><div class="dialogue-text">請問你目前的薪資是多少？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">阿雯</div><div class="dialogue-text">目前是 52,000。（她心想：反正他們都會問，如實回答就好）</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">HR</div><div class="dialogue-text">好的。那我們這個職位的起薪是 55,000，你覺得可以嗎？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">阿雯</div><div class="dialogue-text">比現在多 3,000，算合理。</div></div>
+          <div class="dialogue-result">阿雯做了市場調查，這個職位的市場行情是 65,000。她的 52,000 把她自己錨住了，讓她接受了比市場行情低 10,000 的薪水，還覺得「有進步」。如果她一開始說「我的期望薪資是 68,000」，<strong>就算最後談到 62,000，她也比現在多了 7,000</strong>。</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">如何對抗</span>
+        <h3 class="section-title">五個讓你在看到錨之前先有自己的判斷</h3>
+        <ul class="method-list">
+          <li><strong>在看到任何數字之前，先形成自己的估算</strong>去買東西前，先在心裡定好你認為合理的價格，再去看賣家開價。這樣那個錨就沒辦法覆蓋你原本的判斷，只能跟它競爭。</li>
+          <li><strong>刻意考慮「如果錨不存在，我會怎麼想？」</strong>當你看到一個數字時，強迫自己問：「如果我沒看到這個數字，我的第一判斷是什麼？」</li>
+          <li><strong>談判時，盡量先出牌</strong>先說一個對你有利的高點，讓那個數字成為談判的起始框架。最後就算打折，你還是在一個比較好的位置。</li>
+          <li><strong>質疑「原價」的真實性</strong>每次你看到「原價/特價」的組合，問自己：「這個原價是真的嗎？它是不是一個從來沒有人在那個價格買過的虛設數字？」</li>
+          <li><strong>多看幾個不同的參考點</strong>買房子，看至少五到十個類似的物件。只看一個，你就只有一個錨，那個錨就能完全控制你。</li>
+        </ul>
+      </div>
+
+      <div class="chapter-summary">
+        <div class="chapter-summary-label">本章重點</div>
+        <p>錨定效應讓「第一個數字」擁有不成比例的巨大影響力。它不管那個數字是不是真實的、合理的、甚至跟你的問題有沒有關係。只要它出現在你面前，它就已經進入你的判斷系統，悄悄拉著你走。要抵抗它，你需要<strong>在「看到錨」之前就形成自己的判斷</strong>，並且習慣性地質疑那個最先出現的數字。</p>
+      </div>
+    </section>
+
+    <!-- 第三章 -->
+    <section class="chapter reveal" id="ch3">
+      <div class="chapter-num">Chapter Three</div>
+      <h2 class="chapter-title">可得性捷思——<span>你以為常見的，只是你記得的</span></h2>
+      <div class="chapter-en">Availability Heuristic</div>
+      <div class="bias-quote">「你的大腦不是在統計世界的真實樣貌，它是在統計你最近看過、聽過、感受過的東西，然後把那個統計結果當成現實。」</div>
+
+      <div class="section">
+        <div class="body-text">
+          <p>你最近在考慮要不要買機車通勤。朋友跟你說：「機車超危險的，上個月我認識的人就出車禍住院了。」你開始猶豫，腦海裡堆滿了機車出事的畫面，你覺得「機車真的很危險」。</p>
+          <p>但你有沒有查過數據？台灣每天有數百萬人騎機車通勤，其中絕大多數人平安回家。那些沒有出事的人，從來不會出現在你的腦海裡，因為「他安全到家了」不是新聞，也不會有人特地來告訴你。</p>
+          <p>你的風險評估，<strong>建立在你記得住的資訊上，而不是建立在真實的統計數據上</strong>。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">定義與研究</span>
+        <h3 class="section-title">「容易想起來」≠「真的很常發生」</h3>
+        <div class="body-text">
+          <p>可得性捷思（Availability Heuristic）由康納曼和特沃斯基在1973年提出：當人判斷某件事發生的頻率時，傾向於根據這件事在腦海中「被想起來的難易程度」來判斷，而不是根據真實的統計數據。</p>
+          <p>一件事容易被想起來，可能是因為它最近發生、特別戲劇化、跟你個人有關、或者被媒體大量報導——<em>而不是因為它真的很普遍</em>。</p>
+          <p>數據告訴你：每英里的死亡率，開車是搭飛機的大約70倍。每次你開車去機場，那段車程才是統計上更危險的部分。你怕飛機，不怕車——因為飛機失事是連續幾天的頭條，開車出事不是。</p>
+          <p><strong>你怕鯊魚，不怕浴缸。但每年死於浴缸溺水的人數，遠超過鯊魚攻擊致死的人數。</strong></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">五張臉</span>
+        <h3 class="section-title">可得性捷思在你生活裡的五個樣子</h3>
+        <div class="life-faces">
+          <div class="life-face">
+            <div class="face-num">① 人際樣本偏差</div>
+            <div class="face-title">你認識的人，不代表世界的平均值</div>
+            <div class="face-body">你認識三個做直銷失敗的人，所以你覺得「直銷就是騙人的，根本沒有人成功」。你的人際圈是一個極度偏頗的樣本，但你的大腦把它當成世界的縮影。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">② 貢獻過度高估</div>
+            <div class="face-title">研究者讓夫妻估算各自承擔的家務比例，加起來往往超過100%</div>
+            <div class="face-body">你自己做的事對你來說更「可得」——你記得更清楚、更有細節。對方做的事，印象模糊。所以每個人都覺得自己貢獻更多，每個人都覺得對方沒有感謝自己應得的那一份。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">③ 近期事件過度修正</div>
+            <div class="face-title">上個月大跌，你覺得市場完了；上個月大漲，你覺得繼續加碼</div>
+            <div class="face-body">那次漲跌在你腦海裡非常新鮮，所以大腦把它的重量放大了。這就是為什麼散戶永遠在市場最高點買進，在市場最低點殺出——因為那個時刻的印象最「可得」。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">④ 倖存者偏差</div>
+            <div class="face-title">你記住了成功的那些人，沒記住那十萬個失敗的人</div>
+            <div class="face-body">你讀了 Elon Musk 的傳記，覺得「我也可以」。你沒有記住那十萬個做了類似事情卻失敗收場的人，因為他們沒有傳記，不在你的資訊流裡。成功案例更可得，所以你以為成功更常見。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑤ 孩子安全焦慮</div>
+            <div class="face-title">現代兒童的生活環境比三十年前更安全，只是新聞報導讓它感覺更危險</div>
+            <div class="face-body">你讓孩子去公園玩，滿腦子都是「萬一有壞人」。你的保護本能沒有問題，但它被可得性捷思放大到了一個失真的程度，讓孩子失去了本來可以好好探索世界的機會。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">對話實錄</span>
+        <h3 class="section-title">你的風險感知有多失真</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-scene">場景：美美與老公討論夏令營</div>
+          <div class="dialogue-line"><div class="dialogue-speaker">美美</div><div class="dialogue-text">我不放心，之前看到新聞說有小孩在夏令營溺水。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">老公</div><div class="dialogue-text">那是幾年前的事，而且那個營地管理很差。這個營地我查過，評價很好，有合格救生員。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">美美</div><div class="dialogue-text">但萬一呢？我每次想到那個新聞就毛毛的。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">老公</div><div class="dialogue-text">那你讓她每天坐車上學，車禍的機率你有算過嗎？是因為必要，還是因為你沒有看過孩子上學發生車禍的新聞，所以沒那麼害怕？</div></div>
+          <div class="dialogue-result">美美沉默了一下。讓她害怕的不是統計數據，是那個畫面——那個她看過一次、印在腦海裡的溺水新聞。<strong>那個新聞的可得性，讓她把機率感知扭曲了。</strong></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">如何對抗</span>
+        <h3 class="section-title">四個讓統計數字對抗生動畫面的方法</h3>
+        <ul class="method-list">
+          <li><strong>刻意尋找「不在你腦海裡的數據」</strong>每次你形成一個「感覺上很常見」的判斷，去查實際的統計數字。你記得的案例，可能只是冰山千分之一的尖端。</li>
+          <li><strong>問自己：「我是從哪裡得到這個印象的？」</strong>如果答案是「新聞」「朋友說」「感覺上」，就要格外小心。媒體選擇呈現的，是極端的、戲劇化的——那些東西本來就不代表平均值。</li>
+          <li><strong>主動去認識「失敗的多數」</strong>當你被某個成功案例激勵時，強迫自己去搜尋「那些沒成功的人發生了什麼」。他們通常更沉默、更難找，但他們才是更真實的樣本。</li>
+          <li><strong>對「最近發生的事」保持一段距離</strong>在做重大決策前，刻意等一段時間讓情緒消散再重新評估。最近發生的事影響力最強，但不代表它的重要性最高。</li>
+        </ul>
+      </div>
+
+      <div class="chapter-summary">
+        <div class="chapter-summary-label">本章重點</div>
+        <p>可得性捷思讓你的大腦用「記憶的清晰度」取代「事件的真實頻率」。你害怕的、期待的、判斷的，都在被你最容易想起來的那些畫面和故事塑造著——<strong>而那些畫面，幾乎都是被篩選過、被放大過的例外，不是規律</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 第四章 -->
+    <section class="chapter reveal" id="ch4">
+      <div class="chapter-num">Chapter Four</div>
+      <h2 class="chapter-title">沉沒成本謬誤——<span>你在為過去的錯誤買單</span></h2>
+      <div class="chapter-en">Sunk Cost Fallacy</div>
+      <div class="bias-quote">「理性的人只看未來的成本和收益。但我們大多數人，都在用過去已經消失的投入，綁架自己的未來選擇。」</div>
+
+      <div class="section">
+        <div class="body-text">
+          <p>你花了 500 元買了一張電影票。電影開始了，看了 30 分鐘，你發現這部片非常爛。但你沒有離開，你坐到最後，然後走出戲院說：「爛死了，浪費我的時間。」</p>
+          <p>你為什麼不走？「都花了 500 塊了，不看完不就更虧了嗎？」</p>
+          <p>這個邏輯聽起來很有道理，但其實完全不理性。那 500 元已經沒了，不管你看完還是離開，它都不會回來。你繼續坐著的唯一結果，是再賠上一個半小時的人生。<strong>你不是在止損，你是在繼續虧損，然後用「我已經花了錢」這個理由，讓自己感覺好一點。</strong></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">定義與研究</span>
+        <h3 class="section-title">損失 100 元的痛苦，等於獲得 200 元的快樂</h3>
+        <div class="body-text">
+          <p>沉沒成本謬誤（Sunk Cost Fallacy）：人在做決策時，錯誤地將無法回收的過去投入納入考量，導致做出對未來不利的選擇，只為了「不讓過去的付出顯得白費」。</p>
+          <p>根據展望理論（Prospect Theory），人對損失的痛苦感，大約是同等獲利帶來的快樂感的兩倍。所以我們不願意接受損失，寧可繼續投入，讓自己相信「還有救」——<em>用未來的時間和精力，試圖拯救一個已經沉沒的過去</em>。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">六種形態</span>
+        <h3 class="section-title">沉沒成本謬誤在你生活裡的六種樣子</h3>
+        <div class="life-faces">
+          <div class="life-face">
+            <div class="face-num">① 爛關係</div>
+            <div class="face-title">因為在一起這麼久了</div>
+            <div class="face-body">你跟你的伴侶在一起五年了，這段關係已經不讓你快樂很久了。你應該問的問題是：「以我現在對這段關係的理解，繼續下去對我有益嗎？」不是「我都付出了這麼多了，不能白費」。那個「白費」的感覺，正在讓你繼續賠上你的現在和未來。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">② 爛工作</div>
+            <div class="face-title">因為已經做了這麼久了</div>
+            <div class="face-body">你在這間公司待了八年，不喜歡這份工作，但說：「都做了這麼久了，走掉有點可惜。」那八年的資歷確實是你的資本，但那不是「繼續待下去」的理由——那是你帶出去找下一份工作的籌碼。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">③ 爛投資</div>
+            <div class="face-title">套牢就不算真的虧</div>
+            <div class="face-body">股票從100元跌到40元。你說「反正都跌這麼慘了，就等它回來吧」。問自己：「如果我今天手上有40元，我會把它投入這檔股票嗎？」如果不會，那你就應該賣掉。繼續持有，只是因為「不想承認我虧了」這個心理需求。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">④ 爛計畫</div>
+            <div class="face-title">都做到這裡了，不可能喊停</div>
+            <div class="face-body">團隊為一個專案準備了三個月，後來發現市場需求根本不如預期，但主管說「都做到這裡了，不可能喊停」。喊停的代價是接受三個月白花了；繼續做的代價是再賠上六個月，然後用更大的失敗告終。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑤ 爛食物</div>
+            <div class="face-title">浪費很可惜</div>
+            <div class="face-body">自助餐吃到撐，但盤子裡還有東西，你繼續吃因為「浪費很可惜」。那個食物的錢已經花了。你多吃的那口，只會讓你身體更不舒服，沒有讓那筆錢回來。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑥ 爛書/爛劇</div>
+            <div class="face-title">都追這麼久了，不看完收不了尾</div>
+            <div class="face-body">一本書你覺得很無聊，但已經看了一半，覺得「不看完對不起自己」。那些你已經花掉的時間不會回來。放下一本爛書，你得到的是「接下來可以去看一本好書的時間」。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">對話實錄</span>
+        <h3 class="section-title">七年，是沉沒成本</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-scene">場景：小晴與媽媽</div>
+          <div class="dialogue-line"><div class="dialogue-speaker">媽媽</div><div class="dialogue-text">你跟阿哲在一起多久了？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">小晴</div><div class="dialogue-text">快七年了。想過那些問題，但都七年了……他也不是完全沒優點。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">媽媽</div><div class="dialogue-text">如果你現在才剛認識他，知道他是這樣的人，你還會想在一起嗎？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">小晴</div><div class="dialogue-text">……可能不會。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">媽媽</div><div class="dialogue-text">那是七年讓你繼續在一起，不是他讓你繼續在一起。</div></div>
+          <div class="dialogue-result">那一句話，讓小晴哭了很久。不是因為她媽媽說錯了，而是因為說中了她不敢面對的那個事實。<strong>七年是沉沒成本，從來不是一段關係值不值得繼續的理由。</strong></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">如何對抗</span>
+        <h3 class="section-title">四個讓你從「已經付出了多少」切換到「未來能得到什麼」的方法</h3>
+        <ul class="method-list">
+          <li><strong>「如果從現在開始重新選擇，我還會選這個嗎？」</strong>把過去全部清空，只看眼前這個選擇和未來的走向。如果你不會重新選它，那繼續留在裡面的理由只有一個：不想承認損失。</li>
+          <li><strong>把「停止的代價」和「繼續的代價」分開算</strong>你要算的只有：從現在到未來，我選 A 還是選 B，哪個對我更好？</li>
+          <li><strong>找一個局外人問意見</strong>當你陷得太深，你很難客觀。找一個沒有情感投入的人，把狀況描述給他聽。他的視角裡沒有你的沉沒成本，所以他看得更清楚。</li>
+          <li><strong>允許自己說「這件事本來就不划算，而且我當時判斷錯了」</strong>接受過去的決定是錯的，不代表你這個人很差。把「判斷失誤」和「自我價值」分開，是讓你能夠及時止損的心理前提。</li>
+        </ul>
+      </div>
+
+      <div class="chapter-summary">
+        <div class="chapter-summary-label">本章重點</div>
+        <p>沉沒成本謬誤讓你用「過去已經花掉的」來決定「未來要怎麼走」。停下來的代價永遠比繼續虧損的代價小——只是停下來需要承認損失，<strong>而我們的大腦非常不擅長做這件事</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 第五章 -->
+    <section class="chapter reveal" id="ch5">
+      <div class="chapter-num">Chapter Five</div>
+      <h2 class="chapter-title">達克效應——<span>你越不懂，你越覺得自己懂</span></h2>
+      <div class="chapter-en">Dunning-Kruger Effect</div>
+      <div class="bias-quote">「無知本身並不可怕。可怕的是對無知的無知——你甚至不知道你不知道什麼。」</div>
+
+      <div class="section">
+        <div class="body-text">
+          <p>你的親戚在家庭聚餐上高談闊論最新的政治局勢，滔滔不絕說了二十分鐘，信心十足。你坐在旁邊聽，心裡想：「他到底懂不懂在說什麼？」但他渾然不覺，覺得自己說得非常有道理。</p>
+          <p>現在，問你自己一個問題：<em>你在哪些領域，是那個親戚？</em></p>
+          <p>心理學研究告訴你，幾乎每個人都有那麼幾個領域，在那裡，他們的自信程度遠遠超過他們實際的能力和知識水準。<strong>而最恐怖的是：越不懂的人，越不知道自己不懂。</strong></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">定義與研究</span>
+        <h3 class="section-title">你需要懂一件事，才能知道你有多不懂它</h3>
+        <div class="body-text">
+          <p>達克效應（Dunning-Kruger Effect）由大衛・達寧和賈斯汀・克魯格在1999年提出，他們因此獲得了搞笑諾貝爾獎。核心發現是：能力不足的人傾向於高估自己的能力，同時無法認識到他人真正的能力。</p>
+          <p>為什麼？因為評估一個領域需要的後設認知能力——「判斷自己懂多少」的能力——本身就需要對那個領域有基本的認識。</p>
+          <p>實驗結果：表現在最後25%的人，平均以為自己在前40%左右。而表現最好的人？他們反而傾向低估自己——因為他們知道得越多，<em>就越清楚自己不知道的有多少</em>。</p>
+        </div>
+        <div class="key-insight">
+          <p>最謙虛的，往往是最厲害的那些人。</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">四個階段</span>
+        <h3 class="section-title">從愚昧之巔到持久高原</h3>
+        <div class="dk-stages">
+          <div class="dk-step">
+            <div class="dk-label">第一階段</div>
+            <div class="dk-name">愚昧之巔</div>
+            <div class="dk-body">你剛接觸一個新領域，學了一點，感覺「沒什麼難的嘛」。信心急速上升，開始在朋友面前談論，覺得自己掌握了精髓。你還不知道你不知道什麼。</div>
+          </div>
+          <div class="dk-step">
+            <div class="dk-label">第二階段</div>
+            <div class="dk-name">絕望之谷</div>
+            <div class="dk-body">繼續深入，才發現比你想像的複雜得多。信心跌落谷底。很多人在這裡放棄。但這也是你第一次真正開始「知道自己不知道什麼」。</div>
+          </div>
+          <div class="dk-step">
+            <div class="dk-label">第三階段</div>
+            <div class="dk-name">開悟之坡</div>
+            <div class="dk-body">繼續學，能力真的在提升，信心慢慢回升——但這次是建立在紮實的理解上。你知道自己擅長什麼，也知道在哪裡還有缺口。</div>
+          </div>
+          <div class="dk-step">
+            <div class="dk-label">第四階段</div>
+            <div class="dk-name">持久高原</div>
+            <div class="dk-body">你成為真正的專家。信心是穩定的、有根據的。說話時更謹慎，因為你深知這個領域還有多少你仍在學習的地方。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">五個現場</span>
+        <h3 class="section-title">達克效應在你生活裡的五個樣子</h3>
+        <div class="life-faces">
+          <div class="life-face">
+            <div class="face-num">① 業餘股神</div>
+            <div class="face-title">三個月多頭市場，讓他以為自己有選股能力</div>
+            <div class="face-body">一個人買了三隻股票，剛好碰上多頭市場，全部漲了，開始分享「我的選股邏輯」。他不知道，他那三個月賺的，大盤也漲了差不多的幅度。他的「選股能力」和「隨便買大盤ETF」之間，沒有什麼差別。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">② 讀了一篇文章就給人建議</div>
+            <div class="face-title">知識越淺的人，診斷越快</div>
+            <div class="face-body">你的朋友剛讀了一篇關於心理創傷的文章，然後開始用那個框架分析你的家庭關係，說得非常篤定。一個真正的心理師，在接受數年訓練之後，通常說話更謹慎——因為他知道人有多複雜。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">③ 初學者的教學欲</div>
+            <div class="face-title">剛學會做一件事 ≠ 能夠清楚理解並傳授這件事</div>
+            <div class="face-body">你剛學會騎腳踏車，迫不及待想教朋友。但你根本解釋不清楚「平衡感」是怎麼建立的，因為你自己也說不清楚，你只是憑直覺在騎。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">④ 陌生領域的過度自信評論</div>
+            <div class="face-title">選舉期間每個人都是政治評論家</div>
+            <div class="face-body">疫情期間，每個人都是流行病學家。真正的政治學者、流行病學家說話時通常更謹慎、更多條件句、更多「這要看情況」。因為他們知道這個領域有多複雜。外行人不知道，所以說話最有把握。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑤ 職場新人症候群</div>
+            <div class="face-title">前三個月：「這間公司的流程怎麼這麼沒效率」</div>
+            <div class="face-body">六個月後，你才慢慢理解那些流程背後的歷史脈絡。一年後你的語氣從「為什麼不這樣做？」變成了「我有一個想法，不確定是否可行，想先聽聽大家的意見」。這個轉變，就是從愚昧之巔走向開悟之坡的過程。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">對話實錄</span>
+        <h3 class="section-title">一個剛入行的人在告訴資深者該怎麼做</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-scene">場景：行銷公司會議室，入職三個月的嘉文 vs. 十五年資歷的敏姐</div>
+          <div class="dialogue-line"><div class="dialogue-speaker">嘉文</div><div class="dialogue-text">我覺得我們現在的社群策略太保守了，根本沒有抓住Z世代的注意力。我最近研究了很多案例，我覺得我們應該完全轉向短影音，放棄長文內容。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">敏姐</div><div class="dialogue-text">你說的趨勢方向是對的，短影音確實重要。但你知道我們的主力客群年齡分布嗎？你知道我們現在長文的轉換率數字嗎？你知道我們試過短影音的客戶有哪些結果嗎？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">嘉文</div><div class="dialogue-text">……這些我沒有深入研究過。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">敏姐</div><div class="dialogue-text">你的直覺沒有完全錯，但你現在是在用一個不完整的資訊基礎，建議一個完整的策略轉向。在你了解這些數據之前，你的自信可能領先你的能力一點點。</div></div>
+          <div class="dialogue-result">嘉文後來說，那是他職涯最重要的一課：<strong>「原來我以為我懂的，只是一個更大無知的起點。」</strong></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">如何對抗</span>
+        <h3 class="section-title">四個讓你知道自己不知道什麼的方法</h3>
+        <ul class="method-list">
+          <li><strong>把「我不知道」練習成一個正常的句子</strong>「我不確定」「我沒有深入研究過這個」「我可能理解得不完整」——這些不是示弱，是誠實。真正有能力的人，這些句子說起來不費力。</li>
+          <li><strong>尋找你領域裡真正的專家，然後聽他說話</strong>聽一個真正的專家談論你以為你已經懂了的事，是一個非常謙遜的體驗。你會發現他們考慮的維度，你根本沒想過。</li>
+          <li><strong>對「我很快就搞懂了」這個感覺保持懷疑</strong>當你覺得一個新領域「其實沒那麼難」，很可能你正在愚昧之巔。這個感覺本身，就是一個警告信號。</li>
+          <li><strong>問自己「如果我是錯的，那是因為什麼？」</strong>每次你形成一個很有把握的判斷，問自己：「我這個判斷最可能錯在哪裡？有沒有我根本不知道自己不知道的東西？」</li>
+        </ul>
+      </div>
+
+      <div class="chapter-summary">
+        <div class="chapter-summary-label">本章重點</div>
+        <p>達克效應告訴你，能力和自信之間的關係，比你想像的更扭曲。最危險的不是「知道自己不懂」，而是「不知道自己不懂」。對你的自信保持一點點警覺，特別是在你剛接觸一個新領域的時候——<strong>那個「感覺好像懂了」的時刻，往往是你離真相最遠的地方</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 第六章 -->
+    <section class="chapter reveal" id="ch6">
+      <div class="chapter-num">Chapter Six</div>
+      <h2 class="chapter-title">框架效應——<span>同一件事，換個說法你就上當</span></h2>
+      <div class="chapter-en">Framing Effect</div>
+      <div class="bias-quote">「你以為你在評估選項本身。其實你在評估的，是那個選項被呈現給你的方式。這兩件事，差距可以大到讓你做出完全相反的決定。」</div>
+
+      <div class="section">
+        <div class="body-text">
+          <p>醫生告訴你，有兩種手術方案：A方案「這個手術的存活率是90%」；B方案「這個手術的死亡率是10%」。</p>
+          <p>90%存活率和10%死亡率，是完全相同的統計數字。</p>
+          <p>但研究顯示，面對A方案描述的醫生，患者和家屬更傾向於同意手術；面對B方案描述的醫生，他們更猶豫。<strong>你的決定，不是根據事實本身，而是根據事實被說出來的方式。</strong></p>
+        </div>
+        <div class="frame-compare">
+          <div class="frame-card">
+            <div class="frame-label">正向框架</div>
+            <div class="frame-quote">「這個手術的存活率是 90%。」</div>
+            <div class="frame-effect">患者更傾向同意手術，感覺有保障。</div>
+          </div>
+          <div class="frame-card">
+            <div class="frame-label">負向框架</div>
+            <div class="frame-quote">「這個手術的死亡率是 10%。」</div>
+            <div class="frame-effect">患者更猶豫，更可能拒絕。</div>
+          </div>
+          <div class="frame-equal">= 完全相同的統計數字 =</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">定義與研究</span>
+        <h3 class="section-title">亞洲疾病實驗：同樣的選項，截然不同的選擇</h3>
+        <div class="body-text">
+          <p>框架效應（Framing Effect）由康納曼和特沃斯基提出。他們發現，人對同一個問題的判斷，會因為問題被「呈現」的方式不同而有顯著差異——即使那些呈現方式在邏輯上傳達的是完全相同的資訊。</p>
+          <p>最著名的「亞洲疾病實驗」：600人面臨死亡風險，在「獲得框架」（救活多少人）下，大多數人選確定方案；在「損失框架」（多少人死亡）下，大多數人選賭一把。</p>
+          <p><em>完全相同的選項，因為框架不同——用「獲得」表達還是用「損失」表達——人們做出了完全相反的選擇。你以為你在評估方案，其實你在評估字眼。</em></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">五個場景</span>
+        <h3 class="section-title">框架效應如何操控你的日常決策</h3>
+        <div class="life-faces">
+          <div class="life-face">
+            <div class="face-num">① 食品標籤</div>
+            <div class="face-title">「含95%瘦肉」vs「含5%脂肪」</div>
+            <div class="face-body">完全相同的東西，「95%瘦肉」那組受試者評分顯著更高，覺得更健康、更好吃。食品業早就知道這件事。「低脂」、「添加維生素」、「天然香料」——那些字，塑造了你以為你在客觀評估的東西。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">② 金融產品</div>
+            <div class="face-title">「手續費3%」vs「享有97%的淨收益」</div>
+            <div class="face-body">業者知道用「你得到多少」來呈現，比用「你付出多少」來呈現，簽約率更高。「每月回饋最高3%現金」聽起來比「每月扣除2%年費折合」好得多——但算出來的數字可能對你更不利。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">③ 談判技術</div>
+            <div class="face-title">「損失框架」比「獲得框架」更有效</div>
+            <div class="face-body">「如果你今天簽，可以享有八折優惠」——你傾向保守。「如果你今天不簽，你會損失20%的優惠」——你反而更願意衝動決定。業務員和談判者都在用這個，讓你感受到「我正在失去什麼」。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">④ 政治與媒體</div>
+            <div class="face-title">是同一個議題，框架決定你的立場</div>
+            <div class="face-body">「移民搶走本地人工作」讓你有威脅感；「移民為國家帶來多元活力」讓你有正向期待。每個媒體的每一篇報導都在做框架選擇——選擇哪個角度、哪個字本身就是一種立場。</div>
+          </div>
+          <div class="life-face">
+            <div class="face-num">⑤ 對自己過去的解讀</div>
+            <div class="face-title">你用哪個框架理解自己的失敗？</div>
+            <div class="face-body">框架A：「我當時判斷失誤，因為我沒有充分蒐集資訊。」→ 讓你改善流程。框架B：「我在有限資訊下做了合理判斷，只是結果不如預期。」→ 讓你覺得下次不需要改變什麼。你通常選哪個？</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">對話實錄</span>
+        <h3 class="section-title">你被框架了還不知道</h3>
+        <div class="dialogue-block">
+          <div class="dialogue-scene">場景：建宏與兩個朋友、太太</div>
+          <div class="dialogue-line"><div class="dialogue-speaker">朋友A</div><div class="dialogue-text">你現在這份工作，雖然薪水還可以，但你有多少成長空間？五年後你想在哪裡？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">建宏</div><div class="dialogue-text">這樣說也是……感覺發展有點受限。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">朋友B</div><div class="dialogue-text">你現在薪水穩定，工時正常，在這個時代已經很難得了，你知道現在外面多少人找不到工作嗎？</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">建宏</div><div class="dialogue-text">這樣說也是……我現在其實挺穩定的。</div></div>
+          <div class="dialogue-line"><div class="dialogue-speaker">太太</div><div class="dialogue-text">你到底想不想換？你昨天說想，今天又說不想。</div></div>
+          <div class="dialogue-result">建宏的工作沒有改變，改變的是朋友說話的框架：一個用「損失未來」，一個用「保住現在」。如果他自己沒有一個獨立的評估基準，<strong>他永遠會隨著最後一個說話的人搖擺</strong>。</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-num">如何對抗</span>
+        <h3 class="section-title">四個建立自己評估框架的方法</h3>
+        <ul class="method-list">
+          <li><strong>把同一個問題，用不同的方式重新陳述</strong>「存活率90%」改成「死亡率10%」；「含95%瘦肉」改成「含5%脂肪」。如果換了說法你的感受完全不同，那你的感受在跟著框架走，而不是跟著事實走。</li>
+          <li><strong>只看數字，不看形容詞</strong>廣告、政策說明、投資文件——把所有形容性的字眼去掉，只看具體的數字和條件。「高達30%的報酬率」去掉「高達」，剩下30%，那個30%在什麼條件下達成的？</li>
+          <li><strong>區分「我對這件事的感受」和「這件事本身」</strong>當你對一個選擇有強烈感受，問自己：「這個感受是因為這件事的客觀條件，還是因為它被說出來的方式？」</li>
+          <li><strong>建立自己的評估框架，不依賴別人提供的那個</strong>在面對重要決定之前，先自己決定「我用什麼標準來評估這件事」，把那個標準寫下來，再去看別人提供的資訊。</li>
+        </ul>
+      </div>
+
+      <div class="chapter-summary">
+        <div class="chapter-summary-label">本章重點</div>
+        <p>框架效應告訴你，你從來不是在評估「客觀事實」，你是在評估「事實被呈現給你的方式」。廣告商、政客、業務員、媒體，都在用框架塑造你的感知。唯一的對策，是<strong>建立你自己的評估語言，然後習慣性地把別人提供的框架拆掉重組</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 後記 -->
+    <section class="epilogue reveal" id="epilogue">
+      <h2 class="epilogue-title">後記：現在你看見了，然後呢？</h2>
+      <div class="epilogue-body">
+        <p>你讀到這裡，應該有幾個時刻讓你想說：「天啊，這就是我。」</p>
+        <p>也許是那個繼續坐在爛電影裡的你。也許是那個被「原價」騙走的你。也許是那個對號入座那篇星座文章的你，或者那個在家庭聚餐上高談闊論的親戚——你後來意識到，那個親戚你自己也做過。</p>
+        <p>這本書不是要讓你覺得羞愧。</p>
+        <p>這本書想說的是：這些偏誤不是你的問題，是人類大腦的設計問題。它們在演化的時間軸上有道理，只是在現代世界的決策場景裡常常幫倒忙。</p>
+        <p><strong>看見它們，已經是最重要的一步。</strong></p>
+        <p>從今天開始，每一次你覺得「我很確定」「我一定是對的」「都這樣了沒辦法」「感覺就是這樣」——你可以在那個感覺和你的行動之間，插入一個小小的問號：</p>
+      </div>
+      <div class="epilogue-final">
+        「等等，我的大腦在用哪個偏誤來運作？」
+      </div>
+      <div class="epilogue-body">
+        <p>這個問號，會改變很多事。不是讓你變成一個永遠無法決策的思考機器，而是讓你的判斷多了一層品質。</p>
+      </div>
+    </section>
+
+    <!-- 系列 -->
+    <div class="series-next reveal">
+      <div class="series-next-label">認知心理學系列</div>
+      <div class="series-next-title">探索完整系列</div>
+      <div class="next-books">
+        <div class="next-book current">
+          <span class="next-book-num">Vol.1</span>
+          <span class="next-book-title">你以為你在思考：認知偏誤如何操控你的每個決定</span>
+        </div>
+        <div class="next-book coming">
+          <span class="next-book-num">Vol.2</span>
+          <span class="next-book-title">決策陷阱</span>
+        </div>
+      </div>
+      <a href="https://still-time-corner.vercel.app" class="series-cta-btn" target="_blank">前往小舖 →</a>
+    </div>
+
+  </div><!-- /reading -->
+
+  <footer>
+    認知心理學系列 Vol.1 &nbsp;·&nbsp; 作者：盧林 &nbsp;·&nbsp; 有的沒的小舖出品
+  </footer>
+
+</div><!-- /main-content -->
+</div><!-- /page-wrap -->
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav a');
+  const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.toc-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => tocObserver.observe(s));
+
+  document.querySelectorAll('.toc-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 768) document.querySelector('.toc-sidebar').style.display = '';
+    });
+  });
+</script>
+</body>
+</html>
