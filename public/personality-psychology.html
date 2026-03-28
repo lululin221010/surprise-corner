@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人格心理學：為什麼你就是你｜有的沒的小舖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0c06;
+    --bg2: #130f07;
+    --bg3: #1a1408;
+    --surface: #211a09;
+    --border: rgba(232,184,75,0.12);
+    --text: #f5eedc;
+    --text-muted: #a89870;
+    --accent: #e8b84b;
+    --accent2: #c9a8ff;
+    --accent3: #50c896;
+    --red: #e8607a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.9; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 10%, rgba(232,184,75,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 90%, rgba(180,140,40,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px 60px; position: relative; }
+  .hero-series { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+  .hero-badge { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(232,184,75,0.35); padding: 6px 20px; border-radius: 2px; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 6.5vw, 4.4rem); font-weight: 300; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 12px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+  .hero-title span { color: var(--accent); font-style: italic; }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2.8vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-muted); margin-bottom: 52px; opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards; }
+  .hero-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 0 auto 52px; opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards; }
+  .hero-hook { max-width: 600px; font-size: 1.05rem; color: var(--text-muted); line-height: 2.1; text-align: left; opacity: 0; animation: fadeUp 0.8s ease 0.85s forwards; border-left: 2px solid rgba(232,184,75,0.3); padding-left: 24px; }
+  .hero-hook em { color: var(--accent); font-style: normal; }
+  .hero-meta { margin-top: 48px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards; }
+  .scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 32px; background: linear-gradient(180deg, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
+
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+
+  /* INTRO */
+  .intro { padding: 80px 0; border-top: 1px solid var(--border); }
+  .intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; margin-bottom: 32px; }
+  .intro-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .intro-body p { margin-bottom: 1.4em; }
+  .intro-body strong { color: var(--text); font-weight: 500; }
+  .intro-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--accent); text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; line-height: 1.7; }
+
+  /* OCEAN 五維度 */
+  .ocean-grid { display: flex; flex-direction: column; gap: 12px; margin: 32px 0; }
+  .ocean-item { display: grid; grid-template-columns: 52px 1fr; gap: 0; background: rgba(255,255,255,0.02); border: 1px solid var(--border); overflow: hidden; }
+  .ocean-letter { background: rgba(232,184,75,0.08); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--accent); font-style: italic; }
+  .ocean-content { padding: 16px 20px; }
+  .ocean-name { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 4px; }
+  .ocean-name span { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 400; margin-left: 8px; text-transform: uppercase; }
+  .ocean-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 8px; }
+  .ocean-scene { font-size: 0.83rem; color: rgba(168,152,112,0.75); font-style: italic; padding-left: 10px; border-left: 1px solid rgba(232,184,75,0.2); line-height: 1.65; }
+
+  /* 三大主題 */
+  .themes { padding: 40px 0 80px; }
+  .themes-header { text-align: center; margin-bottom: 80px; }
+  .themes-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4.5vw, 2.8rem); font-weight: 300; margin-top: 16px; }
+  .theme-card { position: relative; margin-bottom: 56px; padding: 48px 48px 48px 40px; background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--card-accent, var(--accent)); transition: background 0.3s ease; }
+  .theme-card:hover { background: var(--surface); }
+  .theme-card:nth-child(1) { --card-accent: #e8b84b; }
+  .theme-card:nth-child(2) { --card-accent: #c9a8ff; }
+  .theme-card:nth-child(3) { --card-accent: #e8607a; }
+  .theme-number { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; line-height: 1; color: var(--card-accent); opacity: 0.12; position: absolute; top: 20px; right: 28px; font-style: italic; pointer-events: none; }
+  .theme-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--card-accent); margin-bottom: 12px; display: block; }
+  .theme-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 400; line-height: 1.3; margin-bottom: 6px; color: var(--text); }
+  .theme-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-muted); font-size: 1rem; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .theme-body { font-size: 0.97rem; color: var(--text-muted); line-height: 2; }
+  .theme-body p { margin-bottom: 1.2em; }
+  .theme-body strong { color: var(--text); font-weight: 500; }
+  .theme-body em { color: var(--card-accent); font-style: normal; }
+  .concept-list { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+  .concept-list li { padding: 14px 16px; background: rgba(255,255,255,0.025); border-left: 2px solid var(--card-accent); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+  .concept-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .concept-list li .note { margin-top: 6px; font-size: 0.86rem; font-style: italic; opacity: 0.75; }
+  .theme-teaser { margin-top: 28px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.07); font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .theme-teaser strong { color: var(--card-accent); display: block; margin-bottom: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* HSP DOES 四格 */
+  .does-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .does-card { padding: 20px 18px; background: rgba(201,168,255,0.04); border: 1px solid rgba(201,168,255,0.15); }
+  .does-letter { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--accent2); opacity: 0.6; font-style: italic; line-height: 1; margin-bottom: 8px; }
+  .does-title { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+  .does-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* 黑暗人格三種 */
+  .dark-trio { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+  .dark-card { padding: 20px 20px 20px 16px; border: 1px solid rgba(232,96,122,0.15); border-left: 3px solid var(--red); background: rgba(232,96,122,0.03); }
+  .dark-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--red); margin-bottom: 6px; text-transform: uppercase; }
+  .dark-name { font-size: 0.97rem; color: var(--text); font-weight: 500; margin-bottom: 8px; }
+  .dark-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* 結語 */
+  .why { padding: 80px 0; border-top: 1px solid var(--border); }
+  .why-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; margin-bottom: 32px; }
+  .why-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .why-body p { margin-bottom: 1.4em; }
+  .why-body strong { color: var(--text); font-weight: 500; }
+  .why-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-style: italic; color: var(--accent); text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; line-height: 1.8; }
+
+  /* CTA */
+  .cta-block { background: var(--bg3); border: 1px solid var(--border); padding: 48px 40px; text-align: center; margin: 40px 0 80px; position: relative; overflow: hidden; }
+  .cta-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .cta-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-weight: 300; margin-bottom: 16px; }
+  .cta-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.9; }
+  .cta-series { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 36px; }
+  .cta-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; padding: 6px 14px; border: 1px solid rgba(232,184,75,0.3); color: var(--text-muted); }
+  .cta-btn { display: inline-block; padding: 14px 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .cta-btn:hover { color: var(--bg); }
+  .cta-btn:hover::before { transform: translateX(0); }
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 600px) {
+    .theme-card { padding: 32px 24px; }
+    .theme-number { font-size: 3.5rem; top: 16px; right: 16px; }
+    .cta-block { padding: 36px 24px; }
+    .hero-hook { padding-left: 16px; }
+    .does-grid { grid-template-columns: 1fr; }
+    .ocean-item { grid-template-columns: 44px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-series">心理學系列 · 系列導讀</div>
+  <div class="hero-badge">Personality Psychology</div>
+  <h1 class="hero-title">人格心理學<br><span>為什麼你就是你</span></h1>
+  <p class="hero-subtitle">你不是奇怪，你只是還不了解自己</p>
+  <div class="hero-divider"></div>
+  <div class="hero-hook">
+    <p>參加聚會時，某些人侃侃而談、如魚得水，你卻只想找個角落安靜待著——<em>這不是你的問題，這是你的本質。</em></p>
+    <p>你試著模仿那些看起來很成功的人的行為方式，結果越學越不像自己，搞得精疲力竭。</p>
+    <p>你問過自己無數次：<em>我到底是哪種人？</em></p>
+    <p>人格心理學不會給你一個貼在額頭上的標籤。但它會給你一樣更有用的東西：一套真正理解自己與他人的語言。</p>
+  </div>
+  <div class="hero-meta">作者：盧林 ／ 有的沒的小舖 出品</div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="wrap">
+    <div class="section-label reveal">什麼是人格心理學</div>
+    <h2 class="intro-title reveal">研究你為什麼是你，<br>科學最豐富的心理學分支之一</h2>
+    <div class="intro-body reveal">
+      <p>人格心理學研究的是個體之間<strong>穩定、持久的差異</strong>——為什麼同樣的環境，不同的人會有截然不同的感受、反應和選擇。</p>
+      <p>它試圖回答幾個最根本的問題：<strong>人格是天生的還是後天塑造的？它可以改變嗎？</strong>為什麼有些人在壓力下越挫越勇，有些人卻徹底崩潰？為什麼你和某些人一見如故，和另一些人卻怎麼相處都覺得彆扭？</p>
+      <p>人格心理學不是算命，不是星座，也不是那種測完就忘的網路小測驗。它是<strong>目前科學研究最豐富、應用最廣泛的心理學分支之一</strong>——從職場招募、團隊搭配，到親密關係、心理治療、領導力發展，都建立在它的基礎上。</p>
+    </div>
+    <div class="intro-closing reveal">
+      「了解人格，不是為了給人貼標籤<br>而是為了終於可以停止<br>為自己的本質道歉」
+    </div>
+  </div>
+</section>
+
+<!-- 三大主題 -->
+<section class="themes">
+  <div class="wrap">
+    <div class="themes-header reveal">
+      <div class="section-label">本系列三大主題</div>
+      <h2>每一個主題，都是一面<br>不留情面的清晰鏡子</h2>
+    </div>
+
+    <!-- 主題一：大五人格 OCEAN -->
+    <div class="theme-card reveal">
+      <div class="theme-number">I</div>
+      <span class="theme-tag">Theme 01 · 人格的地圖</span>
+      <h3 class="theme-title">你不是奇怪，你只是還不了解自己</h3>
+      <p class="theme-subtitle">大五人格（Big Five）——科學最有實證的人格模型</p>
+      <div class="theme-body">
+        <p>目前心理學界最有科學實證的人格模型叫做<strong>大五人格（Big Five）</strong>，又稱 OCEAN 模型。它不像 MBTI 那樣把人分成 16 種「類型」，而是用<em>五個連續的維度</em>來描述每個人獨特的組合——沒有好壞，只有適不適合當下的環境。</p>
+
+        <div class="ocean-grid">
+          <div class="ocean-item">
+            <div class="ocean-letter">O</div>
+            <div class="ocean-content">
+              <div class="ocean-name">開放性 <span>Openness</span></div>
+              <div class="ocean-desc">對新經驗、新想法、藝術、想像力與創意的開放程度。高開放性熱愛探索未知；低開放性偏好熟悉、穩定、實際。</div>
+              <div class="ocean-scene">高：度假衝去體驗極限運動或陌生文化。低：更享受重複去同一家熟悉的餐廳。</div>
+            </div>
+          </div>
+          <div class="ocean-item">
+            <div class="ocean-letter">C</div>
+            <div class="ocean-content">
+              <div class="ocean-name">盡責性 <span>Conscientiousness</span></div>
+              <div class="ocean-desc">自律、組織能力、追求長期目標的傾向。高盡責性計畫周詳、可靠；低盡責性靈活隨性，容易即興發揮。</div>
+              <div class="ocean-scene">高：永遠準時交報告、抽屜整理得一絲不苟。低：deadline 前一晚才開始動手，卻常有意外的創意。</div>
+            </div>
+          </div>
+          <div class="ocean-item">
+            <div class="ocean-letter">E</div>
+            <div class="ocean-content">
+              <div class="ocean-name">外向性 <span>Extraversion</span></div>
+              <div class="ocean-desc">從社交互動中獲得能量的程度。這不是社交能力的差異，而是<strong>能量來源的根本不同</strong>。</div>
+              <div class="ocean-scene">外向者聚會結束還想續攤。內向者已經腦袋一片空白，只想回家躺平。</div>
+            </div>
+          </div>
+          <div class="ocean-item">
+            <div class="ocean-letter">A</div>
+            <div class="ocean-content">
+              <div class="ocean-name">親和性 <span>Agreeableness</span></div>
+              <div class="ocean-desc">合作、信任、體諒他人的傾向。高親和性容易妥協，但也容易犧牲自己；低親和性直接果斷，卻容易被覺得「難搞」。</div>
+              <div class="ocean-scene">高：即使自己不舒服也會勉強答應。低：直接說「不行」，也因此更容易達成自己的目標。</div>
+            </div>
+          </div>
+          <div class="ocean-item">
+            <div class="ocean-letter">N</div>
+            <div class="ocean-content">
+              <div class="ocean-name">神經質 <span>Neuroticism</span></div>
+              <div class="ocean-desc">情緒不穩定、容易感受到負面情緒的傾向。<strong>高神經質不代表有問題</strong>——在演化史上，對潛在威脅更敏感，曾是幫助祖先生存的優勢。</div>
+              <div class="ocean-scene">高：容易把「老闆今天沒笑」解讀成「我要被開除了」。低：相對不容易被日常小事擊倒。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-teaser">
+          <strong>本冊深入帶你認識</strong>
+          大五人格完整框架與科學基礎 · 每個維度在日常、職場、感情中的真實表現 · 大五 vs MBTI 的關鍵差異 · 如何用 OCEAN 更準確地理解自己與他人
+        </div>
+      </div>
+    </div>
+
+    <!-- 主題二：高敏感人格 HSP -->
+    <div class="theme-card reveal">
+      <div class="theme-number">II</div>
+      <span class="theme-tag">Theme 02 · 高敏感人格</span>
+      <h3 class="theme-title">那 15–20% 的人，<br>活在一個更濃烈、更吵雜的世界裡</h3>
+      <p class="theme-subtitle">高敏感不是病，不是缺陷，是神經系統的特質</p>
+      <div class="theme-body">
+        <p>電影裡一個不起眼的細節讓你哭得稀里嘩啦，旁邊的人卻完全無動於衷？人多嘈雜、燈光刺眼的環境待不到一小時，你就已經頭痛精疲力竭，而別人還意猶未盡？</p>
+        <p>心理學家<strong>伊蓮・艾融（Elaine Aron）</strong>提出的<em>高敏感人格（Highly Sensitive Person, HSP）</em>概念指出：約有 <strong>15–20% 的人</strong>天生擁有更敏感的神經系統，對外部刺激的處理比一般人更深入、更細緻、更容易被淹沒。</p>
+        <p>高敏感在人類和超過 100 種動物身上都存在——在某些環境下，它反而是<em>極大的優勢</em>（更容易察覺危險、更有同理心、更能欣賞細微的美）。</p>
+
+        <div class="does-grid">
+          <div class="does-card">
+            <div class="does-letter">D</div>
+            <div class="does-title">深度處理</div>
+            <div class="does-body">Depth of Processing<br>對資訊、情緒、感官輸入進行更深層的分析與連結，思考更周全，但也更耗神。</div>
+          </div>
+          <div class="does-card">
+            <div class="does-letter">O</div>
+            <div class="does-title">容易過度刺激</div>
+            <div class="does-body">Overstimulation<br>在嘈雜、資訊過多的環境中容易超載，需要更多獨處與安靜時間來恢復。</div>
+          </div>
+          <div class="does-card">
+            <div class="does-letter">E</div>
+            <div class="does-title">情緒反應強烈</div>
+            <div class="does-body">Emotional Reactivity<br>正面與負面情緒都更鮮明，同理心更強，容易吸收周圍人的情緒狀態。</div>
+          </div>
+          <div class="does-card">
+            <div class="does-letter">S</div>
+            <div class="does-title">對感官細節敏銳</div>
+            <div class="does-body">Sensitivity to Subtleties<br>能注意到他人忽略的細微變化——氣氛、聲音、光線、氣味、表情。</div>
+          </div>
+        </div>
+
+        <div class="theme-teaser">
+          <strong>本冊帶你認識</strong>
+          高敏感與內向的關鍵差異（外向的高敏感者一樣存在）· 職場、親密關係、日常生活的真實挑戰與優勢 · 如何設計適合自己神經系統的生活方式，從調整環境到學會說「我需要安靜」
+        </div>
+      </div>
+    </div>
+
+    <!-- 主題三：黑暗人格與人格障礙 -->
+    <div class="theme-card reveal">
+      <div class="theme-number">III</div>
+      <span class="theme-tag">Theme 03 · 黑暗人格</span>
+      <h3 class="theme-title">了解人性的陰暗面，<br>才能真正保護自己</h3>
+      <p class="theme-subtitle">人格障礙不是「個性比較強」——是跨情境、造成明顯損害的長期模式</p>
+      <div class="theme-body">
+        <p>你可能在生活中遇過這樣的人：<strong>表面聰明、迷人，很快讓你感覺「終於被懂了」</strong>——但相處一段時間後，你卻發現他從來不真正在乎任何人，包括你。</p>
+        <p>心理學將某些極端且高度穩定的負面人格模式稱為<em>人格障礙（Personality Disorders）</em>，其中最常在日常關係中造成傷害的包括：</p>
+
+        <div class="dark-trio">
+          <div class="dark-card">
+            <div class="dark-tag">NPD</div>
+            <div class="dark-name">自戀型人格障礙</div>
+            <div class="dark-desc">誇大的自我重要感，極度需要被崇拜，缺乏真實的同理心，把關係視為滿足自己需求的工具。</div>
+          </div>
+          <div class="dark-card">
+            <div class="dark-tag">BPD</div>
+            <div class="dark-name">邊緣型人格障礙</div>
+            <div class="dark-desc">情緒極度不穩定，強烈害怕被拋棄，關係常在「把你捧上天」與「把你踩在腳底」之間劇烈擺盪。</div>
+          </div>
+          <div class="dark-card">
+            <div class="dark-tag">ASPD</div>
+            <div class="dark-name">反社會人格障礙</div>
+            <div class="dark-desc">無視他人權利，缺乏悔恨感，可能具有高度的欺騙和操控傾向。</div>
+          </div>
+        </div>
+
+        <div class="theme-teaser">
+          <strong>本冊帶你認識</strong>
+          人格障礙與「個性比較強」的真正差異 · 如何識別生活中可能對你造成傷害的人格模式（早期紅旗、互動模式） · 與這類人相處的現實策略——不是試圖拯救他們，而是<strong>清楚地保護自己、設立邊界</strong> · 人格障礙的成因：遺傳、早期環境、童年創傷如何交互影響
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 結語 -->
+<section class="why">
+  <div class="wrap">
+    <div class="section-label reveal">讀了能做什麼</div>
+    <h2 class="why-title reveal">讓你停止兩件最消耗能量的事</h2>
+    <div class="why-body reveal">
+      <p><strong>第一，停止為自己的本質道歉。</strong>你不是太敏感，你不是太安靜，你不是太認真、太直接、太容易受傷——你只是和某些人不同。了解自己的人格，讓你可以在適合自己的環境裡盡情發揮，而不是繼續在錯誤的土壤裡拼命硬撐。</p>
+      <p><strong>第二，停止試圖改變別人的本質。</strong>當你明白人格具有相當的穩定性，你就不會再把力氣浪費在「為什麼他不能改」這種無止境的幻想裡。你會開始把問題從「他為什麼這樣」換成「我要繼續留在這段關係裡嗎？」</p>
+    </div>
+    <div class="why-quote reveal">
+      「人格心理學給你的，是一張更清晰、更誠實的地圖<br>關於你是誰，關於他是誰<br>以及你們之間到底發生了什麼」
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta-block reveal">
+      <div class="cta-label">心理學系列 · 完整收藏</div>
+      <h2 class="cta-title">準備好真正認識自己了嗎？</h2>
+      <p class="cta-desc">
+        本系列由盧林撰寫，有的沒的小舖出品<br>
+        人格的地圖 · 高敏感人格 · 黑暗人格與人格障礙<br>
+        每一本都讓你更了解自己，也更看懂別人
+      </p>
+      <div class="cta-series">
+        <span class="cta-tag">心理學導讀（免費）</span>
+        <span class="cta-tag">暗黑心理學</span>
+        <span class="cta-tag">認知心理學</span>
+        <span class="cta-tag">關係心理學</span>
+        <span class="cta-tag">成長心理學</span>
+        <span class="cta-tag">人格心理學</span>
+        <span class="cta-tag">潛意識心理學</span>
+      </div>
+      <a href="https://still-time-corner.vercel.app" class="cta-btn" target="_blank" rel="noopener">前往有的沒的小舖</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 有的沒的小舖 · 盧林 著 · Personality Psychology Series</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
