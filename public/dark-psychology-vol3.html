@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黑暗人格：識別你身邊的危險之人｜暗黑心理學系列第三冊</title>
+<meta name="description" content="盧林著。黑暗三角、自戀、馬基維利主義、精神病態、施虐癖——那個讓你越來越懷疑自己的人，其實是誰？">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0608;
+    --bg2: #110809;
+    --bg3: #180b0c;
+    --surface: #200d0f;
+    --border: rgba(232,96,122,0.12);
+    --text: #f5e8ea;
+    --text-muted: #a07880;
+    --accent: #e8607a;
+    --gold: #e8c87a;
+    --purple: #c9a8ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.95; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 5%, rgba(180,50,80,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 5% 95%, rgba(140,40,60,0.05) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* LAYOUT */
+  .page-wrap { display: flex; min-height: 100vh; }
+  .toc-sidebar { width: 240px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; padding: 32px 0; background: var(--bg2); border-right: 1px solid var(--border); z-index: 10; }
+  .toc-sidebar::-webkit-scrollbar { width: 3px; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: rgba(232,96,122,0.2); }
+  .toc-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .toc-back { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); text-decoration: none; margin-bottom: 14px; transition: color 0.2s; }
+  .toc-back:hover { color: var(--accent); }
+  .toc-series { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .toc-booktitle { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--text); line-height: 1.4; }
+  .toc-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; padding: 0 20px 10px; }
+  .toc-nav { list-style: none; }
+  .toc-nav li a { display: block; padding: 7px 20px; font-size: 0.83rem; color: var(--text-muted); text-decoration: none; line-height: 1.5; border-left: 2px solid transparent; transition: all 0.2s ease; }
+  .toc-nav li a:hover { color: var(--text); border-left-color: rgba(232,96,122,0.4); background: rgba(232,96,122,0.04); }
+  .toc-nav li a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(232,96,122,0.06); }
+  .toc-nav li a.ch-link { padding-left: 32px; font-size: 0.79rem; }
+  .toc-chapter-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); padding: 14px 20px 4px; text-transform: uppercase; }
+
+  .main-content { margin-left: 240px; flex: 1; position: relative; z-index: 1; }
+
+  /* BOOK HERO */
+  .book-hero { padding: 80px 60px 60px; max-width: 760px; border-bottom: 1px solid var(--border); }
+  .book-breadcrumb { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 24px; }
+  .book-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .book-breadcrumb a:hover { color: var(--accent); }
+  .book-vol { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; border: 1px solid rgba(232,96,122,0.3); display: inline-block; padding: 5px 16px; }
+  .book-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .book-title span { color: var(--accent); font-style: italic; }
+  .book-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin-bottom: 32px; }
+  .book-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .book-meta-item { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); }
+  .book-meta-item span { color: var(--text); display: block; margin-top: 4px; font-size: 10px; }
+
+  /* READING */
+  .reading { max-width: 680px; padding: 0 60px 120px; }
+
+  .preface { padding: 60px 0 48px; border-bottom: 1px solid var(--border); }
+  .preface-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+  .preface-body { font-size: 1.05rem; color: var(--text-muted); line-height: 2.15; }
+  .preface-body p { margin-bottom: 1.3em; }
+  .preface-body em { color: var(--text); font-style: normal; font-weight: 500; }
+  .preface-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 32px 0; line-height: 1.8; }
+
+  .chapter { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+  .chapter-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 300; line-height: 1.3; margin-bottom: 36px; }
+  .chapter-title span { color: var(--accent); font-style: italic; }
+
+  .section { margin-bottom: 40px; }
+  .section-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; color: var(--text); line-height: 1.4; }
+  .body-text { font-size: 1rem; color: var(--text-muted); line-height: 2.1; }
+  .body-text p { margin-bottom: 1.3em; }
+  .body-text strong { color: var(--text); font-weight: 500; }
+  .body-text em { color: var(--accent); font-style: normal; }
+
+  /* 黑暗三角視覺 */
+  .dark-triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0; }
+  .dt-card { padding: 20px 16px; text-align: center; border: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+  .dt-card:nth-child(1) { border-top: 2px solid #e8607a; }
+  .dt-card:nth-child(2) { border-top: 2px solid #c9a8ff; }
+  .dt-card:nth-child(3) { border-top: 2px solid #4db8e8; }
+  .dt-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; opacity: 0.15; font-style: italic; line-height: 1; margin-bottom: 8px; }
+  .dt-card:nth-child(1) .dt-num { color: #e8607a; }
+  .dt-card:nth-child(2) .dt-num { color: #c9a8ff; }
+  .dt-card:nth-child(3) .dt-num { color: #4db8e8; }
+  .dt-name { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+  .dt-en { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+
+  /* 人格章節顏色 */
+  .ch-narcissism { --ch-c: #e8607a; }
+  .ch-machi { --ch-c: #c9a8ff; }
+  .ch-psycho { --ch-c: #4db8e8; }
+  .ch-sadism { --ch-c: #e88c60; }
+
+  /* 識別清單 */
+  .red-flag-list { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+  .red-flag { display: flex; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(232,96,122,0.3); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; align-items: flex-start; }
+  .red-flag::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 2px; font-size: 0.8rem; }
+  .red-flag strong { color: var(--text); font-weight: 500; }
+
+  /* 三段式發展 */
+  .phase-flow { display: flex; align-items: stretch; gap: 0; margin: 24px 0; }
+  .phase-step { flex: 1; padding: 20px 18px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); position: relative; }
+  .phase-step:not(:last-child)::after { content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1rem; z-index: 1; }
+  .phase-num { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .phase-name { font-size: 0.95rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+  .phase-body { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* 真實情境 */
+  .scene-block { margin: 24px 0; }
+  .scene-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+  .scene-item { margin-bottom: 14px; padding: 16px 20px; background: rgba(232,96,122,0.04); border-left: 2px solid rgba(232,96,122,0.2); }
+  .scene-item-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+  .scene-item p { font-size: 0.91rem; color: var(--text-muted); line-height: 1.85; font-style: italic; margin: 0; }
+
+  /* 特質對比 */
+  .trait-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .trait-card { padding: 18px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
+  .trait-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
+  .trait-title { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 8px; }
+  .trait-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* 方法列表 */
+  .method-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+  .method-list li { padding: 14px 18px; background: rgba(255,255,255,0.02); border-left: 2px solid rgba(232,96,122,0.3); font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+  .method-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+  .key-insight { margin: 28px 0; padding: 22px 28px; background: rgba(232,96,122,0.04); border: 1px solid rgba(232,96,122,0.2); }
+  .key-insight p { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--accent); line-height: 1.8; margin: 0; }
+  .key-warn { margin: 20px 0; padding: 16px 20px; background: rgba(232,184,75,0.04); border: 1px solid rgba(232,184,75,0.15); border-left: 3px solid var(--gold); }
+  .key-warn-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .key-warn p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.85; margin: 0; }
+  .key-warn strong { color: var(--text); }
+
+  /* 結語 */
+  .epilogue { padding: 56px 0 48px; }
+  .epilogue-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 300; margin-bottom: 28px; }
+  .epilogue-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .epilogue-body p { margin-bottom: 1.3em; }
+  .epilogue-body strong { color: var(--text); font-weight: 500; }
+  .epilogue-body em { color: var(--accent); font-style: normal; }
+  .epilogue-final { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: var(--accent); text-align: center; padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 36px 0; line-height: 1.8; }
+
+  /* 系列其他冊 */
+  .series-next { background: var(--bg3); border: 1px solid var(--border); padding: 40px; margin: 40px 0; position: relative; overflow: hidden; }
+  .series-next::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .series-next-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .series-next-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 24px; }
+  .next-books { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .next-book { display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); text-decoration: none; }
+  .next-book-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; color: var(--accent); flex-shrink: 0; }
+  .next-book-title { color: var(--text); }
+  .next-book.current { border-left: 2px solid var(--accent); background: rgba(232,96,122,0.04); }
+  .next-book.current .next-book-title::after { content: '  ←  正在閱讀'; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--accent); }
+  .series-cta-btn { display: inline-block; padding: 12px 32px; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .series-cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .series-cta-btn:hover { color: var(--bg); }
+  .series-cta-btn:hover::before { transform: translateX(0); }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 60px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .main-content { margin-left: 0; }
+    .book-hero { padding: 48px 24px 40px; }
+    .reading { padding: 0 24px 80px; }
+    footer { padding: 24px; }
+    .series-next { padding: 28px 24px; }
+    .dark-triad { grid-template-columns: 1fr; }
+    .phase-flow { flex-direction: column; }
+    .phase-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -12px; transform: translateX(-50%); }
+    .trait-compare { grid-template-columns: 1fr; }
+    .mobile-toc-btn { display: flex; }
+  }
+  .mobile-toc-btn { display: none; position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--bg); width: 48px; height: 48px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; z-index: 20; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<button class="mobile-toc-btn" onclick="document.querySelector('.toc-sidebar').style.display='block'" title="目錄">☰</button>
+
+<div class="page-wrap">
+<nav class="toc-sidebar">
+  <div class="toc-logo">
+    <a href="/dark-psychology.html" class="toc-back">← 系列導讀</a>
+    <div class="toc-series">暗黑心理學 · Vol.3</div>
+    <div class="toc-booktitle">黑暗人格：識別你身邊的危險之人</div>
+  </div>
+  <div class="toc-label">目錄</div>
+  <ul class="toc-nav">
+    <li><a href="#preface">前言</a></li>
+    <div class="toc-chapter-label">第一章</div>
+    <li><a href="#ch1-1" class="ch-link">1.1 黑暗三角</a></li>
+    <li><a href="#ch1-2" class="ch-link">1.2 為什麼叫「黑暗」</a></li>
+    <li><a href="#ch1-3" class="ch-link">1.3 黑暗四角</a></li>
+    <div class="toc-chapter-label">第二章 · 自戀</div>
+    <li><a href="#ch2-1" class="ch-link">2.1 什麼是自戀</a></li>
+    <li><a href="#ch2-2" class="ch-link">2.2 兩種面貌</a></li>
+    <li><a href="#ch2-3" class="ch-link">2.3 理想化→貶低→拋棄</a></li>
+    <li><a href="#ch2-4" class="ch-link">2.4 如何識別</a></li>
+    <div class="toc-chapter-label">第三章 · 馬基維利</div>
+    <li><a href="#ch3-1" class="ch-link">3.1 定義</a></li>
+    <li><a href="#ch3-2" class="ch-link">3.2 特徵</a></li>
+    <li><a href="#ch3-3" class="ch-link">3.3 如何運作</a></li>
+    <li><a href="#ch3-4" class="ch-link">3.4 如何識別</a></li>
+    <div class="toc-chapter-label">第四章 · 精神病態</div>
+    <li><a href="#ch4-1" class="ch-link">4.1 誤解與真相</a></li>
+    <li><a href="#ch4-2" class="ch-link">4.2 核心特徵</a></li>
+    <li><a href="#ch4-3" class="ch-link">4.3 鏡像操縱</a></li>
+    <li><a href="#ch4-4" class="ch-link">4.4 如何識別</a></li>
+    <div class="toc-chapter-label">第五章 · 施虐癖</div>
+    <li><a href="#ch5-1" class="ch-link">5.1 日常施虐</a></li>
+    <li><a href="#ch5-2" class="ch-link">5.2 組合效應</a></li>
+    <div class="toc-chapter-label">第六章</div>
+    <li><a href="#ch6-1" class="ch-link">6.1 黑暗的魅力</a></li>
+    <li><a href="#ch6-2" class="ch-link">6.2 你的傷口是入口</a></li>
+    <li><a href="#ch6-3" class="ch-link">6.3 改變他的幻覺</a></li>
+    <div class="toc-chapter-label">第七章</div>
+    <li><a href="#ch7-1" class="ch-link">7.1 相信你的直覺</a></li>
+    <li><a href="#ch7-2" class="ch-link">7.2 觀察行為</a></li>
+    <li><a href="#ch7-3" class="ch-link">7.3 保護你的信息</a></li>
+    <li><a href="#ch7-4" class="ch-link">7.4 設立並執行邊界</a></li>
+    <li><a href="#ch7-5" class="ch-link">7.5 改變你的位置</a></li>
+    <li><a href="#epilogue">結語</a></li>
+  </ul>
+</nav>
+
+<main class="main-content">
+<div class="book-hero reveal">
+  <div class="book-breadcrumb"><a href="/psychology.html">心理學系列</a> / <a href="/dark-psychology.html">暗黑心理學</a> / 第三冊</div>
+  <div class="book-vol">Dark Psychology · Vol.03</div>
+  <h1 class="book-title">黑暗人格<br><span>識別你身邊的危險之人</span></h1>
+  <p class="book-subtitle">有些人傷害你，不是因為一時衝動</p>
+  <div class="book-meta">
+    <div class="book-meta-item">作者<span>盧林</span></div>
+    <div class="book-meta-item">出品<span>有的沒的小舖</span></div>
+    <div class="book-meta-item">系列<span>暗黑心理學 · 第三冊</span></div>
+  </div>
+</div>
+
+<div class="reading">
+
+<!-- 前言 -->
+<section class="preface" id="preface">
+  <div class="preface-label reveal">前言</div>
+  <div class="preface-body reveal">
+    <p>第一次見面，他就讓你覺得「終於遇到懂我的人了」。他聰明、迷人、說話幽默，對你的每一個想法都給出完美的回應。你覺得自己從來沒有被這樣理解過。</p>
+    <p>然後，慢慢地，你開始感覺到哪裡不對。他對你的「好」有一種奇怪的精準感——好像是計算過的，不是自然流露的。他在人前對你讚不絕口，私下卻讓你覺得自己什麼都不對。他從來不真正道歉，只會解釋為什麼是你的問題。</p>
+    <p>你說不清楚哪裡出了問題，只知道——<em>在他身邊，你越來越懷疑自己</em>。</p>
+    <p>這不是你想太多。這是黑暗人格。</p>
+  </div>
+</section>
+
+<!-- 第一章 -->
+<section class="chapter" id="ch1">
+  <div class="chapter-num reveal">第一章</div>
+  <h2 class="chapter-title reveal">什麼是<span>黑暗人格？</span></h2>
+
+  <div class="section" id="ch1-1">
+    <span class="section-num reveal">1.1</span>
+    <h3 class="section-title reveal">黑暗三角（Dark Triad）</h3>
+    <div class="body-text reveal">
+      <p>心理學家保羅胡斯（Delroy Paulhus）和威廉斯（Kevin Williams）在2002年提出了黑暗三角的概念，描述三種在人際關係中最容易造成傷害的人格特質組合：</p>
+    </div>
+    <div class="dark-triad reveal">
+      <div class="dt-card">
+        <div class="dt-num">I</div>
+        <div class="dt-name">自戀型人格</div>
+        <div class="dt-en">Narcissism</div>
+      </div>
+      <div class="dt-card">
+        <div class="dt-num">II</div>
+        <div class="dt-name">馬基維利主義</div>
+        <div class="dt-en">Machiavellianism</div>
+      </div>
+      <div class="dt-card">
+        <div class="dt-num">III</div>
+        <div class="dt-name">精神病態</div>
+        <div class="dt-en">Psychopathy</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p>這三種特質可以單獨出現，也可以同時存在——<strong>同時具備三者的人，通常是最危險的</strong>。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch1-2">
+    <span class="section-num reveal">1.2</span>
+    <h3 class="section-title reveal">為什麼叫「黑暗」？</h3>
+    <div class="body-text reveal">
+      <p>不是因為這些人看起來陰暗或可怕——恰恰相反，很多黑暗人格者在社交場合<strong>極具魅力</strong>，表面上讓人感覺良好。</p>
+      <p>叫「黑暗」，是因為這些人格特質的核心，都指向<em>對他人的漠視和利用</em>——不管包裝得多好看。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch1-3">
+    <span class="section-num reveal">1.3</span>
+    <h3 class="section-title reveal">黑暗四角（Dark Tetrad）</h3>
+    <div class="body-text reveal">
+      <p>近年來，研究者又加入了第四種特質：<strong>施虐癖（Sadism）</strong>——從他人的痛苦中獲得愉悅。</p>
+      <p>這四種合稱黑暗四角（Dark Tetrad），是目前研究最完整的黑暗人格框架。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 第二章：自戀 -->
+<section class="chapter ch-narcissism" id="ch2">
+  <div class="chapter-num reveal">第二章</div>
+  <h2 class="chapter-title reveal"><span>自戀型人格</span></h2>
+
+  <div class="section" id="ch2-1">
+    <span class="section-num reveal">2.1</span>
+    <h3 class="section-title reveal">什麼是自戀？</h3>
+    <div class="body-text reveal">
+      <p>「自戀」這個詞被過度使用了——很多人把「自信」「自我中心」「喜歡自拍」都叫做自戀。真正的自戀型人格，遠比這些複雜和傷害性強得多。</p>
+      <p>心理學定義的自戀型人格，核心特徵是：</p>
+      <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--accent); font-style:italic; padding: 16px 0;">誇大的自我重要感 ＋ 對讚美的極度需求 ＋ 缺乏真實的同理心</p>
+      <p>注意「缺乏真實的同理心」——自戀者不是完全不懂別人的感受，他們往往非常擅長讀取別人的情緒，只是他們<strong>利用這個能力來服務自己</strong>，而不是真正在乎對方。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch2-2">
+    <span class="section-num reveal">2.2</span>
+    <h3 class="section-title reveal">自戀的兩種面貌</h3>
+    <div class="trait-compare reveal">
+      <div class="trait-card">
+        <div class="trait-label">顯性自戀</div>
+        <div class="trait-title">Grandiose Narcissism</div>
+        <div class="trait-body">外向、自信、喜歡成為焦點。說話誇張、愛炫耀、不斷需要被讚美。這種類型比較容易識別。</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-label" style="color:var(--purple);">隱性自戀</div>
+        <div class="trait-title">Covert Narcissism</div>
+        <div class="trait-body">表面可能看起來害羞、謙遜，甚至是受害者形象。但內心同樣有強烈的優越感和被特殊對待的需求。<strong>更難被識別，也因此更危險。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch2-3">
+    <span class="section-num reveal">2.3</span>
+    <h3 class="section-title reveal">自戀者的關係模式：<br>理想化 → 貶低 → 拋棄</h3>
+    <div class="phase-flow reveal">
+      <div class="phase-step">
+        <div class="phase-num">Phase 01</div>
+        <div class="phase-name">理想化</div>
+        <div class="phase-body">你是他眼中最完美的人。愛情轟炸——目的是讓你深度投入、依賴這種被崇拜的感覺。</div>
+      </div>
+      <div class="phase-step">
+        <div class="phase-num">Phase 02</div>
+        <div class="phase-name">貶低</div>
+        <div class="phase-body">一旦你無法繼續滿足需求——你有了自己的想法、說了「不」——你開始被批評、被否定。</div>
+      </div>
+      <div class="phase-step">
+        <div class="phase-num">Phase 03</div>
+        <div class="phase-name">拋棄</div>
+        <div class="phase-body">當利用價值耗盡，往往突然、毫無解釋。事後可能再以「吸塵器效應」重新出現，重演循環。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch2-4">
+    <span class="section-num reveal">2.4</span>
+    <h3 class="section-title reveal">如何識別自戀者</h3>
+    <div class="body-text reveal"><p><strong>早期紅旗：</strong></p></div>
+    <div class="red-flag-list reveal">
+      <div class="red-flag">過度快速的親密感（第一次見面就說「我從來沒遇過像你這樣的人」）</div>
+      <div class="red-flag">談話中心永遠是他自己</div>
+      <div class="red-flag">對服務生、下屬、或「沒用」的人態度明顯不同</div>
+      <div class="red-flag">前任在他口中全都是「瘋子」「壞人」——從不為任何關係失敗承擔責任</div>
+      <div class="red-flag">無法真正承受批評，哪怕是最輕微的</div>
+    </div>
+    <div class="body-text reveal"><p><strong>長期相處後的跡象：</strong></p></div>
+    <div class="red-flag-list reveal">
+      <div class="red-flag">你的成就讓他不舒服，他會用各種方式貶低或「搶戲」</div>
+      <div class="red-flag">你的問題永遠是次要的，他的需求永遠是第一位</div>
+      <div class="red-flag">道歉從來不是真正的道歉：「如果你覺得我傷害了你，我很遺憾」——把責任推給你的「感受」</div>
+      <div class="red-flag">你在這段關係裡越來越小聲、越來越不確定自己的判斷</div>
+    </div>
+    <div class="scene-block reveal">
+      <div class="scene-label">三種真實情境</div>
+      <div class="scene-item">
+        <div class="scene-item-tag">感情</div>
+        <p>交往初期每天說「你是我的全世界」。你升職加薪，他卻冷嘲熱諷：「恭喜啊，現在你是不是覺得自己比我厲害了？」你一說感受，他就翻白眼：「你怎麼這麼玻璃心？我只是開玩笑。」</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">職場</div>
+        <p>主管把團隊功勞攬在自己身上。你私下提出意見，他當面微笑，轉頭就在高層面前說你「不夠團隊精神」。你離職後，他還到處說「那個人是因為能力不足才離開」。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">友情</div>
+        <p>好閨蜜總是需要你傾聽，但當你遇到低潮，她卻說「我今天心情不好，你能不能先聽我說完？」每次幫她，她說「只有你懂我」，但當你需要她，她永遠「剛好很忙」。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 第三章：馬基維利主義 -->
+<section class="chapter ch-machi" id="ch3">
+  <div class="chapter-num reveal">第三章</div>
+  <h2 class="chapter-title reveal"><span>馬基維利主義</span></h2>
+
+  <div class="section" id="ch3-1">
+    <span class="section-num reveal">3.1</span>
+    <h3 class="section-title reveal">什麼是馬基維利主義？</h3>
+    <div class="body-text reveal">
+      <p>得名於15世紀義大利政治思想家馬基維利（Niccolò Machiavelli），他在《君主論》中提出「目的正當化手段」的政治哲學。</p>
+      <p>在人格心理學中，馬基維利主義指的是：以策略性、工具性的方式看待人際關係的傾向。</p>
+    </div>
+    <div class="red-flag-list reveal">
+      <div class="red-flag">相信人性本質上是自私的、可以被操弄的</div>
+      <div class="red-flag">把人際關係視為實現目標的工具</div>
+      <div class="red-flag">高度重視個人利益，願意為達目的欺騙和操控</div>
+      <div class="red-flag">有耐心、有計劃，不像精神病態者那樣衝動</div>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-2">
+    <span class="section-num reveal">3.2</span>
+    <h3 class="section-title reveal">馬基維利主義者的特徵</h3>
+    <div class="trait-compare reveal">
+      <div class="trait-card">
+        <div class="trait-label">表面特徵</div>
+        <div class="trait-body">通常聰明、有策略感。擅長讀懂局勢和人心。在社交場合懂得說什麼讓人舒服。長期規劃能力強，有耐心等待時機。</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-label" style="color:var(--purple);">深層特徵</div>
+        <div class="trait-body">對人的信任是功能性的，不是真情感。達到目的後，關係的「維護成本」就不值得了。道德是彈性工具，不是內在原則。對被利用極度敏感，對利用別人毫無罪惡感。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-3">
+    <span class="section-num reveal">3.3</span>
+    <h3 class="section-title reveal">馬基維利主義者如何運作</h3>
+    <div class="scene-block reveal">
+      <div class="scene-label">三種場域</div>
+      <div class="scene-item">
+        <div class="scene-item-tag">職場</div>
+        <p>他是那個永遠知道站在哪邊、永遠不會在失敗的團隊上押寶的人。對上司體貼入微，對下屬冷漠利用，對競爭者表面友好、暗中拆台。他升遷很快，離開後你才發現他留下了多少坑。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">感情</div>
+        <p>他的「愛」是有條件的——你對他有用，他就對你好。你開始沒用了，他就找到新的目標。他不像自戀者那樣戲劇性，他更平靜、更有計劃——他在離開之前，已經把下一段關係安排好了。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">友情</div>
+        <p>他是那個「永遠在你最需要的時候出現」的朋友——但每次出現，後面都跟著一個要求。他記住所有人的弱點和秘密，不是為了保護你，而是為了在需要的時候使用。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="ch3-4">
+    <span class="section-num reveal">3.4</span>
+    <h3 class="section-title reveal">如何識別馬基維利主義者</h3>
+    <div class="red-flag-list reveal">
+      <div class="red-flag">他的「好」總是有時機感——在他需要什麼之前</div>
+      <div class="red-flag">他非常了解你的弱點，但從來不用來幫助你</div>
+      <div class="red-flag">他很少真正分享自己的脆弱——資訊是他的籌碼</div>
+      <div class="red-flag">長期觀察下來，他的行為模式都指向同一個受益人：他自己</div>
+      <div class="red-flag">和他在一起，你總覺得自己不知不覺「幫了他很多」，但說不清楚是什麼時候答應的</div>
+    </div>
+  </div>
+</section>
+
+<!-- 第四章：精神病態 -->
+<section class="chapter ch-psycho" id="ch4">
+  <div class="chapter-num reveal">第四章</div>
+  <h2 class="chapter-title reveal"><span>精神病態</span></h2>
+
+  <div class="section" id="ch4-1">
+    <span class="section-num reveal">4.1</span>
+    <h3 class="section-title reveal">誤解與真相</h3>
+    <div class="body-text reveal">
+      <p>精神病態（Psychopathy）是黑暗三角中最被誤解的一個。大多數人對精神病態者的印象，來自電影裡的連環殺手——冷血、暴力、邪惡。</p>
+      <p>但研究估計，精神病態傾向在一般人群中佔約1%，在企業高層中的比例更高——他們中的大多數，從來沒有犯過任何罪。</p>
+      <p><em>他們只是在你的生活裡，靜靜地、有效率地傷害你。</em></p>
+    </div>
+  </div>
+
+  <div class="section" id="ch4-2">
+    <span class="section-num reveal">4.2</span>
+    <h3 class="section-title reveal">精神病態的核心特徵</h3>
+    <ul class="method-list reveal">
+      <li><strong>極度缺乏同理心</strong>不是不懂別人的感受，而是不在乎</li>
+      <li><strong>缺乏罪惡感和羞恥感</strong>做了傷害別人的事，內心沒有真正的不適</li>
+      <li><strong>情感反應表淺</strong>他們可以哭，可以笑，但那些情緒很少是真實的，更多是表演</li>
+      <li><strong>高度衝動，尋求刺激</strong></li>
+      <li><strong>說謊流暢自然</strong>幾乎不帶任何生理反應，比說真話還流暢</li>
+      <li><strong>對自己的行為不承擔後果</strong>永遠有辦法把責任推出去</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch4-3">
+    <span class="section-num reveal">4.3</span>
+    <h3 class="section-title reveal">鏡像——最強大的技能</h3>
+    <div class="body-text reveal">
+      <p>他們最強大的技能，是<strong>鏡像（Mirroring）</strong>——在初期，他們會精準模仿你的興趣、價值觀、說話方式，讓你感覺「終於遇到真正懂我的人」。</p>
+      <p>這不是因為他們真的懂你。這是因為他們在讀取你、複製你，然後把你最渴望看見的版本反射給你。</p>
+    </div>
+    <div class="key-insight reveal">
+      <p>當你愛上他，你其實是愛上了你自己的倒影。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch4-4">
+    <span class="section-num reveal">4.4</span>
+    <h3 class="section-title reveal">如何識別精神病態傾向</h3>
+    <div class="red-flag-list reveal">
+      <div class="red-flag">魅力來得太快、太精準——像是「量身定做」的感覺</div>
+      <div class="red-flag">他的故事裡，他永遠是主角，永遠是對的，永遠是受害者或英雄</div>
+      <div class="red-flag">他對「弱者」（動物、孩子、服務員）的態度讓你不舒服，但說不清楚為什麼</div>
+      <div class="red-flag">他的情緒切換非常快——剛才還在發火，五分鐘後就若無其事</div>
+      <div class="red-flag"><strong>他說謊的時候，你找不到任何跡象</strong>——沒有迴避眼神，沒有緊張，甚至比說真話還流暢</div>
+    </div>
+    <div class="scene-block reveal">
+      <div class="scene-label">三種真實情境</div>
+      <div class="scene-item">
+        <div class="scene-item-tag">感情</div>
+        <p>第一次約會就說「我從小就想找一個像你這樣的人」，完美匹配你的所有喜好。半年後，你發現他同時在跟三個人交往，每一個人都被他說成「唯一」。當你質問，他面不改色地說「我只是怕你不開心才沒告訴你」，然後轉頭繼續過他的生活，絲毫不受影響。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">職場</div>
+        <p>你的搭檔總是能在關鍵時刻提出「完美方案」讓團隊驚豔。但當專案出問題，他立刻把所有責任推給你，表情還帶著關心：「我已經盡力幫你了。」你事後才知道，他早就把你的資料備份，關鍵時刻用來保全自己。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">友情</div>
+        <p>他總是那個「最會玩」的朋友。你借他錢，他說「下個月一定還」，從此人間蒸發。你打電話，他接起來還能笑著說「我最近很忙，忘記了」，完全沒有愧疚。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 第五章：施虐癖 -->
+<section class="chapter ch-sadism" id="ch5">
+  <div class="chapter-num reveal">第五章</div>
+  <h2 class="chapter-title reveal">施虐癖——<span>第四種黑暗</span></h2>
+
+  <div class="section" id="ch5-1">
+    <span class="section-num reveal">5.1</span>
+    <h3 class="section-title reveal">什麼是日常施虐？</h3>
+    <div class="body-text reveal">
+      <p>施虐癖在一般人的理解裡，是性癖好的一種。但在人格心理學裡，<strong>日常施虐癖（Everyday Sadism）</strong>指的是：從他人的痛苦、困窘、或貶低中獲得滿足感。</p>
+      <p>這不一定是身體傷害。更常見的是心理上的：</p>
+    </div>
+    <div class="red-flag-list reveal">
+      <div class="red-flag">故意說出讓你難堪的話，然後說「我只是開玩笑」</div>
+      <div class="red-flag">在你最脆弱的時候踩你一腳，看你的反應</div>
+      <div class="red-flag">享受看你為他們的行為感到困惑和痛苦</div>
+      <div class="red-flag">在群體中公開羞辱你，然後假裝這是「玩笑」</div>
+    </div>
+  </div>
+
+  <div class="section" id="ch5-2">
+    <span class="section-num reveal">5.2</span>
+    <h3 class="section-title reveal">施虐癖與其他黑暗人格的結合</h3>
+    <div class="body-text reveal">
+      <p>施虐癖單獨出現時，可能只是讓人不舒服的相處對象。但當它與其他黑暗人格結合，<strong>傷害力會大幅放大</strong>：</p>
+    </div>
+    <ul class="method-list reveal">
+      <li><strong>自戀 ＋ 施虐</strong>貶低你，不只是因為你妨礙了他，而是因為看你受傷本身就讓他感到愉悅和優越。</li>
+      <li><strong>精神病態 ＋ 施虐（最危險的組合）</strong>不只是不在乎你的痛苦，而是主動製造你的痛苦，並從中得到快感。</li>
+    </ul>
+    <div class="scene-block reveal">
+      <div class="scene-label">三種真實情境</div>
+      <div class="scene-item">
+        <div class="scene-item-tag">感情</div>
+        <p>吵架時故意提起你最自卑的身材或過去失敗，然後笑說「我只是氣話，你怎麼這麼認真？」看著你難過，他嘴角反而微微上揚。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">職場</div>
+        <p>會議上當眾指出你的小錯誤，讓你當場臉紅，事後還說「我這是幫你成長，大家都笑笑而已」。</p>
+      </div>
+      <div class="scene-item">
+        <div class="scene-item-tag">友情</div>
+        <p>群組裡故意分享你以前的糗事，配上「哈哈哈開玩笑」，看你尷尬就覺得有趣。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 第六章：為什麼被吸引 -->
+<section class="chapter" id="ch6">
+  <div class="chapter-num reveal">第六章</div>
+  <h2 class="chapter-title reveal">為什麼我們會被<span>黑暗人格吸引？</span></h2>
+
+  <div class="section" id="ch6-1">
+    <span class="section-num reveal">6.1</span>
+    <h3 class="section-title reveal">黑暗的魅力</h3>
+    <div class="body-text reveal">
+      <p>這是很多人不願意承認的事實：黑暗人格者，往往在一開始極具吸引力。研究顯示，黑暗三角特質與以下特徵高度相關：自信和果斷、魅力和幽默感、短期內的社交成功。</p>
+      <p>在演化心理學的框架裡，這些特質曾經是「基因優越」的訊號。問題是，我們的吸引力本能並不能區分「真實的自信」和「以自我為中心的誇大感」——<em>至少在初期不能</em>。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch6-2">
+    <span class="section-num reveal">6.2</span>
+    <h3 class="section-title reveal">你的傷口，是他的入口</h3>
+    <div class="body-text reveal">
+      <p>黑暗人格者有一個共同的技能：他們能快速找到你最渴望的東西，然後假裝給你。</p>
+    </div>
+    <ul class="method-list reveal">
+      <li>如果你渴望被理解，他就是最懂你的人</li>
+      <li>如果你渴望被保護，他就是最強大的依靠</li>
+      <li>如果你渴望被崇拜，他就是最欣賞你的人</li>
+    </ul>
+    <div class="body-text reveal">
+      <p>這不是巧合，<strong>這是他們讀人的能力</strong>——然後利用你的渴望，建立你對他的依賴。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch6-3">
+    <span class="section-num reveal">6.3</span>
+    <h3 class="section-title reveal">「我可以改變他」的幻覺</h3>
+    <div class="body-text reveal">
+      <p>很多人在意識到對方的黑暗人格之後，仍然選擇留下：「他在我面前不一樣。」「他只是沒有遇到真正愛他的人。」「我看見了他柔軟的一面，我可以幫助他。」</p>
+      <p>這個幻覺非常強大——而且往往是黑暗人格者刻意製造的。偶爾的脆弱、偶爾的溫柔，都是用來讓你留下的工具。</p>
+    </div>
+    <div class="key-warn reveal">
+      <div class="key-warn-label">真相</div>
+      <p><strong>黑暗人格的核心特質，極難透過一段關係改變。</strong>不是不可能，但需要當事人有強烈的自我認知和長期的專業協助——而大多數黑暗人格者，根本不認為自己有任何需要改變的地方。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 第七章：如何保護自己 -->
+<section class="chapter" id="ch7">
+  <div class="chapter-num reveal">第七章</div>
+  <h2 class="chapter-title reveal">如何<span>保護自己</span></h2>
+
+  <div class="section" id="ch7-1">
+    <span class="section-num reveal">7.1</span>
+    <h3 class="section-title reveal">相信你的直覺</h3>
+    <div class="body-text reveal">
+      <p>很多在黑暗人格關係中受傷的人，事後回想都說：「我一開始就感覺到哪裡不對，只是我說服自己那是我想太多了。」</p>
+      <p>你的直覺，特別是那種<em>「說不清楚為什麼，但就是感覺不安全」</em>的感覺，是值得信任的訊號。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch7-2">
+    <span class="section-num reveal">7.2</span>
+    <h3 class="section-title reveal">觀察行為，不只是聽話語</h3>
+    <div class="body-text reveal">
+      <p>黑暗人格者非常善於說出你想聽的話。真正能告訴你一個人是誰的，是他的行為模式——<strong>特別是在他以為你沒在看的時候，特別是在他對「沒用的人」的態度上，特別是在他遇到挫折和壓力時的反應</strong>。</p>
+    </div>
+  </div>
+
+  <div class="section" id="ch7-3">
+    <span class="section-num reveal">7.3</span>
+    <h3 class="section-title reveal">保護你的信息</h3>
+    <div class="body-text reveal">
+      <p>黑暗人格者會把你分享的脆弱和秘密存起來，在需要的時候使用。</p>
+      <p>這不代表你要對所有人築起高牆，而是提醒你：真正的親密，是慢慢建立的，不是在第一次見面就被要求給出的。<em>對方太快要求你「完全信任」「對他毫無保留」，本身就是一個警訊。</em></p>
+    </div>
+  </div>
+
+  <div class="section" id="ch7-4">
+    <span class="section-num reveal">7.4</span>
+    <h3 class="section-title reveal">設立並執行邊界</h3>
+    <div class="body-text reveal">
+      <p>黑暗人格者會測試你的邊界。你設立了邊界，他越過了，然後你沒有執行後果——他就學到了你的邊界是空的。</p>
+    </div>
+    <div class="key-warn reveal">
+      <div class="key-warn-label">關鍵</div>
+      <p>每一次你說了「不」卻沒有維持住，你就在告訴他：<strong>你的「不」是可以被推翻的。</strong></p>
+    </div>
+  </div>
+
+  <div class="section" id="ch7-5">
+    <span class="section-num reveal">7.5</span>
+    <h3 class="section-title reveal">不要試圖改變他，先改變你的位置</h3>
+    <div class="body-text reveal">
+      <p>你無法透過更多的愛、更多的理解、更多的付出來改變一個黑暗人格者。</p>
+      <p><strong>你能改變的，只有你自己的位置</strong>——你在這段關係裡的角色、你的投入程度、以及最終你是否選擇留下。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 結語 -->
+<section class="epilogue" id="epilogue">
+  <div class="chapter-num reveal">結語</div>
+  <h2 class="epilogue-title reveal">看見，是保護自己的開始</h2>
+  <div class="epilogue-body reveal">
+    <p>讀完這本書，你可能會開始回想某些關係，然後突然有一種「原來如此」的感覺。那個感覺，不是要讓你變得憤怒或悲傷——雖然這些情緒都是合理的。</p>
+    <p>那個感覺，是一扇門。當你能夠看見一個人真正的樣子，你就不再需要花所有的能量試圖理解「為什麼他對我這樣」——<em>因為你已經知道答案了</em>。</p>
+    <p>然後你可以把那些能量，用在真正值得的地方。</p>
+  </div>
+  <div class="epilogue-final reveal">
+    「你值得的，是一個讓你越來越像自己的關係<br>不是一個讓你越來越懷疑自己的關係」
+  </div>
+</section>
+
+<!-- 系列其他冊 -->
+<div class="series-next reveal">
+  <div class="series-next-label">暗黑心理學系列</div>
+  <h3 class="series-next-title">繼續探索暗黑心理學完整系列</h3>
+  <div class="next-books">
+    <a href="/dark-psychology-vol1.html" class="next-book">
+      <span class="next-book-num">Vol.1</span>
+      <span class="next-book-title">操控與控制：看清那條你看不見的線</span>
+    </a>
+    <a href="/dark-psychology-vol2.html" class="next-book">
+      <span class="next-book-num">Vol.2</span>
+      <span class="next-book-title">說服與影響力：為什麼你總是被說動</span>
+    </a>
+    <div class="next-book current">
+      <span class="next-book-num">Vol.3</span>
+      <span class="next-book-title">黑暗人格：識別你身邊的危險之人</span>
+    </div>
+    <div class="next-book">
+      <span class="next-book-num">Vol.4</span>
+      <span class="next-book-title">謊言與欺騙：真相沒有你以為的穩固</span>
+    </div>
+  </div>
+  <a href="https://still-time-corner.vercel.app" class="series-cta-btn" target="_blank" rel="noopener">前往有的沒的小舖</a>
+</div>
+
+</div>
+</main>
+</div>
+
+<footer>
+  © 有的沒的小舖 · 盧林 著 · 暗黑心理學系列第三冊 · Dark Psychology Vol.3
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav a');
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.toc-nav a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => scrollObserver.observe(s));
+</script>
+</body>
+</html>
