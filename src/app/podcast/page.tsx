@@ -348,7 +348,6 @@ export default function PodcastPage() {
                       <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.25rem', alignItems: 'center', flexWrap: 'wrap' }}>
                         <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{ep.date}</span>
                         <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>•</span>
-                        <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {ep.duration}</span>
                       </div>
                       <div style={{ color: '#f3f4f6', fontWeight: 700, fontSize: '1rem', marginBottom: '0.3rem' }}>
                         {ep.title}
