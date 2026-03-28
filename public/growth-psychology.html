@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>成長心理學：你還沒變成真正想成為的自己｜有的沒的小舖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060e0a;
+    --bg2: #091410;
+    --bg3: #0d1a14;
+    --surface: #112219;
+    --border: rgba(80,200,140,0.12);
+    --text: #e0f5ec;
+    --text-muted: #7aaa90;
+    --accent: #50c896;
+    --accent2: #c9a8ff;
+    --accent3: #4db8e8;
+    --gold: #e8c87a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.9; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 10%, rgba(40,160,90,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 90%, rgba(20,120,70,0.07) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px 60px; position: relative; }
+  .hero-series { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+  .hero-badge { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(80,200,140,0.35); padding: 6px 20px; border-radius: 2px; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 6.5vw, 4.4rem); font-weight: 300; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 12px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+  .hero-title span { color: var(--accent); font-style: italic; }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2.8vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-muted); margin-bottom: 52px; opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards; }
+  .hero-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 0 auto 52px; opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards; }
+  .hero-hook { max-width: 600px; font-size: 1.05rem; color: var(--text-muted); line-height: 2.1; text-align: left; opacity: 0; animation: fadeUp 0.8s ease 0.85s forwards; border-left: 2px solid rgba(80,200,140,0.3); padding-left: 24px; }
+  .hero-hook em { color: var(--accent); font-style: normal; }
+  .hero-meta { margin-top: 48px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards; }
+  .scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 32px; background: linear-gradient(180deg, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
+
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+
+  /* 什麼是成長心理學 */
+  .intro { padding: 80px 0; border-top: 1px solid var(--border); }
+  .intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; margin-bottom: 32px; }
+  .intro-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .intro-body p { margin-bottom: 1.4em; }
+  .intro-body strong { color: var(--text); font-weight: 500; }
+  .intro-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--accent); text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; line-height: 1.7; }
+
+  /* 心態對比 */
+  .mindset-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0; }
+  .mindset-card { padding: 24px 20px; border: 1px solid var(--border); }
+  .mindset-card.fixed { background: rgba(200,80,80,0.05); border-top: 2px solid #c87878; }
+  .mindset-card.growth { background: rgba(80,200,140,0.05); border-top: 2px solid var(--accent); }
+  .mindset-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; }
+  .mindset-card.fixed .mindset-label { color: #c87878; }
+  .mindset-card.growth .mindset-label { color: var(--accent); }
+  .mindset-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 10px; }
+  .mindset-body { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+  .mindset-scene { margin-top: 10px; font-size: 0.83rem; color: rgba(122,170,144,0.75); font-style: italic; padding-left: 10px; border-left: 1px solid rgba(80,200,140,0.2); }
+  .mindset-card.fixed .mindset-scene { border-left-color: rgba(200,120,120,0.2); color: rgba(180,140,140,0.75); }
+
+  /* 三大主題 */
+  .themes { padding: 40px 0 80px; }
+  .themes-header { text-align: center; margin-bottom: 80px; }
+  .themes-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4.5vw, 2.8rem); font-weight: 300; margin-top: 16px; }
+  .theme-card { position: relative; margin-bottom: 56px; padding: 48px 48px 48px 40px; background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--card-accent, var(--accent)); transition: background 0.3s ease; }
+  .theme-card:hover { background: var(--surface); }
+  .theme-card:nth-child(1) { --card-accent: #50c896; }
+  .theme-card:nth-child(2) { --card-accent: #e8c87a; }
+  .theme-card:nth-child(3) { --card-accent: #4db8e8; }
+  .theme-number { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; line-height: 1; color: var(--card-accent); opacity: 0.12; position: absolute; top: 20px; right: 28px; font-style: italic; pointer-events: none; }
+  .theme-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--card-accent); margin-bottom: 12px; display: block; }
+  .theme-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 400; line-height: 1.3; margin-bottom: 6px; color: var(--text); }
+  .theme-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-muted); font-size: 1rem; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .theme-body { font-size: 0.97rem; color: var(--text-muted); line-height: 2; }
+  .theme-body p { margin-bottom: 1.2em; }
+  .theme-body strong { color: var(--text); font-weight: 500; }
+  .theme-body em { color: var(--card-accent); font-style: normal; }
+  .concept-list { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+  .concept-list li { padding: 14px 16px; background: rgba(255,255,255,0.025); border-left: 2px solid var(--card-accent); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+  .concept-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .concept-list li .note { margin-top: 6px; font-size: 0.86rem; color: rgba(122,170,144,0.8); font-style: italic; }
+  .habit-loop { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 28px 0; flex-wrap: wrap; }
+  .habit-step { padding: 12px 20px; background: rgba(80,200,140,0.07); border: 1px solid rgba(80,200,140,0.2); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; color: var(--accent); text-align: center; }
+  .habit-arrow { color: var(--text-muted); font-size: 1.2rem; }
+  .theme-teaser { margin-top: 28px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.07); font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .theme-teaser strong { color: var(--card-accent); display: block; margin-bottom: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* 三要素 */
+  .three-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 32px 0; }
+  .pillar { padding: 20px 16px; background: rgba(80,200,140,0.05); border: 1px solid rgba(80,200,140,0.15); text-align: center; }
+  .pillar-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--accent); opacity: 0.4; font-style: italic; line-height: 1; margin-bottom: 8px; }
+  .pillar-title { font-size: 0.9rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+  .pillar-body { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* 結語 */
+  .why { padding: 80px 0; border-top: 1px solid var(--border); }
+  .why-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; margin-bottom: 32px; }
+  .why-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .why-body p { margin-bottom: 1.4em; }
+  .why-body strong { color: var(--text); font-weight: 500; }
+  .why-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-style: italic; color: var(--accent); text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; line-height: 1.8; }
+
+  /* CTA */
+  .cta-block { background: var(--bg3); border: 1px solid var(--border); padding: 48px 40px; text-align: center; margin: 40px 0 80px; position: relative; overflow: hidden; }
+  .cta-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .cta-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-weight: 300; margin-bottom: 16px; }
+  .cta-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.9; }
+  .cta-series { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 36px; }
+  .cta-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; padding: 6px 14px; border: 1px solid rgba(80,200,140,0.3); color: var(--text-muted); }
+  .cta-btn { display: inline-block; padding: 14px 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .cta-btn:hover { color: var(--bg); }
+  .cta-btn:hover::before { transform: translateX(0); }
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 600px) {
+    .theme-card { padding: 32px 24px; }
+    .theme-number { font-size: 3.5rem; top: 16px; right: 16px; }
+    .cta-block { padding: 36px 24px; }
+    .hero-hook { padding-left: 16px; }
+    .mindset-compare { grid-template-columns: 1fr; }
+    .three-pillars { grid-template-columns: 1fr; }
+    .habit-loop { flex-direction: column; }
+    .habit-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-series">心理學系列 · 系列導讀</div>
+  <div class="hero-badge">有的沒的小舖 出品</div>
+  <h1 class="hero-title">成長<span>心理學</span></h1>
+  <p class="hero-subtitle">你還沒變成真正想成為的自己</p>
+  <div class="hero-divider"></div>
+  <div class="hero-hook">
+    <p>每年一月一號興奮地寫下滿滿的新年目標，三月就全部悄悄放棄，還安慰自己「明年再說」？</p>
+    <p>告訴自己「這次我要認真改變」，改了兩週就回到原點，然後多了一層「果然我就是這樣沒用」的自我厭惡？</p>
+    <p style="margin-top:1.4em;">你以為這是意志力的問題，是性格的問題，是命的問題。<br>但成長心理學告訴你一個殘酷卻解放的事實：<br><em>你不是做不到。你只是一直用錯誤的方式在嘗試。</em></p>
+  </div>
+  <div class="hero-meta">作者：盧林　｜　有的沒的小舖 出品</div>
+  <div class="scroll-hint">向下探索</div>
+</section>
+
+<!-- 什麼是成長心理學 -->
+<section class="intro">
+  <div class="wrap">
+    <div class="section-label reveal">— 什麼是成長心理學？</div>
+    <h2 class="intro-title reveal">研究人如何真正改變——用科學，不靠熱血</h2>
+    <div class="intro-body reveal">
+      <p>成長心理學研究的是人如何真正改變——不是靠一時的熱血衝動，不是靠貼滿牆的勵志便條，也不是靠「心想事成」的空洞口號，而是靠<strong>可以被理解、可以被複製、可以被科學驗證的心理機制</strong>。</p>
+      <p>它橫跨神經科學、行為心理學、正向心理學等多個領域，試圖回答人類最核心也最折磨人的問題：</p>
+      <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--text); margin: 24px 0;">我們真的可以成為不同的人嗎？</p>
+      <p><strong>答案是肯定的。</strong>但前提是你必須先放棄那些讓你一直原地踏步的錯誤信念——「我就是這樣的人」「我年紀大了改不了」「努力也沒用」。</p>
+    </div>
+    <div class="intro-closing reveal">
+      改變從來不需要等待一個完美的時機。<br>
+      「等待準備好」本身，<br>
+      <span style="font-size:1rem;color:var(--text-muted);">就是固定型心態最常見的表現形式。</span>
+    </div>
+  </div>
+</section>
+
+<!-- 三大主題 -->
+<section class="themes">
+  <div class="wrap">
+    <div class="themes-header reveal">
+      <div class="section-label">— 本系列三大主題</div>
+      <h2>每一本都像一把手術刀<br>專門切開你以為「改不了」的那些死結</h2>
+    </div>
+
+    <!-- 主題一 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">I</span>
+      <span class="theme-tag">主題一 · Growth Mindset</span>
+      <h3 class="theme-title">心態的力量</h3>
+      <p class="theme-subtitle">你對自己的信念，決定了你能走多遠</p>
+      <div class="theme-body">
+        <p>史丹佛大學心理學家卡羅・德維克（Carol Dweck）花了數十年研究一個問題：為什麼面對同樣的挫折，有些人越挫越勇，有些人卻徹底崩潰？答案不在智商，不在才能，<strong>而在你對「能力」的信念系統。</strong></p>
+      </div>
+      <div class="mindset-compare reveal">
+        <div class="mindset-card fixed">
+          <div class="mindset-label">Fixed Mindset · 固定型心態</div>
+          <div class="mindset-title">能力是天生的，失敗 = 我不行</div>
+          <div class="mindset-body">本能地避開挑戰，因為挑戰有失敗的風險，而失敗會直接證明「你不夠好」。</div>
+          <div class="mindset-scene">學英文背單字失敗，就說「我語言天份差，學不會」，從此再也不碰。</div>
+        </div>
+        <div class="mindset-card growth">
+          <div class="mindset-label">Growth Mindset · 成長型心態</div>
+          <div class="mindset-title">能力可以被發展，失敗 = 數據</div>
+          <div class="mindset-body">挑戰不是對自我的威脅，而是成長的機會。失敗是寶貴的學習資料，不是終點。</div>
+          <div class="mindset-scene">同樣背單字失敗，會想「這次方法不對，下次換個方式試試」。</div>
+        </div>
+      </div>
+      <div class="theme-body">
+        <p>你以為自己是哪一種？答案可能讓你驚訝——大多數人在某些領域有成長型心態，在另一些領域卻牢牢抓著固定型心態不放。<em>你在工作上願意接受新挑戰，但一說到「改變個性」就立刻說「我就是這樣，改不了」。</em></p>
+      </div>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        固定型與成長型心態的核心差異與真實表現、如何誠實識別自己在哪些領域被困住、面對批評失敗時如何重新詮釋而非攻擊自己、每天可操作的心態轉換練習（把「我不行」改寫成「我現在還不行」）
+      </div>
+    </div>
+
+    <!-- 主題二 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">II</span>
+      <span class="theme-tag">主題二 · Habit Science</span>
+      <h3 class="theme-title">習慣的科學</h3>
+      <p class="theme-subtitle">為什麼你的意志力永遠不夠用，而且這不是你的錯</p>
+      <div class="theme-body">
+        <p>你有沒有試過靠純粹的「意志力」改變一個習慣？戒糖、早起、每天運動——一開始幹勁十足，撐了幾天，某個特別疲憊的夜晚徹底崩潰，接著狠狠罵自己「我天生就是沒毅力的人」。</p>
+        <p><strong>問題不在你意志力太弱。意志力其實是一種有限資源，會像手機電池一樣耗盡。</strong>當水用完，你就自動回到舊習慣。</p>
+        <p>真正持久的改變，從來不靠意志力硬扛，而是靠系統設計。神經科學告訴我們，習慣的形成有一個固定迴路：</p>
+      </div>
+      <div class="habit-loop reveal">
+        <div class="habit-step">觸發<br>Cue</div>
+        <div class="habit-arrow">→</div>
+        <div class="habit-step">慣性行為<br>Routine</div>
+        <div class="habit-arrow">→</div>
+        <div class="habit-step">獎勵<br>Reward</div>
+        <div class="habit-arrow">→</div>
+        <div class="habit-step">神經迴路<br>強化</div>
+      </div>
+      <div class="theme-body">
+        <p><em>你戒不掉的壞習慣，不是因為你爛，而是因為大腦已經建立了極其強固的神經迴路，在自動執行，根本不需要你每次都「決定」。</em></p>
+      </div>
+      <ul class="concept-list">
+        <li>
+          <strong>21天養成習慣是謊言</strong>
+          真正穩固一個習慣通常需要66天以上，而且因人而異。「21天」這個數字完全沒有科學依據，它只是讓你在第22天破功後更加自責。
+        </li>
+        <li>
+          <strong>環境設計 > 意志力</strong>
+          把手機放到另一個房間、把運動鞋放在床邊最顯眼的位置——讓好習慣「自動發生」，讓壞習慣「自動變得困難」。
+        </li>
+        <li>
+          <strong>微習慣策略</strong>
+          從小到「不可能失敗」的步驟開始，例如「每天只做一個俯臥撐」。讓大腦慢慢建立新的神經路徑，而不是一開始就設定「每天運動一小時」這種注定失敗的目標。
+          <div class="note">重點不是做多少，而是讓「開始」變得毫無阻力。</div>
+        </li>
+      </ul>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        習慣迴路的完整運作機制、為何「知道」和「做到」之間差了十萬八千里、環境設計的具體操作方法、微習慣如何繞過大腦的抵抗機制
+      </div>
+    </div>
+
+    <!-- 主題三 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">III</span>
+      <span class="theme-tag">主題三 · Resilience</span>
+      <h3 class="theme-title">心理韌性</h3>
+      <p class="theme-subtitle">不是不會受傷，而是受傷了還能站起來繼續走</p>
+      <div class="theme-body">
+        <p>有些人遇到一點挫折就徹底崩潰，有些人遇到同樣甚至更嚴重的事，卻能撐過去，甚至因此變得更強。這種差異，心理學稱之為<strong>韌性（Resilience）</strong>。</p>
+        <p>很多人以為韌性是天生的。<strong>但大量研究告訴我們：韌性不是特質，而是一種可以被學習、被建立、被刻意練習的技能。</strong></p>
+        <p>韌性不代表你不會受傷、不會難過、不會崩潰。它真正的意思是——<em>在受傷和難過之後，你有能力重新找回重心，繼續往前走。</em></p>
+        <ul class="concept-list">
+          <li>
+            <strong>為何「正向思考」有時反而有害</strong>
+            強迫自己「想開一點」可能讓你忽略真實的情緒，導致問題累積。真正的韌性，從允許自己感受負面情緒開始。
+          </li>
+          <li>
+            <strong>創傷後成長 Post-Traumatic Growth</strong>
+            有些人經歷過人生中最壞的事（失業、失戀、重病），卻因此重新定義自己、變得更完整、更懂得珍惜。痛苦不一定只有傷害，它也可以是蛻變的原料。
+          </li>
+          <li>
+            <strong>可以每天操作的韌性練習</strong>
+            不是叫你「別難過」，而是寫「壓力後反思日記」、練習「重新框架」負面事件、刻意建立和維護可靠的支持系統。
+          </li>
+        </ul>
+      </div>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        心理韌性的核心組成部分（情緒調節、認知彈性、人際支持、意義感）、創傷後成長的心理機制、建立韌性的具體日常練習、如何區分「正向思考」和真正的心理韌性
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 結語 -->
+<section class="why">
+  <div class="wrap">
+    <div class="section-label reveal">— 成長心理學讀了能做什麼？</div>
+    <h2 class="why-title reveal">真正的改變，靠三樣可以被學習的東西</h2>
+    <div class="why-body reveal">
+      <p>讀這個系列之前，你可能還相信改變靠的是突然的熱情、強大的決心、或某個神奇的人生轉折點。讀完之後，你會清楚看見：</p>
+    </div>
+    <div class="three-pillars reveal">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">成長型心態</div>
+        <div class="pillar-body">對自己誠實的信念系統，把失敗當數據而非審判</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">習慣系統</div>
+        <div class="pillar-body">設計良好的環境與迴路，讓改變自動發生</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">心理韌性</div>
+        <div class="pillar-body">面對挫折時重新站起來繼續走的能力</div>
+      </div>
+    </div>
+    <div class="why-body reveal">
+      <p><strong>這三樣東西都不是天生的禮物，都可以透過練習被建立起來。</strong></p>
+    </div>
+    <div class="why-quote reveal">
+      成長心理學不會給你一夜之間徹底蛻變的魔法。<br>
+      但它會給你一件更珍貴、更可靠的東西：<br>
+      <span style="font-size:1rem;color:var(--text-muted);">一個你終於可以信任的自己——不是完美無缺，<br>而是知道如何一步一步、持續地變得更好。</span>
+    </div>
+
+    <div class="cta-block reveal">
+      <div class="cta-label">— 準備好停止原地踏步了嗎？</div>
+      <h3 class="cta-title">本系列三冊，現正陸續上架</h3>
+      <p class="cta-desc">作者：盧林　｜　有的沒的小舖 出品</p>
+      <div class="cta-series">
+        <span class="cta-tag">心態的力量</span>
+        <span class="cta-tag">習慣的科學</span>
+        <span class="cta-tag">心理韌性</span>
+      </div>
+      <p class="cta-desc">每一本都讓改變從「我想改變」真正變成「我正在改變」。</p>
+      <a href="https://still-time-corner.vercel.app" class="cta-btn" target="_blank">前往小舖探索完整系列</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 有的沒的小舖 Still Time Corner · 成長心理學系列 · 盧林 著
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
