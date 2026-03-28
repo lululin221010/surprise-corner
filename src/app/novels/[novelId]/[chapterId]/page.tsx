@@ -184,7 +184,7 @@ export default async function ChapterPage({ params }: Props) {
           )}
           <h1 style={{ fontSize: '2rem', fontWeight: 400, color: '#e8dcc8', margin: '0 0 20px' }}>{chapter.title}</h1>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 10, fontSize: '0.78rem', color: '#4a3a2a' }}>
-            <span>{chapter.publishedAt}</span><span>·</span><span>{chapter.wordCount} 字</span>
+            <span>{chapter.publishedAt}</span>
           </div>
         </header>
 

@@ -601,7 +601,6 @@ export default function EbookPage() {
           <div className="cover-line" />
           <p className="cover-desc">{novel.description}</p>
           <div className="cover-meta">
-            <span>約 {totalWords.toLocaleString()} 字</span>
           </div>
         </div>
 
@@ -661,7 +660,7 @@ export default function EbookPage() {
               <div key={chapter.id} className="chapter-block" id={`ch-${chapter.chapterNumber}`}>
                 <p className="chapter-eyebrow">第 {chapter.chapterNumber} 章</p>
                 <h2 className="chapter-heading">{chapter.title}</h2>
-                <p className="chapter-dateline">{chapter.publishedAt} &nbsp;·&nbsp; {chapter.wordCount} 字</p>
+                <p className="chapter-dateline">{chapter.publishedAt}</p>
                 <div className="chapter-rule" />
                 {paragraphs.map((para: string, i: number) => {
                   // 圖片：![說明](url)
