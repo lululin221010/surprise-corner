@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心理學系列｜盧林著 × 有的沒的小舖</title>
+<meta name="description" content="盧林著，有的沒的小舖出品。暗黑、認知、關係、成長、人格、潛意識——六大心理學系列，七篇免費導讀，帶你讀懂自己與他人。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08060f;
+    --bg2: #0d0a18;
+    --bg3: #120e20;
+    --surface: #181228;
+    --border: rgba(180,150,255,0.12);
+    --text: #ede8ff;
+    --text-muted: #8878b0;
+    --accent: #c9a8ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; line-height: 1.9; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(150,100,255,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(100,70,200,0.06) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px 60px; position: relative; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 8vw, 5.5rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 8px; opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards; }
+  .hero-title span { color: var(--accent); font-style: italic; }
+  .hero-author { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); border: 1px solid rgba(180,150,255,0.3); padding: 6px 20px; border-radius: 2px; margin: 24px 0 40px; display: inline-block; opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards; }
+  .hero-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 0 auto 40px; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
+  .hero-desc { max-width: 560px; font-size: 1.05rem; color: var(--text-muted); line-height: 2.1; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+  .hero-desc em { color: var(--accent); font-style: normal; }
+  .hero-stats { display: flex; gap: 40px; justify-content: center; margin-top: 52px; opacity: 0; animation: fadeUp 0.8s ease 1s forwards; }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--accent); font-style: italic; line-height: 1; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; }
+  .scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.4s forwards; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 32px; background: linear-gradient(180deg, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
+
+  /* 系列介紹 */
+  .intro { padding: 70px 0; border-top: 1px solid var(--border); }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
+  .intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 300; margin-bottom: 28px; }
+  .intro-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; max-width: 680px; }
+  .intro-body p { margin-bottom: 1.3em; }
+  .intro-body strong { color: var(--text); font-weight: 500; }
+  .intro-body em { color: var(--accent); font-style: normal; }
+
+  /* 免費導讀入口 */
+  .free-banner { background: rgba(180,150,255,0.05); border: 1px solid rgba(180,150,255,0.2); padding: 20px 28px; margin: 40px 0 0; display: flex; align-items: center; gap: 20px; }
+  .free-badge { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; background: var(--accent); color: var(--bg); padding: 6px 14px; white-space: nowrap; text-transform: uppercase; }
+  .free-text { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+  .free-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(180,150,255,0.3); transition: border-color 0.2s; }
+  .free-text a:hover { border-bottom-color: var(--accent); }
+
+  /* 六大系列卡片 */
+  .series-section { padding: 60px 0 80px; }
+  .series-header { text-align: center; margin-bottom: 60px; }
+  .series-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 300; margin-top: 12px; }
+  .series-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .series-card { display: block; text-decoration: none; position: relative; padding: 32px 28px; background: var(--bg3); border: 1px solid var(--border); border-top: 2px solid var(--c); transition: background 0.3s ease, transform 0.2s ease; overflow: hidden; }
+  .series-card:hover { background: var(--surface); transform: translateY(-2px); }
+  .series-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 60%); pointer-events: none; }
+  .series-card[data-n="1"] { --c: #e8607a; }
+  .series-card[data-n="2"] { --c: #4db8e8; }
+  .series-card[data-n="3"] { --c: #e8a0b4; }
+  .series-card[data-n="4"] { --c: #50c896; }
+  .series-card[data-n="5"] { --c: #e8b84b; }
+  .series-card[data-n="6"] { --c: #50c8d8; }
+  .card-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--c); opacity: 0.12; position: absolute; top: 12px; right: 20px; font-style: italic; line-height: 1; pointer-events: none; }
+  .card-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--c); margin-bottom: 12px; }
+  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--text); line-height: 1.35; margin-bottom: 4px; }
+  .card-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; }
+  .card-desc { font-size: 0.86rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+  .card-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .card-topic { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.07); color: var(--text-muted); }
+  .card-cta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--c); display: flex; align-items: center; gap: 8px; }
+  .card-cta::after { content: '→'; transition: transform 0.2s ease; }
+  .series-card:hover .card-cta::after { transform: translateX(4px); }
+
+  /* CTA 底部 */
+  .cta-section { padding: 0 0 80px; }
+  .cta-block { background: var(--bg3); border: 1px solid var(--border); padding: 52px 48px; text-align: center; position: relative; overflow: hidden; }
+  .cta-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .cta-block::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(180,150,255,0.3), transparent); }
+  .cta-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 300; margin-bottom: 16px; }
+  .cta-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 2; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-desc em { color: var(--accent); font-style: normal; }
+  .cta-progress { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; text-align: left; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .progress-item { display: flex; align-items: center; gap: 14px; font-size: 0.88rem; }
+  .progress-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .progress-dot.done { background: var(--accent); }
+  .progress-dot.soon { background: transparent; border: 1px solid var(--text-muted); }
+  .progress-text { color: var(--text-muted); line-height: 1.5; }
+  .progress-text strong { color: var(--text); font-weight: 500; }
+  .progress-badge { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; padding: 2px 8px; margin-left: 6px; }
+  .progress-badge.done { background: rgba(180,150,255,0.12); color: var(--accent); }
+  .progress-badge.soon { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+  .cta-btn { display: inline-block; padding: 14px 44px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .cta-btn:hover { color: var(--bg); }
+  .cta-btn:hover::before { transform: translateX(0); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 620px) {
+    .series-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 28px; }
+    .cta-block { padding: 36px 24px; }
+    .free-banner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">有的沒的小舖 出品</div>
+  <h1 class="hero-title">心理學<span>系列</span></h1>
+  <div class="hero-author">盧林 著</div>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">
+    六大心理學世界，七篇免費系列導讀。<br>
+    <em>暗黑、認知、關係、成長、人格、潛意識</em>——<br>
+    每一篇都帶你讀懂一個你一直不太明白的自己。
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">心理學子系列</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7</div>
+      <div class="stat-label">免費導讀篇章</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">永久免費閱讀</div>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- 介紹 -->
+<section class="intro">
+  <div class="wrap">
+    <div class="section-label reveal">關於這個系列</div>
+    <h2 class="intro-title reveal">不是課本，不是說教<br>是一面你可以選擇要不要照的鏡子</h2>
+    <div class="intro-body reveal">
+      <p>這個系列從一個最簡單的問題出發：<strong>為什麼我們明明很努力，卻還是一直在同樣的地方受傷、卡住、重蹈覆轍？</strong></p>
+      <p>答案幾乎不在「你不夠努力」，也不在「你運氣不好」。答案在心理學——在那些解釋人類如何思考、感受、相處、成長、陷落、又再站起來的機制與模式。</p>
+      <p>六大系列，涵蓋六個不同的心理學視角，從人性的黑暗面、大腦的思維陷阱，到關係的深層需求、改變的神經科學、人格的科學框架，最後一直挖到<em>那個躲在水面以下、一直默默替你做所有決定的潛意識</em>。</p>
+      <p><strong>每一篇導讀完全免費，永久開放。</strong>如果讀完意猶未盡，完整版各冊陸續於有的沒的小舖上架。</p>
+    </div>
+
+    <div class="free-banner reveal">
+      <div class="free-badge">全部免費</div>
+      <div class="free-text">
+        七篇系列導讀現已全部上線，無需登入、無需付費，直接閱讀。<br>
+        從 <a href="/psychology-guide.html">心理學六大世界總導讀</a> 開始，或直接選一個你最想了解的世界。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 六大系列 -->
+<section class="series-section">
+  <div class="wrap">
+    <div class="series-header reveal">
+      <div class="section-label">六大系列導讀</div>
+      <h2>選一個你最想讀懂的自己</h2>
+    </div>
+
+    <div class="series-grid">
+      <!-- 暗黑心理學 -->
+      <a class="series-card reveal" href="/dark-psychology.html" data-n="1">
+        <div class="card-num">I</div>
+        <div class="card-tag">Dark Psychology</div>
+        <div class="card-title">暗黑心理學</div>
+        <div class="card-subtitle">你不敢承認的人性真相</div>
+        <div class="card-desc">操控、說服、謊言、黑暗人格——了解人性的陰暗面，才能真正看清關係與世界。</div>
+        <div class="card-topics">
+          <span class="card-topic">操控與控制</span>
+          <span class="card-topic">說服影響力</span>
+          <span class="card-topic">黑暗人格</span>
+          <span class="card-topic">謊言偵測</span>
+        </div>
+        <div class="card-cta">閱讀導讀</div>
+      </a>
+
+      <!-- 認知心理學 -->
+      <a class="series-card reveal" href="/cognitive-psychology.html" data-n="2">
+        <div class="card-num">II</div>
+        <div class="card-tag">Cognitive Psychology</div>
+        <div class="card-title">認知心理學</div>
+        <div class="card-subtitle">你的大腦每天都在騙你</div>
+        <div class="card-desc">系統一 vs 系統二、認知偏誤、記憶的謊言——拆解大腦自動化思維的 Bug 與捷徑。</div>
+        <div class="card-topics">
+          <span class="card-topic">思維陷阱</span>
+          <span class="card-topic">記憶的謊言</span>
+          <span class="card-topic">決策偏誤</span>
+        </div>
+        <div class="card-cta">閱讀導讀</div>
+      </a>
+
+      <!-- 關係心理學 -->
+      <a class="series-card reveal" href="/relationship-psychology.html" data-n="3">
+        <div class="card-num">III</div>
+        <div class="card-tag">Relationship Psychology</div>
+        <div class="card-title">關係心理學</div>
+        <div class="card-subtitle">為什麼你總是愛錯人</div>
+        <div class="card-desc">依附類型、重複的模式、愛與邊界——為什麼你會一再吸引同類型的人，又一再受同樣的傷。</div>
+        <div class="card-topics">
+          <span class="card-topic">依附類型</span>
+          <span class="card-topic">重複的模式</span>
+          <span class="card-topic">愛與邊界</span>
+        </div>
+        <div class="card-cta">閱讀導讀</div>
+      </a>
+
+      <!-- 成長心理學 -->
+      <a class="series-card reveal" href="/growth-psychology.html" data-n="4">
+        <div class="card-num">IV</div>
+        <div class="card-tag">Growth Psychology</div>
+        <div class="card-title">成長心理學</div>
+        <div class="card-subtitle">你還沒變成真正想成為的自己</div>
+        <div class="card-desc">成長型心態、習慣的科學、心理韌性——改變不是靠意志力，而是了解大腦如何真正地學習與重塑。</div>
+        <div class="card-topics">
+          <span class="card-topic">成長型心態</span>
+          <span class="card-topic">習慣迴路</span>
+          <span class="card-topic">心理韌性</span>
+        </div>
+        <div class="card-cta">閱讀導讀</div>
+      </a>
+
+      <!-- 人格心理學 -->
+      <a class="series-card reveal" href="/personality-psychology.html" data-n="5">
+        <div class="card-num">V</div>
+        <div class="card-tag">Personality Psychology</div>
+        <div class="card-title">人格心理學</div>
+        <div class="card-subtitle">為什麼你就是你</div>
+        <div class="card-desc">大五人格 OCEAN、高敏感人格 HSP、黑暗人格與人格障礙——停止為自己的本質道歉，開始真正認識自己。</div>
+        <div class="card-topics">
+          <span class="card-topic">大五人格</span>
+          <span class="card-topic">高敏感 HSP</span>
+          <span class="card-topic">人格障礙</span>
+        </div>
+        <div class="card-cta">閱讀導讀</div>
+      </a>
+
+      <!-- 潛意識心理學 -->
+      <a class="series-card reveal" href="/unconscious-psychology.html" data-n="6">
+        <div class="card-num">VI</div>
+        <div class="card-tag">Unconscious Psychology</div>
+        <div class="card-title">潛意識心理學</div>
+        <div class="card-subtitle">那個你不認識的自己</div>
+        <div class="card-desc">防衛機制、原生家庭的烙印、強迫性重複——水面以下那個一直在替你做決定的部分，終於要被看見了。</div>
+        <div class="card-topics">
+          <span class="card-topic">防衛機制</span>
+          <span class="card-topic">原生家庭</span>
+          <span class="card-topic">重複劇本</span>
+        </div>
+        <div class="card-cta">閱讀導讀</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-block reveal">
+      <div class="cta-eyebrow">完整版電子書</div>
+      <h2 class="cta-title">導讀之後，還想繼續深入？</h2>
+      <p class="cta-desc">
+        每個系列的完整版電子書，<em>陸續於有的沒的小舖上架</em>。<br>
+        比導讀更深、更完整——包含完整理論框架、大量生活實例、以及可以真正帶走的實用工具。
+      </p>
+      <div class="cta-progress">
+        <div class="progress-item">
+          <div class="progress-dot done"></div>
+          <div class="progress-text">
+            <strong>心理學六大世界導讀</strong>
+            <span class="progress-badge done">永久免費</span>
+          </div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot soon"></div>
+          <div class="progress-text"><strong>暗黑心理學</strong> 完整版<span class="progress-badge soon">撰寫中</span></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot soon"></div>
+          <div class="progress-text"><strong>認知心理學</strong> 完整版<span class="progress-badge soon">撰寫中</span></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot soon"></div>
+          <div class="progress-text"><strong>關係心理學</strong> 完整版<span class="progress-badge soon">撰寫中</span></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot soon"></div>
+          <div class="progress-text"><strong>成長心理學</strong> 完整版<span class="progress-badge soon">撰寫中</span></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot soon"></div>
+          <div class="progress-text"><strong>人格心理學</strong> 完整版<span class="progress-badge soon">撰寫中</span></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot soon"></div>
+          <div class="progress-text"><strong>潛意識心理學</strong> 完整版<span class="progress-badge soon">撰寫中</span></div>
+        </div>
+      </div>
+      <a href="https://still-time-corner.vercel.app" class="cta-btn" target="_blank" rel="noopener">前往有的沒的小舖</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 有的沒的小舖 · 盧林 著 · Psychology Series · surprise-corner.vercel.app</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
