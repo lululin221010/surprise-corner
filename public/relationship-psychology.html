@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>關係心理學：為什麼你總是愛錯人｜有的沒的小舖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f080a;
+    --bg2: #160c0f;
+    --bg3: #1c1014;
+    --surface: #251419;
+    --border: rgba(220,140,160,0.12);
+    --text: #f5e8ec;
+    --text-muted: #b08890;
+    --accent: #e8a0b4;
+    --accent2: #c9a8ff;
+    --accent3: #7ecfb3;
+    --gold: #e8c87a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 10%, rgba(180,60,90,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 90%, rgba(140,40,80,0.07) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; padding: 80px 24px 60px; position: relative;
+  }
+  .hero-series { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+  .hero-badge { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(232,160,180,0.35); padding: 6px 20px; border-radius: 2px; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 6.5vw, 4.4rem); font-weight: 300; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 12px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+  .hero-title span { color: var(--accent); font-style: italic; }
+  .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2.8vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-muted); margin-bottom: 52px; opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards; }
+  .hero-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 0 auto 52px; opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards; }
+  .hero-hook { max-width: 600px; font-size: 1.05rem; color: var(--text-muted); line-height: 2.1; text-align: left; opacity: 0; animation: fadeUp 0.8s ease 0.85s forwards; border-left: 2px solid rgba(232,160,180,0.3); padding-left: 24px; }
+  .hero-hook em { color: var(--accent); font-style: normal; }
+  .hero-meta { margin-top: 48px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards; }
+  .scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 32px; background: linear-gradient(180deg, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
+
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+
+  /* ── 什麼是關係心理學 ── */
+  .intro { padding: 80px 0; border-top: 1px solid var(--border); }
+  .intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; margin-bottom: 32px; }
+  .intro-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .intro-body p { margin-bottom: 1.4em; }
+  .intro-body strong { color: var(--text); font-weight: 500; }
+  .intro-closing { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--accent); text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; line-height: 1.7; }
+
+  /* ── 四種依附類型 ── */
+  .attachment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0; }
+  .att-card { padding: 22px 18px; background: rgba(232,160,180,0.04); border: 1px solid var(--border); border-top: 2px solid var(--att-c, var(--accent)); }
+  .att-card:nth-child(1) { --att-c: #7ecfb3; }
+  .att-card:nth-child(2) { --att-c: #e8a0b4; }
+  .att-card:nth-child(3) { --att-c: #c9a8ff; }
+  .att-card:nth-child(4) { --att-c: #e8c87a; }
+  .att-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--att-c); margin-bottom: 8px; }
+  .att-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 8px; }
+  .att-body { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+  .att-scene { margin-top: 10px; font-size: 0.83rem; color: rgba(176,136,144,0.75); font-style: italic; padding-left: 10px; border-left: 1px solid rgba(232,160,180,0.2); }
+
+  /* ── 三大主題 ── */
+  .themes { padding: 40px 0 80px; }
+  .themes-header { text-align: center; margin-bottom: 80px; }
+  .themes-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4.5vw, 2.8rem); font-weight: 300; margin-top: 16px; }
+  .theme-card { position: relative; margin-bottom: 56px; padding: 48px 48px 48px 40px; background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--card-accent, var(--accent)); transition: background 0.3s ease; }
+  .theme-card:hover { background: var(--surface); }
+  .theme-card:nth-child(1) { --card-accent: #e8a0b4; }
+  .theme-card:nth-child(2) { --card-accent: #c9a8ff; }
+  .theme-card:nth-child(3) { --card-accent: #7ecfb3; }
+  .theme-number { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; line-height: 1; color: var(--card-accent); opacity: 0.12; position: absolute; top: 20px; right: 28px; font-style: italic; pointer-events: none; }
+  .theme-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--card-accent); margin-bottom: 12px; display: block; }
+  .theme-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 400; line-height: 1.3; margin-bottom: 6px; color: var(--text); }
+  .theme-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-muted); font-size: 1rem; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .theme-body { font-size: 0.97rem; color: var(--text-muted); line-height: 2; }
+  .theme-body p { margin-bottom: 1.2em; }
+  .theme-body strong { color: var(--text); font-weight: 500; }
+  .theme-body em { color: var(--card-accent); font-style: normal; }
+  .concept-list { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+  .concept-list li { padding: 14px 16px; background: rgba(255,255,255,0.025); border-left: 2px solid var(--card-accent); font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
+  .concept-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .concept-list li .scene { margin-top: 8px; font-size: 0.86rem; color: rgba(176,136,144,0.8); font-style: italic; padding-left: 10px; border-left: 1px solid rgba(232,160,180,0.2); }
+  .love-contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .love-col { padding: 18px 16px; font-size: 0.92rem; line-height: 1.8; }
+  .love-col.healthy { background: rgba(126,207,179,0.06); border: 1px solid rgba(126,207,179,0.2); color: var(--text-muted); }
+  .love-col.unhealthy { background: rgba(232,160,180,0.06); border: 1px solid rgba(232,160,180,0.15); color: var(--text-muted); }
+  .love-col-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; margin-bottom: 12px; }
+  .love-col.healthy .love-col-label { color: #7ecfb3; }
+  .love-col.unhealthy .love-col-label { color: #e8a0b4; }
+  .love-col p { margin-bottom: 0.8em; }
+  .theme-teaser { margin-top: 28px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.07); font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+  .theme-teaser strong { color: var(--card-accent); display: block; margin-bottom: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ── 結語 ── */
+  .why { padding: 80px 0; border-top: 1px solid var(--border); }
+  .why-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; margin-bottom: 32px; }
+  .why-body { font-size: 1.02rem; color: var(--text-muted); line-height: 2.1; }
+  .why-body p { margin-bottom: 1.4em; }
+  .why-body strong { color: var(--text); font-weight: 500; }
+  .why-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-style: italic; color: var(--accent); text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; line-height: 1.8; }
+
+  /* ── CTA ── */
+  .cta-block { background: var(--bg3); border: 1px solid var(--border); padding: 48px 40px; text-align: center; margin: 40px 0 80px; position: relative; overflow: hidden; }
+  .cta-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .cta-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-weight: 300; margin-bottom: 16px; }
+  .cta-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.9; }
+  .cta-series { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 36px; }
+  .cta-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; padding: 6px 14px; border: 1px solid rgba(232,160,180,0.3); color: var(--text-muted); }
+  .cta-btn { display: inline-block; padding: 14px 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .cta-btn:hover { color: var(--bg); }
+  .cta-btn:hover::before { transform: translateX(0); }
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--text-muted); opacity: 0.5; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 600px) {
+    .theme-card { padding: 32px 24px; }
+    .theme-number { font-size: 3.5rem; top: 16px; right: 16px; }
+    .cta-block { padding: 36px 24px; }
+    .hero-hook { padding-left: 16px; }
+    .attachment-grid { grid-template-columns: 1fr; }
+    .love-contrast { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-series">心理學系列 · 系列導讀</div>
+  <div class="hero-badge">有的沒的小舖 出品</div>
+  <h1 class="hero-title">關係<span>心理學</span></h1>
+  <p class="hero-subtitle">為什麼你總是愛錯人</p>
+  <div class="hero-divider"></div>
+  <div class="hero-hook">
+    <p>換了一個又一個對象，卻發現他們骨子裡都是同一種人？</p>
+    <p>明明知道這段關係對你不好，卻就是離不開，連自己都覺得不可思議。</p>
+    <p>朋友勸你「你值得更好的」，你點頭如搗蒜，轉頭卻還是乖乖回去。</p>
+    <p style="margin-top:1.4em;">你以為這是運氣不好，是緣分使然。<br>但關係心理學會直接戳破這個泡泡，給你一個你最不想聽的答案：<br><em>你吸引來的每一個人，都不是偶然。你重複的每一次傷害，是自己內在劇本在偷偷導演。</em></p>
+  </div>
+  <div class="hero-meta">作者：盧林　｜　有的沒的小舖 出品</div>
+  <div class="scroll-hint">向下探索</div>
+</section>
+
+<!-- 什麼是關係心理學 -->
+<section class="intro">
+  <div class="wrap">
+    <div class="section-label reveal">— 什麼是關係心理學？</div>
+    <h2 class="intro-title reveal">你的關係模板，在你還不會說話之前就已經成形</h2>
+    <div class="intro-body reveal">
+      <p>關係心理學研究的，是人與人之間連結的本質——我們為什麼被某些人強烈吸引、為什麼在關係裡一次又一次重複同樣的痛苦模式、為什麼愛有時候不是讓人自由，而是讓人徹底窒息。</p>
+      <p>它的核心發現來自英國心理學家約翰・鮑比（John Bowlby）提出的<strong>依附理論</strong>：人類從出生那一刻起，就需要與主要照顧者建立穩固的情感連結才能存活。這個最早期的連結經驗，會在你心裡悄悄刻下一套「關係模板」——</p>
+    </div>
+    <div class="three-q reveal" style="display:flex;flex-direction:column;gap:12px;margin:24px 0;">
+      <div style="padding:14px 18px;background:rgba(232,160,180,0.05);border-left:2px solid var(--accent);font-size:0.95rem;color:var(--text-muted);">「我值不值得被愛？」</div>
+      <div style="padding:14px 18px;background:rgba(232,160,180,0.05);border-left:2px solid var(--accent);font-size:0.95rem;color:var(--text-muted);">「別人可不可以被信任？」</div>
+      <div style="padding:14px 18px;background:rgba(232,160,180,0.05);border-left:2px solid var(--accent);font-size:0.95rem;color:var(--text-muted);">「親密到底是安全的，還是會讓我受傷？」</div>
+    </div>
+    <div class="intro-body reveal">
+      <p>這套模板，在你還不會說話之前就已經成形，然後像隱形劇本一樣，跟著你走過每一段友情、愛情、甚至職場關係，<strong>默默決定你在關係裡的行為、反應、選擇——直到你終於看見它。</strong></p>
+    </div>
+    <div class="intro-closing reveal">
+      你從來不是「天生就愛錯人」。<br>
+      你只是還沒看清楚，那個讓你不斷重演的劇本<br>
+      <span style="font-size:1rem;color:var(--text-muted);">究竟從哪裡來，又要帶你去哪裡。</span>
+    </div>
+  </div>
+</section>
+
+<!-- 三大主題 -->
+<section class="themes">
+  <div class="wrap">
+    <div class="themes-header reveal">
+      <div class="section-label">— 本系列三大主題</div>
+      <h2>每一本都像一面無情的鏡子<br>專門照出你以為是「愛情」的那些熟悉傷痕</h2>
+    </div>
+
+    <!-- 主題一 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">I</span>
+      <span class="theme-tag">主題一 · Attachment Theory</span>
+      <h3 class="theme-title">依附類型</h3>
+      <p class="theme-subtitle">你的愛情模式，在童年就已經決定了</p>
+      <div class="theme-body">
+        <p>心理學把依附類型分為四種。你不需要硬把自己塞進哪一格，但讀完這一冊，你大概率會突然對號入座，然後心裡<em>「咔」的一聲</em>。</p>
+      </div>
+      <div class="attachment-grid reveal">
+        <div class="att-card">
+          <div class="att-label">Secure · 安全型</div>
+          <div class="att-title">相信愛，也相信自己值得被愛</div>
+          <div class="att-body">能好好親密，也能給對方空間。吵架不會覺得天要塌下來，因為內心有一個穩固的基地。</div>
+        </div>
+        <div class="att-card">
+          <div class="att-label">Anxious · 焦慮型</div>
+          <div class="att-title">極度害怕被拋棄</div>
+          <div class="att-body">一天沒收到訊息就開始腦補。愛得很用力，卻常常因為太用力而把對方推得更遠。</div>
+          <div class="att-scene">半夜傳「你睡了嗎？」，對方沒秒回就開始翻舊帳。</div>
+        </div>
+        <div class="att-card">
+          <div class="att-label">Avoidant · 迴避型</div>
+          <div class="att-title">越靠近，越想逃</div>
+          <div class="att-body">害怕依賴，覺得親密等於失去自由。不是不愛，是愛讓他們感到窒息和危險。</div>
+          <div class="att-scene">一感覺對方依賴自己，就開始挑剔對方的缺點，好讓自己有理由拉開距離。</div>
+        </div>
+        <div class="att-card">
+          <div class="att-label">Disorganized · 混亂型</div>
+          <div class="att-title">又渴望又害怕</div>
+          <div class="att-body">既強烈渴望連結，又極度害怕受傷。行為常常自相矛盾，把對方搞得摸不著頭緒。</div>
+          <div class="att-scene">今天說「我離不開你」，明天就消失三天。</div>
+        </div>
+      </div>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        四種依附類型的成因與核心特徵、焦慮型與迴避型為何像磁鐵相互吸引卻讓彼此痛不欲生（追逐-逃避循環）、如何快速辨識自己的主要依附類型、依附類型真的可以改變嗎？
+      </div>
+    </div>
+
+    <!-- 主題二 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">II</span>
+      <span class="theme-tag">主題二 · Repetition Compulsion</span>
+      <h3 class="theme-title">重複的模式</h3>
+      <p class="theme-subtitle">為什麼你總是遇到同一種人</p>
+      <div class="theme-body">
+        <p>你的前任們外表、職業可能天差地別，但給你的感覺卻出奇地相似？同樣的爭吵劇碼，換了對象還是在吵同一件事？</p>
+        <p>這不是你運氣爛。這是心理學裡著名的<strong>重複性強迫（Repetition Compulsion）</strong>機制在暗中操盤。</p>
+        <p>你的潛意識有一個非常固執的邏輯：它會不斷驅使你重新創造童年時期未解決的關係模式，潛意識地希望<em>「這一次，我終於可以修復它、得到我小時候沒得到的」</em>。</p>
+        <ul class="concept-list">
+          <li>
+            <strong>熟悉的混亂感 = 「愛的味道」</strong>
+            如果你童年的照顧者忽冷忽熱，你長大後很可能一再被情緒不穩定的人吸引——不是因為你「喜歡痛苦」，而是那種熟悉的混亂感，讓大腦自動判定「這才是家」。
+            <div class="scene">小時候爸媽冷戰，你長大後總是找容易生氣、愛冷暴力的伴侶，然後努力當「和事佬」討好對方。</div>
+          </li>
+          <li>
+            <strong>「嚴格才是愛」的錯誤模板</strong>
+            小時候被嚴格要求「乖才會被愛」，你長大後容易被控制欲強、愛情緒勒索的人吸引，還覺得「他管我就是愛我」。
+          </li>
+          <li>
+            <strong>追逐最初的溫度</strong>
+            小時候缺乏關注，你長大後容易被「一開始很熱烈、之後突然冷淡」的人迷住，然後不斷追逐那最初的感覺。
+          </li>
+        </ul>
+      </div>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        重複性強迫的完整心理機制、為何「有毒的熟悉感」總是比「健康的陌生感」更有吸引力、如何透過回顧過去幾段關係快速識別自己的核心模式、打破重複的第一步：先看清自己正在重演的劇本
+      </div>
+    </div>
+
+    <!-- 主題三 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">III</span>
+      <span class="theme-tag">主題三 · Love & Boundaries</span>
+      <h3 class="theme-title">愛與邊界</h3>
+      <p class="theme-subtitle">真正的愛，不需要你消失自己</p>
+      <div class="theme-body">
+        <p>很多人一輩子都分不清「愛」和「依賴」、「愛」和「控制」的差別。</p>
+      </div>
+      <div class="love-contrast reveal">
+        <div class="love-col healthy">
+          <div class="love-col-label">健康的愛</div>
+          <p>「我想和你在一起」</p>
+          <p>「我尊重你的需要，即使和我的不一樣」</p>
+          <p>「你可以有自己的空間和朋友」</p>
+        </div>
+        <div class="love-col unhealthy">
+          <div class="love-col-label">控制或依賴</div>
+          <p>「沒有你我根本活不下去」</p>
+          <p>「如果你愛我，就應該把我放第一位」</p>
+          <p>「你去見那個人就是不在乎我」</p>
+        </div>
+      </div>
+      <div class="theme-body">
+        <p>關係裡最常見的問題，不是愛得不夠，而是<strong>邊界模糊</strong>——你不知道自己的需求在哪裡、不知道什麼時候該堅定地說「不」。於是你一次次委屈自己，還以為這叫做「為愛犧牲」，其實只是<em>慢慢在關係裡消失</em>。</p>
+        <ul class="concept-list">
+          <li>
+            <strong>共依存 Codependency</strong>
+            當你的存在感、價值感，全部來自「被別人需要」「拯救別人」，最後兩人都失去自己。表面上是愛，本質上是相互綑綁。
+          </li>
+          <li>
+            <strong>邊界不等於不愛</strong>
+            設立邊界不是冷漠，而是真正愛自己的開始。一段能讓你說「不」的關係，才是真正安全的關係。
+          </li>
+          <li>
+            <strong>健康關係的真正標誌</strong>
+            不是有沒有爭吵，而是爭吵後能不能修復、能不能各自保有完整——在關係裡，你還認得出自己嗎？
+          </li>
+        </ul>
+      </div>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        健康與不健康關係的真正差異、邊界的定義與設立方法、共依存的識別與脫離、如何在不傷害關係的前提下找回自己在關係裡的位置
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 結語 -->
+<section class="why">
+  <div class="wrap">
+    <div class="section-label reveal">— 關係心理學讀了能做什麼？</div>
+    <h2 class="why-title reveal">不是要你責怪自己，而是讓你終於可以選擇</h2>
+    <div class="why-body reveal">
+      <p>讀完這個系列，你可能會有一段時間覺得心裡很不是滋味。因為你會開始看見——原來很多你以為是「愛」的東西，其實是恐懼在作祟；原來很多你以為純粹是「對方的問題」，其實有一部分的根源，一直在你自己身上。</p>
+      <p>但這不是要你責怪自己。<strong>你的關係模式，是在你還小、還沒有能力保護自己的時候就形成的。你從來沒有選擇過它。</strong></p>
+      <p>但現在，你可以選擇——是繼續讓這套舊劇本決定你的每一段關係，還是帶著覺察，慢慢改寫它。</p>
+    </div>
+    <div class="why-quote reveal">
+      關係心理學給不了你童話般的完美愛情，<br>
+      但它能給你一樣更珍貴、更踏實的東西：<br>
+      <span style="font-size:1rem;color:var(--text-muted);">在任何關係裡，你都還能清楚地認得出自己。</span>
+    </div>
+
+    <div class="cta-block reveal">
+      <div class="cta-label">— 準備好看清自己的關係模式了嗎？</div>
+      <h3 class="cta-title">本系列三冊，現正陸續上架</h3>
+      <p class="cta-desc">作者：盧林　｜　有的沒的小舖 出品</p>
+      <div class="cta-series">
+        <span class="cta-tag">依附類型</span>
+        <span class="cta-tag">重複的模式</span>
+        <span class="cta-tag">愛與邊界</span>
+      </div>
+      <p class="cta-desc">每一本都讓你在愛裡，更清醒，也更像自己。</p>
+      <a href="https://still-time-corner.vercel.app" class="cta-btn" target="_blank">前往小舖探索完整系列</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 有的沒的小舖 Still Time Corner · 關係心理學系列 · 盧林 著
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
