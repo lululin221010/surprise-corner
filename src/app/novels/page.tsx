@@ -38,6 +38,7 @@ function getLastPublishedDate(novelId: string): string {
 export default function NovelsPage() {
   const serials = novelsData.filter((n: any) => n.category === 'serial')
   const previews = novelsData.filter((n: any) => n.category === 'preview')
+  const guides = novelsData.filter((n: any) => n.category === 'guide')
 
   return (
     <>
@@ -141,11 +142,51 @@ export default function NovelsPage() {
           ))}
         </div>
 
+        {/* ── 認識小舖的書 ── */}
+        {guides.length > 0 && (
+          <>
+            <div className="section-divider" />
+            <div className="section-label">
+              <h2>📚 認識小舖的書</h2>
+              <p>進來翻翻，看看哪本最對你的胃口</p>
+            </div>
+            <div className="novels-grid">
+              {guides.map((novel: any) => (
+                <div key={novel.id} className="novel-card" style={{ cursor: 'default' }}>
+                  <NovélCover cover={novel.cover} title={novel.title} />
+                  <div className="novel-info">
+                    <span className="novel-genre">{novel.genre}</span>
+                    <h2 className="novel-name" style={{ fontSize: '1.6rem' }}>{novel.title}</h2>
+                    <p className="novel-author">作者：{novel.author}</p>
+                    <p className="novel-desc">{novel.description}</p>
+                    <div className="novel-footer">
+                      <div className="novel-tags">
+                        {novel.tags.map((tag: string) => (
+                          <span key={tag} className="novel-tag">#{tag}</span>
+                        ))}
+                      </div>
+                      <a
+                        href={(novel as any).directPdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="novel-read-btn"
+                      >
+                        📖 進來翻翻
+                        <span className="novel-read-btn-arrow">→</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
         {/* ── 試看空間 ── */}
         <div className="section-divider" />
         <div className="section-label">
           <h2>📖 試看空間</h2>
-          <p>前幾章免費・完整版在小舖</p>
+          <p>前幾章試讀・完整版在小舖</p>
         </div>
         <div className="novels-grid">
           {previews.map((novel: any) => (
@@ -157,10 +198,7 @@ export default function NovelsPage() {
                 <p className="novel-author">作者：{novel.author}</p>
                 <p className="novel-desc">{novel.description}</p>
                 <div className="novel-meta">
-                  {(novel as any).directPdfUrl
-                    ? <span>🎁 完全免費・直接閱讀</span>
-                    : <span>完整版 {novel.totalChapters} 章</span>
-                  }
+                  <span>完整版 {novel.totalChapters} 章</span>
                 </div>
                 <div className="novel-footer">
                   <div className="novel-tags">
@@ -169,30 +207,18 @@ export default function NovelsPage() {
                     ))}
                   </div>
                   <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
-                    {(novel as any).directPdfUrl ? (
-                      <a
-                        href={(novel as any).directPdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="novel-read-btn"
-                      >
-                        📖 免費閱讀
-                        <span className="novel-read-btn-arrow">→</span>
-                      </a>
-                    ) : (
-                      <Link href={`/novels/${novel.id}/ebook`} className="novel-read-btn">
-                        👀 看看喜不喜歡
-                        <span className="novel-read-btn-arrow">→</span>
-                      </Link>
-                    )}
-                    {(novel as any).shopPrice !== '免費' && (
+                    <Link href={`/novels/${novel.id}/ebook`} className="novel-read-btn">
+                      👀 看看喜不喜歡
+                      <span className="novel-read-btn-arrow">→</span>
+                    </Link>
+                    {(novel as any).shopPrice && (
                       <a
                         href={novel.shopUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="novel-buy-btn"
                       >
-                        {(novel as any).shopPrice || 'NT$???'} 購買完整版 ↗
+                        {(novel as any).shopPrice} 購買完整版 ↗
                       </a>
                     )}
                   </div>
