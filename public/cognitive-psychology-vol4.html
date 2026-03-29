@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注意力劫持：你的專注力正在被偷走｜認知心理學系列第四冊</title>
+<meta name="description" content="盧林著。稀缺性注意力、多巴胺迴路、通知暴政、切換成本、設計好的上癮、深度工作消失——你的注意力是這個時代最值錢的東西，而你在免費送出去。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070c0f;
+    --bg2: #0a1015;
+    --bg3: #0d1820;
+    --surface: #111e28;
+    --border: rgba(77,184,232,0.12);
+    --text: #e4f0f8;
+    --text-muted: #6898b0;
+    --accent: #4db8e8;
+    --gold: #e8c87a;
+    --toc-w: 240px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* ── TOC SIDEBAR ── */
+  .toc-sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--toc-w);
+    height: 100vh;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 40px 0 60px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(77,184,232,0.2) transparent;
+  }
+  .toc-brand {
+    padding: 0 24px 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .toc-brand-series {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .toc-brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+  .toc-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 24px;
+    margin-bottom: 12px;
+  }
+  .toc-nav { list-style: none; }
+  .toc-nav a {
+    display: block;
+    padding: 9px 24px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    line-height: 1.5;
+  }
+  .toc-nav a:hover { color: var(--text); background: rgba(77,184,232,0.04); }
+  .toc-nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(77,184,232,0.06); }
+  .toc-nav .toc-coming {
+    display: block;
+    padding: 9px 24px;
+    font-size: 0.78rem;
+    color: rgba(104,152,176,0.4);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .toc-divider {
+    margin: 16px 24px;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+  .toc-buy {
+    margin: 24px 16px 0;
+    padding: 10px 16px;
+    background: rgba(77,184,232,0.06);
+    border: 1px solid rgba(77,184,232,0.2);
+    text-align: center;
+  }
+  .toc-buy a {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ── PAGE WRAP ── */
+  .page-wrap {
+    margin-left: var(--toc-w);
+    min-height: 100vh;
+  }
+
+  /* ── BOOK HERO ── */
+  .book-hero {
+    padding: 80px 80px 60px;
+    background: linear-gradient(180deg, var(--bg3) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .book-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(77,184,232,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .book-series-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(77,184,232,0.3);
+    display: inline-block;
+    padding: 5px 14px;
+    margin-bottom: 32px;
+  }
+  .book-vol {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.1em;
+  }
+  .book-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .book-title span { color: var(--accent); }
+  .book-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+  .book-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .book-meta-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .book-meta-sep { color: var(--border); }
+
+  /* ── MAIN CONTENT ── */
+  .main-content { padding: 0 80px 120px; max-width: 860px; }
+
+  /* ── 前言 ── */
+  .preface {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.35;
+    margin-bottom: 36px;
+    color: var(--text);
+  }
+  .prose { font-size: 1.02rem; color: var(--text-muted); line-height: 2.15; }
+  .prose p { margin-bottom: 1.5em; }
+  .prose strong { color: var(--text); font-weight: 500; }
+  .prose em { color: var(--accent); font-style: normal; }
+
+  /* ── 引言 ── */
+  .chapter-quote {
+    margin: 0 0 48px;
+    padding: 28px 32px;
+    border-left: 2px solid var(--accent);
+    background: rgba(77,184,232,0.04);
+  }
+  .chapter-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: rgba(228,240,248,0.7);
+    line-height: 1.75;
+  }
+
+  /* ── 章節 ── */
+  .chapter { padding: 80px 0 60px; border-bottom: 1px solid var(--border); }
+  .chapter-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .chapter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .chapter-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chapter-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(228,240,248,0.6);
+    margin-bottom: 32px;
+    padding-left: 20px;
+    border-left: 1px solid rgba(77,184,232,0.3);
+  }
+
+  /* ── 場景對話 ── */
+  .scene-box {
+    margin: 36px 0;
+    padding: 28px 32px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-top: 2px solid rgba(77,184,232,0.4);
+  }
+  .scene-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .scene-text { font-size: 0.97rem; color: var(--text-muted); line-height: 2.1; }
+  .scene-text p { margin-bottom: 1.2em; }
+  .scene-text strong { color: var(--text); }
+
+  /* ── 對話 ── */
+  .dialogue { margin: 32px 0; }
+  .dialogue-line {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .dialogue-speaker {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    padding-top: 3px;
+    text-align: right;
+  }
+  .dialogue-text {
+    font-size: 0.97rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.02);
+    border-left: 1px solid rgba(77,184,232,0.15);
+  }
+
+  /* ── 小標題 ── */
+  .sub-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text);
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sub-heading-sm {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 36px 0 16px;
+  }
+
+  /* ── 清單 ── */
+  .concept-list { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 12px; }
+  .concept-list li {
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid rgba(77,184,232,0.4);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .concept-list li strong { color: var(--text); display: block; margin-bottom: 6px; font-size: 1rem; }
+  .concept-list li .sub { margin-top: 8px; font-size: 0.9rem; color: rgba(104,152,176,0.8); font-style: italic; }
+
+  /* ── 號碼清單 ── */
+  .num-list { list-style: none; margin: 24px 0; counter-reset: num; display: flex; flex-direction: column; gap: 12px; }
+  .num-list li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 16px;
+    align-items: start;
+    font-size: 0.97rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .num-list li::before {
+    counter-increment: num;
+    content: counter(num);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: rgba(77,184,232,0.5);
+    line-height: 1.3;
+    font-style: italic;
+  }
+
+  /* ── 重點框 ── */
+  .key-box {
+    margin: 40px 0;
+    padding: 24px 28px;
+    background: rgba(77,184,232,0.05);
+    border: 1px solid rgba(77,184,232,0.2);
+    border-radius: 2px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .key-box strong {
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  /* ── 方法清單 ── */
+  .method-list { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 16px; }
+  .method-list li {
+    padding: 20px 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .method-list li .method-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .method-list strong { color: var(--text); font-weight: 500; }
+
+  /* ── 即將推出 ── */
+  .coming-soon-chapter {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .coming-soon-chapter .cs-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    opacity: 0.5;
+  }
+  .coming-soon-chapter .cs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: rgba(228,240,248,0.3);
+    margin-bottom: 12px;
+  }
+  .coming-soon-chapter .cs-badge {
+    display: inline-block;
+    padding: 5px 16px;
+    border: 1px dashed rgba(77,184,232,0.2);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(77,184,232,0.35);
+  }
+
+  /* ── 系列導航 ── */
+  .series-nav {
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+  }
+  .series-nav-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .series-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .next-book {
+    padding: 20px 16px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    display: block;
+  }
+  .next-book:hover { background: var(--surface); border-color: rgba(77,184,232,0.3); }
+  .next-book.current { border-color: rgba(77,184,232,0.4); background: rgba(77,184,232,0.05); pointer-events: none; }
+  .next-book.coming { opacity: 0.4; pointer-events: none; }
+  .next-book-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .next-book.coming .next-book-num::after { content: ' 即將推出'; font-size: 8px; color: var(--text-muted); }
+  .next-book-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .next-book.current .next-book-title { color: var(--accent); }
+
+  /* ── Reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .page-wrap { margin-left: 0; }
+    .book-hero { padding: 60px 24px 48px; }
+    .main-content { padding: 0 24px 80px; }
+    .series-nav-grid { grid-template-columns: 1fr 1fr; }
+    .dialogue-line { grid-template-columns: 50px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOC SIDEBAR -->
+<nav class="toc-sidebar">
+  <div class="toc-brand">
+    <div class="toc-brand-series">認知心理學系列 · Vol.4</div>
+    <div class="toc-brand-title">注意力劫持</div>
+  </div>
+  <div class="toc-label">目錄</div>
+  <ul class="toc-nav">
+    <li><a href="#preface">前言</a></li>
+    <li><a href="#ch1">第一章　稀缺性注意力</a></li>
+    <li><a href="#ch2">第二章　多巴胺迴路</a></li>
+    <span class="toc-coming">第三章　通知的暴政（即將推出）</span>
+    <span class="toc-coming">第四章　切換成本（即將推出）</span>
+    <span class="toc-coming">第五章　設計好的上癮（即將推出）</span>
+    <span class="toc-coming">第六章　深度工作的消失（即將推出）</span>
+  </ul>
+  <hr class="toc-divider">
+  <div class="toc-buy">
+    <a href="https://still-time-corner.vercel.app" target="_blank">前往小舖取得完整版 →</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <header class="book-hero">
+    <div class="book-series-badge">認知心理學系列 · 第四冊</div>
+    <div class="book-vol">Vol.4 · Attention Hijacked</div>
+    <h1 class="book-title"><span>注意力</span>劫持</h1>
+    <p class="book-subtitle">你的專注力正在被偷走，而你還在幫兇</p>
+    <div class="book-meta">
+      <span class="book-meta-item">作者：盧林</span>
+      <span class="book-meta-sep">·</span>
+      <span class="book-meta-item">有的沒的小舖 出品</span>
+      <span class="book-meta-sep">·</span>
+      <span class="book-meta-item">認知心理學系列</span>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <!-- 前言 -->
+    <section class="preface reveal" id="preface">
+      <div class="section-eyebrow">— 前言</div>
+      <h2 class="section-title">你的注意力是這個時代最值錢的東西，而你在免費送出去</h2>
+      <div class="prose">
+        <p>你上一次完整讀完一篇超過三千字的文章是什麼時候？</p>
+        <p>你上一次坐下來做一件事、中間不拿手機、不切換視窗、不被通知打斷、連續專注超過四十五分鐘，是什麼時候？</p>
+        <p>你上一次讓自己無聊、什麼都不做、什麼都不滑，是什麼時候？</p>
+        <p>如果這三個問題讓你想了超過三秒，那就是答案。</p>
+        <p>你的注意力，正在被一個你沒有意識到的系統性戰爭奪走。那場戰爭的一方，是全世界最聰明的工程師和設計師，他們拿著幾億美元的預算，用神經科學、行為心理學、和機器學習，設計出讓你無法停下來的產品。</p>
+        <p>另一方，是你。</p>
+        <p>你帶著一顆幾萬年前演化出來的大腦，對著那些產品說「我再看五分鐘就好」。</p>
+        <p><strong>這不是一場公平的戰爭。</strong></p>
+        <p>這本書不是要讓你徹底斷網、清空手機、回歸原始生活。那既不可能也不必要。這本書要做的事，是讓你看清楚那場戰爭的機制——你的注意力是怎麼被設計好的系統一步一步劫持的，你的大腦又是怎麼在這個過程中被重塑的。</p>
+        <p>看清楚了，你才有機會做出不同的選擇。不是更努力地抵抗，而是更聰明地應對。</p>
+      </div>
+      <div class="chapter-quote">
+        <p>「爭奪你注意力的戰爭，是我們這個時代最重要的戰爭。它決定了你的思想、你的情緒、你的選擇、最終決定了你是誰。」</p>
+        <p style="margin-top:12px; font-size:0.9rem; color: var(--text-muted);">── Tristan Harris，前Google設計倫理師</p>
+      </div>
+    </section>
+
+    <!-- 第一章 -->
+    <section class="chapter reveal" id="ch1">
+      <div class="chapter-num">— 第一章</div>
+      <h2 class="chapter-title">稀缺性注意力</h2>
+      <p class="chapter-title-en">Scarcity of Attention</p>
+
+      <div class="chapter-quote">
+        <p>「你以為你的時間是有限的，其實比時間更稀缺的，是你的注意力。時間你可以省，注意力一旦散掉，就真的不見了。」</p>
+      </div>
+
+      <h3 class="chapter-subtitle">你的專注力是有限資源，而它正在被搶奪</h3>
+
+      <div class="scene-box reveal">
+        <div class="scene-label">— 對照自己的場景</div>
+        <div class="scene-text">
+          <p>今天早上你醒來，手機螢幕亮起。你查了訊息，有三個Line通知、一個Instagram標記、工作信箱兩封信、還有一個新聞推播說了某個昨晚發生的事。你花了七分鐘「快速看一下」。</p>
+          <p>你起床，邊刷牙邊又看了一下手機。吃早餐的時候，你打開了YouTube，「隨便看看」。你出門上班，在捷運上滑了二十分鐘的Instagram。</p>
+          <p>你到了公司，坐下來，打開電腦，準備開始工作。你「開始工作」之前，先看了一下信箱，回了兩封信，然後看到一個同事傳來的連結，點進去，讀了一篇文章，那篇文章旁邊有一個相關連結，你又點進去……</p>
+          <p><strong>十一點了。</strong></p>
+          <p>你今天原本要做的那件事，還沒有開始。你的注意力，在你「正式開始工作」之前，已經被切成了幾十個碎片，分散在七、八個不同的方向上。那個被切碎的注意力，要重新拼回來，需要的時間和精力，遠超過你的想像。</p>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">什麼是注意力的稀缺性？</h3>
+        <p>注意力（Attention）在認知心理學裡，被視為一種有限的認知資源。它不是無限的，不是說你「更努力一點」就能擁有更多的注意力——就像你的肌肉力量有上限，你的工作記憶容量有上限，你的注意力也有上限。</p>
+        <p>心理學家丹尼爾・康納曼在他的雙系統理論裡指出，深度的、需要高度集中的認知工作（他稱之為「系統二」的思考），是特別消耗認知資源的。你沒有辦法一整天都在做系統二的工作，就像你沒有辦法一整天都在做最大重量的深蹲。</p>
+        <p>問題不是你的注意力容量，而是它被消耗的方式。</p>
+        <p>你的注意力資源，在你一天裡有一個大致的「預算」。每次你切換任務、每次你被通知打斷、每次你進行一次不需要深度思考的快速刷新（滑社群、查訊息、看推播），你都在花費這個預算的一小部分。等你真正需要深度專注的時候，你的預算已經耗得差不多了。</p>
+        <p><em>你不是懶。你不是意志力不夠。你的注意力預算，已經在你開始「正式工作」之前，被一個個「沒有什麼大不了」的小動作花光了。</em></p>
+
+        <h3 class="sub-heading">注意力經濟：你是產品，不是用戶</h3>
+        <p>這裡有一個讓你重新看待所有「免費」產品的框架：</p>
+        <p><strong>如果你沒有付錢，你就是產品，不是用戶。</strong></p>
+        <p>Facebook、Instagram、YouTube、TikTok、大多數新聞網站——這些平台的商業模式，是把你的注意力賣給廣告主。你在平台上花的每一分鐘，都是他們賣給廣告商的「廣告曝光時間」。這意味著：這些平台的核心目標，不是讓你的生活更好，不是讓你更快樂，不是讓你更有效率。他們的核心目標，是讓你在平台上待越久越好。</p>
+        <p>你的注意力，是他們的商品。而他們為了這個商品，投入了大量的工程和設計資源，確保它被最有效率地提取。你每次打開那些APP，你不是在使用一個工具，你是在走進一個精心設計的注意力提取系統。</p>
+
+        <h3 class="sub-heading">注意力稀缺在你生活裡的五個代價</h3>
+      </div>
+
+      <ul class="concept-list reveal">
+        <li>
+          <strong>① 你失去了深度工作的能力</strong>
+          「深度工作」（Deep Work）是電腦科學家卡爾・紐波特提出的概念：在沒有干擾的狀態下，對認知要求高的任務進行高度專注的工作。那種「完全沉浸在一件事裡，時間不知不覺過去了兩小時」的狀態——你上一次有那個體驗是什麼時候？研究顯示，長期的注意力分散，會降低人進入深度專注狀態的能力。
+          <div class="sub">你不是沒有辦法深度工作，你只是已經很久沒有練習了。</div>
+        </li>
+        <li>
+          <strong>② 你的思考變得更淺</strong>
+          深度閱讀、長時間的思考、在一個問題上持續推理——這些活動需要持續的注意力。當你的注意力習慣了碎片化，你的思考也跟著碎片化。你開始傾向於接受簡短的、即時的結論，而不是深入追究一件事。
+          <div class="sub">那不是你變笨了。那是你的認知工具被磨鈍了。</div>
+        </li>
+        <li>
+          <strong>③ 你對無聊失去了耐受力</strong>
+          研究顯示，現代人對「無所事事」的耐受力，在過去二十年裡顯著下降。一個著名研究甚至發現，很多人寧願給自己電擊，也不願意在空房間裡獨處十五分鐘。但無聊是有認知功能的——它是大腦的「預設模式網絡」運作的時間，讓你整合資訊、建立連結、進行創意思考。
+          <div class="sub">你不讓大腦無聊，就是不讓大腦做它最重要的背景工作。</div>
+        </li>
+        <li>
+          <strong>④ 你的記憶整合受影響</strong>
+          你學了一個新東西，立刻去看手機，然後下一件事又來了。那個新東西，沒有時間被整合進你的長期記憶系統。記憶鞏固需要一段沒有新刺激干擾的「靜止期」——你給大腦的整合時間太少了。
+          <div class="sub">你讀了很多，但你記住的越來越少。</div>
+        </li>
+        <li>
+          <strong>⑤ 你的情緒調節能力變弱</strong>
+          每次你感到輕微的不舒服——無聊、焦慮、不確定——你立刻拿起手機，那個不舒服就暫時消失了。你的大腦學到了：不舒服的感覺，可以用手機快速解決。但那是迴避，不是真正的情緒調節。越依賴手機迴避不舒服，調節能力就越弱，就越需要手機。
+          <div class="sub">這是一個循環，而且是往下的。</div>
+        </li>
+      </ul>
+
+      <div class="scene-box reveal" style="margin-top:48px;">
+        <div class="scene-label">— 對話實錄</div>
+        <div class="scene-text">
+          <p>珮君是一個設計師，她在跟她男友談她的工作狀況：</p>
+        </div>
+        <div class="dialogue">
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">珮君</span>
+            <span class="dialogue-text">我今天又廢了，早上坐下來本來要做提案，然後不知道怎麼就刷了兩個小時的手機。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">男友</span>
+            <span class="dialogue-text">你知道你在幹嘛，還是繼續？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">珮君</span>
+            <span class="dialogue-text">就是知道才更崩潰。我盯著那個提案文件，然後手就自己拿起手機了。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">男友</span>
+            <span class="dialogue-text">那就把手機放到另一個房間。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">珮君</span>
+            <span class="dialogue-text">我放過，然後我起來去拿它。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">男友</span>
+            <span class="dialogue-text">……你去拿它？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">珮君</span>
+            <span class="dialogue-text">我知道聽起來很蠢，但我就是去拿了。然後我又放回去，然後我又去拿。這樣搞了四次。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">男友</span>
+            <span class="dialogue-text">這聽起來不像是意志力問題，這聽起來更像是……上癮？</span>
+          </div>
+        </div>
+        <div class="scene-text" style="margin-top:16px;">
+          <p>珮君停了一下。</p>
+          <p>「我不想用那個詞，但……可能是。」</p>
+          <p>珮君說的那個循環——知道、抗拒、失敗、再抗拒、再失敗——不是她的軟弱。那是一個被設計出來的行為迴路在跑。她的意志力，在對抗一個專門為了突破意志力而設計的系統。<strong>那不是公平的戰鬥。</strong></p>
+        </div>
+      </div>
+
+      <div class="prose reveal" style="margin-top:48px;">
+        <h3 class="sub-heading">怎麼開始奪回你的注意力？</h3>
+      </div>
+      <ul class="method-list reveal">
+        <li>
+          <span class="method-title">方法一：把注意力當成預算來管理</span>
+          每天早上問自己：「今天我最重要的一件認知工作是什麼？」然後把你當天最好的注意力時段——通常是早上的前兩到三個小時——保護起來，專門用於那件工作。在那個時段之前，不查郵件，不看社群，不看新聞。那些東西不會消失，它們可以等到你的重要工作完成之後再看。
+        </li>
+        <li>
+          <span class="method-title">方法二：設計你的環境，而不是靠意志力</span>
+          不要試圖靠意志力抵抗你的手機——那是你對抗一個比你更強大的系統。<strong>改變環境比改變行為更有效。</strong>睡覺時把手機放到另一個房間。工作時把手機翻面放在看不到的地方，或者放進抽屜。把最容易讓你分心的APP從主畫面刪掉，讓存取它們需要更多步驟。讓「不分心」成為預設值，讓「分心」需要主動選擇。
+        </li>
+        <li>
+          <span class="method-title">方法三：練習讓自己無聊</span>
+          每天刻意給自己一段「無事可做」的時間——五分鐘、十分鐘，就坐著或走著，不看任何東西。讓那個不舒服的感覺存在，不要立刻填滿它。那個練習，一開始很難受，但它是在重新訓練你的大腦忍受無刺激狀態，而那個能力，是深度專注的前提。
+        </li>
+        <li>
+          <span class="method-title">方法四：記錄你真正的使用時間</span>
+          打開你的手機螢幕使用時間報告，看你每天實際在各個APP上花了多少時間。那個數字，通常比你以為的多很多。把那個數字具體化，是改變的第一步——不是因為那個數字讓你羞恥，而是因為你需要看到真實的代價。
+        </li>
+      </ul>
+
+      <div class="key-box reveal">
+        <strong>本章重點</strong>
+        你的注意力是有限的認知資源，而它每天都在被設計精良的系統系統性地提取。那不是你意志力不夠，那是一場不公平的戰爭。奪回注意力的第一步，不是更努力地抵抗，而是理解那個系統的機制，然後用環境設計而不是意志力來應對。
+      </div>
+    </section>
+
+    <!-- 第二章 -->
+    <section class="chapter reveal" id="ch2">
+      <div class="chapter-num">— 第二章</div>
+      <h2 class="chapter-title">多巴胺迴路</h2>
+      <p class="chapter-title-en">The Dopamine Loop</p>
+
+      <div class="chapter-quote">
+        <p>「讓你停不下來的，不是內容有多好。是那個『下一個可能更好』的期待。你的大腦不是在享受，它是在等待一個獎勵，而那個獎勵永遠在下一次滑動之後。」</p>
+      </div>
+
+      <h3 class="chapter-subtitle">你為什麼刷了三小時手機還停不下來</h3>
+
+      <div class="scene-box reveal">
+        <div class="scene-label">— 你今天可能就經歷過的場景</div>
+        <div class="scene-text">
+          <p>你拿起手機，「只是想看一下有沒有新消息」。你打開Instagram。沒有什麼特別的，幾張朋友的照片，幾個限時動態。你滑了幾下，覺得沒什麼意思，你準備放下手機。</p>
+          <p>但你沒有放下。你繼續滑。</p>
+          <p>不是因為你看到了什麼特別吸引你的東西。你繼續滑，是因為你感覺到一個模糊的期待：「也許下一張會更有趣。」「也許再滑幾下會看到什麼。」你不是在享受你看到的內容，你是在等待一個可能出現的更好的內容。那個等待的感覺，由多巴胺驅動，讓你繼續滑，繼續滑，繼續滑。</p>
+          <p>三十分鐘後，你放下手機。你沒有特別開心，甚至有點空洞。</p>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">什麼是多巴胺迴路？</h3>
+        <p>多巴胺（Dopamine）是大腦裡一種重要的神經傳導物質，它在大眾科學裡常被稱為「快樂激素」，但這個描述並不完全準確。</p>
+        <p>神經科學家肯特・貝里奇（Kent Berridge）的研究顯示，多巴胺系統更準確的功能，是驅動「渴望」（wanting）和「尋求」（seeking），而不是「享受」（liking）。換句話說：<strong>多巴胺讓你去追求東西，而不是讓你享受得到的東西。</strong></p>
+        <p>「渴望」和「享受」是兩個不同的神經系統。你可以非常渴望某樣東西，追求它，得到它，然後發現享受感遠低於你追求時的興奮感。這就是為什麼你滑完三小時手機，感覺是空洞的，而不是滿足的——你的多巴胺系統一直在驅動你追求，但你的「享受」系統從來沒有真的被滿足。</p>
+        <p><em>更重要的是：多巴胺的釋放，在「預期到可能的獎勵」時最強烈——不是在「確定獲得獎勵」的時候。不確定性，才是多巴胺最強的觸發器。</em></p>
+
+        <h3 class="sub-heading">間歇性強化：老虎機是怎麼讓人上癮的</h3>
+        <p>行為心理學家B.F.史金納（B.F. Skinner）在1950年代透過實驗發現了一個讓人不安的原則：<strong>間歇性強化（Variable Ratio Reinforcement）</strong>是所有強化排程中最容易製造成癮行為的一種。</p>
+        <p>間歇性強化的意思是：獎勵隨機出現。你不知道哪一次按壓會得到獎勵，你只知道有時候會得到。老虎機就是這個原則的應用。你不知道哪一次拉桿會中，但你知道某一次會。那個不確定性，讓多巴胺系統一直處於高度激活狀態，讓你無法停止。</p>
+        <p>現在，你的社群媒體APP，也是用同樣的原則設計的。你打開Instagram——也許這次有一則讓你會心一笑的貼文，也許沒有。那個「也許有，也許沒有」，是老虎機的邏輯，套在你每天的資訊消費行為上。這不是意外——Tristan Harris明確指出，這些APP的設計師，知道間歇性強化的力量，並且刻意把它嵌入了產品設計裡。</p>
+
+        <h3 class="sub-heading">多巴胺迴路在你生活裡的六個劫持點</h3>
+      </div>
+
+      <ul class="concept-list reveal">
+        <li>
+          <strong>① 通知的紅點</strong>
+          你的手機上那些紅色的數字角標——那是最精準的多巴胺觸發器之一。紅色本身就是一個視覺警示信號，會自動吸引注意力；數字代表「有東西等你」，而那個「東西」的不確定性，讓多巴胺系統興奮起來。
+          <div class="sub">你清掉那個紅點，得到的滿足感持續不超過幾秒鐘。然後又有新的紅點出現了。這個循環，是被設計出來的。</div>
+        </li>
+        <li>
+          <strong>② 無限滾動</strong>
+          傳統的書籍和雜誌有最後一頁。你讀完了，你停下來。Instagram、TikTok、Twitter的動態，沒有最後一頁。無限滾動（Infinite Scroll）的設計師Aza Raskin後來公開對此感到後悔：「這個功能讓人每天多花了大量時間在社群媒體上，但那些時間他們大多數是不想花的。」
+          <div class="sub">沒有終點，就沒有「我看完了可以停下來」的自然停止點。你的大腦找不到關閉的信號，所以繼續滑。</div>
+        </li>
+        <li>
+          <strong>③ 按讚數和留言</strong>
+          你發了一篇貼文，你開始等待。你打開APP看了一下按讚數——三個。關掉。五分鐘後再打開——七個。關掉。十分鐘後再打開……那個「也許這次更多了」的期待，是多巴胺迴路在驅動你反覆打開APP。
+          <div class="sub">那個等待的焦慮，和老虎機玩家等待滾輪停下來的神經狀態，在本質上是一樣的。</div>
+        </li>
+        <li>
+          <strong>④ 自動播放</strong>
+          YouTube和Netflix的自動播放功能，在一個影片結束後，給你幾秒鐘的空檔，然後自動開始下一個。那幾秒鐘是設計師留給你「如果你真的想停下來就去停」的窗口。但「繼續播放」是預設值——你要停，需要主動行動；繼續看，你什麼都不用做。
+          <div class="sub">預設值的力量，加上多巴胺的「也許下一集更好」，讓你一集接一集地看下去，直到你意識到已經凌晨一點了。</div>
+        </li>
+        <li>
+          <strong>⑤ 拉取更新的手勢</strong>
+          在智慧型手機上，很多APP的更新方式是向下拉動畫面，然後放開，等待刷新。那個動作——拉下去、放開、等待——在神經機制上，和拉下老虎機的拉桿，幾乎完全一樣。
+          <div class="sub">那個手勢，是設計師有意識地模仿的。</div>
+        </li>
+        <li>
+          <strong>⑥ 「你可能也會喜歡」</strong>
+          每個推薦演算法的目標，都是讓你繼續在平台上待著。它不是在幫你找你真正需要的東西，它是在預測「什麼會讓你繼續滑」，然後把那個東西放在你面前。
+          <div class="sub">那個演算法知道你比你自己更了解你的多巴胺迴路——因為它有幾百萬個用戶的行為數據，能精確預測什麼內容會讓你無法停下來。</div>
+        </li>
+      </ul>
+
+      <div class="scene-box reveal" style="margin-top:48px;">
+        <div class="scene-label">— 對話實錄：「我只是想放鬆一下」</div>
+        <div class="scene-text">
+          <p>哲翰下班回家，跟他太太說：</p>
+        </div>
+        <div class="dialogue">
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">哲翰</span>
+            <span class="dialogue-text">我今天累壞了，我就想躺著滑一下手機放鬆一下。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">太太</span>
+            <span class="dialogue-text">幾點開始滑的？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">哲翰</span>
+            <span class="dialogue-text">……七點半吧。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">太太</span>
+            <span class="dialogue-text">現在九點四十了。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">哲翰</span>
+            <span class="dialogue-text">（沉默）我沒有注意到時間過去了。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">太太</span>
+            <span class="dialogue-text">你有放鬆到嗎？</span>
+          </div>
+        </div>
+        <div class="scene-text" style="margin-top:16px;">
+          <p>哲翰想了一下。「……好像沒有。我感覺比剛回來的時候更累。」</p>
+          <p>「你花了兩個多小時做一件讓你更累的事，因為你『想放鬆』。」</p>
+          <p>哲翰沒有反駁。因為那是真的。</p>
+          <p>研究顯示，被動式的螢幕消費（滑社群、隨機瀏覽）通常不會讓人真正放鬆——它讓人感到被動疲憊，而不是主動恢復。真正有恢復效果的活動，是讓你的認知系統有機會放空的活動——散步、淋浴、和人面對面聊天、做一件不需要螢幕的事。<strong>你以為你在放鬆，你其實是在讓多巴胺迴路繼續工作，直到它精疲力竭。</strong></p>
+        </div>
+      </div>
+
+      <div class="prose reveal" style="margin-top:48px;">
+        <h3 class="sub-heading">怎麼對抗多巴胺迴路？</h3>
+      </div>
+      <ul class="method-list reveal">
+        <li>
+          <span class="method-title">方法一：讓「打開APP」需要摩擦力</span>
+          把你最容易成癮的APP從主畫面移除，讓存取它們需要多一個步驟。研究顯示，增加哪怕一點點的行為摩擦，就能顯著降低衝動性使用的頻率。你的衝動行為，通常在摩擦增加之後就消退了。
+        </li>
+        <li>
+          <span class="method-title">方法二：提前設定使用時間</span>
+          在你開始使用之前，設定「我今天給這個APP二十分鐘」。不要等到你已經在滑、多巴胺已經在運作的時候才試圖停下來——那時候你的判斷力已經被接管了。在中立的時刻做決定，比在衝動的時刻更有效。
+        </li>
+        <li>
+          <span class="method-title">方法三：用主動性活動替換被動性消費</span>
+          下班想放鬆，不要靠滑手機。去走路、去煮一頓飯、去打一通電話給老朋友、去做任何需要你參與的事。那些主動性活動，比被動消費更能真正恢復你的認知資源。
+        </li>
+        <li>
+          <span class="method-title">方法四：認識你的觸發點</span>
+          你什麼時候最容易拿起手機？等電梯、排隊、感到無聊、感到焦慮、感到孤單？把那些觸發點標記出來，然後在那些時刻有意識地做一個不同的選擇——哪怕只是深呼吸幾次，而不是立刻拿起手機。
+        </li>
+      </ul>
+
+      <div class="key-box reveal">
+        <strong>本章重點</strong>
+        讓你停不下來的不是內容的品質，是多巴胺迴路製造的不確定性期待。那個迴路被設計師刻意嵌入了產品設計裡——無限滾動、間歇性的按讚、自動播放、拉取更新的手勢——每一個設計，都在利用你大腦的獎勵系統。對抗它不是靠意志力，而是靠環境設計和預先決策。
+      </div>
+    </section>
+
+    <!-- Ch3-6 Coming Soon -->
+    <div class="coming-soon-chapter reveal" id="ch3">
+      <div class="cs-num">— 第三章</div>
+      <div class="cs-title">通知的暴政</div>
+      <div class="cs-badge">即將推出</div>
+    </div>
+    <div class="coming-soon-chapter reveal" id="ch4">
+      <div class="cs-num">— 第四章</div>
+      <div class="cs-title">切換成本</div>
+      <div class="cs-badge">即將推出</div>
+    </div>
+    <div class="coming-soon-chapter reveal" id="ch5">
+      <div class="cs-num">— 第五章</div>
+      <div class="cs-title">設計好的上癮</div>
+      <div class="cs-badge">即將推出</div>
+    </div>
+    <div class="coming-soon-chapter reveal" id="ch6">
+      <div class="cs-num">— 第六章</div>
+      <div class="cs-title">深度工作的消失</div>
+      <div class="cs-badge">即將推出</div>
+    </div>
+
+    <!-- 系列導航 -->
+    <div class="series-nav reveal">
+      <div class="series-nav-label">— 認知心理學系列</div>
+      <div class="series-nav-grid">
+        <a href="/cognitive-psychology-vol1.html" class="next-book">
+          <span class="next-book-num">Vol.1</span>
+          <div class="next-book-title">思維陷阱</div>
+        </a>
+        <div class="next-book coming">
+          <span class="next-book-num">Vol.2</span>
+          <div class="next-book-title">決策的陷阱</div>
+        </div>
+        <a href="/cognitive-psychology-vol3.html" class="next-book">
+          <span class="next-book-num">Vol.3</span>
+          <div class="next-book-title">記憶的謊言</div>
+        </a>
+        <div class="next-book current">
+          <span class="next-book-num">Vol.4</span>
+          <div class="next-book-title">注意力劫持</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /page-wrap -->
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav a');
+  const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.toc-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => tocObserver.observe(s));
+</script>
+</body>
+</html>
