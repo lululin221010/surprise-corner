@@ -237,6 +237,47 @@
   .theme-card:nth-child(1) { --card-accent: #4db8e8; }
   .theme-card:nth-child(2) { --card-accent: #7ecfb3; }
   .theme-card:nth-child(3) { --card-accent: #c9a8ff; }
+  .theme-card:nth-child(4) { --card-accent: #e8c87a; }
+  .theme-read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 10px 24px;
+    border: 1px solid var(--card-accent);
+    color: var(--card-accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .theme-read-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--card-accent);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+  .theme-read-link:hover { color: var(--bg); }
+  .theme-read-link:hover::before { transform: translateX(0); }
+  .theme-coming-soon {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 10px 24px;
+    border: 1px dashed rgba(255,255,255,0.12);
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
   .theme-number {
     font-family: 'Cormorant Garamond', serif;
     font-size: 5rem;
@@ -502,7 +543,7 @@
 <section class="themes">
   <div class="wrap">
     <div class="themes-header reveal">
-      <div class="section-label">— 本系列三大主題</div>
+      <div class="section-label">— 本系列四大主題</div>
       <h2>每一本都像一把手電筒<br>照進你以為最可靠、卻其實最危險的大腦角落</h2>
     </div>
 
@@ -543,6 +584,7 @@
         <strong>本冊深入探討</strong>
         最常見也最致命的10種思維陷阱（含錨定效應、後見之明偏誤、團體迷思）、每一種在日常生活中的真實樣貌、如何建立「思維清單」在重要決定前多給自己一道防線
       </div>
+      <a href="/cognitive-psychology-vol1.html" class="theme-read-link">Vol.1 開始試讀 →</a>
     </div>
 
     <!-- 主題二 -->
@@ -574,6 +616,7 @@
         <strong>本冊深入探討</strong>
         記憶被建構、扭曲、竄改的完整機制、誤訊息效應在人際關係與媒體中的威力、記憶不可靠對自我認知與人際關係的深遠影響、如何更謹慎地使用「我記得清清楚楚」這句話
       </div>
+      <a href="/cognitive-psychology-vol3.html" class="theme-read-link">Vol.3 開始試讀 →</a>
     </div>
 
     <!-- 主題三 -->
@@ -609,6 +652,44 @@
         <strong>本冊深入探討</strong>
         選擇架構與推力的完整理論、日常消費中的決策陷阱實例、如何在重要決定前重新框架問題、強迫系統二上線的實用技巧
       </div>
+      <span class="theme-coming-soon">Vol.2 即將推出</span>
+    </div>
+
+    <!-- 主題四 -->
+    <div class="theme-card reveal">
+      <span class="theme-number">IV</span>
+      <span class="theme-tag">主題四 · Attention & Focus</span>
+      <h3 class="theme-title">注意力劫持</h3>
+      <p class="theme-subtitle">你以為你在專心，其實你早就被設計好分心了</p>
+      <div class="theme-body">
+        <p>你打開手機只想查一件事，四十分鐘後放下手機，已經完全忘記自己原本要做什麼。這不是你的意志力不夠——這是<strong>精心設計的注意力劫持</strong>，而且它對你大腦的影響，比你以為的深遠得多。</p>
+        <p>現代神經科學告訴我們：<em>注意力不只是一種能力，它是一種有限的資源</em>。每一次被打斷、每一個通知、每一個自動播放的影片，都在消耗你腦中那杯慢慢空掉的水。</p>
+        <ul class="concept-list">
+          <li>
+            <strong>選擇性注意力 Selective Attention</strong>
+            大腦每秒接收1100萬bits的資訊，卻只能有意識處理約50bits。你「注意到什麼」決定了你的現實——而這個選擇，你以為是自己做的，其實早有人幫你做了。
+            <div class="example">實驗中，人們盯著打籃球的人，完全沒注意到一隻大猩猩走過畫面——注意力就是這樣的。</div>
+          </li>
+          <li>
+            <strong>多工的神話 Multitasking Myth</strong>
+            大腦根本無法同時處理兩件需要認知的任務，所謂「多工」只是快速切換——而每次切換都有代價：注意力殘留（Attention Residue）讓你的一部分大腦卡在上一件事，根本沒有真正轉換。
+          </li>
+          <li>
+            <strong>數位干擾的深層傷害</strong>
+            研究顯示，手機通知即使沒有查看，光是出現就足以顯著降低你的認知表現。深度工作（Deep Work）所需的專注狀態，被打斷一次需要平均23分鐘才能恢復。
+          </li>
+          <li>
+            <strong>大腦的復原力</strong>
+            注意力是可以訓練與恢復的。自然場景、無目的散步、正念練習——科學驗證的注意力恢復方法，不需要特別昂貴的工具，只需要你真的願意讓大腦喘息。
+          </li>
+        </ul>
+        <p><em>讀完這一冊，每次拿起手機前，你會多一個停頓——「這是我的選擇，還是演算法替我做的決定？」</em></p>
+      </div>
+      <div class="theme-teaser">
+        <strong>本冊深入探討</strong>
+        選擇性注意力的運作機制、雞尾酒會效應與大腦的優先順序設定、多工為何降低而非提升效率、科技設計如何系統性劫持你的注意力、深度工作與注意力恢復的實證方法
+      </div>
+      <span class="theme-coming-soon">Vol.4 即將推出</span>
     </div>
 
   </div>
@@ -631,12 +712,13 @@
 
     <div class="cta-block reveal">
       <div class="cta-label">— 準備好打破自己的認知泡泡了嗎？</div>
-      <h3 class="cta-title">本系列三冊，現正陸續上架</h3>
+      <h3 class="cta-title">本系列四冊，現正陸續推出</h3>
       <p class="cta-desc">作者：盧林　｜　有的沒的小舖 出品</p>
       <div class="cta-series">
-        <span class="cta-tag">思維陷阱</span>
-        <span class="cta-tag">記憶的謊言</span>
-        <span class="cta-tag">決策的陷阱</span>
+        <span class="cta-tag">Vol.1 思維陷阱</span>
+        <span class="cta-tag">Vol.2 決策的陷阱</span>
+        <span class="cta-tag">Vol.3 記憶的謊言</span>
+        <span class="cta-tag">Vol.4 注意力劫持</span>
       </div>
       <p class="cta-desc">每一本都讓你更難被騙，包括被自己騙。</p>
       <a href="https://still-time-corner.vercel.app" class="cta-btn" target="_blank">前往小舖探索完整系列</a>
