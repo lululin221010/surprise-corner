@@ -211,14 +211,14 @@ export default function NovelsPage() {
                       👀 看看喜不喜歡
                       <span className="novel-read-btn-arrow">→</span>
                     </Link>
-                    {(novel as any).shopPrice && (
+                    {novel.shopUrl && (
                       <a
                         href={novel.shopUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="novel-buy-btn"
                       >
-                        {(novel as any).shopPrice} 購買完整版 ↗
+                        喜歡嗎這裡買 ↗
                       </a>
                     )}
                   </div>
