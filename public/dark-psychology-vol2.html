@@ -175,6 +175,18 @@
     .mobile-toc-btn { display: flex; }
   }
   .mobile-toc-btn { display: none; position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: var(--bg); width: 48px; height: 48px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; z-index: 20; align-items: center; justify-content: center; }
+
+  /* PAYWALL */
+  .paywall-fade { height: 100px; background: linear-gradient(to bottom, transparent, var(--bg)); margin-top: -60px; position: relative; z-index: 10; pointer-events: none; }
+  .paywall-box { margin: 0 0 80px; padding: 48px 40px; background: var(--bg2); border: 1px solid var(--border); border-top: 2px solid var(--accent); text-align: center; position: relative; z-index: 10; }
+  .paywall-lock { font-size: 2rem; margin-bottom: 16px; }
+  .paywall-title { font-family: "Cormorant Garamond", serif; font-size: 1.6rem; font-weight: 300; color: var(--text); margin-bottom: 12px; }
+  .paywall-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 24px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .paywall-price { font-family: "Space Mono", monospace; font-size: 1.3rem; color: var(--accent); margin-bottom: 24px; letter-spacing: 2px; }
+  .paywall-btn { display: inline-block; padding: 13px 36px; background: var(--accent); color: #050a10; font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; font-weight: 700; transition: background 0.2s; margin-bottom: 16px; }
+  .paywall-btn:hover { background: #7dd5f0; }
+  .paywall-note { font-size: 0.8rem; color: var(--text-muted); }
+  .paywall-note a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
@@ -191,27 +203,7 @@
   <div class="toc-label">目錄</div>
   <ul class="toc-nav">
     <li><a href="#preface">前言</a></li>
-    <div class="toc-chapter-label">第一章</div>
     <li><a href="#ch1-1" class="ch-link">1.1 說服 vs 操控</a></li>
-    <li><a href="#ch1-2" class="ch-link">1.2 為何容易被說服</a></li>
-    <li><a href="#ch1-3" class="ch-link">1.3 席爾迪尼七原則</a></li>
-    <div class="toc-chapter-label">第二章</div>
-    <li><a href="#ch2-1" class="ch-link">2.1 互惠</a></li>
-    <li><a href="#ch2-2" class="ch-link">2.2 承諾與一致性</a></li>
-    <li><a href="#ch2-3" class="ch-link">2.3 社會認同</a></li>
-    <li><a href="#ch2-4" class="ch-link">2.4 喜好</a></li>
-    <li><a href="#ch2-5" class="ch-link">2.5 權威</a></li>
-    <li><a href="#ch2-6" class="ch-link">2.6 稀缺</a></li>
-    <li><a href="#ch2-7" class="ch-link">2.7 統一性</a></li>
-    <div class="toc-chapter-label">第三章</div>
-    <li><a href="#ch3-1" class="ch-link">3.1 廣告與行銷</a></li>
-    <li><a href="#ch3-2" class="ch-link">3.2 職場說服</a></li>
-    <li><a href="#ch3-3" class="ch-link">3.3 人際關係</a></li>
-    <div class="toc-chapter-label">第四章</div>
-    <li><a href="#ch4-1" class="ch-link">4.1 認識你的弱點</a></li>
-    <li><a href="#ch4-2" class="ch-link">4.2 停、問、查</a></li>
-    <li><a href="#ch4-3" class="ch-link">4.3 你有權利等待</a></li>
-    <li><a href="#ch4-4" class="ch-link">4.4 有意識的說服者</a></li>
     <li><a href="#epilogue">結語</a></li>
   </ul>
 </nav>
@@ -259,387 +251,18 @@
       <p>問題在於，這條線往往模糊得很難看清楚。</p>
     </div>
   </div>
-
-  <div class="section" id="ch1-2">
-    <span class="section-num reveal">1.2</span>
-    <h3 class="section-title reveal">為什麼我們這麼容易被說服？</h3>
-    <div class="body-text reveal">
-      <p>人類的大腦不是為了在現代社會做出完美決定而演化的，它是為了在資源有限、威脅隨時出現的環境下<strong>快速生存</strong>而演化的。</p>
-      <p>這意味著大腦非常喜歡走捷徑——用最少的能量得出「夠好」的判斷。</p>
-      <p><em>說服者，就是找到這些捷徑的入口，然後從那裡進來。</em></p>
-    </div>
+  <!-- PAYWALL -->
+  <div class="paywall-fade"></div>
+  <div class="paywall-box">
+    <div class="paywall-lock">&#x1F512;</div>
+    <h3 class="paywall-title">繼續閱讀完整版</h3>
+    <p class="paywall-desc">完整版收錄 4 章：說服的7大原則、暗語與語言操控技術、以及如何在資訊戰中不被牟著走。</p>
+    <div class="paywall-price">NT$ 199</div>
+    <a href="https://still-time-corner.vercel.app/digital" class="paywall-btn" target="_blank">前往小论購買完整版 →</a>
+    <p class="paywall-note">購買後到 <a href="https://still-time-corner.vercel.app/my-purchases" target="_blank">我的購買</a> 自助下載</p>
   </div>
 
-  <div class="section" id="ch1-3">
-    <span class="section-num reveal">1.3</span>
-    <h3 class="section-title reveal">席爾迪尼的七大原則</h3>
-    <div class="body-text reveal">
-      <p>1984年，心理學家羅伯特・席爾迪尼（Robert Cialdini）出版了《影響力》——這本書後來成為行銷、談判、政治宣傳最常引用的心理學著作之一。</p>
-      <p>他提出了六個說服原則，每一個都對應了人類大腦的一個本能捷徑。後來他又補充了第七個原則：<strong>統一性（Unity）</strong>。</p>
-      <p>這七個原則，是本冊的核心。</p>
-    </div>
-  </div>
-</section>
-
-<!-- 第二章 -->
-<section class="chapter" id="ch2">
-  <div class="chapter-num reveal">第二章</div>
-  <h2 class="chapter-title reveal">七大說服原則的<span>完整解析</span></h2>
-
-  <!-- 2.1 互惠 -->
-  <div id="ch2-1" class="principle-card p1 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 01</span>
-      <span class="pc-name">互惠</span>
-      <span class="pc-en">Reciprocity</span>
-    </div>
-    <div class="pc-hook">你欠了我的，現在是還的時候了</div>
-    <div class="pc-body">
-      <p>人類有一個根深蒂固的本能：收到給予，就想回報。這個本能在演化上是合作和信任的基礎。但在現代社會，它被大量利用。</p>
-      <p><strong>運作方式：</strong>先給你一些東西——免費樣品、小禮物、幫你一個小忙、給你一個讓步——然後在你「欠了他」的狀態下，提出真正的要求。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">你點開電商，跳出「新客專屬免運+贈送小禮物」，你順手領了。結帳時發現總額比預期高，卻覺得「不買好像對不起那份禮物」。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">同事先幫你處理一堆瑣事，隔天就說「我這個案子很急，你能幫我 cover 一下嗎？」你明明不想加班，卻鬼使神差答應了。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">他突然送你一束花、幫你做了一頓飯，隔天就說「你能不能別再跟朋友出去玩了，多陪陪我？」你心裡明明想拒絕，嘴巴卻說不出「不」。</div>
-        </div>
-      </div>
-      <div class="pc-insight">互惠本能的問題在於，它不管最初的給予是不是你要的，也不管對方的動機是什麼——你只要收了，大腦就登記了「我欠他的」。</div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        當有人給你東西，先問自己：「他為什麼要給我這個？這個給予，有沒有附帶條件？」如果你不想欠對方，最簡單的方法是——<strong>不收</strong>。
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.2 承諾與一致性 -->
-  <div id="ch2-2" class="principle-card p2 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 02</span>
-      <span class="pc-name">承諾與一致性</span>
-      <span class="pc-en">Commitment and Consistency</span>
-    </div>
-    <div class="pc-hook">你說出口的話，會反過來綁住你</div>
-    <div class="pc-body">
-      <p>人類非常在意自我形象的一致性。一旦你公開承諾了某件事，大腦就會驅使你的後續行為和那個承諾保持一致——即使情況已經改變，即使那個承諾根本不符合你的利益。</p>
-      <p><strong>運作方式：</strong>先讓你做一個小的、無害的承諾，然後逐步升級要求。你已經說了「是」一次，再說「是」就容易多了。這個手法有個名字：<strong>登門檻技術（Foot-in-the-Door）</strong>。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">你先加進購物車「只是看看」，網站跳出「已加入購物車的顧客有87%最終購買」，你開始覺得「不買好像跟自己說的話不一致」，最後刷卡了。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">老闆先問「你願意幫忙看一下這個簡報嗎？」你說好。隔天變成「那你能負責整個提案嗎？」你明明已經超載，卻因為「我之前答應了」而硬接。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">你曾經說過「我會一直支持你的事業」。現在他要你辭職跟他創業，你心裡一百個不願意，卻因為「我之前說過愛他」而開始動搖。</div>
-        </div>
-      </div>
-      <div class="pc-insight">承諾效應最強的情況是：你是公開的、主動的、書面的做出承諾。寫下來的承諾，比口頭的更有約束力。</div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        允許自己改變心意。「我之前說了A，但現在我有了新的資訊，我的決定是B。」前後一致是美德，但它不能凌駕於你的真實利益之上。
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.3 社會認同 -->
-  <div id="ch2-3" class="principle-card p3 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 03</span>
-      <span class="pc-name">社會認同</span>
-      <span class="pc-en">Social Proof</span>
-    </div>
-    <div class="pc-hook">大家都這樣，所以應該沒錯</div>
-    <div class="pc-body">
-      <p>在不確定的情況下，人類會參考「別人怎麼做」來決定自己怎麼做。這個本能在演化上是合理的——如果所有人都在逃跑，跟著跑通常比站在原地想「但為什麼要跑」更安全。</p>
-      <p>但在現代社會，這個本能被大量<strong>製造和操弄</strong>。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">商品頁面顯示「已有12,458人購買」「★★★★★ 4.9分，共8,721則評價」，你明明還在猶豫，卻直接點下「加入購物車」，因為「大家都買了，應該不會錯」。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">會議上老闆說「團隊裡大家都同意這個方向，就你還在猶豫」，你明明有不同意見，卻開始懷疑自己「是不是我太落伍了」，最後也跟著舉手。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">朋友圈裡大家都在秀「情侶每天報平安」，他說「你看別人都這樣，你怎麼不回我訊息？」你明明需要空間，卻開始覺得自己「不正常」，只好每晚乖乖報到。</div>
-        </div>
-      </div>
-      <div class="pc-insight">社會認同可以被輕易製造——刷好評、購買粉絲、製造排隊假象。「很多人都這樣做」不等於「這樣做是對的」。</div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        在從眾之前問自己：「如果沒有其他人在做這件事，我還會做嗎？」把群體的選擇和你自己的判斷分開。
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.4 喜好 -->
-  <div id="ch2-4" class="principle-card p4 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 04</span>
-      <span class="pc-name">喜好</span>
-      <span class="pc-en">Liking</span>
-    </div>
-    <div class="pc-hook">你更容易被你喜歡的人說服</div>
-    <div class="pc-body">
-      <p>我們更容易答應我們喜歡的人提出的要求。這聽起來很合理——但問題是，讓我們「喜歡」一個人的因素，很多都可以被<strong>刻意製造</strong>。</p>
-      <p>讓人更容易被喜歡的因素：外貌吸引力、相似性、讚美、熟悉感、關聯。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">直播主跟你聊「我跟你一樣是寶媽，每天也為了孩子省錢」，你瞬間覺得「她懂我」，最後買了那組其實不需要的育兒用品。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">新主管第一天就說「我跟你一樣討厭開無意義的會」，你立刻對他產生好感，之後他請你幫忙加班，你很難拒絕。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">他總是說「我們兩個真的很像，都喜歡深夜看電影、討厭早起」，你心裡暖暖的，當他提出「搬來跟我一起住吧」，你明明還沒準備好，卻因為「我們是同類」而點頭。</div>
-        </div>
-      </div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        把「我喜歡這個人」和「這件事對我有沒有利」分開。問自己：「如果是一個陌生人提出同樣的要求，我會答應嗎？」
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.5 權威 -->
-  <div id="ch2-5" class="principle-card p5 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 05</span>
-      <span class="pc-name">權威</span>
-      <span class="pc-en">Authority</span>
-    </div>
-    <div class="pc-hook">他說的，應該是對的</div>
-    <div class="pc-body">
-      <p>人類有服從權威的深層本能。當一個人顯示出專業知識、地位或資歷，我們傾向於相信他、服從他——即使我們根本沒有驗證過他的說法。</p>
-      <p>權威的象徵：頭銜、制服、外表。三者都可以被製造。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">商品頁寫「營養師推薦」「醫師實測」，你二話不說下單那瓶保健品，明明沒看過任何臨床數據。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">高層在會議上說「根據我20年的經驗，這是最好的做法」，你明明有更好的想法，卻因為他的頭銜而閉嘴。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">他說「我讀過很多心理學書籍，專家都說親密關係就是要每天黏在一起」，你開始懷疑自己「是不是我太獨立了」，最後妥協了他的要求。</div>
-        </div>
-      </div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        區分「真實的專業知識」和「權威的象徵」。真正的專家，通常願意解釋他的邏輯，而不是只要求你相信。
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.6 稀缺 -->
-  <div id="ch2-6" class="principle-card p6 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 06</span>
-      <span class="pc-name">稀缺</span>
-      <span class="pc-en">Scarcity</span>
-    </div>
-    <div class="pc-hook">快沒了，所以更想要</div>
-    <div class="pc-body">
-      <p>人類對損失的恐懼，遠大於對得到的渴望——心理學家稱之為<strong>損失厭惡（Loss Aversion）</strong>。稀缺原則利用的，正是這個本能：讓你覺得如果現在不行動，你會失去某個珍貴的東西。</p>
-      <p>兩種稀缺：數量稀缺（「只剩2件」）、時間稀缺（「限今天」）。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">結帳頁面跳出「只剩最後2件！已有17人正在搶購」，你明明還在比較價格，卻立刻結帳，生怕「晚一步就沒了」。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">老闆說「這個升職機會只剩一個名額，大家都在爭」，你明明還沒準備好，卻開始瘋狂加班，只因為「不把握就沒了」。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">他說「我身邊很多人都在追我，你要不要想清楚」，你明明還在觀察，卻突然覺得「再不答應他就要被別人搶走了」，倉促答應交往。</div>
-        </div>
-      </div>
-      <div class="pc-insight">真正稀缺的東西，不需要大聲告訴你它稀缺。當有人用稀缺感製造你的緊迫感，那個緊迫感本身，就是一個警訊。</div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        在「限時優惠」結束前，刻意等一下。問自己：「如果這個機會消失了，我的生活會有什麼改變？」如果答案是「沒什麼改變」，那個稀缺感就只是幻覺。
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.7 統一性 -->
-  <div id="ch2-7" class="principle-card p7 reveal">
-    <div class="pc-header">
-      <span class="pc-num">原則 07</span>
-      <span class="pc-name">統一性</span>
-      <span class="pc-en">Unity</span>
-    </div>
-    <div class="pc-hook">我們是同一種人</div>
-    <div class="pc-body">
-      <p>席爾迪尼後來補充的第七個原則，也是<strong>最強大的一個</strong>。統一性不只是「我們有共同點」（那是喜好原則），而是「我們屬於同一個群體、同一個身份」。</p>
-      <p>當你認同某個身份——台灣人、某個品牌的粉絲、某個政黨的支持者——你更容易接受來自「同一群體」的影響，也更難拒絕他們的要求。</p>
-      <div class="pc-scene">
-        <div class="pc-scene-label">三種真實情境</div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">網購</div>
-          <div class="pc-scene-text">品牌廣告說「這是屬於我們這一代年輕人的選擇」，你明明不需要，卻因為「我也是這個圈子的人」而下單。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">職場</div>
-          <div class="pc-scene-text">團隊說「我們都是這間公司一起打拼過來的人，這次專案大家都要衝」，你明明有私人計畫，卻因為「我是團隊一份子」而犧牲休假。</div>
-        </div>
-        <div class="pc-scene-item">
-          <div class="pc-scene-tag">感情</div>
-          <div class="pc-scene-text">他說「我們都是重視家庭的人，你媽也希望我們早點結婚」，你明明還想再觀察，卻因為「我們是同一種人」而開始動搖。</div>
-        </div>
-      </div>
-      <div class="pc-insight">身份認同是最強大的說服工具，因為拒絕「同類」的要求，感覺像是背叛了自己。</div>
-      <div class="pc-break">
-        <div class="pc-break-label">破解方式</div>
-        分清楚「我認同這個群體的價值觀」和「這個群體的每個要求我都應該接受」。身份認同不等於無條件服從。
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 第三章 -->
-<section class="chapter" id="ch3">
-  <div class="chapter-num reveal">第三章</div>
-  <h2 class="chapter-title reveal">說服在日常生活中的<span>真實運作</span></h2>
-
-  <div class="section" id="ch3-1">
-    <span class="section-num reveal">3.1</span>
-    <h3 class="section-title reveal">廣告與行銷</h3>
-    <div class="body-text reveal">
-      <p>你打開任何一個購物網站，你會看到一個精心設計的說服系統：</p>
-    </div>
-    <ul class="method-list reveal">
-      <li><strong>「限時特賣」</strong>稀缺</li>
-      <li><strong>「已有 5,832 人購買」</strong>社會認同</li>
-      <li><strong>「加購滿額免運」</strong>承諾與一致性——你已經放了東西在購物車</li>
-      <li><strong>「顧客評價」</strong>社會認同 + 權威</li>
-      <li><strong>「只送給你的專屬優惠」</strong>喜好——讓你覺得被重視</li>
-    </ul>
-    <div class="body-text reveal"><p>這些不是巧合，這是精心設計的說服系統。</p></div>
-  </div>
-
-  <div class="section" id="ch3-2">
-    <span class="section-num reveal">3.2</span>
-    <h3 class="section-title reveal">職場說服</h3>
-    <div class="body-text reveal"><p>你的老闆說：</p></div>
-    <ul class="method-list reveal">
-      <li><strong>「你一直是我最信任的員工」</strong>喜好 + 承諾——你現在很難說不</li>
-      <li><strong>「大家都願意加班，就你……」</strong>社會認同</li>
-      <li><strong>「這是個難得的機會，不是每個人都有資格做」</strong>稀缺 + 權威</li>
-    </ul>
-  </div>
-
-  <div class="section" id="ch3-3">
-    <span class="section-num reveal">3.3</span>
-    <h3 class="section-title reveal">人際關係中的說服</h3>
-    <div class="body-text reveal">
-      <p>最難識別的說服，發生在最親密的關係裡——因為你信任對方，所以你的防禦心最低。</p>
-    </div>
-    <ul class="method-list reveal">
-      <li><strong>「你之前說你支持我的決定」</strong>承諾與一致性</li>
-      <li><strong>「連你媽都覺得我說的對」</strong>社會認同 + 權威</li>
-      <li><strong>「這種機會不是每個人都有的，你要珍惜」</strong>稀缺</li>
-    </ul>
-  </div>
-</section>
-
-<!-- 第四章 -->
-<section class="chapter" id="ch4">
-  <div class="chapter-num reveal">第四章</div>
-  <h2 class="chapter-title reveal">如何在被說服之前<span>先清醒一秒</span></h2>
-
-  <div class="section" id="ch4-1">
-    <span class="section-num reveal">4.1</span>
-    <h3 class="section-title reveal">認識你自己的弱點</h3>
-    <div class="body-text reveal">
-      <p>七個說服原則，你對哪個最敏感？有些人對「稀缺」特別沒抵抗力，看到「限時」就手癢；有些人對「社會認同」很敏感，特別在意「大家都這樣」；有些人對「喜好」最脆弱，很難拒絕自己喜歡的人。</p>
-      <p><em>知道自己的弱點，是第一道防線。</em></p>
-    </div>
-  </div>
-
-  <div class="section" id="ch4-2">
-    <span class="section-num reveal">4.2</span>
-    <h3 class="section-title reveal">「停、問、查」三步驟</h3>
-    <ul class="method-list reveal">
-      <li><strong>停</strong>在做出任何決定之前，給自己一個停頓。哪怕只有三十秒。緊迫感是說服者製造的，不是真實的。</li>
-      <li><strong>問</strong>這個決定，對我有什麼好處？對方有什麼好處？我是在資訊充分的狀態下做決定，還是在情緒被操弄的狀態下做決定？</li>
-      <li><strong>查</strong>在可以的情況下，驗證對方提供的資訊。「限量100個」是真的還是行銷話術？</li>
-    </ul>
-  </div>
-
-  <div class="section" id="ch4-3">
-    <span class="section-num reveal">4.3</span>
-    <h3 class="section-title reveal">說「我需要時間考慮」是你的權利</h3>
-    <div class="body-text reveal">
-      <p>任何讓你「現在就要決定」的情境，都是一個警訊。真正好的東西，不需要讓你在壓力下做決定。</p>
-    </div>
-    <div class="key-test reveal">
-      <div class="key-test-label">觀察反應</div>
-      <p>學會說：「我需要時間考慮。」然後<strong>觀察對方的反應</strong>——如果他尊重你的時間，他可能是認真的；如果他繼續製造壓力，那個壓力本身就是答案。</p>
-    </div>
-  </div>
-
-  <div class="section" id="ch4-4">
-    <span class="section-num reveal">4.4</span>
-    <h3 class="section-title reveal">成為有意識的說服者</h3>
-    <div class="body-text reveal">
-      <p>了解這些原則，不只是為了保護自己，也是為了<strong>更有效地影響他人——用誠實的方式</strong>。當你想說服別人支持一個真的值得支持的事，你可以：</p>
-    </div>
-    <ul class="method-list reveal">
-      <li>提供真實的社會認同（真實的使用者回饋）</li>
-      <li>建立真實的關係（喜好）</li>
-      <li>讓對方做小的承諾開始</li>
-      <li>清楚說明真正的稀缺性（如果真的有的話）</li>
-    </ul>
-    <div class="key-insight reveal"><p>說服不是壞事，不誠實的說服才是。</p></div>
-  </div>
-</section>
-
-<!-- 結語 -->
-<section class="epilogue" id="epilogue">
-  <div class="chapter-num reveal">結語</div>
-  <h2 class="epilogue-title reveal">你的選擇，真的是你的選擇嗎？</h2>
-  <div class="epilogue-body reveal">
-    <p>讀完這本書，你可能會有一段時間對所有「說服」都過度敏感——超市試吃你不敢接、朋友稱讚你你開始懷疑動機。這很正常，但它會過去。</p>
-    <p>真正的目標，不是讓你對所有影響力都築起高牆，而是讓你在<strong>真正重要的決定面前，多一層清醒</strong>。</p>
-    <p>知道說服原則存在，不會讓你變得冷酷或多疑。它只會讓你在下一次感覺「被推著做決定」的時候，多一個選擇：</p>
-  </div>
-  <div class="epilogue-final reveal">
-    「停下來，問自己<br>這真的是我想要的嗎？」
-  </div>
-</section>
-
-<!-- 系列其他冊 -->
-<div class="series-next reveal">
-  <div class="series-next-label">暗黑心理學系列</div>
-  <h3 class="series-next-title">繼續探索暗黑心理學完整系列</h3>
-  <div class="next-books">
+<div class="next-books">
     <div class="next-book">
       <span class="next-book-num">Vol.1</span>
       <a href="/dark-psychology-vol1.html" style="color:var(--text);text-decoration:none;" class="next-book-title">操控與控制：看清那條你看不見的線</a>
