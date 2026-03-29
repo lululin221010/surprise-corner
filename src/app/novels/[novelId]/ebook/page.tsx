@@ -585,11 +585,11 @@ export default function EbookPage() {
         {/* 連載說明橫幅 */}
         {isSerial && (
           <div style={{ background: 'rgba(180,144,80,0.08)', borderBottom: '1px solid rgba(180,144,80,0.12)', padding: '10px 24px', textAlign: 'center', fontSize: '0.8rem', color: '#9a8878', letterSpacing: '0.04em', lineHeight: 1.8 }}>
-            🎁 優惠期間小舖開放此連載免費，想一次看完可至
+            想一次看完完整版？前往
             <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer" style={{ color: '#b49050', textDecoration: 'underline', margin: '0 4px' }}>
-              數位商店
+              小舖
             </a>
-            購買電子書
+            取得完整版
           </div>
         )}
 

@@ -19,7 +19,7 @@ const CHAPTERS: Chapter[] = [
   { num: 4, emoji: '🎵', title: 'AI音樂生成工具', tools: ['Suno', 'Udio', 'Stable Audio'] },
   { num: 5, emoji: '🎙️', title: 'AI配音與聲音克隆', tools: ['ElevenLabs', 'Play.ht'] },
   { num: 6, emoji: '✂️', title: 'AI影片剪輯與後製', tools: ['CapCut AI', 'Adobe Firefly'] },
-  { num: 7, emoji: '💰', title: '免費工具總整理', tools: ['零預算方案', '推薦組合'] },
+  { num: 7, emoji: '💰', title: '工具選用整理', tools: ['零預算方案', '推薦組合'] },
   { num: 8, emoji: '⚡', title: '實戰案例與Prompt技巧', tools: ['SCAQ公式', '完整案例'] },
 ];
 
@@ -245,7 +245,7 @@ export default function AIBookPromo() {
         }}>
           <span style={{ color: '#9ca3b0', fontSize: '13px' }}>還不確定適不適合你？ </span>
           <a href="/ebook/ai-ebook-free.html" target="_blank" rel="noopener noreferrer" style={{ color: '#a855f7', fontSize: '13px', textDecoration: 'underline' }}>
-            先讀免費預覽（第一章完整）→
+            先看試讀預覽（第一章）→
           </a>
         </div>
       </div>

@@ -6,7 +6,7 @@ import chaptersData from '@/data/chapters.json'
 
 export const metadata: Metadata = {
   title: '連載小說・試看空間 | Surprise Corner',
-  description: '免費連載小說與電子書試閱，睡前・等車・最好的陪伴',
+  description: '連載小說與電子書試閱，睡前・等車・最好的陪伴',
 }
 
 // 封面元件：有圖用圖，沒圖用文字佔位
@@ -105,7 +105,7 @@ export default function NovelsPage() {
         {/* ── 連載中 ── */}
         <div className="section-label">
           <h2>■ 連載中</h2>
-          <p>免費同步更新，週一三五・週二四六</p>
+          <p>同步更新，週一三五・週二四六</p>
         </div>
         <div className="novels-grid">
           {serials.map((novel: any) => (

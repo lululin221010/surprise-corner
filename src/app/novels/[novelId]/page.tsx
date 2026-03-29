@@ -156,10 +156,10 @@ export default async function NovelPage({ params }: Props) {
             {ebookAvailable && (
               <div className="ebook-btn-row">
                 <Link href={`/novels/${novelId}/ebook`} className="ebook-btn">
-                  📖 免費試讀電子書
+                  📖 試讀電子書
                 </Link>
                 <span className="ebook-btn-hint">
-                  前 {freeChapters.length} 章免費，可匯出 PDF
+                  可匯出 PDF 閱讀
                 </span>
               </div>
             )}
@@ -219,8 +219,7 @@ export default async function NovelPage({ params }: Props) {
           {lockedChapters.length > 0 && (
             <div className="lock-notice">
               <p>
-                後續章節為付費內容，前往小舖解鎖完整故事。<br />
-                一次購買，永久閱讀。
+                前往小舖閱讀完整故事。
               </p>
               <a
                 href={novel.shopUrl || "https://still-time-corner.vercel.app/digital"}

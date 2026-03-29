@@ -94,13 +94,13 @@ export default async function ChapterPage({ params }: Props) {
           <div style={{ fontSize: '3.5rem', marginBottom: '1.5rem', opacity: 0.8 }}>{isPaidLocked ? '🔐' : '🔒'}</div>
 
           <h2 style={{ color: '#e8dcc8', fontSize: '1.5rem', fontWeight: 400, margin: '0 0 0.8rem', letterSpacing: '0.05em' }}>
-            第 {chapter.chapterNumber} 章・{isPaidLocked ? '付費章節' : '尚未開放'}
+            第 {chapter.chapterNumber} 章・{isPaidLocked ? '前往小舖閱讀' : '尚未開放'}
           </h2>
 
           <p style={{ color: '#6a5a4a', lineHeight: 1.9, margin: '0 0 0.3rem', fontSize: '0.9rem' }}>
             {chapter.isFree
               ? `本章將於 ${chapter.publishedAt} 開放`
-              : `免費章節（免費章節）已全數開放`}
+              : `試讀章節已全數開放`}
           </p>
 
           {/* 更新時程 */}
@@ -268,7 +268,7 @@ export default async function ChapterPage({ params }: Props) {
             textAlign: 'center',
           }}>
             <p style={{ color: '#b49050', fontSize: '0.9rem', margin: '0 0 0.5rem', letterSpacing: '0.08em' }}>
-              — 免費章節已全數開放 —
+              — 試讀章節已到這裡 —
             </p>
             <p style={{ color: '#5a4a3a', fontSize: '0.82rem', margin: '0 0 1.2rem', lineHeight: 1.9 }}>
               每週一・三・五更新一章，記得常回來 💜<br />
