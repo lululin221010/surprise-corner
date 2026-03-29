@@ -168,6 +168,25 @@
     "shopPrice": "NT$ 199"
   },
   {
+    "id": "cognitive-psychology",
+    "title": "認知心理學：你的大腦每天都在騙你",
+    "author": "盧林說的",
+    "cover": "https://still-time-corner.vercel.app/images/cognitive-psychology/cover.png",
+    "genre": "心理學",
+    "status": "系列導讀",
+    "category": "guide",
+    "description": "確認偏誤、記憶扭曲、決策陷阱、注意力劫持——四冊深入拆解你的大腦如何系統性地出錯。進來看看，哪一本最戳到你。",
+    "tags": [
+      "認知心理學",
+      "大腦",
+      "決策"
+    ],
+    "totalChapters": 0,
+    "updatedAt": "2026-03-29",
+    "createdAt": "2026-03-29",
+    "directPdfUrl": "/cognitive-psychology.html"
+  },
+  {
     "id": "daodu",
     "title": "有的沒的小舖・導讀精選",
     "author": "盧林說的",
