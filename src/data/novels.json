@@ -168,6 +168,25 @@
     "shopPrice": "NT$ 199"
   },
   {
+    "id": "dark-psychology",
+    "title": "暗黑心理學：你不敢承認的人性真相",
+    "author": "盧林說的",
+    "cover": "",
+    "genre": "心理學",
+    "status": "系列導讀",
+    "category": "guide",
+    "description": "操控、謊言、自戀、黑暗三角——四冊深入人性最不願承認的角落。看清楚了，你才能保護自己。",
+    "tags": [
+      "暗黑心理學",
+      "人性",
+      "操控"
+    ],
+    "totalChapters": 0,
+    "updatedAt": "2026-03-29",
+    "createdAt": "2026-03-29",
+    "directPdfUrl": "/dark-psychology.html"
+  },
+  {
     "id": "cognitive-psychology",
     "title": "認知心理學：你的大腦每天都在騙你",
     "author": "盧林說的",
