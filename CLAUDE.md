@@ -1,5 +1,22 @@
 # 驚喜角落（Surprise Corner）- 專案文件
 
+## ⚡ 新 Session 必讀（30秒掌握全局）
+
+| 項目 | 說明 |
+|------|------|
+| **這是什麼** | SS = 驚喜角落，內容平台（小說/Podcast/工具/電子書試讀） |
+| **對應小舖** | ST = 有的沒的小舖（still-time-corner.vercel.app），付費購買在那邊 |
+| **最重要的資料夾** | `src/data/novels.json`（小說+導讀卡片）、`public/`（靜態電子書HTML） |
+| **書籍試讀系統** | 靜態 HTML 放 `public/`，novels.json 加 `category:"guide"` 卡片做入口 |
+| **心理學系列** | 1張卡 → `/psychology.html` → 6系列導讀 → 各冊HTML（暗黑4冊付費牆，認知4冊進行中） |
+| **未來書系** | 角落百科：植物誌/動物談/星空/靈異，結構同心理學，每大類1張卡 |
+| **金流** | 不串任何第三方，全部導去 LINE 私訊 + 銀行轉帳 |
+| **工作習慣** | 每次改完立刻 git add . → commit → push，不等累積 |
+
+---
+
+
+
 ## 專案狀態
 - 部署在：https://surprise-corner.vercel.app
 - 技術：Next.js App Router，TypeScript（`.tsx`）
