@@ -189,6 +189,61 @@ Podcast 開場腳本原則：
 
 ---
 
+## 📚 靜態電子書系統（public/ 資料夾）
+
+### 架構說明
+電子書閱讀頁為**靜態 HTML**，放在 `public/` 資料夾，Vercel 直接伺服（不經 Next.js）。
+讀者入口：`/novels` 頁面 → 「認識小舖的書」區塊 → 點卡片進入。
+
+### novels.json 卡片系統
+- `category: "guide"` → 顯示在「認識小舖的書」區塊
+- `directPdfUrl` 欄位 → 「📖 進來翻翻 →」按鈕的連結目標
+- `cover` 欄位空字串 → 顯示文字佔位（比破圖好看），等 Gemini 封面圖做好再填
+
+### 心理學系列（已上線）
+`novels.json` 只有**1張卡片**（`id: "psychology"`）→ `/psychology.html`（6系列總覽）
+
+| 系列 | 導讀頁 | 各冊 HTML | 狀態 |
+|------|--------|-----------|------|
+| 暗黑心理學 | `/dark-psychology.html` | `dark-psychology-vol1~4.html` | ✅ 4冊完成，**付費牆**（前言+1.1節免費，之後鎖定） |
+| 認知心理學 | `/cognitive-psychology.html` | `cognitive-psychology-vol1/3/4.html` | ✅ Vol.1✅ Vol.2待寫 Vol.3✅ Vol.4前兩章✅（Vol.4 ch3-6待 C 提供） |
+| 關係心理學 | `/relationship-psychology.html` | 無各冊 | ✅ 導讀完成 |
+| 成長心理學 | `/growth-psychology.html` | 無各冊 | ✅ 導讀完成 |
+| 人格心理學 | `/personality-psychology.html` | 無各冊 | ✅ 導讀完成 |
+| 潛意識心理學 | `/unconscious-psychology.html` | 無各冊 | ✅ 導讀完成 |
+
+其他導讀頁：`/psychology-guide.html`（六大世界入門指南）、`/psychology.html`（系列總覽，6系列連結）
+
+### 暗黑心理學付費牆規則
+- **免費**：前言 + 第一章第1節（1.1）
+- **鎖定**：ch1-2 以後全部移除，顯示付費牆 box
+- 付費牆按鈕 → `https://still-time-corner.vercel.app/digital`
+- CSS class：`.paywall-fade`、`.paywall-box`、`.paywall-btn`
+
+### 靜態 HTML 命名規則
+```
+{系列英文名}.html              → 系列導讀頁（6系列總覽或詳細介紹）
+{系列英文名}-vol{N}.html       → 各冊閱讀頁
+```
+
+### 未來系列規劃（角落百科）
+每個大類一張卡 → hub HTML → 各冊 HTML
+
+| 大類 | 狀態 |
+|------|------|
+| 心理學圖書館（6系列）| ✅ 已上線 |
+| 角落植物誌 | 規劃中 |
+| 角落動物談 | 規劃中 |
+| 角落星空與大地 | 規劃中 |
+| 角落靈異與禁忌 | 規劃中 |
+
+新大類加入流程：
+1. 建立 hub HTML（`{類別}.html`）
+2. novels.json 加一筆 `category: "guide"`，`directPdfUrl` 指向 hub HTML
+3. 各冊建立 `{類別}-vol{N}.html`，在 hub HTML 加連結
+
+---
+
 ## SS 連載時間表
 - 奇數日：最後的信號
 - 偶數日：Lulu 的日記
