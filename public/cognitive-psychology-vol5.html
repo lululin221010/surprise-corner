@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>語言的陷阱：你說的話，正在決定你能想到的世界｜認知心理學系列第五冊</title>
+<meta name="description" content="盧林著。薩丕爾—沃夫假說、標籤效應、隱喻的框架力量——你說的語言，決定你能想到的世界。語言不只是表達思想的工具，它是塑造思想的容器。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0a07;
+    --bg2: #130d08;
+    --bg3: #1a110a;
+    --surface: #1f1408;
+    --border: rgba(242,162,122,0.12);
+    --text: #f2ece4;
+    --text-muted: #a07858;
+    --accent: #f2a27a;
+    --gold: #e8c87a;
+    --toc-w: 240px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* ── TOC SIDEBAR ── */
+  .toc-sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--toc-w);
+    height: 100vh;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 40px 0 60px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(242,162,122,0.2) transparent;
+  }
+  .toc-brand {
+    padding: 0 24px 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .toc-brand-series {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .toc-brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+  .toc-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 24px;
+    margin-bottom: 12px;
+  }
+  .toc-nav { list-style: none; }
+  .toc-nav a {
+    display: block;
+    padding: 9px 24px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    line-height: 1.5;
+  }
+  .toc-nav a:hover { color: var(--text); background: rgba(242,162,122,0.04); }
+  .toc-nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(242,162,122,0.06); }
+  .toc-nav .toc-coming {
+    display: block;
+    padding: 9px 24px;
+    font-size: 0.78rem;
+    color: rgba(160,120,88,0.4);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .toc-divider {
+    margin: 16px 24px;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+  .toc-buy {
+    padding: 0 24px;
+    margin-top: 8px;
+  }
+  .toc-buy a {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .toc-buy a:hover { opacity: 1; }
+
+  /* ── LAYOUT ── */
+  .page-wrap {
+    margin-left: var(--toc-w);
+    min-height: 100vh;
+  }
+  .main-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 48px 120px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 48px 64px;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin-top: 64px;
+    opacity: 0.3;
+  }
+  .hero-series {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .hero-title span { color: var(--accent); font-style: italic; }
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .hero-hook {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(242,236,228,0.85);
+    padding: 24px;
+    border-left: 3px solid var(--accent);
+    background: rgba(242,162,122,0.04);
+    border-radius: 0 8px 8px 0;
+  }
+  .hero-hook em { color: var(--accent); font-style: normal; }
+  .hero-meta {
+    margin-top: 32px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* ── CHAPTER ── */
+  .chapter {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chapter:last-of-type { border-bottom: none; }
+  .chapter-header { margin-bottom: 40px; }
+  .chapter-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+  .chapter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .chapter-subtitle {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── PREFACE ── */
+  .preface {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .preface-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 24px;
+  }
+
+  /* ── QUOTE ── */
+  .opening-quote {
+    margin: 0 0 40px;
+    padding: 24px 28px;
+    border-left: 3px solid rgba(242,162,122,0.4);
+    background: rgba(242,162,122,0.03);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: rgba(242,236,228,0.8);
+    line-height: 1.85;
+  }
+
+  /* ── PROSE ── */
+  .prose {
+    font-size: 1rem;
+    line-height: 1.95;
+    color: rgba(242,236,228,0.88);
+  }
+  .prose p { margin-bottom: 20px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--text); font-weight: 500; }
+  .prose em { color: var(--accent); font-style: normal; }
+  .sub-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--accent);
+    margin: 40px 0 16px;
+    letter-spacing: 0.5px;
+  }
+  .prose ul {
+    padding-left: 1.2em;
+    line-height: 2.2;
+  }
+
+  /* ── SCENE BOX ── */
+  .scene-box {
+    margin: 40px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg2);
+  }
+  .scene-label {
+    padding: 14px 24px;
+    background: rgba(242,162,122,0.06);
+    border-bottom: 1px solid var(--border);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    opacity: 0.8;
+  }
+  .scene-text {
+    padding: 24px;
+    font-size: 0.95rem;
+    color: rgba(242,236,228,0.8);
+    line-height: 1.9;
+  }
+  .scene-text p { margin-bottom: 12px; }
+  .scene-text p:last-child { margin-bottom: 0; }
+  .dialogue {
+    padding: 0 24px 24px;
+  }
+  .dialogue-line {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+    font-size: 0.93rem;
+    line-height: 1.75;
+  }
+  .dialogue-speaker {
+    flex-shrink: 0;
+    min-width: 48px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    padding-top: 3px;
+    letter-spacing: 1px;
+  }
+  .dialogue-text { color: rgba(242,236,228,0.85); }
+
+  /* ── CONCEPT LIST ── */
+  .concept-list {
+    list-style: none;
+    margin: 32px 0;
+  }
+  .concept-list li {
+    padding: 20px 24px;
+    border-left: 2px solid rgba(242,162,122,0.25);
+    margin-bottom: 16px;
+    background: rgba(242,162,122,0.03);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: rgba(242,236,228,0.85);
+  }
+  .concept-list li strong {
+    display: block;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .concept-list li .sub {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── KEY BOX ── */
+  .key-box {
+    margin: 40px 0;
+    padding: 28px 32px;
+    background: rgba(242,162,122,0.06);
+    border: 1px solid rgba(242,162,122,0.2);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: rgba(242,236,228,0.85);
+  }
+  .key-box strong {
+    display: block;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* ── SERIES NAV ── */
+  .series-nav {
+    margin: 80px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .series-nav-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .series-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+  .next-book {
+    display: block;
+    padding: 16px 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .next-book:hover { border-color: var(--accent); background: rgba(242,162,122,0.05); }
+  .next-book.coming { opacity: 0.4; cursor: default; }
+  .next-book.current { border-color: var(--accent); background: rgba(242,162,122,0.06); }
+  .next-book-num {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .next-book-title {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    :root { --toc-w: 0px; }
+    .toc-sidebar { display: none; }
+    .hero { padding: 48px 24px 40px; }
+    .main-content { padding: 0 24px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="toc-sidebar">
+  <div class="toc-brand">
+    <div class="toc-brand-series">認知心理學系列 · Vol.5</div>
+    <div class="toc-brand-title">語言的陷阱</div>
+  </div>
+  <div class="toc-label">目錄</div>
+  <ul class="toc-nav">
+    <li><a href="#preface">前言</a></li>
+    <li><a href="#ch1">第一章　薩丕爾—沃夫假說</a></li>
+    <li><a href="#ch2">第二章　標籤效應</a></li>
+    <span class="toc-coming">第三章　即將推出</span>
+    <span class="toc-coming">第四章　即將推出</span>
+    <span class="toc-coming">第五章　即將推出</span>
+    <span class="toc-coming">第六章　即將推出</span>
+  </ul>
+  <hr class="toc-divider">
+  <div class="toc-buy">
+    <a href="https://still-time-corner.vercel.app" target="_blank">前往小舖取得完整版 →</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-series">認知心理學系列・第五冊</div>
+    <h1 class="hero-title"><span>語言的陷阱</span></h1>
+    <p class="hero-subtitle">你說的話，正在決定你能想到的世界</p>
+    <div class="hero-hook">
+      你以為你先有想法，然後用語言把它說出來。這個順序，<em>可能是錯的</em>。語言不只是表達思想的工具，它是塑造思想的容器。你能用什麼語言描述的，你才能真正「想到」它。
+    </div>
+    <div class="hero-meta">作者｜盧林　有的沒的小舖 出品</div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- 前言 -->
+    <section id="preface" class="preface reveal">
+      <div class="preface-label">前言</div>
+      <div class="prose">
+        <p>你以為你先有想法，然後用語言把它說出來。</p>
+        <p>這個順序，可能是錯的。</p>
+        <p>語言學家、哲學家、和認知科學家在過去一個世紀的研究，越來越指向一個讓人不舒服的結論：語言不只是表達思想的工具，它是塑造思想的容器。你能用什麼語言描述的，你才能真正「想到」它。你沒有詞彙的感受，你幾乎感覺不到。你貼在自己身上的標籤，你慢慢活成那個形狀。你用來描述一件事的字，決定了你對那件事的感受和判斷。</p>
+        <p>這不是文字遊戲。這是語言如何在最根本的層次影響你的認知——你的感知、你的記憶、你的情緒、你的身份認同、你對世界的評估。</p>
+        <p>這一冊，我們要拆解六個語言和認知之間的深層連結。讀完這本書，你會在每一次開口之前，多停頓一秒鐘——因為你知道，你說出去的那個字，不只是在描述你的想法，它還在塑造你的想法。那一秒鐘的停頓，是這本書能給你最有價值的東西。</p>
+      </div>
+      <blockquote class="opening-quote" style="margin-top:32px;">
+        「語言的邊界，就是我的世界的邊界。」——路德維希・維根斯坦（Ludwig Wittgenstein），哲學家
+      </blockquote>
+    </section>
+
+    <!-- ── 第一章 ── -->
+    <section id="ch1" class="chapter reveal">
+      <div class="chapter-header">
+        <div class="chapter-num">第一章</div>
+        <h2 class="chapter-title">薩丕爾—沃夫假說</h2>
+        <div class="chapter-subtitle">你說的語言，決定你能想到的世界</div>
+      </div>
+      <blockquote class="opening-quote reveal">
+        「你不是用嘴巴說話，你是用語言思考。不同的語言，不只是不同的表達方式，它們是不同的思考方式——對時間、顏色、空間、關係，有著根本不同的感知結構。」
+      </blockquote>
+
+      <div class="scene-box reveal">
+        <div class="scene-label">— 一個讓你說「語言有這麼厲害嗎？」的場景</div>
+        <div class="scene-text">
+          <p>你知道「青」這個字嗎？</p>
+          <p>在古代中文裡，「青」可以指綠色，也可以指藍色，也可以指黑色——「青天」是藍天，「青草」是綠草，「青絲」是黑髮。現代中文把藍和綠分開了，但日文裡，交通燈的「go」燈至今仍然叫「青（あお，Ao）」——即使那個燈在很多國家都被認定是「綠色」的，日本人說「變青了就過馬路」，指的就是那個在很多人眼裡是綠色的燈。</p>
+          <p>研究顯示：不同語言對顏色的分類方式，確實影響了使用者辨別顏色的速度和精確度。使用有更多基本顏色詞彙的語言的人，在區分某些顏色時更快、更精確——不是因為他們的眼睛更好，而是因為語言給了他們更細緻的感知框架。</p>
+          <p>語言，真的改變了你感知世界的方式。</p>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">什麼是薩丕爾—沃夫假說？</h3>
+        <p>薩丕爾—沃夫假說（Sapir-Whorf Hypothesis），又稱為語言相對論（Linguistic Relativity），由語言學家愛德華・薩丕爾（Edward Sapir）和他的學生班傑明・李・沃夫（Benjamin Lee Whorf）在二十世紀初提出。</p>
+        <p>它的核心主張是：你所使用的語言，影響甚至決定了你思考和感知世界的方式。這個假說有「強版本」和「弱版本」。強版本——語言完全決定思維——大多數語言學家認為過於極端。弱版本——語言影響思維，讓某些思考方式比其他方式更容易或更難——有大量研究支持，是目前語言認知科學的主流方向。</p>
+        <p>換句話說：語言不是監獄，但它是地形——有些地方走起來容易，有些地方走起來困難，這取決於你的語言在那個方向上有沒有鋪好路。</p>
+
+        <h3 class="sub-heading">研究告訴你的那些讓人吃驚的事</h3>
+      </div>
+
+      <ul class="concept-list reveal">
+        <li>
+          <strong>顏色感知：語言決定你看到的顏色邊界</strong>
+          俄語有兩個基本的藍色詞：「goluboy」（淺藍）和「siniy」（深藍）——它們在俄語裡是兩個截然不同的基本色。研究者發現，俄語使用者在辨別跨越「淺藍/深藍」邊界的顏色對時，反應顯著更快——因為語言把那個邊界標記得更清晰，讓感知系統在那個邊界上更敏銳。
+          <div class="sub">你的語言，決定了你的感知在哪裡更銳利，在哪裡更模糊。</div>
+        </li>
+        <li>
+          <strong>空間方向：你的方向感取決於你的語言</strong>
+          澳洲昆士蘭的庫克薩優里語（Kuuk Thaayorre）沒有「左邊/右邊」這樣相對於身體的方向詞彙，他們只使用絕對的基本方位：北、南、東、西。結果：庫克薩優里語使用者有著令人驚嘆的方向感——即使在室內，他們永遠知道正北在哪個方向。
+          <div class="sub">你用什麼語言描述空間，你的空間感知就朝著那個方向被強化。</div>
+        </li>
+        <li>
+          <strong>時間感知：語言的時間軸不一樣</strong>
+          英語使用者在想像時間軸時，傾向於把過去放在左邊、未來放在右邊（水平軸）。中文使用者大量使用垂直空間隱喻——「上個月」「下個星期」——研究顯示，中文使用者在時間思考任務上，確實更傾向於使用垂直空間框架。
+          <div class="sub">你的語言，悄悄決定了你在頭腦裡把「時間」安置在哪個空間維度上。</div>
+        </li>
+        <li>
+          <strong>未來時態：有沒有「未來式」影響你的行為</strong>
+          經濟學家凱斯・陳（Keith Chen）的研究發現：使用沒有強制未來時態語言的人（例如中文、德語），儲蓄率更高、吸菸率更低、肥胖率更低。當你的語言把「現在」和「未來」在文法上區分得越清楚，你就越把「未來的自己」當成一個和現在不同的人——那個心理距離，讓你更難為未來的自己做犧牲。
+          <div class="sub">有沒有未來時態，可能影響你的退休儲蓄和健康行為。</div>
+        </li>
+      </ul>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">語言相對論在你日常生活裡的五個影響</h3>
+        <ul>
+          <li><strong>① 你用什麼詞描述情緒，決定你能感受到的情緒細膩度</strong><br>如果你的情緒詞彙只有「開心」「難過」「生氣」「害怕」，你能感受到的情緒，就只有這幾個粗糙的類別。但如果你學會了更細緻的情緒詞彙——「悵然」「悻悻」「忐忑」「悵惘」——你開始能夠感受到更多細微的情緒層次，那些以前你說不出來的感覺，有了名字，就變得更真實、更可以被處理。你的情緒詞彙，是你情緒感知的解析度。</li>
+          <li style="margin-top:12px;"><strong>② 你用什麼詞定義問題，決定你能找到的解決方案</strong><br>如果你說「我的問題是沒有時間」，你找的解決方案就是「怎麼多出時間」。如果你換一個描述：「我的問題是我的優先順序不夠清晰」，你找的解決方案就完全不同了。同一個困境，用不同的語言框架描述，你能看到的出路就不一樣。</li>
+          <li style="margin-top:12px;"><strong>③ 你用什麼詞評價一個人，決定你對他的整體感知</strong><br>你說一個人「固執」，你對他的整體感知會偏向負面。你說同一個人「堅持原則」，你對他的感知會偏向正面。同一個行為，兩個詞，兩個截然不同的感知框架。</li>
+          <li style="margin-top:12px;"><strong>④ 你用什麼語言自我對話，決定你對自己的感受</strong><br>「我是一個失敗者」，和「我在這件事上失敗了」——這兩句話對你的自我感受和後續行為的影響，是截然不同的。前者是關於你的存在本質的標籤，後者是關於一個特定事件的描述。</li>
+          <li style="margin-top:12px;"><strong>⑤ 你使用的隱喻，決定你對問題的理解框架</strong><br>「對抗」犯罪，和「預防」犯罪——這兩個隱喻，讓你對「怎麼解決犯罪問題」的思考方向完全不同。研究顯示，讀到「犯罪是一種社會病」描述的人，更傾向提出社會改革方案；讀到「犯罪是一種社會捕食者」的人，更傾向提出增加執法力度的方案。</li>
+        </ul>
+      </div>
+
+      <div class="scene-box reveal" style="margin-top:48px;">
+        <div class="scene-label">— 對話實錄：換一個詞，看到不同的出路</div>
+        <div class="scene-text">
+          <p>思妤在跟她的導師談她的論文進度：</p>
+        </div>
+        <div class="dialogue">
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">思妤</span>
+            <span class="dialogue-text">我覺得我在這個問題上被卡住了。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">導師</span>
+            <span class="dialogue-text">你能不能換一個描述方式，不要用「卡住」，而是用另一個詞描述你現在的狀態？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">思妤</span>
+            <span class="dialogue-text">……也許是「我還沒有找到切入點」？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">導師</span>
+            <span class="dialogue-text">你用「卡住」的時候，你覺得你能做什麼？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">思妤</span>
+            <span class="dialogue-text">好像……什麼都做不了，就在那裡等著。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">導師</span>
+            <span class="dialogue-text">你用「還沒找到切入點」的時候呢？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">思妤</span>
+            <span class="dialogue-text">感覺……我可以去找。去讀更多文獻，或者換個角度試試。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">導師</span>
+            <span class="dialogue-text">你的處境沒有改變，只是你描述它的詞改變了。但那個詞，讓你看到了不同的行動可能性。</span>
+          </div>
+        </div>
+        <div class="scene-text" style="margin-top:16px;">
+          <p>「卡住」讓思妤覺得是外力施加給她的狀態，她是被動的受害者。「還沒找到切入點」讓她覺得是一個尚未完成的主動任務，她是可以行動的主體。同一個現實，兩個語言框架，兩種完全不同的自我能動感。</p>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">怎麼善用語言相對論？</h3>
+        <ul>
+          <li><strong>方法一：豐富你的情緒詞彙</strong><br>有意識地學習更多細緻的情緒詞彙——包括你的母語裡的古老詞彙，和其他語言裡沒有精確對應詞的概念（例如日文的「物哀」，葡萄牙文的「saudade」，德文的「Schadenfreude」）。那些詞，讓你能感知到更細緻的情緒狀態。</li>
+          <li style="margin-top:12px;"><strong>方法二：在遇到困境時，刻意換一個描述框架</strong><br>當你說「我做不到」，試著換成「我目前還沒找到做到它的方法」。不是在自我欺騙，而是在換一個語言框架，看看有沒有讓你看到不同出路的可能性。</li>
+          <li style="margin-top:12px;"><strong>方法三：注意你描述他人時用的詞</strong><br>你說一個同事「懶」，你對他的所有行為的解釋，都會被「懶」這個框架過濾。也許他的行為更準確的描述是「效率取向」或「精力管理有問題」。不同的詞，給你完全不同的理解和應對方式。</li>
+          <li style="margin-top:12px;"><strong>方法四：留意隱喻背後的思考框架</strong><br>每次你（或別人）用一個隱喻描述一個複雜問題，問自己：「這個隱喻預設了什麼？它讓我看不到什麼？還有沒有其他描述方式能讓我看到不同的面向？」</li>
+        </ul>
+      </div>
+
+      <div class="key-box reveal">
+        <strong>本章重點</strong>
+        語言不只是表達思想的工具，它是塑造思想的容器。你的語言在哪些地方有更細緻的詞彙，你的感知和思考在那些地方就更精確；你的語言在哪些地方粗糙或空白，那些地方對你來說就更模糊、更難被感知和處理。擴展你的語言，就是在擴展你能思考的世界。
+      </div>
+    </section>
+
+    <!-- ── 第二章 ── -->
+    <section id="ch2" class="chapter reveal">
+      <div class="chapter-header">
+        <div class="chapter-num">第二章</div>
+        <h2 class="chapter-title">標籤效應</h2>
+        <div class="chapter-subtitle">你一旦被貼上標籤，你就開始活成那個標籤</div>
+      </div>
+      <blockquote class="opening-quote reveal">
+        「最危險的不是別人給你貼的標籤，是你自己接受了那個標籤，然後開始用它來解釋你的每一個行為，直到你成為那個標籤本身。」
+      </blockquote>
+
+      <div class="scene-box reveal">
+        <div class="scene-label">— 一個讓你想起某個關於自己的「定論」的場景</div>
+        <div class="scene-text">
+          <p>你小學的時候，有一次數學考了很低分。你媽媽說：「你就是不擅長數學。」你的老師說：「這個孩子在數理方面比較弱。」</p>
+          <p>你記住了那個評語。你開始在心裡說：「我不擅長數學。」從那之後，每次數學有點難，你第一個反應不是「這道題要怎麼解」，而是「反正我不擅長數學，這很正常」。你開始在數學上投入更少，你的成績繼續差，你說：「你看，我就是不擅長數學。」</p>
+          <p>那個標籤，從一個描述，變成了一個預言，然後變成了一個你活進去的身份。</p>
+          <p>但你有沒有想過：你那次考低分，可能是因為那個概念你還沒理解透，或者你那天狀況不好。那不是關於你的「數學能力的本質」的定論。是那個標籤，讓它成了定論。</p>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">什麼是標籤效應？</h3>
+        <p>標籤效應（Labeling Effect）的核心概念是：人們傾向於根據被貼在他們身上的標籤，調整自己的行為和自我認知，最終使那個標籤成為自我實現的預言。</p>
+        <p>它有幾個運作層次：<strong>外部標籤的內化</strong>——別人說你是什麼，你慢慢開始相信你是什麼；<strong>解釋框架的固化</strong>——一旦有了標籤，你對自己行為的解釋就被那個標籤框住了；<strong>選擇性注意的強化</strong>——你接受了一個標籤之後，你開始更容易注意到符合那個標籤的行為，而忽略不符合的行為。</p>
+
+        <h3 class="sub-heading">心理學實驗告訴你標籤有多強大</h3>
+        <p>1968年，心理學家羅伯特・羅森塔爾（Robert Rosenthal）和萊諾爾・雅各布森（Lenore Jacobson）的「比馬龍效應」（Pygmalion Effect）實驗：他們告訴一批小學老師，隨機選出了班上一些「有潛力、即將大幅進步」的學生。實際上，那些學生是完全隨機選出的。</p>
+        <p>一年後，那些被標記為「有潛力」的學生，在智力測驗上的進步，顯著高於沒有被標記的學生。老師相信了那個標籤，他們的態度、期待、和互動方式都被影響了——給了更多的關注、更多的鼓勵、更有挑戰性的任務。學生感受到了那個期待，他們也活出了那個期待。</p>
+        <p>一個完全隨機的「有潛力」標籤，真實地改變了學生的智力表現。如果正向的虛假標籤能做到這件事，那負向的真實標籤能造成什麼，你可以想像。</p>
+
+        <h3 class="sub-heading">標籤效應在你生活裡的六個現場</h3>
+      </div>
+
+      <ul class="concept-list reveal">
+        <li>
+          <strong>① 「你就是很敏感」</strong>
+          有人告訴你「你就是很敏感」，你接受了那個標籤。從那之後，每次你因為某件事難過，你不是問「這件事確實值得難過嗎？」，而是說「我就是很敏感」。有時候你的感受是準確的，你感受到了別人沒有感受到的事情，那是洞察力而不是「太敏感」。但標籤讓你把自己的感受全部歸類為「過度反應」。
+        </li>
+        <li>
+          <strong>② 「我天生沒有創意」</strong>
+          你接受了「我沒有創意」的標籤，從那之後你不再嘗試有創意的事，因為「反正我沒創意」。你的創意能力沒有機會被練習和發展，然後你說「你看，我果然沒創意」。但創意是一種可以發展的能力，不是一個固定的天賦。
+          <div class="sub">那個標籤，讓你從來沒有給自己機會去證明相反。</div>
+        </li>
+        <li>
+          <strong>③ 職場上的「他就是這種人」</strong>
+          你的主管對一個同事形成了「他就是那種不主動的人」的標籤。從那之後，那個同事的每一個主動行為都被略過，他的每一個不主動行為都被放大。那個同事在那個環境裡，真的慢慢變得「不主動」——因為主動也不被看見。
+        </li>
+        <li>
+          <strong>④ 「我們家的人都這樣」</strong>
+          家族集體標籤——「我們家的人都比較內向」「我們家的人都沒有生意頭腦」——透過幾十年的重複，成了一個你從小就接受的關於「你是誰」的定義。你可能只是因為那個標籤讓你在需要社交的場合不去練習，讓你的社交能力從來沒有得到機會發展。
+        </li>
+        <li>
+          <strong>⑤ 醫療診斷的雙面刃</strong>
+          你拿到了一個診斷——焦慮症、憂鬱症、ADHD。那個診斷有它的價值：它給了你一個解釋，讓你的感受有了名字，讓你知道可以尋求什麼樣的幫助。但如果你把那個診斷當成一個永久的身份標籤，讓它成為解釋所有困難的萬能答案，它也可能阻礙了你去發展應對這些困難的能力。
+          <div class="sub">診斷是一個工具，不是一個身份。</div>
+        </li>
+        <li>
+          <strong>⑥ 你自己給自己的標籤</strong>
+          最持久、最有力的標籤，不是別人給的，是你自己說的。「我就是懶。」「我就是沒有耐心。」「我就是不適合感情。」每次你用「我就是」開頭，你不只是在描述一個狀態，你是在把它固化成一個關於你的存在本質的定論——讓你從此不再需要問「下次我可以怎麼做不同的事？」
+        </li>
+      </ul>
+
+      <div class="scene-box reveal" style="margin-top:48px;">
+        <div class="scene-label">— 對話實錄：標籤如何讓人困住自己</div>
+        <div class="scene-text">
+          <p>子涵在跟朋友聊她的感情狀況：</p>
+        </div>
+        <div class="dialogue">
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">子涵</span>
+            <span class="dialogue-text">我就是不適合感情，每次都這樣。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">朋友</span>
+            <span class="dialogue-text">你說的每次，是幾次？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">子涵</span>
+            <span class="dialogue-text">三次了。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">朋友</span>
+            <span class="dialogue-text">是你的問題，還是你在三段不同關係裡遇到的不同挑戰，你還沒有學會怎麼應對？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">子涵</span>
+            <span class="dialogue-text">這不是一樣的事嗎？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">朋友</span>
+            <span class="dialogue-text">不一樣。「不適合感情」是一個關於你本質的定論，沒有什麼可以改變它。「還沒學會應對某些挑戰」是一個技能的問題，是可以學的。</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">子涵</span>
+            <span class="dialogue-text">但如果我學了還是失敗呢？</span>
+          </div>
+          <div class="dialogue-line">
+            <span class="dialogue-speaker">朋友</span>
+            <span class="dialogue-text">那至少你試了。但你用「我就是不適合感情」的標籤，你連試都不用試了。</span>
+          </div>
+        </div>
+        <div class="scene-text" style="margin-top:16px;">
+          <p>「我就是不適合感情」這個標籤，讓子涵不需要承受「試了但失敗」的風險，因為她已經預先宣告了失敗的不可避免。那個標籤是一種保護，也是一座牢籠。</p>
+        </div>
+      </div>
+
+      <div class="prose reveal">
+        <h3 class="sub-heading">怎麼對抗標籤效應？</h3>
+        <ul>
+          <li><strong>方法一：把「我是什麼」換成「我目前傾向於什麼」</strong><br>把所有關於你自己的「我就是」句型，換成「我目前在這個情況下傾向於」。這個語言上的小轉換，把一個關於本質的定論，變成一個關於目前狀態的描述——那個狀態是可以改變的。</li>
+          <li style="margin-top:12px;"><strong>方法二：對別人給你的標籤保持追問</strong><br>每次有人說你「就是這樣的人」，追問自己：「這個標籤，描述的是我的本質，還是我在某些情況下的某個傾向？我有沒有反例？那些反例去哪裡了？」</li>
+          <li style="margin-top:12px;"><strong>方法三：在評價他人之前，用行為描述代替性格標籤</strong><br>不說「他就是懶」，說「他在這個任務上沒有按時完成，我不知道原因」。行為描述保留了對原因的開放性，性格標籤關閉了那個可能性。</li>
+          <li style="margin-top:12px;"><strong>方法四：把診斷和標籤當工具，而不是身份</strong><br>任何描述你的標籤——診斷、性格測驗結果、別人對你的評語——都是工具，不是定義。它們幫助你理解自己的某個面向，但它們不是你的全部，也不是你永遠的形狀。</li>
+        </ul>
+      </div>
+
+      <div class="key-box reveal">
+        <strong>本章重點</strong>
+        標籤效應讓一個描述變成一個定論，讓一個狀態變成一個身份。最危險的不是標籤本身，而是你接受了那個標籤，然後用它解釋你的每一個行為，讓它成為你不再需要嘗試改變的理由。語言上的一個小轉換——從「我是」到「我目前傾向於」——是讓你從標籤的牢籠裡走出來的第一把鑰匙。
+      </div>
+    </section>
+
+    <!-- 系列導航 -->
+    <div class="series-nav reveal">
+      <div class="series-nav-label">— 認知心理學系列</div>
+      <div class="series-nav-grid">
+        <a href="/cognitive-psychology-vol1.html" class="next-book">
+          <span class="next-book-num">Vol.1</span>
+          <div class="next-book-title">思維陷阱</div>
+        </a>
+        <div class="next-book coming">
+          <span class="next-book-num">Vol.2</span>
+          <div class="next-book-title">決策的陷阱</div>
+        </div>
+        <a href="/cognitive-psychology-vol3.html" class="next-book">
+          <span class="next-book-num">Vol.3</span>
+          <div class="next-book-title">記憶的謊言</div>
+        </a>
+        <a href="/cognitive-psychology-vol4.html" class="next-book">
+          <span class="next-book-num">Vol.4</span>
+          <div class="next-book-title">注意力劫持</div>
+        </a>
+        <div class="next-book current">
+          <span class="next-book-num">Vol.5</span>
+          <div class="next-book-title">語言的陷阱</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /page-wrap -->
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav a');
+  const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.toc-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  sections.forEach(s => tocObserver.observe(s));
+</script>
+</body>
+</html>
