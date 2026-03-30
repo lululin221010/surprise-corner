@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>有的沒的小舖・導讀精選 | 驚喜角落</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0a14;
+      --surface: #16101f;
+      --border: rgba(255,255,255,0.07);
+      --text: #ece8f0;
+      --text-muted: rgba(236,232,240,0.88);
+      --accent: #c084fc;
+      --accent2: #e8607a;
+      --gold: #d4a843;
+    }
+    html { font-size: 19px; scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif TC', serif;
+      line-height: 1.9;
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(14,10,20,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .nav-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--text-muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-sep { color: var(--border); font-size: 12px; }
+    .nav-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--text-muted);
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 32px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-style: italic;
+      color: var(--text-muted); margin-bottom: 32px;
+    }
+    .hero-body {
+      font-size: 1.05rem; color: var(--text-muted);
+      line-height: 2.1; margin-bottom: 32px;
+    }
+    .hero-body strong { color: var(--text); font-weight: 500; }
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-style: italic;
+      color: var(--accent); text-align: center;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 32px 0;
+      line-height: 1.8;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px 100px;
+    }
+
+    /* SECTION LABEL */
+    .section-intro {
+      padding: 60px 0 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--text-muted); text-align: center;
+      text-transform: uppercase;
+    }
+    .section-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 300; text-align: center;
+      margin-bottom: 48px; color: var(--text);
+    }
+
+    /* WORLD CARDS */
+    .world-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 36px 40px;
+      margin-bottom: 32px;
+      background: var(--surface);
+      transition: border-color 0.3s;
+    }
+    .world-card:hover { border-color: rgba(192,132,252,0.3); }
+    .world-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .world-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; font-style: italic;
+      color: var(--text-muted); margin-bottom: 6px;
+    }
+    .world-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem; font-weight: 500;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .world-tagline {
+      font-size: 0.92rem; color: var(--text-muted);
+      font-style: italic; margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .world-body {
+      font-size: 1.05rem; color: var(--text-muted);
+      line-height: 2.1; margin-bottom: 20px;
+    }
+    .world-body strong { color: var(--text); font-weight: 500; }
+
+    /* CONCEPT LIST inside world */
+    .concept-list { margin: 20px 0; }
+    .concept-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .concept-item:last-child { border-bottom: none; }
+    .concept-name {
+      font-size: 1rem; font-weight: 500; color: var(--text);
+      margin-bottom: 4px;
+    }
+    .concept-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 0.88rem;
+      color: var(--accent); margin-left: 8px;
+    }
+    .concept-desc {
+      font-size: 0.97rem; color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    /* SERIES FOOTER inside card */
+    .world-series-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 2px;
+      color: var(--text-muted); text-transform: uppercase;
+      margin-top: 20px; margin-bottom: 8px;
+    }
+    .world-series-tags {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    /* CLOSING */
+    .closing {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+    .closing-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-style: italic;
+      color: var(--text-muted); line-height: 2;
+      margin-bottom: 8px;
+    }
+    .closing-quote strong { color: var(--accent); font-style: normal; }
+    .closing-body {
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 2; margin-bottom: 32px;
+    }
+    .cta-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 3px;
+      color: var(--text-muted); text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .cta-sub {
+      font-size: 0.95rem; color: var(--text-muted);
+      line-height: 1.9; margin-bottom: 28px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; text-decoration: none;
+      padding: 14px 36px; border-radius: 6px;
+      font-size: 1rem; font-family: 'Noto Serif TC', serif;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .main { padding: 0 20px 80px; }
+      .world-card { padding: 24px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-back" href="https://surprise-corner.vercel.app/novels">← 回連載小說</a>
+    <span class="nav-sep">·</span>
+    <span class="nav-title">導讀精選</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">有的沒的小舖・導讀精選</div>
+    <h1 class="hero-title">心理學六大世界入門指南</h1>
+    <p class="hero-sub">你以為你了解自己嗎？</p>
+    <div class="hero-body">
+      <p>心理學不會給你溫柔的答案。<br>
+      它只會冷冷地照進那個你以為最熟悉、<br>
+      卻其實最陌生的地方——<strong>你自己的內心</strong>。</p>
+    </div>
+    <div class="hero-body">
+      你有沒有過這樣的經驗——
+      明明下定決心要早睡，卻滑手機滑到凌晨兩點；
+      明明知道那段關係對你不好，卻一次次回去；
+      明明想說「不」，嘴巴卻自動吐出「好」。
+      <br><br>
+      這不是你意志力不夠，也不是你天生軟弱。
+      這就是心理學在暗處偷笑的時刻。
+      <br><br>
+      人類的行為，從來不是純粹理性的產物。
+      我們被情緒綁架、被過去的傷痕操縱、被環境偷偷設局——
+      而最可怕的是，大多數時候，我們對這一切毫無察覺，
+      還以為自己是自由的。
+    </div>
+    <div class="hero-quote">
+      「你真的以為，<br>你是自己人生的主人嗎？」
+    </div>
+    <div class="hero-body">
+      這份導讀，將帶你走進心理學的六個世界。每個世界都有它的黑暗面，也有它的出口。
+      你不需要一次讀完所有，但只要踏進去一個，就再也回不去了。
+    </div>
+  </section>
+
+  <!-- WORLDS -->
+  <main class="main">
+    <div class="section-intro">六大世界</div>
+    <h2 class="section-headline">選一個讓你心裡「咦」了一下的世界</h2>
+
+    <!-- W01 暗黑 -->
+    <div class="world-card">
+      <div class="world-num">World 01 · Dark Psychology</div>
+      <div class="world-title">暗黑心理學</div>
+      <div class="world-tagline">那些你不想承認、卻每天都在發生的人性陰影</div>
+      <div class="world-body">
+        「操控」這個字聽起來很遠，像電影裡的反派才會做的事。但醒醒吧，它就藏在你的日常裡。
+        你的上司用長時間的沉默讓你不安、你的伴侶一掉眼淚你就妥協——這些都是操控，有意識的，或無意識的。
+      </div>
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-name">煤氣燈操控 <span class="concept-en">Gaslighting</span></div>
+          <div class="concept-desc">對方不斷否定你的記憶和感受，讓你開始懷疑自己「是不是想太多了」。久了你連自己的眼睛都不相信。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">愛情轟炸 <span class="concept-en">Love Bombing</span></div>
+          <div class="concept-desc">用過度的關心和甜言蜜語把你砸暈，等你上鉤後突然冷淡，讓你拼命追逐最初的感覺。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">情緒勒索 <span class="concept-en">Emotional Blackmail</span></div>
+          <div class="concept-desc">「如果你愛我，就應該……」用你的同理心當武器，讓你為了不當「壞人」而妥協。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">冷暴力 <span class="concept-en">Silent Treatment</span></div>
+          <div class="concept-desc">突然不回訊息、不說話，用你的不安來懲罰你。</div>
+        </div>
+      </div>
+      <div class="world-body">
+        讀懂暗黑心理學，不是教你傷害別人。
+        而是讓你終於看清——那些讓你難受、讓你自我懷疑的「感覺」，原來有名字，有模式。
+        看清之後，你才有選擇的權力。
+      </div>
+      <div class="world-series-label">本系列深入探討</div>
+      <div class="world-series-tags">操控的12種面貌、情緒勒索的運作機制、黑暗人格識別、說服與影響力的科學原理</div>
+    </div>
+
+    <!-- W02 認知 -->
+    <div class="world-card">
+      <div class="world-num">World 02 · Cognitive Psychology</div>
+      <div class="world-title">認知心理學</div>
+      <div class="world-tagline">你的大腦每天都在偷偷騙你</div>
+      <div class="world-body">
+        你真的相信自己的判斷嗎？研究已經證實，人類每天做出的決定，絕大多數不是深思熟慮，
+        而是大腦偷懶走捷徑的結果。這些捷徑叫做「認知偏誤」，目前已知超過 180 種——而你每天都在中招。
+      </div>
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-name">確認偏誤 <span class="concept-en">Confirmation Bias</span></div>
+          <div class="concept-desc">你只看、只記、只相信支持自己原有觀點的資訊。你的世界觀就是這樣被自己親手扭曲的。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">沉沒成本謬誤 <span class="concept-en">Sunk Cost Fallacy</span></div>
+          <div class="concept-desc">已經投入那麼多，所以「不能放棄」——即使明知繼續下去更糟糕。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">樂觀偏誤 <span class="concept-en">Optimism Bias</span></div>
+          <div class="concept-desc">「我不會是那個倒楣的人。」讓你繼續熬夜、繼續投資高風險的東西。</div>
+        </div>
+      </div>
+      <div class="world-body">
+        認知心理學不是要讓你對自己失去信心，而是在你下一個重要決定前，多給自己那一秒停頓：
+        「等等，這真的是理性選擇，還是大腦又在騙我？」
+      </div>
+      <div class="world-series-label">本系列深入探討</div>
+      <div class="world-series-tags">最致命的思維陷阱、決策中的非理性因素、記憶為何不可靠、如何用反偏誤清單讓自己少犯蠢</div>
+    </div>
+
+    <!-- W03 關係 -->
+    <div class="world-card">
+      <div class="world-num">World 03 · Relationship Psychology</div>
+      <div class="world-title">關係心理學</div>
+      <div class="world-tagline">為什麼愛有時候這麼累、這麼痛、卻還是戒不掉</div>
+      <div class="world-body">
+        我們都渴望被愛、被懂、被看見，卻常常在最親密的關係裡受傷最深。
+        這不是因為你選錯人，也不是因為你「不夠好」。
+        真正的原因藏得更早——在你很小的時候，就已經學會了一套「如何與人相處」的內在模式，
+        心理學稱之為「依附類型」。
+      </div>
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-name">安全型 <span class="concept-en">Secure</span></div>
+          <div class="concept-desc">相信別人可靠，也相信自己值得被愛。能親密，也能給對方空間。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">焦慮型 <span class="concept-en">Anxious</span></div>
+          <div class="concept-desc">極度害怕被拋棄，需要不斷確認「你還愛我嗎？」容易黏人、過度解讀訊息。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">迴避型 <span class="concept-en">Avoidant</span></div>
+          <div class="concept-desc">害怕依賴，覺得親密等於失去自由，習慣拉開距離保護自己。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">混亂型 <span class="concept-en">Disorganized</span></div>
+          <div class="concept-desc">既渴望連結，又害怕受傷。行為常常自相矛盾，一下靠近、一下推開。</div>
+        </div>
+      </div>
+      <div class="world-body">
+        你有沒有發現，自己總是吸引同一種人、重複同樣的爭執模式？
+        那就是你的依附模式在暗中操盤。
+      </div>
+      <div class="world-series-label">本系列深入探討</div>
+      <div class="world-series-tags">四種依附類型的成因、為何總是吸引「熟悉的傷害」、愛與控制的模糊邊界、如何重寫內在劇本</div>
+    </div>
+
+    <!-- W04 成長 -->
+    <div class="world-card">
+      <div class="world-num">World 04 · Growth Psychology</div>
+      <div class="world-title">成長心理學</div>
+      <div class="world-tagline">你可以成為完全不同的人，別再拿「個性就這樣」當藉口</div>
+      <div class="world-body">
+        「我就是這樣，改不了。」這句話聽起來像認命，其實是偷懶。
+        神經科學早已鐵證：大腦具有高度「神經可塑性」。它不是固定硬碟，
+        而是一直在根據你的選擇、練習、經歷重新布線。
+      </div>
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-name">成長型心態 <span class="concept-en">Growth Mindset</span></div>
+          <div class="concept-desc">相信能力可以透過努力發展，失敗是學習而非證明自己不行。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">心理韌性 <span class="concept-en">Resilience</span></div>
+          <div class="concept-desc">不是天生抗壓，而是透過面對挑戰、從挫折中恢復的練習慢慢累積。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">習慣迴路 <span class="concept-en">Habit Loop</span></div>
+          <div class="concept-desc">為什麼 21 天打卡沒用？因為真正改變需要重複形成穩固的神經路徑，同時搭配環境設計。</div>
+        </div>
+      </div>
+      <div class="world-body">
+        你以為年紀大了就定型了？錯。
+        大腦到死都在改變，問題只在於——你願不願意主動去重塑它。
+      </div>
+      <div class="world-series-label">本系列深入探討</div>
+      <div class="world-series-tags">自我認知的科學工具、建立韌性的具體步驟、習慣形成的腦科學、如何設計環境讓改變變得「容易」</div>
+    </div>
+
+    <!-- W05 人格 -->
+    <div class="world-card">
+      <div class="world-num">World 05 · Personality Psychology</div>
+      <div class="world-title">人格心理學</div>
+      <div class="world-tagline">為什麼有些人就是這樣，你永遠和某些人「不對盤」</div>
+      <div class="world-body">
+        為什麼有人天生外向到像充電寶，有人寧願一個人安靜到世界末日？
+        人格心理學試圖回答：是什麼讓每個人成為獨一無二的自己。
+      </div>
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-name">大五人格 <span class="concept-en">Big Five</span></div>
+          <div class="concept-desc">開放性、盡責性、外向性、親和性、神經質——目前最有科學實證的人格模型。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">高敏感人格 <span class="concept-en">HSP</span></div>
+          <div class="concept-desc">約 20-35% 的人擁有更敏感的神經系統，容易被刺激淹沒，也更容易察覺細微情緒和美。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">黑暗三角 <span class="concept-en">Dark Triad</span></div>
+          <div class="concept-desc">自戀、馬基維利主義、精神病態——了解它，你才知道身邊誰在把操控當本能。</div>
+        </div>
+      </div>
+      <div class="world-body">
+        了解人格，不是為了給自己或別人貼標籤，而是更準確地理解：
+        我的優勢在哪、我的雷區在哪、如何和不同人格相處不內耗。
+      </div>
+      <div class="world-series-label">本系列深入探討</div>
+      <div class="world-series-tags">主要人格理論比較、高敏感人的生存策略、職場與人格的匹配、人格有多少是天生 vs 後天</div>
+    </div>
+
+    <!-- W06 潛意識 -->
+    <div class="world-card">
+      <div class="world-num">World 06 · Unconscious Psychology</div>
+      <div class="world-title">潛意識心理學</div>
+      <div class="world-tagline">那個你以為「不存在」、卻一直在控制你的自己</div>
+      <div class="world-body">
+        佛洛伊德說，意識只是冰山露出水面的一小角。
+        你的夢境、莫名其妙的情緒、說不上來的直覺、反覆上演的人生劇本——
+        都來自意識層面以下的地方。
+        潛意識不是玄學，是心理學中最古老、也最有爭議的領域。
+        它研究那些<strong>你沒有主動選擇、卻一直在選擇你的力量</strong>。
+      </div>
+      <div class="concept-list">
+        <div class="concept-item">
+          <div class="concept-name">防衛機制 <span class="concept-en">Defense Mechanisms</span></div>
+          <div class="concept-desc">壓抑、否認、投射、合理化……大腦自動啟動的保護程式，避免你面對無法承受的焦慮。</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">原生家庭烙印</div>
+          <div class="concept-desc">童年與照顧者的互動，形成了你對自我、對世界、對關係的潛意識模板。你現在的樣子，有多少是那時候決定的？</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-name">重複性強迫 <span class="concept-en">Repetition Compulsion</span></div>
+          <div class="concept-desc">明明知道不好，卻不斷重演相似的痛苦模式——不是因為你笨，而是潛意識想「這次終於修復它」。</div>
+        </div>
+      </div>
+      <div class="world-body">
+        本系列將帶你看見那個被壓抑的聲音，
+        學會與潛意識和解，而不是繼續被它牽著鼻子走。
+      </div>
+      <div class="world-series-label">本系列深入探討</div>
+      <div class="world-series-tags">防衛機制的日常運作、原生家庭如何決定你的現在、為何模式一再重演、如何安全地與潛意識對話</div>
+    </div>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <div class="closing-quote">
+        那個小小的「咦」，<br>
+        就是你<strong>最需要的答案</strong>藏著的地方。
+      </div>
+      <br>
+      <div class="closing-body">
+        你不需要一口氣吞下整座心理學圖書館。<br>
+        選一個讓你有點好奇、有點不舒服、<br>
+        或是突然讓你想起某個人的世界——<br>
+        那就是你的入口。
+      </div>
+      <div class="cta-label">繼續探索</div>
+      <div class="cta-sub">
+        各系列完整版，現正於小舖陸續上架。<br>
+        每一本都是一把不同的鑰匙，打開你自己的一扇門。
+      </div>
+      <a class="cta-btn" href="https://still-time-corner.vercel.app/digital" target="_blank">
+        前往小舖探索完整系列 →
+      </a>
+    </div>
+
+  </main>
+
+</body>
+</html>
