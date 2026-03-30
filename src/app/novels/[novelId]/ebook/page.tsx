@@ -214,14 +214,15 @@ export default function EbookPage() {
 
         .btn-back {
           font-size: 0.78rem;
-          color: #5a4a3a;
+          color: #a08858;
           text-decoration: none;
           padding: 8px 14px;
-          border: 1px solid rgba(255,255,255,0.06);
-          transition: color 0.2s;
+          border: 1px solid rgba(180,144,80,0.25);
+          border-radius: 4px;
+          transition: all 0.2s;
         }
 
-        .btn-back:hover { color: #8a7060; }
+        .btn-back:hover { color: #d4aa6a; border-color: rgba(180,144,80,0.5); }
 
         .ebook-cover {
           max-width: 680px;
