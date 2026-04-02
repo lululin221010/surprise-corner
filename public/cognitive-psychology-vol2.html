@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>決策陷阱｜認知心理學系列 Vol.2｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2c5f8a;
+    --accent: #1a3d5c;
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #d0d8e0;
+    --quote-bg: #eef3f8;
+    --chapter-bg: linear-gradient(135deg, #1a3d5c 0%, #2c5f8a 100%);
+    /* sidebar */
+    --sb-bg: #111e2a;
+    --sb-text: #c8d8e8;
+    --sb-accent: #5ba3d0;
+    --sb-hover: rgba(91,163,208,0.12);
+    --sb-border: rgba(255,255,255,0.07);
+    --sb-width: 240px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Serif TC', 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 17px;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sb-width);
+    height: 100vh;
+    background: var(--sb-bg);
+    color: var(--sb-text);
+    padding: 28px 20px 40px;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+  .back-btn {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--sb-accent);
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid rgba(91,163,208,0.35);
+    border-radius: 3px;
+    margin-bottom: 28px;
+    transition: all 0.2s;
+  }
+  .back-btn:hover { background: var(--sb-hover); }
+
+  .sb-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(200,216,232,0.45);
+    margin-bottom: 6px;
+  }
+  .sb-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e8f0f8;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  .sb-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    color: rgba(200,216,232,0.5);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .sb-divider {
+    border: none;
+    border-top: 1px solid var(--sb-border);
+    margin: 0 0 16px;
+  }
+  .sb-toc-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(200,216,232,0.35);
+    margin-bottom: 10px;
+  }
+  .toc-item {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: rgba(200,216,232,0.65);
+    text-decoration: none;
+    padding: 7px 4px 7px 10px;
+    border-left: 2px solid transparent;
+    line-height: 1.5;
+    transition: all 0.2s;
+  }
+  .toc-item:hover, .toc-item.active {
+    color: var(--sb-accent);
+    border-left-color: var(--sb-accent);
+    background: var(--sb-hover);
+  }
+  .toc-item .ch-num {
+    font-size: 9px;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  /* ── 漢堡選單（手機）── */
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 200;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 7px 11px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  /* ── 主內容 ── */
+  .main-content {
+    margin-left: var(--sb-width);
+  }
+
+  /* Cover */
+  .cover {
+    background: var(--chapter-bg);
+    color: white;
+    text-align: center;
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .series-label {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .book-title {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    color: white;
+  }
+  .book-subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    font-style: italic;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+  }
+  .meta {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  /* Content */
+  .content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  /* Chapter headings */
+  .chapter-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    background: var(--chapter-bg);
+    padding: 28px 36px;
+    margin: 60px -40px 40px;
+    line-height: 1.5;
+    position: relative;
+  }
+  .chapter-title.preface {
+    background: linear-gradient(135deg, #2a2a2a 0%, #444 100%);
+  }
+  .chapter-title::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: rgba(255,255,255,0.25);
+  }
+
+  /* Section headings */
+  .section-title {
+    font-size: 17px;
+    color: var(--accent);
+    margin: 36px 0 14px;
+    padding-left: 14px;
+    border-left: 4px solid var(--primary);
+    line-height: 1.6;
+  }
+  .section-title strong { font-weight: 700; }
+
+  p {
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  blockquote {
+    background: var(--quote-bg);
+    border-left: 4px solid var(--primary);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1.9;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .book-footer {
+    text-align: center;
+    padding: 36px 40px;
+    background: var(--accent);
+    color: rgba(255,255,255,0.55);
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  /* ── RWD ── */
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.28s ease;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main-content { margin-left: 0; }
+    .book-title { font-size: 36px; }
+    .cover { padding: 60px 24px 40px; }
+    .content { padding: 0 20px 60px; }
+    .chapter-title { margin: 50px -20px 32px; padding: 22px 24px; font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 漢堡選單（手機用）-->
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <a href="/cognitive-psychology.html" class="back-btn">← 返回認知心理學系列</a>
+
+  <div class="sb-series">認知心理學 · VOL.2</div>
+  <div class="sb-title">《決策陷阱》</div>
+  <div class="sb-sub">你以為你在選擇，其實你已經掉進去了</div>
+
+  <hr class="sb-divider">
+  <div class="sb-toc-label">目錄</div>
+
+  <a href="#preface" class="toc-item">
+    <span class="ch-num">PREFACE</span>前言
+  </a>
+  <a href="#ch1" class="toc-item">
+    <span class="ch-num">第一章</span>過度自信效應
+  </a>
+  <a href="#ch2" class="toc-item">
+    <span class="ch-num">第二章</span>現狀偏誤
+  </a>
+  <a href="#ch3-peak" class="toc-item">
+    <span class="ch-num">第三章</span>峰終定律
+  </a>
+  <a href="#ch3" class="toc-item">
+    <span class="ch-num">第四章</span>賭徒謬誤
+  </a>
+  <a href="#ch4" class="toc-item">
+    <span class="ch-num">第五章</span>後見之明偏誤
+  </a>
+  <a href="#ch5" class="toc-item">
+    <span class="ch-num">第六章</span>稟賦效應
+  </a>
+  <a href="#epilogue" class="toc-item">
+    <span class="ch-num">EPILOGUE</span>後記
+  </a>
+</nav>
+
+<!-- 主內容 -->
+<div class="main-content">
+
+<div class="cover">
+  <p class="series-label">認知心理學系列・第二冊</p>
+  <h1 class="book-title">決策陷阱</h1>
+  <p class="book-subtitle">你以為你在選擇，其實你已經掉進去了</p>
+  <p class="meta">作者｜盧林</p>
+  <p class="meta">有的沒的小舖 出品</p>
+</div>
+
+<div class="content">
+
+<h2 class="chapter-title preface" id="preface">前言：你的每個決定，都是一個你看不見的坑</h2>
+<p>你以為決策是你的強項。</p>
+<p>你有邏輯，你會分析，你做重大決定前會想很多。你不是那種衝動行事、感情用事的人。</p>
+<p>但心理學研究在過去半個世紀裡，已經清楚地告訴我們一件事：人類天生就不擅長做決策。不是因為不夠聰明，不是因為不夠努力，而是因為我們的大腦在面對選擇時，會啟動一系列系統性的偏誤——那些偏誤安靜、高效、幾乎無法用意志力阻止。</p>
+<p>《你以為你在思考》告訴你，你的大腦如何感知世界。這本書要告訴你的是下一步：當你在「做決定」的那個當下，你的大腦正在偷偷犯哪些錯。</p>
+<p>你相信你的計畫嗎？過度自信效應會讓你系統性地低估困難、高估自己的執行能力，然後在現實打臉的時候措手不及。</p>
+<p>你覺得你選擇現狀是因為現狀確實好嗎？現狀偏誤會讓你把「熟悉」誤認為「正確」，用懶惰包裝成穩重的外衣。</p>
+<p>你覺得你對一段經歷的評價是客觀的嗎？峰終定律告訴你，你記得的只是最高峰那一刻和最後那一刻，其他時間你根本沒在評估。</p>
+<p>這六個決策陷阱，你每天都在踩。今天讀完之後，你會在踩下去之前，多一秒鐘的猶豫。那一秒鐘，可能改變你做的決定。</p>
+<p>準備好了。我們開始挖坑——</p>
+<blockquote><em>「人類最大的幻覺，是以為自己是理性的決策者。」——丹尼爾・康納曼，《快思慢想》</em></blockquote>
+
+<h2 class="chapter-title" id="ch1">第一章：過度自信效應——你以為你的計畫天衣無縫</h2>
+<blockquote><em>「每個人在開始之前都是樂觀主義者。現實主義是在被現實打過幾次之後才學會的——但大多數人每次都忘記上次學到的教訓。」</em></blockquote>
+<h3 class="section-title"><strong>一個讓你笑，然後讓你皺眉的場景</strong></h3>
+<p>你決定要開始健身。你在心裡擬了一個計畫：每週去健身房三次，每次一小時。然後你算了算：一個月十二次，半年七十二次，一年後你一定會瘦下來、練出線條。</p>
+<p>你辦了一張年費健身房會員卡。你買了新的運動服和運動鞋。你下載了一個健身APP。</p>
+<p>第一週，你去了三次。第二週，你去了兩次。第三週，加班，去了一次。第四週，你記得自己有一張健身房會員卡。</p>
+<p>三個月後，那張卡躺在你的錢包最深處，你已經想不起上次去是什麼時候。</p>
+<p>這不是意志力的問題。這是過度自信效應讓你對自己的計畫執行力做了一個根本性的高估。你以為你會去。你在規劃的那一刻，完全相信你會去。你只是沒有把「未來的你」跟「現在的你」之間的巨大差距算進去。</p>
+<h3 class="section-title"><strong>什麼是過度自信效應？</strong></h3>
+<p>過度自信效應（Overconfidence Effect）指的是：人對自己的判斷準確度、技能水準、以及對未來的預測，系統性地過度高估。這個現象非常普遍、非常穩定，而且橫跨文化：不管是學生、醫生、律師、投資者、工程師，在大量研究中都表現出不同程度的過度自信。</p>
+<p>最經典的研究問題之一：「你的開車技術在所有駕駛人裡排名前50%嗎？」在多個國家的研究中，有70%到90%的駕駛人回答「是」。當然，50%以上的人不可能都在前50%。但每個人都覺得自己是那個「比平均好」的人。</p>
+<p>過度自信效應有三個主要的表現形式：</p>
+<p>第一，過度精準（Overprecision）：你對自己的估算太有把握，提供的信心區間太窄。你說「這個專案大概需要三週」，你心裡對這個判斷很有把握——但現實是八週。</p>
+<p>第二，過度配置（Overplacement）：你以為自己比別人強。「我的銷售能力在團隊裡算前段班」——但你的同事也是這樣想的。</p>
+<p>第三，過度樂觀（Overoptimism）：你對未來結果的預測，系統性地偏向正面。你預計的成功機率，比客觀機率高。這三個加在一起，製造出一個對自己和未來都戴著玫瑰色眼鏡的決策者——那個決策者，就是你。</p>
+<h3 class="section-title"><strong>計畫謬誤：你的計畫為什麼永遠比你想的更久、更貴、更難</strong></h3>
+<p>計畫謬誤（Planning Fallacy）是過度自信效應最貼近日常生活的一個版本，由康納曼和特沃斯基在1979年提出。它的核心發現是：人在估算完成一個任務所需的時間、成本、和資源時，傾向於太樂觀，即使他們有過去的失敗經驗可以參考，即使他們「知道」事情通常比計畫更久。</p>
+<p>研究者請學生估算他們的學位論文需要多久完成。學生們給出的「最壞情況」平均是49天。實際完成的平均時間是56天。換句話說，他們的「最壞情況」預測，仍然比現實更樂觀。</p>
+<h3 class="section-title"><strong>過度自信在你生活裡的五種災難</strong></h3>
+<h3 class="section-title"><strong>① 你的副業計畫</strong></h3>
+<p>你在上班的同時決定要做副業。你計算了一下：下班後每天兩小時，週末全天，一個月大概可以累積一百小時。三個月後，你就有足夠的產品可以上架開賣。你沒有計算的是：你下班後通常有多累、家裡有多少雜事、朋友和家人的邀約、那些你以為兩小時可以做完但實際上要四小時的工作。三個月後，你有半成品和一堆學到的教訓。這不是你的失敗。這是計畫謬誤的正常運作結果。</p>
+<h3 class="section-title"><strong>② 你的裝潢預算</strong></h3>
+<p>你在裝潢新家。你估算預算60萬，給自己留了10%的緩衝，所以你的上限是66萬。你最後花了87萬。研究大型建設工程的數據顯示，超出預算和超出工期是常態，而不是例外。「留緩衝」的邏輯是對的，但緩衝的量從來不夠，因為計算緩衝的那個大腦，也受了過度自信效應的影響。</p>
+<h3 class="section-title"><strong>③ 你對自己學新技能的速度估算</strong></h3>
+<p>你決定要學Python。你查了一下，說「一般人六個月可以入門」。你覺得自己學習速度比一般人快，所以三個月應該夠。三個月後，你還在卡第二章的練習題。「我比平均快」的想法，是過度配置效應的最典型表現。</p>
+<h3 class="section-title"><strong>④ 你對談判結果的預期</strong></h3>
+<p>你去跟房東談續租，你在心裡預期整個談判走向。你把談判想成了一個你能預見和控制的劇本。現實是：房東說了一句你完全沒預料到的話，整個談判脫軌了。你對任何涉及「另一個人的反應」的計畫，都有根本性的高估。</p>
+<h3 class="section-title"><strong>⑤ 你對感情的樂觀主義</strong></h3>
+<p>你跟一個新的對象開始約會。你在腦海裡勾勒了六個月後、一年後的畫面。統計上，人在每段新關係開始時，都有類似的樂觀主義。然後大約有一半的關係，在幾年內走向結束。沒有人在開始的時候計畫失敗。但過度自信效應讓每個人都以為，那些讓別人失敗的問題，在自己身上不會發生。</p>
+<h3 class="section-title"><strong>對話實錄：一個創業者的計畫和現實</strong></h3>
+<p>振宇在跟他太太說他的創業計畫：</p>
+<blockquote><em>振宇：「我算過了，前三個月是建立期，我們靠積蓄撐。第四個月開始有收入，第六個月損益兩平，一年後開始獲利。」 太太：「你這樣算的假設是什麼？」 振宇：「第四個月開始有穩定客戶，每個月最少十個案子。」 太太：「你有沒有想過，萬一第四個月只有三個案子呢？」 振宇：「那就再努力一點，多開發。」 太太：「如果努力了但就是只有三個，那計畫要怎麼調整？」 振宇沉默了幾秒。 振宇：「......你太悲觀了。」 太太：「我不是悲觀，我在問你有沒有B計畫。」</em></blockquote>
+<p>振宇沒有B計畫。他的計畫裡，失敗的選項根本不存在——不是因為他不聰明，而是因為過度自信效應讓他的規劃大腦自動採用了最好情況的劇本，把所有「萬一」都過濾掉了。八個月後，他回憶那次對話時說：「她問的那些問題，是我最應該在計畫階段想清楚的事。」</p>
+<h3 class="section-title"><strong>怎麼對抗過度自信效應？</strong></h3>
+<h3 class="section-title"><strong>方法一：用「外部觀點」取代「內部觀點」</strong></h3>
+<p>試著改用「外部觀點」：找出類似的計畫，看看它們的實際結果是什麼。「做這件事的人，平均需要多久？平均花了多少錢？成功率是多少？」把你的計畫放進那個基準率裡，而不是把自己當成例外。</p>
+<h3 class="section-title"><strong>方法二：做「事前驗屍」（Pre-mortem）</strong></h3>
+<p>事前驗屍的方法由心理學家蓋瑞・克萊因（Gary Klein）提出：在執行計畫之前，先假設計畫已經失敗了，然後問：「它是怎麼失敗的？」強迫自己想像失敗的具體原因，然後想想你的計畫有沒有應對方案。</p>
+<h3 class="section-title"><strong>方法三：把你的時間和預算估算乘以1.5到2</strong></h3>
+<p>這不是玩笑。研究顯示，一般人的時間和預算估算系統性地低估30%到50%以上。如果你覺得需要三個月，計畫四到五個月。如果你覺得需要60萬，準備80到90萬的預算。</p>
+<h3 class="section-title"><strong>方法四：記錄你過去的預測，定期回頭看</strong></h3>
+<p>把過去的預測數字記下來，定期回頭看。這是你個人的「過度自信校準數據」——你會發現你的誤差是系統性的，然後你下次規劃時就能把那個誤差納入考量。</p>
+<blockquote><em>本章重點：過度自信效應讓你的計畫永遠比現實更美好。不是因為你懶或不認真，而是因為你的大腦在規劃時，自動切換到最好情況模式，過濾掉所有可能讓計畫變複雜的因素。對抗它的方法不是「更努力想清楚」，而是刻意採用外部觀點、做事前驗屍、並且把你的估算直接加上一個大緩衝。</em></blockquote>
+
+<h2 class="chapter-title" id="ch2">第二章：現狀偏誤——不是因為好，而是因為熟悉</h2>
+<blockquote><em>「我們把『一直這樣』誤認為『應該這樣』。熟悉感讓我們覺得安全，但安全感從來不等於最優解。」</em></blockquote>
+<h3 class="section-title"><strong>一個你會說「但這不是有理由的嗎」的場景</strong></h3>
+<p>你用同一個銀行帳戶已經十五年了。你知道有其他銀行的數位帳戶利率更高、手續費更低、APP更好用。你的朋友已經轉過去兩年了，說很滿意。你說：「有機會再看看吧。」你說這句話，已經說了四年了。</p>
+<p>為什麼？不是因為你的銀行特別好。是因為換一個帳戶需要花時間、需要重新設定自動扣款、需要跟一堆帳單更新資料。那些「麻煩」，在你的大腦裡被放大成了一個巨大的障礙。而「繼續現狀」，什麼都不用做。你的大腦偏好「不做」，因為不做的感覺比較安全。這不是懶惰，這是現狀偏誤。</p>
+<h3 class="section-title"><strong>什麼是現狀偏誤？</strong></h3>
+<p>現狀偏誤（Status Quo Bias）由理查・塞勒（Richard Thaler，2017年諾貝爾經濟學獎得主）和薩繆爾・薩默斯坦（Samuel Samuelson）在1988年正式提出。它描述的是：人在其他條件相同的情況下，傾向於選擇維持現狀，而不是做出改變。</p>
+<p>現狀偏誤的心理根源有兩個：第一，損失趨避（Loss Aversion）：改變通常意味著你要放棄一些你現在擁有的東西，換取不確定的好處。第二，不作為偏誤（Omission Bias）：我們傾向於認為「沒有做」的後果，比「做了但做錯」的後果，在道德和心理上更容易接受。這兩個力量加在一起，讓「維持現狀」感覺比實際上更合理、更安全。</p>
+<h3 class="section-title"><strong>現狀偏誤是怎麼被設計進你生活裡的</strong></h3>
+<p>訂閱制的「免費試用期」——試用結束後，服務自動開始扣費。你要取消就要主動行動。大多數人不會主動行動。手機合約的自動續約、保險的自動續保——這些設計都在利用你的現狀偏誤。</p>
+<p>器官捐贈政策研究顯示，一個國家採用「預設同意（opt-out）」的制度，其器官捐贈率，遠高於「預設不同意（opt-in）」的國家。你以為你的選擇是你的。但很多時候，你只是接受了別人幫你設定的現狀。</p>
+<h3 class="section-title"><strong>現狀偏誤在你生活裡的六張臉</strong></h3>
+<h3 class="section-title"><strong>① 你還在用那個不順手的工具</strong></h3>
+<p>你的Excel技能已經足夠，但你知道如果你學會Python或者Notion，你的工作效率會大幅提升。你說：「有機會學看看。」你說這句話，已經說了兩年。學習的代價是確定的，收益是不確定的。現狀偏誤讓你傾向於不承受確定的代價，即使那個代價很小。</p>
+<h3 class="section-title"><strong>② 你還在那段不讓你快樂的關係裡</strong></h3>
+<p>你跟你的伴侶相處起來很費力。你知道這樣下去不是辦法，但你說：「也許過一陣子會好一點。」那個「過一陣子」，已經過了兩年。你的大腦把「繼續」當成了「沒有選擇」，而不是「一個你每天都在重新選擇的決定」。</p>
+<h3 class="section-title"><strong>③ 你還待在那份不讓你成長的工作</strong></h3>
+<p>你的工作不是很糟，只是……就那樣。沒有什麼成長，薪水也多年沒什麼動靜，但穩定、熟悉、不需要花力氣重新適應。你知道市場上有更好的機會，但你說：「現在換工作時機不對。」「時機不對」是現狀偏誤最常見的包裝方式。</p>
+<h3 class="section-title"><strong>④ 你在沿用爸媽教你的那套理財邏輯</strong></h3>
+<p>你的父母那個年代，把錢放銀行定存是合理的策略。你現在三十幾歲，還是把大部分的積蓄放定存，利率大概0.8%。通膨讓你的錢實際上每年在縮水。你知道有其他選項，但那套「存錢安全」的信念是你的現狀，改變它需要你去學新東西、承擔不確定性。保守和現狀偏誤，長得非常像。</p>
+<h3 class="section-title"><strong>⑤ 你對城市、對國家的慣性</strong></h3>
+<p>你一直住在同一個城市，不是因為你認真比較過這個城市跟其他地方的生活品質，而是因為你在這裡長大、你的人際網絡在這裡、你對這裡熟悉。大多數人從來沒有認真算過這個帳，因為「繼續住在這裡」是預設值。</p>
+<h3 class="section-title"><strong>⑥ 公司裡的「我們一直都是這樣做」</strong></h3>
+<p>「這個流程我們一直都是這樣的。」這句話，是組織裡最貴的六個字。一個流程之所以被保留，不一定是因為它最好，而是因為沒有人有足夠的動力去挑戰它。改變需要能量，維持現狀不需要。所以現狀贏了。</p>
+<h3 class="section-title"><strong>對話實錄：「時機不對」是真的嗎？</strong></h3>
+<p>怡君在跟她的職涯教練談話：</p>
+<blockquote><em>怡君：「我知道我應該換工作，但現在不是好時機。」 教練：「什麼樣的時機是好時機？」 怡君：「等我把現在這個專案做完，大概半年後。」 教練：「半年後你會說什麼？」 怡君：「......（停頓）我可能會說要等年底。」 教練：「你上次說『時機不對』是什麼時候？」 怡君：「大概兩年前。」 教練：「那兩年你換工作了嗎？」 怡君：「沒有。」 教練：「所以你的『時機不對』，翻譯成白話是什麼意思？」 怡君沉默了很長一段時間，然後說：「是我不想面對改變。」</em></blockquote>
+<p>「時機不對」是現狀偏誤給你的語言。它讓「我不想改變」聽起來像是「我在等一個更好的機會」。但如果你說「等更好的時機」已經說了兩年，那個時機八成根本不存在——它只是一個讓你可以繼續停在原地的理由。</p>
+<h3 class="section-title"><strong>怎麼對抗現狀偏誤？</strong></h3>
+<h3 class="section-title"><strong>方法一：把「繼續現狀」也視為一個主動的選擇</strong></h3>
+<p>現狀不是「沒有選擇」，它是「你每天都在重新做出的選擇」。問自己：「如果今天我要重新做這個選擇，我還會選現狀嗎？」如果答案是不確定，那就是一個信號——你可能只是在慣性中滑行。</p>
+<h3 class="section-title"><strong>方法二：算「不改變的成本」，而不只是「改變的成本」</strong></h3>
+<p>「繼續在那份工作待兩年的機會成本是多少？」「繼續放定存而不是做其他投資，兩年後差了多少錢？」把不改變的代價具體化，它就沒那麼隱形了。</p>
+<h3 class="section-title"><strong>方法三：設定「決策截止日」</strong></h3>
+<p>「等時機到了再說」是沒有終點的。給自己一個明確的日期：「我會在三個月內做出這個決定，無論如何。」強迫自己在截止日前認真評估，而不是讓現狀無限期地自動延續。</p>
+<h3 class="section-title"><strong>方法四：注意那些被設計成讓你維持現狀的系統</strong></h3>
+<p>當你在使用任何服務的時候，問自己：「這個預設值是誰設計的？它對我有利還是對他們有利？」主動去管理你的訂閱、你的合約、你的各種預設設定。</p>
+<blockquote><em>本章重點：現狀偏誤讓「繼續這樣」感覺比它實際上更合理、更安全。它不是你的懶惰，是你大腦對改變的本能抗拒——因為改變有確定的代價，而現狀的代價是隱形的。對抗它的方式，是把「不改變的代價」算出來，讓那個隱形的成本變得可見。</em></blockquote>
+
+<h2 class="chapter-title" id="ch3-peak">第三章：峰終定律——你記得的不是全部，是最高點和結尾</h2>
+<blockquote><em>「你以為你在評估一段完整的經歷，其實你只是在評估兩個瞬間——它最強烈的那一刻，和它結束的那一刻。中間的一切，你的大腦幾乎沒在算。」</em></blockquote>
+<h3 class="section-title"><strong>一個讓你重新想想「我到底在評估什麼」的場景</strong></h3>
+<p>你去了一趟旅行。第一天：飛機延誤三小時，行李差點找不到，飯店check-in出問題，又餓又累地躺下來。第二天到第五天：還不錯，景點普通，吃了幾頓好吃的，天氣忽好忽壞，沒什麼特別。第六天：你去了一個小鎮，夕陽美得讓你說不出話，你跟同伴坐在山坡上喝了一瓶在地的酒，你覺得那是你這幾年來最放鬆的一個黃昏。第七天回程：順利，毫無波瀾，落地回家。</p>
+<p>你回來跟朋友說：「這趟旅行超棒的，我會記一輩子。」朋友問：「什麼最讓你印象深刻？」你說：「最後那個夕陽，美翻了。」那個第一天的三小時延誤呢？那四天「還不錯但說不上特別」的日子呢？它們在你的記憶裡，幾乎不存在。</p>
+<p>你評估這趟旅行的方式，不是把七天的體驗平均加總。你用的是：最強烈的那個峰值（那個夕陽），加上最後的那個結尾（順利回家）。這叫峰終定律。</p>
+<h3 class="section-title"><strong>什麼是峰終定律？</strong></h3>
+<p>峰終定律（Peak-End Rule）同樣來自丹尼爾・康納曼，在1990年代透過一系列研究確立。康納曼的核心發現是：人對一段經歷的整體評價，主要由兩個時間點決定——這段經歷中感受最強烈的那個瞬間（峰值），以及這段經歷結束時的感受（終值）。中間的「過程」，對整體評價的影響遠比你想像的小。</p>
+<p>他有一個經典的「冷水實驗」：受試者必須把手浸在14度的冷水裡。他們做了兩次：第一次浸60秒；第二次浸60秒，再繼續浸30秒，但那30秒裡水溫悄悄升到15度（稍微好一點點）。客觀上，第二次更長、總痛苦更多。但大多數人選了第二次，因為第二次的「結尾」感覺稍微好一點點。</p>
+<h3 class="section-title"><strong>峰終定律如何被設計進各種體驗裡</strong></h3>
+<p>主題樂園：迪士尼的遊樂設施通常在接近結尾時有一個高潮——速度最快的那一段、最壯觀的場景。出口處有禮品店讓你帶著美好的記憶和消費欲離開。</p>
+<p>餐廳：許多高級餐廳最重視的是第一道和最後一道——最後通常是甜點或小禮物送上。那個「完美收尾」對你的整體評分影響極大，遠超過中間某道菜的水準。</p>
+<p>醫療程序：研究顯示，在結腸鏡檢查結束後，讓患者多等幾分鐘（但那幾分鐘的不適感較低），可以顯著提升患者對整個程序的評價。這些都不是巧合，這是對峰終定律的工程應用。</p>
+<h3 class="section-title"><strong>峰終定律在你生活裡的五個影響</strong></h3>
+<h3 class="section-title"><strong>① 你對一段關係的記憶</strong></h3>
+<p>你跟一個人交往了三年。分手後，你怎麼記得這段關係？如果分手過程很難看、很傷、很醜陋，你可能記得「那段感情很痛苦」——即使三年裡有很多好的時光。如果分手是平和的、甚至是溫柔的，你可能記得「那是一段美好的關係」——即使中間有很多不順遂的地方。結尾，改寫了三年的記憶評分。</p>
+<h3 class="section-title"><strong>② 你對工作經歷的評價</strong></h3>
+<p>你在一間公司待了五年。最後半年跟主管鬧得很不愉快，憤憤不平地離開。你後來怎麼跟人說那份工作？「那間公司真的很差，主管超爛。」但前四年半呢？你學了很多、薪水還不錯、同事也不差。那四年半在你的評分裡，被最後半年的惡化結尾大幅覆蓋了。</p>
+<h3 class="section-title"><strong>③ 你對自己痛苦經歷的記憶失真</strong></h3>
+<p>你生過一場大病，住院兩週。如果出院那天，醫護人員態度很好、主治醫師親自來道別——你對那次住院的記憶，會比實際上更正面。如果出院手續繁瑣、最後等了三小時才辦完——那個糟糕的結尾，會讓你對整個住院體驗的評價更低。</p>
+<h3 class="section-title"><strong>④ 你對假期的評估影響下一次選擇</strong></h3>
+<p>你去年去了一個景點，前三天超級好玩，最後一天碰到大塞車，在車上悶了七個小時才到機場。你今年會想再去嗎？你說「不了，上次結尾太慘」——即使那個景點前三天你真的很喜歡。峰終定律讓那七小時的塞車，在你未來的決策裡，比那三天的美好佔了更大的比重。</p>
+<h3 class="section-title"><strong>⑤ 你對自己人生階段的回顧</strong></h3>
+<p>你回顧你的大學四年。如果畢業那年一切順利、畢業典禮很感動——你記得大學「是我人生最好的時光」。如果大學最後一年論文出了問題、跟幾個朋友鬧翻——你可能記得大學「壓力很大、並不是那麼美好」。那個結尾的感受，重新標注了你對整個階段的記憶標籤。</p>
+<h3 class="section-title"><strong>對話實錄：結尾怎麼改寫了三年的故事</strong></h3>
+<p>恩慈在跟閨蜜聊她剛結束的一段感情：</p>
+<blockquote><em>閨蜜：「你們分手的方式呢？」 恩慈：「他傳訊息說要分，然後就封鎖我了。沒有解釋，什麼都沒有。」 閨蜜：「天啊。那三年你覺得怎麼樣？」 恩慈：「很糟。我現在回想起來，覺得那三年根本就是浪費時間。」 閨蜜：「但你之前說過，前兩年你們還不錯啊？」 恩慈：「（停頓）……對，前兩年有些時候是很好的。但現在想起來全部都是爛的。」 閨蜜：「你覺得，如果他當時當面好好跟你說清楚，你現在的感受會一樣嗎？」 恩慈想了很久。 恩慈：「……可能不一樣。也許我還是會記得前兩年那些好的部分。」</em></blockquote>
+<p>那個封鎖的結尾，不只是傷害了恩慈，它還改寫了她對整段關係的記憶。三年的好與壞，被那個訊息+封鎖的終值，全部標記為「糟糕」。</p>
+<h3 class="section-title"><strong>怎麼善用峰終定律？</strong></h3>
+<h3 class="section-title"><strong>方法一：刻意設計你主導的體驗的結尾</strong></h3>
+<p>你在做一個簡報、辦一個活動、帶一個團隊完成一個專案——把你的資源和心力集中在「結尾要怎麼收」，不只是「過程要怎麼跑」。一個強而有力的收尾，讓所有人記得這件事更好。</p>
+<h3 class="section-title"><strong>方法二：對自己的負面記憶保持一點懷疑</strong></h3>
+<p>當你對某個過去的經歷評價非常差，問自己：「這個評價是基於整段經歷，還是主要來自那個糟糕的峰值或結尾？」也許那段經歷實際上比你記得的更複雜、更有價值。</p>
+<h3 class="section-title"><strong>方法三：在結束一段重要關係或合作前，注意你的「結尾設計」</strong></h3>
+<p>好好說再見，不是做作，是對記憶結構的理解。那個結尾怎麼進行，會在對方的記憶裡留下很長的影子。</p>
+<h3 class="section-title"><strong>方法四：體驗當下，而不只是管理記憶</strong></h3>
+<p>峰終定律描述的是記憶的機制，不是生活的目標。意識到記憶會失真，有時候反而讓你更願意活在當下的過程裡——因為你知道，那個過程的豐富，遲早會被大腦簡化成幾個快照。趁它還在的時候，真的感受它。</p>
+<blockquote><em>本章重點：你對任何經歷的評價，不是時間加權平均，而是峰值加終值的快照。這讓你的記憶系統性地失真——糟糕的結尾讓好的經歷變差，好的結尾讓平淡的經歷變得珍貴。理解這件事，讓你在設計體驗時更聰明，在評估記憶時更謹慎。</em></blockquote>
+
+<h2 class="chapter-title" id="ch3">第四章：賭徒謬誤——連輸十把之後，你以為下一把一定贏</h2>
+<blockquote><em>「硬幣沒有記憶。骰子沒有欠你的。那個讓你覺得『應該輪到我好運了』的感覺，是你的大腦在對一個完全無感的宇宙投射了一套它根本不遵循的邏輯。」</em></blockquote>
+<h3 class="section-title"><strong>一個你在某個地方做過的事</strong></h3>
+<p>你在投硬幣。連續出現了七次正面。第八次你猜：「這次應該是反面了，概率上來說。」你輸了，還是正面。第九次你更確定：「現在一定是反面。」你還是輸了。</p>
+<p>但硬幣不知道它前七次是正面。它每次被投出去，正反面的機率永遠是50%對50%，不管之前發生了什麼。你的感覺——「連輸這麼多次，下次應該輪到我了」——是你的大腦強加給一個隨機事件的錯誤邏輯。這叫賭徒謬誤。</p>
+<h3 class="section-title"><strong>什麼是賭徒謬誤？</strong></h3>
+<p>賭徒謬誤（Gambler's Fallacy），又稱蒙地卡羅謬誤（Monte Carlo Fallacy），指的是：人錯誤地以為，在獨立的隨機事件序列中，過去的結果會影響未來的概率。</p>
+<p>1913年，在摩納哥的蒙地卡羅賭場，輪盤連續出現了26次黑色。每出現一次黑色，賭徒就更確信「下一次一定是紅色」，於是大量押注紅色。他們輸了。又輸了。又輸了。到第26次的時候，賭場贏得了那個時代最驚人的一筆賭注——因為賭徒們把「連續出現黑色」解讀為「紅色欠了很多次」。那個輪盤，不欠任何人紅色。</p>
+<h3 class="section-title"><strong>賭徒謬誤在你生活裡的五個現身</strong></h3>
+<h3 class="section-title"><strong>① 投資市場的「跌這麼多了，應該要漲了」</strong></h3>
+<p>你的持股連跌了三個月。你說：「已經跌了這麼多，不可能一直跌，應該要反彈了。」但如果那個公司的基本面真的在惡化，它還可以繼續跌。市場不欠你一次反彈。把基本面分析和賭徒謬誤混在一起，是很多散戶在底部攤平、越攤越平的根本原因。</p>
+<h3 class="section-title"><strong>② 生孩子的「生了三個女兒，下一個一定是兒子」</strong></h3>
+<p>每一次的受孕，生男生女的機率都接近50%。前三個是女兒，不會讓第四個更可能是兒子。宇宙沒有在幫你計數，也沒有在平衡你家的性別比例。</p>
+<h3 class="section-title"><strong>③ 選號碼的「這個號碼好久沒出現了」</strong></h3>
+<p>每一次開獎，每個號碼被抽到的機率完全相同，與它上次出現是何時完全無關。「好久沒出現」等於「快要出現了」，是賭徒謬誤的教科書範例。</p>
+<h3 class="section-title"><strong>④ 面試和選人的「已經拒絕太多人了，這個應該錄取」</strong></h3>
+<p>面試官連續面試了十五個不合適的候選人。第十六個進來，其實也只是普通，但面試官說：「已經拒了這麼多了，這個應該還行，錄取吧。」那十五個不合適的人，不會讓第十六個自動變得更合適。這是賭徒謬誤和決策疲勞的合體，在人事決策裡非常常見。</p>
+<h3 class="section-title"><strong>⑤ 感情的「上一段太差了，這段一定更好」</strong></h3>
+<p>你剛走出一段很糟糕的關係。你心想：「我上一段受了那麼多苦，這段一定會好一點。」上一段的痛苦，不會讓這段關係自動變好。每一段感情，都是從零開始的獨立事件，受你們雙方的個性、溝通方式、時機影響，而不是受「上次太慘所以這次應該要補回來」的宇宙平衡邏輯影響。</p>
+<h3 class="section-title"><strong>賭徒謬誤的反面：熱手謬誤</strong></h3>
+<p>賭徒謬誤有一個相反方向的雙胞胎兄弟，叫做熱手謬誤（Hot Hand Fallacy）：人傾向於相信，一個人或一件事在連續成功之後，會繼續成功，因為「手感很熱」。賭徒謬誤是「連輸之後一定要贏」，熱手謬誤是「連贏之後還會繼續贏」——兩個都是你的大腦在隨機事件裡強加了一套它自己的「故事邏輯」。</p>
+<h3 class="section-title"><strong>對話實錄：在賭桌上說服自己再待一下</strong></h3>
+<blockquote><em>阿凱：（輸了第五把）「我今晚手氣真的很背，但這樣的運氣應該快要轉了。」 朋友志明：「你這是賭徒謬誤，輸五把不代表第六把會贏。」 阿凱：「不是啦，我感覺就是要轉了，你不懂。」 志明：「每一把牌都是獨立的，你今晚輸了多少？」 阿凱：「四千。但再玩幾把就會贏回來。」 志明：「你說『再玩幾把就會贏回來』，是因為你有什麼根據，還是因為你不想承認今晚就是虧了？」 阿凱沉默了幾秒，然後說：「……再玩一把就好。」</em></blockquote>
+<p>又過了四把。阿凱又輸了兩千。他那晚的「手氣快要轉了」，從第五把說到了第十一把。每一把都是新的開始。每一把都不知道上一把發生了什麼。但阿凱的大腦，一直在等一個宇宙的補償，而那個補償從來不會來。</p>
+<h3 class="section-title"><strong>怎麼對抗賭徒謬誤？</strong></h3>
+<h3 class="section-title"><strong>方法一：每次問自己「這是獨立事件嗎？」</strong></h3>
+<p>在你做任何跟「之前發生了什麼」相關的判斷之前，先問：「這個事件和之前的結果有因果關係，還是它們本質上是獨立的？」如果是獨立的，那之前發生什麼，跟這次的概率完全無關。</p>
+<h3 class="section-title"><strong>方法二：區分「隨機事件」和「有規律的系統」</strong></h3>
+<p>純粹的隨機事件沒有記憶。但有些事情有真實的因果結構——一家公司的股票下跌，可能有基本面惡化的原因。學會區分這兩類，是做出好判斷的前提。</p>
+<h3 class="section-title"><strong>方法三：設定事前的停損點，不要靠「感覺」決定停</strong></h3>
+<p>如果你在參與任何帶有隨機性的活動，在開始之前就設定停損條件，並且承諾自己遵守它。不要在當下用「再一次就會好轉」的感覺來決定是否繼續。</p>
+<h3 class="section-title"><strong>方法四：記住：宇宙不欠你任何東西</strong></h3>
+<p>連輸十把、連跌三個月、連續三段失敗的感情——這些都不會讓宇宙「欠你一次好運」。接受隨機事件的本質，是讓你在這些情況下做出更理性決策的基礎。</p>
+<blockquote><em>本章重點：賭徒謬誤是你的大腦對隨機事件強加了一套「平衡邏輯」——彷彿宇宙在計帳，在確保公平。但隨機就是隨機，它沒有記憶，沒有義務，也不欠你任何補償。每一次，都是新的開始。</em></blockquote>
+
+<h2 class="chapter-title" id="ch4">第五章：後見之明偏誤——「我早就知道會這樣」其實是你騙自己</h2>
+<blockquote><em>「結果出來之後，每個人都是先知。但在結果出來之前，沒有人知道。你的大腦非常擅長在事後重新組裝一個『我本來就知道』的記憶——但那個記憶，是假的。」</em></blockquote>
+<h3 class="section-title"><strong>一個讓你回想起某個對話的場景</strong></h3>
+<p>某個新創公司失敗了。你的朋友說：「我早就說過他們那個商業模式有問題，這個結果我老早就料到了。」但你記得，在那個公司還在擴張、到處上新聞的時候，這個朋友說的是：「這間公司還不錯，看起來有點潛力。」他現在的記憶，跟他當時說過的話，對不上。但他本人完全不覺得矛盾。他真的以為他早就預測到了。這不是他在說謊。這是後見之明偏誤在運作。</p>
+<h3 class="section-title"><strong>什麼是後見之明偏誤？</strong></h3>
+<p>後見之明偏誤（Hindsight Bias），又稱「我早就知道效應」（I-knew-it-all-along Effect），由心理學家巴魯克・費斯科夫（Baruch Fischhoff）在1975年的研究中確立。它的核心現象是：當一件事的結果已經揭曉後，人傾向於相信他們事前就已經知道（或能夠預測）這個結果。</p>
+<p>費斯科夫做了一個研究：他請受試者在某個歷史事件（尼克森訪華）發生前，估算各種可能結果的概率。事件結束後，他請同一批人「回憶」他們當初的估算。結果：大多數人都「記得」自己事前的估算，比實際記錄中更接近最終發生的結果。他們沒有在說謊，他們真的以為自己當初就估算得很準。但那個記憶，是事後被結果反向修改過的。</p>
+<h3 class="section-title"><strong>後見之明偏誤在你生活裡的五個現身</strong></h3>
+<h3 class="section-title"><strong>① 股市崩盤之後的「我就說嘛」</strong></h3>
+<p>2020年3月，新冠疫情導致全球股市崩盤。崩盤之後，你聽到很多人說：「我早就說過市場估值太高了，這個早晚要修正。」但在2020年1月，這些人的投資組合還是滿的，他們沒有減倉。如果他們真的「早就知道」，他們為什麼沒有在崩盤前出場？因為他們當時並不確定。但結果揭曉之後，後見之明偏誤讓他們的記憶自動重寫了。</p>
+<h3 class="section-title"><strong>② 產品失敗之後的「我們都知道這不會成功」</strong></h3>
+<p>一個新產品上市失敗了。會後檢討時，幾乎每個人都說：「我一直覺得這個方向有問題。」但如果在產品規劃期間，他們真的覺得有問題，為什麼沒有在當時提出？後見之明偏誤讓「失敗後的檢討」很難發揮真正的學習效果，因為每個人都在用「我早就知道」掩蓋「我當時其實也不確定」。</p>
+<h3 class="section-title"><strong>③ 感情結束後的「我早就看出他有問題」</strong></h3>
+<p>你的朋友跟一個人交往了兩年，分手了。她說：「其實我從一開始就感覺他有點怪，只是當時沒在意。」你想起來，她在交往的第一年，每次提到那個對象都眉飛色舞，說他很好、很體貼。那個「一開始就感覺有點怪」，是她在知道結局之後，重新詮釋了最初的感受。她不是在騙你，她真的以為自己當時就有感覺。但那個感覺，是事後建構的。</p>
+<h3 class="section-title"><strong>④ 你對自己過去決策的過度自責或過度自誇</strong></h3>
+<p>你做了一個投資決策，後來賺了。你說：「我就知道這個會漲，我當時判斷得很準。」你做了一個投資決策，後來虧了。你說：「我其實當時就有一點猶豫，只是沒聽自己的感覺。」賺錢了，你把功勞歸給自己的洞見。虧錢了，你說「其實我當時就有感覺」——讓失敗感覺比較不那麼難受，因為「至少我有察覺到」。</p>
+<h3 class="section-title"><strong>⑤ 歷史評論的「那是必然的結局」</strong></h3>
+<p>希特勒的崛起、蘇聯的解體、網際網路的爆發——回頭看這些歷史事件，人們常說「那個時代如果仔細看，一切都是有跡可循的」。但生活在那個年代的人，置身其中，面對著同樣的資訊，做出的判斷五花八門，大多數人都沒有預見那些「顯而易見」的走向。後見之明讓歷史看起來必然，讓當時的人看起來愚蠢。</p>
+<h3 class="section-title"><strong>對話實錄：誰才是真正的先知？</strong></h3>
+<p>國慶和他的同事在討論公司剛宣布的一個策略轉向：</p>
+<blockquote><em>同事A：「這個方向我早就說過，之前那個策略根本行不通。」 國慶：「你有說過嗎？我記得之前你說那個策略還不錯啊？」 同事A：「我是說看起來還不錯，但我心裡其實有疑慮的。」 國慶：「那你有在會議裡說出來嗎？」 同事A：「……沒有，因為大家都支持，我不想掃興。」 國慶：「所以你『早就知道』，但沒有說？」 同事A：（不太自在地）「就是大概有那個感覺啦。」 國慶心想：他是真的有感覺，還是現在才有感覺，但以為自己當時就有了？</em></blockquote>
+<h3 class="section-title"><strong>怎麼對抗後見之明偏誤？</strong></h3>
+<h3 class="section-title"><strong>方法一：在結果揭曉之前，記錄你的預測和理由</strong></h3>
+<p>每次你做重要判斷，把你的預測和你的理由寫下來，加上時間戳記。事後回頭看，你會驚訝地發現你的「我早就知道」跟當時的記錄有多少差距。</p>
+<h3 class="section-title"><strong>方法二：在做事後檢討時，重建「當時的資訊環境」</strong></h3>
+<p>評估一個過去的決策時，刻意回到「那個時間點，你們知道什麼、不知道什麼」。不要用現在的資訊來評斷當時的判斷，而是問：「在當時的資訊條件下，那個決定合理嗎？」</p>
+<h3 class="section-title"><strong>方法三：對自己的「早就知道」保持懷疑</strong></h3>
+<p>每次你說「我早就知道」，問自己：「我有沒有在事前說出來？有沒有紀錄可以證明？」如果沒有，那個「早就知道」很可能是後見之明在運作，不是你真的有先見之明。</p>
+<h3 class="section-title"><strong>方法四：用不確定性語言說話</strong></h3>
+<p>在事情結果揭曉之前，刻意用「我估計」「我覺得可能」「我有一點疑慮但不確定」這樣的語言，而不是「我知道」「一定是這樣」。</p>
+<blockquote><em>本章重點：後見之明偏誤讓每個人在結果出來之後都變成先知，讓每一個結果看起來都是「本來就顯而易見」的。它是最安靜的自欺機制之一——因為你的大腦改寫記憶的過程，你完全感覺不到。唯一能阻止它的方式，是在事前留下紀錄，讓現實的你對抗事後重寫記憶的你。</em></blockquote>
+
+<h2 class="chapter-title" id="ch5">第六章：稟賦效應——你的東西因為是你的，所以值更多錢</h2>
+<blockquote><em>「同一個馬克杯，你買它的意願是5美元。但如果它已經是你的了，你要賣它的最低價格是10美元。那5美元的差距，不是合理的市場溢價，是所有權製造的幻覺。」</em></blockquote>
+<h3 class="section-title"><strong>一個讓你開始懷疑自己定價邏輯的場景</strong></h3>
+<p>你在整理家裡，決定把一些舊東西放到二手平台賣掉。你找出一件你大概五年前買、穿了幾次就放著的外套。你想了想，定價1,800元。買家問你能不能便宜一點，出價800。你說：「不行，這件品質很好的。」你拒絕了。那件外套繼續放在衣櫃裡。</p>
+<p>但你自己也知道，如果今天在二手店看到這件外套，標價1,000，你可能還會嫌貴。你買它的意願和你賣它的意願，差了800元。那件外套本身沒有改變。改變的只有一件事：它是你的。這叫稟賦效應。</p>
+<h3 class="section-title"><strong>什麼是稟賦效應？</strong></h3>
+<p>稟賦效應（Endowment Effect）由理查・塞勒在1980年提出。最著名的是「馬克杯實驗」：研究者隨機把大學馬克杯分給一半的學生（賣方），另一半學生什麼都沒拿到（買方）。賣方的平均最低售價大約是買方平均最高出價的兩倍。同樣的杯子，只是「是不是我的」這件事改變了，估值就差了一倍。</p>
+<h3 class="section-title"><strong>稟賦效應在你生活裡的六張臉</strong></h3>
+<h3 class="section-title"><strong>① 你的舊車「值這個價」</strong></h3>
+<p>你在賣你的二手車。你覺得它保養得很好、有感情、值35萬。你估計出去的時候，一位路人開同款同年份的車，你可能評估那輛車值25萬。你的車和那輛車，客觀上幾乎沒有差別。但你的車「是你的」，所以你的大腦自動給它加了一個所有權溢價。</p>
+<h3 class="section-title"><strong>② 你對自己創作的過度評價</strong></h3>
+<p>你寫了一篇文章，你覺得它很好，應該有很多人看。實際上點閱量很低。你覺得是演算法的問題，不是文章本身的問題。稟賦效應讓你對「自己寫的東西」的評價，系統性地高於它的客觀品質。</p>
+<h3 class="section-title"><strong>③ 你對舊有信念的堅持</strong></h3>
+<p>你持有一個信念很多年了。這個信念「是你的」——你用它解釋世界，你的自我認同有一部分依附在它上面。現在有一個對立的証據出現了。你的大腦不是在公平地評估這個証據，它是在評估「接受這個証據要我放棄什麼」——而那個要放棄的，是你擁有的信念，是你的稟賦。</p>
+<h3 class="section-title"><strong>④ 談判中的「這是我的底線」</strong></h3>
+<p>你在談一個合約。你提出了一個條件，對方提出修改。那個修改客觀上可能是合理的，甚至對你也有好處。但因為你的提案已經「是你的」，改變它感覺像是在放棄你的立場——而不是在改善一個共同方案。</p>
+<h3 class="section-title"><strong>⑤ 你對「已經下載的APP」的使用率高估</strong></h3>
+<p>你下載了一個APP，用了幾天覺得還好，但因為你已經下載了、已經是「你的APP」，你繼續讓它佔著手機空間，因為刪掉它感覺像是承認你的選擇是錯的。</p>
+<h3 class="section-title"><strong>⑥ 你的房子「不一樣」</strong></h3>
+<p>你要賣房子。你覺得你的房子「地段有優勢」「採光特別好」「裝潢是我親手做的」。每個要賣房子的人都覺得自己的房子有特別的優勢。買方不在乎那些「是你的」的理由。稟賦效應讓賣方和買方之間的價格期待永遠有一道鴻溝。</p>
+<h3 class="section-title"><strong>對話實錄：賣家的那個「合理」定價</strong></h3>
+<p>瑞安把一台舊的相機放在網路上賣，標價15,000元：</p>
+<blockquote><em>買家：「這台相機現在二手行情大概10,000到12,000，你這個價格有點高耶，能不能12,000？」 瑞安：「這台我保養得很好，快門數很低，鏡頭也沒刮傷。而且這台陪我去了很多地方，對我來說有紀念價值。」 買家：「紀念價值是你的感受，但我買的是相機的功能，不是你的回憶。」 瑞安：「……（停頓）那13,500？」 買家：「12,000是我的上限。」 瑞安：「12,500，這樣我才覺得值。」 買家最後沒有買。那台相機繼續在架上掛著。</em></blockquote>
+<p>瑞安設的價，包含了相機本身的市場價值，加上了一個「這是我的、這陪我去了很多地方」的稟賦溢價。買家完全不願意為那個溢價付錢，因為他買的是相機，不是瑞安的旅行記憶。那個差距，讓交易沒有發生。</p>
+<h3 class="section-title"><strong>怎麼對抗稟賦效應？</strong></h3>
+<h3 class="section-title"><strong>方法一：問「如果這個不是我的，我會為它付多少錢？」</strong></h3>
+<p>每次你要賣一個東西、評估一個你已經擁有的東西的價值，先問：「如果我今天在二手市場看到這個，我最多願意出多少錢？」那個數字，比你「作為賣方覺得它值多少」更接近真實的市場價值。</p>
+<h3 class="section-title"><strong>方法二：找一個局外人幫你評估</strong></h3>
+<p>你的二手物品、你的創作、你的信念——找一個跟你沒有情感連結的人，讓他們客觀評估。他們的估價，會讓你看到稟賦效應製造了多少溢價。</p>
+<h3 class="section-title"><strong>方法三：在談判前，刻意降低對「你的提案」的依戀</strong></h3>
+<p>進入談判前，告訴自己：「我的初始提案只是一個起點，不是我的領土。改變它不是失去，是在尋找更好的共同方案。」把提案和自我認同分開，你就能更靈活地回應對方的修改建議。</p>
+<h3 class="section-title"><strong>方法四：對信念設定「更新門檻」，而不是「保護門檻」</strong></h3>
+<p>當你面對一個挑戰你既有信念的証據，試著問：「如果我從來沒有持有這個信念，現在看到這兩方面的証據，我會怎麼判斷？」把信念從「我的東西」變成「一個可以被更新的工具」，是對抗稟賦效應在信念層面的最好辦法。</p>
+<blockquote><em>本章重點：稟賦效應讓所有你擁有的東西——物品、觀點、計畫、關係——都自動被你的大腦加上一個所有權溢價。那個溢價不是理性的，是情感的。理解它，能讓你在定價、談判、評估和更新信念的時候，更接近真實的市場價值和更客觀的判斷。</em></blockquote>
+
+<h2 class="chapter-title preface" id="epilogue">後記：決策不會完美，但可以更少坑</h2>
+<p>你讀完了六個決策陷阱。</p>
+<p>你的計畫比你想的更容易出錯，你對現狀的堅持比你以為的更多是惰性，你的記憶在峰值和終值之間抹去了中間所有的複雜，你在隨機事件裡尋找一個不存在的規律，你用事後的知識美化了你當時的判斷，你把你擁有的東西估得比實際更高。</p>
+<p>這六件事，你今天都做過，明天還會繼續做。這不是因為你不夠聰明，也不是因為你不夠努力。這是因為你是人，而人類的大腦是在一個和今天非常不同的環境裡演化出來的——那個環境裡，這些偏誤是有用的，是讓你活下去的工具。但在現代的工作決策、感情選擇、財務判斷裡，那些工具開始讓你跌跤。</p>
+<p>知道坑在哪裡，不代表你不會掉進去。但你掉進去的機率，和你在裡面待著的時間，可以因為「你看見了它」而縮短。</p>
+<p>這本書做的事只有一件：讓你在做決定的那一刻，多一個問號。</p>
+<p>「等等——我現在是不是在用過去的沉沒成本做選擇？」</p>
+<p>「等等——我這個計畫的緩衝夠嗎，還是我在過度自信？」</p>
+<p>「等等——我不想改變，是因為現狀真的好，還是只是熟悉讓我不想動？」</p>
+<p>那個問號，是你和偏誤之間的距離。距離很小。但它的存在，讓你有機會選擇。</p>
+<hr>
+<p>認知心理學系列第三冊《記憶的謊言》即將推出。如果你以為你的記憶是可靠的——那本書會告訴你，它有多擅長說謊。</p>
+<p class="meta" style="margin-top:8px;">作者｜盧林　有的沒的小舖 出品</p>
+
+</div><!-- /content -->
+
+<div class="book-footer">
+  認知心理學系列・第二冊｜作者：盧林｜有的沒的小舖 出品
+</div>
+
+</div><!-- /main-content -->
+
+<script>
+  // 平滑捲動 + active 章節偵測
+  document.querySelectorAll('.toc-item').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // 手機關閉 sidebar
+        document.querySelector('.sidebar').classList.remove('open');
+      }
+    });
+  });
+
+  // active 偵測
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('.toc-item');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
