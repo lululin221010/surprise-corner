@@ -18,11 +18,11 @@
     --quote-bg: #eef3f8;
     --chapter-bg: linear-gradient(135deg, #1a3d5c 0%, #2c5f8a 100%);
     /* sidebar */
-    --sb-bg: #111e2a;
-    --sb-text: #c8d8e8;
-    --sb-accent: #5ba3d0;
-    --sb-hover: rgba(91,163,208,0.12);
-    --sb-border: rgba(255,255,255,0.07);
+    --sb-bg: #eef3f8;
+    --sb-text: #1a2e40;
+    --sb-accent: #2c5f8a;
+    --sb-hover: rgba(44,95,138,0.09);
+    --sb-border: rgba(44,95,138,0.12);
     --sb-width: 240px;
   }
 
@@ -50,9 +50,10 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    border-right: 1px solid rgba(44,95,138,0.15);
   }
   .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(44,95,138,0.2); border-radius: 2px; }
 
   .back-btn {
     display: inline-block;
@@ -62,7 +63,7 @@
     color: var(--sb-accent);
     text-decoration: none;
     padding: 6px 10px;
-    border: 1px solid rgba(91,163,208,0.35);
+    border: 1px solid rgba(44,95,138,0.35);
     border-radius: 3px;
     margin-bottom: 28px;
     transition: all 0.2s;
@@ -73,21 +74,21 @@
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 10px;
     letter-spacing: 3px;
-    color: rgba(200,216,232,0.45);
+    color: rgba(26,46,64,0.5);
     margin-bottom: 6px;
   }
   .sb-title {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    color: #e8f0f8;
+    color: #1a2e40;
     line-height: 1.5;
     margin-bottom: 4px;
   }
   .sb-sub {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 11px;
-    color: rgba(200,216,232,0.5);
+    color: rgba(26,46,64,0.5);
     line-height: 1.6;
     margin-bottom: 24px;
   }
@@ -100,14 +101,14 @@
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 10px;
     letter-spacing: 4px;
-    color: rgba(200,216,232,0.35);
+    color: rgba(26,46,64,0.35);
     margin-bottom: 10px;
   }
   .toc-item {
     display: block;
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 12px;
-    color: rgba(200,216,232,0.65);
+    color: rgba(26,46,64,0.65);
     text-decoration: none;
     padding: 7px 4px 7px 10px;
     border-left: 2px solid transparent;
@@ -273,6 +274,58 @@
     letter-spacing: 2px;
     font-family: 'Noto Sans TC', sans-serif;
   }
+
+  /* ── 系列導覽 ── */
+  .series-nav {
+    max-width: 700px;
+    margin: 80px auto 0;
+    padding: 48px 40px 60px;
+    border-top: 3px double #2c3e50;
+    text-align: center;
+  }
+  .series-nav .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  .series-nav .snbooks {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .series-nav .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    color: #7f8c8d;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .series-nav .snbook.current {
+    border-color: #2c5f8a;
+    color: #2c5f8a;
+    font-weight: 700;
+  }
+  .series-nav .snbook:hover:not(.current) {
+    border-color: #2c5f8a;
+    color: #2c5f8a;
+  }
+  .series-nav .back-link {
+    display: block;
+    margin-top: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: #7f8c8d;
+    text-decoration: none;
+    letter-spacing: 2px;
+  }
+  .series-nav .back-link:hover { color: #2c5f8a; }
 
   /* ── RWD ── */
   @media (max-width: 768px) {
@@ -596,6 +649,20 @@
 <p class="meta" style="margin-top:8px;">作者｜盧林　有的沒的小舖 出品</p>
 
 </div><!-- /content -->
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">認知心理學系列</div>
+  <div class="snbooks">
+    <a href="/cognitive-psychology-vol1.html" class="snbook">Vol.1《你以為你在思考》</a>
+    <span class="snbook current">Vol.2《決策陷阱》</span>
+    <a href="/cognitive-psychology-vol3.html" class="snbook">Vol.3《記憶的謊言》</a>
+    <a href="/cognitive-psychology-vol4.html" class="snbook">Vol.4《注意力劫持》</a>
+    <a href="/cognitive-psychology-vol5.html" class="snbook">Vol.5《語言的陷阱》</a>
+    <a href="/cognitive-psychology-vol6.html" class="snbook">Vol.6《社會壓力下的你》</a>
+  </div>
+  <a href="/cognitive-psychology.html" class="back-link">← 返回認知心理學系列</a>
+</div>
 
 <div class="book-footer">
   認知心理學系列・第二冊｜作者：盧林｜有的沒的小舖 出品

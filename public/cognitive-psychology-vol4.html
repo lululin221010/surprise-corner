@@ -3,1397 +3,1221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>注意力劫持：你的專注力正在被偷走｜認知心理學系列第四冊</title>
-<meta name="description" content="盧林著。稀缺性注意力、多巴胺迴路、通知暴政、切換成本、設計好的上癮、深度工作消失——你的注意力是這個時代最值錢的東西，而你在免費送出去。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>注意力劫持｜認知心理學 Vol.4｜盧林著</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #070c0f;
-    --bg2: #0a1015;
-    --bg3: #0d1820;
-    --surface: #111e28;
-    --border: rgba(77,184,232,0.12);
-    --text: #e4f0f8;
-    --text-muted: #6898b0;
-    --accent: #4db8e8;
-    --gold: #e8c87a;
-    --toc-w: 240px;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Serif TC', serif;
-    line-height: 1.9;
-    overflow-x: hidden;
+    --accent:        #2c5f8a;
+    --accent-light:  rgba(44,95,138,0.08);
+    --accent-mid:    rgba(44,95,138,0.20);
+    --accent-hover:  rgba(44,95,138,0.12);
+
+    --sidebar-w:     240px;
+    --sidebar-bg:    #eef2f7;
+    --sidebar-text:  #1a2e40;
+    --sidebar-muted: rgba(26,46,64,0.55);
+    --sidebar-border:rgba(44,95,138,0.15);
+
+    --ink:    #1a1a2e;
+    --paper:  #f5f0e8;
+    --muted:  #7f8c8d;
+    --accent-red: #c0392b;
+    --highlight: #faeee8;
+    --border: #2c3e50;
   }
 
-  /* ── TOC SIDEBAR ── */
-  .toc-sidebar {
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 1.9;
+  }
+
+  /* ══════════════════════════════
+     SIDEBAR
+  ══════════════════════════════ */
+  .sidebar {
     position: fixed;
     top: 0; left: 0;
-    width: var(--toc-w);
+    width: var(--sidebar-w);
     height: 100vh;
-    background: var(--bg2);
-    border-right: 1px solid var(--border);
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
     overflow-y: auto;
-    z-index: 100;
-    padding: 40px 0 60px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(77,184,232,0.2) transparent;
-  }
-  .toc-brand {
-    padding: 0 24px 32px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 24px;
-  }
-  .toc-brand-series {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-  .toc-brand-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--accent);
-    line-height: 1.4;
-  }
-  .toc-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 0 24px;
-    margin-bottom: 12px;
-  }
-  .toc-nav { list-style: none; }
-  .toc-nav a {
-    display: block;
-    padding: 9px 24px;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: all 0.2s;
-    border-left: 2px solid transparent;
-    line-height: 1.5;
-  }
-  .toc-nav a:hover { color: var(--text); background: rgba(77,184,232,0.04); }
-  .toc-nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(77,184,232,0.06); }
-  .toc-nav .toc-coming {
-    display: block;
-    padding: 9px 24px;
-    font-size: 0.78rem;
-    color: rgba(104,152,176,0.4);
-    font-style: italic;
-    line-height: 1.5;
-  }
-  .toc-divider {
-    margin: 16px 24px;
-    border: none;
-    border-top: 1px solid var(--border);
-  }
-  .toc-buy {
-    margin: 24px 16px 0;
-    padding: 10px 16px;
-    background: rgba(77,184,232,0.06);
-    border: 1px solid rgba(77,184,232,0.2);
-    text-align: center;
-  }
-  .toc-buy a {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  /* ── PAGE WRAP ── */
-  .page-wrap {
-    margin-left: var(--toc-w);
-    min-height: 100vh;
-  }
-
-  /* ── BOOK HERO ── */
-  .book-hero {
-    padding: 80px 80px 60px;
-    background: linear-gradient(180deg, var(--bg3) 0%, var(--bg) 100%);
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .book-hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(77,184,232,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .book-series-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid rgba(77,184,232,0.3);
-    display: inline-block;
-    padding: 5px 14px;
-    margin-bottom: 32px;
-  }
-  .book-vol {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    letter-spacing: 0.1em;
-  }
-  .book-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 5vw, 3.6rem);
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-  .book-title span { color: var(--accent); }
-  .book-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-  }
-  .book-meta {
+    overflow-x: hidden;
+    z-index: 200;
+    border-right: 1px solid var(--sidebar-border);
     display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .book-meta-item {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .book-meta-sep { color: var(--border); }
-
-  /* ── MAIN CONTENT ── */
-  .main-content { padding: 0 80px 120px; max-width: 860px; }
-
-  /* ── 前言 ── */
-  .preface {
-    padding: 80px 0 60px;
-    border-bottom: 1px solid var(--border);
-  }
-  .section-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    font-weight: 300;
-    line-height: 1.35;
-    margin-bottom: 36px;
-    color: var(--text);
-  }
-  .prose { font-size: 1.02rem; color: var(--text-muted); line-height: 2.15; }
-  .prose p { margin-bottom: 1.5em; }
-  .prose strong { color: var(--text); font-weight: 500; }
-  .prose em { color: var(--accent); font-style: normal; }
-
-  /* ── 引言 ── */
-  .chapter-quote {
-    margin: 0 0 48px;
-    padding: 28px 32px;
-    border-left: 2px solid var(--accent);
-    background: rgba(77,184,232,0.04);
-  }
-  .chapter-quote p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-style: italic;
-    color: rgba(228,240,248,0.7);
-    line-height: 1.75;
+    flex-direction: column;
+    padding-bottom: 40px;
+    transition: transform 0.3s ease;
   }
 
-  /* ── 章節 ── */
-  .chapter { padding: 80px 0 60px; border-bottom: 1px solid var(--border); }
-  .chapter-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
+  /* 返回按鈕 */
+  .sb-back {
+    padding: 24px 20px 0;
   }
-  .chapter-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
-    font-weight: 300;
-    line-height: 1.25;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
-  .chapter-title-en {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    font-style: italic;
-    color: var(--text-muted);
-    margin-bottom: 48px;
-    padding-bottom: 36px;
-    border-bottom: 1px solid var(--border);
-  }
-  .chapter-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-style: italic;
-    color: rgba(228,240,248,0.6);
-    margin-bottom: 32px;
-    padding-left: 20px;
-    border-left: 1px solid rgba(77,184,232,0.3);
-  }
-
-  /* ── 場景對話 ── */
-  .scene-box {
-    margin: 36px 0;
-    padding: 28px 32px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-top: 2px solid rgba(77,184,232,0.4);
-  }
-  .scene-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-  }
-  .scene-text { font-size: 0.97rem; color: var(--text-muted); line-height: 2.1; }
-  .scene-text p { margin-bottom: 1.2em; }
-  .scene-text strong { color: var(--text); }
-
-  /* ── 對話 ── */
-  .dialogue { margin: 32px 0; }
-  .dialogue-line {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
-    align-items: start;
-  }
-  .dialogue-speaker {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: var(--accent);
-    padding-top: 3px;
-    text-align: right;
-  }
-  .dialogue-text {
-    font-size: 0.97rem;
-    color: var(--text-muted);
-    line-height: 1.9;
-    padding: 8px 16px;
-    background: rgba(255,255,255,0.02);
-    border-left: 1px solid rgba(77,184,232,0.15);
-  }
-
-  /* ── 小標題 ── */
-  .sub-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--text);
-    margin: 48px 0 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .sub-heading-sm {
-    font-family: 'Space Mono', monospace;
+  .sb-back a {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 11px;
     letter-spacing: 2px;
-    text-transform: uppercase;
     color: var(--accent);
-    margin: 36px 0 16px;
+    text-decoration: none;
+    padding: 5px 9px;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .sb-back a:hover {
+    background: var(--accent-hover);
   }
 
-  /* ── 清單 ── */
-  .concept-list { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 12px; }
-  .concept-list li {
-    padding: 18px 20px;
-    background: rgba(255,255,255,0.02);
-    border-left: 2px solid rgba(77,184,232,0.4);
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.9;
+  /* 封面圖 */
+  .sb-cover {
+    margin: 20px 20px 0;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
-  .concept-list li strong { color: var(--text); display: block; margin-bottom: 6px; font-size: 1rem; }
-  .concept-list li .sub { margin-top: 8px; font-size: 0.9rem; color: rgba(104,152,176,0.8); font-style: italic; }
-
-  /* ── 號碼清單 ── */
-  .num-list { list-style: none; margin: 24px 0; counter-reset: num; display: flex; flex-direction: column; gap: 12px; }
-  .num-list li {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 16px;
-    align-items: start;
-    font-size: 0.97rem;
-    color: var(--text-muted);
-    line-height: 1.9;
-  }
-  .num-list li::before {
-    counter-increment: num;
-    content: counter(num);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    color: rgba(77,184,232,0.5);
-    line-height: 1.3;
-    font-style: italic;
-  }
-
-  /* ── 重點框 ── */
-  .key-box {
-    margin: 40px 0;
-    padding: 24px 28px;
-    background: rgba(77,184,232,0.05);
-    border: 1px solid rgba(77,184,232,0.2);
-    border-radius: 2px;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 2;
-  }
-  .key-box strong {
-    color: var(--accent);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  .sb-cover img {
+    width: 100%;
     display: block;
-    margin-bottom: 12px;
   }
 
-  /* ── 方法清單 ── */
-  .method-list { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 16px; }
-  .method-list li {
-    padding: 20px 24px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 2;
+  /* 書名區 */
+  .sb-title {
+    padding: 16px 20px 0;
   }
-  .method-list li .method-title {
-    font-family: 'Space Mono', monospace;
+  .sb-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+  .sb-book-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--sidebar-text);
+    line-height: 1.4;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .sb-book-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    color: var(--sidebar-muted);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+  .sb-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    color: var(--sidebar-muted);
+    letter-spacing: 2px;
+    margin-top: 6px;
+  }
+
+  /* 分隔線 */
+  .sb-divider {
+    border: none;
+    border-top: 1px solid var(--sidebar-border);
+    margin: 16px 20px;
+  }
+
+  /* 目錄 */
+  .sb-toc-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--sidebar-muted);
+    padding: 0 20px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .sb-toc a {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12.5px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 7px 20px 7px 22px;
+    opacity: 0.65;
+    border-left: 2px solid transparent;
+    line-height: 1.5;
+    transition: all 0.18s;
+  }
+  .sb-toc a:hover {
+    opacity: 1;
+    background: var(--accent-hover);
+    border-left-color: rgba(44,95,138,0.4);
+    color: var(--accent);
+  }
+  .sb-toc a.active {
+    opacity: 1;
+    border-left-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+    font-weight: 500;
+  }
+
+  /* 系列導覽（sidebar 底部） */
+  .sb-series-nav {
+    margin: 20px 20px 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--sidebar-border);
+  }
+  .sb-series-nav-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--sidebar-muted);
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .sb-series-nav a,
+  .sb-series-nav span {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11.5px;
+    color: var(--sidebar-muted);
+    text-decoration: none;
+    padding: 5px 0;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    transition: color 0.18s;
+  }
+  .sb-series-nav a:hover { color: var(--accent); }
+  .sb-series-nav span.cur {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ══════════════════════════════
+     HAMBURGER（行動版）
+  ══════════════════════════════ */
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 300;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    width: 38px; height: 38px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 150;
+  }
+  .overlay.show { display: block; }
+
+  /* ══════════════════════════════
+     MOBILE TOP BAR
+  ══════════════════════════════ */
+  .mobile-bar {
+    display: none;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    border-bottom: 1px solid #ddd;
+    padding: 12px 56px 12px 16px;
+    z-index: 100;
+  }
+  .mobile-bar .mb-series {
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 10px;
     letter-spacing: 2px;
-    text-transform: uppercase;
     color: var(--accent);
-    display: block;
+    margin-bottom: 2px;
+  }
+  .mobile-bar .mb-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ══════════════════════════════
+     MAIN CONTENT
+  ══════════════════════════════ */
+  .main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 120px;
+  }
+
+  /* ── 書名頁 ── */
+  .title-page {
+    text-align: center;
+    padding: 80px 0 100px;
+    border-bottom: 3px double var(--border);
+    margin-bottom: 80px;
+  }
+  .cover-img-main {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    margin-bottom: 40px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .vol-number {
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--accent);
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  h1.book-title {
+    font-size: 3.4em;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    font-size: 1.05em;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 48px;
+    letter-spacing: 2px;
+  }
+  .author-line {
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .publisher-line {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  /* ── 章節標題 ── */
+  .chapter-divider {
+    text-align: center;
+    padding: 60px 0 50px;
+    border-top: 1px solid #ccc;
+    margin-top: 80px;
+  }
+  .chapter-divider.first { border-top: none; padding-top: 0; margin-top: 0; }
+  .chapter-number {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .chapter-title {
+    font-size: 2.1em;
+    font-weight: 900;
+    line-height: 1.25;
     margin-bottom: 10px;
   }
-  .method-list strong { color: var(--text); font-weight: 500; }
-
-  /* ── 即將推出 ── */
-  .coming-soon-chapter {
-    padding: 60px 0;
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-  }
-  .coming-soon-chapter .cs-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    opacity: 0.5;
-  }
-  .coming-soon-chapter .cs-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: rgba(228,240,248,0.3);
-    margin-bottom: 12px;
-  }
-  .coming-soon-chapter .cs-badge {
-    display: inline-block;
-    padding: 5px 16px;
-    border: 1px dashed rgba(77,184,232,0.2);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(77,184,232,0.35);
+  .chapter-sub {
+    font-size: 0.95em;
+    color: var(--muted);
+    font-style: italic;
+    letter-spacing: 1px;
   }
 
-  /* ── 系列導航 ── */
-  .series-nav {
-    padding: 60px 0;
-    border-top: 1px solid var(--border);
+  h2 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
   }
-  .series-nav-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    text-align: center;
+  h2.preface-h2 {
+    border-bottom-color: var(--accent);
+    font-size: 1.5em;
+    margin-top: 0;
   }
-  .series-nav-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-  .next-book {
-    padding: 20px 16px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
-    display: block;
-  }
-  .next-book:hover { background: var(--surface); border-color: rgba(77,184,232,0.3); }
-  .next-book.current { border-color: rgba(77,184,232,0.4); background: rgba(77,184,232,0.05); pointer-events: none; }
-  .next-book.coming { opacity: 0.4; pointer-events: none; }
-  .next-book-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
+  h3 {
+    font-size: 1.05em;
+    font-weight: 700;
+    margin: 32px 0 12px;
     color: var(--accent);
-    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+    letter-spacing: 1px;
+  }
+  p { margin-bottom: 20px; }
+
+  blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 18px 26px;
+    margin: 32px 0;
+    background: var(--accent-light);
+    font-style: italic;
+    font-size: 1.02em;
+  }
+  blockquote cite {
     display: block;
+    margin-top: 8px;
+    font-size: 0.82em;
+    font-style: normal;
+    color: var(--muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    letter-spacing: 1px;
   }
-  .next-book.coming .next-book-num::after { content: ' 即將推出'; font-size: 8px; color: var(--text-muted); }
-  .next-book-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-  .next-book.current .next-book-title { color: var(--accent); }
 
-  /* ── Reveal ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+  .scenario-box {
+    border: 2px solid var(--ink);
+    padding: 26px 30px;
+    margin: 32px 0;
+    position: relative;
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .scenario-box::before {
+    content: '情境';
+    position: absolute;
+    top: -12px; left: 20px;
+    background: var(--paper);
+    padding: 0 10px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--muted);
+  }
 
-  /* ── Mobile ── */
+  .dialogue-box {
+    background: #1a1a2e;
+    color: #e8dcc8;
+    padding: 30px 34px;
+    margin: 32px 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.92em;
+    line-height: 2;
+  }
+  .dialogue-box .label {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 14px;
+  }
+  .dialogue-box .label:first-child { margin-top: 0; }
+
+  .method-list {
+    counter-reset: method;
+    list-style: none;
+    margin: 20px 0;
+  }
+  .method-list li {
+    counter-increment: method;
+    padding: 16px 16px 16px 54px;
+    margin-bottom: 10px;
+    background: var(--accent-light);
+    position: relative;
+  }
+  .method-list li::before {
+    content: counter(method);
+    position: absolute;
+    left: 16px; top: 16px;
+    width: 24px; height: 24px;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-family: 'Noto Sans TC', sans-serif;
+    border-radius: 2px;
+  }
+
+  .chapter-summary {
+    border: 1px solid var(--accent-mid);
+    padding: 24px 30px;
+    margin: 44px 0 16px;
+    font-style: italic;
+    font-size: 0.97em;
+    line-height: 1.85;
+    background: var(--accent-light);
+  }
+
+  strong { font-weight: 700; }
+  em { font-style: italic; color: var(--accent); }
+
+  .chapter-end {
+    text-align: center;
+    margin-top: 56px;
+    font-size: 18px;
+    color: var(--muted);
+  }
+  .page-marker {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-align: center;
+    margin: 36px 0 0;
+  }
+
+  /* ── 後記 ── */
+  .afterword {
+    margin-top: 80px;
+    padding-top: 60px;
+    border-top: 3px double var(--border);
+  }
+  .afterword-title {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .afterword-title .alabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .afterword-title h2 {
+    border: none;
+    font-size: 1.7em;
+    margin: 0; padding: 0;
+  }
+  .divider-line {
+    text-align: center;
+    color: var(--muted);
+    margin: 40px 0;
+    letter-spacing: 6px;
+    font-size: 13px;
+  }
+  .colophon {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 36px;
+    border-top: 1px solid #ccc;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    line-height: 2.4;
+  }
+  .next-vol {
+    margin-top: 24px;
+    padding: 18px 24px;
+    border: 1px solid var(--accent);
+    font-size: 0.88em;
+    color: var(--muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 2;
+  }
+  .next-vol strong { color: var(--accent); }
+
+  /* ── 系列導覽（頁底） ── */
+  .series-nav {
+    margin-top: 80px;
+    padding-top: 48px;
+    border-top: 3px double var(--border);
+    text-align: center;
+  }
+  .series-nav .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .series-nav .snbooks {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .series-nav .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .series-nav .snbook.current {
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .series-nav .snbook:hover:not(.current) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .series-nav .back-link {
+    display: block;
+    margin-top: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 2px;
+    padding-bottom: 40px;
+  }
+  .series-nav .back-link:hover { color: var(--accent); }
+
+  /* ══════════════════════════════
+     RWD
+  ══════════════════════════════ */
   @media (max-width: 768px) {
-    .toc-sidebar { display: none; }
-    .page-wrap { margin-left: 0; }
-    .book-hero { padding: 60px 24px 48px; }
-    .main-content { padding: 0 24px 80px; }
-    .series-nav-grid { grid-template-columns: 1fr 1fr; }
-    .dialogue-line { grid-template-columns: 50px 1fr; }
+    .sidebar {
+      transform: translateX(-100%);
+    }
+    .sidebar.open {
+      transform: translateX(0);
+      box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+    }
+    .menu-toggle { display: flex; }
+    .mobile-bar { display: block; }
+    .main { margin-left: 0; }
+    .content { padding: 20px 20px 80px; }
+    .title-page { padding: 40px 0 60px; }
+    h1.book-title { font-size: 2.2em; }
   }
 </style>
 </head>
 <body>
 
-<!-- TOC SIDEBAR -->
-<nav class="toc-sidebar">
-  <div class="toc-brand">
-    <div class="toc-brand-series">認知心理學系列 · Vol.4</div>
-    <div class="toc-brand-title">注意力劫持</div>
+<!-- Hamburger -->
+<button class="menu-toggle" id="menuToggle" aria-label="開啟目錄">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar" id="sidebar">
+
+  <div class="sb-back">
+    <a href="/cognitive-psychology.html">← 返回認知心理學系列</a>
   </div>
-  <div class="toc-label">目錄</div>
-  <ul class="toc-nav">
-    <li><a href="#preface">前言</a></li>
-    <li><a href="#ch1">第一章　稀缺性注意力</a></li>
-    <li><a href="#ch2">第二章　多巴胺迴路</a></li>
-    <li><a href="#ch3">第三章　通知的暴政</a></li>
-    <li><a href="#ch4">第四章　切換成本</a></li>
-    <li><a href="#ch5">第五章　設計好的上癮</a></li>
-    <li><a href="#ch6">第六章　深度工作的消失</a></li>
-    <li><a href="#postscript">後記</a></li>
-  </ul>
-  <hr class="toc-divider">
-  <div class="toc-buy">
-    <a href="https://still-time-corner.vercel.app" target="_blank">前往小舖取得完整版 →</a>
+
+  <div class="sb-cover">
+    <img src="/cognitive-psychology-vol4-注意力劫持.png"
+         alt="注意力劫持封面"
+         onerror="this.style.display='none'">
   </div>
+
+  <div class="sb-title">
+    <div class="sb-series">認知心理學系列・Vol.4</div>
+    <div class="sb-book-title">注意力劫持</div>
+    <div class="sb-book-sub">你的專注力正在被偷走<br>而你還在幫兇</div>
+    <div class="sb-author">盧林 著</div>
+  </div>
+
+  <hr class="sb-divider">
+
+  <div class="sb-toc-label">目錄</div>
+  <div class="sb-toc">
+    <a href="#preface">前言</a>
+    <a href="#ch1">第一章　稀缺性注意力</a>
+    <a href="#ch2">第二章　多巴胺迴路</a>
+    <a href="#ch3">第三章　通知的暴政</a>
+    <a href="#ch4">第四章　切換成本</a>
+    <a href="#ch5">第五章　設計好的上癮</a>
+    <a href="#ch6">第六章　深度工作的消失</a>
+    <a href="#afterword">後記</a>
+  </div>
+
+  <div class="sb-series-nav">
+    <div class="sb-series-nav-label">本系列</div>
+    <a href="/cognitive-psychology-vol1.html">Vol.1《你以為你在思考》</a>
+    <a href="/cognitive-psychology-vol2.html">Vol.2《決策陷阱》</a>
+    <a href="/cognitive-psychology-vol3.html">Vol.3《記憶的謊言》</a>
+    <span class="cur">Vol.4《注意力劫持》</span>
+    <a href="/cognitive-psychology-vol5.html">Vol.5《語言的陷阱》</a>
+    <a href="/cognitive-psychology-vol6.html">Vol.6《社會壓力下的你》</a>
+  </div>
+
 </nav>
 
-<!-- PAGE -->
-<div class="page-wrap">
+<!-- ── MAIN ── -->
+<div class="main">
 
-  <!-- HERO -->
-  <header class="book-hero">
-    <div class="book-series-badge">認知心理學系列 · 第四冊</div>
-    <div class="book-vol">Vol.4 · Attention Hijacked</div>
-    <h1 class="book-title"><span>注意力</span>劫持</h1>
-    <p class="book-subtitle">你的專注力正在被偷走，而你還在幫兇</p>
-    <div class="book-meta">
-      <span class="book-meta-item">作者：盧林</span>
-      <span class="book-meta-sep">·</span>
-      <span class="book-meta-item">有的沒的小舖 出品</span>
-      <span class="book-meta-sep">·</span>
-      <span class="book-meta-item">認知心理學系列</span>
+  <!-- 行動版 top bar -->
+  <div class="mobile-bar">
+    <div class="mb-series">認知心理學 Vol.4</div>
+    <div class="mb-title">注意力劫持</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ 書名頁 ══ -->
+    <div class="title-page" id="cover">
+      <img src="/cognitive-psychology-vol4-注意力劫持.png"
+           alt="注意力劫持封面"
+           class="cover-img-main"
+           onerror="this.style.display='none'">
+      <div class="series-label">認知心理學系列</div>
+      <div class="vol-number">Vol. 4</div>
+      <h1 class="book-title">注意力劫持</h1>
+      <div class="subtitle">你的專注力正在被偷走，而你還在幫兇</div>
+      <div class="author-line">盧　林　著</div>
+      <div class="publisher-line">有的沒的小舖　出品</div>
     </div>
-  </header>
 
-  <div class="main-content">
+    <!-- ══ 前言 ══ -->
+    <div id="preface">
+      <h2 class="preface-h2">前言：你的注意力是這個時代最值錢的東西，而你在免費送出去</h2>
 
-    <!-- 前言 -->
-    <section class="preface reveal" id="preface">
-      <div class="section-eyebrow">— 前言</div>
-      <h2 class="section-title">你的注意力是這個時代最值錢的東西，而你在免費送出去</h2>
-      <div class="prose">
-        <p>你上一次完整讀完一篇超過三千字的文章是什麼時候？</p>
-        <p>你上一次坐下來做一件事、中間不拿手機、不切換視窗、不被通知打斷、連續專注超過四十五分鐘，是什麼時候？</p>
-        <p>你上一次讓自己無聊、什麼都不做、什麼都不滑，是什麼時候？</p>
-        <p>如果這三個問題讓你想了超過三秒，那就是答案。</p>
-        <p>你的注意力，正在被一個你沒有意識到的系統性戰爭奪走。那場戰爭的一方，是全世界最聰明的工程師和設計師，他們拿著幾億美元的預算，用神經科學、行為心理學、和機器學習，設計出讓你無法停下來的產品。</p>
-        <p>另一方，是你。</p>
-        <p>你帶著一顆幾萬年前演化出來的大腦，對著那些產品說「我再看五分鐘就好」。</p>
-        <p><strong>這不是一場公平的戰爭。</strong></p>
-        <p>這本書不是要讓你徹底斷網、清空手機、回歸原始生活。那既不可能也不必要。這本書要做的事，是讓你看清楚那場戰爭的機制——你的注意力是怎麼被設計好的系統一步一步劫持的，你的大腦又是怎麼在這個過程中被重塑的。</p>
-        <p>看清楚了，你才有機會做出不同的選擇。不是更努力地抵抗，而是更聰明地應對。</p>
-      </div>
-      <div class="chapter-quote">
-        <p>「爭奪你注意力的戰爭，是我們這個時代最重要的戰爭。它決定了你的思想、你的情緒、你的選擇、最終決定了你是誰。」</p>
-        <p style="margin-top:12px; font-size:0.9rem; color: var(--text-muted);">── Tristan Harris，前Google設計倫理師</p>
-      </div>
-    </section>
+      <p>你上一次完整讀完一篇超過三千字的文章是什麼時候？</p>
+      <p>你上一次坐下來做一件事、中間不拿手機、不切換視窗、不被通知打斷、連續專注超過四十五分鐘，是什麼時候？</p>
+      <p>你上一次讓自己無聊、什麼都不做、什麼都不滑，是什麼時候？</p>
+      <p>如果這三個問題讓你想了超過三秒，那就是答案。</p>
+      <p>你的注意力，正在被一個你沒有意識到的系統性戰爭奪走。那場戰爭的一方，是全世界最聰明的工程師和設計師，他們拿著幾億美元的預算，用神經科學、行為心理學、和機器學習，設計出讓你無法停下來的產品。另一方，是你。你帶著一顆幾萬年前演化出來的大腦，對著那些產品說「我再看五分鐘就好」。</p>
+      <p>這不是一場公平的戰爭。</p>
+      <p>這本書不是要讓你徹底斷網、清空手機、回歸原始生活。那既不可能也不必要。這本書要做的事，是讓你看清楚那場戰爭的機制——你的注意力是怎麼被設計好的系統一步一步劫持的，你的大腦又是怎麼在這個過程中被重塑的。看清楚了，你才有機會做出不同的選擇。不是更努力地抵抗，而是更聰明地應對。</p>
 
-    <!-- 第一章 -->
-    <section class="chapter reveal" id="ch1">
-      <div class="chapter-num">— 第一章</div>
-      <h2 class="chapter-title">稀缺性注意力</h2>
-      <p class="chapter-title-en">Scarcity of Attention</p>
-
-      <div class="chapter-quote">
-        <p>「你以為你的時間是有限的，其實比時間更稀缺的，是你的注意力。時間你可以省，注意力一旦散掉，就真的不見了。」</p>
-      </div>
-
-      <h3 class="chapter-subtitle">你的專注力是有限資源，而它正在被搶奪</h3>
-
-      <div class="scene-box reveal">
-        <div class="scene-label">— 對照自己的場景</div>
-        <div class="scene-text">
-          <p>今天早上你醒來，手機螢幕亮起。你查了訊息，有三個Line通知、一個Instagram標記、工作信箱兩封信、還有一個新聞推播說了某個昨晚發生的事。你花了七分鐘「快速看一下」。</p>
-          <p>你起床，邊刷牙邊又看了一下手機。吃早餐的時候，你打開了YouTube，「隨便看看」。你出門上班，在捷運上滑了二十分鐘的Instagram。</p>
-          <p>你到了公司，坐下來，打開電腦，準備開始工作。你「開始工作」之前，先看了一下信箱，回了兩封信，然後看到一個同事傳來的連結，點進去，讀了一篇文章，那篇文章旁邊有一個相關連結，你又點進去……</p>
-          <p><strong>十一點了。</strong></p>
-          <p>你今天原本要做的那件事，還沒有開始。你的注意力，在你「正式開始工作」之前，已經被切成了幾十個碎片，分散在七、八個不同的方向上。那個被切碎的注意力，要重新拼回來，需要的時間和精力，遠超過你的想像。</p>
-        </div>
-      </div>
-
-      <div class="prose reveal">
-        <h3 class="sub-heading">什麼是注意力的稀缺性？</h3>
-        <p>注意力（Attention）在認知心理學裡，被視為一種有限的認知資源。它不是無限的，不是說你「更努力一點」就能擁有更多的注意力——就像你的肌肉力量有上限，你的工作記憶容量有上限，你的注意力也有上限。</p>
-        <p>心理學家丹尼爾・康納曼在他的雙系統理論裡指出，深度的、需要高度集中的認知工作（他稱之為「系統二」的思考），是特別消耗認知資源的。你沒有辦法一整天都在做系統二的工作，就像你沒有辦法一整天都在做最大重量的深蹲。</p>
-        <p>問題不是你的注意力容量，而是它被消耗的方式。</p>
-        <p>你的注意力資源，在你一天裡有一個大致的「預算」。每次你切換任務、每次你被通知打斷、每次你進行一次不需要深度思考的快速刷新（滑社群、查訊息、看推播），你都在花費這個預算的一小部分。等你真正需要深度專注的時候，你的預算已經耗得差不多了。</p>
-        <p><em>你不是懶。你不是意志力不夠。你的注意力預算，已經在你開始「正式工作」之前，被一個個「沒有什麼大不了」的小動作花光了。</em></p>
-
-        <h3 class="sub-heading">注意力經濟：你是產品，不是用戶</h3>
-        <p>這裡有一個讓你重新看待所有「免費」產品的框架：</p>
-        <p><strong>如果你沒有付錢，你就是產品，不是用戶。</strong></p>
-        <p>Facebook、Instagram、YouTube、TikTok、大多數新聞網站——這些平台的商業模式，是把你的注意力賣給廣告主。你在平台上花的每一分鐘，都是他們賣給廣告商的「廣告曝光時間」。這意味著：這些平台的核心目標，不是讓你的生活更好，不是讓你更快樂，不是讓你更有效率。他們的核心目標，是讓你在平台上待越久越好。</p>
-        <p>你的注意力，是他們的商品。而他們為了這個商品，投入了大量的工程和設計資源，確保它被最有效率地提取。你每次打開那些APP，你不是在使用一個工具，你是在走進一個精心設計的注意力提取系統。</p>
-
-        <h3 class="sub-heading">注意力稀缺在你生活裡的五個代價</h3>
-      </div>
-
-      <ul class="concept-list reveal">
-        <li>
-          <strong>① 你失去了深度工作的能力</strong>
-          「深度工作」（Deep Work）是電腦科學家卡爾・紐波特提出的概念：在沒有干擾的狀態下，對認知要求高的任務進行高度專注的工作。那種「完全沉浸在一件事裡，時間不知不覺過去了兩小時」的狀態——你上一次有那個體驗是什麼時候？研究顯示，長期的注意力分散，會降低人進入深度專注狀態的能力。
-          <div class="sub">你不是沒有辦法深度工作，你只是已經很久沒有練習了。</div>
-        </li>
-        <li>
-          <strong>② 你的思考變得更淺</strong>
-          深度閱讀、長時間的思考、在一個問題上持續推理——這些活動需要持續的注意力。當你的注意力習慣了碎片化，你的思考也跟著碎片化。你開始傾向於接受簡短的、即時的結論，而不是深入追究一件事。
-          <div class="sub">那不是你變笨了。那是你的認知工具被磨鈍了。</div>
-        </li>
-        <li>
-          <strong>③ 你對無聊失去了耐受力</strong>
-          研究顯示，現代人對「無所事事」的耐受力，在過去二十年裡顯著下降。一個著名研究甚至發現，很多人寧願給自己電擊，也不願意在空房間裡獨處十五分鐘。但無聊是有認知功能的——它是大腦的「預設模式網絡」運作的時間，讓你整合資訊、建立連結、進行創意思考。
-          <div class="sub">你不讓大腦無聊，就是不讓大腦做它最重要的背景工作。</div>
-        </li>
-        <li>
-          <strong>④ 你的記憶整合受影響</strong>
-          你學了一個新東西，立刻去看手機，然後下一件事又來了。那個新東西，沒有時間被整合進你的長期記憶系統。記憶鞏固需要一段沒有新刺激干擾的「靜止期」——你給大腦的整合時間太少了。
-          <div class="sub">你讀了很多，但你記住的越來越少。</div>
-        </li>
-        <li>
-          <strong>⑤ 你的情緒調節能力變弱</strong>
-          每次你感到輕微的不舒服——無聊、焦慮、不確定——你立刻拿起手機，那個不舒服就暫時消失了。你的大腦學到了：不舒服的感覺，可以用手機快速解決。但那是迴避，不是真正的情緒調節。越依賴手機迴避不舒服，調節能力就越弱，就越需要手機。
-          <div class="sub">這是一個循環，而且是往下的。</div>
-        </li>
-      </ul>
-
-      <div class="scene-box reveal" style="margin-top:48px;">
-        <div class="scene-label">— 對話實錄</div>
-        <div class="scene-text">
-          <p>珮君是一個設計師，她在跟她男友談她的工作狀況：</p>
-        </div>
-        <div class="dialogue">
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">珮君</span>
-            <span class="dialogue-text">我今天又廢了，早上坐下來本來要做提案，然後不知道怎麼就刷了兩個小時的手機。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">男友</span>
-            <span class="dialogue-text">你知道你在幹嘛，還是繼續？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">珮君</span>
-            <span class="dialogue-text">就是知道才更崩潰。我盯著那個提案文件，然後手就自己拿起手機了。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">男友</span>
-            <span class="dialogue-text">那就把手機放到另一個房間。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">珮君</span>
-            <span class="dialogue-text">我放過，然後我起來去拿它。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">男友</span>
-            <span class="dialogue-text">……你去拿它？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">珮君</span>
-            <span class="dialogue-text">我知道聽起來很蠢，但我就是去拿了。然後我又放回去，然後我又去拿。這樣搞了四次。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">男友</span>
-            <span class="dialogue-text">這聽起來不像是意志力問題，這聽起來更像是……上癮？</span>
-          </div>
-        </div>
-        <div class="scene-text" style="margin-top:16px;">
-          <p>珮君停了一下。</p>
-          <p>「我不想用那個詞，但……可能是。」</p>
-          <p>珮君說的那個循環——知道、抗拒、失敗、再抗拒、再失敗——不是她的軟弱。那是一個被設計出來的行為迴路在跑。她的意志力，在對抗一個專門為了突破意志力而設計的系統。<strong>那不是公平的戰鬥。</strong></p>
-        </div>
-      </div>
-
-      <div class="prose reveal" style="margin-top:48px;">
-        <h3 class="sub-heading">怎麼開始奪回你的注意力？</h3>
-      </div>
-      <ul class="method-list reveal">
-        <li>
-          <span class="method-title">方法一：把注意力當成預算來管理</span>
-          每天早上問自己：「今天我最重要的一件認知工作是什麼？」然後把你當天最好的注意力時段——通常是早上的前兩到三個小時——保護起來，專門用於那件工作。在那個時段之前，不查郵件，不看社群，不看新聞。那些東西不會消失，它們可以等到你的重要工作完成之後再看。
-        </li>
-        <li>
-          <span class="method-title">方法二：設計你的環境，而不是靠意志力</span>
-          不要試圖靠意志力抵抗你的手機——那是你對抗一個比你更強大的系統。<strong>改變環境比改變行為更有效。</strong>睡覺時把手機放到另一個房間。工作時把手機翻面放在看不到的地方，或者放進抽屜。把最容易讓你分心的APP從主畫面刪掉，讓存取它們需要更多步驟。讓「不分心」成為預設值，讓「分心」需要主動選擇。
-        </li>
-        <li>
-          <span class="method-title">方法三：練習讓自己無聊</span>
-          每天刻意給自己一段「無事可做」的時間——五分鐘、十分鐘，就坐著或走著，不看任何東西。讓那個不舒服的感覺存在，不要立刻填滿它。那個練習，一開始很難受，但它是在重新訓練你的大腦忍受無刺激狀態，而那個能力，是深度專注的前提。
-        </li>
-        <li>
-          <span class="method-title">方法四：記錄你真正的使用時間</span>
-          打開你的手機螢幕使用時間報告，看你每天實際在各個APP上花了多少時間。那個數字，通常比你以為的多很多。把那個數字具體化，是改變的第一步——不是因為那個數字讓你羞恥，而是因為你需要看到真實的代價。
-        </li>
-      </ul>
-
-      <div class="key-box reveal">
-        <strong>本章重點</strong>
-        你的注意力是有限的認知資源，而它每天都在被設計精良的系統系統性地提取。那不是你意志力不夠，那是一場不公平的戰爭。奪回注意力的第一步，不是更努力地抵抗，而是理解那個系統的機制，然後用環境設計而不是意志力來應對。
-      </div>
-    </section>
-
-    <!-- 第二章 -->
-    <section class="chapter reveal" id="ch2">
-      <div class="chapter-num">— 第二章</div>
-      <h2 class="chapter-title">多巴胺迴路</h2>
-      <p class="chapter-title-en">The Dopamine Loop</p>
-
-      <div class="chapter-quote">
-        <p>「讓你停不下來的，不是內容有多好。是那個『下一個可能更好』的期待。你的大腦不是在享受，它是在等待一個獎勵，而那個獎勵永遠在下一次滑動之後。」</p>
-      </div>
-
-      <h3 class="chapter-subtitle">你為什麼刷了三小時手機還停不下來</h3>
-
-      <div class="scene-box reveal">
-        <div class="scene-label">— 你今天可能就經歷過的場景</div>
-        <div class="scene-text">
-          <p>你拿起手機，「只是想看一下有沒有新消息」。你打開Instagram。沒有什麼特別的，幾張朋友的照片，幾個限時動態。你滑了幾下，覺得沒什麼意思，你準備放下手機。</p>
-          <p>但你沒有放下。你繼續滑。</p>
-          <p>不是因為你看到了什麼特別吸引你的東西。你繼續滑，是因為你感覺到一個模糊的期待：「也許下一張會更有趣。」「也許再滑幾下會看到什麼。」你不是在享受你看到的內容，你是在等待一個可能出現的更好的內容。那個等待的感覺，由多巴胺驅動，讓你繼續滑，繼續滑，繼續滑。</p>
-          <p>三十分鐘後，你放下手機。你沒有特別開心，甚至有點空洞。</p>
-        </div>
-      </div>
-
-      <div class="prose reveal">
-        <h3 class="sub-heading">什麼是多巴胺迴路？</h3>
-        <p>多巴胺（Dopamine）是大腦裡一種重要的神經傳導物質，它在大眾科學裡常被稱為「快樂激素」，但這個描述並不完全準確。</p>
-        <p>神經科學家肯特・貝里奇（Kent Berridge）的研究顯示，多巴胺系統更準確的功能，是驅動「渴望」（wanting）和「尋求」（seeking），而不是「享受」（liking）。換句話說：<strong>多巴胺讓你去追求東西，而不是讓你享受得到的東西。</strong></p>
-        <p>「渴望」和「享受」是兩個不同的神經系統。你可以非常渴望某樣東西，追求它，得到它，然後發現享受感遠低於你追求時的興奮感。這就是為什麼你滑完三小時手機，感覺是空洞的，而不是滿足的——你的多巴胺系統一直在驅動你追求，但你的「享受」系統從來沒有真的被滿足。</p>
-        <p><em>更重要的是：多巴胺的釋放，在「預期到可能的獎勵」時最強烈——不是在「確定獲得獎勵」的時候。不確定性，才是多巴胺最強的觸發器。</em></p>
-
-        <h3 class="sub-heading">間歇性強化：老虎機是怎麼讓人上癮的</h3>
-        <p>行為心理學家B.F.史金納（B.F. Skinner）在1950年代透過實驗發現了一個讓人不安的原則：<strong>間歇性強化（Variable Ratio Reinforcement）</strong>是所有強化排程中最容易製造成癮行為的一種。</p>
-        <p>間歇性強化的意思是：獎勵隨機出現。你不知道哪一次按壓會得到獎勵，你只知道有時候會得到。老虎機就是這個原則的應用。你不知道哪一次拉桿會中，但你知道某一次會。那個不確定性，讓多巴胺系統一直處於高度激活狀態，讓你無法停止。</p>
-        <p>現在，你的社群媒體APP，也是用同樣的原則設計的。你打開Instagram——也許這次有一則讓你會心一笑的貼文，也許沒有。那個「也許有，也許沒有」，是老虎機的邏輯，套在你每天的資訊消費行為上。這不是意外——Tristan Harris明確指出，這些APP的設計師，知道間歇性強化的力量，並且刻意把它嵌入了產品設計裡。</p>
-
-        <h3 class="sub-heading">多巴胺迴路在你生活裡的六個劫持點</h3>
-      </div>
-
-      <ul class="concept-list reveal">
-        <li>
-          <strong>① 通知的紅點</strong>
-          你的手機上那些紅色的數字角標——那是最精準的多巴胺觸發器之一。紅色本身就是一個視覺警示信號，會自動吸引注意力；數字代表「有東西等你」，而那個「東西」的不確定性，讓多巴胺系統興奮起來。
-          <div class="sub">你清掉那個紅點，得到的滿足感持續不超過幾秒鐘。然後又有新的紅點出現了。這個循環，是被設計出來的。</div>
-        </li>
-        <li>
-          <strong>② 無限滾動</strong>
-          傳統的書籍和雜誌有最後一頁。你讀完了，你停下來。Instagram、TikTok、Twitter的動態，沒有最後一頁。無限滾動（Infinite Scroll）的設計師Aza Raskin後來公開對此感到後悔：「這個功能讓人每天多花了大量時間在社群媒體上，但那些時間他們大多數是不想花的。」
-          <div class="sub">沒有終點，就沒有「我看完了可以停下來」的自然停止點。你的大腦找不到關閉的信號，所以繼續滑。</div>
-        </li>
-        <li>
-          <strong>③ 按讚數和留言</strong>
-          你發了一篇貼文，你開始等待。你打開APP看了一下按讚數——三個。關掉。五分鐘後再打開——七個。關掉。十分鐘後再打開……那個「也許這次更多了」的期待，是多巴胺迴路在驅動你反覆打開APP。
-          <div class="sub">那個等待的焦慮，和老虎機玩家等待滾輪停下來的神經狀態，在本質上是一樣的。</div>
-        </li>
-        <li>
-          <strong>④ 自動播放</strong>
-          YouTube和Netflix的自動播放功能，在一個影片結束後，給你幾秒鐘的空檔，然後自動開始下一個。那幾秒鐘是設計師留給你「如果你真的想停下來就去停」的窗口。但「繼續播放」是預設值——你要停，需要主動行動；繼續看，你什麼都不用做。
-          <div class="sub">預設值的力量，加上多巴胺的「也許下一集更好」，讓你一集接一集地看下去，直到你意識到已經凌晨一點了。</div>
-        </li>
-        <li>
-          <strong>⑤ 拉取更新的手勢</strong>
-          在智慧型手機上，很多APP的更新方式是向下拉動畫面，然後放開，等待刷新。那個動作——拉下去、放開、等待——在神經機制上，和拉下老虎機的拉桿，幾乎完全一樣。
-          <div class="sub">那個手勢，是設計師有意識地模仿的。</div>
-        </li>
-        <li>
-          <strong>⑥ 「你可能也會喜歡」</strong>
-          每個推薦演算法的目標，都是讓你繼續在平台上待著。它不是在幫你找你真正需要的東西，它是在預測「什麼會讓你繼續滑」，然後把那個東西放在你面前。
-          <div class="sub">那個演算法知道你比你自己更了解你的多巴胺迴路——因為它有幾百萬個用戶的行為數據，能精確預測什麼內容會讓你無法停下來。</div>
-        </li>
-      </ul>
-
-      <div class="scene-box reveal" style="margin-top:48px;">
-        <div class="scene-label">— 對話實錄：「我只是想放鬆一下」</div>
-        <div class="scene-text">
-          <p>哲翰下班回家，跟他太太說：</p>
-        </div>
-        <div class="dialogue">
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">哲翰</span>
-            <span class="dialogue-text">我今天累壞了，我就想躺著滑一下手機放鬆一下。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">太太</span>
-            <span class="dialogue-text">幾點開始滑的？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">哲翰</span>
-            <span class="dialogue-text">……七點半吧。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">太太</span>
-            <span class="dialogue-text">現在九點四十了。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">哲翰</span>
-            <span class="dialogue-text">（沉默）我沒有注意到時間過去了。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">太太</span>
-            <span class="dialogue-text">你有放鬆到嗎？</span>
-          </div>
-        </div>
-        <div class="scene-text" style="margin-top:16px;">
-          <p>哲翰想了一下。「……好像沒有。我感覺比剛回來的時候更累。」</p>
-          <p>「你花了兩個多小時做一件讓你更累的事，因為你『想放鬆』。」</p>
-          <p>哲翰沒有反駁。因為那是真的。</p>
-          <p>研究顯示，被動式的螢幕消費（滑社群、隨機瀏覽）通常不會讓人真正放鬆——它讓人感到被動疲憊，而不是主動恢復。真正有恢復效果的活動，是讓你的認知系統有機會放空的活動——散步、淋浴、和人面對面聊天、做一件不需要螢幕的事。<strong>你以為你在放鬆，你其實是在讓多巴胺迴路繼續工作，直到它精疲力竭。</strong></p>
-        </div>
-      </div>
-
-      <div class="prose reveal" style="margin-top:48px;">
-        <h3 class="sub-heading">怎麼對抗多巴胺迴路？</h3>
-      </div>
-      <ul class="method-list reveal">
-        <li>
-          <span class="method-title">方法一：讓「打開APP」需要摩擦力</span>
-          把你最容易成癮的APP從主畫面移除，讓存取它們需要多一個步驟。研究顯示，增加哪怕一點點的行為摩擦，就能顯著降低衝動性使用的頻率。你的衝動行為，通常在摩擦增加之後就消退了。
-        </li>
-        <li>
-          <span class="method-title">方法二：提前設定使用時間</span>
-          在你開始使用之前，設定「我今天給這個APP二十分鐘」。不要等到你已經在滑、多巴胺已經在運作的時候才試圖停下來——那時候你的判斷力已經被接管了。在中立的時刻做決定，比在衝動的時刻更有效。
-        </li>
-        <li>
-          <span class="method-title">方法三：用主動性活動替換被動性消費</span>
-          下班想放鬆，不要靠滑手機。去走路、去煮一頓飯、去打一通電話給老朋友、去做任何需要你參與的事。那些主動性活動，比被動消費更能真正恢復你的認知資源。
-        </li>
-        <li>
-          <span class="method-title">方法四：認識你的觸發點</span>
-          你什麼時候最容易拿起手機？等電梯、排隊、感到無聊、感到焦慮、感到孤單？把那些觸發點標記出來，然後在那些時刻有意識地做一個不同的選擇——哪怕只是深呼吸幾次，而不是立刻拿起手機。
-        </li>
-      </ul>
-
-      <div class="key-box reveal">
-        <strong>本章重點</strong>
-        讓你停不下來的不是內容的品質，是多巴胺迴路製造的不確定性期待。那個迴路被設計師刻意嵌入了產品設計裡——無限滾動、間歇性的按讚、自動播放、拉取更新的手勢——每一個設計，都在利用你大腦的獎勵系統。對抗它不是靠意志力，而是靠環境設計和預先決策。
-      </div>
-    </section>
-
-    <!-- ── 第三章 ── -->
-    <section id="ch3" class="chapter reveal">
-      <div class="chapter-header">
-        <div class="chapter-num">第三章</div>
-        <h2 class="chapter-title">通知的暴政</h2>
-        <div class="chapter-subtitle">每次被打斷，你的大腦需要23分鐘才能回來</div>
-      </div>
-      <blockquote class="opening-quote reveal">
-        「你以為那個通知只打斷了你三十秒。實際上，它偷走了你接下來二十三分鐘的深度專注。而你一天裡，有多少個通知？」
+      <blockquote>
+        「爭奪你注意力的戰爭，是我們這個時代最重要的戰爭。它決定了你的思想、你的情緒、你的選擇、最終決定了你是誰。」
+        <cite>—— Tristan Harris，前Google設計倫理師</cite>
       </blockquote>
 
-      <div class="scene-box reveal">
-        <div class="scene-label">— 一個你今天一定經歷過的場景</div>
-        <div class="scene-text">
-          <p>你終於坐下來，準備認真處理那份重要的報告。你打開文件，腦子開始轉動，你找到了切入的思路，你開始打字——</p>
-          <p>手機震動了。</p>
-          <p>你告訴自己不要看。但你的眼睛已經掃到了一半內容。你的大腦已經從「報告的邏輯架構」切換到「那則訊息說了什麼」。</p>
-          <p>你強迫自己回到報告。但剛才那個思路——那個你花了十分鐘才建立起來的架構感——它不見了。你又花了八分鐘，重新進入狀態。</p>
-          <p>又震動了。</p>
-          <p>這不是你的意志力問題。這是通知機制對你認知系統的系統性破壞。</p>
-        </div>
+      <div class="chapter-end">§</div>
+    </div>
+
+
+    <!-- ══ 第一章 ══ -->
+    <div id="ch1">
+      <div class="chapter-divider first" style="margin-top:80px;">
+        <div class="chapter-number">Chapter One</div>
+        <div class="chapter-title">稀缺性注意力</div>
+        <div class="chapter-sub">你的專注力是有限資源，而它正在被搶奪</div>
       </div>
 
-      <div class="prose reveal">
-        <h3 class="sub-heading">23分鐘的代價</h3>
-        <p>加州大學爾灣分校（UC Irvine）的研究者葛洛麗亞・馬克（Gloria Mark）發現：一個人在被打斷之後，平均需要<strong>23分鐘15秒</strong>，才能完全恢復到被打斷前的專注狀態。</p>
-        <p>研究顯示，現代工作者平均每三到五分鐘就會被打斷一次——不是被別人打斷，而是被自己的手機、瀏覽器、郵件提醒打斷。你永遠都在「快要進入深度專注」，但從來沒有真的到達那裡。</p>
-        <p>更令人沮喪的是：在頻繁被打斷的環境中，人會開始「自我打斷」——即使沒有外部通知，也會主動切換去做別的事。你被訓練成了一個打斷自己的機器。</p>
+      <blockquote>「你以為你的時間是有限的，其實比時間更稀缺的，是你的注意力。時間你可以省，注意力一旦散掉，就真的不見了。」</blockquote>
 
-        <h3 class="sub-heading">通知為什麼這麼難抵抗？</h3>
-        <p><strong>定向反射（Orienting Response）</strong>：你的大腦對突然出現的聲音和震動有根深蒂固的本能反應——轉移注意力去評估那個刺激是否重要。這是演化出來的生存機制，你的大腦無法在聽到震動的時候說「這只是Line訊息，我可以忽略它」。</p>
-        <p><strong>未完成效應（Zeigarnik Effect）</strong>：你的大腦對「未完成的事」會保持一個開放的認知迴路，持續消耗工作記憶資源。你看到了那個通知的預覽，大腦就分配了一部分資源去「記住還有那件事」——即使你試圖繼續專注在報告上。</p>
-        <p><strong>多巴胺期待</strong>：你不知道那個通知是什麼，那個不確定性觸發了多巴胺的「渴望和尋求」機制，製造了一個把注意力轉過去的衝動。</p>
-        <p>三個機制加在一起，讓每一個通知都是一次強烈的注意力劫持——即使那個通知的內容完全不重要。</p>
-
-        <h3 class="sub-heading">通知的暴政在你生活裡的五個後果</h3>
+      <h2>開場情境</h2>
+      <div class="scenario-box">
+        <p>今天早上你醒來，手機螢幕亮起。你查了訊息，有三個Line通知、一個Instagram標記、工作信箱兩封信、還有一個新聞推播。你花了七分鐘「快速看一下」。你起床，邊刷牙邊又看了一下手機。吃早餐的時候，你打開了YouTube，「隨便看看」。你出門上班，在捷運上滑了二十分鐘的Instagram。</p>
+        <p>你到了公司，坐下來，打開電腦，準備開始工作。你「開始工作」之前，先看了一下信箱，回了兩封信，然後看到一個同事傳來的連結，點進去，讀了一篇文章，那篇文章旁邊有一個相關連結，你又點進去……十一點了。</p>
+        <p>你今天原本要做的那件事，還沒有開始。</p>
       </div>
 
-      <ul class="concept-list reveal">
-        <li>
-          <strong>① 你從來沒有真正的深度工作時段</strong>
-          深度工作需要連續、不被打斷的時間塊。研究顯示，進入深度專注狀態通常需要至少十五到二十分鐘的不被打斷的時間。在每三到五分鐘就有一個通知的環境裡，你永遠沒有機會真正進入深度狀態。
-          <div class="sub">你在做的，是永遠處於中等專注水準的「淺層工作」。</div>
-        </li>
-        <li>
-          <strong>② 你的工作時間比你以為的長，但產出比你以為的少</strong>
-          研究顯示，在高通知頻率的環境下，一般工作者每天真正的深度工作時間，可能只有一到兩個小時。其餘時間在切換、恢復、再切換、再恢復的循環裡消耗掉了。
-          <div class="sub">你感覺很累，但你沒有做出跟那個疲憊相稱的產出。</div>
-        </li>
-        <li>
-          <strong>③ 你開始對深度工作感到不耐煩</strong>
-          長期在碎片化的注意力狀態下工作，當你試圖進入深度工作，你會感到一種不舒服的「拉力」——一種想要切換出去、看看有沒有新訊息的衝動。那個不舒服不是因為你不想做那件事，而是因為你的大腦已經習慣了更高頻率的刺激切換。
-        </li>
-        <li>
-          <strong>④ 你的溝通品質下降</strong>
-          當你習慣了即時回覆，你也把同樣的期待套在別人身上。那個「即時性」的期待，讓所有人都變成了通知的奴隸，任何人的工作時間都隨時可以被任何訊息打斷。
-        </li>
-        <li>
-          <strong>⑤ 你的壓力水準持續偏高</strong>
-          馬克的研究還發現，在高打斷頻率的工作環境下，工作者的心率和壓力指標（cortisol 水準）都顯著偏高。你感到焦慮、永遠有事情沒做完——這不只是心理感受，它有生理基礎。
-          <div class="sub">你的身體一整天都處於輕度的壓力應激狀態。</div>
-        </li>
+      <h2>什麼是注意力的稀缺性？</h2>
+      <p>注意力（Attention）在認知心理學裡，被視為一種有限的認知資源。它不是無限的，不是說你「更努力一點」就能擁有更多的注意力——就像你的肌肉力量有上限，你的工作記憶容量有上限，你的注意力也有上限。</p>
+      <p>心理學家丹尼爾·康納曼在他的雙系統理論裡指出，深度的、需要高度集中的認知工作（他稱之為「系統二」的思考），是特別消耗認知資源的。你的注意力資源，在你一天裡有一個大致的「預算」。每次你切換任務、每次你被通知打斷、每次你進行一次不需要深度思考的快速刷新，你都在花費這個預算的一小部分。等你真正需要深度專注的時候，你的預算已經耗得差不多了。</p>
+
+      <h2>注意力經濟：你是產品，不是用戶</h2>
+      <p>如果你沒有付錢，你就是產品，不是用戶。Facebook、Instagram、YouTube、TikTok——這些平台的商業模式，是把你的注意力賣給廣告主。這意味著：這些平台的核心目標，不是讓你的生活更好，不是讓你更快樂，不是讓你更有效率。他們的核心目標，是讓你在平台上待越久越好。你的注意力，是他們的商品。</p>
+
+      <h2>注意力稀缺在你生活裡的五個代價</h2>
+      <h3>① 你失去了深度工作的能力</h3>
+      <p>「深度工作」（Deep Work）是電腦科學家卡爾·紐波特提出的概念：在沒有干擾的狀態下，對認知要求高的任務進行的高度專注的工作。研究顯示，長期的注意力分散和頻繁的任務切換，會降低人進入深度專注狀態的能力。你的大腦習慣了頻繁切換，習慣了短時間的刺激，然後開始抗拒長時間的深度投入。</p>
+
+      <h3>② 你的思考變得更淺</h3>
+      <p>深度閱讀、長時間的思考、在一個問題上持續推理——這些活動需要持續的注意力。當你的注意力習慣了碎片化，你的思考也跟著碎片化。你開始傾向於接受簡短的、即時的結論，而不是深入追究一件事。那不是你變笨了，那是你的認知工具被磨鈍了。</p>
+
+      <h3>③ 你對無聊失去了耐受力</h3>
+      <p>你現在能坐在那裡，什麼都不做、什麼都不看，就是坐著，超過三分鐘嗎？研究顯示，現代人對「無所事事」的耐受力，在過去二十年裡顯著下降。但無聊是有認知功能的——它是大腦的「預設模式網絡」（Default Mode Network）運作的時間，那段時間裡，你的大腦在整合資訊、建立連結、進行創意性的思考。你不讓大腦無聊，你就是在不讓大腦做它最重要的背景工作。</p>
+
+      <h3>④ 你的記憶整合受影響</h3>
+      <p>你學了一個新東西，立刻去看手機，然後下一件事又來了。那個新東西，沒有時間被整合進你的長期記憶系統。記憶鞏固需要時間，需要一段沒有新刺激干擾的「靜止期」。如果你在學習之後立刻用新的刺激轟炸你的大腦，那個轉化的過程就被打斷了。你讀了很多，但你記住的越來越少。</p>
+
+      <h3>⑤ 你的情緒調節能力變弱</h3>
+      <p>每次你感到輕微的不舒服——無聊、焦慮、不確定、孤單——你立刻拿起手機，那個不舒服就暫時消失了。你的大腦學到了：不舒服的感覺，可以用手機快速解決。但那個「快速解決」，是一種迴避，不是真正的情緒調節。你越依賴手機來迴避不舒服，你的情緒調節能力就越弱，你就越需要手機。這是一個往下的循環。</p>
+
+      <h2>完整對話實錄</h2>
+      <div class="dialogue-box">
+        <div class="label">情境：珮君是一個設計師，她在跟她男友談她的工作狀況。</div>
+        <div class="label">珮君：</div>我今天又廢了，早上坐下來本來要做提案，然後不知道怎麼就刷了兩個小時的手機。
+        <div class="label">男友：</div>你知道你在幹嘛，還是繼續？
+        <div class="label">珮君：</div>就是知道才更崩潰。我盯著那個提案文件，然後手就自己拿起手機了。
+        <div class="label">男友：</div>那就把手機放到另一個房間。
+        <div class="label">珮君：</div>我放過，然後我起來去拿它。
+        <div class="label">男友：</div>……你去拿它？
+        <div class="label">珮君：</div>我知道聽起來很蠢，但我就是去拿了。然後我又放回去，然後我又去拿。這樣搞了四次。
+        <div class="label">男友：</div>這聽起來不像是意志力問題，這聽起來更像是……上癮？
+        <div class="label">珮君（停了一下）：</div>我不想用那個詞，但……可能是。
+      </div>
+
+      <h2>怎麼開始奪回你的注意力？</h2>
+      <ul class="method-list">
+        <li><strong>把注意力當成預算來管理。</strong>每天早上問自己：「今天我最重要的一件認知工作是什麼？」然後把你當天最好的注意力時段——通常是早上的前兩到三個小時——保護起來，專門用於那件工作。在那個時段之前，不查郵件，不看社群，不看新聞。</li>
+        <li><strong>設計你的環境，而不是靠意志力。</strong>睡覺時把手機放到另一個房間。工作時把手機翻面放在看不到的地方，或者放進抽屜。把最容易讓你分心的APP從主畫面刪掉，讓存取它們需要更多步驟。</li>
+        <li><strong>練習讓自己無聊。</strong>每天刻意給自己一段「無事可做」的時間——五分鐘、十分鐘，就坐著或走著，不看任何東西。讓那個不舒服的感覺存在，不要立刻填滿它。</li>
+        <li><strong>記錄你真正的使用時間。</strong>打開你的手機螢幕使用時間報告，看你每天實際在各個APP上花了多少時間。那個數字，通常比你以為的多很多。把那個數字具體化，是改變的第一步。</li>
       </ul>
 
-      <div class="scene-box reveal" style="margin-top:48px;">
-        <div class="scene-label">— 對話實錄</div>
-        <div class="scene-text">
-          <p>宗翰在跟他的導師討論他的工作效率問題：</p>
-        </div>
-        <div class="dialogue">
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">導師</span>
-            <span class="dialogue-text">你有沒有試過工作時關掉所有通知？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">宗翰</span>
-            <span class="dialogue-text">不行，我的工作性質要求我要即時回應。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">導師</span>
-            <span class="dialogue-text">你上次有人因為你晚了兩個小時回覆而造成真正緊急後果，是什麼時候？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">宗翰</span>
-            <span class="dialogue-text">……好像沒有。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">導師</span>
-            <span class="dialogue-text">你覺得你需要即時回覆，還是你已經習慣了即時回覆，然後把那個習慣當成了需求？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">宗翰</span>
-            <span class="dialogue-text">……但如果我不即時回，別人會覺得我沒在工作。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">導師</span>
-            <span class="dialogue-text">所以你用你真正工作的品質，去換取一個「看起來有在即時回覆」的形象？</span>
-          </div>
-        </div>
-        <div class="scene-text" style="margin-top:16px;">
-          <p>宗翰後來試了兩週：早上九點到十一點，關閉所有通知，只做深度工作。訊息兩小時後再統一回覆。沒有任何人因此有真正的緊急狀況。但他那兩小時的產出，比之前整個上午的還多。</p>
-        </div>
+      <div class="chapter-summary">
+        本章重點：你的注意力是有限的認知資源，而它每天都在被設計精良的系統系統性地提取。那不是你意志力不夠，那是一場不公平的戰爭。奪回注意力的第一步，不是更努力地抵抗，而是理解那個系統的機制，然後用環境設計而不是意志力來應對。
+      </div>
+      <div class="chapter-end">§</div>
+      <div class="page-marker">— 第一章　終 —</div>
+    </div>
+
+
+    <!-- ══ 第二章 ══ -->
+    <div id="ch2">
+      <div class="chapter-divider">
+        <div class="chapter-number">Chapter Two</div>
+        <div class="chapter-title">多巴胺迴路</div>
+        <div class="chapter-sub">你為什麼刷了三小時手機還停不下來</div>
       </div>
 
-      <div class="prose reveal">
-        <h3 class="sub-heading">怎麼對抗通知的暴政？</h3>
-        <ul style="padding-left:1.2em;line-height:2.2;">
-          <li><strong>方法一：把所有非必要通知關掉，現在就去做</strong><br>打開手機設定，逐一審查每個 APP 的通知權限。問自己：「這個通知，需要在它發生的瞬間讓我知道嗎？」大多數通知都不需要。只保留真正緊急的——電話、特定重要聯絡人的訊息。</li>
-          <li><strong>方法二：設定「通知查看時段」而不是「隨時查看」</strong><br>決定每天幾個固定的時段查看訊息和郵件，例如早上九點半、中午十二點、下午三點、下班前。讓「查看通知」成為你主導的行動，而不是被動的反應。</li>
-          <li><strong>方法三：讓你的工作環境物理上隔絕通知</strong><br>工作時，把手機放在另一個地方，或者放入抽屜。把電腦的通知彈窗關掉。不要靠意志力抵抗通知，而是讓通知根本到不了你。</li>
-          <li><strong>方法四：和工作夥伴建立明確的緊急溝通協議</strong><br>真正緊急的事，打電話；其他事，訊息等兩小時內的批次回覆。大多數人接受這個安排，因為他們自己也厭倦了隨時待命的壓力。</li>
-        </ul>
+      <blockquote>「讓你停不下來的，不是內容有多好。是那個『下一個可能更好』的期待。你的大腦不是在享受，它是在等待一個獎勵，而那個獎勵永遠在下一次滑動之後。」</blockquote>
+
+      <h2>開場情境</h2>
+      <div class="scenario-box">
+        <p>你拿起手機，「只是想看一下有沒有新消息」。你打開Instagram。沒有什麼特別的，幾張朋友的照片，幾個限時動態。你滑了幾下，覺得沒什麼意思，你準備放下手機。但你沒有放下。你繼續滑。不是因為你看到了什麼特別吸引你的東西，你繼續滑，是因為你感覺到一個模糊的期待：「也許下一張會更有趣。」你不是在享受你看到的內容，你是在等待一個可能出現的更好的內容。三十分鐘後，你放下手機。你沒有特別開心，甚至有點空洞。</p>
       </div>
 
-      <div class="key-box reveal">
-        <strong>本章重點</strong>
-        每一個通知都不只是打斷了你三十秒，它偷走了你接下來二十三分鐘的恢復時間。在高通知頻率的環境下，你永遠在「快要進入深度專注」但從來沒有到達。對抗通知的暴政，不是靠更強的意志力去忽略它，而是靠系統性地關掉它，讓你的環境預設值變成「不被打斷」。
+      <h2>什麼是多巴胺迴路？</h2>
+      <p>多巴胺（Dopamine）是大腦裡一種重要的神經傳導物質，常被稱為「快樂激素」，但這個描述並不完全準確。神經科學家肯特·貝里奇（Kent Berridge）的研究顯示，多巴胺系統更準確的功能，是驅動「渴望」（wanting）和「尋求」（seeking），而不是「享受」（liking）。</p>
+      <p>換句話說：多巴胺讓你去追求東西，而不是讓你享受得到的東西。這就是為什麼你滑完三小時手機，感覺是空洞的，而不是滿足的——你的多巴胺系統一直在驅動你追求，但你的「享受」系統從來沒有真的被滿足。更重要的是：多巴胺的釋放，在「預期到可能的獎勵」時最強烈——不確定性，才是多巴胺最強的觸發器。</p>
+
+      <h2>間歇性強化：老虎機是怎麼讓人上癮的</h2>
+      <p>行為心理學家B.F.史金納在1950年代發現了間歇性強化（Variable Ratio Reinforcement）——獎勵隨機出現，你不知道哪一次按壓會得到獎勵，只知道有時候會得到。老虎機就是這個原則的應用。現在，你的社群媒體APP，也是用同樣的原則設計的。你打開Instagram——也許這次有一則讓你會心一笑的貼文，也許沒有。那個「也許有，也許沒有」，是老虎機的邏輯，套在你每天的資訊消費行為上。</p>
+
+      <h2>多巴胺迴路在你生活裡的六個劫持點</h2>
+      <h3>① 通知的紅點</h3>
+      <p>你的手機上那些紅色的數字角標——那是最精準的多巴胺觸發器之一。紅色本身就是一個視覺警示信號，會自動吸引注意力；數字代表「有東西等你」，而那個「東西」的不確定性，讓多巴胺系統興奮起來。你清掉那個紅點，得到的滿足感持續不超過幾秒鐘。然後又有新的紅點出現了。這個循環，是被設計出來的。</p>
+
+      <h3>② 無限滾動</h3>
+      <p>傳統的書籍和雜誌有最後一頁。你讀完了，你停下來。Instagram、TikTok、Twitter的動態，沒有最後一頁。無限滾動（Infinite Scroll）是Aza Raskin在2006年設計的功能，他後來公開表達對這個設計的後悔。沒有終點，就沒有「我看完了可以停下來」的自然停止點。</p>
+
+      <h3>③ 按讚數和留言</h3>
+      <p>你發了一篇貼文。你開始等待。你打開APP，看了一下按讚數——三個。你關掉。五分鐘後你再打開——七個。那個「也許這次更多了」的期待，是多巴胺迴路在驅動你反覆打開APP。</p>
+
+      <h3>④ 自動播放</h3>
+      <p>YouTube和Netflix的自動播放功能，在一個影片結束後，給你幾秒鐘的空檔，然後自動開始下一個。「繼續播放」是預設值。你要停下來，你需要主動行動；繼續看，你什麼都不用做。預設值的力量，加上多巴胺的「也許下一集更好」，讓你一集接一集地看下去。</p>
+
+      <h3>⑤ 拉取更新的手勢</h3>
+      <p>在智慧型手機上，很多APP的更新方式是向下拉動畫面，然後放開，等待刷新。那個動作——拉下去、放開、等待——在神經機制上，和拉下老虎機的拉桿，幾乎完全一樣。那個手勢，是設計師有意識地模仿的。</p>
+
+      <h3>⑥ 「你可能也會喜歡」</h3>
+      <p>每個推薦演算法的目標，都是讓你繼續在平台上待著。它不是在幫你找你真正需要的東西，它是在預測「什麼會讓你繼續滑」，然後把那個東西放在你面前。那個演算法比你更了解你的多巴胺迴路——因為它有幾百萬個用戶的行為數據。</p>
+
+      <h2>完整對話實錄</h2>
+      <div class="dialogue-box">
+        <div class="label">情境：哲翰下班回家，跟他太太說。</div>
+        <div class="label">哲翰：</div>我今天累壞了，我就想躺著滑一下手機放鬆一下。
+        <div class="label">太太：</div>幾點開始滑的？
+        <div class="label">哲翰：</div>……七點半吧。
+        <div class="label">太太：</div>現在九點四十了。
+        <div class="label">哲翰：</div>我沒有注意到時間過去了。
+        <div class="label">太太：</div>你有放鬆到嗎？
+        <div class="label">哲翰（想了一下）：</div>……好像沒有。我感覺比剛回來的時候更累。
+        <div class="label">太太：</div>你花了兩個多小時做一件讓你更累的事，因為你「想放鬆」。
       </div>
-    </section>
 
-    <!-- ── 第四章 ── -->
-    <section id="ch4" class="chapter reveal">
-      <div class="chapter-header">
-        <div class="chapter-num">第四章</div>
-        <h2 class="chapter-title">切換成本</h2>
-        <div class="chapter-subtitle">你以為你在多工，其實你在連續失敗</div>
-      </div>
-      <blockquote class="opening-quote reveal">
-        「多工不是一種技能，它是一種幻覺。你的大腦在同一時間只能真正處理一件需要注意力的事。你以為你在同時做兩件事，你其實是在非常快速地來回切換，然後兩件事都做得更差。」
-      </blockquote>
-
-      <div class="scene-box reveal">
-        <div class="scene-label">— 一個讓你重新看待「我可以多工」的場景</div>
-        <div class="scene-text">
-          <p>你在開會，同時在回覆郵件。你覺得你很有效率——一石二鳥。</p>
-          <p>但會議結束後，你的同事問你剛才討論的某個決策，你愣了一下。「哪個方案？」</p>
-          <p>你沒有全程跟上。你的郵件也回得不夠好——其中一封，你後來發現你回錯了問題。</p>
-          <p>兩件事，都沒有做好。你沒有多工，你只是在快速切換，然後為每一次切換付出了代價。</p>
-        </div>
-      </div>
-
-      <div class="prose reveal">
-        <h3 class="sub-heading">什麼是切換成本？</h3>
-        <p>切換成本（Task-Switching Cost），是指當你從一個任務切換到另一個任務時，大腦需要花費額外的認知資源來「卸載」前一個任務的心理狀態、「載入」新任務的心理狀態，以及重新建立專注的過程。</p>
-        <p>美國心理學會（APA）的研究顯示，多工行為會讓整體工作效率降低高達 <strong>40%</strong>。你以為你在省時間，你實際上在多花40%的時間做同樣的工作，而且品質還更低。</p>
-        <p>心理學家把這個現象稱為「殘餘注意力」（Attentional Residue）效應：當你從任務A切換到任務B，你的大腦裡仍然有一部分在處理任務A——那個殘餘，佔據了你在處理B時的認知頻寬，讓B的表現打折扣。</p>
-
-        <h3 class="sub-heading">「我天生就擅長多工」——你可能真的沒有</h3>
-        <p>史丹佛大學的研究者克里弗德・納斯（Clifford Nass）找了兩組人：自稱「重度多工者」和「輕度多工者」。他們預期重度多工者在多工測試上會表現更好。</p>
-        <p>結果完全相反。重度多工者在幾乎所有測試指標上都表現更差：他們更容易被不相關的資訊干擾、工作記憶組織能力更差、任務切換也沒有更快。最諷刺的發現是：那些自認為擅長多工的人，實際上是最差的多工者。他們的大腦更容易被干擾，只是他們已經習慣了那種散亂的狀態，以至於感覺不出來。</p>
-
-        <h3 class="sub-heading">切換成本在你生活裡的五個現場</h3>
-      </div>
-
-      <ul class="concept-list reveal">
-        <li>
-          <strong>① 開會時滑手機</strong>
-          你把那個會議的認知資源和你的訊息認知資源同時分割了。結果：你沒有完全跟上會議，你的訊息也回得不夠好，而且你有可能錯過了一個跟你有關的討論點。
-          <div class="sub">你以為你省了時間，你實際上兩件事都沒做好，還可能要花時間補救。</div>
-        </li>
-        <li>
-          <strong>② 邊看影片邊做作業/工作</strong>
-          如果你的工作需要閱讀、寫作、邏輯推理、或任何語言處理——同時開著影片或 podcast，你的語言處理系統在同時處理兩個語言輸入，它們互相競爭資源，兩個都打折扣。
-          <div class="sub">你以為影片只是背景，但你的大腦沒有「背景處理」的模式。</div>
-        </li>
-        <li>
-          <strong>③ 同時開著十幾個視窗</strong>
-          每一個視窗，都是一個可能的注意力切換點。你的眼睛瞄到郵件有新信，你在報告上建立的思路就被打斷了。視窗數量越多，被打斷的機率越高，切換成本的累積就越大。
-        </li>
-        <li>
-          <strong>④ 在不同項目之間頻繁跳躍</strong>
-          你在A做了二十分鐘，切換去B，接電話處理C，想到D要確認，回到A時你忘了做到哪裡了。那個「重新載入」，讓你從零開始，不是從二十分鐘前的地方開始。
-        </li>
-        <li>
-          <strong>⑤ 在等待回覆的間隙做其他事，然後反覆切換</strong>
-          如果那個等待和回覆的循環發生了十次，你在那個「另一件事」上付出了十次切換成本。那件事的實際進度，遠少於你感覺投入的時間。
-        </li>
+      <h2>怎麼對抗多巴胺迴路？</h2>
+      <ul class="method-list">
+        <li><strong>讓「打開APP」需要摩擦力。</strong>把你最容易成癮的APP從主畫面移除，讓存取它們需要多一個步驟。研究顯示，增加哪怕一點點的行為摩擦，就能顯著降低衝動性使用的頻率。</li>
+        <li><strong>設定使用時間，但提前設定，不是在「我要停了」的時候設定。</strong>在你開始使用之前，設定「我今天給這個APP二十分鐘」。不要等到你已經在滑、多巴胺已經在運作的時候才試圖停下來。</li>
+        <li><strong>用主動性活動替換被動性消費。</strong>下班想放鬆，不要靠滑手機。去走路、去煮一頓飯、去打一通電話給老朋友。那些主動性活動，比被動消費更能真正恢復你的認知資源。</li>
+        <li><strong>認識你的觸發點。</strong>你什麼時候最容易拿起手機？等電梯、排隊、感到無聊、感到焦慮？把那些觸發點標記出來，然後在那些時刻有意識地做一個不同的選擇。</li>
       </ul>
 
-      <div class="scene-box reveal" style="margin-top:48px;">
-        <div class="scene-label">— 對話實錄</div>
-        <div class="scene-text">
-          <p>品如在跟她的主管做工作回顧：</p>
-        </div>
-        <div class="dialogue">
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">主管</span>
-            <span class="dialogue-text">你這週的輸出量感覺比較少，你覺得是什麼原因？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">品如</span>
-            <span class="dialogue-text">我不知道，我覺得我很忙，但確實沒有做出什麼東西。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">主管</span>
-            <span class="dialogue-text">那份企劃，你今天實際上連續寫了多久？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">品如</span>
-            <span class="dialogue-text">……加起來可能不到四十分鐘？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">主管</span>
-            <span class="dialogue-text">你工作了八小時，深度處理那份企劃不到四十分鐘。那另外七個多小時在哪裡？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">品如</span>
-            <span class="dialogue-text">在切換、在等待、在回覆、在恢復……</span>
-          </div>
-        </div>
-        <div class="scene-text" style="margin-top:16px;">
-          <p>七個小時的切換成本。四十分鐘的實際深度產出。這不是她的錯，這是她的工作方式的結構性問題。</p>
-        </div>
+      <div class="chapter-summary">
+        本章重點：讓你停不下來的不是內容的品質，是多巴胺迴路製造的不確定性期待。那個迴路被設計師刻意嵌入了產品設計裡——無限滾動、間歇性的按讚、自動播放、拉取更新的手勢——每一個設計，都在利用你大腦的獎勵系統。對抗它不是靠意志力，而是靠環境設計和預先決策。
+      </div>
+      <div class="chapter-end">§</div>
+      <div class="page-marker">— 第二章　終 —</div>
+    </div>
+
+
+    <!-- ══ 第三章 ══ -->
+    <div id="ch3">
+      <div class="chapter-divider">
+        <div class="chapter-number">Chapter Three</div>
+        <div class="chapter-title">通知的暴政</div>
+        <div class="chapter-sub">每次被打斷，你的大腦需要23分鐘才能回來</div>
       </div>
 
-      <div class="prose reveal">
-        <h3 class="sub-heading">怎麼對抗切換成本？</h3>
-        <ul style="padding-left:1.2em;line-height:2.2;">
-          <li><strong>方法一：用「時間塊」（Time Blocking）替代待辦清單</strong><br>把你的時間分成塊，每塊專門做一件事：早上九到十一點只做企劃，十一到十二點只處理郵件和訊息。在每個時間塊裡，那件事之外的所有事都暫時不存在。</li>
-          <li><strong>方法二：在切換之前，留下「重新載入路標」</strong><br>如果你必須切換出去，在文件或筆記裡留下「我做到這裡，下一步是……」的標記。讓你回來的時候不需要從零重新建立背景。</li>
-          <li><strong>方法三：把「等待時間」拿來做低認知需求的工作</strong><br>用不確定長度的等待時間做機械性的行政工作，而不是切換去另一個需要深度思考的任務。這樣當回覆來了，切換回去的成本較低。</li>
-          <li><strong>方法四：認識你自己的「最高專注時段」，然後保護它</strong><br>找出你的認知能量高峰時段，把那個時段完全保護起來給深度工作，把所有會議、低認知工作推到低谷時段。</li>
-        </ul>
+      <blockquote>「你以為那個通知只打斷了你三十秒。實際上，它偷走了你接下來二十三分鐘的深度專注。而你一天裡，有多少個通知？」</blockquote>
+
+      <h2>開場情境</h2>
+      <div class="scenario-box">
+        <p>你終於坐下來，準備認真處理那份重要的報告。你打開文件，腦子開始轉動，你找到了切入的思路，你開始打字——手機震動了。Line訊息。你的眼角瞄到螢幕上的預覽，是一個群組的閒聊。你告訴自己不要看。但你的眼睛已經掃到了一半內容。你的大腦已經從「報告的邏輯架構」切換到「那則訊息說了什麼」。你強迫自己回到報告。但剛才那個思路——那個你花了十分鐘才建立起來的架構感——它不見了。你又從頭開始找。又花了八分鐘，你重新進入狀態。又震動了。</p>
       </div>
 
-      <div class="key-box reveal">
-        <strong>本章重點</strong>
-        多工是一個代價高昂的幻覺。你的大腦在任務切換時付出的認知成本，讓你用更多的時間做出更差的結果。真正的效率不是同時做更多事，而是在更長的連續時間裡只做一件事，讓那件事做到深度和品質。
+      <h2>23分鐘的代價</h2>
+      <p>加州大學爾灣分校（UC Irvine）的研究者葛洛麗亞·馬克（Gloria Mark）做了一系列關於工作場所打斷的研究，其中最著名的發現是：一個人在被打斷之後，平均需要<strong>23分鐘15秒</strong>，才能完全恢復到被打斷前的專注狀態。</p>
+      <p>研究顯示，現代辦公室工作者平均每三到五分鐘就會被打斷一次。如果你每三分鐘被打斷一次，理論上你需要的恢復時間，是你實際工作時間的幾倍。你永遠都在「快要進入深度專注」，但從來沒有真的到達那裡。更令人沮喪的是：馬克的研究還顯示，人在頻繁被打斷的工作環境中，會開始「自我打斷」——即使沒有外部通知，他們也會主動切換去做別的事，因為大腦已經習慣了那個頻率的切換節奏。</p>
+
+      <h2>通知為什麼這麼難抵抗？</h2>
+      <p><strong>定向反射（Orienting Response）：</strong>你的大腦對突然出現的聲音和震動有一個根深蒂固的本能反應——轉移注意力去評估那個刺激是否重要。這是演化出來的生存機制，你的大腦無法在聽到震動的時候說「這只是Line訊息，我可以忽略它」。</p>
+      <p><strong>未完成效應（Zeigarnik Effect）：</strong>你的大腦對「未完成的事」會保持一個開放的認知迴路，持續消耗工作記憶資源。你看到了那個通知的預覽，你的大腦就開始追蹤那個未讀訊息，即使你試圖繼續專注在報告上。</p>
+      <p><strong>多巴胺期待：</strong>你不知道那個通知是什麼，也許是重要的事，也許是無聊的閒聊。那個不確定性，觸發了多巴胺的「渴望和尋求」機制，製造了一個把注意力轉過去的衝動。</p>
+
+      <h2>通知的暴政在你生活裡的五個後果</h2>
+      <h3>① 你從來沒有真正的深度工作時段</h3>
+      <p>深度工作需要一個連續的、不被打斷的時間塊。研究顯示，進入深度專注狀態通常需要至少十五到二十分鐘的不被打斷的時間。如果你的工作環境裡每三到五分鐘就有一個通知，你從來沒有機會真正進入深度狀態。</p>
+
+      <h3>② 你的工作時間比你以為的長，但產出比你以為的少</h3>
+      <p>研究顯示，在高度通知頻率的環境下，一般工作者每天真正的深度工作時間，可能只有一到兩個小時。其餘的時間，在切換、恢復、再切換、再恢復的循環裡消耗掉了。你感覺很累，但你沒有做出跟那個疲憊相稱的產出。</p>
+
+      <h3>③ 你開始對深度工作感到不耐煩</h3>
+      <p>長期在碎片化的注意力狀態下工作，你的大腦開始不習慣長時間的深度投入。當你試圖進入深度工作，你會感到一種不舒服的「拉力」——一種想要切換出去、看看有沒有新訊息的衝動。</p>
+
+      <h3>④ 你的溝通品質下降</h3>
+      <p>當你習慣了即時回覆，你也把同樣的期待套在別人身上。你開始對「未讀已讀但沒回」感到焦慮，你開始在等待回覆的時候無法做其他事。那個「即時性」的期待，讓所有人都變成了通知的奴隸。</p>
+
+      <h3>⑤ 你的壓力水準持續偏高</h3>
+      <p>馬克的研究還發現，在高打斷頻率的工作環境下，工作者的心率和壓力指標（cortisol水準）都顯著偏高。你感到焦慮、你感到永遠有事情沒做完——這不只是心理感受，它有生理基礎。</p>
+
+      <h2>完整對話實錄</h2>
+      <div class="dialogue-box">
+        <div class="label">情境：宗翰在跟他的導師討論他的工作效率問題。</div>
+        <div class="label">導師：</div>你有沒有試過工作時關掉所有通知？
+        <div class="label">宗翰：</div>不行，我的工作性質要求我要即時回應。
+        <div class="label">導師：</div>你上次有人因為你晚了兩個小時回覆而造成真正緊急後果，是什麼時候？
+        <div class="label">宗翰：</div>……好像沒有。
+        <div class="label">導師：</div>你覺得你需要即時回覆，還是你已經習慣了即時回覆，然後把那個習慣當成了需求？
+        <div class="label">宗翰（沉默了一下）：</div>但如果我不即時回，別人會覺得我沒在工作。
+        <div class="label">導師：</div>所以你用你真正工作的品質，去換取一個「看起來有在即時回覆」的形象？
+        <div class="label">宗翰：</div>……這樣說起來，好像是。
       </div>
-    </section>
 
-    <!-- ── 第五章 ── -->
-    <section id="ch5" class="chapter reveal">
-      <div class="chapter-header">
-        <div class="chapter-num">第五章</div>
-        <h2 class="chapter-title">設計好的上癮</h2>
-        <div class="chapter-subtitle">那些 APP 不是意外讓你停不下來的</div>
-      </div>
-      <blockquote class="opening-quote reveal">
-        「你手機裡的那些 APP，是世界上一些最聰明的人，用神經科學和行為心理學，花了幾億美元設計出來的。它們不是意外讓你停不下來的。那是設計目標。」
-      </blockquote>
-
-      <div class="scene-box reveal">
-        <div class="scene-label">— 一個讓你重新看待那個 APP 的場景</div>
-        <div class="scene-text">
-          <p>你打開 TikTok，「只是要看一下」。第一個影片，還行。第二個，有點好笑。第三個，讓你噴笑。你繼續滑——不是因為每個影片都很好，而是因為你永遠不知道下一個會是什麼。那個「下一個也許很好」的期待，讓你繼續滑。</p>
-          <p>一小時後，你關掉。你感到有點空洞，有點自責，同時又有點想再打開。</p>
-          <p>那不是意外。那是設計。</p>
-        </div>
-      </div>
-
-      <div class="prose reveal">
-        <h3 class="sub-heading">說出來的人：前 Google 設計倫理師的告白</h3>
-        <p>Tristan Harris 在 Google 工作時，職稱是「設計倫理師」。他在離開 Google 之後，創辦了「人道科技中心」（Center for Humane Technology），持續倡導科技產品的道德設計。</p>
-        <p>他說過一句話，幾乎成了這個議題的定義：「在你口袋裡的手機，有一千個工程師為了讓你上癮而工作，而你只有一個大腦。」</p>
-        <p>這不是陰謀論。這是公開的商業模式。注意力經濟的核心邏輯是：你在平台上待的時間越長，他們可以賣給廣告商的注意力就越多，收入就越高。讓你「停不下來」，從來就不是副作用——它是產品的設計目標。</p>
-
-        <h3 class="sub-heading">他們用了什麼手段？</h3>
-      </div>
-
-      <ul class="concept-list reveal">
-        <li>
-          <strong>一、可變獎勵排程（Variable Reward Schedule）</strong>
-          Instagram 的動態不是按照時間順序排列的，它是由演算法排列的——目的是確保每次你打開，都會遇到幾個讓你反應的內容，但不是每一個都是，讓你有驅動力繼續滑下去找那個「好的」內容。那個結構，就是老虎機的邏輯。
-        </li>
-        <li>
-          <strong>二、社交互惠壓力（Social Reciprocity）</strong>
-          有人對你的貼文按讚，你感受到一個隱性的社交壓力：你應該也去看看他們的。有人留言，你感到有義務回應。有人標記你，你必須去看。你的社交本能——互惠、關注、回應——被轉換成了在平台上花時間的驅動力。
-        </li>
-        <li>
-          <strong>三、FOMO（錯過恐懼）</strong>
-          「你不在的這段時間，發生了什麼事嗎？」那個焦慮讓你不敢長時間離開。那個「重要的事」，大多數時候根本不重要。但那個恐懼是真實的，它讓你持續回來查看。
-        </li>
-        <li>
-          <strong>四、漸進式揭露（Progressive Disclosure）</strong>
-          你的 Instagram 動態，永遠不會「看完」。你的 YouTube 推薦，永遠有新的影片。那個「永遠還有更多」，讓你沒有一個自然的停止點。
-        </li>
-        <li>
-          <strong>五、身份認同綁定</strong>
-          你在那個平台上建立了個人檔案、追蹤者、貼文歷史、社交關係網絡。那些東西「是你的」，讓你對那個平台產生了稟賦效應——你捨不得離開，因為離開意味著放棄你在那裡建立的一切。
-        </li>
-        <li>
-          <strong>六、暗黑設計模式（Dark Patterns）</strong>
-          你試圖刪除帳號，取消按鈕藏在七層設定裡。你試圖取消訂閱，頁面設計得讓你不容易找到取消按鈕。那些讓離開變得困難的設計，不是疏忽——是刻意的。
-        </li>
+      <h2>怎麼對抗通知的暴政？</h2>
+      <ul class="method-list">
+        <li><strong>把所有非必要通知關掉，現在就去做。</strong>打開你的手機設定，逐一審查每個APP的通知權限。問自己：「這個通知，需要在它發生的瞬間讓我知道嗎？還是我可以每兩小時統一查看一次？」只保留真正緊急的通知——電話、特定重要聯絡人的訊息。</li>
+        <li><strong>設定「通知查看時段」而不是「隨時查看」。</strong>決定你每天幾個固定的時段查看訊息和郵件，例如早上九點半、中午十二點、下午三點、下班前。讓「查看通知」成為一個你主導的行動，而不是一個被動的反應。</li>
+        <li><strong>讓你的工作環境物理上隔絕通知。</strong>工作時，把手機放在另一個地方，或者放入抽屜。把電腦的通知彈窗關掉。讓你的工作環境，在物理上就不容易被打斷。</li>
+        <li><strong>和你的工作夥伴建立明確的緊急溝通協議。</strong>跟你的同事或主管建立一個協議：真正緊急的事，打電話；其他事，訊息等兩小時內的批次回覆。大多數人接受這個安排，因為他們自己也厭倦了隨時待命的壓力。</li>
       </ul>
 
-      <div class="scene-box reveal" style="margin-top:48px;">
-        <div class="scene-label">— 對話實錄</div>
-        <div class="scene-text">
-          <p>書宇和他的大學同學在聊他們對社群媒體的矛盾感受：</p>
-        </div>
-        <div class="dialogue">
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">同學</span>
-            <span class="dialogue-text">你剛才說這些 APP 讓你上癮、傷害你的注意力、讓你更焦慮。那你為什麼還用？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">書宇</span>
-            <span class="dialogue-text">因為我身邊的人都在上面，如果我不在，我會跟社交圈脫節。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">同學</span>
-            <span class="dialogue-text">那不就是他們設計的結果？讓你覺得不用就會失去東西。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">書宇</span>
-            <span class="dialogue-text">對。但知道這件事不代表你能輕鬆離開。就像你知道速食不健康，但你還是吃。改變的成本很高，而且是社交成本，不只是個人選擇。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">同學</span>
-            <span class="dialogue-text">那這個問題，不只是個人的問題。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">書宇</span>
-            <span class="dialogue-text">對。這就是為什麼它很難處理。</span>
-          </div>
-        </div>
-        <div class="scene-text" style="margin-top:16px;">
-          <p>上癮設計的問題，有一部分是個人的——你可以學習更好地管理你的使用方式。但它也有一部分是結構性的。看清楚這件事，是做出更清醒選擇的第一步。</p>
-        </div>
+      <div class="chapter-summary">
+        本章重點：每一個通知都不只是打斷了你三十秒，它偷走了你接下來二十三分鐘的恢復時間。在高通知頻率的環境下，你永遠在「快要進入深度專注」但從來沒有到達。對抗通知的暴政，不是靠更強的意志力去忽略它，而是靠系統性地關掉它，讓你的環境預設值變成「不被打斷」。
+      </div>
+      <div class="chapter-end">§</div>
+      <div class="page-marker">— 第三章　終 —</div>
+    </div>
+
+
+    <!-- ══ 第四章 ══ -->
+    <div id="ch4">
+      <div class="chapter-divider">
+        <div class="chapter-number">Chapter Four</div>
+        <div class="chapter-title">切換成本</div>
+        <div class="chapter-sub">你以為你在多工，其實你在連續失敗</div>
       </div>
 
-      <div class="prose reveal">
-        <h3 class="sub-heading">怎麼在明知道的情況下，還是做出更好的選擇？</h3>
-        <ul style="padding-left:1.2em;line-height:2.2;">
-          <li><strong>方法一：把娛樂性使用和功能性使用分開</strong><br>刻意去聯絡特定的人，而不是隨機滑動態等待驚喜。</li>
-          <li><strong>方法二：使用替代界面或第三方工具</strong><br>有些工具可以讓你使用平台的核心功能，同時移除掉上癮設計——沒有推薦演算法的 YouTube 界面、沒有按讚計數的瀏覽器擴充功能。你不一定要完全離開那個平台，但你可以移除讓你上癮的那些設計層。</li>
-          <li><strong>方法三：對你的使用行為保持有意識</strong><br>每次你打開那個 APP 之前，問自己：「我現在為什麼要打開它？我想要得到什麼？」如果你答不出來，那就是衝動性使用，不是有意識的選擇。</li>
-          <li><strong>方法四：把你的數位環境設計得跟你的目標一致</strong><br>你的手機主畫面，放的應該是支持你想成為的人的工具。把那些設計好讓你上癮的 APP，移出你最容易看到的地方，讓存取它們需要多一步。</li>
-        </ul>
+      <blockquote>「多工不是一種技能，它是一種幻覺。你的大腦在同一時間只能真正處理一件需要注意力的事。你以為你在同時做兩件事，你其實是在非常快速地來回切換，然後兩件事都做得更差。」</blockquote>
+
+      <h2>開場情境</h2>
+      <div class="scenario-box">
+        <p>你在開會，同時在回覆郵件。你覺得你很有效率——一石二鳥，會開完了郵件也回完了。但會議結束後，你的同事問你剛才討論的某個決策：「你覺得那個方案可行嗎？」你愣了一下。「哪個方案？」你沒有全程跟上。有幾個關鍵的討論你沒有吸收進來。你的郵件回得也沒有很好，其中一封你後來發現你回錯了問題。兩件事，都沒有做好。</p>
       </div>
 
-      <div class="key-box reveal">
-        <strong>本章重點</strong>
-        讓你停不下來的那些 APP，是用行為心理學和神經科學的精確武器設計出來的，目標就是最大化你在平台上的時間。那不是意外，那是商業模式。了解那些設計手段，不會讓你免疫，但它讓你的選擇從「本能反應」變成「有意識的決定」，而那個差距，就是你能奪回的空間。
-      </div>
-    </section>
+      <h2>什麼是切換成本？</h2>
+      <p>切換成本（Task-Switching Cost）是指當你從一個任務切換到另一個任務時，大腦需要花費額外的認知資源來「卸載」前一個任務的心理狀態、「載入」新任務的心理狀態，以及重新建立專注的過程。這個成本不是零。美國心理學會（APA）的研究顯示，多工行為會讓整體工作效率降低高達<strong>40%</strong>。</p>
+      <p>心理學家把這個現象稱為「殘餘注意力」（Attentional Residue）效應：當你從任務A切換到任務B，你的大腦裡仍然有一部分在處理任務A——你在想A還沒完成的部分、A的某個問題、A裡面你不確定的決策。那個殘餘，佔據了你在處理B時的認知頻寬，讓B的表現打折扣。</p>
 
-    <!-- ── 第六章 ── -->
-    <section id="ch6" class="chapter reveal">
-      <div class="chapter-header">
-        <div class="chapter-num">第六章</div>
-        <h2 class="chapter-title">深度工作的消失</h2>
-        <div class="chapter-subtitle">你失去了長時間專注的能力，但你以為那很正常</div>
-      </div>
-      <blockquote class="opening-quote reveal">
-        「你上一次在一件事上連續專注兩個小時，是什麼時候？如果你想了超過三秒，那就是你需要讀這一章的答案。」
-      </blockquote>
+      <h2>「我天生就擅長多工」——你可能真的沒有</h2>
+      <p>史丹佛大學的研究者克里弗德·納斯（Clifford Nass）找了兩組人：一組是自稱「重度多工者」的人，另一組是「輕度多工者」。他們預期重度多工者在多工測試上會表現更好。結果完全相反。重度多工者在幾乎所有測試指標上都表現更差：他們更容易被不相關的資訊干擾、工作記憶組織能力更差、在任務切換上也沒有更快。最諷刺的發現是：那些自認為擅長多工的人，實際上是最差的多工者。</p>
 
-      <div class="scene-box reveal">
-        <div class="scene-label">— 一個讓你說「這也太準了」的場景</div>
-        <div class="scene-text">
-          <p>你下定決心今天要讀完那本買了三個月、只讀了三十頁的書。你坐下來，翻到你上次讀到的地方，開始讀。</p>
-          <p>讀了兩段，你的腦子有點飄。讀了一頁，你的手本能地去摸手機，你把手機翻面放好。讀了三頁，你發現你的眼睛在看字，但你不確定你的腦子有沒有在處理內容。讀了五頁，你感到一股強烈的衝動想去做別的事。</p>
-          <p>你放下書，拿起手機。你告訴自己：「可能這本書就是沒那麼有趣。」</p>
-          <p>但三個月前你買它的時候，你非常期待讀它。</p>
-          <p>不是書的問題。是你的深度專注能力，在三個月的碎片化資訊消費裡，已經被磨損了。</p>
-        </div>
-      </div>
+      <h2>切換成本在你生活裡的五個現場</h2>
+      <h3>① 開會時滑手機</h3>
+      <p>你在開會，你覺得這個會議跟你關係不大，你拿出手機回訊息。你把那個會議的認知資源和你的訊息認知資源同時分割了。結果：兩件事都沒做好，而且你有可能錯過了一個跟你有關的討論點。</p>
 
-      <div class="prose reveal">
-        <h3 class="sub-heading">什麼是深度工作的消失？</h3>
-        <p>電腦科學家卡爾・紐波特在《深度工作力》（Deep Work）裡指出：深度工作——在沒有干擾的狀態下進行高認知要求任務的能力——正在變得越來越稀少，同時越來越有價值。</p>
-        <p>它變得稀少，是因為我們的數位環境系統性地侵蝕了進行深度工作所需的能力：長時間的連續專注力被碎片化的注意力取代了；對複雜問題的慢速深入推理，被對快速資訊的即時反應取代了；忍受認知上的不確定和困難的能力，被遇到困難就切換出去的習慣取代了。</p>
-        <p>你失去了什麼，你可能還沒有完全意識到——因為你周圍的人也失去了同樣的東西，所以那個失去看起來很「正常」。</p>
+      <h3>② 邊看影片邊做作業／工作</h3>
+      <p>如果你的工作需要閱讀、寫作、邏輯推理、或任何語言處理——同時開著影片或podcast，你的語言處理系統在同時處理兩個語言輸入，它們互相競爭資源，兩個都打折扣。你以為影片只是背景，但你的大腦沒有「背景處理」的模式。</p>
 
-        <h3 class="sub-heading">你的大腦發生了什麼？</h3>
-        <p>神經可塑性（Neuroplasticity）是大腦的核心特性：你反覆做什麼，你的大腦就朝著支持那個行為的方向重塑。如果你反覆練習頻繁切換和碎片化消費，你的大腦就發展出更強的「快速切換」迴路，同時讓「維持長時間專注」的迴路退化。</p>
-        <p>麻省理工學院的研究者追蹤了長期重度智慧型手機使用者的大腦結構，發現他們在負責延遲滿足和長期規劃的前額葉皮質功能上，有可測量的差異。你的手機使用習慣，在字面意義上重塑了你的大腦。</p>
-        <p>好消息是：神經可塑性也意味著，如果你改變習慣，大腦也可以往另一個方向重塑。它不是永久的損傷，但它需要時間和刻意的練習才能逆轉。</p>
+      <h3>③ 同時開著十幾個視窗</h3>
+      <p>你的電腦螢幕上開著：報告文件、三個瀏覽器分頁、郵件、Slack、一個音樂播放器……每一個視窗，都是一個可能的注意力切換點。視窗數量越多，被打斷的機率越高，切換成本的累積就越大。</p>
 
-        <h3 class="sub-heading">深度工作消失的六個徵兆</h3>
+      <h3>④ 在不同項目之間頻繁跳躍</h3>
+      <p>你今天的待辦清單有五件事。你在A做了二十分鐘，覺得卡住了，切換去做B，做了十五分鐘，接到電話要處理C……你回到A，但你忘了剛才做到哪裡了。那個「忘了做到哪裡」，是切換成本的實體化：你的大腦需要重新載入A的所有背景。</p>
+
+      <h3>⑤ 在等待回覆的間隙做其他事，然後反覆切換</h3>
+      <p>你傳了一個訊息給客戶，在等回覆。等待期間切換去做另一件事，客戶回了再切換回來。如果這個循環發生了十次，你在那個「另一件事」上，付出了十次切換成本。那件事的實際進度，遠少於你感覺投入的時間。</p>
+
+      <h2>完整對話實錄</h2>
+      <div class="dialogue-box">
+        <div class="label">情境：品如在跟她的主管做工作回顧。</div>
+        <div class="label">主管：</div>你這週的輸出量感覺比較少，你覺得是什麼原因？
+        <div class="label">品如：</div>我不知道，我覺得我很忙，但確實沒有做出什麼東西。
+        <div class="label">主管：</div>那份企劃，你今天實際上連續寫了多久？
+        <div class="label">品如（想了想）：</div>……加起來可能不到四十分鐘？
+        <div class="label">主管：</div>你工作了八小時，深度處理那份企劃不到四十分鐘。那另外七個多小時在哪裡？
+        <div class="label">品如：</div>在切換、在等待、在回覆、在恢復……
       </div>
 
-      <ul class="concept-list reveal">
-        <li>
-          <strong>① 你讀長文章讀不完</strong>
-          你點開一篇五千字的文章，讀了一千字，你開始感到不耐煩，往下滑，試圖找出「重點在哪裡」，然後放棄。你不是不感興趣——你點開它就是因為你感興趣。但你的閱讀耐力，已經不夠支撐你讀完一篇長文章了。
-        </li>
-        <li>
-          <strong>② 你無法在一個想法上停留超過幾分鐘</strong>
-          你有一個很好的想法，想了兩分鐘，你的大腦飄到別的地方了。長時間在一個問題上持續推理，是深度工作的核心能力之一。如果你發現自己越來越難做到，那是一個警訊。
-        </li>
-        <li>
-          <strong>③ 你感到「寫作障礙」或「思考障礙」</strong>
-          你坐下來要寫一篇文章或報告，但你的腦子像是空的。寫作需要長時間的深度專注。如果你的深度專注能力退化了，寫作就會變得格外困難——不是因為你沒有話說，而是因為你的大腦無法在那個任務上維持足夠長的時間。
-        </li>
-        <li>
-          <strong>④ 你容易在困難的地方放棄</strong>
-          你在學一個新技能，遇到了困難的概念，你的第一個反應是去查 Google，或者換一個更簡單的學習資源，或者乾脆放下來做別的事。深度學習需要在困難的地方待著，讓你的大腦反覆處理那個難點，直到它被理解和整合。
-          <div class="sub">如果你一遇到困難就切換出去，你永遠停留在淺層的理解。</div>
-        </li>
-        <li>
-          <strong>⑤ 你的思想在空閒時很難「就這樣待著」</strong>
-          你在等電梯、等紅燈——你能不拿手機、就讓思緒自由漂流嗎？大多數人現在連三十秒的「什麼都不做」都很難忍受。那個空白，是你的大腦需要的整合和創意思考的空間，但你用手機把它填滿了。
-        </li>
-        <li>
-          <strong>⑥ 你完成了一天的工作，但不知道你做了什麼</strong>
-          你工作了八小時，你很累，但你說不清楚你今天做了什麼有意義的事。那個感覺，是「你的時間被碎片化消耗了，但沒有集中在任何一件有重量的事上」的訊號。你在忙，但你沒有在深度工作。
-        </li>
+      <h2>怎麼對抗切換成本？</h2>
+      <ul class="method-list">
+        <li><strong>用「時間塊」（Time Blocking）替代待辦清單。</strong>把你的時間分成塊，每塊專門做一件事：早上九到十一點只做企劃，十一到十二點只處理郵件和訊息，下午兩到四點只做簡報。在每個時間塊裡，那件事之外的所有事都暫時不存在。</li>
+        <li><strong>在切換之前，留下「重新載入路標」。</strong>如果你必須切換出去處理別的事，在你的文件或筆記裡留下一個「我做到這裡，下一步是……」的標記。那個路標讓你回來的時候，不需要從零重新建立背景，大幅降低切換成本。</li>
+        <li><strong>把「等待時間」拿來做低認知需求的工作。</strong>如果你在等一個回覆，不要切換去做另一個需要深度思考的任務。用那段不確定長度的等待時間，做一些低認知需求的事——整理文件、清空信箱草稿、做一些機械性的行政工作。</li>
+        <li><strong>認識你自己的「最高專注時段」，然後保護它。</strong>每個人的認知能量在一天裡有高峰和低谷。找出你的高峰時段，把那個時段完全保護起來給深度工作，把所有的會議、訊息回覆、低認知工作推到你的低谷時段。</li>
       </ul>
 
-      <div class="scene-box reveal" style="margin-top:48px;">
-        <div class="scene-label">— 對話實錄：「我以前不是這樣的」</div>
-        <div class="scene-text">
-          <p>惟恩在跟一個老朋友聊：</p>
-        </div>
-        <div class="dialogue">
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">惟恩</span>
-            <span class="dialogue-text">我以前可以坐下來讀書讀好幾個小時，現在我讀二十分鐘就分心了。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">朋友</span>
-            <span class="dialogue-text">你覺得是為什麼？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">惟恩</span>
-            <span class="dialogue-text">我不知道，可能是年紀大了？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">朋友</span>
-            <span class="dialogue-text">你幾歲？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">惟恩</span>
-            <span class="dialogue-text">三十二。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">朋友</span>
-            <span class="dialogue-text">三十二歲不是年紀大，你應該還在認知巔峰期。你每天花多少時間在手機上？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">惟恩</span>
-            <span class="dialogue-text">……螢幕使用時間說五個小時。</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">朋友</span>
-            <span class="dialogue-text">你每天練習了五個小時的快速切換，然後你發現你的長時間專注能力退步了，你覺得這兩件事有沒有關係？</span>
-          </div>
-          <div class="dialogue-line">
-            <span class="dialogue-speaker">惟恩</span>
-            <span class="dialogue-text">……有。</span>
-          </div>
-        </div>
-        <div class="scene-text" style="margin-top:16px;">
-          <p>惟恩說的「我以前不是這樣的」，是真的。他的大腦沒有退化，它只是被訓練往另一個方向走了。那個訓練是可以逆轉的，但它需要刻意的深度專注練習，重新建立那條神經迴路。</p>
-        </div>
+      <div class="chapter-summary">
+        本章重點：多工是一個代價高昂的幻覺。你的大腦在任務切換時付出的認知成本，讓你用更多的時間做出更差的結果。真正的效率不是同時做更多事，而是在更長的連續時間裡只做一件事，讓那件事做到深度和品質。
+      </div>
+      <div class="chapter-end">§</div>
+      <div class="page-marker">— 第四章　終 —</div>
+    </div>
+
+
+    <!-- ══ 第五章 ══ -->
+    <div id="ch5">
+      <div class="chapter-divider">
+        <div class="chapter-number">Chapter Five</div>
+        <div class="chapter-title">設計好的上癮</div>
+        <div class="chapter-sub">那些APP不是意外讓你停不下來的</div>
       </div>
 
-      <div class="prose reveal">
-        <h3 class="sub-heading">怎麼重建深度工作的能力？</h3>
-        <ul style="padding-left:1.2em;line-height:2.2;">
-          <li><strong>方法一：從短開始，刻意拉長</strong><br>如果你現在的深度專注上限是十五分鐘，就從十五分鐘開始。每天給自己一個不被打斷的十五分鐘，只做一件高認知需求的事。下週延長到二十分鐘。就像在健身房訓練肌肉一樣，用漸進式的負荷讓能力成長。</li>
-          <li><strong>方法二：讓無聊成為你的練習</strong><br>每天給自己一段「什麼都不做」的時間——五到十分鐘，不看手機，不聽 podcast，就讓你的思緒漂流。那個練習，是在訓練你的預設模式網絡，也是在訓練你對無刺激狀態的耐受力。</li>
-          <li><strong>方法三：讀長文，讀完再說</strong><br>每天選一篇長文章或一本書，規定自己讀到某個段落或某個頁數再停下來。那個「不夠有趣」的感覺，很可能只是你的大腦在抗拒深度投入，不是文章真的沒有價值。</li>
-          <li><strong>方法四：在深度工作後，讓大腦真正休息</strong><br>深度工作後需要真正的休息——不是滑手機，而是散步、冥想、和人說話、做飯。讓你的認知系統有真正的恢復時間，它下一次才能再次進入深度狀態。</li>
-        </ul>
+      <blockquote>「你手機裡的那些APP，是世界上一些最聰明的人，用神經科學和行為心理學，花了幾億美元設計出來的。它們不是意外讓你停不下來的。那是設計目標。」</blockquote>
+
+      <h2>開場情境</h2>
+      <div class="scenario-box">
+        <p>你打開TikTok，「只是要看一下」。第一個影片，還行。第二個，有點好笑。第三個，你完全看不下去，但你沒有關掉，你往上滑。第四個，讓你噴笑。第五個，有點無聊。第六個，你學到了一個你沒想到的小知識。你繼續滑。不是因為每個影片都很好，是因為你永遠不知道下一個會是什麼。一小時後，你關掉。你感到有點空洞，有點自責，同時又有點想再打開。那不是意外。那是設計。</p>
       </div>
 
-      <div class="key-box reveal">
-        <strong>本章重點</strong>
-        深度工作的能力不是消失了，它是被你的日常數位習慣系統性地退化了。你每天練習快速切換和碎片化消費，你的大腦就朝著支持那個行為的方向重塑。好消息是，神經可塑性讓你可以把那個過程逆轉——但那需要刻意的練習、允許自己不舒服、以及時間。
-      </div>
-    </section>
+      <h2>說出來的人：前Google設計倫理師的告白</h2>
+      <p>Tristan Harris在Google工作時，職稱是「設計倫理師」。他在離開Google之後，花了多年的時間公開揭露科技產業設計用戶上癮的機制，並創辦了「人道科技中心」（Center for Humane Technology）。他說過一句話，幾乎成了這個議題的定義：「在你口袋裡的手機，有一千個工程師為了讓你上癮而工作，而你只有一個大腦。」這不是陰謀論，這是公開的商業模式。</p>
 
-    <!-- ── 後記 ── -->
-    <section id="postscript" class="chapter reveal">
-      <div class="chapter-header">
-        <div class="chapter-num">後記</div>
-        <h2 class="chapter-title">你的注意力是你的人生</h2>
+      <h2>他們用了什麼手段？</h2>
+      <h3>一、可變獎勵排程（Variable Reward Schedule）</h3>
+      <p>Instagram的動態不是按照時間順序排列的，它是由演算法排列的——目的是確保每次你打開，都會遇到幾個讓你反應的內容，但不是每一個都是，讓你有驅動力繼續滑下去找那個「好的」內容。那個「好的和壞的混在一起，你不知道哪個在下面」的結構，就是老虎機的邏輯。</p>
+
+      <h3>二、社交互惠壓力（Social Reciprocity）</h3>
+      <p>有人對你的貼文按讚，你感受到一個隱性的社交壓力：你應該也去看看他們的。有人留言，你感到有義務回應。有人標記你，你必須去看。這些機制把你的社交本能——互惠、關注、回應——轉換成了在平台上花時間的驅動力。</p>
+
+      <h3>三、FOMO（錯過恐懼）</h3>
+      <p>「你不在的這段時間，發生了什麼事嗎？」那個焦慮，是許多社群平台刻意培養的。它讓你不敢長時間離開，因為你害怕錯過一些重要的事。那個「重要的事」，大多數時候根本不重要，但那個恐懼是真實的。</p>
+
+      <h3>四、漸進式揭露（Progressive Disclosure）</h3>
+      <p>你的Instagram動態，永遠不會「看完」。你的YouTube推薦，永遠有新的影片。你的新聞動態，永遠有更新。那個「永遠還有更多」，讓你沒有一個自然的停止點。</p>
+
+      <h3>五、身份認同綁定</h3>
+      <p>你在那個平台上建立了你的個人檔案、你的追蹤者、你的貼文歷史、你的社交關係網絡。那些東西「是你的」，讓你對那個平台產生了稟賦效應——你捨不得離開，因為離開意味著放棄你在那裡建立的一切。</p>
+
+      <h3>六、暗黑設計模式（Dark Patterns）</h3>
+      <p>你試圖刪除帳號，你發現取消按鈕藏在七層設定裡。你試圖取消訂閱，頁面設計得讓你不容易找到取消按鈕。那些讓離開變得困難的設計，不是疏忽，是刻意的。</p>
+
+      <h2>完整對話實錄</h2>
+      <div class="dialogue-box">
+        <div class="label">情境：書宇和他的大學同學在聊他們對社群媒體的矛盾感受。</div>
+        <div class="label">同學：</div>你剛才說這些APP讓你上癮、傷害你的注意力、讓你更焦慮。那你為什麼還用？
+        <div class="label">書宇：</div>因為我身邊的人都在上面，如果我不在，我會跟社交圈脫節。
+        <div class="label">同學：</div>那不就是他們設計的結果？讓你覺得不用就會失去東西。
+        <div class="label">書宇：</div>……對。但知道這件事不代表你能輕鬆離開。就像你知道速食不健康，但你還是吃。
+        <div class="label">同學：</div>所以你的意思是，明知道也無能為力？
+        <div class="label">書宇：</div>不是無能為力，是改變的成本很高，而且是社交成本，不只是個人選擇。我一個人戒掉沒有用，因為資訊和社交還是在那個平台上。
+        <div class="label">同學（沉默了一下）：</div>那這個問題，不只是個人的問題。
+        <div class="label">書宇：</div>對。這就是為什麼它很難處理。
       </div>
 
-      <div class="prose reveal">
-        <p>你讀完了六章。</p>
-        <p>你知道你的注意力是有限的、被設計好的系統在系統性地提取，你知道多巴胺迴路讓你停不下來，你知道每個通知都在偷走你的23分鐘，你知道多工是幻覺，你知道那些 APP 是刻意設計來對付你的，你知道你的深度工作能力正在退化。</p>
-        <p>現在你可能有兩種反應。</p>
-        <p>第一種：「好，我今天開始戒手機，刪掉所有社群 APP，每天只用螢幕一小時。」</p>
-        <p>第二種：「這些我都懂，但我還是會繼續用，因為沒辦法。」</p>
-        <p>這兩種反應，都沒有說到重點。</p>
-        <p>重點不是戒掉，也不是認命，而是：<strong>你對你的注意力，從現在開始要有意識。</strong></p>
-        <p>你選擇把注意力給誰，你就是在選擇讓誰塑造你的思想、你的情緒、你的記憶、你的判斷。那不是小事。那幾乎就是「你是誰」這件事的全部。</p>
-        <p>你的注意力去哪裡，你的人生就在那裡。</p>
-        <p>這不是一本要你放棄科技的書。它是一本讓你看清楚那場正在發生的戰爭的書——然後你可以做出比「本能反應」更有意識的選擇。</p>
-        <p>哪怕每天只多一個有意識的選擇，也是你在那場戰爭裡奪回的一寸領土。</p>
+      <h2>怎麼在明知道的情況下，還是做出更好的選擇？</h2>
+      <ul class="method-list">
+        <li><strong>把娛樂性使用和功能性使用分開。</strong>你用Instagram跟朋友保持聯絡（功能性），你用Instagram隨機刷動態（娛樂性／上癮性）。把這兩件事分開——刻意去聯絡特定的人，而不是隨機滑動態等待驚喜。</li>
+        <li><strong>使用替代界面或第三方工具。</strong>有些工具可以讓你使用平台的核心功能，同時移除掉上癮設計——例如沒有推薦演算法的YouTube界面、把社群媒體鎖在特定時段的APP管理工具。</li>
+        <li><strong>對你的使用行為保持有意識。</strong>每次你打開那個APP之前，問自己：「我現在為什麼要打開它？我想要得到什麼？」如果你答不出來，那就是衝動性使用，不是有意識的選擇。</li>
+        <li><strong>把你的數位環境設計得跟你的目標一致。</strong>你的手機主畫面，放的應該是支持你想成為的人的工具——閱讀APP、筆記工具、學習資源。把那些設計好讓你上癮的APP，移出你最容易看到的地方。</li>
+      </ul>
+
+      <div class="chapter-summary">
+        本章重點：讓你停不下來的那些APP，是用行為心理學和神經科學的精確武器設計出來的，目標就是最大化你在平台上的時間。那不是意外，那是商業模式。了解那些設計手段，不會讓你免疫，但它讓你的選擇從「本能反應」變成「有意識的決定」，而那個差距，就是你能奪回的空間。
+      </div>
+      <div class="chapter-end">§</div>
+      <div class="page-marker">— 第五章　終 —</div>
+    </div>
+
+
+    <!-- ══ 第六章 ══ -->
+    <div id="ch6">
+      <div class="chapter-divider">
+        <div class="chapter-number">Chapter Six</div>
+        <div class="chapter-title">深度工作的消失</div>
+        <div class="chapter-sub">你失去了長時間專注的能力，但你以為那很正常</div>
       </div>
 
-      <div class="prose reveal" style="margin-top:48px;text-align:center;color:var(--text-muted);font-size:0.9rem;">
-        <p>─　─　─</p>
-        <p style="margin-top:16px;">認知心理學系列第五冊《語言的陷阱》即將推出。<br>你用的詞，決定你怎麼思考。那本書，會讓你重新看待你說的每一句話。</p>
-        <p style="margin-top:24px;color:var(--text-muted);">作者｜盧林<br>有的沒的小舖 出品</p>
-      </div>
-    </section>
+      <blockquote>「你上一次在一件事上連續專注兩個小時，是什麼時候？如果你想了超過三秒，那就是你需要讀這一章的答案。」</blockquote>
 
-    <!-- 系列導航 -->
-    <div class="series-nav reveal">
-      <div class="series-nav-label">— 認知心理學系列</div>
-      <div class="series-nav-grid">
-        <a href="/cognitive-psychology-vol1.html" class="next-book">
-          <span class="next-book-num">Vol.1</span>
-          <div class="next-book-title">思維陷阱</div>
-        </a>
-        <div class="next-book coming">
-          <span class="next-book-num">Vol.2</span>
-          <div class="next-book-title">決策的陷阱</div>
-        </div>
-        <a href="/cognitive-psychology-vol3.html" class="next-book">
-          <span class="next-book-num">Vol.3</span>
-          <div class="next-book-title">記憶的謊言</div>
-        </a>
-        <div class="next-book current">
-          <span class="next-book-num">Vol.4</span>
-          <div class="next-book-title">注意力劫持</div>
+      <h2>開場情境</h2>
+      <div class="scenario-box">
+        <p>你下定決心今天要讀完那本買了三個月、只讀了三十頁的書。你坐下來，翻到你上次讀到的地方，開始讀。讀了兩段，你不確定你有沒有真的理解，你重新讀了一遍。讀了一頁，你的手本能地去摸手機。你把手機翻面放好，繼續讀。讀了三頁，你發現你的眼睛在看字，但你不確定你的腦子有沒有在處理內容。讀了五頁，你感到一股強烈的衝動想去做別的事——任何事，只要不是繼續讀這本書。你放下書，拿起手機。</p>
+        <p>你告訴自己：「可能這本書就是沒那麼有趣。」但那本書，三個月前你買它的時候，你非常期待讀它。不是書的問題，是你的深度專注能力，已經被磨損了。</p>
+      </div>
+
+      <h2>什麼是深度工作的消失？</h2>
+      <p>電腦科學家卡爾·紐波特在他的著作《深度工作力》（Deep Work）裡提出：在我們這個時代，深度工作——在沒有干擾的狀態下進行高認知要求任務的能力——正在變得越來越稀少，同時越來越有價值。它變得稀少，是因為我們的數位環境系統性地侵蝕了進行深度工作所需的能力：長時間的連續專注力，被碎片化的注意力取代了；對複雜問題的慢速深入推理，被對快速資訊的即時反應取代了；忍受認知上的不確定和困難的能力，被遇到困難就切換出去的習慣取代了。</p>
+
+      <h2>你的大腦發生了什麼？</h2>
+      <p>神經可塑性（Neuroplasticity）是大腦的一個核心特性：你反覆做什麼，你的大腦就朝著支持那個行為的方向重塑。如果你反覆練習深度專注，你的大腦就發展出更強的深度專注迴路。如果你反覆練習頻繁切換和碎片化消費，你的大腦就發展出更強的「快速切換」迴路，同時讓「維持長時間專注」的迴路退化。</p>
+      <p>好消息是：神經可塑性也意味著，如果你改變習慣，大腦也可以往另一個方向重塑。它不是永久的損傷，但它需要時間和刻意的練習才能逆轉。</p>
+
+      <h2>深度工作消失的六個徵兆</h2>
+      <h3>① 你讀長文章讀不完</h3>
+      <p>你點開一篇五千字的文章，讀了一千字，你開始感到不耐煩，你往下滑，試圖找出「重點在哪裡」，然後放棄。你不是不感興趣——你點開它就是因為你感興趣。但你的閱讀耐力，已經不夠支撐你讀完一篇長文章了。</p>
+
+      <h3>② 你無法在一個想法上停留超過幾分鐘</h3>
+      <p>你有一個很好的想法，你開始思考它，想了兩分鐘，你的大腦飄到別的地方了。長時間在一個問題上持續推理，是深度工作的核心能力之一。如果你發現自己越來越難做到這件事，那是一個警訊。</p>
+
+      <h3>③ 你感到「寫作障礙」或「思考障礙」</h3>
+      <p>你坐下來要寫一篇文章或報告，但你的腦子像是空的。你不是沒有想法，是你無法讓那個想法發展成一個有結構的長文本。如果你的深度專注能力退化了，寫作就會變得格外困難。</p>
+
+      <h3>④ 你容易在困難的地方放棄</h3>
+      <p>你在學一個新技能，遇到了一個困難的概念，你的第一個反應是去查Google，或者換一個更簡單的學習資源。深度學習需要在困難的地方待著，讓你的大腦反覆處理那個難點，直到它被理解和整合。如果你一遇到困難就切換出去，你永遠停留在淺層的理解。</p>
+
+      <h3>⑤ 你的思想在空閒時很難「就這樣待著」</h3>
+      <p>你在等電梯、你在等紅燈、你排隊等待——你能不拿手機、就讓思緒自由漂流嗎？大多數人現在連三十秒的「什麼都不做」都很難忍受。那個空白，是你的大腦需要的整合和創意思考的空間，但你用手機把它填滿了。</p>
+
+      <h3>⑥ 你完成了一天的工作，但不知道你做了什麼</h3>
+      <p>你工作了八小時，你很累，但你說不清楚你今天做了什麼有意義的事。那個感覺，是「你的時間被碎片化消耗了，但沒有集中在任何一件有重量的事上」的訊號。你在忙，但你沒有在深度工作。</p>
+
+      <h2>完整對話實錄</h2>
+      <div class="dialogue-box">
+        <div class="label">情境：惟恩在跟一個老朋友聊。</div>
+        <div class="label">惟恩：</div>我以前可以坐下來讀書讀好幾個小時，現在我讀二十分鐘就分心了。
+        <div class="label">朋友：</div>你覺得是為什麼？
+        <div class="label">惟恩：</div>我不知道，可能是年紀大了？
+        <div class="label">朋友：</div>你幾歲？
+        <div class="label">惟恩：</div>三十二。
+        <div class="label">朋友：</div>三十二歲不是年紀大，你應該還在認知巔峰期。也許不是變笨，是你練習的是別的東西。你每天花多少時間在手機上？
+        <div class="label">惟恩：</div>……螢幕使用時間說五個小時。
+        <div class="label">朋友：</div>你每天練習了五個小時的快速切換，然後你發現你的長時間專注能力退步了，你覺得這兩件事有沒有關係？
+        <div class="label">惟恩（沉默了很長一段時間）：</div>……有。
+      </div>
+
+      <h2>怎麼重建深度工作的能力？</h2>
+      <ul class="method-list">
+        <li><strong>從短開始，刻意拉長。</strong>如果你現在的深度專注上限是十五分鐘，就從十五分鐘開始。每天給自己一個不被打斷的十五分鐘，只做一件高認知需求的事。下週延長到二十分鐘。就像在健身房訓練肌肉一樣，你的深度專注能力也需要漸進式的負荷才能成長。</li>
+        <li><strong>讓無聊成為你的練習。</strong>每天給自己一段「什麼都不做」的時間——五到十分鐘，不看手機，不聽podcast，不做任何事，就讓你的思緒漂流。讓那個不舒服的感覺存在，不要立刻填滿它。</li>
+        <li><strong>讀長文，讀完再說。</strong>每天選一篇長文章或一本書，規定自己讀到某個段落或某個頁數再停下來。不要在讀到「不夠有趣」的時候就放棄——那個不夠有趣的感覺，很可能只是你的大腦在抗拒深度投入。</li>
+        <li><strong>在深度工作後，讓大腦真正休息。</strong>深度工作之後需要真正休息——不是滑手機，而是散步、冥想、和人說話、做飯。讓你的認知系統有真正的恢復時間，它下一次才能再次進入深度狀態。</li>
+      </ul>
+
+      <div class="chapter-summary">
+        本章重點：深度工作的能力不是消失了，它是被你的日常數位習慣系統性地退化了。你每天練習快速切換和碎片化消費，你的大腦就朝著支持那個行為的方向重塑。好消息是，神經可塑性讓你可以把那個過程逆轉——但那需要刻意的練習、允許自己不舒服、以及時間。
+      </div>
+      <div class="chapter-end">§</div>
+      <div class="page-marker">— 第六章　終 —</div>
+    </div>
+
+
+    <!-- ══ 後記 ══ -->
+    <div class="afterword" id="afterword">
+      <div class="afterword-title">
+        <div class="alabel">AFTERWORD</div>
+        <h2>後記：你的注意力是你的人生</h2>
+      </div>
+
+      <p>你讀完了六章。</p>
+      <p>你知道你的注意力是有限的、被設計好的系統在系統性地提取，你知道多巴胺迴路讓你停不下來，你知道每個通知都在偷走你的23分鐘，你知道多工是幻覺，你知道那些APP是刻意設計來對付你的，你知道你的深度工作能力正在退化。</p>
+      <p>現在你可能有兩種反應。第一種：「好，我今天開始戒手機，刪掉所有社群APP，每天只用螢幕一小時。」第二種：「這些我都懂，但我還是會繼續用，因為沒辦法。」</p>
+      <p>這兩種反應，都沒有說到重點。</p>
+      <p>重點不是戒掉，也不是認命，而是：你對你的注意力，從現在開始要有意識。</p>
+      <p>你選擇把注意力給誰，你就是在選擇讓誰塑造你的思想、你的情緒、你的選擇、最終決定了你是誰。那不是小事。那幾乎就是「你是誰」這件事的全部。</p>
+      <p>你的注意力去哪裡，你的人生就在那裡。</p>
+      <p>這不是一本要你放棄科技的書。它是一本讓你看清楚那場正在發生的戰爭的書——然後你可以做出比「本能反應」更有意識的選擇。哪怕每天只多一個有意識的選擇，也是你在那場戰爭裡奪回的一寸領土。</p>
+
+      <div class="divider-line">─　─　─</div>
+
+      <div class="colophon">
+        感謝你讀到最後。<br><br>
+        作者｜盧　林<br>
+        有的沒的小舖　出品
+
+        <div class="next-vol">
+          <strong>認知心理學系列 Vol.5</strong>《語言的陷阱》即將推出<br>
+          你用的詞，決定你怎麼思考。那本書，會讓你重新看待你說的每一句話。
         </div>
       </div>
     </div>
 
-  </div><!-- /main-content -->
-</div><!-- /page-wrap -->
+    <!-- ── 系列導覽（頁底） ── -->
+    <div class="series-nav">
+      <div class="snlabel">認知心理學系列</div>
+      <div class="snbooks">
+        <a href="/cognitive-psychology-vol1.html" class="snbook">Vol.1《你以為你在思考》</a>
+        <a href="/cognitive-psychology-vol2.html" class="snbook">Vol.2《決策陷阱》</a>
+        <a href="/cognitive-psychology-vol3.html" class="snbook">Vol.3《記憶的謊言》</a>
+        <span class="snbook current">Vol.4《注意力劫持》</span>
+        <a href="/cognitive-psychology-vol5.html" class="snbook">Vol.5《語言的陷阱》</a>
+        <a href="/cognitive-psychology-vol6.html" class="snbook">Vol.6《社會壓力下的你》</a>
+      </div>
+      <a href="/cognitive-psychology.html" class="back-link">← 返回認知心理學系列</a>
+    </div>
+
+  </div><!-- .content -->
+</div><!-- .main -->
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // ── IntersectionObserver：捲動高亮 ──
+  (function() {
+    const sections = ['preface','ch1','ch2','ch3','ch4','ch5','ch6','afterword']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    const links = document.querySelectorAll('.sb-toc a');
 
-  const sections = document.querySelectorAll('[id]');
-  const tocLinks = document.querySelectorAll('.toc-nav a');
-  const tocObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        tocLinks.forEach(a => a.classList.remove('active'));
-        const active = document.querySelector(`.toc-nav a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          links.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // 平滑捲動
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // 行動版：點擊後關閉 sidebar
+          if (window.innerWidth <= 768) closeSidebar();
+        }
+      });
     });
-  }, { rootMargin: '-30% 0px -60% 0px' });
-  sections.forEach(s => tocObserver.observe(s));
+
+    // ── Hamburger ──
+    const toggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      toggle.textContent = '✕';
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      toggle.textContent = '☰';
+    }
+    toggle.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    overlay.addEventListener('click', closeSidebar);
+  })();
 </script>
+
 </body>
 </html>
