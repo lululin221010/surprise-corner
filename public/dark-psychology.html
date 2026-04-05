@@ -351,6 +351,34 @@
     margin: 40px 0;
     line-height: 1.7;
   }
+  /* ── 試讀連結 ── */
+  .theme-read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 10px 24px;
+    border: 1px solid var(--card-accent);
+    color: var(--card-accent);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .theme-read-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--card-accent);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+  .theme-read-link:hover { color: var(--bg); }
+  .theme-read-link:hover::before { transform: translateX(0); }
   /* ── CTA ── */
   .cta-block {
     background: var(--bg3);
@@ -536,6 +564,7 @@
         <strong>本冊深入探討</strong>
         控制行為的12種常見面貌、情緒勒索的完整運作機制（恐懼→義務→愧疚三部曲）、為何控制者常常也不知道自己在控制、如何在不激怒對方的情況下悄悄收回主導權
       </div>
+      <a href="/dark-psychology-vol1.html" class="theme-read-link">Vol.1 開始試讀 →</a>
     </div>
 
     <!-- 主題二 -->
@@ -559,6 +588,7 @@
         <strong>本冊深入探討</strong>
         席爾迪尼六大說服原則的實際運作、為何「免費試用」讓你這麼難說不、社群演算法如何悄悄重塑你的世界觀、「停·問·查」三秒鐘清醒法則
       </div>
+      <a href="/dark-psychology-vol2.html" class="theme-read-link">Vol.2 開始試讀 →</a>
     </div>
 
     <!-- 主題三 -->
@@ -581,6 +611,7 @@
         <strong>本冊深入探討</strong>
         黑暗三角的識別特徵與早期紅旗、為何我們常常被這類人強烈吸引、從理想化到貶低再到丟棄的經典操控循環、灰岩法與堅固邊界設立實戰
       </div>
+      <a href="/dark-psychology-vol3.html" class="theme-read-link">Vol.3 開始試讀 →</a>
     </div>
 
     <!-- 主題四 -->
@@ -603,6 +634,7 @@
         <strong>本冊深入探討</strong>
         謊言分類與識別、確認偏誤如何讓你主動忽略真相、自我欺騙的完整心理機制、如何開始更誠實地面對自己
       </div>
+      <a href="/dark-psychology-vol4.html" class="theme-read-link">Vol.4 開始試讀 →</a>
     </div>
 
   </div>

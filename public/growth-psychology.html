@@ -121,6 +121,10 @@
   .cta-desc { font-size: 0.93rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.9; }
   .cta-series { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 36px; }
   .cta-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; padding: 6px 14px; border: 1px solid rgba(80,200,140,0.3); color: var(--text-muted); }
+  .theme-read-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 10px 24px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .theme-read-link::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
+  .theme-read-link:hover { color: var(--bg); }
+  .theme-read-link:hover::before { transform: translateX(0); }
   .cta-btn { display: inline-block; padding: 14px 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; position: relative; overflow: hidden; }
   .cta-btn::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1; }
   .cta-btn:hover { color: var(--bg); }
@@ -218,6 +222,7 @@
         <strong>本冊深入探討</strong>
         固定型與成長型心態的核心差異與真實表現、如何誠實識別自己在哪些領域被困住、面對批評失敗時如何重新詮釋而非攻擊自己、每天可操作的心態轉換練習（把「我不行」改寫成「我現在還不行」）
       </div>
+      <a href="/growth-psychology-vol1.html" class="theme-read-link">Vol.1 開始試讀 →</a>
     </div>
 
     <!-- 主題二 -->
