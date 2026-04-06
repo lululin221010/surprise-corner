@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Place Was Always Different | Trial Edition | That Feeling Series 2 Vol.1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+        :root {
+            --bg: #0f0f0f;
+            --text: #e8e0d0;
+            --accent: #8b6f47;
+            --dark-accent: #5c4730;
+        }
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Source Sans Pro', system-ui, sans-serif;
+            line-height: 1.7;
+            font-size: 18px;
+        }
+        .book-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #1a1612, var(--bg));
+            box-shadow: 0 0 80px rgba(0,0,0,0.9);
+            min-height: 100vh;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-bottom: 1px solid var(--accent);
+            margin-bottom: 60px;
+        }
+        .trial-badge {
+            display: inline-block;
+            background: #3a2a10;
+            border: 1px solid var(--accent);
+            color: #d4a96a;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 5px 18px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .series {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin: 20px 0 10px;
+            color: #f0e6d2;
+        }
+        .subtitle {
+            font-size: 1.35rem;
+            color: #b8a98a;
+            font-style: italic;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+        .author {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+        nav {
+            background: rgba(20,18,15,0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--dark-accent);
+            margin-bottom: 60px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0; padding: 0;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #b8a98a;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links .locked {
+            color: #3a3025;
+            cursor: default;
+            font-size: 1.05rem;
+        }
+        .chapter { margin-bottom: 120px; }
+        .chapter-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            margin-bottom: 30px;
+            color: #f0e6d2;
+            border-left: 6px solid var(--accent);
+            padding-left: 25px;
+        }
+        .chapter-intro {
+            font-style: italic;
+            color: #b8a98a;
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            border-bottom: 1px dashed var(--dark-accent);
+            padding-bottom: 30px;
+        }
+        p { margin-bottom: 1.6em; text-align: justify; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: #f0e6d2; }
+        .pull-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            color: var(--accent);
+            border-left: 4px solid var(--accent);
+            padding-left: 30px;
+            margin: 50px 0;
+            font-style: italic;
+        }
+        footer {
+            text-align: center;
+            padding: 80px 20px 40px;
+            font-size: 0.95rem;
+            color: #776a55;
+            border-top: 1px solid var(--dark-accent);
+        }
+        .page-break {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            margin: 80px 0;
+        }
+        .back-link {
+            text-align: center;
+            margin: 60px 0 20px;
+        }
+        .back-link a {
+            color: #8b6f47;
+            font-size: 13px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: color 0.2s;
+        }
+        .back-link a:hover { color: #d4a96a; }
+
+        /* ── Fade-out + CTA ── */
+        .fade-out-wrap {
+            position: relative;
+            overflow: hidden;
+            max-height: 420px;
+        }
+        .fade-out-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 220px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none;
+        }
+        .cta-box {
+            text-align: center;
+            padding: 60px 30px;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            background: linear-gradient(135deg, #1a1410, #120f0a);
+            margin-top: 0;
+        }
+        .cta-box .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #f0e6d2;
+            margin: 0 0 16px;
+        }
+        .cta-box .cta-sub {
+            font-size: 1.1rem;
+            color: #b8a98a;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .cta-box .chapter-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto 35px;
+            max-width: 500px;
+            text-align: left;
+        }
+        .cta-box .chapter-list li {
+            color: #b8a98a;
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2218;
+            font-size: 1rem;
+        }
+        .cta-box .chapter-list li::before {
+            content: '→ ';
+            color: var(--accent);
+        }
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #0f0f0f;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 16px 42px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+        }
+        .cta-btn:hover { background: #d4a96a; }
+        .cta-note {
+            margin-top: 18px;
+            font-size: 0.9rem;
+            color: #5c4730;
+        }
+    </style>
+</head>
+<body>
+<div class="book-container">
+
+    <header>
+        <div class="trial-badge">&#9655; Trial Edition &mdash; Foreword + Chapter 1 &amp; 2 (partial)</div>
+        <div class="series">That Feeling Series &bull; Series 2 &bull; Vol. 1</div>
+        <h1 class="title">This Place Was Always Different</h1>
+        <p class="subtitle">Taiwan&rsquo;s Landscapes That Carry Something Else</p>
+        <div class="author">by Lu Lin<br>
+        <small>Published by Still Time Corner</small></div>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#foreword">Foreword</a></li>
+            <li><a href="#chapter1">Chapter 1</a></li>
+            <li><a href="#chapter2">Chapter 2 &nbsp;(partial)</a></li>
+            <li><span class="locked">&#128274; Chapter 3</span></li>
+            <li><span class="locked">&#128274; Chapter 4</span></li>
+            <li><span class="locked">&#128274; Chapter 5</span></li>
+        </ul>
+    </nav>
+
+    <!-- FOREWORD -->
+    <section id="foreword" class="chapter">
+        <h2 class="chapter-header">Foreword: The Island That Remembers</h2>
+        <p>Imagine stepping onto an island where the ground itself feels heavier than it should. Not because of the weight of the mountains or the density of the jungles, but because this place has been asked to hold too much for too long.</p>
+        <p>Taiwan sits at the edge of the Philippine Sea Plate and the Eurasian Plate, a restless boundary where the earth constantly pushes and folds against itself. Earthquakes are not interruptions here; they are reminders that the land is still forming. But the tremors you feel when you stand in certain quiet spots are not always coming from below the surface. Sometimes they rise from layers of memory that the island has been forced to carry: waves of settlers, colonizers, soldiers, refugees, and the countless lives that ended abruptly along its roads, in its waters, and among its hills.</p>
+        <p class="pull-quote">This is not a haunted island in the way ghost stories are usually told. It is an island that remembers.</p>
+        <p>Throughout its history, Taiwan has seen regimes rise and fall with a frequency that leaves marks. Indigenous peoples lived here for thousands of years before waves of Han Chinese migrants arrived, followed by Dutch, Spanish, Qing, Japanese, and then the Nationalist government after 1949. Each shift brought new stories, new burials, new reasons for the living to speak softly in certain places.</p>
+        <p>Foreign visitors often remark on Taiwan&rsquo;s breathtaking landscapes&mdash;the steep green mountains dropping into the Pacific, the misty tea plantations, the vibrant night markets. What they rarely sense at first is the quiet understanding among locals that some of these places carry something else. Not evil, not necessarily dangerous in a dramatic sense, but different. A weight. A presence shaped by geography that refuses to forget, history that refuses to smooth itself over, and beliefs that treat the land as a living participant rather than a backdrop.</p>
+        <p>In the chapters that follow, we will walk through specific places where this feeling becomes most tangible. We will not chase cheap thrills or invent shadows. Instead, we will look at how Taiwan&rsquo;s people have learned to live alongside these landscapes&mdash;speaking to them, respecting their rules, and acknowledging that the island was always different because it had no choice but to be.</p>
+        <p>Come with an open mind. Leave your assumptions about what &ldquo;haunted&rdquo; means at the door. This is a conversation between a curious outsider and a place that has seen too many outsiders come and go without ever truly listening.</p>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 1 -->
+    <section id="chapter1" class="chapter">
+        <h2 class="chapter-header">Chapter 1: The Mountain Roads That Locals Don&rsquo;t Drive at Night</h2>
+        <p class="chapter-intro">Some roads in Taiwan are not just routes from one place to another. They are passages where the living and the remembered travel together.</p>
+        <p>If you ask a Taiwanese driver why they avoid certain mountain roads after dark, you will rarely get a direct answer about ghosts. Instead, they might say something practical: the curves are sharp, the fog comes down quickly, and it&rsquo;s easy to make a mistake. But listen longer, and the real reason emerges&mdash;not fear of crashing, but respect for what the road has already taken.</p>
+        <p>Take the Beiyi Highway (&#21271;&#23546;&#20844;&#36335;), the old route connecting Taipei to Yilan County. With its famous &ldquo;nine bends and eighteen turns,&rdquo; this road earned the nickname &ldquo;Highway of Death&rdquo; long before any supernatural tales attached themselves to it. Poor lighting, steep drops, and frequent accidents made it notorious. Drivers used to scatter ghost money&mdash;joss paper burned for the deceased&mdash;along the roadside to appease those who never made it home. Even today, as the road has improved and become popular with motorcyclists, the collective memory lingers.</p>
+        <p>Similar stories cling to the Suhua Highway (&#34987;&#35611;&#20844;&#36335;), the narrow, cliff-hugging route along Taiwan&rsquo;s rugged east coast between Suao and Hualien. For decades, this was one of the most dangerous roads in the world: single-lane sections with no guardrails in places, constant threat of falling rocks, and sheer drops into the Pacific. Construction and maintenance claimed many lives, and typhoons have repeatedly turned sections into graveyards. Memorials to workers and victims still stand quietly beside the modern improvements.</p>
+        <p>These are not random tragedies. Taiwan&rsquo;s central mountain range is young, geologically restless, and prone to landslides. The combination of heavy rainfall, steep terrain, and human determination to connect remote areas has created roads that feel almost alive with the consequences of that ambition. But the cultural layer goes deeper.</p>
+        <p>Among the Atayal (&#27849;&#38282;&#26063;) people, one of Taiwan&rsquo;s Indigenous groups with deep roots in the northern and central mountains, mountains hold sacred power and strict boundaries. The Atayal concept of <em>utux</em>&mdash;ancestral spirits&mdash;guides daily life through <em>gaga</em>, the ancestral teachings and taboos passed down through generations. Certain areas in the high mountains are approached with caution because they belong to the spirits; disturbing them without proper respect can bring misfortune. While not every driver today identifies as Atayal, these older ways of relating to the land have quietly shaped broader Taiwanese attitudes toward mountain spaces: you do not treat them casually.</p>
+        <p>This is why you might hear a taxi driver on a lonely mountain road talking to himself&mdash;or seemingly to someone else. It is not eccentricity. In Taiwanese folk practice, speaking aloud can serve as a gentle announcement to any unseen presences: &ldquo;I&rsquo;m just passing through. I mean no harm. Please let me continue safely.&rdquo; It is a small act of politeness toward the <em>h&ucirc;o xi&omacr;ngd&igrave;</em> (&#22909;&#20249;&#24481;), the &ldquo;good brothers&rdquo;&mdash;a respectful term for wandering or unclaimed spirits who might linger where sudden deaths occurred.</p>
+        <p>Locals will tell you that accidents on these roads often cluster in ways that feel more than statistical. A curve where multiple vehicles have gone over the edge becomes a place where drivers instinctively slow down, honk their horns, or turn on interior lights. Not out of superstition alone, but from a shared understanding that the land here has absorbed too many stories too quickly.</p>
+        <p>Yet these roads are also breathtaking. The Beiyi Highway winds through mist-shrouded forests that feel timeless. The Suhua offers views of marble cliffs plunging into turquoise water that can take your breath away. The tension between beauty and unease is part of what makes them distinctly Taiwanese. The landscape does not hide its history; it wears it openly, and locals have learned to navigate both the physical curves and the invisible ones.</p>
+        <p>When you next ride through Taiwan&rsquo;s mountains at dusk, notice how the conversation in the car quiets. Notice how the driver might reach for the radio or start humming. It is not fear exactly. It is acknowledgment&mdash;that this place was always different, and the respectful way to move through it is to remember that you are only a temporary guest on roads that have carried far more than cars and travelers.</p>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 2 (partial) -->
+    <section id="chapter2" class="chapter">
+        <h2 class="chapter-header">Chapter 2: The Temples That Aren&rsquo;t for Praying</h2>
+        <p class="chapter-intro">Not every temple in Taiwan is a house of gods. Some are quiet shelters for those the living world has forgotten.</p>
+
+        <div class="fade-out-wrap">
+            <p>Walk down almost any older street in Taiwan and you might pass a small, unassuming structure with red lanterns, incense holders, and offerings of food and ghost money. At first glance, it looks like any other neighborhood shrine. But look closer&mdash;no grand statues of popular deities like Mazu or Guanyin dominate the altar. Instead, you may see simple tablets, stones, or even just a quiet space dedicated to <em>h&ucirc;o xi&omacr;ngd&igrave;</em>&mdash;the good brothers, the unclaimed souls who died without proper rites or family to remember them.</p>
+            <p>These are yin miao (&#38452;&#24215;), often translated as &ldquo;ghost temples&rdquo; or &ldquo;yin temples.&rdquo; Unlike regular temples that worship gods, yin temples primarily honor wandering spirits&mdash;particularly those who became <em>g&#363;h&#250;n y&#283;gu&#464;</em> (&#23400;&#39672;&#37326;&#39740;), lonely souls and wild ghosts&mdash;after dying in accidents, wars, or disasters far from home. Taiwan&rsquo;s history of migration, conflict, and natural calamities has left many such souls, and the culture developed a practical, compassionate response: give them a place, feed them, and ask them to keep the peace.</p>
+            <p>The logic is straightforward and deeply rooted in Taiwanese folk belief. If these spirits have nowhere to go and nothing to sustain them, they may cause trouble out of hunger or resentment. By building Wan Shan Tang (&#33836;&#21892;&#22530;, Halls of Ten Thousand Good Deeds) or Da Zhong Miao (&#22823;&#30438;&#24215;, Temples for the Masses), communities offer ongoing care. In return, the spirits are expected to protect the area rather than disturb it. It is a social contract extended to the unseen.</p>
+        </div>
+
+        <!-- CTA BOX -->
+        <div class="cta-box">
+            <p class="cta-title">Continue Reading the Full Edition</p>
+            <p class="cta-sub">
+                The trial ends here. The full edition includes all 5 chapters and a closing essay&mdash;a complete walk through the landscapes that shaped Taiwan&rsquo;s quiet relationship with the unseen.
+            </p>
+            <ul class="chapter-list">
+                <li>Chapter 2 (full) &mdash; The Temples That Aren&rsquo;t for Praying</li>
+                <li>Chapter 3 &mdash; The Old Neighborhoods That Push You Out</li>
+                <li>Chapter 4 &mdash; The Water That Calls</li>
+                <li>Chapter 5 &mdash; Places That Appeared on No Map</li>
+                <li>Closing &mdash; Why This Place Stays With You</li>
+            </ul>
+            <a class="cta-btn" href="/digital">Get the Full Edition</a>
+            <p class="cta-note">One-time purchase &bull; Instant access &bull; Read on any device</p>
+        </div>
+    </section>
+
+    <div class="back-link">
+        <a href="/">&larr; Back to Surprise Corner</a>
+    </div>
+
+    <footer>
+        <p>Trial Edition &bull; This Place Was Always Different by Lu Lin</p>
+        <p>&copy; 2026 Still Time Corner</p>
+        <p>For personal reading only. Full edition available at Surprise Corner.</p>
+    </footer>
+
+</div>
+</body>
+</html>
