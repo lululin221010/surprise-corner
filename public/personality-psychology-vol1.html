@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你以為的你｜人格心理學 Vol.1｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf9fc;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #6d4c9e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #6d4c9e; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    border: 1px solid #6d4c9e;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #6d4c9e;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #6d4c9e;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(109,76,158,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf9fc);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(109,76,158,0.08);
+    border: 1px solid #6d4c9e;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #6d4c9e;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #6d4c9e; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #6d4c9e;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(109,76,158,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #6d4c9e;
+    color: #fff;
+    border-color: #6d4c9e;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">人格心理學</div>
+  <h1>你以為的你</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>你對自己的了解，大部分是錯的。</p>
+<p>這不是在罵你。這是人格心理學告訴我們的事實。我們傾向把自己的人格描述得比實際更一致、更穩定、更有邏輯——因為這樣比較舒服。但研究的結果一再顯示，人類的行為受到情境影響的程度，遠遠超過我們願意承認的。</p>
+<p>心理學家 Walter Mischel 在1968年出版《人格與評估》，提出了一個在當時極具爭議的論點：跨情境的行為一致性，並不像我們以為的那麼強。你在家是一個人，在公司是另一個人，在愛情裡又是另一個人——而你以為這些都是「真實的你」。</p>
+<p>那麼，究竟哪個才是真的你？或者說，有沒有一個固定的「你」存在？</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　人格是什麼</h2>
+<p>「人格」這個詞，來自拉丁文 persona——意思是面具。古希臘劇場裡，演員戴著面具演戲，面具本身就代表了角色。有趣的是，這個詞後來用來指稱「一個人真實的自我」，而它的來源卻是「偽裝」。</p>
+<p>現代人格心理學通常把人格定義為：跨時間、跨情境，相對穩定的思考、感受與行為模式。「相對穩定」這四個字是關鍵。不是絕對穩定，是相對穩定。</p>
+<p>目前最被廣泛接受的人格模型是「五大人格特質」（Big Five），由保羅·科斯塔（Paul Costa）和羅伯特·麥克雷（Robert McCrae）在1990年代確立。這五個維度分別是：開放性、盡責性、外向性、親和性、神經質。幾乎所有主流的人格測量工具，都可以被歸到這五個軸線上。</p>
+<p>但請注意：這個模型描述的是「你傾向如何表現」，不是「你是一個什麼樣的人」。這個差距，比你想像的大。</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/personality-psychology-vol1.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">人格心理學</div>
+  <div class="snbooks">
+    <span class="snbook current">Vol.1《你以為的你》</span>
+<a href="/personality-psychology-vol2-trial.html" class="snbook">Vol.2《你的暗面》</a>
+<a href="/personality-psychology-vol3-trial.html" class="snbook">Vol.3《你怎麼變成這樣》</a>
+<a href="/personality-psychology-vol4-trial.html" class="snbook">Vol.4《你可以不一樣》</a>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你為什麼需要他｜關係心理學 Vol.1｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf8f6;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #8b4560; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #8b4560; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b4560;
+    border: 1px solid #8b4560;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b4560;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #8b4560;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #8b4560;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(139,69,96,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf8f6);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(139,69,96,0.08);
+    border: 1px solid #8b4560;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #8b4560;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #8b4560; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #8b4560;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(139,69,96,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #8b4560;
+    color: #fff;
+    border-color: #8b4560;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">關係心理學</div>
+  <h1>你為什麼需要他</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>你以為你選擇了他。但選擇是從什麼時候開始的？</p>
+<p>依附理論（Attachment Theory）由約翰·鮑比（John Bowlby）在1960至70年代建立，後來由心理學家 Mary Ainsworth 的陌生情境實驗（Strange Situation）細化。這個理論的核心論點是：你在嬰兒期與主要照顧者之間建立的依附模式，會成為你日後所有親密關係的內在工作模型（internal working model）。</p>
+<p>換句話說，你為什麼需要他，可能跟他這個人本身沒有你以為的那麼大的關係——而跟你很久以前學到的某個關係模式，有很大的關係。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　依附模式如何決定你愛的方式</h2>
+<p>Ainsworth 的陌生情境實驗將嬰兒的依附類型分為三類（後來擴展為四類）：安全型、焦慮型、逃避型，以及後來由 Mary Main 加入的混亂型。</p>
+<p>幾十年的後續研究顯示，這些嬰兒期的依附類型在成年後會以不同的面貌重新出現：焦慮型依附的成人傾向在親密關係中需要大量的確認，害怕被拋棄；逃避型依附的成人傾向在關係中保持距離，把獨立說成一種美德；混亂型依附的成人則在靠近和逃跑之間反覆擺盪，往往在最需要連結的時刻，反而做出破壞關係的行為。</p>
+<p>心理學家 Phillip Shaver 和 Cindy Hazan 在1987年的研究中，率先把成人依附風格和鮑比的理論系統性地連結起來，並發現在他們的樣本中，大約有55%的成人屬於安全型，25%屬於逃避型，20%屬於焦慮型。</p>
+<p>問題不在於你屬於哪一種。問題在於：你知道嗎？</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/relationship-psychology-vol1.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">關係心理學</div>
+  <div class="snbooks">
+    <span class="snbook current">Vol.1《你為什麼需要他》</span>
+<a href="/relationship-psychology-vol2-trial.html" class="snbook">Vol.2《為什麼總是你受傷》</a>
+<a href="/relationship-psychology-vol3-trial.html" class="snbook">Vol.3《你愛的不是他是感覺》</a>
+<a href="/relationship-psychology-vol4-trial.html" class="snbook">Vol.4《邊界》</a>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>

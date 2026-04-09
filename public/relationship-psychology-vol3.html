@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你愛的不是他是感覺｜關係心理學 Vol.3｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf8f6;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #8b4560; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #8b4560; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b4560;
+    border: 1px solid #8b4560;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b4560;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #8b4560;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #8b4560;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(139,69,96,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf8f6);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(139,69,96,0.08);
+    border: 1px solid #8b4560;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #8b4560;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #8b4560; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #8b4560;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(139,69,96,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #8b4560;
+    color: #fff;
+    border-color: #8b4560;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">關係心理學</div>
+  <h1>你愛的不是他是感覺</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>你有沒有遇過這種事：關係結束之後，你思念的不是那個人，而是某種感覺——某個下午的氛圍、某種被理解的瞬間、某種你以為會永遠在那裡的安全感。</p>
+<p>這不是說你的感情是假的。這是說：愛的對象，往往比你意識到的更複雜。你愛的可能是他本身，但也可能是他在你身上喚起的某種東西——某種你渴望了很久的感覺，某種你在別的地方找不到的狀態。</p>
+<p>心理學家 Arthur Aron 在1997年提出了「自我擴張理論」（self-expansion theory）：人類被吸引到能讓我們「擴張自我」的對象——那些讓我們感覺更完整、更有趣、更有能力的人和關係。你迷上的不只是他，還有那個跟他在一起時的你。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　愛上一個人還是愛上一種狀態</h2>
+<p>1974年，心理學家 Donald Dutton 和 Arthur Aron 做了一個後來被無數人引用的實驗——「吊橋實驗」。研究者請一位女性助理分別在兩座橋上攔截陌生的男性：一座是搖晃的高危吊橋，一座是穩固的低矮橋。訪問結束後，女助理給受試者電話號碼，說有興趣的話可以進一步了解研究。結果，在危險吊橋上被攔截的男性，之後打電話給女助理的比例明顯更高。</p>
+<p>他們的解釋是：高處的恐懼引發的生理喚起（心跳加速、腎上腺素上升），被大腦誤歸因為對女性的吸引力。你的大腦把「這個情境讓我興奮」和「這個人讓我興奮」搞混了。</p>
+<p>這個研究已經超過五十年，但它說明的現象至今仍然每天在各種關係裡上演。你在壓力下相遇的人、在旅行中認識的人、在某個特殊場合遇見的人——你對他們的感覺，有多少是來自那個情境，而不是那個人本身？</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/relationship-psychology-vol3.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">關係心理學</div>
+  <div class="snbooks">
+    <a href="/relationship-psychology-vol1-trial.html" class="snbook">Vol.1《你為什麼需要他》</a>
+<a href="/relationship-psychology-vol2-trial.html" class="snbook">Vol.2《為什麼總是你受傷》</a>
+<span class="snbook current">Vol.3《你愛的不是他是感覺》</span>
+<a href="/relationship-psychology-vol4-trial.html" class="snbook">Vol.4《邊界》</a>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>

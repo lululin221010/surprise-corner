@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你的暗面｜人格心理學 Vol.2｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf9fc;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #6d4c9e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #6d4c9e; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    border: 1px solid #6d4c9e;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #6d4c9e;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #6d4c9e;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(109,76,158,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf9fc);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(109,76,158,0.08);
+    border: 1px solid #6d4c9e;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #6d4c9e;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #6d4c9e; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #6d4c9e;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(109,76,158,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #6d4c9e;
+    color: #fff;
+    border-color: #6d4c9e;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">人格心理學</div>
+  <h1>你的暗面</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>Carl Jung 說，你沒有變成光的部分，就成了你的影子。</p>
+<p>「陰影」（Shadow）是 Jung 分析心理學裡最重要的概念之一。它指的是你的人格裡那些被壓抑、被否認、被藏起來的面向——那些你不願意承認自己有的特質，那些讓你感到羞恥的欲望，那些你在別人身上強烈厭惡，但其實也存在於你自己身上的東西。</p>
+<p>心理學研究顯示，人格的「暗面」不只存在於診斷為人格障礙的少數人身上。每個人都有暗面——差別只是你對它的意識程度，以及你和它的關係。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　你最討厭的人，可能是一面鏡子</h2>
+<p>心理學家 Roy Baumeister 和他的同事在1990年代進行了一系列研究，探討人們在「投射」（projection）這個防衛機制上的運作方式。投射的意思是：把你不願意承認的自身特質，歸因到別人身上。你不承認自己憤怒，但你覺得對方很有敵意。你不承認自己貪婪，但你覺得別人很勢利。</p>
+<p>Baumeister 的研究發現，人們對他人特質的感知，往往帶有大量的自我投射成分。更有趣的是：那些你對某個特定行為感到強烈道德義憤的人，往往在無意識中自己也有類似的衝動。</p>
+<p>這不是說你的所有批評都是投射。而是說，當你對某個特質有強烈的、幾乎是不成比例的反應時，那個反應值得你停下來問一下：這裡面有沒有你自己的影子？</p>
+<p>Jung 說得更直接：你遇到讓你狂怒的人，很可能是因為他們展示了你最不願意面對的自己。</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/personality-psychology-vol2.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">人格心理學</div>
+  <div class="snbooks">
+    <a href="/personality-psychology-vol1-trial.html" class="snbook">Vol.1《你以為的你》</a>
+<span class="snbook current">Vol.2《你的暗面》</span>
+<a href="/personality-psychology-vol3-trial.html" class="snbook">Vol.3《你怎麼變成這樣》</a>
+<a href="/personality-psychology-vol4-trial.html" class="snbook">Vol.4《你可以不一樣》</a>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>

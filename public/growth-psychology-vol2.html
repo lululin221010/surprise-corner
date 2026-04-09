@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>失敗學｜成長心理學 IV Vol.2｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf8f7;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #8b2635; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #8b2635; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b2635;
+    border: 1px solid #8b2635;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b2635;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #8b2635;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #8b2635;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(139,38,53,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf8f7);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(139,38,53,0.08);
+    border: 1px solid #8b2635;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #8b2635;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #8b2635; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #8b2635;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(139,38,53,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #8b2635;
+    color: #fff;
+    border-color: #8b2635;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/psychology-guide.html">← 返回成長心理學導讀</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">成長心理學 IV</div>
+  <h1>失敗學</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>你從小被教導：失敗是成功之母。這句話說得對，但說得不完整。失敗是成功之母——前提是你得先熬過失敗帶來的羞恥、自我懷疑、還有那種在腦子裡不斷重播的畫面。</p>
+<p>心理學家 Martin Seligman 在1960年代做了一組著名的狗實驗。那些被電擊卻無路可逃的狗，即使後來籠子打開了，也不再嘗試逃跑。牠們學會了：反正沒用。Seligman 把這個現象叫做「習得無助」（learned helplessness）。人也一樣。</p>
+<p>這本書研究的不是如何避免失敗，而是失敗之後，你的大腦究竟發生了什麼——以及那些事情如何在你不知情的情況下，決定你接下來的每一步。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　失敗的記憶為什麼這麼黏</h2>
+<p>2014年，神經科學家 Daniela Schiller 在《自然》期刊發表了一項研究：恐懼記憶並不像我們以為的那樣固定儲存在大腦裡，它每次被提取時都會重新寫入——而且在重新寫入的過程中，可以被修改。</p>
+<p>這個發現讓人又興奮又沮喪。興奮的是：失敗的記憶不是永久的刻痕。沮喪的是：大多數人在提取失敗記憶的時候，不但沒有修改它，還把它寫得更糟。</p>
+<p>心理學把這個現象叫做「反芻」（rumination）。你不只是記得失敗，你還會反覆回到那個場景，用放大鏡盯著每一個細節，同時自動附上一段旁白：「你真的很爛」「早就知道會這樣」「你憑什麼覺得自己可以」。</p>
+<p>問題不在於失敗本身，而在於你的大腦對失敗所做的事。</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/growth-psychology-4-vol2.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/psychology-guide.html" class="paywall-back">← 回到成長心理學導讀</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">成長心理學 IV</div>
+  <div class="snbooks">
+    <a href="/growth-psychology-4-vol1-trial.html" class="snbook">Vol.1《你以為你在成長但你只是在變老》</a>
+<span class="snbook current">Vol.2《失敗學》</span>
+<a href="/growth-psychology-4-vol3-trial.html" class="snbook">Vol.3《習慣的解剖》</a>
+<a href="/growth-psychology-4-vol4-trial.html" class="snbook">Vol.4《動機的真相》</a>
+<a href="/growth-psychology-4-vol5-trial.html" class="snbook">Vol.5《自我認識的邊界》</a>
+<a href="/growth-psychology-4-vol6-trial.html" class="snbook">Vol.6《你與時間的關係》</a>
+
+  </div>
+  <a href="/psychology-guide.html" class="back-link">← 返回成長心理學導讀</a>
+</div>
+
+</body>
+</html>

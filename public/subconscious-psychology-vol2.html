@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>那些你以為忘了的事｜潛意識心理學 Vol.2｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf9f6;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #4a6741; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #4a6741; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #4a6741;
+    border: 1px solid #4a6741;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #4a6741;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #4a6741;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #4a6741;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(74,103,65,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf9f6);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(74,103,65,0.08);
+    border: 1px solid #4a6741;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #4a6741;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #4a6741; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #4a6741;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(74,103,65,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #4a6741;
+    color: #fff;
+    border-color: #4a6741;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">潛意識心理學</div>
+  <h1>那些你以為忘了的事</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>忘記不代表消失。這是記憶研究告訴我們最重要的事之一。</p>
+<p>神經科學家 Joseph LeDoux 的研究顯示，情緒記憶——尤其是恐懼記憶——的儲存路徑和一般的陳述性記憶不同。它走的是杏仁核這條快速通道，不需要經過海馬迴的語言處理，就能被儲存下來。這意味著：你可以忘記某件事「發生了」，但你的身體記得那種感覺。</p>
+<p>你不記得三歲發生的事，但那些事可能仍然以某種方式影響著你現在遇到特定情境時的反應。這不是玄學，這是神經科學。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　記憶不是錄影，是重建</h2>
+<p>心理學家 Elizabeth Loftus 是記憶研究領域最重要的人物之一。她花了幾十年證明一件事：記憶不是像影片一樣被儲存和播放的，它是每次被提取時重新建構的——而重建的過程中，很容易被新的訊息污染。</p>
+<p>她最著名的研究之一，是讓受試者觀看車禍影片，然後用不同的問法詢問細節。當問題用「撞碎」（smashed）而不是「碰到」（hit）這個字，受試者不只記憶中的車速更快，還有更高的比例「記得」看到了碎玻璃——即使影片裡根本沒有碎玻璃。</p>
+<p>Loftus 的研究後來被廣泛應用於司法心理學：目擊者的記憶有多不可靠，對整個司法體系有重大影響。但這個研究更根本的意涵是：你對過去的記憶，不是客觀事實的保存，而是你的大腦根據當下的狀態、情緒、和已知訊息所做的詮釋。</p>
+<p>你以為你忘了的事，可能只是改變了形狀。</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/subconscious-psychology-vol2.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">潛意識心理學</div>
+  <div class="snbooks">
+    <a href="/subconscious-psychology-vol1-trial.html" class="snbook">Vol.1《你不知道你在做什麼》</a>
+<span class="snbook current">Vol.2《那些你以為忘了的事》</span>
+<a href="/subconscious-psychology-vol3-trial.html" class="snbook">Vol.3《你的陰影》</a>
+<a href="/subconscious-psychology-vol4-trial.html" class="snbook">Vol.4《夢在說什麼》</a>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你怎麼變成這樣｜人格心理學 Vol.3｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf9fc;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #6d4c9e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #6d4c9e; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    border: 1px solid #6d4c9e;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #6d4c9e;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #6d4c9e;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(109,76,158,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf9fc);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(109,76,158,0.08);
+    border: 1px solid #6d4c9e;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #6d4c9e;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #6d4c9e; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #6d4c9e;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(109,76,158,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #6d4c9e;
+    color: #fff;
+    border-color: #6d4c9e;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">人格心理學</div>
+  <h1>你怎麼變成這樣</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>你不是天生就這樣的。也不完全是環境造成的。這個答案讓人不舒服，因為它意味著你既沒有辦法推卸責任，也沒有辦法完全負責。</p>
+<p>人格的形成，是遺傳和環境交互作用的結果——但比這個說法更複雜的是：同樣的遺傳在不同環境下會產生完全不同的結果，同樣的環境對不同遺傳組成的人也有截然不同的影響。</p>
+<p>行為遺傳學家 Robert Plomin 在幾十年的雙胞胎研究後得出一個讓很多人感到不安的結論：幾乎所有的心理特質，遺傳都佔了相當大的份量。但同時，他也指出：「非共享環境」——也就是兩個在同一個家庭長大的孩子各自不同的個人化經驗——的影響力，遠比我們以為的大。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　你的童年，沒你以為的那麼重要（但也沒那麼不重要）</h2>
+<p>「童年決定一切」這個說法，既對也錯。</p>
+<p>心理學家 Jerome Kagan 花了幾十年研究氣質（temperament）和後天發展的關係。他的長期追蹤研究顯示：嬰兒期表現出的某些氣質特徵（例如面對新刺激的反應模式），確實能在一定程度上預測成年後的行為傾向。但「一定程度」意味著大量的例外。</p>
+<p>Kagan 特別強調一件事：大多數具有所謂「高反應性」（高度敏感、容易焦慮）氣質的嬰兒，在合適的養育環境下，並不會成長為焦慮的成年人。氣質提供了一個傾向，環境決定了這個傾向能走多遠。</p>
+<p>所以當你說「我就是這樣的人，因為我小時候⋯⋯」的時候，你說的可能有一部分是真的。但那也只是一部分。</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/personality-psychology-vol3.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">人格心理學</div>
+  <div class="snbooks">
+    <a href="/personality-psychology-vol1-trial.html" class="snbook">Vol.1《你以為的你》</a>
+<a href="/personality-psychology-vol2-trial.html" class="snbook">Vol.2《你的暗面》</a>
+<span class="snbook current">Vol.3《你怎麼變成這樣》</span>
+<a href="/personality-psychology-vol4-trial.html" class="snbook">Vol.4《你可以不一樣》</a>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>

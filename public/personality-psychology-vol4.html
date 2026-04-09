@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你可以不一樣｜人格心理學 Vol.4｜盧林著</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #faf9fc;
+    color: #2c2c2c;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+  a { color: #6d4c9e; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page-back {
+    padding: 20px 40px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .page-back a { color: #6d4c9e; }
+  .trial-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    border: 1px solid #6d4c9e;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #6d4c9e;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .author {
+    font-size: 13px;
+    color: #aaa;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #6d4c9e;
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 48px 0 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+  }
+  blockquote {
+    border-left: 3px solid #6d4c9e;
+    padding: 12px 24px;
+    margin: 32px 0;
+    background: rgba(109,76,158,0.08);
+    font-size: 15px;
+    color: #555;
+  }
+  .chapter-fade {
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #faf9fc);
+  }
+  .paywall {
+    margin-top: 48px;
+    padding: 48px;
+    background: rgba(109,76,158,0.08);
+    border: 1px solid #6d4c9e;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .paywall-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .paywall p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #6d4c9e;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+  .paywall-back {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .paywall-back:hover { color: #6d4c9e; }
+  .series-nav {
+    max-width: 720px;
+    margin: 80px auto 0;
+    padding: 32px 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .snlabel {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #6d4c9e;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .snbook:hover { background: rgba(109,76,158,0.08); text-decoration: none; }
+  .snbook.current {
+    background: #6d4c9e;
+    color: #fff;
+    border-color: #6d4c9e;
+  }
+  .back-link {
+    font-size: 13px;
+    color: #888;
+  }
+  @media (max-width: 640px) {
+    .trial-wrap { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1 { font-size: 1.8rem; }
+    .series-nav { padding: 24px; }
+    .paywall { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/ebooks">← 返回電子書</a></div>
+
+<div class="trial-wrap">
+  <div class="trial-badge">試　閱　版</div>
+
+  <div class="series-label">人格心理學</div>
+  <h1>你可以不一樣</h1>
+  <div class="author">盧林著／有的沒的小舖出品</div>
+
+  <div class="divider"></div>
+
+  
+<h2>前言</h2>
+<p>人格可以改變嗎？</p>
+<p>這個問題的答案，比大多數人期待的更複雜。不是「可以」，不是「不可以」，是：在某些條件下，某些特質，在特定的方向上，可以改變——而且改變的幅度通常比你希望的小，但比你以為的大。</p>
+<p>心理學家 Brent Roberts 針對人格在生命歷程中的變化做了大量的縱向研究。他發現人格並非固定不變：大多數人隨著年齡增長，在盡責性、親和性上會有所提升，在神經質上則會下降。這個現象被稱為「人格的成熟原則」（maturity principle）。</p>
+<p>但這不是說你什麼都不用做，時間自然會讓你變好。那些改變，很多來自於特定的生命事件、特定的人際關係、還有你對自己的主動介入。</p>
+
+
+  <div class="chapter-fade">
+    
+<h2>第一章　改變人格有多難</h2>
+<p>2017年，心理學家 Nathan Hudson 和 Chris Fraley 在《人格與社會心理學雜誌》發表了一項研究。他們讓受試者在16週內，有意識地嘗試改變自己的某項人格特質——例如變得更外向，或更有條理。結果：那些真的採取行動去改變的人（而不只是「想要改變」的人），確實在目標特質上出現了顯著的移動。</p>
+<p>但有幾個重要的細節：第一，改變需要持續的行為介入，光靠意圖沒用。第二，改變的幅度因人而異，且受到起始點的限制——如果你在外向性上本來就很低，你也許可以往上走，但不太可能變成一個典型的外向者。第三，改變需要時間，而且很容易在壓力下退回去。</p>
+<p>這說明了一件事：人格改變是可能的，但它更像是調整一個樂器的音調，而不是換一台樂器。</p>
+
+  </div>
+
+  <div class="paywall">
+    <div class="paywall-title">繼續閱讀</div>
+    <p>試閱到這裡。<br>完整版包含前言、六個章節與後記，<br>共約一萬五千字。</p>
+    <a href="/personality-psychology-vol4.html" class="cta-btn">閱讀完整版 →</a>
+    <a href="/ebooks" class="paywall-back">← 回到電子書</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">人格心理學</div>
+  <div class="snbooks">
+    <a href="/personality-psychology-vol1-trial.html" class="snbook">Vol.1《你以為的你》</a>
+<a href="/personality-psychology-vol2-trial.html" class="snbook">Vol.2《你的暗面》</a>
+<a href="/personality-psychology-vol3-trial.html" class="snbook">Vol.3《你怎麼變成這樣》</a>
+<span class="snbook current">Vol.4《你可以不一樣》</span>
+
+  </div>
+  <a href="/ebooks" class="back-link">← 返回電子書</a>
+</div>
+
+</body>
+</html>
