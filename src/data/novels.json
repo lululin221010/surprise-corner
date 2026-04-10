@@ -187,6 +187,25 @@
     "directPdfUrl": "/psychology.html"
   },
   {
+    "id": "that-feeling",
+    "title": "那個感覺 系列",
+    "author": "盧林",
+    "cover": "https://88lwhikbeo2pkibc.public.blob.vercel-storage.com/covers/that-feeling/that-feeling-00.png",
+    "genre": "靈異・心理・科學",
+    "status": "六大系列",
+    "category": "guide",
+    "description": "靈魂意識、台灣在地、詛咒心理、死亡不死、集體靈異、科學邊界——六大系列 36 冊，那些讓你睡不著的問題，這裡都在問。",
+    "tags": [
+      "靈異",
+      "心理",
+      "科學"
+    ],
+    "totalChapters": 0,
+    "updatedAt": "2026-04-10",
+    "createdAt": "2026-04-10",
+    "directPdfUrl": "/that-feeling.html"
+  },
+  {
     "id": "daodu",
     "title": "有的沒的小舖・導讀精選",
     "author": "盧林說的",
