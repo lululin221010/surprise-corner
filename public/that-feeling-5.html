@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集體靈異｜那個感覺 系列五｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── 返回列 ── */
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px 56px;
+    text-align: center;
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 24px;
+  }
+  .series-title {
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+  }
+  .series-sub {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.9;
+    max-width: 560px;
+    margin: 0 auto 48px;
+  }
+
+  /* ── 導言卡 ── */
+  .intro-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 36px 40px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 2.1;
+  }
+  .intro-card p { margin-bottom: 20px; }
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  /* ── 書目區 ── */
+  .volumes-section {
+    max-width: 860px;
+    margin: 0 auto 60px;
+    padding: 0 40px;
+  }
+  .section-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .volumes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .vol-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 28px 24px;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .vol-card:hover {
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+  }
+  .vol-num {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 10px;
+  }
+  .vol-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .vol-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .vol-btn {
+    display: inline-block;
+    padding: 7px 18px;
+    border: 1px solid var(--accent-dim);
+    color: var(--accent);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .vol-btn:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+  }
+  .vol-btn.coming {
+    color: var(--label);
+    border-color: rgba(90,90,138,0.25);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* ── 系列導覽 ── */
+  .series-nav {
+    max-width: 860px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .snbook {
+    padding: 7px 16px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* ── RWD ── */
+  @media (max-width: 640px) {
+    .page-back { padding: 16px 20px; }
+    .hero { padding: 48px 20px 40px; }
+    .series-title { font-size: 2rem; }
+    .intro-card { padding: 24px 20px; }
+    .volumes-section { padding: 0 20px; }
+    .volumes-grid { grid-template-columns: 1fr; }
+    .series-nav { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling.html">← 返回那個感覺</a></div>
+
+<div class="hero">
+  <div class="series-label">那個感覺 · 系列五</div>
+  <h1 class="series-title">集體靈異</h1>
+  <p class="series-sub">為什麼一群人會同時看見同一件不存在的事？<br>UFO、群體幻覺、都市傳說、邪教——<br>不是他們瘋了，是有什麼東西比瘋更難解釋。</p>
+
+  <div class="intro-card">
+    <p>1518年，法國史特拉斯堡。一個女人在街頭開始跳舞，停不下來。一天內，三十人加入她。一個月內，四百人在街上持續跳舞，骨折、衰竭、有人死亡。沒有音樂，沒有指令，沒有組織者。</p>
+    <p>這不是傳說。這是有醫生記錄、有市議會決議、有布道者出面干預的歷史事件。</p>
+    <p>這個系列要研究的，就是這類事情。不是「靈異」的問題，是一個更難回答的問題：當一群人同時相信同一件事、看見同一個東西、做出同樣的行為——他們的大腦裡發生了什麼，社會在裡面扮演什麼角色，還有，你和他們之間的距離，有你以為的那麼遠嗎？</p>
+  </div>
+</div>
+
+<div class="volumes-section">
+  <div class="section-label">系列書目</div>
+  <div class="volumes-grid">
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 1</div>
+      <div class="vol-title">《你們都看見了》</div>
+      <div class="vol-desc">集體目擊、共同幻覺，與那些同時出現在百人眼中的東西。一百個目擊者不會全錯——這個邏輯哪裡出了問題？</div>
+      <div class="btn-row">
+        <a href="/that-feeling-5-vol1-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-5-vol1.html" class="vol-btn">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 2</div>
+      <div class="vol-title">《都市傳說解剖》</div>
+      <div class="vol-desc">它從哪裡來，為什麼你會相信，它要去哪裡。都市傳說不是謠言，是一個社會在說它自己說不出口的事。</div>
+      <div class="btn-row">
+        <a href="/that-feeling-5-vol2-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-5-vol2.html" class="vol-btn">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 3</div>
+      <div class="vol-title">《UFO與我們》</div>
+      <div class="vol-desc">天空裡那個東西，和看見它的人。從羅斯威爾到鳳凰城之光，目擊者不是瘋子——這讓事情更難解釋，不是更容易。</div>
+      <div class="btn-row">
+        <a href="/that-feeling-5-vol3-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-5-vol3.html" class="vol-btn">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 4</div>
+      <div class="vol-title">《恐慌怎麼擴散》</div>
+      <div class="vol-desc">集體歇斯底里的解剖：從1518年舞蹈瘟疫到現代工廠事件，社會性症狀如何在人群中像病毒一樣複製自己。</div>
+      <div class="btn-row">
+        <a href="/that-feeling-5-vol4-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-5-vol4.html" class="vol-btn">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 5</div>
+      <div class="vol-title">《邪教的邏輯》</div>
+      <div class="vol-desc">他們不是瘋子，他們只是找到了歸屬感。邪教的招募、控制與崩解，從天堂之門到太陽聖殿教——加入的人都是普通人。</div>
+      <div class="btn-row">
+        <a href="/that-feeling-5-vol5-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-5-vol5.html" class="vol-btn">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 6</div>
+      <div class="vol-title">《你記錯了，我們一起記錯了》</div>
+      <div class="vol-desc">曼德拉效應、集體假記憶，與那個從未存在的過去。當數百萬人記得同一件沒發生過的事，這到底說明了什麼？</div>
+      <div class="btn-row">
+        <a href="/that-feeling-5-vol6-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-5-vol6.html" class="vol-btn">完整版</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">那個感覺 · 全系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-1.html" class="snbook">系列一｜靈魂與意識</a>
+    <a href="/that-feeling-2.html" class="snbook">系列二｜台灣在地</a>
+    <a href="/that-feeling-3.html" class="snbook">系列三｜詛咒與心理</a>
+    <a href="/that-feeling-4.html" class="snbook">系列四｜死亡與不死</a>
+    <span class="snbook current">系列五｜集體靈異</span>
+    <a href="/that-feeling-6.html" class="snbook">系列六｜科學邊界</a>
+  </div>
+  <a href="/that-feeling.html" class="back-link">← 返回那個感覺</a>
+</div>
+
+</body>
+</html>

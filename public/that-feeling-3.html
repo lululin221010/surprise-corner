@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>詛咒與心理｜那個感覺 系列三｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --accent-light: rgba(122,74,158,0.15);
+  --accent-dim: rgba(122,74,158,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(122,74,158,0.2);
+  --label: #5a5a8a;
+  --curse-accent: #9e4a6a;
+  --curse-dim: rgba(158,74,106,0.4);
+  --curse-light: rgba(158,74,106,0.12);
+  --curse-border: rgba(158,74,106,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+/* 背景紋理 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(158,74,106,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(122,74,158,0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 返回按鈕 */
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--curse-accent); }
+
+/* 主容器 */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+/* 系列標籤 */
+.series-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--curse-accent);
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+/* 主標題區 */
+.hero {
+  padding: 20px 0 60px;
+  border-bottom: 1px solid var(--curse-border);
+  margin-bottom: 60px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 500;
+  letter-spacing: 6px;
+  color: #e8d8e0;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.hero-desc {
+  max-width: 620px;
+  color: var(--text);
+  line-height: 2;
+  font-size: 16px;
+}
+
+/* 核心問題區塊 */
+.core-question {
+  background: var(--curse-light);
+  border-left: 3px solid var(--curse-accent);
+  padding: 28px 32px;
+  margin: 40px 0;
+  border-radius: 0 8px 8px 0;
+}
+.core-question p {
+  font-size: 1.1rem;
+  color: #e0c8d0;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* 導讀正文 */
+.intro-section {
+  margin-bottom: 60px;
+}
+.intro-section h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--curse-accent);
+  margin-bottom: 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.intro-section p {
+  margin-bottom: 24px;
+  color: var(--text);
+  text-align: justify;
+}
+
+/* 六冊卡片區 */
+.books-section {
+  margin-bottom: 60px;
+}
+.books-section h2 {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 32px;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.vol-card {
+  background: var(--card-bg);
+  border: 1px solid var(--curse-border);
+  border-radius: 8px;
+  padding: 28px 24px;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+}
+.vol-card:hover {
+  border-color: var(--curse-accent);
+  background: rgba(158,74,106,0.05);
+}
+
+.vol-num {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--curse-accent);
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+.vol-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #e8d8e0;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.vol-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-family: 'Noto Sans TC', sans-serif;
+  margin-bottom: 20px;
+}
+.vol-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vol-btn {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 7px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.vol-btn.trial {
+  border: 1px solid var(--curse-dim);
+  color: var(--curse-accent);
+  background: transparent;
+}
+.vol-btn.trial:hover {
+  background: var(--curse-light);
+  border-color: var(--curse-accent);
+}
+.vol-btn.full {
+  background: var(--curse-accent);
+  color: #fff;
+  border: 1px solid var(--curse-accent);
+}
+.vol-btn.full:hover {
+  background: #b05070;
+}
+.vol-btn.coming {
+  border: 1px solid rgba(112,112,160,0.2);
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* 編輯說明 */
+.editor-note {
+  background: rgba(122,74,158,0.06);
+  border: 1px solid rgba(122,74,158,0.15);
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 60px;
+}
+.editor-note-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+.editor-note p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 16px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.editor-note p:last-child { margin-bottom: 0; }
+
+/* 底部導覽 */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+  border-top: 1px solid rgba(122,74,158,0.15);
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.bottom-nav a {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.bottom-nav a:hover { color: var(--curse-accent); }
+
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  margin-top: 48px;
+  padding-bottom: 40px;
+}
+
+/* 系列導覽 */
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.15);
+  padding: 32px 48px;
+  margin-top: 40px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.snbook.current {
+  border-color: var(--curse-accent);
+  color: var(--curse-accent);
+  background: var(--curse-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--curse-accent); }
+
+/* RWD */
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .hero-title { font-size: 2rem; }
+  .books-grid { grid-template-columns: 1fr; }
+  .series-nav { padding: 24px; }
+  .bottom-nav { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling.html">← 返回那個感覺</a></div>
+
+<div class="container">
+
+  <div class="series-label">系列三　SERIES THREE</div>
+
+  <div class="hero">
+    <h1 class="hero-title">詛咒與心理</h1>
+    <div class="hero-subtitle">六冊完整系列　那個感覺</div>
+    <p class="hero-desc">
+      詛咒有沒有效，這個問題比你想的更難回答。<br>
+      不是因為靈界神秘，而是因為人的心理結構本來就讓詛咒有機可乘。<br>
+      信仰、暗示、集體意念——科學不否認它們能改變現實。
+    </p>
+
+    <div class="core-question">
+      <p>如果詛咒的力量來自你相信它，那它算真的還是假的？</p>
+    </div>
+  </div>
+
+  <!-- 導讀正文 -->
+  <div class="intro-section">
+    <h2>為什麼是詛咒</h2>
+    <p>
+      每個文化都有詛咒。美索不達米亞泥板上刻著最早的詛咒文字，距今四千年。埃及法老墓室的「詛咒銘文」嚇退了幾個世紀的盜墓者。台灣的「牽亡」「厭勝」「下降頭」有完整的儀式系統。非洲的巫毒、中南美的桑泰利亞、東南亞的黑魔法——地圖上幾乎找不到沒有詛咒文化的地方。
+    </p>
+    <p>
+      這不是巧合。詛咒之所以無處不在，是因為它解決了人類共同的問題：怎麼傷害一個我打不過的人？怎麼解釋我的連續厄運？怎麼讓群體遵守規範，不需要動用物理暴力？
+    </p>
+    <p>
+      詛咒是工具。在它的背後，是完整的心理學、神經科學和社會控制邏輯。
+    </p>
+
+    <h2>科學怎麼說</h2>
+    <p>
+      Nocebo效應（反安慰劑效應）是醫學上的正式現象：相信某件事會傷害你，你的身體會真的受傷。1990年代，哈佛醫學院的Herbert Benson研究了「巫毒死亡」現象——當一個人強烈相信自己被詛咒，他的神經系統可以啟動一連串生理反應，最終導致心臟停止。不需要毒藥，不需要巫師在場。
+    </p>
+    <p>
+      這不是玄學。這是神經科學。
+    </p>
+    <p>
+      自我實現預言、習得性無助、認知失調——這些心理機制讓詛咒在沒有任何超自然力量介入的情況下，完整地發揮作用。這個系列要做的，就是把整個機制拆開來看清楚。
+    </p>
+
+    <h2>這個系列的六個問題</h2>
+    <p>
+      六冊各處理一個核心問題，從懷疑開始，到理解，到解脫。你不需要相信詛咒存在，才能讀這個系列。事實上，不相信的人讀起來可能更有收穫——因為你會發現，詛咒最能傷害的，往往是那些以為自己不信的人。
+    </p>
+  </div>
+
+  <!-- 六冊列表 -->
+  <div class="books-section">
+    <h2>六冊　VOLUMES</h2>
+    <div class="books-grid">
+
+      <div class="vol-card">
+        <div class="vol-num">VOL.1</div>
+        <div class="vol-title">《詛咒是真的嗎》</div>
+        <div class="vol-desc">詛咒的定義、Nocebo效應、為什麼人需要「詛咒」這個解釋框架。從圖坦卡門詛咒的考古紀錄開始，到醫學上有記錄的巫毒死亡案例。</div>
+        <div class="vol-actions">
+          <a href="/that-feeling-3-vol1-trial.html" class="vol-btn trial">試閱</a>
+          <a href="/that-feeling-3-vol1.html" class="vol-btn full">完整版</a>
+        </div>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-num">VOL.2</div>
+        <div class="vol-title">《你被詛咒了嗎》</div>
+        <div class="vol-desc">自我實現預言、受害心態、習得性無助。當一個人開始相信自己被詛咒，他的行為會怎麼配合這個信念，讓預言成真。</div>
+        <div class="vol-actions">
+          <a href="/that-feeling-3-vol2-trial.html" class="vol-btn coming">試閱 即將上線</a>
+        </div>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-num">VOL.3</div>
+        <div class="vol-title">《世界怎麼詛咒人》</div>
+        <div class="vol-desc">各文化詛咒系統的共同結構與社會控制功能。巫毒、降頭、桑泰利亞、卡到陰——為什麼地球上每個文化都發展出詛咒，而且結構驚人相似。</div>
+        <div class="vol-actions">
+          <a href="/that-feeling-3-vol3-trial.html" class="vol-btn coming">試閱 即將上線</a>
+        </div>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-num">VOL.4</div>
+        <div class="vol-title">《家族的咒》</div>
+        <div class="vol-desc">世代創傷、家族業力、集體詛咒信仰的心理根源。甘迺迪家族的「詛咒」被廣泛研究，心理學怎麼解釋一個家族反覆重蹈覆轍的模式。</div>
+        <div class="vol-actions">
+          <a href="/that-feeling-3-vol4-trial.html" class="vol-btn coming">試閱 即將上線</a>
+        </div>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-num">VOL.5</div>
+        <div class="vol-title">《詛咒怎麼殺人》</div>
+        <div class="vol-desc">神經科學、壓力荷爾蒙與真實死亡案例。身體如何在沒有任何外力介入的情況下，因為強烈的信念而關閉。這不是隱喻，這是生理機制。</div>
+        <div class="vol-actions">
+          <a href="/that-feeling-3-vol5-trial.html" class="vol-btn coming">試閱 即將上線</a>
+        </div>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-num">VOL.6</div>
+        <div class="vol-title">《解咒》</div>
+        <div class="vol-desc">儀式的神經機制、脫離詛咒框架的心理路徑。為什麼解咒儀式有時候真的有效，以及你不需要巫師也能完成的認知重建過程。</div>
+        <div class="vol-actions">
+          <a href="/that-feeling-3-vol6-trial.html" class="vol-btn coming">試閱 即將上線</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 編輯說明 -->
+  <div class="editor-note">
+    <div class="editor-note-label">編輯說明　EDITOR'S NOTE</div>
+    <p>
+      這個系列所有案例均有來源記錄：考古文獻、醫學期刊、人類學田野報告、新聞事件。沒有虛構案例，沒有「某研究顯示」這種無法查證的說法。
+    </p>
+    <p>
+      你相不相信詛咒，都可以讀。但讀完之後，你對「相信」這件事本身，可能會有不一樣的看法。
+    </p>
+  </div>
+
+  <!-- 底部導覽 -->
+  <div class="bottom-nav">
+    <a href="/that-feeling.html">← 回到驚喜角落</a>
+    <a href="/that-feeling-3-vol1-trial.html">開始閱讀 Vol.1 試閱 →</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">那個感覺　系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-1.html" class="snbook">系列一　靈魂與意識</a>
+    <a href="/that-feeling-2.html" class="snbook">系列二　台灣在地</a>
+    <span class="snbook current">系列三　詛咒與心理</span>
+    <a href="/that-feeling-4.html" class="snbook">系列四　死亡與不死</a>
+    <a href="/that-feeling-5.html" class="snbook">系列五　集體靈異</a>
+    <a href="/that-feeling-6.html" class="snbook">系列六　科學邊界</a>
+  </div>
+  <a href="/that-feeling.html" class="back-link">← 返回那個感覺</a>
+</div>
+
+</body>
+</html>

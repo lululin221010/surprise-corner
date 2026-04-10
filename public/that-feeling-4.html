@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>死亡與不死｜那個感覺 系列四｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .page-back a:hover { color: var(--accent); }
+
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 70px 40px 48px;
+  }
+
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .hero-desc {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.9;
+    max-width: 600px;
+  }
+
+  .series-intro {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 40px 60px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .series-intro p {
+    color: var(--text);
+    font-size: 16px;
+    line-height: 2;
+    margin-bottom: 22px;
+    max-width: 700px;
+  }
+
+  .series-intro p:last-child { margin-bottom: 0; }
+
+  .volumes-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .section-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 32px;
+  }
+
+  .vol-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .vol-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 28px 26px;
+    transition: border-color 0.25s;
+  }
+
+  .vol-card:hover { border-color: var(--accent-dim); }
+
+  .vol-num {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 10px;
+  }
+
+  .vol-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .vol-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: 22px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+  }
+
+  .vol-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .vol-btn {
+    display: inline-block;
+    padding: 7px 18px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .vol-btn:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+  }
+
+  .vol-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .vol-btn.primary:hover {
+    background: #6a3a8e;
+    border-color: #6a3a8e;
+  }
+
+  .vol-btn.coming {
+    border-color: rgba(122,74,158,0.12);
+    color: var(--label);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .footer-note {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px 50px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+    padding-top: 48px;
+  }
+
+  .footer-note p {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    line-height: 2.2;
+  }
+
+  .footer-nav {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 40px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover { color: var(--accent); }
+
+  .author-line {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--label);
+    margin-top: 16px;
+  }
+
+  @media (max-width: 680px) {
+    .hero, .series-intro, .volumes-section, .footer-note, .footer-nav {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    h1 { font-size: 1.9rem; letter-spacing: 3px; }
+    .vol-grid { grid-template-columns: 1fr; }
+    .page-back { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling.html">← 返回那個感覺</a></div>
+
+<div class="hero">
+  <div class="series-label">那個感覺　系列四</div>
+  <h1>死亡與不死</h1>
+  <p class="hero-desc">人類為什麼這麼難接受消失？轉世、靈媒、與死者的連結——那些未竟的故事。</p>
+  <p class="author-line">盧林著｜有的沒的小舖出品</p>
+</div>
+
+<div class="series-intro">
+  <p>你有沒有想過，我們對死亡的恐懼，可能是人類所有行為裡最重要的驅動力之一？</p>
+  <p>從埃及法老的木乃伊，到現代人花大錢把自己冷凍起來，人類想盡一切辦法不想消失。與此同時，那些宣稱曾短暫死去再回來的人，帶回了什麼故事？那些記得前世的孩子說的，到底是真的還是想像？靈媒傳達的訊息，有沒有可能通過科學的檢驗？</p>
+  <p>這個系列不會告訴你死後有什麼。它只會把那些最難忽略的問題，一個一個攤在你面前。</p>
+</div>
+
+<div class="volumes-section">
+  <div class="section-label">系列四　共六冊</div>
+  <div class="vol-grid">
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 1</div>
+      <div class="vol-title">《你為什麼怕死》</div>
+      <div class="vol-desc">死亡恐懼不只是本能。恐懼管理理論告訴我們，你幾乎所有的行為都在對抗這件事。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-4-vol1-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-4-vol1.html" class="vol-btn primary">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 2</div>
+      <div class="vol-title">《瀕死之後》</div>
+      <div class="vol-desc">NDE 研究的現狀。那些曾經「死去」的人，看見了什麼，記得什麼，科學怎麼解釋。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-4-vol2-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-4-vol2.html" class="vol-btn primary">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 3</div>
+      <div class="vol-title">《與死者同在》</div>
+      <div class="vol-desc">靈媒研究史。從19世紀的通靈桌到現代受控實驗，那些無法輕易解釋的案例。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-4-vol3-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-4-vol3.html" class="vol-btn primary">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 4</div>
+      <div class="vol-title">《轉世的案例》</div>
+      <div class="vol-desc">Ian Stevenson 花40年研究記得前世的孩子。維吉尼亞大學的資料庫，至今沒有滿意的解釋。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-4-vol4-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-4-vol4.html" class="vol-btn primary">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 5</div>
+      <div class="vol-title">《不死的執念》</div>
+      <div class="vol-desc">Alcor 冷凍保存、意識上傳、Ray Kurzweil 的奇點論。人類到底願意花多少代價逃避消失。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-4-vol5-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-4-vol5.html" class="vol-btn primary">完整版</a>
+      </div>
+    </div>
+
+    <div class="vol-card">
+      <div class="vol-num">Vol. 6</div>
+      <div class="vol-title">《好好告別》</div>
+      <div class="vol-desc">庫伯勒-羅斯的五階段、死亡咖啡館運動、善終運動。如何在知道結局的前提下繼續活。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-4-vol6-trial.html" class="vol-btn">試閱</a>
+        <a href="/that-feeling-4-vol6.html" class="vol-btn primary">完整版</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-note">
+  <p>每個系列都有導讀可以先看。<br>覺得對了，再進去讀完整版。</p>
+</div>
+
+<div class="footer-nav">
+  <a href="/">← 回到驚喜角落</a>
+  <a href="/that-feeling.html">← 返回那個感覺</a>
+</div>
+
+</body>
+</html>

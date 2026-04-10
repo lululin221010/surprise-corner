@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科學邊界｜那個感覺 系列六｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 背景粒子效果 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(74,143,168,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 80% 80%, rgba(74,143,168,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 50% 50%, rgba(74,143,168,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+/* 返回按鈕 */
+.page-back {
+  padding: 28px 0 0;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+/* Hero 區 */
+.hero {
+  padding: 64px 0 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+}
+
+.series-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 500;
+  letter-spacing: 6px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: #e0e8f0;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: var(--text);
+  max-width: 680px;
+  margin-bottom: 40px;
+}
+
+.hero-desc em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* 統計列 */
+.stats-row {
+  display: flex;
+  gap: 48px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(74,143,168,0.1);
+  border-bottom: 1px solid rgba(74,143,168,0.1);
+  margin-bottom: 64px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+/* 引言區 */
+.intro-section {
+  margin-bottom: 64px;
+}
+
+.intro-section h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-family: 'Noto Sans TC', sans-serif;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.intro-text {
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.blockquote {
+  margin: 36px 0;
+  padding: 24px 32px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 8px 8px 0;
+}
+
+.blockquote p {
+  font-size: 1rem;
+  line-height: 2;
+  color: #b8c8d8;
+  font-style: italic;
+}
+
+.blockquote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 2px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* 各冊卡片區 */
+.volumes-section {
+  margin-bottom: 64px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-family: 'Noto Sans TC', sans-serif;
+  opacity: 0.8;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(74,143,168,0.15);
+}
+
+/* CSS Grid 兩欄 */
+.vol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.vol-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 28px;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.vol-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vol-card:hover {
+  border-color: var(--accent-dim);
+  background: rgba(74,143,168,0.05);
+}
+
+.vol-card:hover::before { opacity: 1; }
+
+.vol-number {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.vol-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #d0dce8;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.vol-desc {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.vol-btn {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.vol-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-dim);
+  color: #80c8e0;
+}
+
+.vol-btn.coming {
+  color: var(--label);
+  border-color: rgba(90,90,138,0.2);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* 關於這個系列 */
+.about-section {
+  margin-bottom: 64px;
+  padding: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+
+.about-section h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-family: 'Noto Sans TC', sans-serif;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.about-section p {
+  font-size: 1rem;
+  line-height: 2.2;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.about-section p:last-child { margin-bottom: 0; }
+
+/* 其他系列 */
+.other-series {
+  margin-bottom: 48px;
+}
+
+.other-series h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-family: 'Noto Sans TC', sans-serif;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.series-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.series-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid rgba(90,90,138,0.25);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.series-link:hover {
+  color: var(--text);
+  border-color: var(--accent-dim);
+}
+
+/* footer */
+.footer-note {
+  text-align: center;
+  padding: 40px 0 0;
+  border-top: 1px solid rgba(74,143,168,0.1);
+}
+
+.footer-note p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+/* 系列導覽 */
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.snbook:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: var(--accent); }
+
+/* RWD */
+@media (max-width: 640px) {
+  .hero-title { font-size: 2rem; letter-spacing: 4px; }
+  .vol-grid { grid-template-columns: 1fr; }
+  .stats-row { flex-wrap: wrap; gap: 28px; }
+  .about-section { padding: 28px 20px; }
+  .container { padding: 0 20px 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/">← 返回那個感覺</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="series-label">那個感覺・系列六</div>
+    <h1 class="hero-title">科學邊界</h1>
+    <p class="hero-subtitle">當實驗室遇上它解釋不了的事</p>
+    <p class="hero-desc">
+      科學不是答案的終點，是問題的起點。<br>
+      有些數據被壓下去了。有些實驗沒有結論。<br>
+      有些科學家看見了某件事，然後<em>不說話了</em>。<br>
+      這個系列，帶你去那條線的另一邊看看。
+    </p>
+  </section>
+
+  <!-- 統計 -->
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">冊</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">6</span>
+      <span class="stat-label">個你不知道的科學黑洞</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">0</span>
+      <span class="stat-label">個虛構案例</span>
+    </div>
+  </div>
+
+  <!-- 引言 -->
+  <section class="intro-section">
+    <h2>為什麼要讀這個系列</h2>
+    <p class="intro-text">
+      你以為科學是黑白分明的世界。有根據就說，沒根據就不說。
+      測得到就承認，測不到就暫時存疑。
+    </p>
+    <p class="intro-text">
+      但真實的科學史不是這樣的。<br>
+      真實的科學史裡，有研究者因為發表了某篇論文而失去職位。
+      有實驗數據不符合主流理論、所以從未被正式引用。
+      有科學家在退休後才敢說出他們三十年前看到的事。
+    </p>
+
+    <div class="blockquote">
+      <p>「異常數據不代表理論錯了，但它一定代表有什麼事情，我們還不懂。」</p>
+      <cite>—— 托馬斯・庫恩，《科學革命的結構》，1962</cite>
+    </div>
+
+    <p class="intro-text">
+      這個系列不是要你「相信靈異」。<br>
+      這個系列要你去看：<em>在科學能說話的邊界，到底發生了什麼事。</em>
+    </p>
+    <p class="intro-text">
+      每一冊都有名字、有來源、有時間點。不是傳說，是紀錄。
+    </p>
+  </section>
+
+  <!-- 各冊 -->
+  <section class="volumes-section">
+    <div class="section-header">
+      <span class="section-title">六冊書目</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="vol-grid">
+
+      <div class="vol-card">
+        <div class="vol-number">VOL. 01</div>
+        <div class="vol-title">《儀器測到了，但科學家不敢說》</div>
+        <p class="vol-desc">那些真實存在於研究紀錄中、卻從未被正式解釋的異常數據。儀器沒有壞，數據沒有問題，但沒有人敢在論文裡下結論。</p>
+        <a href="/that-feeling-6-vol1-trial.html" class="vol-btn">開始試閱 →</a>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-number">VOL. 02</div>
+        <div class="vol-title">《那個實驗從來沒有結論》</div>
+        <p class="vol-desc">被中途終止、無法複製、結果消失的實驗。有些是因為資金，有些是因為結果太奇怪，有些從來沒有官方說法。</p>
+        <a href="/that-feeling-6-vol2-trial.html" class="vol-btn">開始試閱 →</a>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-number">VOL. 03</div>
+        <div class="vol-title">《你的大腦在你死後還在運作》</div>
+        <p class="vol-desc">瀕死經驗的科學爭議：意識在腦死後數分鐘內仍有活動的實驗紀錄，以及那些試圖解釋這件事的科學家所面對的困境。</p>
+        <a href="/that-feeling-6-vol3-trial.html" class="vol-btn">開始試閱 →</a>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-number">VOL. 04</div>
+        <div class="vol-title">《物理學家相信鬼》</div>
+        <p class="vol-desc">量子力學打開了一道縫。多重宇宙、觀測者效應、非局域性——這些不是比喻，是物理學正式的語言。那條縫裡有什麼？</p>
+        <a href="/that-feeling-6-vol4-trial.html" class="vol-btn">開始試閱 →</a>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-number">VOL. 05</div>
+        <div class="vol-title">《地球上有個地方科學解釋不了》</div>
+        <p class="vol-desc">地磁異常、重力偏差、時間感扭曲——這些地點有測量數據，有科學團隊研究過，但沒有一個令人滿意的解釋。</p>
+        <a href="/that-feeling-6-vol5-trial.html" class="vol-btn">開始試閱 →</a>
+      </div>
+
+      <div class="vol-card">
+        <div class="vol-number">VOL. 06</div>
+        <div class="vol-title">《他們研究這個，然後不說話了》</div>
+        <p class="vol-desc">有一份研究清單：發表後撤稿、研究者改換領域、機構否認曾有這個計畫。不是陰謀論，是可查的公開紀錄。</p>
+        <a href="/that-feeling-6-vol6-trial.html" class="vol-btn">開始試閱 →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 關於這個系列 -->
+  <section class="about-section">
+    <h2>關於這個系列的寫法</h2>
+    <p>
+      這個系列裡的每一個案例，都有可查的來源：論文名稱、研究機構、時間、當事人姓名。
+      不是「有人說」，是「某年某月，某個人，做了某件事，留下了這個紀錄」。
+    </p>
+    <p>
+      科學邊界不等於偽科學。邊界的存在，恰恰說明科學本身是誠實的——
+      它知道自己在哪裡停下來。問題是，停下來的那個地方，到底有什麼？
+    </p>
+    <p>
+      你不需要相信任何事。你只需要願意去那條線旁邊站一下，往另一邊看看。
+    </p>
+  </section>
+
+  <!-- 其他系列 -->
+  <section class="other-series">
+    <h2>那個感覺・其他系列</h2>
+    <div class="series-links">
+      <a href="/that-feeling-1.html" class="series-link">系列一｜靈魂與意識</a>
+      <a href="/that-feeling-2.html" class="series-link">系列二｜台灣在地</a>
+      <a href="/that-feeling-3.html" class="series-link">系列三｜詛咒與心理</a>
+      <a href="/that-feeling-4.html" class="series-link">系列四｜死亡與不死</a>
+      <a href="/that-feeling-5.html" class="series-link">系列五｜集體靈異</a>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <div class="footer-note">
+    <p>每個系列都有導讀可以先看。</p>
+    <p>覺得對了，再進去讀完整版。</p>
+    <p style="margin-top:16px; font-size:12px; opacity:0.5;">盧林著／有的沒的小舖出品</p>
+  </div>
+
+  <!-- 系列導覽 -->
+  <div class="series-nav">
+    <div class="snlabel">那個感覺・系列導覽</div>
+    <div class="snbooks">
+      <a href="/that-feeling-1.html" class="snbook">系列一｜靈魂與意識</a>
+      <a href="/that-feeling-2.html" class="snbook">系列二｜台灣在地</a>
+      <a href="/that-feeling-3.html" class="snbook">系列三｜詛咒與心理</a>
+      <a href="/that-feeling-4.html" class="snbook">系列四｜死亡與不死</a>
+      <a href="/that-feeling-5.html" class="snbook">系列五｜集體靈異</a>
+      <span class="snbook current">系列六｜科學邊界</span>
+    </div>
+    <a href="/that-feeling.html" class="back-link">← 返回那個感覺</a>
+  </div>
+
+</div>
+
+</body>
+</html>

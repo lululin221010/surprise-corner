@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>那個感覺｜盧林著／有的沒的小舖出品</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #4a3060;
+    --accent-light: rgba(74,48,96,0.12);
+    --accent-muted: rgba(74,48,96,0.5);
+    --bg: #0e0e14;
+    --bg2: #13121c;
+    --text: #c0c0d8;
+    --text-bright: #e8e8f0;
+    --text-muted: #7a7a9a;
+    --border: rgba(74,48,96,0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+  }
+
+  /* 返回按鈕 */
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-back a {
+    color: var(--accent-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 40px 60px;
+  }
+
+  .hero-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--accent-muted);
+    margin-bottom: 32px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 8px;
+    color: var(--text-bright);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 60px;
+  }
+
+  /* 主文 */
+  .main-content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .main-content p {
+    margin-bottom: 28px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .main-content p.lead {
+    font-size: 18px;
+    color: var(--text-bright);
+    line-height: 2.1;
+  }
+
+  .pull-quote {
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 28px;
+    margin: 48px 0;
+    color: var(--text-bright);
+    font-size: 18px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .case-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 40px;
+    margin: 48px 0;
+  }
+
+  .case-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent-muted);
+    margin-bottom: 16px;
+  }
+
+  .case-block p {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .case-block p:last-child { margin-bottom: 0; }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent-muted);
+    margin: 60px auto;
+    opacity: 0.5;
+  }
+
+  /* 六系列 */
+  .series-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--accent-muted);
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .series-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .series-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .series-card.ready {
+    cursor: pointer;
+  }
+
+  .series-card.ready:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .series-num {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent-muted);
+    margin-bottom: 10px;
+  }
+
+  .series-name {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+
+  .series-desc {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .series-tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent-muted);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  /* 底部 */
+  .footer-cta {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+    text-align: center;
+  }
+
+  .footer-cta p {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .back-home {
+    display: inline-block;
+    color: var(--accent-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border: 1px solid var(--border);
+    padding: 12px 28px;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .back-home:hover {
+    color: var(--text-bright);
+    border-color: var(--accent);
+  }
+
+  .footer-sig {
+    margin-top: 80px;
+    padding: 32px 40px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  /* RWD */
+  @media (max-width: 640px) {
+    .hero { padding: 60px 24px 40px; }
+    .hero-title { font-size: 2.2rem; letter-spacing: 6px; }
+    .main-content { padding: 0 24px 60px; }
+    .series-section { padding: 0 24px 60px; }
+    .series-grid { grid-template-columns: 1fr; }
+    .footer-cta { padding: 0 24px 80px; }
+    .page-back { padding: 16px 24px; }
+    .case-block { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back">
+  <a href="/">← 回到驚喜角落</a>
+</div>
+
+<div class="hero">
+  <div class="hero-label">盧林著　有的沒的小舖出品</div>
+  <h1 class="hero-title">那個感覺</h1>
+  <div class="hero-sub">六個系列　說那些說不清楚的事</div>
+</div>
+
+<div class="main-content">
+
+  <div class="case-block">
+    <div class="case-label">真實案例　1991　美國亞利桑那州</div>
+    <p>一個叫 Pamela Reynolds 的女人接受了腦瘤手術。為了切除腫瘤，醫生必須把她的體溫降到攝氏15度、抽乾腦部血液、讓腦電波完全歸零。臨床上，她死了。</p>
+    <p>她後來描述了手術室裡的細節——使用的器械形狀、醫生說的話、骨鋸的聲音像什麼。這些細節被主刀醫生 Robert Spetzler 具名確認。</p>
+    <p>問題是，她的眼睛全程貼著膠帶，耳朵塞著測試儀器的噪音。她不可能看見，不可能聽見。</p>
+    <p>她在哪裡？</p>
+  </div>
+
+  <p class="lead">你有過那個感覺嗎？</p>
+
+  <p>不需要這麼戲劇性。可能只是走進一個房間，突然不想待了，但不知道為什麼。可能是夢見某件事，然後它發生了。可能某個人走的那一刻，你在很遠的地方，但你知道。</p>
+
+  <p>你叫它什麼？直覺？巧合？還是你什麼都不叫，因為說出來太奇怪？</p>
+
+  <div class="pull-quote">
+    這個系列不打算說服你相信什麼。<br>
+    只是把那些說不清楚的事攤開來看。
+  </div>
+
+  <p>有人研究過的、有記錄的、還沒有答案的。台灣的、世界的、科學解釋得了的、解釋不了的。六個方向，六個問題。</p>
+
+  <p>那個感覺是真的嗎？</p>
+
+  <p>不知道。但這個問題值得認真問。</p>
+
+</div>
+
+<div class="divider"></div>
+
+<div class="series-section">
+  <div class="series-label">六個系列　選一個你最好奇的方向</div>
+
+  <div class="series-grid">
+
+    <a href="/that-feeling-series1.html" class="series-card ready">
+      <div class="series-num">系列一</div>
+      <div class="series-name">靈魂與意識</div>
+      <div class="series-desc">意識可以離開身體嗎？如果可以，它去了哪裡？瀕死、出竅、催眠——那條邊界到底在哪。</div>
+      <span class="series-tag">閱讀導讀 →</span>
+    </a>
+
+    <div class="series-card">
+      <div class="series-num">系列二</div>
+      <div class="series-name">台灣在地</div>
+      <div class="series-desc">這塊土地上的靈異，為什麼長得跟別的地方不一樣？從地理、歷史、信仰找答案。</div>
+      <span class="series-tag">即將上線</span>
+    </div>
+
+    <div class="series-card">
+      <div class="series-num">系列三</div>
+      <div class="series-name">詛咒與心理</div>
+      <div class="series-desc">詛咒有沒有效？這個問題比你想的更難回答。信仰、暗示、集體意念——科學怎麼說。</div>
+      <span class="series-tag">即將上線</span>
+    </div>
+
+    <div class="series-card">
+      <div class="series-num">系列四</div>
+      <div class="series-name">死亡與不死</div>
+      <div class="series-desc">人類為什麼這麼難接受消失？轉世、靈媒、與死者的連結——那些未竟的故事。</div>
+      <span class="series-tag">即將上線</span>
+    </div>
+
+    <div class="series-card">
+      <div class="series-num">系列五</div>
+      <div class="series-name">集體靈異</div>
+      <div class="series-desc">為什麼一群人會同時看見同一件不存在的事？UFO、群體事件、都市傳說的心理根源。</div>
+      <span class="series-tag">即將上線</span>
+    </div>
+
+    <div class="series-card">
+      <div class="series-num">系列六</div>
+      <div class="series-name">科學邊界</div>
+      <div class="series-desc">當實驗室裡出現了解釋不了的數據，科學家怎麼辦？那些被壓下去的研究和沒有答案的實驗。</div>
+      <span class="series-tag">即將上線</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-cta">
+  <p>每個系列都有導讀可以先看。<br>覺得對了，再進去讀完整版。</p>
+  <a href="/" class="back-home">← 回到驚喜角落</a>
+</div>
+
+<div class="footer-sig">
+  盧林著　有的沒的小舖出品　Surprise Corner
+</div>
+
+</body>
+</html>

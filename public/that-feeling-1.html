@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>靈魂與意識｜那個感覺 系列一｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  /* 背景紋理 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(122,74,158,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 80%, rgba(80,40,120,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* 返回按鈕 */
+  .page-back {
+    padding: 24px 0 0;
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  /* 頁首 */
+  .series-header {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 56px;
+  }
+
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .series-title {
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: 6px;
+    color: #e8e8f8;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .series-subtitle {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+
+  .series-intro {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--text);
+    max-width: 680px;
+    margin-bottom: 24px;
+  }
+
+  .series-intro p {
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  /* 統計列 */
+  .series-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(122,74,158,0.1);
+  }
+
+  .stat-item {
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+  }
+
+  /* 書冊卡片區 */
+  .books-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 24px;
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+
+  @media (max-width: 600px) {
+    .books-grid { grid-template-columns: 1fr; }
+    .series-title { font-size: 2rem; }
+    .series-stats { flex-wrap: wrap; gap: 24px; }
+  }
+
+  .book-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 28px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .book-card:hover {
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+  }
+
+  .book-vol {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 10px;
+  }
+
+  .book-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #e0e0f0;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .book-desc {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .book-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .vol-btn {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 7px 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .vol-btn.trial {
+    background: transparent;
+    border: 1px solid var(--accent-dim);
+    color: var(--text-muted);
+  }
+
+  .vol-btn.trial:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: var(--accent-light);
+  }
+
+  .vol-btn.full {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-dim);
+    color: var(--text);
+  }
+
+  .vol-btn.full:hover {
+    background: rgba(122,74,158,0.25);
+    border-color: var(--accent);
+  }
+
+  .vol-btn.coming {
+    background: transparent;
+    border: 1px solid rgba(90,90,138,0.2);
+    color: var(--label);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* 系列說明區 */
+  .series-about {
+    padding: 40px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    margin-bottom: 48px;
+  }
+
+  .about-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--text);
+    text-align: justify;
+    margin-bottom: 16px;
+  }
+
+  /* 跳轉ST按鈕區 */
+  .cta-section {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .cta-text {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .cta-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #f0f0f8;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .cta-btn:hover { background: #8d5ab5; }
+
+  .back-ss {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .back-ss:hover { color: var(--text); }
+
+  /* 頁尾 */
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(122,74,158,0.1);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    text-align: center;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling.html">← 返回那個感覺</a>
+  </div>
+
+  <header class="series-header">
+    <div class="series-label">那個感覺．系列一</div>
+    <h1 class="series-title">靈魂與意識</h1>
+    <div class="series-subtitle">SOUL &amp; CONSCIOUSNESS</div>
+
+    <div class="series-intro">
+      <p>你有沒有那種感覺——某一刻，你突然覺得「我」這個東西很奇怪。那個坐在這裡想事情的，到底是什麼？它住在哪裡？如果身體壞掉了，它去哪？</p>
+      <p>這個系列不是要你信什麼。它是要你正視一件事：意識這個東西，連最頂尖的神經科學家都還搞不清楚。而在他們搞清楚之前，那些被記錄下來的案例、那些在邊界發生的事，還在等著被解釋。</p>
+      <p>六冊，從你離開身體的那一刻，到意識的定義本身——每一冊都是一個你以為自己知道答案、但其實沒有的問題。</p>
+    </div>
+
+    <div class="series-stats">
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">冊</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">72,000+</div>
+        <div class="stat-label">字</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">盧林</div>
+        <div class="stat-label">著</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 書冊列表 -->
+  <div class="books-label">系列書目</div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-vol">Vol.1</div>
+      <div class="book-title">《你離開身體的那一刻》</div>
+      <div class="book-desc">瀕死體驗、靈魂出竅、意識邊界——那些在死亡邊緣看到的事，不是幻覺那麼簡單。</div>
+      <div class="book-actions">
+        <a href="/that-feeling-1-vol1-trial.html" class="vol-btn trial">試閱</a>
+        <a href="/that-feeling-1-vol1.html" class="vol-btn full">完整版</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-vol">Vol.2</div>
+      <div class="book-title">《你不是你以為的你》</div>
+      <div class="book-desc">自我感消失、人格解離、意識的錯覺——「我」這個感覺，原來可以被拿走。</div>
+      <div class="book-actions">
+        <a href="/that-feeling-1-vol2-trial.html" class="vol-btn trial">試閱</a>
+        <span class="vol-btn coming">完整版即將上線</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-vol">Vol.3</div>
+      <div class="book-title">《睡著之後你去了哪裡》</div>
+      <div class="book-desc">夢境、清醒夢、睡眠意識狀態——你以為你在睡覺，但你的意識從沒有停止。</div>
+      <div class="book-actions">
+        <span class="vol-btn coming">試閱即將上線</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-vol">Vol.4</div>
+      <div class="book-title">《另一個人的記憶》</div>
+      <div class="book-desc">前世記憶案例、身份滲透、意識轉移——如果記憶可以跨越個體，「我」是誰的問題就更大了。</div>
+      <div class="book-actions">
+        <span class="vol-btn coming">試閱即將上線</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-vol">Vol.5</div>
+      <div class="book-title">《你和你之間的距離》</div>
+      <div class="book-desc">催眠、解離狀態、意識層次——你以為你只有一個「你」，但你從來沒有驗證過這件事。</div>
+      <div class="book-actions">
+        <span class="vol-btn coming">試閱即將上線</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-vol">Vol.6</div>
+      <div class="book-title">《意識的邊界在哪裡》</div>
+      <div class="book-desc">動物意識、人工意識、意識的定義之爭——最後這個問題，科學家還沒有答案。</div>
+      <div class="book-actions">
+        <span class="vol-btn coming">試閱即將上線</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 系列說明 -->
+  <div class="series-about">
+    <div class="about-label">關於這個系列</div>
+    <p class="about-text">這個系列的每一冊，都從一個真實發生過的案例出發。不是都市傳說，不是靈異故事——是有記錄、有姓名、有來源的事件，然後問：科學目前能解釋到哪裡？邊界在哪裡？</p>
+    <p class="about-text">盧林不是要說服你相信靈魂存在，也不是要告訴你意識只是大腦的電化學反應。他只是把那條界線攤開給你看，然後讓你自己站在上面想一想。</p>
+    <p class="about-text">每個系列都有導讀可以先看。覺得對了，再進去讀完整版。</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <p class="cta-text">從 Vol.1 開始，先讀試閱版。</p>
+    <div class="cta-row">
+      <a href="/that-feeling-1-vol1-trial.html" class="cta-btn">開始閱讀 Vol.1 試閱</a>
+      <a href="/" class="back-ss">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <footer>
+    盧林著／有的沒的小舖出品
+  </footer>
+
+</div>
+
+</body>
+</html>

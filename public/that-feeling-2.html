@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣在地｜那個感覺 系列二｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --tw-accent: #c0392b;
+    --tw-accent-light: rgba(192,57,43,0.15);
+    --tw-accent-dim: rgba(192,57,43,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  /* ── 返回按鈕 ── */
+  .page-back {
+    padding: 20px 32px;
+    border-bottom: 1px solid rgba(122,74,158,0.1);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 72px 32px 56px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--tw-accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: 8px;
+    color: #e8e8f5;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .hero-subtitle {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--tw-accent-dim);
+    margin-bottom: 32px;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text);
+    max-width: 600px;
+    line-height: 2.1;
+    opacity: 0.9;
+  }
+
+  /* ── 台灣紋理裝飾 ── */
+  .tw-tag {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 6px 16px;
+    border: 1px solid var(--tw-accent-dim);
+    border-radius: 2px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--tw-accent);
+    opacity: 0.8;
+  }
+
+  /* ── 前言區塊 ── */
+  .intro-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+  }
+
+  .intro-block {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--tw-accent-dim);
+    padding: 36px 40px;
+    margin-bottom: 40px;
+  }
+
+  .intro-block p {
+    margin-bottom: 20px;
+    line-height: 2.1;
+    color: var(--text);
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* ── 各冊卡片區 ── */
+  .volumes-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  .section-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--label);
+    margin-bottom: 32px;
+  }
+
+  .volumes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .volumes-grid { grid-template-columns: 1fr; }
+  }
+
+  .vol-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 28px;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vol-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--tw-accent);
+    transition: height 0.3s;
+  }
+
+  .vol-card:hover { border-color: var(--tw-accent-dim); transform: translateY(-2px); }
+  .vol-card:hover::before { height: 100%; }
+
+  .vol-number {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--tw-accent);
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+
+  .vol-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #e0e0f0;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .vol-desc {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .vol-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .vol-btn {
+    display: inline-block;
+    padding: 7px 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: 1px solid var(--tw-accent-dim);
+    color: var(--tw-accent);
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+
+  .vol-btn:hover {
+    background: var(--tw-accent-light);
+    color: #e88;
+  }
+
+  .vol-btn.coming {
+    border-color: rgba(112,112,160,0.2);
+    color: var(--label);
+    pointer-events: none;
+    cursor: default;
+  }
+
+  /* ── 底部文字 ── */
+  .footer-note {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(122,74,158,0.1);
+    padding-top: 40px;
+  }
+
+  .footer-note p {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 2;
+    margin-bottom: 8px;
+  }
+
+  .footer-note .back-ss {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-note .back-ss:hover { color: var(--accent); }
+
+  /* ── 系列導覽 ── */
+  .series-nav {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px 60px;
+    border-top: 1px solid rgba(122,74,158,0.1);
+  }
+
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(122,74,158,0.2);
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--text);
+    background: var(--accent-light);
+    cursor: default;
+  }
+
+  .back-link {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- 返回按鈕 -->
+<div class="page-back"><a href="/that-feeling.html">← 返回那個感覺</a></div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="series-label">那個感覺 · 系列二</div>
+  <h1 class="hero-title">台灣在地</h1>
+  <div class="hero-subtitle">這塊土地上的靈異，為什麼長得跟別的地方不一樣</div>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">
+    台灣的鬼，跟日本的鬼不一樣。台灣的廟，跟東南亞的廟不一樣。這塊島嶼有自己的地形、自己的歷史、自己混血出來的信仰系統。那些讓你背脊發涼的故事，背後都有具體的土地在撐著。
+  </p>
+  <div class="tw-tag">盧林著 · 有的沒的小舖出品</div>
+</div>
+
+<!-- 前言 -->
+<div class="intro-section">
+  <div class="intro-block">
+    <p>
+      你有沒有想過，為什麼台灣人這麼怕農曆七月，但日本人沒有？為什麼台灣的廟這麼多，密度高到讓外國記者拍照都覺得獵奇？為什麼同樣是「鬼」，台灣的好兄弟需要拜，日本的幽靈需要超渡，泰國的厲鬼需要封印——處理方式完全不同？
+    </p>
+    <p>
+      因為靈異不是飄在空中的。靈異長在土地裡。台灣這塊島嶼的形狀、歷史、移民結構、殖民記憶，決定了這裡的靈異長什麼樣子。
+    </p>
+    <p>
+      這個系列不是要說台灣的鬼故事。是要說：這些故事為什麼只在這裡發生。
+    </p>
+  </div>
+</div>
+
+<!-- 各冊 -->
+<div class="volumes-section">
+  <div class="section-label">系列二 · 六冊</div>
+  <div class="volumes-grid">
+
+    <!-- Vol.1 -->
+    <div class="vol-card">
+      <div class="vol-number">VOL. 1</div>
+      <div class="vol-title">《這裡本來就不一樣》</div>
+      <div class="vol-desc">台灣地理、地氣、風水信仰的現實基礎。為什麼山會作怪，海會索命，這塊地形決定了什麼。</div>
+      <div class="vol-actions">
+        <a href="/that-feeling-2-vol1-trial.html" class="vol-btn">開放試閱</a>
+        <a href="/that-feeling-2-vol1.html" class="vol-btn">讀完整版</a>
+      </div>
+    </div>
+
+    <!-- Vol.2 -->
+    <div class="vol-card">
+      <div class="vol-number">VOL. 2</div>
+      <div class="vol-title">《那些廟在說什麼》</div>
+      <div class="vol-desc">民間信仰、乩童、問事的心理與社會學。廟不只是拜神的地方，它是這個社會的神經系統。</div>
+      <div class="vol-actions">
+        <span class="vol-btn coming">即將上線</span>
+      </div>
+    </div>
+
+    <!-- Vol.3 -->
+    <div class="vol-card">
+      <div class="vol-number">VOL. 3</div>
+      <div class="vol-title">《你家附近的鬼故事》</div>
+      <div class="vol-desc">都市傳說的在地變體與集體記憶。那些在特定地點流傳的故事，為什麼只在那裡存在。</div>
+      <div class="vol-actions">
+        <span class="vol-btn coming">即將上線</span>
+      </div>
+    </div>
+
+    <!-- Vol.4 -->
+    <div class="vol-card">
+      <div class="vol-number">VOL. 4</div>
+      <div class="vol-title">《死了要去哪》</div>
+      <div class="vol-desc">台灣喪葬文化、好兄弟信仰、魂魄觀。死亡在這個島嶼的處理方式，跟你想的不一樣。</div>
+      <div class="vol-actions">
+        <span class="vol-btn coming">即將上線</span>
+      </div>
+    </div>
+
+    <!-- Vol.5 -->
+    <div class="vol-card">
+      <div class="vol-number">VOL. 5</div>
+      <div class="vol-title">《台灣人為什麼這麼怕》</div>
+      <div class="vol-desc">禁忌、沖煞、犯太歲——恐懼的文化結構。把這些禁忌攤開來看，你會發現它們都有邏輯。</div>
+      <div class="vol-actions">
+        <span class="vol-btn coming">即將上線</span>
+      </div>
+    </div>
+
+    <!-- Vol.6 -->
+    <div class="vol-card">
+      <div class="vol-number">VOL. 6</div>
+      <div class="vol-title">《這塊土地上的聲音》</div>
+      <div class="vol-desc">台灣靈異事件的田野紀錄與歷史脈絡。有名字、有地點、有記錄的那些事，不是傳說。</div>
+      <div class="vol-actions">
+        <span class="vol-btn coming">即將上線</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 底部 -->
+<div class="footer-note">
+  <p>每個系列都有導讀可以先看。</p>
+  <p>覺得對了，再進去讀完整版。</p>
+  <a href="/" class="back-ss">← 回到驚喜角落</a>
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">那個感覺系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-1.html" class="snbook">系列一｜靈魂與意識</a>
+    <span class="snbook current">系列二｜台灣在地</span>
+    <a href="/that-feeling-3.html" class="snbook">系列三｜詛咒與心理</a>
+    <a href="/that-feeling-4.html" class="snbook">系列四｜死亡與不死</a>
+    <span class="snbook coming" style="pointer-events:none;opacity:0.5;">系列五｜集體靈異</span>
+    <span class="snbook coming" style="pointer-events:none;opacity:0.5;">系列六｜科學邊界</span>
+  </div>
+  <a href="/that-feeling.html" class="back-link">← 返回那個感覺</a>
+</div>
+
+</body>
+</html>
