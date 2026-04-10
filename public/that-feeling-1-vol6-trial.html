@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>意識的邊界在哪裡｜那個感覺 系列一 Vol.6 試閱｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --accent-light: rgba(122,74,158,0.15);
+  --accent-dim: rgba(122,74,158,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(122,74,158,0.2);
+  --label: #5a5a8a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 30% 20%, rgba(122,74,158,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 55% at 75% 80%, rgba(122,74,158,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.book-header {
+  padding: 16px 0 48px;
+  border-bottom: 1px solid var(--card-border);
+  margin-bottom: 56px;
+}
+.series-info {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #d8d0e8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.book-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chapter-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #d8d0e8;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #c8c0d8;
+  letter-spacing: 1px;
+  margin: 36px 0 20px;
+}
+p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.blockquote {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-style: italic;
+  color: #d0c8e0;
+  margin-bottom: 8px;
+}
+.blockquote p:last-child { margin-bottom: 0; }
+.blockquote .source {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.section-divider {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--accent-dim);
+  letter-spacing: 8px;
+  font-size: 14px;
+}
+
+.cutoff-zone {
+  position: relative;
+  overflow: hidden;
+  max-height: 260px;
+}
+.cutoff-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, var(--bg) 80%);
+  pointer-events: none;
+}
+
+.paywall {
+  text-align: center;
+  padding: 56px 32px 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin: 0 0 60px;
+}
+.paywall-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 20px;
+}
+.paywall h3 {
+  font-size: 1.3rem;
+  color: #d8d0e8;
+  margin: 0 0 12px;
+  letter-spacing: 2px;
+}
+.paywall p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.9;
+}
+.paywall-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.paywall-btn:hover { background: #8f5ab8; }
+.paywall-return {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.paywall-return:hover { color: var(--accent); }
+
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.12);
+  padding: 32px 48px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover { border-color: var(--accent); color: var(--text); }
+.snbook.current {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .book-title { font-size: 1.8rem; }
+  .series-nav { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-1.html">← 返回靈魂與意識</a></div>
+
+<div class="container">
+
+  <div class="trial-badge">試閱版　PREVIEW</div>
+
+  <div class="book-header">
+    <div class="series-info">那個感覺　系列一　VOL.6</div>
+    <h1 class="book-title">意識的邊界在哪裡</h1>
+    <div class="book-subtitle">靈魂與意識　終冊</div>
+  </div>
+
+  <!-- 前言 -->
+  <div class="chapter-label">前言　PREFACE</div>
+  <h2>這個問題比你以為的更危險</h2>
+
+  <p>
+    意識是什麼？
+  </p>
+  <p>
+    你以為這是哲學家的問題。其實它是科學最難回答的問題之一，而且越深入，越令人不安。
+  </p>
+  <p>
+    不安不是因為答案指向鬼神，而是因為答案拒絕指向任何清楚的地方。哲學家 David Chalmers 在1995年把這個困境叫做「意識的困難問題」（the hard problem of consciousness）：我們可以解釋大腦怎麼處理信息、怎麼整合感官輸入、怎麼控制行為——但我們無法解釋，為什麼這些過程伴隨著主觀的「感覺」。為什麼看到紅色不只是神經元放電，而是有紅色這個感受？為什麼痛不只是傷害信號，而是「痛的感覺」？
+  </p>
+  <p>
+    這個問題沒有被解決。目前沒有任何科學理論可以令人滿意地回答它。
+  </p>
+  <p>
+    這一冊是「靈魂與意識」系列的終冊。前五冊我們看了意識的各種邊緣狀態——瀕死、解離、夢境、前世記憶、催眠。這一冊要回到最根本的問題：意識的邊界在哪裡？它只存在於人類嗎？動物有意識嗎？人工智慧可以有意識嗎？以及，如果我們連意識是什麼都無法確定，我們又怎麼可能知道靈魂存不存在？
+  </p>
+  <p>
+    這些問題沒有乾淨的答案。但問這些問題本身，就已經讓你站在了一個不同的地方。
+  </p>
+
+  <div class="section-divider">· · ·</div>
+
+  <!-- 第一章 -->
+  <div class="chapter-label">第一章　CHAPTER ONE</div>
+  <h2>意識的困難問題</h2>
+
+  <p>
+    1994年，在亞利桑那州圖森舉行的一場名為「走向意識科學」（Toward a Science of Consciousness）的學術會議上，澳洲哲學家 David Chalmers 發表了一篇後來改變了整個意識研究領域方向的論文。他在論文裡區分了兩類關於意識的問題。
+  </p>
+  <p>
+    「容易問題」（easy problems）：大腦怎麼整合信息？怎麼控制行為？怎麼把注意力集中在特定的刺激上？這些問題雖然科學上還有很多細節未解，但它們的解決路徑是清楚的——繼續研究神經機制就可以。
+  </p>
+  <p>
+    「困難問題」（the hard problem）：為什麼這些神經過程伴隨著主觀的體驗？為什麼有「感覺」這回事？你的大腦處理紅色的光波，這可以用神經科學完整描述——但為什麼這個過程讓你有「看到紅色」的感受，而不只是自動地辨識和反應？
+  </p>
+  <p>
+    這個問題被叫做「困難問題」，不是因為它很複雜，而是因為它在原則上似乎不能用標準的科學方法解決。你可以把神經科學發展到任何程度，完整描述每一個神經元的活動——但這個描述永遠是關於物理過程的，它無法說明為什麼這個物理過程會伴隨著主觀感受。
+  </p>
+
+  <h3>哲學殭屍：一個讓人不安的思想實驗</h3>
+  <p>
+    Chalmers 用一個叫做「哲學殭屍」（philosophical zombie）的思想實驗來說明這個問題。想象一個在物理上和你完全相同的存在——同樣的原子組成、同樣的神經迴路、同樣的行為反應——但沒有任何主觀體驗。它看到紅色，神經元放電，嘴巴說「這是紅色」，但沒有「看到紅色」的感受。它感到痛，神經元放電，嘴巴說「我很痛」，但沒有「痛的感覺」。
+  </p>
+  <p>
+    Chalmers 的問題是：這樣的存在在概念上是可以想象的嗎？如果是，那麼意識就不能只是物理過程——因為同樣的物理過程可以存在於沒有意識的「殭屍」裡。這個論證讓很多哲學家不舒服，也讓很多神經科學家不高興，但目前沒有令人信服的反駁。
+  </p>
+
+  <h3>三個主要的競爭理論</h3>
+  <p>
+    目前對意識「是什麼」的科學和哲學理論，主要有三個方向，它們彼此之間有根本性的分歧。
+  </p>
+  <p>
+    第一是「全局工作空間理論」（Global Workspace Theory），由認知科學家 Bernard Baars 在1988年提出，後來由 Stanislas Dehaene 發展。這個理論認為，意識是大腦的一種特定的信息廣播機制——當信息進入一個全局的「工作空間」，被廣泛分享到大腦各個系統，意識就發生了。這個理論有具體的神經科學預測，可以被實驗測試。
+  </p>
+  <p>
+    第二是「整合信息理論」（Integrated Information Theory，IIT），由神經科學家 Giulio Tononi 在2004年提出。這個理論用一個叫做 Φ（phi）的數學量來定義意識的程度：Φ 越高，意識越豐富。這個理論有一個令人不安的推論：任何有整合信息的系統都有某種程度的意識，包括簡單的電路，甚至可能包括互聯網。
+  </p>
+  <p>
+    第三是「量子意識」理論，最著名的版本由物理學家 Roger Penrose 和麻醉科醫師 Stuart Hameroff 提出（Orch-OR 理論）。他們認為意識涉及神經元微管（microtubules）裡的量子力學過程。這個理論在主流科學界有爭議，但它的提出者不是邊緣人物——Penrose 是圖靈獎得主。
+  </p>
+
+  <!-- 截斷點 -->
+  <div class="cutoff-zone">
+    <h3>為什麼這個問題和靈魂有關</h3>
+    <p>
+      「意識的困難問題」和「靈魂存不存在」之間有一個直接的連結，雖然這個連結通常沒有被明說。
+    </p>
+    <p>
+      如果意識可以被完整地還原為物理過程——如果「看到紅色的感受」只是特定神經元放電的另一種說法——那麼當大腦停止運作，意識就消失，沒有什麼可以存續。靈魂在這個框架裡沒有立足點。
+    </p>
+    <p>
+      但如果 Chalmers 是對的，如果意識確實無法被完整還原為物理過程，如果「感受」是某種不能被神經科學完整捕捉的東西——那麼「大腦停止，意識也停止」這個推論就不再那麼理所當然。這不是說靈魂因此存在，但它說明這個問題比「顯然不存在」要複雜得多。
+    </p>
+  </div>
+
+  <!-- 付費牆 -->
+  <div class="paywall">
+    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
+    <h3>繼續讀完整版</h3>
+    <p>
+      完整版包含：<br>
+      前言＋六章＋後記，全書逾 12,000 字<br>
+      動物意識的科學爭議與劍橋宣言<br>
+      人工智慧能不能有意識<br>
+      系列終章：靈魂的問題，我們站在哪裡
+    </p>
+    <a href="/that-feeling-1-vol6.html" class="paywall-btn">閱讀完整版</a>
+    <a href="/" class="paywall-return">← 回到驚喜角落</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">靈魂與意識　系列一</div>
+  <div class="snbooks">
+    <a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
+    <a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
+    <a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
+    <a href="/that-feeling-1-vol4-trial.html" class="snbook">Vol.4《另一個人的記憶》</a>
+    <a href="/that-feeling-1-vol5-trial.html" class="snbook">Vol.5《你和你之間的距離》</a>
+    <span class="snbook current">Vol.6《意識的邊界在哪裡》</span>
+  </div>
+  <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識</a>
+</div>
+
+</body>
+</html>

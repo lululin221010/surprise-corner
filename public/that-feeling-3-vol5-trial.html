@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>詛咒怎麼殺人｜那個感覺 系列三 Vol.5 試閱｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --card-bg: #14141e;
+  --label: #5a5a8a;
+  --curse-accent: #9e4a6a;
+  --curse-dim: rgba(158,74,106,0.4);
+  --curse-light: rgba(158,74,106,0.10);
+  --curse-border: rgba(158,74,106,0.22);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 10%, rgba(158,74,106,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 85% 90%, rgba(122,74,158,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--curse-accent); }
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--curse-accent);
+  border: 1px solid var(--curse-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.book-header {
+  padding: 16px 0 48px;
+  border-bottom: 1px solid var(--curse-border);
+  margin-bottom: 56px;
+}
+.series-info {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #e8d0d8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.book-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chapter-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--curse-accent);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #e0d0d8;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #d0c0c8;
+  letter-spacing: 1px;
+  margin: 36px 0 20px;
+}
+p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.blockquote {
+  background: var(--curse-light);
+  border-left: 3px solid var(--curse-accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-style: italic;
+  color: #e0c8d0;
+  margin-bottom: 8px;
+}
+.blockquote p:last-child { margin-bottom: 0; }
+.blockquote .source {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.warning-box {
+  background: rgba(158,74,106,0.08);
+  border: 1px solid var(--curse-border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 32px 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.warning-box strong {
+  color: var(--curse-accent);
+  font-size: 10px;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-divider {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--curse-dim);
+  letter-spacing: 8px;
+  font-size: 14px;
+}
+
+.cutoff-zone {
+  position: relative;
+  overflow: hidden;
+  max-height: 260px;
+}
+.cutoff-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, var(--bg) 80%);
+  pointer-events: none;
+}
+
+.paywall {
+  text-align: center;
+  padding: 56px 32px 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--curse-border);
+  border-radius: 12px;
+  margin: 0 0 60px;
+}
+.paywall-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 20px;
+}
+.paywall h3 {
+  font-size: 1.3rem;
+  color: #e8d0d8;
+  margin: 0 0 12px;
+  letter-spacing: 2px;
+}
+.paywall p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.9;
+}
+.paywall-btn {
+  display: inline-block;
+  background: var(--curse-accent);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.paywall-btn:hover { background: #b05070; }
+.paywall-return {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.paywall-return:hover { color: var(--curse-accent); }
+
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.12);
+  padding: 32px 48px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover { border-color: var(--accent); color: var(--text); }
+.snbook.current {
+  border-color: var(--curse-accent);
+  color: var(--curse-accent);
+  background: var(--curse-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--curse-accent); }
+
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .book-title { font-size: 1.8rem; }
+  .series-nav { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-3.html">← 返回詛咒與心理</a></div>
+
+<div class="container">
+
+  <div class="trial-badge">試閱版　PREVIEW</div>
+
+  <div class="book-header">
+    <div class="series-info">那個感覺　系列三　VOL.5</div>
+    <h1 class="book-title">詛咒怎麼殺人</h1>
+    <div class="book-subtitle">詛咒與心理　第五冊</div>
+  </div>
+
+  <div class="warning-box">
+    <strong>關於本冊</strong>
+    本冊討論因信念和心理機制導致的死亡案例，均為有醫學或人類學文獻記錄的真實事件。內容涉及死亡、身體衰竭和心理崩潰的描述，請依自身狀態斟酌閱讀。
+  </div>
+
+  <!-- 前言 -->
+  <div class="chapter-label">前言　PREFACE</div>
+  <h2>這不是隱喻</h2>
+
+  <p>
+    「被詛咒死」這個說法，在大多數現代人聽來是一個隱喻——象徵性的說法，說明某個人遭受了極大的不幸。
+  </p>
+  <p>
+    但這本書要說的，不是隱喻。它是字面意義上的：有人被詛咒，然後死了。這個死亡有具體的生理機制，有醫學文獻記錄，可以在神經科學的框架裡被解釋。
+  </p>
+  <p>
+    不需要鬼神。不需要任何超自然的假設。只需要一個人足夠強烈地相信自己將死——身體就會開始執行這個指令。
+  </p>
+  <p>
+    這是 Nocebo 效應的極端形式。Vol.1 我們簡單提到了它，這一冊要把它打開來完整地看：機制是什麼，歷史上有哪些記錄在案的案例，以及它揭示了什麼關於人類身體與信念之間關係的真相。
+  </p>
+  <p>
+    讀這一冊需要一定程度的心理準備，不是因為內容超自然，而是因為它太自然了——它說明的是人類身體有多容易被自己的心理摧毀。這個事實，比任何鬼故事都更令人不安。
+  </p>
+
+  <div class="section-divider">· · ·</div>
+
+  <!-- 第一章 -->
+  <div class="chapter-label">第一章　CHAPTER ONE</div>
+  <h2>巫毒死亡：有記錄的案例</h2>
+
+  <p>
+    「巫毒死亡」（Voodoo death）這個術語由美國生理學家 Walter Bradford Cannon 在1942年提出，發表在《美國人類學家》（American Anthropologist）期刊。Cannon 在文章裡整理了當時人類學文獻中記錄的多個案例：被部落巫醫宣告詛咒的人，在沒有任何外力傷害的情況下，在數天到數週內死亡。
+  </p>
+  <p>
+    Cannon 提出了一個生理假說：極度的恐懼激活了交感神經系統，導致持續的腎上腺素和正腎上腺素分泌，最終造成心血管系統的崩潰。他把這個過程叫做「神經性休克」（neurogenic shock）。
+  </p>
+
+  <h3>澳洲原住民案例</h3>
+  <p>
+    Cannon 在文章裡引用的案例之一，來自澳洲人類學家 Herbert Basedow 在1925年的田野記錄。Basedow 描述了他親眼目睹一個被「骨頭指向」（bone pointing，一種詛咒儀式，巫醫用動物骨頭指向目標，同時吟唱詛咒）的澳洲原住民男性的反應：
+  </p>
+
+  <div class="blockquote">
+    <p>他站在那裡，眼睛盯著指向他的骨頭，手舉起來試圖擋住死亡的力量。他的臉扭曲成可怕的表情，他的臉頰蒼白，眼睛變得呆滯……他開始顫抖，肌肉不自主地抽搐。他把手捂在臉上，發出哀嚎，然後倒在地上……如果沒有人干預，他可能就這樣死去。</p>
+    <span class="source">── Herbert Basedow，《澳洲原住民》（The Australian Aboriginal），1925年</span>
+  </div>
+
+  <p>
+    Basedow 的記錄是一個觀察，不是一個受控實驗。但它描述的身體反應——血壓驟降、肌肉失去控制、意識喪失——和現代醫學對極度恐懼引發的迷走神經性休克（vasovagal syncope）的描述高度一致。
+  </p>
+
+  <h3>新幾內亞的系統性記錄</h3>
+  <p>
+    人類學家 Laurence Goldman 在他對巴布亞新幾內亞 Huli 族的長期田野研究裡，記錄了多個詛咒死亡案例，並且追蹤了死亡前的詳細過程。他的記錄顯示，這些死亡通常遵循一個固定的模式：詛咒宣告→社會隔離（社區成員開始迴避被詛咒者）→飲食拒絕和身體衰竭→死亡，時間跨度通常在一到三週。
+  </p>
+  <p>
+    Goldman 的分析指出，社會隔離在這個過程裡起了關鍵作用：被詛咒者不只相信自己將死，他還面對著整個社區行為上的確認——人們不再和他說話、不再給他食物、像對待已死的人一樣對待他。這個社會現實的改變，把 Nocebo 效應放大到了致命的程度。
+  </p>
+
+  <!-- 截斷點 -->
+  <div class="cutoff-zone">
+    <h3>死亡的生理路徑</h3>
+    <p>
+      現代神經科學對「巫毒死亡」的生理機制有幾個候選解釋，這些解釋不是互斥的，它們可能在不同的案例裡以不同的組合起作用。
+    </p>
+    <p>
+      第一個機制是「交感神經風暴」（sympathetic storm）：極度的恐懼導致腎上腺素和正腎上腺素的大量持續分泌，這對心臟產生直接的毒性效應。心臟病學家把這個現象叫做「應激性心肌病」（stress cardiomyopathy），又稱「章魚壺心肌病」（Takotsubo cardiomyopathy）——因為心臟在這個狀態下的形狀像日本的章魚捕捉器。這個病症在現代醫學裡有完整的記錄：強烈的情緒衝擊（包括極度的悲傷、恐懼、或甚至極度的快樂）可以在沒有冠狀動脈疾病的情況下造成心臟功能嚴重受損。
+    </p>
+  </div>
+
+  <!-- 付費牆 -->
+  <div class="paywall">
+    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
+    <h3>繼續讀完整版</h3>
+    <p>
+      完整版包含：<br>
+      前言＋六章＋後記，全書逾 12,000 字<br>
+      章魚壺心肌病與應激性死亡的神經科學<br>
+      誤診詛咒的真實醫療案例完整記錄<br>
+      「突然死亡綜合症」與東南亞的 Bangungut 現象
+    </p>
+    <a href="/that-feeling-3-vol5.html" class="paywall-btn">閱讀完整版</a>
+    <a href="/" class="paywall-return">← 回到驚喜角落</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">詛咒與心理　系列三</div>
+  <div class="snbooks">
+    <a href="/that-feeling-3-vol1-trial.html" class="snbook">Vol.1《詛咒是真的嗎》</a>
+    <a href="/that-feeling-3-vol2-trial.html" class="snbook">Vol.2《你被詛咒了嗎》</a>
+    <a href="/that-feeling-3-vol3-trial.html" class="snbook">Vol.3《世界怎麼詛咒人》</a>
+    <a href="/that-feeling-3-vol4-trial.html" class="snbook">Vol.4《家族的咒》</a>
+    <span class="snbook current">Vol.5《詛咒怎麼殺人》</span>
+    <a href="/that-feeling-3-vol6-trial.html" class="snbook">Vol.6《解咒》</a>
+  </div>
+  <a href="/that-feeling-3.html" class="back-link">← 返回詛咒與心理</a>
+</div>
+
+</body>
+</html>

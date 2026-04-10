@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你的大腦在你死後還在運作｜科學邊界 Vol.3｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.page-back { padding: 28px 0 0; }
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.book-header {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--accent-light);
+}
+
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 56px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 36px 0 16px;
+}
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.trial-end {
+  margin: 64px 0 48px;
+  text-align: center;
+  position: relative;
+}
+.trial-end::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+.trial-end-label {
+  position: relative;
+  display: inline-block;
+  background: var(--bg);
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.cta-block {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.cta-block h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin-bottom: 16px;
+}
+.cta-block p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: #5aa0b8; }
+.btn-secondary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(74,143,168,0.25);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px 80px; }
+  .book-title { font-size: 1.5rem; }
+  .cta-block { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 03</div>
+    <h1 class="book-title">你的大腦<br>在你死後還在運作</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版・前言＋第一章前半</span>
+  </div>
+
+  <div class="content">
+
+    <h2>前言　意識在哪裡結束</h2>
+
+    <p>
+      2013年，密西根大學的神經科學家吉莫・博爾吉金（Jimo Borjigin）
+      在實驗室裡讓九隻大鼠心跳停止。
+    </p>
+    <p>
+      心跳停止後的30秒內，大鼠的腦電波活動不是下降——
+      而是<em>飆升</em>。
+      伽瑪波的強度，比清醒狀態下高出好幾倍。
+      這種腦波模式，在人類身上與高度意識活動有關：
+      夢境、頓悟、深度冥想。
+    </p>
+    <p>
+      心臟停了，腦子卻更活躍。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：Borjigin et al.,《美國國家科學院院刊》（PNAS），2013年8月，Vol. 110, No. 35<br>
+      實驗對象：9隻大鼠，心臟停止後持續腦電波監測<br>
+      發現：心跳停止後30秒內，高頻伽瑪波強度顯著上升，神經同步性增強
+    </div>
+
+    <p>
+      博爾吉金在接受訪問時說：
+      「我們不知道這意味著什麼。但它發生了，而且是可重複的。」
+    </p>
+    <p>
+      這本書不是要說「瀕死就是靈魂出竅」。
+      這本書要說的是：<strong>意識在身體死亡後的那段時間，
+      科學既沒有完整的解釋，也沒有辦法忽視它。</strong>
+    </p>
+    <p>
+      那段時間裡發生的事，是這個時代神經科學最不舒服的問題。
+    </p>
+
+    <div class="blockquote">
+      <p>「意識是宇宙中最後一個尚未被科學充分解釋的現象。不是因為我們不夠努力，而是因為我們還不知道該往哪個方向問。」</p>
+      <cite>—— 大衛・查爾默斯（David Chalmers），《有意識的心靈》，1996</cite>
+    </div>
+
+    <p>
+      這本書會帶你看三件事：<br>
+      一、腦死後的腦電波紀錄說了什麼。<br>
+      二、那些在急救後甦醒的人描述了什麼，以及科學怎麼嘗試解釋它。<br>
+      三、為什麼這個領域的研究者，在學術界的處境如此尷尬。
+    </p>
+
+    ---
+
+    <h2>第一章　腦死之後的三十分鐘</h2>
+
+    <h3>AWARE 研究：他們看見了什麼</h3>
+
+    <p>
+      2014年，南安普頓大學的心臟科醫師山姆・帕尼亞（Sam Parnia）
+      發表了一項進行了四年的研究，名為 AWARE
+      （AWAreness during REsuscitation，急救時的意識）。
+    </p>
+    <p>
+      研究橫跨英國、美國、奧地利，追蹤了2060名心跳停止後被急救復甦的患者。
+      其中330人在復甦後有記憶，101人有清晰的死亡期間記憶，
+      46%描述的體驗是正面的，13%感受到恐懼。
+    </p>
+    <p>
+      但最關鍵的不是這些數字。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：Parnia et al.,《復甦》期刊（Resuscitation），2014年12月，Vol. 85, Issue 12<br>
+      研究規模：英、美、奧 15 家醫院，2060名心跳停止患者<br>
+      關鍵案例：一名57歲男性能正確描述急救過程中醫護人員的行動與對話，
+      而他在整個過程中臨床上處於心跳停止狀態
+    </div>
+
+    <p>
+      那個57歲的男性，在心跳停止後的急救過程中，
+      <em>準確描述了醫護人員的位置、對話內容、以及急救室裡一台機器發出的聲音</em>。
+      這些細節被護理人員和醫師獨立確認。
+    </p>
+    <p>
+      帕尼亞在論文裡沒有說「這證明了靈魂出竅」。
+      他說的是：「這個案例的驗證細節，與我們目前對意識和腦功能的理解不相容。」
+    </p>
+    <p>
+      不相容。這是科學語言裡很重的兩個字。
+      不是「奇怪」，不是「有趣」，是<em>不相容</em>。
+    </p>
+
+    <h3>為什麼這個領域的研究者很孤獨</h3>
+
+    <p>
+      帕尼亞的研究發表後，受到的反應分成兩類：
+      一類是媒體的熱烈報導，一類是同行的冷淡。
+    </p>
+    <p>
+      神經科學界的主流立場是：心跳停止後的「意識活動」
+      可以用大腦缺氧時的神經放電來解釋。
+      那些看見光、感到平靜、離開身體的體驗，是大腦在極端壓力下產生的幻覺。
+    </p>
+    <p>
+      這個解釋合理嗎？合理。
+      但它解釋了那個57歲男性準確描述急救細節的現象嗎？
+    </p>
+    <p>
+      沒有。
+    </p>
+    <p>
+      帕尼亞在2022年接受《衛報》訪問時說了一句話：
+      「做這個研究最難的部分，不是找資金，不是設計方法，
+      是說服同行，這個問題值得被認真對待。」
+    </p>
+
+  </div>
+
+  <div class="trial-end">
+    <span class="trial-end-label">試閱到此結束</span>
+  </div>
+
+  <div class="cta-block">
+    <h3>意識的問題還沒有答案</h3>
+    <p>
+      腦死後的伽瑪波為什麼出現？<br>
+      那些體驗能被驗證的案例，科學怎麼解釋？<br>
+      完整版帶你看這個領域最不安的六個面向。
+    </p>
+    <div class="cta-buttons">
+      <a href="/that-feeling-6-vol3.html" class="btn-primary">讀完整版</a>
+      <a href="/" class="btn-secondary">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-6-vol1-trial.html" class="snbook">Vol.1《儀器測到了，但科學家不敢說》</a>
+      <a href="/that-feeling-6-vol2-trial.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+      <span class="snbook current">Vol.3《你的大腦在你死後還在運作》</span>
+      <a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <a href="/that-feeling-6-vol5-trial.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <a href="/that-feeling-6-vol6-trial.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

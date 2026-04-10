@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你離開身體的那一刻｜那個感覺 系列一 Vol.1｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 30% 10%, rgba(122,74,158,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  /* 返回 */
+  .page-back {
+    padding: 28px 0 0;
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  /* 書籍頁首 */
+  .book-header {
+    padding: 56px 0 48px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 52px;
+  }
+
+  .book-meta {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #e8e8f8;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border: 1px solid var(--accent-dim);
+    color: var(--text-muted);
+    border-radius: 2px;
+  }
+
+  /* 內文 */
+  .content h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #e0e0f0;
+    margin: 52px 0 24px;
+    line-height: 1.6;
+  }
+
+  .content h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #c8c8e0;
+    margin: 36px 0 16px;
+  }
+
+  .content p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .content blockquote {
+    border-left: 2px solid var(--accent-dim);
+    margin: 32px 0;
+    padding: 16px 24px;
+    background: var(--accent-light);
+    color: #a0a0c0;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  /* 截止遮罩 */
+  .fade-out {
+    position: relative;
+    margin-top: -120px;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--bg) 80%);
+    pointer-events: none;
+  }
+
+  /* 試閱結束區 */
+  .trial-end {
+    text-align: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .trial-end-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 2;
+  }
+
+  .trial-end-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-full {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #f0f0f8;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #8d5ab5; }
+
+  .back-ss {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--text); }
+
+  /* 系列導覽 */
+  .series-nav {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .snbook:hover {
+    border-color: var(--accent-dim);
+    color: var(--text);
+  }
+
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--text);
+    background: var(--accent-light);
+    cursor: default;
+  }
+
+  .back-link {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 24px 60px; }
+    .book-title { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-1.html">← 返回靈魂與意識系列</a>
+  </div>
+
+  <header class="book-header">
+    <div class="book-meta">那個感覺．系列一｜Vol.1</div>
+    <h1 class="book-title">你離開身體的那一刻</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版</span>
+  </header>
+
+  <div class="content">
+
+    <h2>前言　那個人在天花板上看著自己</h2>
+
+    <p>1991年，一位名叫帕姆·雷諾茲（Pam Reynolds）的美國女性，因為腦幹動脈瘤接受了一種極端手術。外科醫師必須讓她的心臟停跳、大腦活動歸零、體溫降至攝氏15度、把她的血液全部抽出——這個程序叫做「深低溫停循環」，目的是在一個幾乎等於臨床死亡的狀態下進行手術。</p>
+
+    <p>帕姆在那段時間沒有任何腦電活動。按照任何神經科學的定義，她的意識應該是不存在的。</p>
+
+    <p>但她後來描述了整個手術過程。</p>
+
+    <p>她說她看到外科醫師使用的那把骨鋸，說它看起來「像是電動牙刷」，描述了它的把手設計，說鋸片是可以換的而且裝在卡匣裡。她說她聽到了一首歌——後來確認是〈Hotel California〉，在她重新接上體外循環機的時候被播放的。她說她看到自己從天花板上往下看著自己的身體。</p>
+
+    <p>她描述的那把骨鋸細節，後來被手術室人員確認是正確的。</p>
+
+    <p>這個案例被亞特蘭大神經外科醫師Michael Sabom記錄在他1998年的著作《Light and Death》中。它不是都市傳說，不是靈媒故事，不是你奶奶說的有人說的誰說的。它是一個有姓名、有主治醫師、有完整手術記錄的案例，然後它給了神經科學一個到現在還沒有完整答案的問題：</p>
+
+    <p>在大腦活動完全停止的情況下，意識去哪裡了？</p>
+
+    <p>這本書就是從這個問題開始的。</p>
+
+    <p>我不是要說服你相信靈魂存在。也不是要你否認它存在。我只是要帶你去看那條線——那條科學目前能解釋到哪裡、然後就不知道了的線。在那條線的兩側，各自站著一堆人，互相說對方是傻瓜。</p>
+
+    <p>帕姆·雷諾茲的案例讓人不舒服，不是因為它太靈異，而是因為它太具體。</p>
+
+    <hr style="border:none;border-top:1px solid rgba(122,74,158,0.15);margin:40px 0;">
+
+    <h2>第一章　瀕死體驗不是你以為的那樣</h2>
+
+    <h3>它不稀有</h3>
+
+    <p>1982年，美國蓋洛普民調公司（Gallup）做了一個調查，估計有大約800萬美國成年人報告過瀕死體驗（Near-Death Experience，NDE）。這個數字在當時看起來很荒謬，但後來被多個獨立研究重複確認。</p>
+
+    <p>2001年，荷蘭心臟科醫師Pim van Lommel在醫學期刊《刺胳針》（The Lancet）發表了一項研究，追蹤了344名曾在荷蘭心臟病院接受心肺復甦的病患。其中18%的人報告了某種程度的NDE；有12%的人的體驗達到了被研究者定義為「深層NDE」的程度，包含了強烈的正向情緒、時間感知改變、進入一個「其他世界」的感覺，以及在某些案例中對自己身體的「俯視」體驗。</p>
+
+    <p>這篇文章發表在全世界最嚴謹的醫學期刊之一，不是靈異雜誌，不是新時代網站。</p>
+
+    <p>van Lommel在文章結尾寫道：「我們的研究發現，NDE無法以生理、心理、藥理或個人背景因素加以完整解釋。」</p>
+
+    <p>他沒有說「靈魂存在」。他說的是「我們目前的解釋框架無法覆蓋這些現象」。這兩件事差距非常大，但很多人懶得區分。</p>
+
+  </div>
+
+  <!-- 截止遮罩 -->
+  <div class="fade-out"></div>
+
+  <!-- 試閱結束 -->
+  <div class="trial-end">
+    <div class="trial-end-label">試閱結束</div>
+    <p class="trial-end-text">
+      第一章還有「它不快樂」「它有結構」「它讓科學家頭痛的那個問題」三個小節，<br>
+      以及後續五章與後記，完整版共12,000字以上。
+    </p>
+    <div class="trial-end-actions">
+      <a href="/that-feeling-1-vol1.html" class="btn-full">讀完整版</a>
+      <a href="/" class="back-ss">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <!-- 系列導覽 -->
+  <div class="series-nav">
+    <div class="snlabel">靈魂與意識系列</div>
+    <div class="snbooks">
+      <span class="snbook current">Vol.1《你離開身體的那一刻》</span>
+      <a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
+      <a href="/that-feeling-1.html" class="snbook">Vol.3–6 即將上線</a>
+    </div>
+    <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識系列</a>
+  </div>
+
+</div>
+
+</body>
+</html>

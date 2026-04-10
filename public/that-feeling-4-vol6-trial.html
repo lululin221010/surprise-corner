@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>好好告別｜那個感覺 系列四 Vol.6｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6a3a8e; }
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--accent); }
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.6</div>
+    <h1 class="book-title">好好告別</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <h2>前言　我們從來沒有學過怎麼死</h2>
+
+  <p>你學過怎麼騎腳踏車，怎麼煮飯，怎麼填稅單，怎麼和人吵架之後和好。你大概也學過一些怎麼「活得更好」的事——怎麼睡得好，怎麼維持關係，怎麼找到工作的意義。</p>
+
+  <p>但你學過怎麼死嗎？</p>
+
+  <p>不是技術層面的——那是醫生的事。而是：怎麼面對自己的死亡，或者你所愛的人的死亡，讓那個過程不是只有痛苦和混亂，而是有一種說不清楚但真實存在的妥貼感？</p>
+
+  <p>幾乎沒有人學過這件事。現代社會花了大量資源讓死亡在日常生活裡變得不可見——老人在養老院而不是家裡，死亡在醫院而不是床上，遺體在殯儀館而不是讓家人親手洗淨。這種隔離有它的功能，但也帶來了一個代價：我們在死亡真正降臨的時候，幾乎沒有任何準備。</p>
+
+  <p>伊麗莎白·庫伯勒-羅斯（Elisabeth Kübler-Ross）在1969年出版了《論死亡與臨終》（On Death and Dying），那是第一本讓「怎麼死」這個問題進入嚴肅討論的書。她訪談了數百名臨終患者，聽他們說話，記錄他們的體驗，試圖理解一個醫學體系長期以來完全忽視的問題：一個人知道自己快死了，他在那段時間裡需要什麼？</p>
+
+  <p>這本書是系列四的最後一冊。它不會再問「死後有什麼」，那個問題在前五冊裡我們已經盡可能誠實地看過了。這一冊要問的是：在知道結局的前提下，怎麼好好活到最後，怎麼讓告別不只是一件可怕的事。</p>
+
+  <h2>第一章　庫伯勒-羅斯與五個階段</h2>
+
+  <h3>一個瑞士醫生在芝加哥的發現</h3>
+
+  <p>1965年，伊麗莎白·庫伯勒-羅斯是芝加哥大學的精神科住院醫師。有一天，她的一個指導教授要求她為醫學院學生準備一堂課，主題是「人類面臨的極端壓力」。她決定讓學生直接聽臨終患者說話。</p>
+
+  <p>問題是：她需要找到願意接受訪談的臨終患者，而醫院裡幾乎沒有醫師願意讓她接觸他們的患者。「我的患者太虛弱了。」「這樣對他們太殘忍了。」「你會讓他們更焦慮。」她聽到了各種拒絕，最後意識到這些拒絕本身就說明了一件事：是醫師無法面對死亡，不是患者無法談論它。</p>
+
+  <p>她最終找到了一個16歲的女孩，那個女孩患有白血病，知道自己快死了，卻沒有任何人願意和她談論這件事——不是父母，不是醫師，不是護士。所有人都在她面前假裝「一切都會沒事的」，而她一個人承受著那個秘密和孤獨。</p>
+
+  <p>庫伯勒-羅斯讓那個女孩在醫學院的課堂上，隔著單向鏡，和學生們說話。那個女孩說的話讓在場的每個人都沉默了。她沒有崩潰，她沒有憤怒，她說的是：「我希望有人能夠和我說真話，讓我說出我真正的感受，而不是一直假裝。」</p>
+
+  <p>庫伯勒-羅斯在接下來四年裡，訪談了超過兩百名臨終患者。1969年，她把這些訪談整理成了《論死亡與臨終》，提出了後來全世界都知道的「悲傷的五個階段」。</p>
+
+  <h3>五個階段：否認、憤怒、討價還價、抑鬱、接受</h3>
+
+  <p>庫伯勒-羅斯的五個階段，原本是描述臨終患者在知道自己快死之後的心理歷程，不是描述喪親悲傷的框架（雖然後來它被廣泛地用在後者）。</p>
+
+  <p>第一階段，否認（Denial）：「不可能是真的。一定是診斷錯誤。我要再去找另一個醫生。」否認是一種緩衝，讓消息的衝擊有時間被慢慢吸收，而不是一次性地壓垮人。</p>
+
+  <p>第二階段，憤怒（Anger）：「為什麼是我？我做了什麼值得這樣？」憤怒通常指向各種方向——醫師、家人、上天、自己。它是一種有能量的狀態，比麻木感更好，因為它代表你仍然在和現實搏鬥。</p>
+
+  <p>第三階段，討價還價（Bargaining）：「如果我能多活五年，我願意把剩下的時間都奉獻給家人。」或者對神明的祈求：「讓我撐到我孩子的婚禮，我就不再要求什麼了。」這個階段充滿了「如果……就……」的思維，試圖找到某種能夠改變結局的契機。</p>
+
+  <p>第四階段，抑鬱（Depression）：當現實無法迴避，悲傷真正降臨。庫伯勒-羅斯說，這個階段的悲傷不應該被「加油！要正向！」之類的話打斷，因為那樣做是在否認這個悲傷的合理性。抑鬱是面對失去時正常的、必要的情緒處理。</p>
+
+  <p>第五階段，接受（Acceptance）：不是「我很高興我要死了」，而是「我知道了。我準備好了。」這是一種平靜，而不是快樂。很多人在生命的最後階段到達這個狀態，對於那些陪伴在旁的家人，常常反而比患者本人更難接受。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半討論五個階段最常被誤解的地方，以及庫伯勒-羅斯本人在晚年如何看待她自己的理論。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-4-vol6.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+      <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+      <a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
+      <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+      <a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
+      <span class="snbook current">Vol.6《好好告別》</span>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+</body>
+</html>

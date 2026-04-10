@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不死的執念｜那個感覺 系列四 Vol.5｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6a3a8e; }
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--accent); }
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.5</div>
+    <h1 class="book-title">不死的執念</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <h2>前言　人類願意花多少錢不消失</h2>
+
+  <p>在美國亞利桑那州斯科茨代爾，有一棟外觀普通的建築，裡面存放著大約兩百個人體，以及更多顆被單獨保存的頭顱。它們被浸泡在攝氏負196度的液態氮裡，等待一個也許永遠不會到來的時刻：科技進步到足以把他們復活。</p>
+
+  <p>這家公司叫做 Alcor 生命延伸基金會（Alcor Life Extension Foundation）。全身保存需要大約20萬美元，只保存頭顱（神經保存）需要8萬美元。他們有幾千名已支付費用、等待死後被冷凍的會員。</p>
+
+  <p>這不是科幻小說。這是一門正在運作的生意，有法人登記、有會計師、有員工，今天仍然在接受新的申請。</p>
+
+  <p>這是人類最直白的不死計畫之一。不需要靠信仰，不需要靠靈魂的假設，只需要相信科技會在某個未來的時間點追上死亡。</p>
+
+  <p>問題在於：「某個未來的時間點」這個短語，本身就需要非常嚴肅地被審視。這本書要帶你看的，是這個問題的全部厚度——從冷凍保存的實際科學現狀，到意識上傳的哲學困境，到雷·庫茲威爾（Ray Kurzweil）的奇點預言，以及歷史上每一個宣稱找到了長生方法的人，最後都去了哪裡。</p>
+
+  <h2>第一章　Alcor 與液態氮裡的人</h2>
+
+  <h3>冷凍保存的科學基礎</h3>
+
+  <p>人體冷凍保存的想法，最早由物理學家羅伯特·埃廷格（Robert Ettinger）在1964年的著作《永生的前景》（The Prospect of Immortality）裡系統性地提出。埃廷格的邏輯是：死亡在很多情況下是一個可以逆轉的過程，只要造成「死亡」的損傷不是不可修復的。如果一個人在死亡後立即被冷凍，讓身體的分解過程停止，那麼未來的醫學技術也許能夠治療原本造成死亡的疾病，並且將人復活。</p>
+
+  <p>Alcor 成立於1972年，是目前全球最大的人體冷凍保存機構。在技術層面，它的操作程序在死亡宣告後立即開始：工作人員對身體進行化學處理，用一種叫做「玻璃化」（vitrification）的方法，把體內的水分替換成低溫保護劑，以防止細胞在極低溫下因為冰晶形成而被破壞。然後身體被緩慢降溫，最終存放在液態氮的溫度。</p>
+
+  <p>2005年，Alcor 的首席科學家布萊恩·韋羅斯科（Brian Wowk）和同事在學術期刊發表了玻璃化技術的改進成果，顯示用這個方法保存的兔子腎臟，在解凍後仍然可以在另一隻兔子身上正常運作。這是低溫保存領域的一個里程碑，被作為技術可行性的重要證據。</p>
+
+  <p>但兔子腎臟和人類大腦之間，存在一個巨大的鴻溝。</p>
+
+  <h3>真正的問題：大腦的連結組</h3>
+
+  <p>即使冷凍保存能夠完整地保存細胞結構（目前這一點本身就有爭議），復活一個人面臨的核心問題是：大腦裡記錄著這個人的記憶、個性、知識和感受的，是神經元之間數以兆計的突觸連接，也就是所謂的「連結組」（connectome）。</p>
+
+  <p>一個成年人大腦大約有860億個神經元，每個神經元平均有7000個突觸連接，總連接數量大約是100兆。這個連接網絡的具體配置，就是你這個人的物理載體。任何復活程序，不只需要讓細胞存活，還需要讓這個100兆連接的精確配置完整地保存下來，並且在復活時精確地重建。</p>
+
+  <p>目前，科學家連繪製一隻線蟲（302個神經元）的完整連結組，都花了二十多年的時間。人類大腦連結組的完整繪製，在可預見的未來仍然是技術上不可能的任務。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半進入 Alcor 保存的真實案例，以及目前冷凍保存技術在科學上的確切爭議點。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-4-vol5.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+      <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+      <a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
+      <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+      <span class="snbook current">Vol.5《不死的執念》</span>
+      <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+</body>
+</html>

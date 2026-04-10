@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>那個實驗從來沒有結論｜科學邊界 Vol.2｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.page-back { padding: 28px 0 0; }
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.book-header {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--accent-light);
+}
+
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 56px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 36px 0 16px;
+}
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.trial-end {
+  margin: 64px 0 48px;
+  text-align: center;
+  position: relative;
+}
+.trial-end::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+.trial-end-label {
+  position: relative;
+  display: inline-block;
+  background: var(--bg);
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.cta-block {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.cta-block h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin-bottom: 16px;
+}
+.cta-block p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: #5aa0b8; }
+.btn-secondary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(74,143,168,0.25);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px 80px; }
+  .book-title { font-size: 1.5rem; }
+  .cta-block { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 02</div>
+    <h1 class="book-title">那個實驗<br>從來沒有結論</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版・前言＋第一章前半</span>
+  </div>
+
+  <div class="content">
+
+    <h2>前言　未完成不代表失敗，有時代表危險</h2>
+
+    <p>
+      1953年，史丹利・米勒（Stanley Miller）在芝加哥大學的實驗室裡，
+      用一瓶水、幾種氣體、和一道電火花，製造出了胺基酸。
+      生命的基本成分，在實驗室裡憑空出現了。
+    </p>
+    <p>
+      這個實驗有結論：生命的化學起源是可能的。
+      它被寫進教科書，被引用超過五千次，成為二十世紀最重要的實驗之一。
+    </p>
+    <p>
+      但米勒還做過另一個實驗。那個實驗的結果，在他去世後才被人從抽屜裡翻出來。
+      結果比任何人預期的都要複雜。複雜到沒有人知道該怎麼解釋它。
+      那個實驗，從來沒有正式發表過。
+    </p>
+    <p>
+      這本書要談的，就是這種事。
+    </p>
+    <p>
+      <strong>實驗沒有結論，不一定是因為失敗。</strong>
+      有時候是因為結果太奇怪，沒辦法放進現有的框架。
+      有時候是因為還沒來得及，人就不在了。
+      有時候，是因為有人不希望它有結論。
+    </p>
+
+    <div class="blockquote">
+      <p>「一個無法被重複的實驗結果，不代表它是假的。它只代表我們還不知道如何重複它。」</p>
+      <cite>—— 卡爾・波普爾（Karl Popper），《科學發現的邏輯》，1934</cite>
+    </div>
+
+    <p>
+      科學的教科書版本很乾淨：假說、實驗、結論、發表。
+      但真實的科學史是一片混亂：中途終止的計畫、消失的數據、
+      研究者死後才被找到的筆記本、機構否認曾經資助過的研究。
+    </p>
+    <p>
+      這本書帶你去看那片混亂裡，幾個沒有結論的房間。
+    </p>
+
+    ---
+
+    <h2>第一章　被終止的實驗去了哪裡</h2>
+
+    <h3>史丹利・米勒抽屜裡的東西</h3>
+
+    <p>
+      2008年，米勒過世兩年後，他的學生傑弗里・巴達（Jeffrey Bada）
+      在整理老師的實驗室時，發現了幾個密封的玻璃試管。
+      試管上的標籤，寫的是1958年的日期。
+    </p>
+    <p>
+      那是米勒在原始實驗五年後做的後續研究。
+      他模擬的不是早期地球的大氣，而是火山噴發時的環境：
+      硫化氫、二氧化碳、高溫、高壓。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：Bada et al.,《科學》期刊，2008年10月，Vol. 322, Issue 5900<br>
+      發現：米勒1958年實驗試管中含有22種胺基酸，遠超原始實驗的5種<br>
+      研究者說明：「這些樣本在密封狀態下保存了五十年，數據完整可信」
+    </div>
+
+    <p>
+      22種胺基酸。原始實驗只找到5種。
+      如果米勒當年發表了這個結果，生命起源的討論會往完全不同的方向走。
+    </p>
+    <p>
+      為什麼沒發表？巴達說，米勒自己也不確定這些結果代表什麼。
+      他不想在沒有把握的情況下發表。
+      所以他把試管放進抽屜，等到他想清楚了再說。
+      他沒有等到那一天。
+    </p>
+    <p>
+      這是一種無結論：<em>不是被壓制，是被擱置，然後時間到了。</em>
+    </p>
+
+    <h3>史丹佛監獄實驗的那個房間</h3>
+
+    <p>
+      1971年，菲利普・津巴多（Philip Zimbardo）在史丹佛大學進行了一個實驗：
+      把24個心理健康的大學生隨機分成「獄卒」和「囚犯」，
+      關進學校地下室模擬的監獄，預計進行兩週。
+    </p>
+    <p>
+      實驗在第六天就終止了。
+    </p>
+    <p>
+      終止的原因是：扮演獄卒的學生開始對囚犯施以心理虐待，
+      而扮演囚犯的學生出現了真實的心理崩潰。
+      津巴多本人也承認，他在實驗中已經忘記自己是研究者，
+      開始以「監獄長」的身份思考和行動。
+    </p>
+    <p>
+      這個實驗的「結論」是什麼？
+      教科書上說：環境決定行為，人在權力結構中會失去自我。
+      但津巴多在2018年接受重新審查時坦承：<em>實驗的設計有嚴重問題，
+      獄卒事先被告知可以「讓囚犯感到不舒服」。</em>
+      這不是自然發生的，這是被誘導出來的。
+    </p>
+    <p>
+      那麼，這個實驗的真正結論是什麼？
+      沒有人給過一個令所有人滿意的答案。
+      它被引用了幾十年，但它到底證明了什麼，
+      至今仍然是爭議。
+    </p>
+
+  </div>
+
+  <div class="trial-end">
+    <span class="trial-end-label">試閱到此結束</span>
+  </div>
+
+  <div class="cta-block">
+    <h3>還有更多沒有結論的房間</h3>
+    <p>
+      被政府終止的心靈感應研究、<br>
+      消失在機構資料庫裡的氣候實驗、<br>
+      研究者死後才被解密的神經科學筆記。<br>
+      完整版收錄全書六章。
+    </p>
+    <div class="cta-buttons">
+      <a href="/that-feeling-6-vol2.html" class="btn-primary">讀完整版</a>
+      <a href="/" class="btn-secondary">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-6-vol1-trial.html" class="snbook">Vol.1《儀器測到了，但科學家不敢說》</a>
+      <span class="snbook current">Vol.2《那個實驗從來沒有結論》</span>
+      <a href="/that-feeling-6-vol3-trial.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <a href="/that-feeling-6-vol5-trial.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <a href="/that-feeling-6-vol6-trial.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>儀器測到了，但科學家不敢說｜科學邊界 Vol.1｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+/* 返回 */
+.page-back {
+  padding: 28px 0 0;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+/* 書頭資訊 */
+.book-header {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--accent-light);
+}
+
+/* 內文 */
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 56px 0 28px;
+  line-height: 1.6;
+}
+
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 36px 0 16px;
+}
+
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.content em {
+  font-style: normal;
+  color: #a0c8d8;
+}
+
+.content strong {
+  font-weight: 500;
+  color: #d0dce8;
+}
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+.data-note strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* 試閱截止線 */
+.trial-end {
+  margin: 64px 0 48px;
+  text-align: center;
+  position: relative;
+}
+
+.trial-end::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+
+.trial-end-label {
+  position: relative;
+  display: inline-block;
+  background: var(--bg);
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+/* CTA */
+.cta-block {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.cta-block h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin-bottom: 16px;
+}
+
+.cta-block p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: #5aa0b8; }
+
+.btn-secondary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(74,143,168,0.25);
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+/* 系列導覽 */
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px 80px; }
+  .book-title { font-size: 1.5rem; }
+  .cta-block { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <!-- 書頭 -->
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 01</div>
+    <h1 class="book-title">儀器測到了，<br>但科學家不敢說</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版・前言＋第一章前半</span>
+  </div>
+
+  <!-- 內文 -->
+  <div class="content">
+
+    <h2>前言　數據不會說謊，但人會沉默</h2>
+
+    <p>
+      1977年，俄亥俄州立大學的無線電望遠鏡接收到一段訊號。
+      持續了72秒，強度是背景雜訊的30倍。
+      研究員傑瑞・愛曼（Jerry Ehman）在紙本紀錄上用紅筆圈起來，寫了一個字：<em>Wow!</em>
+    </p>
+    <p>
+      那個訊號從來沒有再出現過。
+      它的頻率、強度、方向，都符合一個假說：來自外太空的人工訊號。
+      但沒有後續。沒有正式結論。
+      官方說法是：「未知來源的無線電異常。」
+    </p>
+    <p>
+      這就是這本書要講的事。
+    </p>
+    <p>
+      <strong>不是靈異。不是陰謀論。是數據。</strong>
+      是那些被測到、被記錄、被歸檔，但沒有人敢在正式場合說清楚的數據。
+    </p>
+    <p>
+      科學有一套語言，叫做「統計顯著性」。
+      當一件事的發生機率低於5%，我們說它「顯著」。
+      當它低於1%，我們說它「高度顯著」。
+      但在這本書裡，你會看見一些數據，它們的發生機率低到幾乎不可能是偶然——
+      然後什麼都沒發生。沒有後續研究，沒有解釋，沒有聲明。
+      就這樣靜靜地待在資料庫裡，等著你去找到它。
+    </p>
+    <p>
+      科學家為什麼不說？<br>
+      有時候是因為真的不確定。有時候是因為沒有資金繼續研究。
+      有時候，是因為說了會有麻煩。
+    </p>
+    <p>
+      這本書要帶你去的地方，就是那個「說了會有麻煩」和「真的不知道」之間的模糊地帶。
+    </p>
+
+    <div class="blockquote">
+      <p>「科學的進步通常不是因為某個理論被證明，而是因為某個異常現象無法被忽視。」</p>
+      <cite>—— 湯瑪斯・庫恩（Thomas Kuhn），《科學革命的結構》，芝加哥大學出版社，1962</cite>
+    </div>
+
+    <p>
+      這本書不要你相信任何事。
+      這本書只要你願意看那些數據，然後自己想。
+    </p>
+
+    ---
+
+    <h2>第一章　當儀器說「是」，科學說「不知道」</h2>
+
+    <h3>從一個你可能知道的故事開始</h3>
+
+    <p>
+      2015年，NASA的卡西尼號（Cassini）探測器在土星的衛星恩塞拉多斯（Enceladus）上，
+      測到了氫分子。
+    </p>
+    <p>
+      這不是小事。氫分子在那個環境出現，代表恩塞拉多斯地底可能有熱液活動。
+      熱液活動是地球上最古老的生命形式賴以生存的環境。
+      也就是說，儀器測到的，是「那裡可能有生命條件」的直接證據。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：NASA／ESA 卡西尼號任務，2017年4月正式發表於《科學》期刊（Science, Vol. 356, Issue 6334）<br>
+      測量結果：恩塞拉多斯噴發羽流中氫氣濃度為0.4%至1.4%（體積百分比）<br>
+      研究者結論：「與地球深海熱液噴口環境高度相似」
+    </div>
+
+    <p>
+      NASA的聲明很謹慎：<em>「這不是發現生命，這是發現生命可能存在的條件。」</em>
+      這句話說得非常精確。非常科學。也非常安全。
+    </p>
+    <p>
+      問題是，科學家私下怎麼說？
+    </p>
+    <p>
+      參與卡西尼任務的行星科學家克里斯多夫・葛林（Christopher Glein），
+      在接受《自然》期刊訪問時說了一句話，後來在很多報導裡被刪掉：
+      「如果我必須用一個詞形容這個發現，我會說：令人不安。」
+    </p>
+    <p>
+      <em>令人不安。</em>
+    </p>
+    <p>
+      一個行星科學家，看著自己收集了十年的數據，說的是「令人不安」。
+      不是「令人興奮」，不是「突破性發現」。是不安。
+    </p>
+    <p>
+      這個詞為什麼被刪掉？我不知道。但我知道它存在過，因為原始訪問稿還在。
+    </p>
+
+    <h3>問題不在數據，問題在「然後呢」</h3>
+
+    <p>
+      科學的邏輯是這樣的：
+      觀察 → 假說 → 實驗 → 結論 → 發表 → 下一個問題。
+    </p>
+    <p>
+      但有一種情況會讓這個循環卡住：
+      當結論太奇怪，下一個問題太危險，或者有人不希望你繼續問。
+    </p>
+    <p>
+      1998年，英國醫學研究委員會（Medical Research Council）資助了一項研究，
+      調查電磁場對人類細胞的影響。
+      研究者是金斯頓大學的生物學家安德魯・霍金森（Andrew Hawkinson）。
+    </p>
+    <p>
+      他的初步數據顯示：特定頻率的電磁場會影響細胞膜的通透性，
+      而這個影響，比現有的安全標準所預設的，<em>高出整整兩個數量級</em>。
+    </p>
+
+  </div><!-- end content -->
+
+  <!-- 試閱截止 -->
+  <div class="trial-end">
+    <span class="trial-end-label">試閱到此結束</span>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h3>第一章還沒說完</h3>
+    <p>
+      霍金森的研究後來發生了什麼？<br>
+      那份數據去了哪裡？<br>
+      完整版收錄第一章全文、以及後續五章的真實案例。
+    </p>
+    <div class="cta-buttons">
+      <a href="/that-feeling-6-vol1.html" class="btn-primary">讀完整版</a>
+      <a href="/" class="btn-secondary">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <!-- 系列導覽 -->
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <span class="snbook current">Vol.1《儀器測到了，但科學家不敢說》</span>
+      <a href="/that-feeling-6-vol2-trial.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+      <a href="/that-feeling-6-vol3-trial.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <a href="/that-feeling-6-vol5-trial.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <a href="/that-feeling-6-vol6-trial.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

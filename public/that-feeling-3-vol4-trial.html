@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家族的咒｜那個感覺 系列三 Vol.4 試閱｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --card-bg: #14141e;
+  --label: #5a5a8a;
+  --curse-accent: #9e4a6a;
+  --curse-dim: rgba(158,74,106,0.4);
+  --curse-light: rgba(158,74,106,0.10);
+  --curse-border: rgba(158,74,106,0.22);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 45% 50% at 25% 25%, rgba(158,74,106,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 75% 75%, rgba(122,74,158,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--curse-accent); }
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--curse-accent);
+  border: 1px solid var(--curse-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.book-header {
+  padding: 16px 0 48px;
+  border-bottom: 1px solid var(--curse-border);
+  margin-bottom: 56px;
+}
+.series-info {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #e8d0d8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.book-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chapter-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--curse-accent);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #e0d0d8;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #d0c0c8;
+  letter-spacing: 1px;
+  margin: 36px 0 20px;
+}
+p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.blockquote {
+  background: var(--curse-light);
+  border-left: 3px solid var(--curse-accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-style: italic;
+  color: #e0c8d0;
+  margin-bottom: 8px;
+}
+.blockquote p:last-child { margin-bottom: 0; }
+.blockquote .source {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.section-divider {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--curse-dim);
+  letter-spacing: 8px;
+  font-size: 14px;
+}
+
+.cutoff-zone {
+  position: relative;
+  overflow: hidden;
+  max-height: 260px;
+}
+.cutoff-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, var(--bg) 80%);
+  pointer-events: none;
+}
+
+.paywall {
+  text-align: center;
+  padding: 56px 32px 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--curse-border);
+  border-radius: 12px;
+  margin: 0 0 60px;
+}
+.paywall-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 20px;
+}
+.paywall h3 {
+  font-size: 1.3rem;
+  color: #e8d0d8;
+  margin: 0 0 12px;
+  letter-spacing: 2px;
+}
+.paywall p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.9;
+}
+.paywall-btn {
+  display: inline-block;
+  background: var(--curse-accent);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.paywall-btn:hover { background: #b05070; }
+.paywall-return {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.paywall-return:hover { color: var(--curse-accent); }
+
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.12);
+  padding: 32px 48px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover { border-color: var(--accent); color: var(--text); }
+.snbook.current {
+  border-color: var(--curse-accent);
+  color: var(--curse-accent);
+  background: var(--curse-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--curse-accent); }
+
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .book-title { font-size: 1.8rem; }
+  .series-nav { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-3.html">← 返回詛咒與心理</a></div>
+
+<div class="container">
+
+  <div class="trial-badge">試閱版　PREVIEW</div>
+
+  <div class="book-header">
+    <div class="series-info">那個感覺　系列三　VOL.4</div>
+    <h1 class="book-title">家族的咒</h1>
+    <div class="book-subtitle">詛咒與心理　第四冊</div>
+  </div>
+
+  <!-- 前言 -->
+  <div class="chapter-label">前言　PREFACE</div>
+  <h2>你家的故事</h2>
+
+  <p>
+    每個家族都有一個關於自己的故事。
+  </p>
+  <p>
+    有些故事是驕傲的：我們家的人勤勞、聰明、從逆境裡爬起來。有些故事是悲觀的：我們家的人命不好、運氣差、總是在最後一刻失去該得到的東西。有些故事更具體：我們家的男人都短命、我們家的女人都嫁錯人、我們家三代都出不了這個村子。
+  </p>
+  <p>
+    這些故事是怎麼來的？它們是準確的觀察，還是自我實現的預言？它們通過什麼機制從上一代傳到下一代？以及，最重要的：如果你繼承了一個「我們家有詛咒」的故事，你有沒有辦法走出它？
+  </p>
+  <p>
+    這一冊要處理的，是詛咒最難看清楚的一個面向：它藏在你最熟悉、因此最難質疑的地方——你的家族故事裡。
+  </p>
+  <p>
+    我們會看世代創傷的心理學，會看家族系統治療的概念，會看甘迺迪家族被廣泛研究的「詛咒」模式，也會看表觀遺傳學裡那些讓人不安的發現：創傷真的可能以某種形式傳遞給下一代，只是傳遞的方式和「詛咒」完全不同。
+  </p>
+
+  <div class="section-divider">· · ·</div>
+
+  <!-- 第一章 -->
+  <div class="chapter-label">第一章　CHAPTER ONE</div>
+  <h2>家族腳本：你繼承的不只是基因</h2>
+
+  <p>
+    家庭系統治療師 Murray Bowen 在1950年代開始在美國國家精神健康研究院（NIMH）工作，研究精神分裂症患者的家庭動力。他最重要的發現之一，是精神症狀很少是單獨個人的問題——它們往往是家庭系統在特定壓力下的「解決方案」，而這些解決方案通過幾代人的傳遞，變成了家族的固定模式。
+  </p>
+  <p>
+    Bowen 把這個傳遞過程叫做「多世代傳遞過程」（multigenerational transmission process）：焦慮、防衛機制、關係模式、和對世界的基本假設，通過親子關係從一代傳到下一代，往往在傳遞者和接受者都沒有意識到的情況下完成。
+  </p>
+
+  <h3>家族腳本的形成</h3>
+  <p>
+    每個家族都有一套隱性的「腳本」——關於什麼是可能的、什麼是危險的、什麼是「我們家的人」應該做或不應該做的。這些腳本通過幾個管道傳遞：直接的語言（「我們家的人就是這樣」）、行為示範（父母怎麼處理衝突，孩子就學到衝突應該怎麼處理）、情感的調頻（父母對某些事情的焦慮，孩子會感知並且內化），以及家族故事的重複敘述（哪些故事被反覆講，哪些從不被提及）。
+  </p>
+  <p>
+    這些腳本不是顯性的規則，它們是隱性的假設。正因為是假設而不是規則，它們很難被質疑——你質疑一條規則，但你通常不會去質疑你以為是「現實」的東西。「我們家的人命不好」在家族腳本裡的位置，不是一個可以被討論的觀點，而是一個關於世界如何運作的基本預設。
+  </p>
+
+  <h3>甘迺迪家族的「詛咒」</h3>
+  <p>
+    甘迺迪家族是被最廣泛研究的「家族詛咒」案例之一，部分是因為他們的悲劇是公開記錄的，部分是因為媒體對這個故事的持續放大。
+  </p>
+  <p>
+    事實清單：Joseph Kennedy Jr.（大兒子）在二戰中死於飛行任務，1944年。Kathleen Kennedy（女兒）在飛機事故中死亡，1948年。John F. Kennedy（總統）被暗殺，1963年。Robert F. Kennedy（參議員）被暗殺，1968年。Edward Kennedy（參議員）在 Chappaquiddick 事件中造成一名女性死亡，嚴重影響其政治生涯，1969年。David Kennedy 吸毒過量死亡，1984年。Michael Kennedy 滑雪意外死亡，1997年。John F. Kennedy Jr. 飛機失事死亡，1999年。
+  </p>
+  <p>
+    這個清單放在一起，看起來像詛咒。但放在一個有超過三十個成員、橫跨八十年的大家族裡，統計上的意義就不那麼清楚了。更值得分析的問題是：這個家族的某些模式——對危險活動的吸引、對規則的輕視、對自身特殊性的信念——是否通過家族腳本傳遞，讓某些悲劇更容易發生？
+  </p>
+
+  <!-- 截斷點 -->
+  <div class="cutoff-zone">
+    <h3>危險偏好的家族傳遞</h3>
+    <p>
+      心理學家 Frank Farley 在1980年代提出了「T型人格」（Thrill-seeking personality）的概念，描述那些對刺激和風險有強烈需求的人。這個特質有部分的遺傳基礎（相關研究指向多巴胺受體基因的變異），但環境也有重要的塑造作用——在一個把冒險視為美德、把謹慎視為懦弱的家族文化裡，這個特質會被強化而不是被抑制。
+    </p>
+    <p>
+      甘迺迪家族的文化有清楚的記錄：激烈的競爭、對運動和危險活動的崇尚、以及一種「我們不一樣，規則不適用於我們」的家族信念。這種文化氛圍不只塑造了個別成員的行為，它也定義了「一個真正的甘迺迪」是什麼樣子——那個模板裡，謹慎和迴避風險沒有位置。
+    </p>
+  </div>
+
+  <!-- 付費牆 -->
+  <div class="paywall">
+    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
+    <h3>繼續讀完整版</h3>
+    <p>
+      完整版包含：<br>
+      前言＋六章＋後記，全書逾 12,000 字<br>
+      世代創傷的心理學機制與臨床研究<br>
+      表觀遺傳學：創傷怎麼寫進 DNA<br>
+      如何辨識並打破你的家族腳本
+    </p>
+    <a href="/that-feeling-3-vol4.html" class="paywall-btn">閱讀完整版</a>
+    <a href="/" class="paywall-return">← 回到驚喜角落</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">詛咒與心理　系列三</div>
+  <div class="snbooks">
+    <a href="/that-feeling-3-vol1-trial.html" class="snbook">Vol.1《詛咒是真的嗎》</a>
+    <a href="/that-feeling-3-vol2-trial.html" class="snbook">Vol.2《你被詛咒了嗎》</a>
+    <a href="/that-feeling-3-vol3-trial.html" class="snbook">Vol.3《世界怎麼詛咒人》</a>
+    <span class="snbook current">Vol.4《家族的咒》</span>
+    <a href="/that-feeling-3-vol5-trial.html" class="snbook">Vol.5《詛咒怎麼殺人》</a>
+    <a href="/that-feeling-3-vol6-trial.html" class="snbook">Vol.6《解咒》</a>
+  </div>
+  <a href="/that-feeling-3.html" class="back-link">← 返回詛咒與心理</a>
+</div>
+
+</body>
+</html>

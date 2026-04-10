@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>詛咒是真的嗎｜那個感覺 系列三 Vol.1 試閱｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --accent-light: rgba(122,74,158,0.15);
+  --card-bg: #14141e;
+  --label: #5a5a8a;
+  --curse-accent: #9e4a6a;
+  --curse-dim: rgba(158,74,106,0.4);
+  --curse-light: rgba(158,74,106,0.10);
+  --curse-border: rgba(158,74,106,0.22);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(158,74,106,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(122,74,158,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 返回 */
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--curse-accent); }
+
+/* 主容器 */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+/* 試閱標籤 */
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--curse-accent);
+  border: 1px solid var(--curse-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+/* 書名區 */
+.book-header {
+  padding: 16px 0 48px;
+  border-bottom: 1px solid var(--curse-border);
+  margin-bottom: 56px;
+}
+
+.series-info {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #e8d0d8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.book-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* 章節 */
+.chapter-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--curse-accent);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #e0d0d8;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #d0c0c8;
+  letter-spacing: 1px;
+  margin: 36px 0 20px;
+}
+
+p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+/* 引言塊 */
+.blockquote {
+  background: var(--curse-light);
+  border-left: 3px solid var(--curse-accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-style: italic;
+  color: #e0c8d0;
+  margin-bottom: 8px;
+}
+.blockquote p:last-child { margin-bottom: 0; }
+.blockquote .source {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+/* 章節分隔 */
+.section-divider {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--curse-dim);
+  letter-spacing: 8px;
+  font-size: 14px;
+}
+
+/* 截斷遮罩 */
+.cutoff-zone {
+  position: relative;
+  overflow: hidden;
+  max-height: 280px;
+}
+.cutoff-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background: linear-gradient(transparent, var(--bg) 80%);
+  pointer-events: none;
+}
+
+/* 付費牆 */
+.paywall {
+  text-align: center;
+  padding: 56px 32px 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--curse-border);
+  border-radius: 12px;
+  margin: 0 0 60px;
+}
+.paywall-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 20px;
+}
+.paywall h3 {
+  font-size: 1.3rem;
+  color: #e8d0d8;
+  margin: 0 0 12px;
+  letter-spacing: 2px;
+}
+.paywall p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.9;
+}
+.paywall-btn {
+  display: inline-block;
+  background: var(--curse-accent);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  margin-bottom: 16px;
+}
+.paywall-btn:hover { background: #b05070; }
+.paywall-return {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.paywall-return:hover { color: var(--curse-accent); }
+
+/* 底部 */
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+/* 系列導覽 */
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.12);
+  padding: 32px 48px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover { border-color: var(--accent); color: var(--text); }
+.snbook.current {
+  border-color: var(--curse-accent);
+  color: var(--curse-accent);
+  background: var(--curse-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--curse-accent); }
+
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .book-title { font-size: 1.8rem; }
+  .series-nav { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-3.html">← 返回詛咒與心理</a></div>
+
+<div class="container">
+
+  <div class="trial-badge">試閱版　PREVIEW</div>
+
+  <div class="book-header">
+    <div class="series-info">那個感覺　系列三　VOL.1</div>
+    <h1 class="book-title">詛咒是真的嗎</h1>
+    <div class="book-subtitle">詛咒與心理　第一冊</div>
+  </div>
+
+  <!-- 前言 -->
+  <div class="chapter-label">前言　PREFACE</div>
+  <h2>在我們開始之前</h2>
+
+  <p>
+    我不打算問你信不信詛咒。
+  </p>
+  <p>
+    這個問題沒意思，因為答案幾乎確定是「理智上不信，但某些時候會想一下」。大部分人都是這樣。白天嘲笑鬼神，深夜一個人走樓梯還是會加快腳步。
+  </p>
+  <p>
+    我想問的是另一件事：如果詛咒的力量來自你相信它，那它算真的還是假的？
+  </p>
+  <p>
+    這個問題沒有你以為的那麼容易回答。醫學期刊上有記錄在案的案例，病人在被醫生告知「你只剩三個月」之後，精確地在三個月內死去——但後來發現當初的診斷是誤診，他根本沒病。身體按照「詛咒」執行了死亡。
+  </p>
+  <p>
+    這叫 Nocebo 效應。它是真實的生理現象，有神經科學機制，可以在實驗室裡被測量和複製。
+  </p>
+  <p>
+    詛咒起作用，不需要鬼神。只需要你足夠相信。
+  </p>
+  <p>
+    這個系列會拆開詛咒的每一層——心理學、神經科學、人類學、真實案例。讀完之後你可能還是不信詛咒，但你對「相信」這件事本身，會有完全不同的理解。
+  </p>
+
+  <div class="section-divider">· · ·</div>
+
+  <!-- 第一章開始 -->
+  <div class="chapter-label">第一章　CHAPTER ONE</div>
+  <h2>詛咒的定義，以及為什麼這很重要</h2>
+
+  <p>
+    先從一個你可能沒想過的問題開始：詛咒是什麼？
+  </p>
+  <p>
+    不是「詛咒靈不靈」，不是「詛咒存不存在」，而是：它是什麼東西？它的定義是什麼？
+  </p>
+  <p>
+    這個問題重要，因為定義決定了我們在討論什麼。如果詛咒的定義是「超自然力量對特定對象造成傷害」，那它的存在與否取決於你是否相信超自然力量。但如果詛咒的定義是「一個讓被詛咒者相信自己會倒楣的信念系統」，那它的運作機制就完全在科學的射程範圍之內。
+  </p>
+  <p>
+    人類學家把詛咒定義為：一種通過語言、儀式或象徵行為，向特定對象傳遞「你將遭受傷害」這個信念的社會實踐。注意這個定義裡沒有任何超自然元素——它只需要發出詛咒的人、接收詛咒的人，以及讓這個傳遞有效的社會共識。
+  </p>
+
+  <h3>四千年的記錄</h3>
+  <p>
+    已知最早的詛咒文字出現在美索不達米亞，距今約四千年。蘇美人的泥板上刻著詳細的詛咒配方：對象、語言、儀式步驟、預期效果。這不是粗糙的原始巫術——這是一套有完整邏輯的系統，說明詛咒的施放者和接收者都生活在同一個信念框架裡，雙方都理解這套規則。
+  </p>
+  <p>
+    埃及法老墓室的詛咒銘文是另一個有記錄的案例。1922年，考古學家霍華德·卡特（Howard Carter）開啟圖坦卡門的墓室後，媒體開始報導「法老的詛咒」：參與發掘的人相繼死亡，死因各異，但媒體把這些死亡串連成一個詛咒敘事。後來的統計研究——包括1992年發表於《英國醫學期刊》的分析——發現參與挖掘的人員平均壽命與對照組沒有顯著差異。詛咒在統計上不成立。
+  </p>
+  <p>
+    但這不是重點。重點是：在詛咒新聞被廣泛報導的時期，有幾名參與者在身體出現任何不適時，立刻將其解釋為詛咒的作用。這種解釋框架本身，就已經在影響他們的心理狀態。
+  </p>
+
+  <!-- 截斷點 -->
+  <div class="cutoff-zone">
+    <h3>為什麼人需要詛咒這個框架</h3>
+    <p>
+      詛咒解決了一個人類共同的認知問題：對隨機性的不耐受。
+    </p>
+    <p>
+      人類的大腦不喜歡「這件事純粹是隨機發生的」這個答案。我們的神經系統是在需要快速辨識因果關係的環境下演化的——草叢裡有動靜可能是獵食者，果子吃了肚子痛可能是毒的。快速建立因果連結是生存優勢。
+    </p>
+    <p>
+      但這個能力有副作用：我們在沒有因果關係的地方也會看到因果關係。心理學家把這個現象叫做「原因錯誤歸因」（causal attribution error）。當壞事連續發生，大腦會自動尋找一個統一解釋，而「我被詛咒了」是一個結構完整、邏輯自洽的解釋框架——它有施咒者、有動機、有傳遞機制、有預期結果。
+    </p>
+  </div>
+
+  <!-- 付費牆 -->
+  <div class="paywall">
+    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
+    <h3>繼續讀完整版</h3>
+    <p>
+      完整版包含：<br>
+      前言＋六章＋後記，全書逾 12,000 字<br>
+      Nocebo 效應的神經科學機制<br>
+      圖坦卡門詛咒的完整統計分析<br>
+      詛咒作為社會控制工具的人類學記錄
+    </p>
+    <a href="/that-feeling-3-vol1.html" class="paywall-btn">閱讀完整版</a>
+    <a href="/" class="paywall-return">← 回到驚喜角落</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">詛咒與心理　系列三</div>
+  <div class="snbooks">
+    <span class="snbook current">Vol.1《詛咒是真的嗎》</span>
+    <a href="/that-feeling-3-vol2-trial.html" class="snbook">Vol.2《你被詛咒了嗎》</a>
+    <a href="/that-feeling-3-vol3-trial.html" class="snbook">Vol.3《世界怎麼詛咒人》</a>
+    <a href="/that-feeling-3-vol4-trial.html" class="snbook">Vol.4《家族的咒》</a>
+    <a href="/that-feeling-3-vol5-trial.html" class="snbook">Vol.5《詛咒怎麼殺人》</a>
+    <a href="/that-feeling-3-vol6-trial.html" class="snbook">Vol.6《解咒》</a>
+  </div>
+  <a href="/that-feeling-3.html" class="back-link">← 返回詛咒與心理</a>
+</div>
+
+</body>
+</html>

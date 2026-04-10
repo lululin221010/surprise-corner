@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>另一個人的記憶｜那個感覺 系列一 Vol.4｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6a3a8e; }
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--accent); }
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-1.html">← 返回靈魂與意識系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列一　靈魂與意識　Vol.4</div>
+    <h1 class="book-title">另一個人的記憶</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <h2>前言　那個記憶不是你的，但你記得它</h2>
+
+  <p>你有沒有在某個完全陌生的地方，突然感覺自己曾經來過？不是模糊的似曾相識，而是一種具體的、帶著情緒重量的確信：你知道那條街轉角有什麼，你知道那棟建築裡面的氣味，你知道某一扇門後面會有一個窗子，窗外是一棵你叫不出名字的樹。</p>
+
+  <p>大多數人把這叫做 déjà vu，然後笑一笑，繼續走。但有些人的體驗比這更深、更沉，沉到讓他們開始懷疑：那個記憶，到底是誰的？</p>
+
+  <p>這本書要探討的，是一種非常特殊的意識現象：你的意識裡似乎住著另一個人的記憶。不是你學到的、聽說的、讀過的，而是一種從「裡面」升起來的、帶著第一人稱視角的東西——你在那個記憶裡不是旁觀者，你是那個人。</p>
+
+  <p>這種體驗出現在很多不同的情境裡：記得前世的孩子（我們會在第一章開始），異語症患者（他們在某些狀態下說出從未學過的語言），以及某些腦部損傷後開始出現「不屬於自己的記憶」的患者。它也出現在一些完全無法用神經學解釋的地方，讓研究者陷入一個關於意識的根本問題：記憶，究竟屬於誰？</p>
+
+  <p>這一冊不是要告訴你轉世是真的，或是假的。那個問題在系列四有更完整的討論。這一冊要問的是一個更貼近身體的問題：當一個人說「我記得我不是我自己」，那個體驗在意識層次上是什麼？它讓我們看見了關於「自我」的什麼？</p>
+
+  <h2>第一章　從身體裡升起來的不是你的東西</h2>
+
+  <h3>三歲孩子說的那些話</h3>
+
+  <p>1992年，印度北方邦，一個叫做塔魯克（Taruk，研究報告中使用的名字）的男孩剛學會說話不久，開始在晚飯時間描述一個叫做「馬圖拉」（Mathura）的地方，說那是他「以前的家」。他描述了家門前有一棵芒果樹，說他在那個家裡有三個孩子，說他死的時候是「掉進水裡」的。</p>
+
+  <p>他的父母是農民，從未去過馬圖拉，家裡也沒有任何人在那個地方有親戚。他們最初把這當成孩子的幻想，但男孩在接下來幾年裡持續提起，細節沒有改變。五歲時，他的父親決定帶他去馬圖拉。</p>
+
+  <p>他們在那裡找到了一個與他描述相符的家庭——門前確實有芒果樹，家中有三個孩子，而那個家庭的父親在幾年前的季風季節渡河時溺斃了。男孩在見到那個家庭的孩子時，叫出了其中一個孩子的暱稱，那個暱稱只有家人才使用。</p>
+
+  <p>這個案例在维吉尼亚大学的感知研究部門有記錄。研究者吉姆·塔克（Jim Tucker）在後來的訪談裡說，這個案例裡讓他印象最深刻的，不是那些可以被驗證的細節，而是男孩描述那些記憶時的方式：他不是在「說故事」，他是在「回憶」。他的語氣、他的表情，和一個孩子描述昨天發生的事沒有差別。</p>
+
+  <p>這讓塔克問了一個問題：對那個孩子來說，那些記憶的感受是什麼？它們從哪裡「來」？為什麼它們帶著那麼強烈的第一人稱質感？</p>
+
+  <h3>記憶的第一人稱感從哪裡來</h3>
+
+  <p>認知神經科學家馬丁·康威（Martin Conway）在他關於自傳式記憶（autobiographical memory）的研究裡提出，讓一個記憶感覺「是你的」的關鍵，不只是它的內容，而是它的「自我參照編碼」（self-referential encoding）——也就是，這個記憶在儲存的時候，有沒有被標記為「我在那裡」。</p>
+
+  <p>當你回憶起昨天吃早餐的事，你不只是看到一個場景，你感覺自己「在那個場景裡」。那個感覺，是大腦在記憶提取的時候，把「自我」這個概念附加進去的結果。這個附加，在正常情況下，只發生在你真正親身經歷過的事上。</p>
+
+  <p>但有些人報告了一種不尋常的體驗：他們有一些記憶，帶著完整的第一人稱感受，但那個「第一人稱」不是他們現在的身份。他們在那個記憶裡，是另一個人的視角。這不是夢，不是想像，不是他們在讀一個故事並且代入了主角。那個感受和他們對自己真實過去的記憶，在「真實感」的質地上幾乎沒有差別。</p>
+
+  <p>這個現象讓神經科學家非常困惑，因為在已知的記憶機制裡，沒有一個路徑可以解釋，一個你從未親身經歷過的事，如何獲得第一人稱的「自我在場感」。</p>
+
+  <h3>異語症：從沒學過的語言</h3>
+
+  <p>在「另一個人的記憶」這個現象裡，最難解釋的一類案例，是異語症（xenoglossy）——一個人在某些特定的意識狀態下（催眠、解離、或自發的恍惚狀態），說出了他們從來沒有學過的語言，而且說得流利，不是幾個詞彙，而是完整的對話。</p>
+
+  <p>1907年，費城的詹森案例是史上記錄最早也最詳細的異語症案例之一。一個叫做詹森（Jensen Jacoby）的中年美國家庭主婦，在催眠狀態下轉變成一個叫做「詹森·雅克比」的17世紀瑞典農民，用流利的瑞典語對話。她的丈夫是精神科醫師，安排了說瑞典語的受試者與她對話，並且把整個對話過程錄音。</p>
+
+  <p>語言學家分析了那段錄音，確認她使用的是真實的瑞典語，而且語法和詞彙符合17世紀的語言習慣，包含一些在現代瑞典語裡已經不使用的古詞。她在清醒狀態下完全不懂瑞典語，也從來沒有去過斯堪地那維亞或接觸過任何說北歐語言的人。</p>
+
+  <p>史蒂文森在他1974年的著作《異語症：前世的回聲》（Xenoglossy: A Review and Report of a Case）裡詳細分析了這個案例，並且試圖排除各種標準解釋，包括隱性記憶（孩童時期偶然接觸過的語言被遺忘但沒有消失）和有意識的欺騙。他的結論是：這個案例沒有令人滿意的普通解釋。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半進入身份滲透的神經學記錄——腦部損傷後突然「擁有」不屬於自己記憶的患者，以及這些案例對意識身份理論的挑戰。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-1-vol4.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">靈魂與意識　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
+      <a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
+      <a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
+      <span class="snbook current">Vol.4《另一個人的記憶》</span>
+      <a href="/that-feeling-1-vol5-trial.html" class="snbook">Vol.5《你和你之間的距離》</a>
+      <a href="/that-feeling-1-vol6-trial.html" class="snbook">Vol.6《意識的邊界在哪裡》</a>
+    </div>
+    <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識系列</a>
+  </div>
+
+</div>
+</body>
+</html>

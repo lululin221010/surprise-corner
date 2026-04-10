@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恐慌怎麼擴散｜那個感覺 系列五 Vol.4｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 48px 80px;
+  }
+
+  .book-meta {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+  .trial-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 16px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 56px 0 28px;
+    color: var(--text);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .highlight-box {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 6px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .highlight-box strong { color: var(--text); font-weight: 500; }
+
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .btn-full:hover { opacity: 0.85; }
+  .back-ss {
+    display: block;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--accent); }
+
+  .series-nav {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 40px 48px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .page-back { padding: 16px 20px; }
+    .main { padding: 48px 20px 60px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-5.html">← 返回集體靈異</a></div>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.4</div>
+    <h1 class="book-title">恐慌怎麼擴散</h1>
+    <div class="book-subtitle">集體歇斯底里的解剖：從舞蹈瘟疫到現代工廠事件</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+    <div class="trial-badge">試　閱　版</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　她只是開始跳舞</h2>
+
+  <p>1518年7月，法國史特拉斯堡（Strasbourg）。一個叫做特羅菲亞·布拉格特（Troffea）的女人走上街頭，開始跳舞。沒有音樂，沒有理由，就是跳。她跳了幾個小時，然後跳了一整天，然後繼續跳。</p>
+
+  <p>幾天之內，三十個人加入了她。再過幾天，那個數字到了一百人。到了八月，在同一條街道上，有大約四百個人在持續不間斷地跳舞，他們跳到腳上起水泡、骨折、衰竭，有些人跳到心臟病發死亡。</p>
+
+  <p>市議會被迫召開緊急會議討論這件事。他們諮詢了醫生，醫生的建議是：讓他們繼續跳，因為那是「過熱的血液」造成的，跳舞可以讓那些熱血排出去。市議會於是專門僱了樂手為那些舞者伴奏，徵用了兩個公共廣場和一個市場作為舞場，甚至搭建了臨時舞台。</p>
+
+  <p>這件事在歷史上有完整的記錄：市議會的決議、地方編年史的記載、醫生的備忘錄，還有布道者的講道稿。它不是傳說，不是都市傳說，是一件有文件記錄的歷史事件，發生在十六世紀的歐洲城市，有真實的行政回應和社會影響。</p>
+
+  <p>那些人為什麼跳舞，跳到死？</p>
+
+  <p>這本書不打算給你一個乾淨的答案，因為那個答案，五百年後的今天，還在爭論中。但我可以告訴你，這個問題的答案，和你今天生活的世界，距離比你以為的近很多。</p>
+
+  <p>集體歇斯底里不是中世紀的怪談。它活在當代。它的形式換了，但它的機制沒有。</p>
+
+  <!-- 第一章前半 -->
+  <h2>第一章　集體歇斯底里是什麼</h2>
+
+  <p>先說清楚一個術語問題，因為「歇斯底里」這個詞在日常使用中已經被用爛了，它的意思在科學語境和日常語境裡差很遠。</p>
+
+  <p>在醫學和心理學的歷史上，「歇斯底里」（hysteria）這個詞有一段非常複雜的政治史，它長期被用來描述——通常是女性的——情緒化的、「非理性的」行為，這個用法帶有明顯的性別偏見和病理化傾向，已經被現代精神醫學基本放棄。</p>
+
+  <p>現代醫學對同類現象使用的術語是「群體心因性疾病」（Mass Psychogenic Illness，MPI），或者「功能性神經症狀」（Functional Neurological Disorder）。這個改名不只是政治正確的問題，它反映了對這類現象本質的理解的改變：它不是「假裝生病」，不是「沒有意志力」，而是一種真實的、有神經生理基礎的現象，只是它的觸發機制是心理和社會性的，而不是生物性的外部病原體。</p>
+
+  <div class="quote-block">
+    <p>社會心理學家羅伯特·巴索羅繆（Robert Bartholomew）和公衛研究者西蒙·韋斯利（Simon Wessely）在他們對群體心因性疾病的系統性回顧中，把MPI定義為：在一個群體中，由社會性觸發因素引發的、透過社會傳播機制擴散的、沒有對應的有機病因的症狀群。關鍵特徵包括：症狀在社交接觸中傳播，在群體隔離後消退，以及症狀模式反映了群體對「疾病應該長什麼樣」的期待，而不是已知疾病的臨床表現。</p>
+    <span class="quote-source">——Robert Bartholomew & Simon Wessely，〈Protean nature of mass sociogenic illness〉，2002年，《British Journal of Psychiatry》</span>
+  </div>
+
+  <p>注意那個定義的幾個要素：社會性觸發、透過社交接觸傳播、在隔離後消退。這不是一個人的心理問題被放大，而是一個系統性的社會過程，透過人與人之間的接觸和觀察傳遞症狀。</p>
+
+  <p>更精確的說法是：當你看見另一個人出現了某種症狀，在某些條件下，你的神經系統會以某種方式「學習」那個症狀，然後真實地複製它。不是有意識的模仿，而是一種更深層的、在意識之下發生的生理過程。</p>
+
+  <p>這個過程有幾個必要條件。第一是「高壓情境」（high-stress context）：那個群體必須處於某種持續的壓力下，讓神經系統保持在高度警覺的狀態。第二是「解釋框架」（explanatory framework）：群體必須共享某種對「為什麼這件事在發生」的解釋，那個解釋不需要是正確的，但它需要讓那個症狀在文化上「有意義」。第三是「社會傳播路徑」（social transmission pathway）：症狀需要能夠從一個人傳遞到另一個人，通常透過視覺觀察和情感同步。</p>
+
+  <p>史特拉斯堡的舞蹈瘟疫，在這三個條件上，全部成立。</p>
+
+</div><!-- .main -->
+
+<!-- 試閱截止 -->
+<div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
+  <div class="trial-end">
+    <div class="trial-end-label">試　閱　到　此</div>
+    <h3>後面還有六章，每章都更靠近你的生活</h3>
+    <p>接下來會解剖1962年美國工廠的「昆蟲咬傷」事件、2011年紐約高中女生的抽搐群發事件、以及TikTok時代的「社群媒體誘發抽動症」——現代MPI在網路上的新型態，比你想的更難分辨。</p>
+    <a href="/that-feeling-5-vol4.html" class="btn-full">閱讀完整版</a>
+    <a href="/" class="back-ss">← 回到驚喜角落</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">集體靈異 · 系列五</div>
+  <div class="snbooks">
+    <a href="/that-feeling-5-vol1-trial.html" class="snbook">Vol.1《你們都看見了》</a>
+    <a href="/that-feeling-5-vol2-trial.html" class="snbook">Vol.2《都市傳說解剖》</a>
+    <a href="/that-feeling-5-vol3-trial.html" class="snbook">Vol.3《UFO與我們》</a>
+    <span class="snbook current">Vol.4《恐慌怎麼擴散》</span>
+    <a href="/that-feeling-5-vol5-trial.html" class="snbook">Vol.5《邪教的邏輯》</a>
+    <a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+  </div>
+  <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+</div>
+
+</body>
+</html>

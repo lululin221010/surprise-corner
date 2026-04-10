@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你不是你以為的你｜那個感覺 系列一 Vol.2｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 70% 20%, rgba(122,74,158,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .page-back {
+    padding: 28px 0 0;
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .book-header {
+    padding: 56px 0 48px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 52px;
+  }
+
+  .book-meta {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #e8e8f8;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border: 1px solid var(--accent-dim);
+    color: var(--text-muted);
+    border-radius: 2px;
+  }
+
+  .content h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #e0e0f0;
+    margin: 52px 0 24px;
+    line-height: 1.6;
+  }
+
+  .content h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #c8c8e0;
+    margin: 36px 0 16px;
+  }
+
+  .content p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .content blockquote {
+    border-left: 2px solid var(--accent-dim);
+    margin: 32px 0;
+    padding: 16px 24px;
+    background: var(--accent-light);
+    color: #a0a0c0;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .content .divider {
+    border: none;
+    border-top: 1px solid rgba(122,74,158,0.12);
+    margin: 48px 0;
+  }
+
+  .fade-out {
+    position: relative;
+    margin-top: -120px;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--bg) 80%);
+    pointer-events: none;
+  }
+
+  .trial-end {
+    text-align: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .trial-end-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 2;
+  }
+
+  .trial-end-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-full {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #f0f0f8;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #8d5ab5; }
+
+  .back-ss {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--text); }
+
+  .series-nav {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--text);
+    background: var(--accent-light);
+    cursor: default;
+  }
+
+  .back-link {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 24px 60px; }
+    .book-title { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-1.html">← 返回靈魂與意識系列</a>
+  </div>
+
+  <header class="book-header">
+    <div class="book-meta">那個感覺．系列一｜Vol.2</div>
+    <h1 class="book-title">你不是你以為的你</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版</span>
+  </header>
+
+  <div class="content">
+
+    <h2>前言　「我」這個感覺，其實很脆弱</h2>
+
+    <p>你有沒有想過，「我」這個感覺是從哪裡來的？</p>
+
+    <p>不是你的名字，不是你的記憶，不是你的身體——而是那個感覺「我存在」、「我是我」的感覺本身，它從哪裡來？</p>
+
+    <p>大部分人從來沒有問過這個問題，因為那個感覺一直都在。它在你醒來的時候在，在你做決定的時候在，在你說「我想要」「我不喜歡」的時候在。它像空氣一樣，因為太穩定所以讓你忘記它存在。</p>
+
+    <p>但它不是不會消失的。</p>
+
+    <p>有一群人，因為各種原因——腦部損傷、嚴重壓力、精神科疾病、或有時候什麼明顯的原因都沒有——失去了「我是我」這個感覺。那個感覺被拿走了，或者變得不真實了，或者變成了一種從外面看著自己的奇怪疏離感。</p>
+
+    <p>他們說那是一種難以形容的恐怖。不是痛苦，而是空。</p>
+
+    <p>神經科學、心理學、哲學，對「自我感」（sense of self）這件事，有很多不同的說法。但有一件事他們都同意：「我」這個感覺，是大腦主動建構出來的，不是一個給定的事實。</p>
+
+    <p>如果它是被建構出來的，它就可以被解構。</p>
+
+    <p>這本書要帶你去看那個解構的過程——那些因為各種原因、「我」這個感覺出了問題的案例，以及它們告訴我們關於「自我」這件事的真相。</p>
+
+    <p>你準備好發現自己沒有你以為的那麼真實了嗎？</p>
+
+    <hr class="divider">
+
+    <h2>第一章　當「我」消失的時候</h2>
+
+    <h3>人格解離不是電影情節</h3>
+
+    <p>2001年，一名在英國倫敦工作的28歲女性，在一次嚴重的車禍後，開始有一種奇怪的感覺：她覺得她「不是真的」。</p>
+
+    <p>不是說她覺得自己在做夢——她完全清醒，她知道周圍發生的事，她可以正常工作、正常說話、正常吃飯。但她同時有一種強烈的感覺，覺得自己像是在從外面看著自己做這些事。她說：「我知道那是我的手，但那個手感覺不像是我的。我知道那是我說的話，但那個聲音聽起來很遠。」</p>
+
+    <p>她被診斷為「人格解離症」（Depersonalization Disorder，DPD）。</p>
+
+    <p>這不是電影裡那種「人格分裂」——她沒有多個人格，她的記憶是完整的，她的認知功能完全正常。她只是失去了「我是真實的」這個感覺。</p>
+
+    <p>倫敦大學國王學院的精神科醫師Mauricio Sierra，是目前研究DPD最重要的研究者之一。他在2009年出版的《Depersonalization: A New Look at a Neglected Syndrome》中估計，DPD的終生盛行率大約在1%到2%之間——在你認識的人裡面，大約每一百個就有一到兩個人在某個時間點有過這種體驗，只是可能沒有嚴重到被診斷。</p>
+
+    <p>更多的人有過短暫的輕度解離體驗——那種站在一個地方突然覺得「這一切很不真實」的感覺，或是在極度疲勞時感覺自己像在夢裡。這種短暫的解離在正常人口中非常普遍，研究估計大約70%的人在一生中至少有過一次。</p>
+
+    <p>你大概也有過，只是你可能沒有注意到它在告訴你什麼。</p>
+
+    <h3>「我」到底在哪裡</h3>
+
+    <p>DPD的核心症狀給神經科學帶來了一個很根本的問題：如果「自我感」是大腦的某個功能，那麼這個功能在大腦的哪裡？</p>
+
+    <p>這個問題的答案，比你以為的更混亂。</p>
+
+    <p>早期的神經科學傾向於把自我感定位在某個特定區域——笛卡兒曾經認為靈魂住在松果體，雖然他說的是哲學意義上的，但這個「自我有一個固定住所」的直覺一直延伸到現代神經科學。有些研究者把「自我感」和前額葉皮質（prefrontal cortex）連結，有些人關注腦島（insula），有些人認為頂葉（parietal lobe）是關鍵。</p>
+
+    <p>但問題是，如果你損傷了前額葉，你的「自我感」不會消失——你的個性可能改變，你的決策能力可能受損，但你仍然感覺「我是我」。同樣的道理適用於大多數被提出的腦區。</p>
+
+    <p>Mauricio Sierra的研究顯示，DPD患者的大腦在功能上確實有可測量的差異——特別是在腦島和前額葉之間的連結方式上。但他謹慎地說，這些差異是相關的，不一定是因果的：也許是DPD導致了這些大腦差異，也許是這些大腦差異導致了DPD，也許兩者都是某個更基本的機制的結果。</p>
+
+    <p>「自我感」不住在大腦的某一個地方。它更像是一個系統性的結果，是多個大腦區域協同運作產生的輸出。這讓它更難被研究，但也讓它在哲學上更有趣：如果「我」是一個湧現的屬性（emergent property），而不是一個固定的存在，那麼「我」到底是什麼？</p>
+
+  </div>
+
+  <div class="fade-out"></div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱結束</div>
+    <p class="trial-end-text">
+      第一章還有「自我感的失去是什麼感覺」「為什麼這讓哲學家頭痛」兩個小節，<br>
+      以及後續五章與後記，完整版共12,000字以上。
+    </p>
+    <div class="trial-end-actions">
+      <a href="/that-feeling-1-vol2.html" class="btn-full">讀完整版</a>
+      <a href="/" class="back-ss">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">靈魂與意識系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
+      <span class="snbook current">Vol.2《你不是你以為的你》</span>
+      <a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
+      <a href="/that-feeling-1-vol4-trial.html" class="snbook">Vol.4《另一個人的記憶》</a>
+      <a href="/that-feeling-1-vol5-trial.html" class="snbook">Vol.5《你和你之間的距離》</a>
+      <a href="/that-feeling-1-vol6-trial.html" class="snbook">Vol.6《意識的邊界在哪裡》</a>
+    </div>
+    <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識系列</a>
+  </div>
+
+</div>
+</body>
+</html>

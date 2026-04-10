@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你為什麼怕死｜那個感覺 系列四 Vol.1｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .page-back a:hover { color: var(--accent); }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 16px;
+  }
+
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background: var(--accent-dim);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .muted { color: var(--text-muted); }
+
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+
+  blockquote cite {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .chapter-divider {
+    height: 1px;
+    background: var(--card-border);
+    margin: 60px 0;
+  }
+
+  /* 試閱截止提示 */
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  .trial-end .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-full:hover { background: #6a3a8e; }
+
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .btn-back:hover { color: var(--accent); }
+
+  /* 系列導覽 */
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .snbook:hover {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+    cursor: default;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    h2 { font-size: 1.25rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.1</div>
+    <h1 class="book-title">你為什麼怕死</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　死亡焦慮，人類的底層作業系統</h2>
+
+  <p>你上一次想到自己會死，是什麼時候？</p>
+
+  <p>大多數人的答案會讓你覺得放心：很久以前。偶爾。不常。但心理學家告訴我們，這個答案是假的。不是因為你在說謊，而是因為你根本不知道你每天都在想這件事——只是以一種你完全看不出來的方式。</p>
+
+  <p>你為什麼拼命追求成就？為什麼無法容忍批評？為什麼這麼需要被群體接受？為什麼有時候看到某些人就莫名厭惡？為什麼你花了那麼多錢在那件你其實不需要的東西上面？</p>
+
+  <p>1973年，美國人類學家厄尼斯特·貝克爾（Ernest Becker）出版了一本後來獲得普立茲獎的書，叫做《死亡否認》（The Denial of Death）。他在書裡說了一件讓人不舒服的事：人類文明的幾乎所有成就，從藝術、宗教、政治到日常社交行為，根本上都是對死亡的逃跑。</p>
+
+  <p>這個說法太極端了，讓很多人覺得不舒服，然後繼續過日子。但在貝克爾死後十年，三位社會心理學家決定把這個想法變成可以實驗的假說。結果讓他們自己都嚇了一跳。</p>
+
+  <p>這本書要講的，就是那個假說，那些實驗，以及它們對你意味著什麼。</p>
+
+  <div class="chapter-divider"></div>
+
+  <!-- 第一章前半 -->
+  <h2>第一章　你以為你不怕，但你每分鐘都在逃</h2>
+
+  <h3>貝克爾與那本讓人坐立不安的書</h3>
+
+  <p>厄尼斯特·貝克爾在1974年過世，就在《死亡否認》獲得普立茲獎的幾個月後。死於癌症，57歲。某種意義上這個結局像是刻意安排的，只是沒有人安排它。</p>
+
+  <p>《死亡否認》的核心論點是這樣的：人類是唯一知道自己會死的動物。這個知識對我們造成了一種根本性的、無法解決的恐懼。我們沒有辦法接受自己只是一個會腐爛消失的生物體，所以我們需要相信自己是某種更大意義的一部分——某個比肉身更持久的東西。</p>
+
+  <p>貝克爾把這叫做「不死計畫」（immortality project）。你的宗教信仰是不死計畫，你對國家的認同是不死計畫，你留下孩子是不死計畫，你寫這本書是不死計畫，你追求財富、名聲、遺產，全都是不死計畫。我們建造紀念碑、命名建築、留下作品，因為我們需要在某個意義上活下去。</p>
+
+  <p>更深的問題在於：當別人挑戰你的不死計畫，你會怎麼反應？</p>
+
+  <p>如果你相信天堂，有人說天堂不存在，你感到的那個憤怒，不只是意見不合。是存在威脅。如果你的民族認同是你的不死計畫，有人侮辱你的民族，你感到的那個憤怒也是一樣的。貝克爾認為，人類的大部分衝突，包括戰爭，根本上都是不死計畫之間的碰撞。</p>
+
+  <p>這個框架很有力量，也很難驗證。直到1980年代，三位心理學家決定把它變成科學。</p>
+
+  <h3>恐懼管理理論：當實驗者提醒你會死</h3>
+
+  <p>傑夫·葛林伯格（Jeff Greenberg）、謝爾登·所羅門（Sheldon Solomon）、湯姆·皮茨辛斯基（Tom Pyszczynski）是在亞利桑那大學讀書時認識的。1986年，他們提出了「恐懼管理理論」（Terror Management Theory，簡稱TMT），把貝克爾的哲學翻譯成可以測試的心理學假說。</p>
+
+  <p>TMT的核心預測是：當人被提醒自己的死亡（他們叫做「死亡顯著性」，mortality salience），人會更強烈地防衛自己的世界觀，更排斥威脅這個世界觀的人，更渴望獲得肯定。</p>
+
+  <p>第一個讓他們自己都傻眼的實驗，是1989年羅森布拉特（Rosenblatt）等人做的。他們找了22位穆尼西帕爾法院的法官，請他們填一份問卷，問卷裡包含一段關於自己死亡的問題（實驗組），或是關於口腔疼痛的問題（對照組）。之後，法官被要求為一個被指控賣淫的被告設定保釋金額。</p>
+
+  <p>結果：被提醒死亡的法官，設定的保釋金額平均是451美元。沒有被提醒的法官，平均是50美元。</p>
+
+  <p>同樣是法官，同樣是在審查同一類案件，只是被提醒了自己的死亡，判決就嚴厲了九倍。</p>
+
+  <p>這個結果讓研究者自己都不敢相信。他們重複了實驗，換了情境，換了地點，換了受試者群體。結果一直在。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半繼續探討：死亡提醒如何讓人變得更民族主義、更排外、更需要被認同——以及這對你的日常行為意味著什麼。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-4-vol1.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <span class="snbook current">Vol.1《你為什麼怕死》</span>
+      <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+      <a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
+      <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+      <a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
+      <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+
+</body>
+</html>

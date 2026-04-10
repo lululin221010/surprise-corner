@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>死了要去哪｜那個感覺 系列二 Vol.4｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --tw-accent: #c0392b;
+    --tw-accent-light: rgba(192,57,43,0.12);
+    --tw-accent-dim: rgba(192,57,43,0.35);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; min-height: 100vh; }
+  .page-back { padding: 20px 32px; border-bottom: 1px solid rgba(122,74,158,0.1); }
+  .page-back a { color: var(--text-muted); text-decoration: none; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; transition: color 0.2s; }
+  .page-back a:hover { color: var(--accent); }
+  .main-content { max-width: 720px; margin: 0 auto; padding: 60px 48px; }
+  .book-meta { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  .series-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--tw-accent); opacity: 0.8; margin-bottom: 16px; }
+  .book-title { font-size: 2.4rem; font-weight: 500; letter-spacing: 4px; color: #e8e8f5; line-height: 1.4; margin-bottom: 12px; }
+  .book-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 24px; }
+  .trial-badge { display: inline-block; padding: 5px 14px; border: 1px solid var(--tw-accent-dim); font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--tw-accent); opacity: 0.8; }
+  h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 3px; color: #e0e0f0; margin: 56px 0 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #c8c8e8; margin: 36px 0 18px; }
+  p { margin-bottom: 24px; text-align: justify; color: var(--text); }
+  strong { color: #e0e0f0; font-weight: 500; }
+  .quote-block { border-left: 2px solid var(--tw-accent-dim); padding: 20px 28px; margin: 36px 0; background: var(--tw-accent-light); }
+  .quote-block p { color: #d0d0e8; font-size: 15px; margin-bottom: 0; line-height: 2.2; }
+  .data-note { background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px 28px; margin: 32px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+  .data-note .note-label { font-size: 10px; letter-spacing: 4px; color: var(--label); margin-bottom: 10px; }
+  .fade-out { position: relative; margin-bottom: 0; }
+  .fade-out::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+  .trial-end { margin: 60px 0 0; padding: 48px 40px; background: var(--card-bg); border: 1px solid var(--card-border); text-align: center; position: relative; overflow: hidden; }
+  .trial-end::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--tw-accent-dim), transparent); }
+  .trial-end-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--label); margin-bottom: 20px; }
+  .trial-end h3 { font-size: 1.2rem; letter-spacing: 3px; color: #e0e0f0; margin: 0 0 16px; border: none; }
+  .trial-end p { font-family: 'Noto Sans TC', sans-serif; font-size: 14px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.9; text-align: center; }
+  .btn-full { display: inline-block; padding: 12px 32px; background: var(--tw-accent-light); border: 1px solid var(--tw-accent-dim); color: var(--tw-accent); font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; text-decoration: none; transition: background 0.25s, color 0.25s; margin-bottom: 16px; }
+  .btn-full:hover { background: rgba(192,57,43,0.25); color: #e88; }
+  .back-ss-inline { display: block; margin-top: 16px; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .back-ss-inline:hover { color: var(--accent); }
+  .series-nav { max-width: 720px; margin: 0 auto; padding: 40px 48px 60px; border-top: 1px solid rgba(122,74,158,0.1); }
+  .snlabel { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 20px; }
+  .snbooks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .snbook { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(122,74,158,0.2); color: var(--text-muted); text-decoration: none; letter-spacing: 1px; transition: border-color 0.2s, color 0.2s; }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current { border-color: var(--tw-accent-dim); color: #e88; background: var(--tw-accent-light); cursor: default; }
+  .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 640px) { .main-content { padding: 40px 24px; } .book-title { font-size: 1.8rem; } .series-nav { padding: 40px 24px 60px; } }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-2.html">← 返回台灣在地系列</a></div>
+
+<div class="main-content">
+
+  <div class="book-meta">
+    <div class="series-tag">那個感覺 · 系列二 · VOL. 4</div>
+    <h1 class="book-title">死了要去哪</h1>
+    <div class="book-subtitle">台灣喪葬文化、好兄弟信仰與魂魄觀</div>
+    <span class="trial-badge">開放試閱 · 前言 + 第一章節選</span>
+  </div>
+
+  <h2>前言　你知道你死了之後要去哪嗎</h2>
+
+  <p>你有沒有想過這個問題？不是抽象的「死後有沒有靈魂」，而是非常具體的：如果台灣的民間信仰是對的，你死了之後，接下來發生的事情是什麼？</p>
+
+  <p>你的靈魂要去報到，有人來接你，然後你去一個跟人間平行的地方，你的家人要幫你準備那邊需要的東西，你在那邊的生活品質跟這邊幫你燒的紙紮有直接關係——台灣的民間信仰對死後世界有非常具體的描述，具體到有點驚人。</p>
+
+  <p>這本書要處理的，不是這套說法是不是真的。而是：這套說法從哪裡來，它在幫活著的人處理什麼問題，以及台灣現代化之後，這套說法面對了什麼挑戰、做了什麼調整。</p>
+
+  <p>死亡是所有人類社會都必須處理的問題。每個社會的處理方式，都反映了那個社會最深層的價值觀和世界觀。台灣的處理方式非常獨特——它混血了漢族、閩客、原住民、日本、以及現代西方的各種元素，製造出了一套只有在這裡才長得出來的死亡文化。</p>
+
+  <p>我們從最根本的問題開始：台灣人怎麼看死亡？</p>
+
+  <h2>第一章　死亡不是終點，是搬家</h2>
+
+  <h3>台灣的死亡觀不是悲劇性的</h3>
+
+  <p>如果你去參加一個台灣傳統的喪禮，你可能會被現場的某些元素驚到：那裡有哭泣，但也有電子花車和外請的表演；那裡有嚴肅的儀式，但也有家人在旁邊聊天、吃便當；整個過程漫長、熱鬧、嘈雜，跟你可能期待的「肅穆哀悼」相去甚遠。</p>
+
+  <p>這不是台灣人對死亡不尊重。這是台灣死亡觀的具體表現：死亡是一個重大的人生事件，但它不是終點，是搬家。死者搬去另一個地方，活著的人要幫他把搬家的事辦好，讓他在那邊過得好。這個框架下，喪禮不只是哀悼儀式，它是一個實際的事務處理過程——有很多事情要做，有很多人要來幫忙，有很多細節要確認。</p>
+
+  <div class="quote-block">
+    <p>「台灣民間信仰裡，人死後的靈魂歷程是有非常具體的程序的：靈魂離開身體、有人來引導、接受冥府的審判、依生前的功德決定去處。這套程序讓死亡不是一個虛無的消失，而是一個有結構的過渡。」</p>
+  </div>
+
+  <p>這個「過渡」的框架對活著的人有巨大的心理功能。死亡最讓人難以承受的，往往不是失去本身，而是失去的「無意義感」——那個人就這樣消失了，什麼都沒了。台灣的民間信仰提供了一個替代框架：他沒有消失，他去了另一個地方，你們還是有連結的，你還可以為他做事。那個「還可以做事」的感覺，對哀慟中的人有真實的心理支撐效果。</p>
+
+  <h3>魂魄的構成：台灣的靈魂解剖學</h3>
+
+  <p>台灣民間信仰對靈魂的構成有一套相對完整的說法，雖然各地細節略有不同。最常見的說法是人有「三魂七魄」——三個魂和七個魄，各自有不同的功能和去處。</p>
+
+  <p>人死後，三魂分別去不同的地方：一魂留在靈位（牌位），接受家人的祭祀；一魂去墓地，留守遺體；一魂去冥界，接受審判、等待轉世或安置。這個三魂分置的概念，解釋了為什麼台灣人同時在家裡立牌位、在墓地掃墓、並且進行超度儀式——這三件事對應的是三個不同的魂的不同需求。</p>
+
+  <p>這套「靈魂解剖學」的精妙之處在於它的實用性：它讓生者對死者的義務變得具體、可操作、有明確的對應關係。你知道你要做什麼，對應的是哪個魂的哪個需求。不確定性被大幅降低了，而不確定性是哀慟裡最痛苦的成分之一。</p>
+
+  <div class="data-note">
+    <div class="note-label">民俗記錄</div>
+    人類學者李亦園在1960至70年代對台灣民間信仰進行的系統性研究，記錄了三魂七魄說在台灣各地的分布和變體。他注意到，即使是受過現代教育、自稱不信鬼神的台灣人，在面對家人死亡時，往往仍然會遵循這套靈魂觀的邏輯來安排喪葬事務——不是因為他們相信靈魂真的在那裡，而是因為「做了這些事」本身對他們有意義。
+  </div>
+
+  <h3>陰間的地理學：那邊長什麼樣子</h3>
+
+  <p>台灣民間信仰對陰間有相當具體的空間描述。陰間有行政系統：城隍管轄一個區域的亡魂，閻王管轄更大範圍，十殿閻王各自審判不同類型的罪行。陰間有地理：有渡河、有審判廳、有轉世等候區，有專門關押特定罪行者的地方。</p>
+
+  <p>這套陰間地理學，是漢文化長期積累的集體想像，但在台灣的在地化過程中加入了台灣本地的元素。台灣各地城隍廟的配置往往反映了該地區的行政歷史——城隍的轄區跟歷史上的行政區劃有對應關係，就連陰間的官僚系統，也是以人間的官僚系統為藍本設計的。</p>
+
+  <p>這種「陰間是人間的鏡像」的邏輯，讓陰間變成一個可以被理解、可以被應對的地方。你在人間需要跟官府打交道，你在陰間也需要跟官府打交道，規則是類似的，你知道怎麼做。這個熟悉感，讓死亡的未知性大幅降低。</p>
+
+  <div class="fade-out">
+    <p>當然，「陰間跟人間一樣需要錢」這個邏輯，也解釋了為什麼台灣喪葬文化裡的紙紮燒給亡者的傳統這麼根深柢固。從手機到豪宅、從傭人到名牌包，現代台灣的紙紮產業跟上了消費社會的節奏，提供的產品種類繁多。這個現象讓一些人覺得荒謬，但如果你接受那個基本框架——死者在另一個地方繼續生活——那麼確保他們有足夠的資源，是一個非常合理的孝道表現。</p>
+  </div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱到這裡</div>
+    <h3>後面還有很多</h3>
+    <p>
+      第一章繼續談台灣死亡觀的具體運作。<br>
+      第二章拆解喪葬儀式的每個環節在處理什麼——<br>
+      那不只是傳統，是一套精密的心理處理程序。<br>
+      第三章談好兄弟：台灣社會如何集體照顧那些沒有家人的死者。
+    </p>
+    <a href="/that-feeling-2-vol4.html" class="btn-full">讀完整版</a>
+    <a href="/" class="back-ss-inline">← 回到驚喜角落</a>
+  </div>
+
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">台灣在地系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-2-vol1-trial.html" class="snbook">Vol.1《這裡本來就不一樣》</a>
+    <a href="/that-feeling-2-vol2-trial.html" class="snbook">Vol.2《那些廟在說什麼》</a>
+    <a href="/that-feeling-2-vol3-trial.html" class="snbook">Vol.3《你家附近的鬼故事》</a>
+    <span class="snbook current">Vol.4《死了要去哪》</span>
+    <a href="/that-feeling-2-vol5-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.5《台灣人為什麼這麼怕》</a>
+    <a href="/that-feeling-2-vol6-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.6《這塊土地上的聲音》</a>
+  </div>
+  <a href="/that-feeling-2.html" class="back-link">← 返回台灣在地系列</a>
+</div>
+
+</body>
+</html>

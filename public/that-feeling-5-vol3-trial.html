@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UFO與我們｜那個感覺 系列五 Vol.3｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 48px 80px;
+  }
+
+  .book-meta {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+  .trial-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 16px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 56px 0 28px;
+    color: var(--text);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .highlight-box {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 6px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .highlight-box strong { color: var(--text); font-weight: 500; }
+
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .btn-full:hover { opacity: 0.85; }
+  .back-ss {
+    display: block;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--accent); }
+
+  .series-nav {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 40px 48px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .page-back { padding: 16px 20px; }
+    .main { padding: 48px 20px 60px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-5.html">← 返回集體靈異</a></div>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.3</div>
+    <h1 class="book-title">UFO與我們</h1>
+    <div class="book-subtitle">天空裡那個東西，和看見它的人</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+    <div class="trial-badge">試　閱　版</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　那個問題沒有你以為的那麼簡單</h2>
+
+  <p>2004年11月，美國海軍F/A-18F戰鬥機飛行員大衛·弗雷佛（David Fravor）在加州聖地牙哥外海執行例行訓練任務時，和他的僚機同時目擊了一個不明飛行物。那個物體的外形被描述為橢圓形，白色，大約是一架F-18的大小，在海面上方約十五公尺處懸停，沒有任何可見的推進裝置，也沒有任何尾流或排放物。</p>
+
+  <p>弗雷佛試圖靠近，那個物體開始移動，在幾秒內以他的戰機完全無法追上的速度消失了。整個過程被戰機上的紅外線攝影系統記錄下來，那段影片後來被稱為「Tic Tac影片」，因為那個物體的外形像一顆橢圓形的薄荷糖。</p>
+
+  <p>這段影片在2017年被《紐約時報》報導，並由美國國防部正式確認其真實性。弗雷佛後來多次在國會聽證會上作證，包括2023年7月的聽證會，他在公開紀錄中表示，那個物體的飛行性能超出了他所知道的任何已知技術。</p>
+
+  <p>弗雷佛是一個有二十多年飛行經驗的海軍中校，不是在黑暗中仰望夜空的普通人，是在執行正式任務、有紅外線設備輔助的軍事飛行員。</p>
+
+  <p>這件事，你要怎麼解釋？</p>
+
+  <p>這本書不打算給你一個答案，因為誠實的答案是：我不知道，沒有人知道。但我們可以做一件更有意思的事：拆解這個問題周圍的所有雜訊——那些讓這個問題很難被認真討論的東西——然後看看，把雜訊清掉之後，剩下的是什麼。</p>
+
+  <p>剩下的東西，比你想的更難忽略。</p>
+
+  <!-- 第一章前半 -->
+  <h2>第一章　UFO不是你以為的那個詞</h2>
+
+  <p>先解決一個定義問題，因為這個定義問題，是整個UFO討論最大的混亂來源。</p>
+
+  <p>UFO是「不明飛行物」（Unidentified Flying Object）的縮寫。它的意思是：一個飛行中的物體，目擊者無法識別它是什麼。就這樣。它不等於外星飛船，不等於政府秘密武器，不等於幻覺，不等於任何特定的解釋。它只是說：有一個東西在飛，我不知道那是什麼。</p>
+
+  <p>但在過去幾十年的大眾文化裡，「UFO」這個詞已經幾乎完全和「外星人飛碟」畫上等號。這個等號，讓整個討論變得非常困難——因為一旦你說「我看見了UFO」，你就自動被放進了一個特定的文化框架裡，那個框架帶著大量的刻板印象和可信度預設。</p>
+
+  <p>美國國防部在2020年把官方使用的術語從UFO改為UAP（Unidentified Aerial Phenomena，不明空中現象），部分原因就是要試圖切斷這個文化連結，讓相關的報告和調查可以在不帶「外星人」預設的情況下進行。</p>
+
+  <div class="quote-block">
+    <p>美國國家情報總監辦公室（ODNI）在2021年6月發布的UAP報告中指出，在他們分析的144件UAP事件中，有143件無法得到確定的解釋。報告明確說明，這些事件中有18件展現了「不尋常的飛行特性」，包括靜止懸停、突然加速、以及在沒有明顯推進系統的情況下高速移動。報告同時說明，這些現象對飛行安全和國家安全構成潛在威脅，需要系統性的研究。</p>
+    <span class="quote-source">——Office of the Director of National Intelligence，《Preliminary Assessment: Unidentified Aerial Phenomena》，2021年6月25日</span>
+  </div>
+
+  <p>注意那個數字：144件中143件無法解釋。這不是邊緣人士的報告，這是美國情報體系在分析軍事飛行員和傳感器設備的數據之後得到的結論。</p>
+
+  <p>這讓問題變成了：143件無法解釋，不等於143件是外星飛船。「無法解釋」只是說，在現有的資訊和技術框架下，我們找不到令人滿意的解釋。但「找不到解釋」和「那一定是外星人」之間，有一個非常巨大的跳躍，而大眾討論幾乎永遠在進行這個跳躍，要麼往「外星人」跳，要麼往「全部是假的」跳。</p>
+
+  <p>這兩個跳躍，都是在逃避那個「無法解釋」本身的不舒服。</p>
+
+  <div class="highlight-box">
+    <p><strong>真正讓人不舒服的不是「可能是外星人」，而是「我們有一些東西在天空裡，我們不知道那是什麼，我們的傳感器測量到了異常的物理特性，而且我們確認了這件事超過七十年，但我們還是不知道。」</strong>這句話，沒有辦法被簡化成一個讓人放心的答案。</p>
+  </div>
+
+  <p>羅斯威爾事件在1947年發生的時候，美國空軍的第一份官方聲明說那是一個「飛碟」（flying disc）。然後第二天，那個說法被撤回，改口說是氣象氣球。幾十年後，解密文件顯示那其實是「莫古爾計畫」（Project Mogul）的機密氣球，那個計畫是冷戰時期用來監測蘇聯核試爆的。所以它是氣球——只是一個非常機密的氣球，官方為了不揭露計畫的存在，選擇了一個讓人更困惑的解釋方式。</p>
+
+  <p>這個例子說明了UFO討論最根本的困難：政府確實在隱瞞事情，但隱瞞的理由通常是「我們有機密的軍事計畫」，而不是「我們有外星人」。當你知道政府有隱瞞的動機，又知道他們確實在隱瞞某些東西，你要怎麼判斷他們隱瞞的是什麼？</p>
+
+  <p>這個問題沒有簡單的答案。但下一章，我們可以先從那些確實被解密的案例開始，看看「已知的部分」長什麼樣子。</p>
+
+</div><!-- .main -->
+
+<!-- 試閱截止 -->
+<div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
+  <div class="trial-end">
+    <div class="trial-end-label">試　閱　到　此</div>
+    <h3>後面還有六章，每章都更難放下</h3>
+    <p>接下來會逐一解剖羅斯威爾解密文件、五角大廈的UAP研究計畫AATIP、2023年國會聽證會的具體內容，以及目擊者心理學——為什麼飛行員、雷達操作員這些受過專業訓練的人，他們的陳述需要被認真對待，而不是被歸類為「看錯了」。</p>
+    <a href="/that-feeling-5-vol3.html" class="btn-full">閱讀完整版</a>
+    <a href="/" class="back-ss">← 回到驚喜角落</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">集體靈異 · 系列五</div>
+  <div class="snbooks">
+    <a href="/that-feeling-5-vol1-trial.html" class="snbook">Vol.1《你們都看見了》</a>
+    <a href="/that-feeling-5-vol2-trial.html" class="snbook">Vol.2《都市傳說解剖》</a>
+    <span class="snbook current">Vol.3《UFO與我們》</span>
+    <a href="/that-feeling-5-vol4-trial.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+    <a href="/that-feeling-5-vol5-trial.html" class="snbook">Vol.5《邪教的邏輯》</a>
+    <a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+  </div>
+  <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+</div>
+
+</body>
+</html>

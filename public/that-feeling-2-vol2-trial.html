@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>那些廟在說什麼｜那個感覺 系列二 Vol.2｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --tw-accent: #c0392b;
+    --tw-accent-light: rgba(192,57,43,0.12);
+    --tw-accent-dim: rgba(192,57,43,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  .page-back {
+    padding: 20px 32px;
+    border-bottom: 1px solid rgba(122,74,158,0.1);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .main-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  .book-meta {
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(122,74,158,0.15);
+  }
+
+  .series-tag {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--tw-accent);
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #e8e8f5;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .book-subtitle {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid var(--tw-accent-dim);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--tw-accent);
+    opacity: 0.8;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #e0e0f0;
+    margin: 56px 0 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(122,74,158,0.15);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #c8c8e8;
+    margin: 36px 0 18px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  strong { color: #e0e0f0; font-weight: 500; }
+
+  .quote-block {
+    border-left: 2px solid var(--tw-accent-dim);
+    padding: 20px 28px;
+    margin: 36px 0;
+    background: var(--tw-accent-light);
+  }
+  .quote-block p {
+    color: #d0d0e8;
+    font-size: 15px;
+    margin-bottom: 0;
+    line-height: 2.2;
+  }
+
+  .data-note {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 20px 28px;
+    margin: 32px 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .data-note .note-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 10px;
+  }
+
+  .fade-out {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .fade-out::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(transparent, var(--bg));
+    pointer-events: none;
+  }
+
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 48px 40px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .trial-end::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--tw-accent-dim), transparent);
+  }
+
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .trial-end h3 {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #e0e0f0;
+    margin: 0 0 16px;
+    border: none;
+  }
+
+  .trial-end p {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 1.9;
+    text-align: center;
+  }
+
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--tw-accent-light);
+    border: 1px solid var(--tw-accent-dim);
+    color: var(--tw-accent);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+    margin-bottom: 16px;
+  }
+  .btn-full:hover { background: rgba(192,57,43,0.25); color: #e88; }
+
+  .back-ss-inline {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-ss-inline:hover { color: var(--accent); }
+
+  .series-nav {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 48px 60px;
+    border-top: 1px solid rgba(122,74,158,0.1);
+  }
+
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(122,74,158,0.2);
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current {
+    border-color: var(--tw-accent-dim);
+    color: #e88;
+    background: var(--tw-accent-light);
+    cursor: default;
+  }
+
+  .back-link {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .main-content { padding: 40px 24px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 40px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-2.html">← 返回台灣在地系列</a></div>
+
+<div class="main-content">
+
+  <div class="book-meta">
+    <div class="series-tag">那個感覺 · 系列二 · VOL. 2</div>
+    <h1 class="book-title">那些廟在說什麼</h1>
+    <div class="book-subtitle">民間信仰、乩童、問事的心理與社會學</div>
+    <span class="trial-badge">開放試閱 · 前言 + 第一章節選</span>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　你去廟裡，你在做什麼</h2>
+
+  <p>你最近一次去廟是什麼時候？做了什麼？拜了誰？你知道你在拜的神明是誰、管什麼事嗎？</p>
+
+  <p>多數台灣人如果誠實回答這些問題，答案會是：不太確定。我跟著去的。我知道要拜但不知道為什麼。我就是覺得去一下比較安心。</p>
+
+  <p>這個「比較安心」，是這本書最想探討的東西。</p>
+
+  <p>廟不是一個你搞懂了神學才能進去的地方。它是一個你帶著各種各樣的需求走進去，然後那個需求被某種方式接住的地方。那個「接住」的機制，從外面看起來是宗教儀式，從裡面感受起來是某種說不清楚的篤定感。這本書要做的，是把那個機制拆開來看——不是為了破壞它，而是為了真正理解它在做什麼。</p>
+
+  <p>台灣的廟不只是宗教空間。它是社區的神經節，是政治權力的節點，是心理諮商的前身，是死亡管理的系統，是集體記憶的儲存庫。要理解台灣社會，你必須理解廟。要理解廟，你必須願意同時用好幾種眼光去看它：信徒的眼光、社會學的眼光、心理學的眼光、歷史的眼光。</p>
+
+  <p>這不容易。但台灣人其實比自己以為的更有資格做這件事，因為你從小就泡在這個系統裡。你缺的不是經驗，是語言——用來說清楚那個經驗的語言。這本書想提供一部分那個語言。</p>
+
+  <!-- 第一章 -->
+  <h2>第一章　廟不只是拜神的地方</h2>
+
+  <h3>你進廟的第一件事是什麼</h3>
+
+  <p>你進廟的第一件事，通常不是跪下來。是看一眼，確認方向，找香，確認要拜哪幾個神明，確認自己知不知道順序。這個過程裡有大量的社會性資訊在傳遞：你熟不熟悉這間廟、這個信仰系統、這個地方的規矩。</p>
+
+  <p>台灣的廟宇空間設計是一個複雜的社會地圖。正殿供奉的主神決定了這間廟的「身份」，偏殿和配祀的神明則說明了這個社區的歷史需求。一間廟裡同時供奉媽祖、城隍、土地公、虎爺，這不是亂來，每一個神明對應的是不同類型的社會需求：媽祖管海上安全和一般庇護，城隍管陰間司法和是非判斷，土地公管地方財富和農業，虎爺管兒童健康和驅邪。</p>
+
+  <p>這套神明配置系統，本質上是一個社區問題清單的具體化。你看一間廟供奉哪些神明、哪些神明的香火特別旺，你就大致知道這個社區歷史上最焦慮的事情是什麼。</p>
+
+  <div class="data-note">
+    <div class="note-label">田野觀察</div>
+    宗教社會學者瞿海源在1980至90年代對台灣廟宇進行系統性調查，注意到廟宇的神明配置跟聚落的歷史職業結構有高度相關性。漁村的廟媽祖地位最高；農村的廟土地公最重要；早期移墾衝突頻繁的地區，城隍和有應公廟的比例明顯偏高。廟宇配置是社區歷史風險地圖的宗教版本。
+  </div>
+
+  <h3>廟作為社區行政中心的歷史</h3>
+
+  <p>在台灣地方自治制度建立之前，廟宇承擔了大量現在由政府機構執行的功能。調解鄰里糾紛、組織防災救助、管理公共水利設施、舉辦集市、建立跨聚落的聯盟——這些功能今天我們不會想到要去廟裡找，但在清朝和日治初期的台灣，廟宇是唯一有足夠社會信任基礎來執行這些功能的機構。</p>
+
+  <p>這個歷史背景解釋了一件很多人覺得奇怪的事：台灣的廟宇管委會在地方政治裡有非常大的影響力，遠超過一個「宗教組織」理論上應該有的影響力。這不是廟宇在越界，而是廟宇在執行它幾百年來一直在執行的功能——只是那個功能的名稱從「社區行政」變成了「地方政治參與」。</p>
+
+  <p>台南的大廟，例如祀典武廟、開基天后宮，至今仍然在地方政治裡扮演重要角色。它們的角色不只是宗教的，更是社區認同的核心節點。一個政治人物在重要廟宇的爐主選舉裡有影響力，往往比在里長選舉裡有影響力更能說明他在地方的實際地位。</p>
+
+  <h3>香的邏輯：一個你從來沒想過要解釋的動作</h3>
+
+  <p>你拿著香，你對著神明拜了三下，你把香插進香爐。這個動作你可能做過幾百次，但你有沒有想過：為什麼是香？為什麼是三下？為什麼要插進香爐而不是放在地上？</p>
+
+  <p>香煙上升，在許多文化裡是人與神溝通的媒介象徵——煙往上走，帶著祈求往神明所在的方向去。三這個數字在漢文化裡有「完整」的象徵意義，三拜代表誠意足夠。香爐是神明的「收件匣」，把香插進去代表這個祈求被正式提交了。</p>
+
+  <p>這些解釋你以前可能沒想過，但你的身體早就知道了。你在廟裡拜拜的動作是流暢的、不需要思考的，因為它是從小被示範和練習內化的。這種身體性的知識，是廟宇文化最深層的傳承方式，也是最難被理性批評破壞的部分。你可以在認知上對這套系統有很多質疑，但你的身體還是會在廟裡自動完成那幾個動作。</p>
+
+  <div class="fade-out">
+    <p>這種身體記憶的穩固性，解釋了一個現象：台灣有很多自稱「不信鬼神」的人，在面對重要的考試、手術、或家人的安危時，還是會去廟裡拜一拜。這不是矛盾，也不是虛偽。這是兩套並行的認知系統——一套用理性語言運作，另一套用身體語言運作——在不同的情境下各自啟動。廟宇的力量，在很大程度上建立在這第二套系統上。</p>
+  </div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱到這裡</div>
+    <h3>後面還有很多</h3>
+    <p>
+      第一章繼續談廟的空間政治與信任機制。<br>
+      第二章拆解乩童的運作原理——那不是裝神弄鬼，<br>
+      那是一個非常精密的社會角色系統。<br>
+      第三章談問事：人為什麼願意把重要決定交給一個陌生人和一個神明。
+    </p>
+    <a href="/that-feeling-2-vol2.html" class="btn-full">讀完整版</a>
+    <a href="/" class="back-ss-inline">← 回到驚喜角落</a>
+  </div>
+
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">台灣在地系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-2-vol1-trial.html" class="snbook">Vol.1《這裡本來就不一樣》</a>
+    <span class="snbook current">Vol.2《那些廟在說什麼》</span>
+    <a href="/that-feeling-2-vol3-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.3《你家附近的鬼故事》</a>
+    <a href="/that-feeling-2-vol4-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.4《死了要去哪》</a>
+    <a href="/that-feeling-2-vol5-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.5《台灣人為什麼這麼怕》</a>
+    <a href="/that-feeling-2-vol6-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.6《這塊土地上的聲音》</a>
+  </div>
+  <a href="/that-feeling-2.html" class="back-link">← 返回台灣在地系列</a>
+</div>
+
+</body>
+</html>

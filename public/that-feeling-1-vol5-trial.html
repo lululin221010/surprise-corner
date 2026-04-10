@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你和你之間的距離｜那個感覺 系列一 Vol.5｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14; --text: #c0c0d8; --text-muted: #7070a0;
+    --accent: #7a4a9e; --accent-light: rgba(122,74,158,0.15); --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #5a5a8a;
+    --s1-accent: #7a4a9e; --s1-accent-light: rgba(122,74,158,0.12); --s1-accent-dim: rgba(122,74,158,0.35);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; min-height: 100vh; }
+  .page-back { padding: 20px 32px; border-bottom: 1px solid rgba(122,74,158,0.1); }
+  .page-back a { color: var(--text-muted); text-decoration: none; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; transition: color 0.2s; }
+  .page-back a:hover { color: var(--accent); }
+  .main-content { max-width: 720px; margin: 0 auto; padding: 60px 48px; }
+  .book-meta { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  .series-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--s1-accent); opacity: 0.8; margin-bottom: 16px; }
+  .book-title { font-size: 2.4rem; font-weight: 500; letter-spacing: 4px; color: #e8e8f5; line-height: 1.4; margin-bottom: 12px; }
+  .book-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 24px; }
+  .trial-badge { display: inline-block; padding: 5px 14px; border: 1px solid var(--s1-accent-dim); font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--s1-accent); opacity: 0.8; }
+  h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 3px; color: #e0e0f0; margin: 56px 0 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #c8c8e8; margin: 36px 0 18px; }
+  p { margin-bottom: 24px; text-align: justify; color: var(--text); }
+  strong { color: #e0e0f0; font-weight: 500; }
+  .quote-block { border-left: 2px solid var(--s1-accent-dim); padding: 20px 28px; margin: 36px 0; background: var(--s1-accent-light); }
+  .quote-block p { color: #d0d0e8; font-size: 15px; margin-bottom: 0; line-height: 2.2; }
+  .data-note { background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px 28px; margin: 32px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+  .data-note .note-label { font-size: 10px; letter-spacing: 4px; color: var(--label); margin-bottom: 10px; }
+  .fade-out { position: relative; margin-bottom: 0; }
+  .fade-out::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+  .trial-end { margin: 60px 0 0; padding: 48px 40px; background: var(--card-bg); border: 1px solid var(--card-border); text-align: center; position: relative; overflow: hidden; }
+  .trial-end::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--s1-accent-dim), transparent); }
+  .trial-end-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--label); margin-bottom: 20px; }
+  .trial-end h3 { font-size: 1.2rem; letter-spacing: 3px; color: #e0e0f0; margin: 0 0 16px; border: none; }
+  .trial-end p { font-family: 'Noto Sans TC', sans-serif; font-size: 14px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.9; text-align: center; }
+  .btn-full { display: inline-block; padding: 12px 32px; background: var(--s1-accent-light); border: 1px solid var(--s1-accent-dim); color: var(--s1-accent); font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; text-decoration: none; transition: background 0.25s, color 0.25s; margin-bottom: 16px; }
+  .btn-full:hover { background: rgba(122,74,158,0.25); color: #c0a0f0; }
+  .back-ss-inline { display: block; margin-top: 16px; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .back-ss-inline:hover { color: var(--accent); }
+  .series-nav { max-width: 720px; margin: 0 auto; padding: 40px 48px 60px; border-top: 1px solid rgba(122,74,158,0.1); }
+  .snlabel { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 20px; }
+  .snbooks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .snbook { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(122,74,158,0.2); color: var(--text-muted); text-decoration: none; letter-spacing: 1px; transition: border-color 0.2s, color 0.2s; }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current { border-color: var(--s1-accent-dim); color: #c0a0f0; background: var(--s1-accent-light); cursor: default; }
+  .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 640px) { .main-content { padding: 40px 24px; } .book-title { font-size: 1.8rem; } .series-nav { padding: 40px 24px 60px; } }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-1.html">← 返回靈魂與意識系列</a></div>
+
+<div class="main-content">
+
+  <div class="book-meta">
+    <div class="series-tag">那個感覺 · 系列一 · VOL. 5</div>
+    <h1 class="book-title">你和你之間的距離</h1>
+    <div class="book-subtitle">催眠、解離狀態與意識層次</div>
+    <span class="trial-badge">開放試閱 · 前言 + 第一章節選</span>
+  </div>
+
+  <h2>前言　你以為你是一個完整的人</h2>
+
+  <p>你以為你是一個完整的人。有一個固定的「你」，住在你的身體裡，掌管你的想法和行為，持續存在於時間裡。</p>
+
+  <p>這個感覺非常真實。但它很可能是錯的。</p>
+
+  <p>神經科學和心理學過去幾十年的研究，持續在侵蝕這個「完整自我」的概念。意識不是一個統一的整體，而是多個平行系統的即時協作結果。「你」不是一個固定的核心，而是一個動態的、隨時在重組的過程。在某些條件下——催眠、解離、強烈壓力、特定的靈修練習——這個過程的正常組織方式會被擾動，製造出那種「我不像我自己」或者「那個做了那件事的人不是我」的體驗。</p>
+
+  <p>這本書要探討的，就是你和你之間的那個距離。那個距離在催眠狀態裡有多遠，在解離的時候有多深，在你試圖用意識探索意識的時候會遇到什麼邊界。</p>
+
+  <p>不是要嚇你。是要讓你對自己更好奇。</p>
+
+  <h2>第一章　催眠不是你想的那樣</h2>
+
+  <h3>你對催眠的印象來自哪裡</h3>
+
+  <p>你對催眠的印象，很可能來自電影、舞台表演、或者新聞裡的聳動報導。那些印象製造了一個非常特定的催眠形象：一個人把懷錶在你面前晃，你的眼睛逐漸失焦，然後你進入了一個完全被對方控制的狀態，做了各種你清醒時不會做的事情，醒來之後什麼都不記得。</p>
+
+  <p>這個形象跟真實的催眠研究之間的距離，大概跟好萊塢的手術室跟真實的手術室之間的距離差不多。</p>
+
+  <p>催眠是一個真實的心理現象，有超過一百五十年的科學研究歷史，在心理治療、疼痛管理、和意識研究上有有記錄的效果。但它的運作方式、能做到的事情、以及它對「自我控制」的影響，跟大眾印象裡的版本有根本性的差異。</p>
+
+  <h3>催眠狀態的實際樣子</h3>
+
+  <p>催眠狀態不是睡著。被催眠的人是清醒的、有意識的、可以說話的，而且在絕大多數情況下，他們知道自己在被催眠。催眠更接近的比喻，是一種高度專注的「吸收」狀態（absorption）：注意力高度集中在催眠師提供的引導上，對外部刺激的注意力相應降低，但不是消失。</p>
+
+  <p>催眠的深度因人而異，差別巨大。人口中大約有10至15%是「高催眠感受性」（high hypnotizability）的人，他們對催眠的反應非常強烈，可以在催眠狀態下經歷幻覺、遺忘、以及複雜的感知改變。另外10至15%對催眠幾乎沒有反應。其餘的大多數人在這兩個極端之間。</p>
+
+  <div class="data-note">
+    <div class="note-label">研究背景</div>
+    史丹佛大學的Ernest Hilgard在1960至70年代建立了一套系統性的催眠感受性測量工具（Stanford Hypnotic Susceptibility Scale），至今仍是催眠研究的標準工具之一。Hilgard的研究顯示，催眠感受性是一個相對穩定的個體特質，跟智力無關，跟吸收能力（absorption）和想像力的豐富程度有較高的相關性。
+  </div>
+
+  <h3>催眠能控制你嗎</h3>
+
+  <p>催眠最常見的誤解，是它讓人「失去意志」、變得「完全聽話」。這個誤解的來源，一部分是舞台催眠表演——那些在台上做出各種奇怪行為的「受催眠者」，看起來像是完全被催眠師控制了。</p>
+
+  <p>但研究顯示，舞台催眠裡發生的事情，有更複雜的解釋。被選上台的人，往往是事先被篩選過的高催眠感受性者；舞台環境本身（觀眾、表演期待、社會壓力）對行為有強大的影響；而催眠師的指令，在大多數情況下只有在受試者「願意配合」的前提下才有效——如果催眠師要求受催眠者做他們強烈反對的事，大多數人仍然會拒絕。</p>
+
+  <p>催眠研究者把這個現象描述為：催眠增加了人對建議的接受性，但不能覆蓋核心的道德判斷和個人意志。你在催眠狀態裡，仍然是你——只是一個更願意接受引導、對某些體驗更開放的你。</p>
+
+  <div class="fade-out">
+    <p>這個「更願意接受引導」的狀態，是催眠在心理治療上有效的原因，也是它被誤解的原因。治療性催眠的效果，建立在催眠師和來訪者的合作關係上——不是控制，而是引導。治療師用催眠狀態的高接受性，幫助來訪者接觸平常被防禦機制阻擋的記憶、感受、或行為模式。這個過程的主動者，始終是來訪者本人，不是催眠師。</p>
+  </div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱到這裡</div>
+    <h3>後面還有很多</h3>
+    <p>
+      第一章繼續談催眠的神經機制——<br>
+      大腦在催眠狀態下實際發生了什麼。<br>
+      第二章進入解離：那個「我不像我自己」的感覺，<br>
+      是怎麼發生的，它的邊界在哪裡。<br>
+      第三章談多重人格——它是真實的嗎？
+    </p>
+    <a href="/that-feeling-1-vol5.html" class="btn-full">讀完整版</a>
+    <a href="/" class="back-ss-inline">← 回到驚喜角落</a>
+  </div>
+
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">靈魂與意識系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
+    <a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
+    <a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
+    <a href="/that-feeling-1-vol4-trial.html" class="snbook">Vol.4《另一個人的記憶》</a>
+    <span class="snbook current">Vol.5《你和你之間的距離》</span>
+    <a href="/that-feeling-1-vol6-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.6《意識的邊界在哪裡》</a>
+  </div>
+  <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識系列</a>
+</div>
+
+</body>
+</html>

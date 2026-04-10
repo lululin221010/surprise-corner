@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>他們研究這個，然後不說話了｜科學邊界 Vol.6｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.page-back { padding: 28px 0 0; }
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.book-header {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--accent-light);
+}
+
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 56px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 36px 0 16px;
+}
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.trial-end {
+  margin: 64px 0 48px;
+  text-align: center;
+  position: relative;
+}
+.trial-end::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+.trial-end-label {
+  position: relative;
+  display: inline-block;
+  background: var(--bg);
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.cta-block {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.cta-block h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin-bottom: 16px;
+}
+.cta-block p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: #5aa0b8; }
+.btn-secondary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(74,143,168,0.25);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px 80px; }
+  .book-title { font-size: 1.5rem; }
+  .cta-block { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 06</div>
+    <h1 class="book-title">他們研究這個，<br>然後不說話了</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版・前言＋第一章前半</span>
+  </div>
+
+  <div class="content">
+
+    <h2>前言　沉默是一種數據</h2>
+
+    <p>
+      有一種研究者的命運是這樣的：
+    </p>
+    <p>
+      他做了一個研究。研究結果很奇怪，但數據是真的。
+      他發表了，或者試圖發表。
+      然後某件事發生了——也許是論文被撤回，也許是資金被切斷，
+      也許是他自己決定不再談這件事。
+      之後他換了研究方向，或者退休了，或者去世了。
+      那個研究就這樣懸在那裡，沒有後文。
+    </p>
+    <p>
+      這種沉默，有時候是因為研究本身有問題。
+      有時候是因為研究太超前，還沒有人準備好接受它。
+      <strong>有時候，是因為繼續說下去的代價太高。</strong>
+    </p>
+
+    <div class="blockquote">
+      <p>「科學界最有效的審查，不是禁止發表，而是讓發表了也沒有人引用。」</p>
+      <cite>—— 魯伯特・謝爾德雷克（Rupert Sheldrake），《科學的錯覺》，2012</cite>
+    </div>
+
+    <p>
+      這本書是這個系列的最後一冊，也是最直接的一冊。
+      前五冊看的是數據、實驗、地點、理論。
+      這一冊看的是<em>人</em>。
+    </p>
+    <p>
+      那些研究了某件事，然後不說話了的人。
+      他們的名字、他們的研究、以及那之後發生的事——
+      全部都是可以查的公開紀錄。
+    </p>
+
+    ---
+
+    <h2>第一章　撤稿之後</h2>
+
+    <h3>安德魯・韋克菲爾德：一個關於撤稿的複雜故事</h3>
+
+    <p>
+      1998年，英國胃腸科醫師安德魯・韋克菲爾德（Andrew Wakefield）
+      在《刺胳針》（The Lancet）發表了一篇論文，
+      聲稱在12個自閉症兒童中發現麻疹疫苗與腸道病變的關聯。
+    </p>
+    <p>
+      這篇論文在2010年被撤稿。韋克菲爾德的醫師執照也被吊銷。
+      原因是數據造假和利益衝突。
+    </p>
+    <p>
+      這個案例通常被用來說明「好的科學如何糾正自己」。
+    </p>
+    <p>
+      但這本書要講的不是這個部分。
+    </p>
+
+    <div class="data-note">
+      <strong>事件紀錄</strong><br>
+      論文發表：Wakefield et al.,《刺胳針》，1998年2月，Vol. 351, Issue 9103<br>
+      撤稿時間：2010年2月<br>
+      調查機構：英國醫學總會（General Medical Council）<br>
+      撤稿理由：數據選擇性呈現、研究倫理違規、未揭露利益衝突<br>
+      後續：韋克菲爾德移居美國，持續在反疫苗社群中發表演說
+    </div>
+
+    <p>
+      韋克菲爾德的論文有問題，這一點已經被充分確認。
+      但在那篇論文被撤稿之後，有幾位共同作者嘗試繼續研究腸道與自閉症的關聯——
+      <em>不是疫苗，只是腸道</em>——
+      他們遇到了什麼？
+    </p>
+    <p>
+      其中一位，英國皇家慈善兒童醫院的腸胃科醫師約翰・沃克-史密斯（John Walker-Smith），
+      在同一調查中被吊銷執照，後來上訴，在2012年獲得高等法院裁定撤銷處分，
+      理由是原調查「不合邏輯、不公正」。
+    </p>
+    <p>
+      沃克-史密斯之後沒有再繼續那個研究方向。
+      他說：「我已經沒有力氣了。」
+    </p>
+
+    <h3>星系旋轉曲線：那個「錯誤」的天文學家</h3>
+
+    <p>
+      1970年代，天文學家薇拉・魯賓（Vera Rubin）測量了仙女座星系的旋轉速度。
+      根據牛頓力學，越遠離星系中心的恆星應該轉得越慢，就像太陽系外圍的行星一樣。
+    </p>
+    <p>
+      但她的數據顯示：外圍的恆星轉得跟中心的一樣快，甚至更快。
+    </p>
+    <p>
+      這在物理學上是不可能的——除非星系裡有大量我們看不見的物質，
+      提供了額外的重力。
+    </p>
+    <p>
+      魯賓把這個結果帶去天文學研討會。
+      她後來回憶說：<em>「沒有人相信我。他們說我的數據一定有問題。」</em>
+    </p>
+    <p>
+      她繼續測量了更多星系，得到了相同的結果。
+      她繼續發表，繼續被懷疑，繼續測量。
+      三十年後，她的發現有了一個名字：暗物質（dark matter）。
+      它現在是宇宙學的核心概念，佔宇宙總質量的約27%。
+    </p>
+    <p>
+      魯賓從來沒有獲得諾貝爾物理學獎。2016年，她在提名名單公布前幾週去世。
+      諾貝爾獎不追授。
+    </p>
+    <p>
+      她的故事有一個好結局，至少在科學史的意義上。
+      但在她說話的那三十年間，她是那個「數據有問題」的人。
+      <em>沉默不是她的選擇，是她被迫承受的環境。</em>
+    </p>
+
+  </div>
+
+  <div class="trial-end">
+    <span class="trial-end-label">試閱到此結束</span>
+  </div>
+
+  <div class="cta-block">
+    <h3>還有更多不說話的人</h3>
+    <p>
+      史丹佛的遠距感知計畫被終止後，研究者去了哪裡？<br>
+      那個在政府實驗室工作、退休後才開口的物理學家說了什麼？<br>
+      完整版收錄全書六章，以及一篇後記。
+    </p>
+    <div class="cta-buttons">
+      <a href="/that-feeling-6-vol6.html" class="btn-primary">讀完整版</a>
+      <a href="/" class="btn-secondary">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-6-vol1-trial.html" class="snbook">Vol.1《儀器測到了，但科學家不敢說》</a>
+      <a href="/that-feeling-6-vol2-trial.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+      <a href="/that-feeling-6-vol3-trial.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <a href="/that-feeling-6-vol5-trial.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <span class="snbook current">Vol.6《他們研究這個，然後不說話了》</span>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

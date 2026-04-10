@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世界怎麼詛咒人｜那個感覺 系列三 Vol.3 試閱｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --card-bg: #14141e;
+  --label: #5a5a8a;
+  --curse-accent: #9e4a6a;
+  --curse-dim: rgba(158,74,106,0.4);
+  --curse-light: rgba(158,74,106,0.10);
+  --curse-border: rgba(158,74,106,0.22);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 35% at 70% 15%, rgba(158,74,106,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 55% at 30% 85%, rgba(122,74,158,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--curse-accent); }
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--curse-accent);
+  border: 1px solid var(--curse-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.book-header {
+  padding: 16px 0 48px;
+  border-bottom: 1px solid var(--curse-border);
+  margin-bottom: 56px;
+}
+.series-info {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #e8d0d8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.book-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chapter-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--curse-accent);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #e0d0d8;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #d0c0c8;
+  letter-spacing: 1px;
+  margin: 36px 0 20px;
+}
+p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.blockquote {
+  background: var(--curse-light);
+  border-left: 3px solid var(--curse-accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-style: italic;
+  color: #e0c8d0;
+  margin-bottom: 8px;
+}
+.blockquote p:last-child { margin-bottom: 0; }
+.blockquote .source {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+/* 文化對照表 */
+.culture-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+}
+.culture-table th {
+  background: rgba(158,74,106,0.15);
+  color: #e0c8d0;
+  padding: 10px 14px;
+  text-align: left;
+  letter-spacing: 2px;
+  font-size: 11px;
+  border-bottom: 1px solid var(--curse-border);
+}
+.culture-table td {
+  padding: 10px 14px;
+  color: var(--text);
+  border-bottom: 1px solid rgba(158,74,106,0.08);
+  line-height: 1.7;
+  vertical-align: top;
+}
+.culture-table tr:last-child td { border-bottom: none; }
+
+.section-divider {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--curse-dim);
+  letter-spacing: 8px;
+  font-size: 14px;
+}
+
+.cutoff-zone {
+  position: relative;
+  overflow: hidden;
+  max-height: 260px;
+}
+.cutoff-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, var(--bg) 80%);
+  pointer-events: none;
+}
+
+.paywall {
+  text-align: center;
+  padding: 56px 32px 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--curse-border);
+  border-radius: 12px;
+  margin: 0 0 60px;
+}
+.paywall-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 20px;
+}
+.paywall h3 {
+  font-size: 1.3rem;
+  color: #e8d0d8;
+  margin: 0 0 12px;
+  letter-spacing: 2px;
+}
+.paywall p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.9;
+}
+.paywall-btn {
+  display: inline-block;
+  background: var(--curse-accent);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.paywall-btn:hover { background: #b05070; }
+.paywall-return {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.paywall-return:hover { color: var(--curse-accent); }
+
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.12);
+  padding: 32px 48px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover { border-color: var(--accent); color: var(--text); }
+.snbook.current {
+  border-color: var(--curse-accent);
+  color: var(--curse-accent);
+  background: var(--curse-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--curse-accent); }
+
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .book-title { font-size: 1.8rem; }
+  .series-nav { padding: 24px; }
+  .culture-table { font-size: 12px; }
+  .culture-table th, .culture-table td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-3.html">← 返回詛咒與心理</a></div>
+
+<div class="container">
+
+  <div class="trial-badge">試閱版　PREVIEW</div>
+
+  <div class="book-header">
+    <div class="series-info">那個感覺　系列三　VOL.3</div>
+    <h1 class="book-title">世界怎麼詛咒人</h1>
+    <div class="book-subtitle">詛咒與心理　第三冊</div>
+  </div>
+
+  <!-- 前言 -->
+  <div class="chapter-label">前言　PREFACE</div>
+  <h2>一張地圖，到處都是詛咒</h2>
+
+  <p>
+    把世界地圖展開來，找一個沒有詛咒文化的地方。
+  </p>
+  <p>
+    你找不到。
+  </p>
+  <p>
+    美索不達米亞有詛咒泥板，古埃及有詛咒銘文，古希臘羅馬有詛咒鉛板，中世紀歐洲有巫術，非洲有巫毒，中南美洲有薩滿咒術，東南亞有降頭，台灣有厭勝、牽亡、卡到陰。這些文明在地理上相距數千公里，在時間上跨越數千年，彼此之間幾乎沒有接觸——但它們各自發展出了結構驚人相似的詛咒系統。
+  </p>
+  <p>
+    這種普遍性不是巧合。它說明詛咒滿足的是人類共同的某種需求，而這種需求強烈到足以在完全不同的文化環境裡，獨立演化出幾乎相同的解決方案。
+  </p>
+  <p>
+    這一冊要做的，是把這張地圖展開來看。不是旅遊式地介紹各地的奇風異俗，而是找出這些詛咒系統的共同結構——它們在形式上有什麼相似之處，這些相似性說明了什麼，以及它們在社會功能上扮演了什麼角色。
+  </p>
+  <p>
+    當你看完這張地圖，你對詛咒的理解會從「某些文化的奇特信仰」變成「人類心理的普遍投射」。這個轉變，比任何單一的詛咒案例都更有解釋力。
+  </p>
+
+  <div class="section-divider">· · ·</div>
+
+  <!-- 第一章 -->
+  <div class="chapter-label">第一章　CHAPTER ONE</div>
+  <h2>詛咒的四個共同要素</h2>
+
+  <p>
+    人類學家在研究跨文化詛咒系統時，發現幾乎所有的詛咒都包含四個基本要素。這四個要素的存在，說明詛咒不是隨機的文化現象，而是人類心理在特定問題面前的系統性回應。
+  </p>
+
+  <h3>一、意圖的傳遞</h3>
+  <p>
+    詛咒需要一個傳遞機制，把「你將受到傷害」這個信息送達目標。這個傳遞可以是直接的（當面說出詛咒語），也可以是間接的（通過儀式、象徵物、或第三方傳遞）。
+  </p>
+  <p>
+    不同文化的傳遞機制差異很大，但它們共享一個邏輯：傳遞必須「有效」——目標必須以某種方式知道或感受到詛咒的存在，詛咒才能發揮作用。這個「有效性」的要求，再次把詛咒的機制指向了心理學而不是超自然力量：如果目標不知道自己被詛咒，詛咒通常不會產生預期的效果。
+  </p>
+
+  <h3>二、專業知識的壟斷</h3>
+  <p>
+    幾乎所有的詛咒系統都有一個「專業人士」的角色：巫師、薩滿、女巫、法師、乩童、靈媒。這些人掌握著施咒和解咒的知識，而這個知識是不對外公開的，需要特定的資格（血統、師承、神靈的選擇）才能獲得。
+  </p>
+  <p>
+    這個壟斷結構有明顯的社會功能：它創造了一個詛咒的「中間人」市場，讓施咒和解咒都需要通過特定的人。這個結構在任何詛咒文化興旺的地方，都同時維持著一個「解咒服務業」的存在——兩者相互依存。
+  </p>
+
+  <h3>三、物質媒介的使用</h3>
+  <p>
+    大多數詛咒系統都使用某種物質媒介：蠟像、詛咒板、符咒、特定的食物或飲料、頭髮指甲等身體部位。這些媒介的使用有一個共同的心理邏輯：它把抽象的「惡意」具體化，讓詛咒變成一個有形的東西。
+  </p>
+  <p>
+    具體化的詛咒更令人恐懼，因為它感覺更「真實」。一個「我詛咒你」的口頭表達，遠不如一個插著針的蠟像更有心理衝擊力。物質媒介讓詛咒的威脅從語言層面下沉到感官層面，繞過了理性的過濾。
+  </p>
+
+  <h3>四、時間框架的設定</h3>
+  <p>
+    詛咒通常有一個時間框架，明確或隱含地說明「什麼時候生效」「持續多久」。這個時間框架有幾個功能：它創造了預期的焦慮（知道詛咒正在倒數），它為解咒提供了緊迫性，它也解釋了為什麼詛咒沒有立即生效（「詛咒還在醞釀」）。
+  </p>
+
+  <h3>四個要素組合成的心理結構</h3>
+  <p>
+    這四個要素合在一起，構成了一個完整的心理操作系統：它傳遞了威脅信息（意圖傳遞），確認了這個威脅的真實性（專業知識背書），讓威脅變得具體可感（物質媒介），並且創造了持續的焦慮和解咒的需求（時間框架）。
+  </p>
+  <p>
+    這個結構在任何文化、任何時代都是有效的，因為它精準地針對了人類心理的幾個核心弱點：對未知威脅的恐懼、對專業權威的服從、感官信息比抽象信息更有說服力的認知偏誤、以及對時間壓力的焦慮反應。
+  </p>
+
+  <table class="culture-table">
+    <thead>
+      <tr>
+        <th>文化</th>
+        <th>詛咒類型</th>
+        <th>主要媒介</th>
+        <th>專業人士稱謂</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>古羅馬</td>
+        <td>Defixiones（詛咒板）</td>
+        <td>鉛板、蠟板</td>
+        <td>Veneficus（毒術師）</td>
+      </tr>
+      <tr>
+        <td>西非（貝南、多哥）</td>
+        <td>巫毒（Vodou）</td>
+        <td>人偶、祭品</td>
+        <td>Houngan / Mambo</td>
+      </tr>
+      <tr>
+        <td>東南亞（馬來西亞、泰國）</td>
+        <td>降頭術（Sihir）</td>
+        <td>頭髮、符咒、食物</td>
+        <td>Bomoh / Pawang</td>
+      </tr>
+      <tr>
+        <td>台灣</td>
+        <td>厭勝、卡到陰</td>
+        <td>符令、金紙、米</td>
+        <td>乩童、法師、師公</td>
+      </tr>
+      <tr>
+        <td>中南美（古巴、巴西）</td>
+        <td>桑泰利亞（Santería）</td>
+        <td>蠟燭、草藥、動物</td>
+        <td>Santero / Babalawo</td>
+      </tr>
+      <tr>
+        <td>愛爾蘭（凱爾特）</td>
+        <td>Geis（禁忌詛咒）</td>
+        <td>語言宣告</td>
+        <td>Druid（德魯伊）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 截斷點 -->
+  <div class="cutoff-zone">
+    <h3>為什麼結構如此相似</h3>
+    <p>
+      看到這張表，你可能有一個問題：這些文化之間沒有接觸，為什麼它們的詛咒系統這麼像？
+    </p>
+    <p>
+      人類學有幾個可能的解釋。第一個是「心理一致性」（psychic unity）假說：所有人類共享相同的基本心理結構，所以在面對相同的社會問題時，會獨立發展出相似的解決方案。詛咒是一個例子——當人們需要一種方式來傷害無法直接傷害的對象、解釋隨機的厄運、維持社會規範，他們的心理會自然地走向類似的方向。
+    </p>
+    <p>
+      第二個解釋是「文化傳播」：這些系統可能並不像我們以為的那麼獨立演化，而是通過我們尚未完全記錄的歷史接觸傳播的。古代的貿易路線和移民路徑比現代人通常以為的更廣泛，文化元素的跨地區傳播比顯而易見的歷史記錄更複雜。
+    </p>
+  </div>
+
+  <!-- 付費牆 -->
+  <div class="paywall">
+    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
+    <h3>繼續讀完整版</h3>
+    <p>
+      完整版包含：<br>
+      前言＋六章＋後記，全書逾 12,000 字<br>
+      台灣詛咒文化的完整田野記錄<br>
+      巫毒、降頭、桑泰利亞的人類學分析<br>
+      詛咒作為社會控制工具的跨文化比較
+    </p>
+    <a href="/that-feeling-3-vol3.html" class="paywall-btn">閱讀完整版</a>
+    <a href="/" class="paywall-return">← 回到驚喜角落</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">詛咒與心理　系列三</div>
+  <div class="snbooks">
+    <a href="/that-feeling-3-vol1-trial.html" class="snbook">Vol.1《詛咒是真的嗎》</a>
+    <a href="/that-feeling-3-vol2-trial.html" class="snbook">Vol.2《你被詛咒了嗎》</a>
+    <span class="snbook current">Vol.3《世界怎麼詛咒人》</span>
+    <a href="/that-feeling-3-vol4-trial.html" class="snbook">Vol.4《家族的咒》</a>
+    <a href="/that-feeling-3-vol5-trial.html" class="snbook">Vol.5《詛咒怎麼殺人》</a>
+    <a href="/that-feeling-3-vol6-trial.html" class="snbook">Vol.6《解咒》</a>
+  </div>
+  <a href="/that-feeling-3.html" class="back-link">← 返回詛咒與心理</a>
+</div>
+
+</body>
+</html>

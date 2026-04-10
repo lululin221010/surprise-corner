@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瀕死之後｜那個感覺 系列四 Vol.2｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6a3a8e; }
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--accent); }
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.2</div>
+    <h1 class="book-title">瀕死之後</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <h2>前言　你死了三分鐘，然後回來了</h2>
+
+  <p>1991年，美國歌手潘·雷諾茲（Pam Reynolds）因為腦部動脈瘤接受手術。這不是一般的手術。醫生需要讓她的體溫降到攝氏15.5度，排空腦部血液，讓心臟和腦部活動完全停止——從任何醫學定義來說，她在手術中間那段時間是死的。</p>
+
+  <p>她醒來之後說她記得出體，從上方看著自己的手術。她描述了外科醫生使用的骨鋸的樣子，說它看起來像一把電動牙刷，描述了護士說的一些話，描述了手術室的一些細節。她的主治醫生麥克·塞邦（Michael Sabom）後來核對了這些描述，發現一部分細節是準確的——而且那些細節對應的時間點，正是她的腦電圖已經呈現平線的時候。</p>
+
+  <p>如果她的大腦在那個時候沒有任何活動，她怎麼有記憶？</p>
+
+  <p>這個問題沒有容易的答案。瀕死經驗（Near-Death Experience，NDE）是心理學和神經科學裡一個讓研究者分裂的領域。支持者說這是意識獨立於大腦存在的證據，懷疑者說每一個案例都有更簡單的物理解釋。</p>
+
+  <p>這本書不打算告訴你誰對。它要做的是：讓你看清楚，兩邊的論據到底有多強，以及那些無法輕易被任何一方消化的案例，到底有多難解釋。</p>
+
+  <h2>第一章　你死去的那一刻，你可能看見了什麼</h2>
+
+  <h3>瀕死經驗是什麼</h3>
+
+  <p>「瀕死經驗」這個詞是雷蒙德·穆迪（Raymond Moody）在1975年的書《死後的世界》（Life After Life）裡引入主流討論的，但這個現象本身被記錄的歷史更長。柏拉圖在《理想國》裡記載了一個叫艾爾（Er）的士兵，死後靈魂離體，看見了死後的世界，然後被送回來報告見聞。中世紀有大量「回來的死人」的故事，通常帶有宗教色彩。</p>
+
+  <p>穆迪做的是把這個現象系統化。他收集了150個在臨床死亡後被救活的人的敘述，找出其中的共同元素，給它們一個統一的名稱和框架。他整理出的典型NDE包含以下要素，不同案例出現其中的一部分或全部：</p>
+
+  <p>一，聽到被宣告死亡的消息，同時保有清醒的意識。二，平靜感，沒有痛苦。三，奇怪的聲音，通常是嗡嗡聲或鈴聲。四，穿越黑暗隧道的感覺。五，出體——從上方看著自己的身體和周圍的環境。六，遇到已逝的親人或某種光的存在。七，看見自己生命的回顧。八，遇到某種邊界或限制，回到自己的身體。</p>
+
+  <p>穆迪的書賣了數百萬冊，在全球範圍內讓這個現象進入了公眾意識。但它也有一個根本性的問題：這些都是案例報告，沒有對照組，沒有標準化的收集方法，沒有辦法排除記憶加工和後期添加的可能性。</p>
+
+  <p>科學家需要更嚴格的研究方法。他們花了三十年才開始得到一些答案——即使那些答案本身也在爭議中。</p>
+
+  <h3>荷蘭的344名心臟停跳倖存者</h3>
+
+  <p>2001年，荷蘭心臟科醫師皮姆·范·洛梅爾（Pim van Lommel）在《刺胳針》（The Lancet）發表了一個迄今為止設計最嚴格的NDE前瞻性研究之一。</p>
+
+  <p>他和同事在荷蘭十家醫院追蹤了344名成功被心肺復甦術（CPR）救活的心臟停跳患者。這些患者在心臟停跳期間，從任何臨床標準來說都沒有意識和大腦活動。研究者在他們醒來後盡快進行標準化訪談，問他們在停跳期間是否有任何記憶或經歷。</p>
+
+  <p>結果：344人中，62人（18%）報告了某種形式的記憶。其中41人（12%）符合「核心NDE」的標準，包括出體體驗、光明感、遇見已逝的親人等。</p>
+
+  <p>這個數字讓范·洛梅爾自己都很驚訝。18%不是一個小數字——在一個設計嚴謹的前瞻性研究裡，每六個心臟停跳的倖存者就有一個報告了瀕死經驗。而且這個研究的設計刻意排除了「後期加工」的問題：研究者盡快在患者醒來後訪談，而不是幾年之後回憶。</p>
+
+  <p>更重要的是：那些報告NDE的患者和沒有報告的患者，在心臟停跳時間長度、用藥、氧氣水平等醫學指標上，沒有顯著差異。也就是說，「缺氧」或「藥物影響」這些常見的懷疑論解釋，無法完全說明為什麼同樣的臨床條件下，只有18%的人有NDE。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半進入潘·雷諾茲的完整案例紀錄，以及為什麼她的案例讓神經科學家特別難處理。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-4-vol2.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+      <span class="snbook current">Vol.2《瀕死之後》</span>
+      <a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
+      <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+      <a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
+      <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>轉世的案例｜那個感覺 系列四 Vol.4｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6a3a8e; }
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--accent); }
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.4</div>
+    <h1 class="book-title">轉世的案例</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <h2>前言　一個精神科醫師與兩千五百個孩子</h2>
+
+  <p>伊恩·史蒂文森（Ian Stevenson）是維吉尼亞大學精神科主任，在1960年代初是一個完全主流的學術精神科醫師。他研究過家庭遺傳對心理疾病的影響，發表過標準的精神醫學論文，在同儕之間有很好的聲譽。</p>
+
+  <p>然後他讀到了一篇關於一個印度小女孩的報告，那個女孩聲稱記得她的前世。</p>
+
+  <p>他本來以為這類報告都是民間故事，容易被解釋為文化期望或家庭說教的結果。但他決定親自去看，帶著學術懷疑論者該有的一切工具。他在1960年去了印度，訪談了那個女孩和她的家庭，也訪談了她宣稱的前世家庭。他做了田野調查，對照了細節，用他受過訓練的精神科評估方式審視每一個宣稱。</p>
+
+  <p>他回來之後得出了一個讓他自己都感到不舒服的結論：這個案例裡有一些細節，他無法用任何他熟悉的機制解釋。</p>
+
+  <p>然後他繼續去找下一個案例。再下一個。再下一個。</p>
+
+  <p>他花了接下來四十年的時間，研究了超過兩千五百個宣稱記得前世的兒童案例，橫跨印度、斯里蘭卡、緬甸、黎巴嫩、土耳其、美洲和歐洲。他出版了超過三百篇學術論文和數本專著，建立了一個至今仍在持續的研究資料庫。</p>
+
+  <p>他沒有說他「證明了」轉世。他說的是：在數百個案例裡，他找到了他目前知道的任何假說都無法完全解釋的東西。</p>
+
+  <p>這本書就是從那個「無法完全解釋的東西」開始的。</p>
+
+  <h2>第一章　記得前世的孩子長什麼樣</h2>
+
+  <h3>典型案例的特徵</h3>
+
+  <p>史蒂文森在研究了數百個案例之後，整理出了記得前世的孩子通常呈現的一組共同特徵。這些特徵在不同國家、不同文化背景的案例裡反覆出現，而且在很多案例裡，家人表示在孩子第一次說話之前就已經注意到了某些異常的行為。</p>
+
+  <p>第一，年齡模式：孩子通常在兩到四歲之間開始說話，提及前世的記憶，然後在六到八歲之間，這些記憶開始自然消退。史蒂文森在他的資料庫裡觀察到，如果過了八歲孩子仍然堅持聲稱記得前世，這反而讓他更懷疑，因為它違背了典型的消退模式。</p>
+
+  <p>第二，具體性：聲稱記得前世的孩子，通常不說「我前世是一個好人」這種抽象陳述，而是說非常具體的事：前世家庭的位置、家庭成員的名字、房子的樣子、自己死去的方式、職業、個人習慣。這些細節通常是可以被驗證的——研究者可以去找那個「前世家庭」，核對孩子描述的細節是否準確。</p>
+
+  <p>第三，情緒連結：孩子通常對前世的「家人」有強烈的情感反應。有些孩子會要求被帶去見前世的父母，見到之後情緒激動。有些孩子會對前世家人的死亡或苦難表現出與年齡不相稱的悲傷。</p>
+
+  <p>第四，行為特徵：很多案例裡，孩子的行為和偏好和他們的家庭環境非常不一致，但和他們宣稱的前世生活的背景相符。一個漁夫家庭的孩子，執著地想要去海邊，說自己「之前住在海邊」；一個素食家庭的孩子，對肉類有異常的渴望；一個宣稱前世是軍人的孩子，有對槍支的異常著迷。</p>
+
+  <p>第五，胎記與先天缺陷：這是史蒂文森最具爭議也最具特色的研究方向。在數百個案例裡，孩子身上的胎記或先天缺陷，在位置上對應了他們聲稱的前世死亡方式——槍傷、刀傷、溺水的痕跡在對應位置上。史蒂文森收集了這些案例的醫療記錄，並且在可能的情況下核對了前世人物的驗屍報告或死亡紀錄。</p>
+
+  <h3>沙克拉·米什拉案例：有名字、有地址、有家人</h3>
+
+  <p>1974年，史蒂文森在印度北方邦訪談了一個名叫沙克拉·米什拉（Sukla Mishra）的女孩。她在大約三歲時開始說話，宣稱她的「前世名字」是米娜·帕提（Mana Pathak），住在距離她家約六十公里的帕塔普爾（Rathtala）村。她描述了前世丈夫的名字、孩子的名字，以及她死去的方式。</p>
+
+  <p>她的父親最初沒有把這當一回事，但女孩堅持了兩年，細節一致。父親最終決定帶她去那個村莊查看。他們在那裡找到了一個和她描述相符的家庭，家庭成員確認了她描述的細節，包括她說到的丈夫和孩子的名字，以及幾個只有家庭成員知道的細節。</p>
+
+  <p>史蒂文森在兩個家庭都分開進行了訪談，記錄了女孩的陳述，並且核對了可以核實的細節。他在後來的報告裡說，這個案例裡有二十四個可核實的細節，其中二十個被確認是準確的。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半進入史蒂文森最震撼的胎記研究，以及他如何在土耳其、黎巴嫩找到對應前世槍傷位置的孩子。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-4-vol4.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+      <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+      <a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
+      <span class="snbook current">Vol.4《轉世的案例》</span>
+      <a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
+      <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>與死者同在｜那個感覺 系列四 Vol.3｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .trial-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 56px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .trial-end {
+    margin-top: 60px;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end .te-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cta-group {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6a3a8e; }
+  .btn-back {
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--accent); }
+  .series-nav {
+    margin-top: 60px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 680px) {
+    .content { padding: 40px 24px 60px; }
+    .page-back { padding: 16px 24px; }
+    h1.book-title { font-size: 1.9rem; }
+    .series-nav { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+
+<div class="content">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.3</div>
+    <h1 class="book-title">與死者同在</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+    <span class="trial-badge">試　閱　版</span>
+  </div>
+
+  <h2>前言　靈媒不是你想的那種問題</h2>
+
+  <p>如果你聽到「靈媒」這個詞，你可能想到的是兩種東西：電視上的表演者，用模糊的語言套話讓觀眾感動落淚；或是收費昂貴的神棍，專門盯著剛失去親人、判斷力暫時下降的人。</p>
+
+  <p>這兩種東西都存在，而且都有詳盡的紀錄。詹姆斯·蘭迪（James Randi）——一位職業魔術師和懷疑論者——花了他職業生涯的大部分時間拆解靈媒的把戲，他的工作記錄了一個讓人不舒服的真相：大多數宣稱能夠與死者溝通的人，使用的都是可以被識別和複製的心理技術，和靈界沒有任何關係。</p>
+
+  <p>但這本書不是要討論騙局。騙局的部分已經被充分記錄了。</p>
+
+  <p>這本書要討論的是另一個問題：在那些被系統性排除了明顯欺騙可能性的受控條件下，靈媒現象裡有沒有任何東西是目前已知的心理學或物理學無法解釋的？</p>
+
+  <p>這個問題的答案，比「靈媒是騙子」和「靈媒是真的」都更複雜，也更有趣。</p>
+
+  <h2>第一章　十九世紀的通靈桌與科學家的介入</h2>
+
+  <h3>靈性主義運動的誕生</h3>
+
+  <p>1848年3月，美國紐約州海德斯維爾（Hydesville），凱特和瑪格麗特·福克斯（Kate and Maggie Fox）兩姐妹宣稱她們能夠與一個在屋裡發出神祕敲擊聲的「靈」溝通。她們的家人和鄰居來見證，發現那些敲擊聲似乎在回應問題。消息傳開，吸引了大批訪客，最終演變成19世紀最大的宗教社會現象之一：靈性主義運動（Spiritualism）。</p>
+
+  <p>到1850年代，美國和英國有數以百萬計的人相信人死後靈魂繼續存在，並且可以透過靈媒與生者溝通。通靈桌旋轉（table-turning）、自動書寫、降靈會（séance），成為維多利亞時代中產階級的社交活動。</p>
+
+  <p>科學家沒有置身事外。1869年，英國皇家學會成立了一個調查委員會，研究靈性主義現象。1882年，英國科學促進協會的部分成員成立了「心靈研究學會」（Society for Psychical Research，SPR），成員包括物理學家威廉·巴雷特（William Barrett）、哲學家亨利·席威克（Henry Sidgwick），以及後來的諾貝爾物理學獎得主雷利勛爵（Lord Rayleigh）。</p>
+
+  <p>這群人的態度不是相信靈性主義，而是認為這個現象普遍到值得嚴肅調查。他們用當時最嚴格的科學方法收集和評估證據，試圖區分欺騙、自我欺騙、和真正無法解釋的現象。</p>
+
+  <h3>福克斯姐妹的後來</h3>
+
+  <p>1888年，瑪格麗特·福克斯在一場公開演講中承認，那些敲擊聲是她們用腳趾關節發出的。這個「坦白」在懷疑論者之間被視為對整個靈性主義運動的終極否定。</p>
+
+  <p>但事情比這複雜。一年後，瑪格麗特撤回了她的坦白，說那次公開演講是在精神崩潰和財務壓力下做出的，並不是真實的。她在1893年去世，沒有再做任何官方聲明。</p>
+
+  <p>凱特從未做過任何坦白。</p>
+
+  <p>這個開頭故事的細節，預示了整個靈媒研究史的特質：充滿了「確定」然後「不確定」，「揭穿」然後「反揭穿」，很少有真正乾淨的結局。</p>
+
+  <h3>丹尼爾·鄧格拉斯·洪姆：讓科學家困惑的靈媒</h3>
+
+  <p>在19世紀所有的靈媒中，最讓認真的調查者感到困惑的是丹尼爾·鄧格拉斯·洪姆（Daniel Dunglas Home，1833-1886）。洪姆從未收費，從不在黑暗或封閉的環境裡工作（這和大多數靈媒相反），而且從未被抓到詐騙。</p>
+
+  <p>英國物理學家威廉·克魯克斯（William Crookes）——真空管的發明者，皇家學會院士——在1870年至1873年間對洪姆進行了一系列受控實驗，包括在自己家中的實驗室環境裡。克魯克斯記錄了洪姆讓物體漂浮、在光線下被觀察到、讓樂器在無人接觸的情況下演奏等現象。</p>
+
+  <p>克魯克斯發表了他的觀察報告，結論是這些現象是真實的，無法用已知的物理機制解釋。這個結論讓他在科學圈裡受到廣泛嘲諷，但他拒絕撤回。他說：「我沒有說這是不可能的，我說的是我觀察到了它。」</p>
+
+  <p>洪姆從來沒有被揭穿。他的案例至今仍在被研究者爭論。懷疑論者說克魯克斯被洪姆欺騙了，或者克魯克斯在記錄上不夠嚴謹。信奉者說這是有記錄的最強「物理靈媒」案例之一。唯一可以確定的是：沒有人能夠複製洪姆的現象，但也沒有人能夠確定地解釋它是如何被製造出來的。</p>
+
+  <div class="trial-end">
+    <div class="te-label">試　閱　到　此</div>
+    <p>第一章後半進入20世紀的受控靈媒實驗，以及蓋瑞·施瓦茲的亞利桑那大學靈媒研究計畫。</p>
+    <div class="cta-group">
+      <a href="/that-feeling-4-vol3.html" class="btn-full">讀完整版 →</a>
+      <a href="/" class="btn-back">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+      <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+      <span class="snbook current">Vol.3《與死者同在》</span>
+      <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+      <a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
+      <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+</body>
+</html>

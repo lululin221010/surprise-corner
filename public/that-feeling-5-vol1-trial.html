@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你們都看見了｜那個感覺 系列五 Vol.1｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  /* ── 主內容 ── */
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 48px 80px;
+  }
+
+  /* ── 書名頭部 ── */
+  .book-meta {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+  .trial-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 16px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  /* ── 內文 ── */
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 56px 0 28px;
+    color: var(--text);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  /* ── 試閱截止 ── */
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+    margin-bottom: 16px;
+  }
+  .btn-full:hover { opacity: 0.85; }
+  .back-ss {
+    display: block;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--accent); }
+
+  /* ── 系列導覽 ── */
+  .series-nav {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 40px 48px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .page-back { padding: 16px 20px; }
+    .main { padding: 48px 20px 60px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-5.html">← 返回集體靈異</a></div>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.1</div>
+    <h1 class="book-title">你們都看見了</h1>
+    <div class="book-subtitle">集體目擊、共同幻覺，與那些同時出現在百人眼中的東西</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+    <div class="trial-badge">試　閱　版</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言：一百個人不會全部說謊</h2>
+
+  <p>1997年3月13日晚上，美國亞利桑那州鳳凰城的天空出現了一排燈光。不是一個點，是一個巨大的V字形排列，從北向南緩緩移動，靜默無聲。目擊者超過一萬人，包括當時的亞利桑那州長菲菲·賽門頓（Fife Symington）。</p>
+
+  <p>那些燈光停在那裡的時間足夠長，讓人們有時間打電話叫鄰居出來看，有時間架起攝影機，有時間站在街上仰望，確認自己沒有在做夢。</p>
+
+  <p>這個事件後來被稱為「鳳凰城之光」（Phoenix Lights），是美國歷史上規模最大的集體UFO目擊事件之一。美國軍方後來的解釋是：那是A-10戰機在演習時投放的照明彈。但許多目擊者否認這個解釋——照明彈會掉落，那個東西沒有。照明彈不會保持完美的V字形排列移動整整一小時。</p>
+
+  <p>問題不在於那個東西是什麼。問題在於：一萬個人同時看見了同一個東西。然後他們描述的內容高度一致。然後其中一個還是州長。</p>
+
+  <p>你要怎麼解釋這件事？</p>
+
+  <p>這本書要討論的，就是這類事情的核心問題：當一群人——十個、一百個、一萬個——同時宣稱他們看見了同一件事，這件事的真實性是不是因此增加了？我們的直覺說「是」。但我們的直覺在這裡可能大錯特錯。</p>
+
+  <p>不是因為那些人在撒謊。恰恰相反——他們很可能都在說實話。問題是：說實話和看見了真實存在的東西，是兩回事。</p>
+
+  <p>這本書會帶你看幾個案例，然後試著拆解一個問題：「我們都看見了」這句話，到底能證明什麼，又不能證明什麼。</p>
+
+  <!-- 第一章前半 -->
+  <h2>第一章　一百個目擊者不會全錯</h2>
+
+  <p>先說一個你可能以為很清楚、但其實一點都不清楚的問題：為什麼人數多，可信度就高？</p>
+
+  <p>這個邏輯在法庭上叫做「證人數量」，在日常生活裡叫做「大家都這樣說」，在社群媒體上叫做「轉發了三萬次」。我們用這個邏輯來判斷事情，幾乎是本能的。</p>
+
+  <p>但它成立的前提是：那些人的判斷彼此獨立。</p>
+
+  <p>如果十個人各自在不同地點、不同時間、互不認識，然後描述了一致的事情，那確實值得認真對待。但如果十個人是站在同一個街角，互相看著彼此的反應，然後說他們看到了同一件事——這和一個人說沒有本質的差別，只是那個誤差被放大了十倍。</p>
+
+  <p>心理學把這個現象叫做「社會認知偏誤」（social cognition bias）的一種形式，更通俗的說法是：人的感知，會被周圍的人影響。</p>
+
+  <div class="quote-block">
+    <p>社會心理學家所羅門·阿希（Solomon Asch）在1950年代做了一系列線段判斷實驗。他請受試者判斷哪條線和標準線等長——這個判斷在視覺上非常清楚，幾乎不可能出錯。但當房間裡其他人（實際上是阿希安排的助手）都選了錯誤的答案，有75%的受試者在至少一題中跟著選了錯的。</p>
+    <p class="quote-source">——Solomon Asch，〈Studies of independence and conformity〉，1956年，《Psychological Monographs》</p>
+  </div>
+
+  <p>注意，那不是模糊的題目。那是視覺上很清楚的線段長短比較。但當別人都說「C」，很多人就說了「C」，即使他們的眼睛告訴他們是「B」。</p>
+
+  <p>現在想像那個題目不是線段，而是夜空中一個移動的光點。</p>
+
+  <p>1994年9月16日，辛巴威哈拉雷郊區的阿里爾小學（Ariel School）。早上的下課時間，六十二個學生聲稱在操場旁的樹叢邊看見了一個銀色碟形物體降落，然後有生物從裡面走出來。那些孩子的年齡從六歲到十二歲，他們的描述——那個生物的外形、眼睛、行為——高度一致。</p>
+
+  <p>哈佛大學精神科醫師約翰·麥克（John Mack）後來親赴辛巴威訪問這些孩子，他在研究紀錄裡寫道，孩子們的陳述展現出他無法以正常創傷後反應或集體說謊來解釋的一致性和情緒強度。</p>
+
+  <p>六十二個孩子，一致的描述，一個哈佛醫生說他找不到撒謊的跡象。</p>
+
+  <p>但這裡有一個問題：六十二個孩子是在同一個操場上，同一時間，看著同一個方向，互相看著彼此的反應——然後說出了一致的故事。</p>
+
+  <p>他們有沒有可能，是在彼此的影響下，建構出了一個共同的感知？</p>
+
+  <p>這個問題不是在說他們說謊。這個問題是在問：人的感知，有多少是自己的？</p>
+
+</div><!-- .main -->
+
+<!-- 試閱截止 -->
+<div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
+  <div class="trial-end">
+    <div class="trial-end-label">試　閱　到　此</div>
+    <h3>後面還有六章，每章都更難放下</h3>
+    <p>第一章繼續探討「集體感知」的神經機制，以及為什麼我們的大腦天生就設計成要跟隨別人的判斷。之後六章涵蓋法蒂瑪太陽奇蹟、麻州塞勒姆獵巫事件的目擊心理學，以及「共同幻覺」在現代神經科學的最新研究。</p>
+    <a href="/that-feeling-5-vol1.html" class="btn-full">閱讀完整版</a>
+    <a href="/" class="back-ss">← 回到驚喜角落</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">集體靈異 · 系列五</div>
+  <div class="snbooks">
+    <span class="snbook current">Vol.1《你們都看見了》</span>
+    <a href="/that-feeling-5-vol2-trial.html" class="snbook">Vol.2《都市傳說解剖》</a>
+    <a href="/that-feeling-5-vol3-trial.html" class="snbook">Vol.3《UFO與我們》</a>
+    <a href="/that-feeling-5-vol4-trial.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+    <a href="/that-feeling-5-vol5-trial.html" class="snbook">Vol.5《邪教的邏輯》</a>
+    <a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+  </div>
+  <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>都市傳說解剖｜那個感覺 系列五 Vol.2｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 48px 80px;
+  }
+
+  .book-meta {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+  .trial-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 16px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 56px 0 28px;
+    color: var(--text);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .btn-full:hover { opacity: 0.85; }
+  .back-ss {
+    display: block;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--accent); }
+
+  .series-nav {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 40px 48px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .page-back { padding: 16px 20px; }
+    .main { padding: 48px 20px 60px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-5.html">← 返回集體靈異</a></div>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.2</div>
+    <h1 class="book-title">都市傳說解剖</h1>
+    <div class="book-subtitle">它從哪裡來，為什麼你會相信，它想說什麼</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+    <div class="trial-badge">試　閱　版</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　那個故事你聽過嗎</h2>
+
+  <p>1970年代，美國各地流傳著一個故事。版本很多，但核心一樣：一個女人在試衣間試衣服，感覺有點頭暈，以為是燈光的問題，付完錢就回家了。幾天後她開始發高燒，然後醫院的檢查結果出來了：她的頭髮裡住著一窩蜘蛛，已經在她的頭皮下產卵。</p>
+
+  <p>這個故事在沒有網路的年代，靠著口耳相傳，傳遍了整個美國。每個地方的版本都有點不同——有些說是百貨公司，有些說是廉價商場，有些說是她朋友的朋友的朋友親身經歷。</p>
+
+  <p>這個故事從來沒有發生過。沒有任何醫療記錄，沒有任何新聞報導，沒有任何可以追溯的真實案例。</p>
+
+  <p>但是它傳播了。而且它傳播得非常成功——成功到今天如果你在某些地方問起，還是有人說他們「聽說有人真的遇到了」。</p>
+
+  <p>這就是都市傳說。它不是謠言，不是誤解，不是錯誤訊息。它是一種特殊的敘事形式，有自己的生成邏輯，有自己的傳播規則，有自己的社會功能。它告訴你的，不是那個故事裡的事是不是真的，而是說那個故事的人，在那個時候，怕什麼，相信什麼，想說什麼卻說不直接。</p>
+
+  <p>這本書要做的，就是把都市傳說翻過來，看看它的裡面是什麼。</p>
+
+  <!-- 第一章前半 -->
+  <h2>第一章　都市傳說是什麼，不是什麼</h2>
+
+  <p>「都市傳說」這個名字有點誤導。它不一定發生在都市，也不一定是傳說，更不一定是假的。</p>
+
+  <p>這個詞的英文是 urban legend，由民俗學家簡·哈洛德·布倫萬（Jan Harold Brunvand）在他1981年出版的《消失的搭便車者》（The Vanishing Hitchhiker）一書中系統性地引入學術討論。布倫萬給都市傳說的定義是：一種以故事形式流傳的民俗，通常被敘述者聲稱是真實發生的，且往往附帶一個「朋友的朋友」的來源框架（a friend of a friend，學術縮寫FOAF）。</p>
+
+  <div class="quote-block">
+    <p>布倫萬在《消失的搭便車者》中指出，都市傳說的共同特徵包括：它有一個清楚的敘事結構（開頭、發展、結局），它通常帶有道德訓誡或情緒衝擊，它的來源永遠是「我朋友的朋友」而非第一人稱，以及它往往反映了敘述者所在社會的集體焦慮。</p>
+    <span class="quote-source">——Jan Harold Brunvand，《The Vanishing Hitchhiker: American Urban Legends and Their Meanings》，1981年，W. W. Norton & Company</span>
+  </div>
+
+  <p>「朋友的朋友」這個結構非常重要。它讓故事保持了一種可信度——不是遠古傳說，不是明顯的虛構，而是「就在你的社交圈附近發生的事」——同時又讓它無法被追溯和驗證，因為那個「朋友」永遠無法被找到。</p>
+
+  <p>這個距離感是都市傳說得以存活的關鍵。太遠的事你不在乎，太近的事可以被驗證。「朋友的朋友」是那個剛好無法驗證、又剛好近到讓你覺得有關係的距離。</p>
+
+  <p>都市傳說和謠言的區別在於：謠言通常是關於特定的人或事件，它的目的是傳遞訊息（或錯誤訊息）；都市傳說是一個完整的故事，它的目的是傳遞一種感受——恐懼、警示、道德判斷，或者一種「這個世界比你以為的更危險」的提醒。</p>
+
+  <p>都市傳說也和神話不同。神話是一個社會對自己起源和宇宙觀的解釋，它的敘述者知道它是神聖的故事，不一定是字面上的事實。都市傳說的敘述者通常相信它是真的，或者至少相信它「可能是真的」——這個相信，才是都市傳說力量的來源。</p>
+
+  <p>民俗學家彼得·盧里（Peter Lürie）在研究都市傳說的傳播時提出了一個分類框架，把都市傳說分成三種功能類型：警告型（warning legends，告訴你某種行為的危險後果）、污染型（contamination legends，告訴你某個原本安全的東西其實被污染或危害了）、以及顛覆型（subversion legends，告訴你你信任的機構或人其實在傷害你）。蜘蛛頭髮的故事屬於污染型——那個安全的日常行為（試衣服）其實暗藏危機。</p>
+
+  <p>這三種類型覆蓋了人類焦慮的三個主要方向：自己的行為帶來的後果，環境對自己的威脅，以及信任的對象背叛自己。幾乎所有持久流傳的都市傳說，都可以在這三個焦慮中找到它的根。</p>
+
+</div><!-- .main -->
+
+<!-- 試閱截止 -->
+<div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
+  <div class="trial-end">
+    <div class="trial-end-label">試　閱　到　此</div>
+    <h3>後面還有六章，每個都是你聽過的故事</h3>
+    <p>接下來會解剖你熟悉的都市傳說如何誕生、為什麼在特定時代爆發式傳播，以及它們在說的，是那個社會當時無法直接開口說的什麼。包含：麥當勞蚯蚓漢堡、下水道鱷魚、針頭愛滋、以及台灣本土的版本。</p>
+    <a href="/that-feeling-5-vol2.html" class="btn-full">閱讀完整版</a>
+    <a href="/" class="back-ss">← 回到驚喜角落</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">集體靈異 · 系列五</div>
+  <div class="snbooks">
+    <a href="/that-feeling-5-vol1-trial.html" class="snbook">Vol.1《你們都看見了》</a>
+    <span class="snbook current">Vol.2《都市傳說解剖》</span>
+    <a href="/that-feeling-5-vol3-trial.html" class="snbook">Vol.3《UFO與我們》</a>
+    <a href="/that-feeling-5-vol4-trial.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+    <a href="/that-feeling-5-vol5-trial.html" class="snbook">Vol.5《邪教的邏輯》</a>
+    <a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+  </div>
+  <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+</div>
+
+</body>
+</html>

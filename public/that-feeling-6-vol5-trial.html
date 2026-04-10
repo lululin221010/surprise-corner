@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地球上有個地方科學解釋不了｜科學邊界 Vol.5｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.page-back { padding: 28px 0 0; }
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.book-header {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--accent-light);
+}
+
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 56px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 36px 0 16px;
+}
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.trial-end {
+  margin: 64px 0 48px;
+  text-align: center;
+  position: relative;
+}
+.trial-end::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+.trial-end-label {
+  position: relative;
+  display: inline-block;
+  background: var(--bg);
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.cta-block {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.cta-block h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin-bottom: 16px;
+}
+.cta-block p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: #5aa0b8; }
+.btn-secondary {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid rgba(74,143,168,0.25);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px 80px; }
+  .book-title { font-size: 1.5rem; }
+  .cta-block { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 05</div>
+    <h1 class="book-title">地球上有個地方<br>科學解釋不了</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">試閱版・前言＋第一章前半</span>
+  </div>
+
+  <div class="content">
+
+    <h2>前言　地圖上有幾個洞</h2>
+
+    <p>
+      地球已經被測量過很多次了。
+      衛星、地質調查、地磁掃描、重力測繪。
+      我們知道地球的形狀精確到毫米，
+      知道每個地點的重力值精確到小數點後六位，
+      知道地磁場在哪裡強、哪裡弱。
+    </p>
+    <p>
+      但地圖上還是有幾個地方，數據對不起來。
+    </p>
+    <p>
+      不是測量誤差。是<em>系統性的、可重複的、無法用已知地質結構解釋的偏差</em>。
+      科學家去測過，記錄下來，然後沒有後文。
+    </p>
+    <p>
+      這本書要帶你去幾個這樣的地方。
+      不是旅遊景點，不是都市傳說，是有坐標、有測量數據、有研究報告的地點。
+      那些報告說了什麼，以及為什麼沒有人繼續追下去。
+    </p>
+
+    <div class="blockquote">
+      <p>「如果你在測量中遇到無法解釋的異常，有兩種可能：你的儀器壞了，或者你發現了新的東西。排除前者之後，你必須認真對待後者。」</p>
+      <cite>—— 路易斯・阿爾瓦雷茲（Luis Alvarez），諾貝爾物理學獎得主，1968年得獎演講</cite>
+    </div>
+
+    <p>
+      這本書裡的每一個地點，研究者都排除了儀器問題。
+      然後他們認真對待了後者——至少一段時間。
+      之後發生了什麼，因地而異。
+    </p>
+
+    ---
+
+    <h2>第一章　重力不對的地方</h2>
+
+    <h3>赫德森灣的重力窪地</h3>
+
+    <p>
+      赫德森灣（Hudson Bay）在加拿大東北部，是世界上最大的內陸海之一。
+      如果你在那裡測量重力，你會得到一個比地球其他地方低的數值。
+    </p>
+    <p>
+      這不是都市傳說。這是 NASA 的官方測量結果。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：GRACE（Gravity Recovery and Climate Experiment）衛星計畫，NASA／德國航空太空中心（DLR），2002年啟動<br>
+      發現：赫德森灣及周邊地區重力值持續低於全球平均，偏差約0.005%<br>
+      官方解釋：冰河時代冰層融化後地殼尚未完全回彈（地殼均衡補償），加上地函對流影響<br>
+      未解釋部分：兩種效應加總後，仍有約25%至30%的偏差無法被現有模型解釋
+    </div>
+
+    <p>
+      25%到30%的偏差無法被解釋。
+    </p>
+    <p>
+      這不是一個小數字。這意味著我們對那個地區的地質結構的理解，
+      有將近三分之一是不完整的。
+    </p>
+    <p>
+      NASA 的聲明裡沒有提到這個數字。
+      那個數字在學術論文裡，在引用量不高的地球物理期刊裡，
+      <em>靜靜地等著人去讀它。</em>
+    </p>
+
+    <h3>南大西洋異常區：衛星最怕的地方</h3>
+
+    <p>
+      地球有一個磁場，磁場的作用之一是保護地球表面不受太陽風的高能粒子轟炸。
+      在南大西洋有一個區域，磁場強度異常低——
+      低到讓繞行地球的衛星在經過那裡時，
+      電子設備的故障率顯著上升。
+    </p>
+    <p>
+      這個區域叫做「南大西洋異常區」（South Atlantic Anomaly，SAA）。
+      它不是秘密，NASA、ESA 都有公開文件描述它。
+      哈伯太空望遠鏡在經過這個區域時，會自動關閉某些敏感儀器。
+    </p>
+    <p>
+      問題不在於它的存在。問題在於它正在<em>擴大</em>，而且速度在加快。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：ESA Swarm 衛星任務，2014年迄今持續監測<br>
+      發現：南大西洋異常區自1970年代以來向西北方向移動，面積持續擴大<br>
+      2020年數據：異常區開始出現「分裂」跡象，可能形成兩個中心點<br>
+      爭議：部分地球物理學家認為此現象與地磁場反轉前兆有關，主流觀點認為時間尺度過長，暫無定論
+    </div>
+
+    <p>
+      地磁場反轉。
+      這件事在地球歷史上發生過數百次，上一次是約78萬年前。
+      反轉過程中，磁場強度會大幅下降，地球表面的宇宙輻射保護會減弱。
+    </p>
+    <p>
+      沒有人知道下一次反轉什麼時候開始。
+      也沒有人知道南大西洋異常區的擴大，是不是一個早期訊號。
+    </p>
+    <p>
+      科學家的標準答案是：「我們需要更多數據。」
+      這個答案是誠實的。但它沒有說的是：
+      <em>就算我們有了更多數據，我們目前也沒有好的模型來預測它。</em>
+    </p>
+
+  </div>
+
+  <div class="trial-end">
+    <span class="trial-end-label">試閱到此結束</span>
+  </div>
+
+  <div class="cta-block">
+    <h3>地圖上還有更多對不起來的地方</h3>
+    <p>
+      百慕達三角的真實地質數據、<br>
+      西藏高原的時間感扭曲報告、<br>
+      以及一個科學家去了就不想離開的地點。<br>
+      完整版收錄全書六章。
+    </p>
+    <div class="cta-buttons">
+      <a href="/that-feeling-6-vol5.html" class="btn-primary">讀完整版</a>
+      <a href="/" class="btn-secondary">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-6-vol1-trial.html" class="snbook">Vol.1《儀器測到了，但科學家不敢說》</a>
+      <a href="/that-feeling-6-vol2-trial.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+      <a href="/that-feeling-6-vol3-trial.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <span class="snbook current">Vol.5《地球上有個地方科學解釋不了》</span>
+      <a href="/that-feeling-6-vol6-trial.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

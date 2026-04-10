@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邪教的邏輯｜那個感覺 系列五 Vol.5｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .page-back {
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 48px 80px;
+  }
+
+  .book-meta {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+  .trial-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 16px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 56px 0 28px;
+    color: var(--text);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .highlight-box {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 6px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .highlight-box strong { color: var(--text); font-weight: 500; }
+
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 40px 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  .trial-end h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .trial-end p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .btn-full:hover { opacity: 0.85; }
+  .back-ss {
+    display: block;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--accent); }
+
+  .series-nav {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 40px 48px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .page-back { padding: 16px 20px; }
+    .main { padding: 48px 20px 60px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-5.html">← 返回集體靈異</a></div>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.5</div>
+    <h1 class="book-title">邪教的邏輯</h1>
+    <div class="book-subtitle">他們不是瘋子，他們只是找到了歸屬感</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+    <div class="trial-badge">試　閱　版</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　加入的人都是普通人</h2>
+
+  <p>1997年3月26日，美國加州聖地牙哥郊區的蘭喬聖菲（Rancho Santa Fe）。警察進入一棟租賃的豪宅，發現了三十九具遺體。他們的死亡方式完全相同：服用了混有苯巴比妥的布丁或蘋果醬，然後用塑膠袋套住頭部。每個人都穿著黑色運動服，腳上穿著同款的Nike運動鞋，身上蓋著紫色的布。</p>
+
+  <p>那個組織叫做「天堂之門」（Heaven's Gate）。他們相信地球即將被「回收」（recycled），而一艘外星飛船正跟隨著海爾波普彗星（Comet Hale-Bopp）飛來接走他們——但前提是他們必須「脫離」地球的容器，也就是他們的身體。</p>
+
+  <p>那三十九個人不是被逼死的，沒有人拿槍指著他們的頭。他們是自願的，有計畫的，平靜的。事後在豪宅裡找到的影片顯示，在死亡前幾天，他們一個個對著鏡頭說話，語氣是平靜的、甚至是興奮的，說他們終於要離開了，說這是他們等待了很久的事。</p>
+
+  <p>那三十九個人的背景：工程師、護士、教師、圖書館員、前軍人。平均年齡約四十歲。他們的家人後來描述他們，說他們在加入天堂之門之前，是聰明的、有好奇心的、在某種意義上有點在尋找的普通人。</p>
+
+  <p>這不是瘋子的故事。這是普通人的故事。</p>
+
+  <p>這本書要問的問題是：邪教是怎麼把普通人變成願意為它死的人的？那個過程，比你以為的更有邏輯，更緩慢，也更難在身處其中時察覺。</p>
+
+  <!-- 第一章前半 -->
+  <h2>第一章　邪教不是你以為的那個樣子</h2>
+
+  <p>先解決一個定義問題。「邪教」這個詞在中文裡帶著強烈的貶義，英文的 cult 也是，雖然它的字面意思只是「崇拜」或「宗教性的獻身」。這個貶義，讓我們在討論邪教的時候，很容易陷入一個思維陷阱：以為邪教是一個在外觀上就很明顯異常的東西，以為那些加入邪教的人是因為某種明顯的脆弱性或愚蠢才被騙進去的。</p>
+
+  <p>這兩個假設，都是錯的。</p>
+
+  <p>宗教學者和心理學家在研究邪教現象時，通常不用「邪教」這個帶有評判性的詞，而是用「高度控制性群體」（High Control Group）或「新興宗教運動」（New Religious Movement，NRM）。這不是在為那些組織洗白，而是讓研究者可以用更準確的語言描述那些組織的結構特徵，而不是停留在「那很明顯是邪教，裡面的人很奇怪」的表面判斷。</p>
+
+  <div class="quote-block">
+    <p>前邪教成員、後來成為研究者的史蒂芬·哈桑（Steven Hassan）在他1988年出版的《與邪教戰鬥》（Combating Cult Mind Control）中，發展出了「BITE模型」來描述高度控制性群體的運作方式。BITE是四個英文字的縮寫：行為控制（Behavior control）、訊息控制（Information control）、思想控制（Thought control）、情緒控制（Emotional control）。哈桑指出，任何一個組織——不管它自稱是什麼——如果在這四個維度上都展現出高度的控制性，那麼不管它有多少成員、有多長的歷史，它都具備了高度控制性群體的核心結構。</p>
+    <span class="quote-source">——Steven Hassan，《Combating Cult Mind Control》，1988年，Park Street Press</span>
+  </div>
+
+  <p>用BITE模型看天堂之門：成員的日常作息、飲食、睡眠、性行為都受到嚴格規定（行為控制）；成員只能接觸組織認可的訊息，不能接觸「外界的負面影響」（訊息控制）；組織有一套完整的世界觀框架，任何不符合這個框架的想法都被視為「地球意識的污染」（思想控制）；離開組織的念頭被連結到對「被遺棄在地球上」的恐懼（情緒控制）。</p>
+
+  <p>全部成立。但在加入的初期，這些控制不是全部同時出現的。它是一個緩慢的、漸進的過程，每一步都比上一步只多了一點點，而且每一步都有一個讓人覺得合理的理由。</p>
+
+  <p>這個「漸進」，是整個過程裡最重要的特徵，也是為什麼身處其中的人很難發現自己在哪裡。你不是有一天突然發現自己在一個邪教裡，你是一步一步走進去的，而且每一步走的時候，都覺得那是自己的選擇。</p>
+
+  <div class="highlight-box">
+    <p><strong>社會心理學把這個機制稱為「承諾升級」（escalation of commitment）：一旦你對一個想法或組織投入了時間、金錢、或情感，你就會傾向於繼續投入，因為承認那個投入是錯的，代價太高了。邪教利用的，正是這個人類大腦的基本運作方式。</strong></p>
+  </div>
+
+  <p>但在說「邪教怎麼控制人」之前，有一個更根本的問題需要先回答：人為什麼會加入？不是被綁架進去，不是被欺騙進去，而是自願走進去——那個吸引力從哪裡來？</p>
+
+  <p>這個問題的答案，比「那些人很脆弱」或「那些人很蠢」複雜得多，也讓人更不舒服。因為那個吸引力，有一部分來自人類最普遍的需求，而不是什麼特殊的弱點。</p>
+
+</div><!-- .main -->
+
+<!-- 試閱截止 -->
+<div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
+  <div class="trial-end">
+    <div class="trial-end-label">試　閱　到　此</div>
+    <h3>後面還有六章，每章都離你更近一步</h3>
+    <p>接下來會完整解剖招募的心理學、「愛轟炸」（love bombing）技術、天堂之門與太陽聖殿教的控制機制，以及最關鍵的問題：那些離開了的人，是怎麼離開的，離開之後又是什麼樣的。</p>
+    <a href="/that-feeling-5-vol5.html" class="btn-full">閱讀完整版</a>
+    <a href="/" class="back-ss">← 回到驚喜角落</a>
+  </div>
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">集體靈異 · 系列五</div>
+  <div class="snbooks">
+    <a href="/that-feeling-5-vol1-trial.html" class="snbook">Vol.1《你們都看見了》</a>
+    <a href="/that-feeling-5-vol2-trial.html" class="snbook">Vol.2《都市傳說解剖》</a>
+    <a href="/that-feeling-5-vol3-trial.html" class="snbook">Vol.3《UFO與我們》</a>
+    <a href="/that-feeling-5-vol4-trial.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+    <span class="snbook current">Vol.5《邪教的邏輯》</span>
+    <a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+  </div>
+  <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+</div>
+
+</body>
+</html>

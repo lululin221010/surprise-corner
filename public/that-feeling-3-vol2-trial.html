@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你被詛咒了嗎｜那個感覺 系列三 Vol.2 試閱｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #7a4a9e;
+  --card-bg: #14141e;
+  --label: #5a5a8a;
+  --curse-accent: #9e4a6a;
+  --curse-dim: rgba(158,74,106,0.4);
+  --curse-light: rgba(158,74,106,0.10);
+  --curse-border: rgba(158,74,106,0.22);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(158,74,106,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 20% 80%, rgba(122,74,158,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-back {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+}
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--curse-accent); }
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px 80px;
+}
+
+.trial-badge {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--curse-accent);
+  border: 1px solid var(--curse-border);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.book-header {
+  padding: 16px 0 48px;
+  border-bottom: 1px solid var(--curse-border);
+  margin-bottom: 56px;
+}
+.series-info {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #e8d0d8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.book-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.chapter-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--curse-accent);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #e0d0d8;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #d0c0c8;
+  letter-spacing: 1px;
+  margin: 36px 0 20px;
+}
+p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.blockquote {
+  background: var(--curse-light);
+  border-left: 3px solid var(--curse-accent);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-style: italic;
+  color: #e0c8d0;
+  margin-bottom: 8px;
+}
+.blockquote p:last-child { margin-bottom: 0; }
+.blockquote .source {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.section-divider {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--curse-dim);
+  letter-spacing: 8px;
+  font-size: 14px;
+}
+
+.cutoff-zone {
+  position: relative;
+  overflow: hidden;
+  max-height: 260px;
+}
+.cutoff-zone::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, var(--bg) 80%);
+  pointer-events: none;
+}
+
+.paywall {
+  text-align: center;
+  padding: 56px 32px 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--curse-border);
+  border-radius: 12px;
+  margin: 0 0 60px;
+}
+.paywall-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--label);
+  margin-bottom: 20px;
+}
+.paywall h3 {
+  font-size: 1.3rem;
+  color: #e8d0d8;
+  margin: 0 0 12px;
+  letter-spacing: 2px;
+}
+.paywall p {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.9;
+}
+.paywall-btn {
+  display: inline-block;
+  background: var(--curse-accent);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.paywall-btn:hover { background: #b05070; }
+.paywall-return {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 16px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.paywall-return:hover { color: var(--curse-accent); }
+
+.author-sig {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--label);
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.series-nav {
+  position: relative;
+  z-index: 1;
+  background: rgba(14,14,20,0.95);
+  border-top: 1px solid rgba(122,74,158,0.12);
+  padding: 32px 48px;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(122,74,158,0.2);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.snbook:hover { border-color: var(--accent); color: var(--text); }
+.snbook.current {
+  border-color: var(--curse-accent);
+  color: var(--curse-accent);
+  background: var(--curse-light);
+}
+.back-link {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--curse-accent); }
+
+@media (max-width: 640px) {
+  .page-back { padding: 20px 24px; }
+  .container { padding: 0 24px 60px; }
+  .book-title { font-size: 1.8rem; }
+  .series-nav { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-3.html">← 返回詛咒與心理</a></div>
+
+<div class="container">
+
+  <div class="trial-badge">試閱版　PREVIEW</div>
+
+  <div class="book-header">
+    <div class="series-info">那個感覺　系列三　VOL.2</div>
+    <h1 class="book-title">你被詛咒了嗎</h1>
+    <div class="book-subtitle">詛咒與心理　第二冊</div>
+  </div>
+
+  <!-- 前言 -->
+  <div class="chapter-label">前言　PREFACE</div>
+  <h2>症狀清單</h2>
+
+  <p>
+    你有沒有這種感覺：某段時間裡，壞事一件接著一件，不管你怎麼努力，結果都不對。感情出問題，工作出問題，身體出問題，甚至連買東西都踩雷。你開始覺得，這不是普通的倒楣，這是有什麼東西在針對你。
+  </p>
+  <p>
+    你不一定說出「我被詛咒了」這幾個字。但那個感覺是一樣的：命運對你有某種特殊的惡意。
+  </p>
+  <p>
+    這個感覺，值得認真對待——不是因為詛咒是真的，而是因為這個感覺本身，會讓事情繼續變糟。
+  </p>
+  <p>
+    Vol.1 我們看了詛咒的機制：Nocebo 效應、大腦的模式識別、社會傳播。這一冊要深入一個更具體的問題：如果你現在正在「被詛咒的感覺」裡，你的心理在做什麼？這個狀態如何自我強化？以及，你是怎麼進去的？
+  </p>
+  <p>
+    這不是一本勵志書，不會告訴你「相信自己，詛咒不存在」。這是一本拆解機制的書。你需要先看清楚自己在哪裡，才有辦法走出去。
+  </p>
+
+  <div class="section-divider">· · ·</div>
+
+  <!-- 第一章 -->
+  <div class="chapter-label">第一章　CHAPTER ONE</div>
+  <h2>自我實現預言：你怎麼讓詛咒成真</h2>
+
+  <p>
+    1948年，社會學家 Robert K. Merton 在他的著作《社會理論與社會結構》（Social Theory and Social Structure）裡提出了「自我實現預言」（self-fulfilling prophecy）這個概念。他用一個銀行擠兌的例子來說明：如果足夠多的人相信一家銀行要倒閉，他們就會同時去提款，而這個行為本身就會讓銀行真的倒閉——即使那家銀行一開始完全沒有問題。
+  </p>
+  <p>
+    信念改變行為，行為改變現實，現實反過來確認信念。這個循環不需要任何超自然力量，只需要足夠多的人相信同一件事。
+  </p>
+  <p>
+    詛咒的自我實現機制在個人層面的運作方式非常類似，只是循環發生在一個人的內部。
+  </p>
+
+  <h3>預期怎麼改變行為</h3>
+  <p>
+    當你相信自己「被詛咒了」，或者更廣義地說，當你相信「我會失敗」「我不值得被愛」「事情對我來說永遠不會順」，這個信念會滲透到你的每一個行為決策裡。
+  </p>
+  <p>
+    心理學家 Carol Dweck 在她數十年的研究裡記錄了「固定型思維」（fixed mindset）的效應。固定型思維的人相信能力和命運是固定的、無法改變的——你要麼有才能，要麼沒有；你要麼幸運，要麼不幸。這個信念讓他們在面對挑戰時傾向於迴避，因為失敗不只是「這次沒成功」，而是對「我本來就不行」的確認。
+  </p>
+  <p>
+    迴避挑戰讓他們錯失成長的機會，缺少練習讓他們真的表現不好，表現不好確認了「我本來就不行」——這個循環和詛咒的邏輯完全相同，只是穿著心理學的外衣。
+  </p>
+  <p>
+    相信自己被詛咒的人，會在無意識中做出一系列「配合詛咒」的行為：在關係裡預期被拋棄，所以先把對方推開；在工作上預期失敗，所以不全力投入（這樣失敗了還有藉口）；在機會面前預期結果不好，所以猶豫、拖延、最後放棄。每一個這樣的行為，都讓壞的結果更可能發生。
+  </p>
+
+  <h3>Rosenthal 效應：他人的預期也能改變你</h3>
+  <p>
+    自我實現預言不只作用於自己，它也通過他人的預期傳遞。
+  </p>
+  <p>
+    1968年，心理學家 Robert Rosenthal 和 Leonore Jacobson 做了一個後來被廣泛引用的實驗。他們告訴小學老師，某些學生在測試中表現出「即將爆發的學習潛力」（實際上這些學生是隨機挑選的，和其他學生沒有區別）。一年後，這些被標記為「有潛力」的學生，在智力測試中的進步顯著高於其他學生。
+  </p>
+  <p>
+    老師相信這些學生有潛力，無意識中給予了更多關注、更多鼓勵、更多挑戰性的任務，而這些行為真的讓學生進步了。這個效應後來被叫做「比馬龍效應」（Pygmalion effect）。
+  </p>
+  <p>
+    詛咒的反向版本是一樣的：如果你身邊的人相信你「被詛咒」，或者更現實地說，如果他們相信你是個「麻煩人物」「倒楣鬼」「永遠搞不定事情的人」，他們的行為會讓這個預言更容易成真——他們給你更少的機會，對你的表現有更低的期待，在你失敗時更快放棄你。
+  </p>
+
+  <!-- 截斷點 -->
+  <div class="cutoff-zone">
+    <h3>你怎麼知道你在這個循環裡</h3>
+    <p>
+      最難的部分是：這個循環從內部看不出來。當你在裡面，你看到的是「我已經很努力了，但事情就是不順」，而不是「我的預期影響了我的行為，讓事情不順」。
+    </p>
+    <p>
+      有幾個信號值得注意。第一，你對成功的解釋方式：當事情順利時，你傾向於歸因於「這次運氣好」「這次是例外」，而不是「我做了正確的事」。這種不對稱的歸因方式，說明你的基本信念是「我不應該成功」，而成功只是偶然。
+    </p>
+    <p>
+      第二，你的風險迴避模式：你是否傾向於在重要的時刻退縮，用「時機不對」「我還沒準備好」來推遲行動？這種退縮在意識層面有完全合理的解釋，但它可能是預期失敗的保護機制。
+    </p>
+  </div>
+
+  <!-- 付費牆 -->
+  <div class="paywall">
+    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
+    <h3>繼續讀完整版</h3>
+    <p>
+      完整版包含：<br>
+      前言＋六章＋後記，全書逾 12,000 字<br>
+      受害者心態的心理學結構與辨識方式<br>
+      習得性無助的形成過程與臨床記錄<br>
+      怎麼從「被詛咒」的心理狀態走出來
+    </p>
+    <a href="/that-feeling-3-vol2.html" class="paywall-btn">閱讀完整版</a>
+    <a href="/" class="paywall-return">← 回到驚喜角落</a>
+  </div>
+
+  <div class="author-sig">盧林著　有的沒的小舖出品</div>
+
+</div>
+
+<!-- 系列導覽 -->
+<div class="series-nav">
+  <div class="snlabel">詛咒與心理　系列三</div>
+  <div class="snbooks">
+    <a href="/that-feeling-3-vol1-trial.html" class="snbook">Vol.1《詛咒是真的嗎》</a>
+    <span class="snbook current">Vol.2《你被詛咒了嗎》</span>
+    <a href="/that-feeling-3-vol3-trial.html" class="snbook">Vol.3《世界怎麼詛咒人》</a>
+    <a href="/that-feeling-3-vol4-trial.html" class="snbook">Vol.4《家族的咒》</a>
+    <a href="/that-feeling-3-vol5-trial.html" class="snbook">Vol.5《詛咒怎麼殺人》</a>
+    <a href="/that-feeling-3-vol6-trial.html" class="snbook">Vol.6《解咒》</a>
+  </div>
+  <a href="/that-feeling-3.html" class="back-link">← 返回詛咒與心理</a>
+</div>
+
+</body>
+</html>

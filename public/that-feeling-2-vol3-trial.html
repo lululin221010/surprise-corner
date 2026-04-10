@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你家附近的鬼故事｜那個感覺 系列二 Vol.3｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --tw-accent: #c0392b;
+    --tw-accent-light: rgba(192,57,43,0.12);
+    --tw-accent-dim: rgba(192,57,43,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  .page-back {
+    padding: 20px 32px;
+    border-bottom: 1px solid rgba(122,74,158,0.1);
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .main-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  .book-meta {
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(122,74,158,0.15);
+  }
+
+  .series-tag {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--tw-accent);
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #e8e8f5;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .book-subtitle {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid var(--tw-accent-dim);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--tw-accent);
+    opacity: 0.8;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #e0e0f0;
+    margin: 56px 0 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(122,74,158,0.15);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #c8c8e8;
+    margin: 36px 0 18px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  strong { color: #e0e0f0; font-weight: 500; }
+
+  .quote-block {
+    border-left: 2px solid var(--tw-accent-dim);
+    padding: 20px 28px;
+    margin: 36px 0;
+    background: var(--tw-accent-light);
+  }
+  .quote-block p {
+    color: #d0d0e8;
+    font-size: 15px;
+    margin-bottom: 0;
+    line-height: 2.2;
+  }
+
+  .data-note {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 20px 28px;
+    margin: 32px 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .data-note .note-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 10px;
+  }
+
+  .fade-out {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .fade-out::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(transparent, var(--bg));
+    pointer-events: none;
+  }
+
+  .trial-end {
+    margin: 60px 0 0;
+    padding: 48px 40px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .trial-end::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--tw-accent-dim), transparent);
+  }
+
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .trial-end h3 {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #e0e0f0;
+    margin: 0 0 16px;
+    border: none;
+  }
+
+  .trial-end p {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 1.9;
+    text-align: center;
+  }
+
+  .btn-full {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--tw-accent-light);
+    border: 1px solid var(--tw-accent-dim);
+    color: var(--tw-accent);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+    margin-bottom: 16px;
+  }
+  .btn-full:hover { background: rgba(192,57,43,0.25); color: #e88; }
+
+  .back-ss-inline {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-ss-inline:hover { color: var(--accent); }
+
+  .series-nav {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 48px 60px;
+    border-top: 1px solid rgba(122,74,158,0.1);
+  }
+
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .snbook {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid rgba(122,74,158,0.2);
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current {
+    border-color: var(--tw-accent-dim);
+    color: #e88;
+    background: var(--tw-accent-light);
+    cursor: default;
+  }
+
+  .back-link {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .main-content { padding: 40px 24px; }
+    .book-title { font-size: 1.8rem; }
+    .series-nav { padding: 40px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-back"><a href="/that-feeling-2.html">← 返回台灣在地系列</a></div>
+
+<div class="main-content">
+
+  <div class="book-meta">
+    <div class="series-tag">那個感覺 · 系列二 · VOL. 3</div>
+    <h1 class="book-title">你家附近的鬼故事</h1>
+    <div class="book-subtitle">都市傳說的在地變體與集體記憶</div>
+    <span class="trial-badge">開放試閱 · 前言 + 第一章節選</span>
+  </div>
+
+  <!-- 前言 -->
+  <h2>前言　每個地方都有一個說法</h2>
+
+  <p>你家附近有沒有一個地方，大家都說不乾淨？</p>
+
+  <p>不用想太久。幾乎每個台灣人都有這個答案。可能是某條路、某棟建築、某個公園的角落、某個停車場的地下室。你可能從來沒有認真調查過那個說法是怎麼來的，但你知道它，你知道那個地方「有故事」，你路過的時候可能多想了一秒。</p>
+
+  <p>那個說法不是憑空長出來的。它有來源，有傳播路徑，有它在這個地方存在的具體原因。這本書要做的，就是把那個「不知道怎麼來的說法」的生成機制拆開來看。</p>
+
+  <p>都市傳說的研究在國際學術界是一個成熟的領域，有自己的方法論和理論框架。但台灣的都市傳說有它非常在地的特性——它跟台灣的歷史、地理、族群記憶深度結合，製造出了只有在這裡才長得出來的故事形狀。要理解台灣的都市傳說，你既需要普遍的傳說學框架，也需要非常具體的台灣知識。</p>
+
+  <p>這本書試圖提供這兩樣東西。不是為了破除迷信，也不是為了證明鬼的存在——而是為了理解：為什麼這個故事在這裡，為什麼是這個形狀，為什麼人們要把它說下去。</p>
+
+  <p>我們從最基本的問題開始：一個鬼故事是怎麼長出來的？</p>
+
+  <!-- 第一章 -->
+  <h2>第一章　都市傳說的生產機制</h2>
+
+  <h3>故事需要土壤</h3>
+
+  <p>一個鬼故事要在某個地方扎根，需要幾個條件同時具備。第一是一個「可以發生故事的空間」——通常是有歷史的地方、廢棄的地方、發生過事件的地方，或者單純是地形特殊讓人感到不安的地方。第二是一個「初始事件或說法」——可能是真實發生的意外、可能是有人開始說的一句話、可能是某個地名的諧音聯想。第三是一個「傳播網絡」——人們互相說故事的社群，可能是鄰里、可能是學校、可能是網路社群。</p>
+
+  <p>這三個條件缺一不可。一個有歷史的地方，如果沒有人在那裡生活、沒有人互相說故事，傳說不會長出來。一個密集的社群，如果沒有觸發事件，也不會無中生有地製造傳說。傳說的生成，是空間、事件、社群三者交互作用的結果。</p>
+
+  <p>台灣的條件讓這三個要素特別容易同時具備。密集的人口、高度的社群性、豐富的歷史事件密度，加上我們之前討論過的那些地形和死亡風險——台灣是一個傳說生產力極高的環境。</p>
+
+  <h3>傳說的變形：從真實事件到鬼故事的距離</h3>
+
+  <p>多數有生命力的台灣都市傳說，都有一個真實事件的核心。那個核心在傳播的過程中被不斷重新詮釋、添加細節、轉移地點、放大情緒——最後的版本跟原始事件之間的距離，有時候大得讓人認不出來。</p>
+
+  <p>這個變形過程是有規律的。美國民俗學者詹·哈羅德·布魯凡（Jan Harold Brunvand）在研究都市傳說時發現，傳說在傳播過程中傾向於增加戲劇性細節、減少模糊性、強化情緒衝擊，以及在地化——把故事發生的地點改成聽故事的人熟悉的地方。</p>
+
+  <p>在地化是台灣都市傳說裡最值得注意的機制。同一個故事骨架，在台北、台南、高雄會長出不同的在地版本，每個版本都把地點換成了當地人熟悉的地標。一個關於醫院廢墟的故事，在每個城市都有它的「本地版」——而每個本地人都相信自己聽到的版本是真實發生在那個地方的，不知道同樣的故事在其他地方也有對應版本。</p>
+
+  <div class="data-note">
+    <div class="note-label">傳說學研究</div>
+    台灣民俗學者金榮華長期收集台灣各地的民間故事和都市傳說，在其研究中記錄了大量「跨地移植」的案例——同一個故事核心在不同地區長出不同在地版本的現象。他的研究顯示，台灣的都市傳說傳播速度極快，一個在台北流行的傳說，往往在幾個月內就會在南部出現本地化版本，在網路時代這個速度更是以天計。
+  </div>
+
+  <h3>為什麼人要說鬼故事</h3>
+
+  <p>說鬼故事是一個人類普遍行為，但動機比「因為恐怖所以有趣」複雜得多。心理學研究顯示，說鬼故事在社交功能上服務了幾個需求：它創造了一個共享的情緒體驗，強化群體連結；它提供了一個在安全環境裡演練恐懼的機會；它傳遞了隱含的行為規範——什麼地方不要去、什麼事情不要做；它讓說故事的人獲得了暫時的社會關注。</p>
+
+  <p>在台灣的脈絡裡，說鬼故事還有一個額外的功能：傳遞集體記憶。很多台灣的地方性靈異傳說，是對歷史創傷的非正式記憶。一個關於某個地點「很多人死過」的傳說，往往對應著一個在正式歷史裡沒有被充分記錄的事件——械鬥、瘟疫、政治迫害、工程意外。故事替那些死亡留了一個位置，即使那個位置是鬼故事的形式。</p>
+
+  <div class="fade-out">
+    <p>這個功能在台灣特別重要，因為台灣有大量的歷史傷口沒有在正式的集體記憶裡得到充分處理。那些傷口需要去某個地方，而鬼故事提供了一個非正式的容納空間。從這個角度看，你家附近的那個鬼故事，可能不只是一個讓你晚上不敢出門的說法，它可能是這個地方的人對某件真實發生過的事情的非正式記憶載體。</p>
+  </div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱到這裡</div>
+    <h3>後面還有很多</h3>
+    <p>
+      第一章繼續拆解傳說的傳播規律與情緒機制。<br>
+      第二章專門談台灣學校靈異——<br>
+      為什麼每所學校都有那幾種固定類型的鬼故事，<br>
+      它們是怎麼被製造出來的。<br>
+      第三章進入醫院、廢墟、特定建築，<br>
+      談空間本身如何成為傳說的生產機器。
+    </p>
+    <a href="/that-feeling-2-vol3.html" class="btn-full">讀完整版</a>
+    <a href="/" class="back-ss-inline">← 回到驚喜角落</a>
+  </div>
+
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">台灣在地系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-2-vol1-trial.html" class="snbook">Vol.1《這裡本來就不一樣》</a>
+    <a href="/that-feeling-2-vol2-trial.html" class="snbook">Vol.2《那些廟在說什麼》</a>
+    <span class="snbook current">Vol.3《你家附近的鬼故事》</span>
+    <a href="/that-feeling-2-vol4-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.4《死了要去哪》</a>
+    <a href="/that-feeling-2-vol5-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.5《台灣人為什麼這麼怕》</a>
+    <a href="/that-feeling-2-vol6-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.6《這塊土地上的聲音》</a>
+  </div>
+  <a href="/that-feeling-2.html" class="back-link">← 返回台灣在地系列</a>
+</div>
+
+</body>
+</html>
