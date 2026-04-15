@@ -603,6 +603,18 @@
     .title-page { padding: 40px 0 60px; }
     h1.book-title { font-size: 2.2em; }
   }
+
+  /* ── PAYWALL ── */
+  .paywall-fade { height: 100px; background: linear-gradient(to bottom, transparent, var(--bg)); margin-top: -60px; position: relative; z-index: 10; pointer-events: none; }
+  .paywall-box { margin: 0 0 80px; padding: 48px 40px; background: var(--bg2); border: 1px solid var(--border); border-top: 2px solid var(--accent); text-align: center; position: relative; z-index: 10; }
+  .paywall-lock { font-size: 2rem; margin-bottom: 16px; }
+  .paywall-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--text); margin-bottom: 12px; }
+  .paywall-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 24px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .paywall-price { font-family: 'Space Mono', monospace; font-size: 1.3rem; color: var(--accent); margin-bottom: 24px; letter-spacing: 2px; }
+  .paywall-btn { display: inline-block; padding: 13px 36px; background: var(--accent); color: #050a10; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; font-weight: 700; transition: background 0.2s; margin-bottom: 16px; }
+  .paywall-btn:hover { background: #7dd5f0; }
+  .paywall-note { font-size: 0.8rem; color: var(--text-muted); }
+  .paywall-note a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
@@ -771,6 +783,18 @@
       <div class="chapter-end">§</div>
       <div class="page-marker">— 第一章　終 —</div>
     </div>
+
+
+  <!-- PAYWALL -->
+  <div class="paywall-fade"></div>
+  <div class="paywall-box">
+    <div class="paywall-lock">🔒</div>
+    <h3 class="paywall-title">繼續閱讀完整版</h3>
+    <p class="paywall-desc">試閱到這裡。完整版收錄全 6 章，請至小舖購買完整版電子書。</p>
+    <div class="paywall-price">NT$ 199</div>
+    <a href="https://still-time-corner.vercel.app/digital/69d7c0040b6f5888174c9f33" class="paywall-btn" target="_blank">前往小舖購買完整版 →</a>
+    <p class="paywall-note">購買後到 <a href="https://still-time-corner.vercel.app/my-purchases" target="_blank">我的購買</a> 自助下載 ・ <a href="/cognitive-psychology.html">← 回到認知心理學導讀</a></p>
+  </div>
 
 
     <!-- ══ 第二章 ══ -->
@@ -1219,6 +1243,6 @@
   })();
 </script>
 
-<div style="text-align:center;margin-top:16px;"><a href="/" style="color:rgba(255,255,255,0.45);font-size:13px;font-family:'Noto Sans TC',sans-serif;text-decoration:none;letter-spacing:2px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'"> &larr; &#22238;&#21040;&#39511;&#21916;&#35282;&#33853;</a></div>
+<div style="text-align:center;margin-top:16px;"><a href="/cognitive-psychology.html" style="color:rgba(255,255,255,0.45);font-size:13px;font-family:'Noto Sans TC',sans-serif;text-decoration:none;letter-spacing:2px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'"> &larr; &#22238;&#21040;&#39511;&#21916;&#35282;&#33853;</a></div>
 </body>
 </html>

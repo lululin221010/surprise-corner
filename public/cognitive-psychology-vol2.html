@@ -341,6 +341,18 @@
     .content { padding: 0 20px 60px; }
     .chapter-title { margin: 50px -20px 32px; padding: 22px 24px; font-size: 19px; }
   }
+
+  /* ── PAYWALL ── */
+  .paywall-fade { height: 100px; background: linear-gradient(to bottom, transparent, var(--bg)); margin-top: -60px; position: relative; z-index: 10; pointer-events: none; }
+  .paywall-box { margin: 0 0 80px; padding: 48px 40px; background: var(--bg2); border: 1px solid var(--border); border-top: 2px solid var(--accent); text-align: center; position: relative; z-index: 10; }
+  .paywall-lock { font-size: 2rem; margin-bottom: 16px; }
+  .paywall-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--text); margin-bottom: 12px; }
+  .paywall-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 24px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .paywall-price { font-family: 'Space Mono', monospace; font-size: 1.3rem; color: var(--accent); margin-bottom: 24px; letter-spacing: 2px; }
+  .paywall-btn { display: inline-block; padding: 13px 36px; background: var(--accent); color: #050a10; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; font-weight: 700; transition: background 0.2s; margin-bottom: 16px; }
+  .paywall-btn:hover { background: #7dd5f0; }
+  .paywall-note { font-size: 0.8rem; color: var(--text-muted); }
+  .paywall-note a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
@@ -453,6 +465,18 @@
 <h3 class="section-title"><strong>方法四：記錄你過去的預測，定期回頭看</strong></h3>
 <p>把過去的預測數字記下來，定期回頭看。這是你個人的「過度自信校準數據」——你會發現你的誤差是系統性的，然後你下次規劃時就能把那個誤差納入考量。</p>
 <blockquote><em>本章重點：過度自信效應讓你的計畫永遠比現實更美好。不是因為你懶或不認真，而是因為你的大腦在規劃時，自動切換到最好情況模式，過濾掉所有可能讓計畫變複雜的因素。對抗它的方法不是「更努力想清楚」，而是刻意採用外部觀點、做事前驗屍、並且把你的估算直接加上一個大緩衝。</em></blockquote>
+
+  <!-- PAYWALL -->
+  <div class="paywall-fade"></div>
+  <div class="paywall-box">
+    <div class="paywall-lock">🔒</div>
+    <h3 class="paywall-title">繼續閱讀完整版</h3>
+    <p class="paywall-desc">試閱到這裡。完整版收錄全 6 章，請至小舖購買完整版電子書。</p>
+    <div class="paywall-price">NT$ 199</div>
+    <a href="https://still-time-corner.vercel.app/digital/69d7c0040b6f5888174c9f31" class="paywall-btn" target="_blank">前往小舖購買完整版 →</a>
+    <p class="paywall-note">購買後到 <a href="https://still-time-corner.vercel.app/my-purchases" target="_blank">我的購買</a> 自助下載 ・ <a href="/cognitive-psychology.html">← 回到認知心理學導讀</a></p>
+  </div>
+
 
 <h2 class="chapter-title" id="ch2">第二章：現狀偏誤——不是因為好，而是因為熟悉</h2>
 <blockquote><em>「我們把『一直這樣』誤認為『應該這樣』。熟悉感讓我們覺得安全，但安全感從來不等於最優解。」</em></blockquote>
@@ -700,6 +724,6 @@
   });
 </script>
 
-<div style="text-align:center;margin-top:16px;"><a href="/" style="color:rgba(255,255,255,0.45);font-size:13px;font-family:'Noto Sans TC',sans-serif;text-decoration:none;letter-spacing:2px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'"> &larr; &#22238;&#21040;&#39511;&#21916;&#35282;&#33853;</a></div>
+<div style="text-align:center;margin-top:16px;"><a href="/cognitive-psychology.html" style="color:rgba(255,255,255,0.45);font-size:13px;font-family:'Noto Sans TC',sans-serif;text-decoration:none;letter-spacing:2px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'"> &larr; &#22238;&#21040;&#39511;&#21916;&#35282;&#33853;</a></div>
 </body>
 </html>
