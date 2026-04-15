@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e14; --text: #c0c0d8; --text-muted: #7070a0;
+    --bg: #0e0e14; --text: #dcdcf0; --text-muted: #a8a8cc;
     --accent: #7a4a9e; --accent-light: rgba(122,74,158,0.15); --accent-dim: rgba(122,74,158,0.4);
-    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #5a5a8a;
+    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #9090b8;
     --s1-accent: #7a4a9e; --s1-accent-light: rgba(122,74,158,0.12); --s1-accent-dim: rgba(122,74,158,0.35);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,6 +52,17 @@
   .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
   .back-link:hover { color: var(--accent); }
   @media (max-width: 640px) { .main-content { padding: 40px 24px; } .book-title { font-size: 1.8rem; } .series-nav { padding: 40px 24px 60px; } }
+
+  /* 手機可讀性優化 */
+  @media (max-width: 600px) {
+    body { font-size: 16px; line-height: 1.9; }
+    .container { padding: 0 20px 60px; }
+    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
+    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
+    .content p { margin-bottom: 20px; }
+    .series-grid { grid-template-columns: 1fr; }
+    .vol-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>

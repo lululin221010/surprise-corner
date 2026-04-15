@@ -9,11 +9,11 @@
 
 :root {
   --bg: #0e0e14;
-  --text: #c0c0d8;
-  --text-muted: #7070a0;
+  --text: #dcdcf0;
+  --text-muted: #a8a8cc;
   --accent: #7a4a9e;
   --card-bg: #14141e;
-  --label: #5a5a8a;
+  --label: #9090b8;
   --curse-accent: #9e4a6a;
   --curse-dim: rgba(158,74,106,0.4);
   --curse-light: rgba(158,74,106,0.10);
@@ -295,6 +295,17 @@ p {
   .book-title { font-size: 1.8rem; }
   .series-nav { padding: 24px; }
 }
+
+  /* 手機可讀性優化 */
+  @media (max-width: 600px) {
+    body { font-size: 16px; line-height: 1.9; }
+    .container { padding: 0 20px 60px; }
+    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
+    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
+    .content p { margin-bottom: 20px; }
+    .series-grid { grid-template-columns: 1fr; }
+    .vol-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
