@@ -3,6 +3,7 @@
 
 import Navbar from '@/components/Navbar';
 import PwaUpdateBanner from '@/components/PwaUpdateBanner';
+import DonateButton from '@/components/DonateButton';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -93,36 +94,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           borderTop: '1px solid rgba(167,139,250,0.1)',
           background: 'rgba(0,0,0,0.2)',
         }}>
-          {/* ✅ Ko-fi 打賞按鈕 */}
+          {/* ✅ 請魯魯吃罐罐 — 兩段式，直接顯示帳號不需私訊 */}
           <div style={{ marginBottom: '1rem' }}>
-            <a
-             href="https://line.me/R/ti/p/@983agawb"
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{
-    display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-    background: 'linear-gradient(135deg, #FF5E5B, #ff8c42)',
-    color: '#fff', textDecoration: 'none',
-    padding: '0.6rem 1.6rem', borderRadius: '30px',
-    fontSize: '0.9rem', fontWeight: 700,
-    boxShadow: '0 4px 15px rgba(255,94,91,0.35)',
-  }}
->
-  🥫 請魯魯吃罐罐
-</a>
-  <p style={{ marginTop: '0.6rem', fontSize: '0.78rem', color: 'rgba(255,255,255,0.85)', lineHeight: 2 }}>
-  ① 點按鈕 &nbsp;→&nbsp; {' '}
-  <a href="https://line.me/R/ti/p/@983agawb" target="_blank" rel="noopener noreferrer"
-    style={{ color: '#06c755', textDecoration: 'underline' }}>
-    加入 LINE 好友
-  </a>
-  &nbsp;→&nbsp; ③ 私訊「請魯魯吃罐罐」取得轉帳資訊 魯魯謝您支持 🐱
-  <br />
-  <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.85)' }}>
-    （手機點擊直接開啟 LINE，電腦請掃描 QR Code）
-  </span>
-
-</p>
+            <DonateButton />
           </div>
 
           {/* 連結列 */}

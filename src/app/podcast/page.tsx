@@ -3,6 +3,7 @@
 // 功能：Podcast 節目頁面 — 集數列表 + 嵌入式 MP3 播放器（Vercel Blob）
 
 import { useState, useRef } from 'react';
+import DonateButton from '@/components/DonateButton';
 
 const BASE = 'https://88lwhikbeo2pkibc.public.blob.vercel-storage.com/podcast';
 
@@ -427,22 +428,11 @@ export default function PodcastPage() {
             <p style={{ color: '#fcd34d', fontWeight: 800, fontSize: '1.05rem', margin: '0 0 0.4rem' }}>
               喜歡這個節目？請魯魯吃罐罐！
             </p>
-            <p style={{ color: '#d1d5db', fontSize: '0.88rem', margin: '0 0 0.3rem' }}>
-              你的支持讓節目繼續做，也讓魯魯罐頭不斷糧 🥫
+            <p style={{ color: '#d1d5db', fontSize: '0.88rem', margin: '0 0 1rem' }}>
+              你的支持讓節目繼續做，也讓魯魯罐頭不斷糧 🥫<br />
+              <span style={{ color: '#9ca3af', fontSize: '0.8rem' }}>點按鈕直接看轉帳帳號，不需加 LINE</span>
             </p>
-            <p style={{ color: '#9ca3af', fontSize: '0.8rem', margin: '0 0 1.2rem' }}>
-              加 LINE 私訊「請罐罐」，我會回傳轉帳帳號，一罐 NT$50 起，數量不限 😄
-            </p>
-            <a href="https://line.me/R/ti/p/@983agawb" target="_blank" rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                background: 'linear-gradient(135deg,#06C755,#00a040)',
-                color: '#fff', padding: '0.65rem 2rem', borderRadius: '30px',
-                textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem',
-                boxShadow: '0 4px 16px rgba(6,199,85,0.4)',
-              }}>
-              💬 加 LINE 請罐罐
-            </a>
+            <DonateButton />
             <p style={{ marginTop: '0.75rem', color: 'rgba(209,213,219,0.5)', fontSize: '0.75rem' }}>
               每一罐都會被魯魯親自認證好吃 🐈
             </p>
