@@ -68,6 +68,7 @@ export default function ReminderPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
   // Feedback
   const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([]);
@@ -92,6 +93,11 @@ export default function ReminderPage() {
     }
 
     fetchFeedbacks();
+
+    // 請求通知權限
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
   }, []);
 
   // Keep remindersRef in sync
@@ -105,12 +111,49 @@ export default function ReminderPage() {
     try { localStorage.setItem('reminder-items', JSON.stringify(reminders)); } catch {}
   }, [reminders, remindersLoaded]);
 
+  // Wake Lock：有提醒時保持螢幕亮著
+  useEffect(() => {
+    if (reminders.length > 0) {
+      requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+  }, [reminders]);
+
+  // ── Wake Lock ─────────────────────────────────────
+  async function requestWakeLock() {
+    try {
+      if ('wakeLock' in navigator) {
+        wakeLockRef.current = await navigator.wakeLock.request('screen');
+      }
+    } catch { /* 不支援或被拒絕，靜默處理 */ }
+  }
+
+  function releaseWakeLock() {
+    if (wakeLockRef.current) {
+      wakeLockRef.current.release();
+      wakeLockRef.current = null;
+    }
+  }
+
+  // ── Web Notifications ─────────────────────────────
+  function sendNotification(message: string) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('⏰ 提醒事項', {
+        body: message,
+        icon: '/favicon.ico',
+        requireInteraction: true,
+      });
+    }
+  }
+
   // ── Alarm logic ───────────────────────────────────
   function triggerAlarm(item: ReminderItem) {
     alarmActiveRef.current = true;
     setAlarmItem(item);
     setAlarmActive(true);
     if (typeof document !== 'undefined') document.body.style.overflow = 'hidden';
+    sendNotification(item.content);
 
     if (audioUrlRef.current) {
       const audio = new Audio(audioUrlRef.current);
