@@ -44,7 +44,7 @@ const QUIZZES = [
     title: '錯的永遠不是我？',
     description: '責任感盲區——你有多難開口說「是我的問題」？',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#dc2626',
   },
   {

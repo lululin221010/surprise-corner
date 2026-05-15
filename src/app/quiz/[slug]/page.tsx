@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import attachmentQuiz from '../../../data/quizzes/attachment.json';
 import defenseQuiz from '../../../data/quizzes/defense.json';
 import traumaResponseQuiz from '../../../data/quizzes/trauma-response.json';
+import neverWrongQuiz from '../../../data/quizzes/never-wrong.json';
 
 type Option = { text: string; type: string };
 type Question = { q: string; options: Option[] };
@@ -19,6 +20,7 @@ const QUIZZES: Record<string, QuizData> = {
   attachment: attachmentQuiz as QuizData,
   defense: defenseQuiz as QuizData,
   'trauma-response': traumaResponseQuiz as QuizData,
+  'never-wrong': neverWrongQuiz as QuizData,
 };
 
 export default function QuizPage() {
@@ -77,21 +79,41 @@ export default function QuizPage() {
     return (
       <main style={{ minHeight: '100vh', background: BG, color: '#fff', padding: '0 0 5rem' }}>
         <div style={{ maxWidth: '680px', margin: '0 auto', padding: '3rem 1.4rem 0' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <div style={{ fontSize: '2.8rem', marginBottom: '0.8rem' }}>{quiz.emoji}</div>
-            <div style={{ color: '#6b5a8a', fontSize: '0.75rem', letterSpacing: '0.15em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
-              測驗結果
+
+          {/* 截圖分享卡片 */}
+          <div style={{
+            background: 'linear-gradient(135deg, #1a0f3c 0%, #2d1a5c 50%, #1a0f3c 100%)',
+            border: '1px solid rgba(139,92,246,0.4)',
+            borderRadius: '20px', padding: '2rem 2rem 1.6rem',
+            marginBottom: '2.5rem', textAlign: 'center', position: 'relative', overflow: 'hidden',
+          }}>
+            <div style={{
+              position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+              background: 'radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 70%)',
+              pointerEvents: 'none',
+            }} />
+            <div style={{ fontSize: '2.4rem', marginBottom: '0.6rem' }}>{quiz.emoji}</div>
+            <div style={{ color: '#6b5a8a', fontSize: '0.68rem', letterSpacing: '0.18em', marginBottom: '0.8rem', textTransform: 'uppercase' }}>
+              {quiz.title}
             </div>
-            <h1 style={{
-              fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 900, margin: '0 0 0.5rem',
+            <div style={{
+              fontSize: 'clamp(1.6rem, 5vw, 2.4rem)', fontWeight: 900, margin: '0 0 0.5rem',
               background: 'linear-gradient(135deg, #fff 0%, #c4b5fd 60%, #f0abfc 100%)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1.2,
             }}>
               {r.title}
-            </h1>
-            <p style={{ color: '#9d8fc4', fontSize: '1rem', fontStyle: 'italic', margin: 0 }}>
+            </div>
+            <p style={{ color: '#a78bda', fontSize: '0.95rem', fontStyle: 'italic', margin: '0 0 1.4rem' }}>
               {r.label}
             </p>
+            <div style={{
+              display: 'inline-block',
+              background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.3)',
+              borderRadius: '30px', padding: '0.3rem 1rem',
+              color: '#8b5cf6', fontSize: '0.72rem', letterSpacing: '0.08em',
+            }}>
+              surprise-corner.vercel.app/quiz/{quiz.slug}
+            </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem', marginBottom: '2.5rem' }}>
