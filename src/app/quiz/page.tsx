@@ -71,7 +71,7 @@ const QUIZZES = [
     title: '你是不是太相信這世界的好？',
     description: '天真型防禦——善良有時是一種你沒發現的迴避方式。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#10b981',
   },
   {

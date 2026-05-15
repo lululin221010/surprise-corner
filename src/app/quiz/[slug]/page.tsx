@@ -11,6 +11,7 @@ import socialPressureQuiz from '../../../data/quizzes/social-pressure.json';
 import selfDoubtQuiz from '../../../data/quizzes/self-doubt.json';
 import procrastinationQuiz from '../../../data/quizzes/procrastination.json';
 import noGoodPeopleQuiz from '../../../data/quizzes/no-good-people.json';
+import onlyGoodPeopleQuiz from '../../../data/quizzes/only-good-people.json';
 
 type Option = { text: string; type: string };
 type Question = { q: string; options: Option[] };
@@ -31,6 +32,7 @@ const QUIZZES: Record<string, QuizData> = {
   'self-doubt': selfDoubtQuiz as QuizData,
   'procrastination': procrastinationQuiz as QuizData,
   'no-good-people': noGoodPeopleQuiz as QuizData,
+  'only-good-people': onlyGoodPeopleQuiz as QuizData,
 };
 
 export default function QuizPage() {
