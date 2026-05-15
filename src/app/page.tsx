@@ -68,15 +68,6 @@ const BOOK_PREVIEWS = [
   },
 ];
 
-const BOOK_SERIES = [
-  { name: '暗黑心理學', vols: 4, color: '#9333ea', desc: '操控、謊言與黑暗人格的真相' },
-  { name: '認知心理學', vols: 6, color: '#0ea5e9', desc: '你以為你在思考，其實你沒有' },
-  { name: '成長心理學', vols: 6, color: '#10b981', desc: '失敗、動機與改變的科學' },
-  { name: '人格心理學', vols: 4, color: '#f59e0b', desc: '你是誰？你怎麼變成這樣？' },
-  { name: '關係心理學', vols: 4, color: '#ec4899', desc: '愛、傷害與邊界的心理學' },
-  { name: '潛意識心理學', vols: 4, color: '#8b5cf6', desc: '那些你以為忘了的事' },
-];
-
 const CATEGORY_COLORS: Record<string, string> = {
   '心理學': '#9333ea',
   '腦科學': '#0ea5e9',
@@ -358,28 +349,6 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
           </section>
         )}
 
-        {/* ── 書評角落入口 ── */}
-        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.25s both' }}>
-          <Link href="/books" className="book-card" style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            textDecoration: 'none',
-            background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(139,92,246,0.3)', borderRadius: '20px',
-            padding: '1.5rem 2rem', gap: '1rem',
-          }}>
-            <div>
-              <div style={{ color: '#c4b5fd', fontWeight: 800, fontSize: '1rem', marginBottom: '0.3rem' }}>
-                📚 心理學電子書
-              </div>
-              <div style={{ color: '#5a5878', fontSize: '0.82rem' }}>
-                28本 · 6系列 · NT$199／冊
-              </div>
-            </div>
-            <span style={{ color: '#8b5cf6', fontWeight: 700, fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
-              進書評角落 →
-            </span>
-          </Link>
-        </section>
 
 
         {/* ── AI快訊 + 工具遊戲（各一張）── */}
