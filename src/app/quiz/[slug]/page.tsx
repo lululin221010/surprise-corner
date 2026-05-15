@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import attachmentQuiz from '../../../data/quizzes/attachment.json';
+import defenseQuiz from '../../../data/quizzes/defense.json';
 
 type Option = { text: string; type: string };
 type Question = { q: string; options: Option[] };
@@ -15,6 +16,7 @@ type QuizData = {
 
 const QUIZZES: Record<string, QuizData> = {
   attachment: attachmentQuiz as QuizData,
+  defense: defenseQuiz as QuizData,
 };
 
 export default function QuizPage() {

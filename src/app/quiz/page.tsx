@@ -17,7 +17,7 @@ const QUIZZES = [
     title: '你用哪種防禦機制保護自己？',
     description: '否認、投射、合理化——你的大腦在幫你擋什麼？',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#8b5cf6',
   },
   {
