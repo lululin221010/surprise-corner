@@ -26,7 +26,7 @@ const QUIZZES = [
     title: '你的創傷反應是哪一型？',
     description: 'Fight / Flight / Freeze / Fawn——壓力來了你的身體怎麼反應。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#f59e0b',
   },
   {
