@@ -7,6 +7,7 @@ const ST_BASE = 'https://still-time-corner.vercel.app';
 const SERIES = [
   {
     name: '暗黑心理學',
+    tags: ['操控', '黑暗人格', '識破'],
     color: '#9333ea',
     emoji: '🌑',
     desc: '操控、謊言與黑暗人格的真相。讀完你才知道，誰一直在對你使手段。',
@@ -19,6 +20,7 @@ const SERIES = [
   },
   {
     name: '認知心理學',
+    tags: ['思考偏誤', '決策', '大腦'],
     color: '#0ea5e9',
     emoji: '🧠',
     desc: '你以為你在思考，其實你沒有。大腦如何欺騙你，以及你能怎麼辦。',
@@ -33,6 +35,7 @@ const SERIES = [
   },
   {
     name: '成長心理學',
+    tags: ['改變', '習慣', '拖延'],
     color: '#10b981',
     emoji: '🌱',
     desc: '失敗、動機與改變的科學。為什麼努力沒有用，以及真正有用的是什麼。',
@@ -47,6 +50,7 @@ const SERIES = [
   },
   {
     name: '人格心理學',
+    tags: ['自我', '人格', '防禦'],
     color: '#f59e0b',
     emoji: '🪞',
     desc: '你是誰？你怎麼變成這樣？人格的形成、類型與改變的可能。',
@@ -59,6 +63,7 @@ const SERIES = [
   },
   {
     name: '關係心理學',
+    tags: ['關係', '依附', '邊界'],
     color: '#ec4899',
     emoji: '💔',
     desc: '愛、傷害與邊界的心理學。最傷你的人，通常不是壞人。',
@@ -71,6 +76,7 @@ const SERIES = [
   },
   {
     name: '潛意識心理學',
+    tags: ['潛意識', '記憶', '身體'],
     color: '#8b5cf6',
     emoji: '🌊',
     desc: '那些你以為忘了的事。潛意識如何驅動你的選擇、情緒與人生。',
@@ -135,9 +141,15 @@ export default function BooksPage() {
             borderLeft: `4px solid ${featured.color}`,
             borderRadius: '12px', padding: '1.6rem',
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.8rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.8rem', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '1.4rem' }}>{featured.emoji}</span>
-              <span style={{ color: featured.color, fontSize: '0.8rem', fontWeight: 700 }}>{featured.name}</span>
+              {featured.tags.map(tag => (
+                <span key={tag} style={{
+                  background: `${featured.color}20`, border: `1px solid ${featured.color}55`,
+                  color: featured.color, fontSize: '0.72rem', padding: '0.1rem 0.55rem',
+                  borderRadius: '20px', fontWeight: 700,
+                }}>{tag}</span>
+              ))}
             </div>
             <div style={{ color: '#e5e7eb', fontSize: '0.92rem', lineHeight: 1.85, marginBottom: '1.2rem' }}>
               {featured.vols[0].excerpt}⋯⋯
@@ -180,8 +192,16 @@ export default function BooksPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
                   <span style={{ fontSize: '1.4rem' }}>{s.emoji}</span>
                   <div>
-                    <div style={{ color: s.color, fontWeight: 800, fontSize: '1rem' }}>{s.name}</div>
-                    <div style={{ color: '#6b7280', fontSize: '0.8rem', marginTop: '0.15rem' }}>{s.desc}</div>
+                    <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
+                      {s.tags.map(tag => (
+                        <span key={tag} style={{
+                          background: `${s.color}20`, border: `1px solid ${s.color}55`,
+                          color: s.color, fontSize: '0.72rem', padding: '0.1rem 0.55rem',
+                          borderRadius: '20px', fontWeight: 700,
+                        }}>{tag}</span>
+                      ))}
+                    </div>
+                    <div style={{ color: '#6b7280', fontSize: '0.8rem' }}>{s.desc}</div>
                   </div>
                 </div>
                 <span style={{ color: '#6b7280', fontSize: '0.8rem', flexShrink: 0, marginLeft: '0.5rem' }}>

@@ -400,6 +400,11 @@ export default function Home() {
                       </button>
                     ))}
                   </div>
+                  {selectedOption === null && (
+                    <div style={{ textAlign: 'center', color: '#4a3d6a', fontSize: '0.74rem', letterSpacing: '0.04em', marginTop: '-0.5rem', marginBottom: '0.4rem' }}>
+                      選一個，看看你和多少人一樣
+                    </div>
+                  )}
                   {selectedOption !== null && (
                     <div style={{
                       borderTop: '1px solid rgba(236,72,153,0.2)', paddingTop: '1.2rem',
