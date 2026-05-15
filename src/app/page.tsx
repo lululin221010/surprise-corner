@@ -197,6 +197,7 @@ export default function Home() {
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
   const [todayQuestion] = useState<DailyQuestion>(() => getTodayQuestion());
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [quoteIdx, setQuoteIdx] = useState(0);
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
   const [heroOffset, setHeroOffset] = useState(0);
 
@@ -224,6 +225,11 @@ export default function Home() {
     const onScroll = () => setHeroOffset(window.scrollY * 0.25);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => setQuoteIdx(i => (i + 1) % READER_QUOTES.length), 5000);
+    return () => clearInterval(t);
   }, []);
 
   const catColor = todayEntry ? (CATEGORY_COLORS[todayEntry.category] || '#8b5cf6') : '#8b5cf6';
@@ -417,114 +423,110 @@ export default function Home() {
           </section>
         )}
 
-        {/* ── 電子書展示 ── */}
-        <section style={{ maxWidth: '1020px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.25s both' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#e9d5ff', margin: '0 0 0.4rem' }}>
-              心理學電子書 📚
-            </h2>
-            <p style={{ color: '#4a4868', fontSize: '0.88rem', margin: 0 }}>
-              28本 · 6個系列 · NT$199／冊
+        {/* ── 書評角落入口 ── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.25s both' }}>
+          <Link href="/books" className="book-card" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            textDecoration: 'none',
+            background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(139,92,246,0.3)', borderRadius: '20px',
+            padding: '1.5rem 2rem', gap: '1rem',
+          }}>
+            <div>
+              <div style={{ color: '#c4b5fd', fontWeight: 800, fontSize: '1rem', marginBottom: '0.3rem' }}>
+                📚 心理學電子書
+              </div>
+              <div style={{ color: '#5a5878', fontSize: '0.82rem' }}>
+                28本 · 6系列 · NT$199／冊
+              </div>
+            </div>
+            <span style={{ color: '#8b5cf6', fontWeight: 700, fontSize: '0.88rem', whiteSpace: 'nowrap' }}>
+              進書評角落 →
+            </span>
+          </Link>
+        </section>
+
+        {/* ── 讀者說（單卡輪播）── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.3s both' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+            <span style={{ color: '#4a4868', fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>讀者說</span>
+          </div>
+          <div style={{
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)',
+            borderRadius: '20px', padding: '1.8rem 2rem', minHeight: '110px',
+          }}>
+            <p style={{ color: '#d4d0ea', fontSize: '0.9rem', lineHeight: 1.9, margin: '0 0 1rem', fontStyle: 'italic' }}>
+              「{READER_QUOTES[quoteIdx].text}」
             </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(285px, 1fr))', gap: '1rem' }}>
-            {BOOK_SERIES.map(s => (
-              <Link
-                key={s.name}
-                href="/books"
-                className="book-card"
-                style={{
-                  display: 'block', textDecoration: 'none',
-                  background: 'rgba(255,255,255,0.05)',
-                  border: `1px solid ${s.color}30`,
-                  borderRadius: '18px', padding: '1.6rem',
-                  backdropFilter: 'blur(8px)',
-                }}
-              >
-                <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: s.color, marginBottom: '0.9rem' }} />
-                <h3 style={{ color: '#f0eeff', fontSize: '1.05rem', fontWeight: 800, margin: '0 0 0.35rem' }}>
-                  {s.name}
-                </h3>
-                <p style={{ color: '#7a788e', fontSize: '0.81rem', margin: '0 0 0.9rem', lineHeight: 1.55 }}>
-                  {s.desc}
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: s.color, fontSize: '0.76rem', fontWeight: 600 }}>共 {s.vols} 冊</span>
-                  <span style={{ color: s.color, fontSize: '0.8rem', fontWeight: 700 }}>前往購買 →</span>
-                </div>
-              </Link>
-            ))}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#5a5878', fontSize: '0.76rem' }}>— {READER_QUOTES[quoteIdx].name}</span>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                {READER_QUOTES.map((_, i) => (
+                  <button key={i} onClick={() => setQuoteIdx(i)} style={{
+                    width: i === quoteIdx ? '18px' : '6px', height: '6px', borderRadius: '3px',
+                    background: i === quoteIdx ? '#8b5cf6' : '#3d3b5a',
+                    border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0,
+                  }} />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ── 讀者說 ── */}
-        <section style={{ maxWidth: '900px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.3s both' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1.6rem' }}>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#e9d5ff', margin: '0 0 0.3rem' }}>讀者說</h2>
-            <p style={{ color: '#4a4868', fontSize: '0.82rem', margin: 0 }}>真實回饋，沒有美化</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
-            {READER_QUOTES.map((q, i) => (
-              <div key={i} style={{
-                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)',
-                borderRadius: '18px', padding: '1.5rem',
-              }}>
-                <p style={{ color: '#d4d0ea', fontSize: '0.88rem', lineHeight: 1.85, margin: '0 0 1rem', fontStyle: 'italic' }}>
-                  「{q.text}」
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#5a5878', fontSize: '0.76rem' }}>— {q.name}</span>
-                  <span style={{ color: '#3d3b5a', fontSize: '0.72rem' }}>{q.series}</span>
-                </div>
+        {/* ── AI快訊 + 工具遊戲（各一張）── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem', animation: 'fadeInUp 1s ease 0.35s both' }}>
+          {/* AI快訊 1則 */}
+          {aiNews[0] ? (
+            <a href={aiNews[0].link} target="_blank" rel="noopener noreferrer" className="news-card" style={{
+              display: 'block', textDecoration: 'none',
+              background: 'rgba(14,165,233,0.07)', border: '1px solid rgba(14,165,233,0.22)',
+              borderRadius: '18px', padding: '1.4rem 1.6rem',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                <span style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 700 }}>🤖 AI 快訊 · {aiNews[0].source}</span>
+                <Link href="/ai-news" onClick={e => e.stopPropagation()} style={{ color: '#38bdf8', fontSize: '0.72rem', textDecoration: 'none', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
+                  看更多 →
+                </Link>
               </div>
-            ))}
-          </div>
-        </section>
+              <h3 style={{
+                color: '#f0f4f8', fontSize: '0.9rem', fontWeight: 700, margin: '0 0 0.4rem', lineHeight: 1.45,
+                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
+              }}>{aiNews[0].title}</h3>
+              <p style={{
+                color: '#8a9ab0', fontSize: '0.78rem', lineHeight: 1.6, margin: 0,
+                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
+              }}>{aiNews[0].description}</p>
+            </a>
+          ) : (
+            <div style={{ background: 'rgba(14,165,233,0.04)', border: '1px solid rgba(14,165,233,0.12)', borderRadius: '18px', padding: '1.4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#2a3a4a', fontSize: '0.8rem' }}>🤖 AI 快訊載入中…</span>
+              <Link href="/ai-news" style={{ color: '#38bdf8', fontSize: '0.78rem', textDecoration: 'none' }}>看更多 →</Link>
+            </div>
+          )}
 
-        {/* ── AI 快訊 3則 ── */}
-        <section style={{ maxWidth: '920px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.35s both' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '1.25rem', fontWeight: 800, color: '#e9d5ff', marginBottom: '1.2rem' }}>
-            🤖 AI 快訊
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
-            {aiNews.length > 0 ? aiNews.map((n, i) => (
-              <a key={i} href={n.link} target="_blank" rel="noopener noreferrer"
-                className="news-card"
-                style={{
-                  display: 'block', textDecoration: 'none',
-                  background: 'rgba(14,165,233,0.07)', border: '1px solid rgba(14,165,233,0.22)',
-                  borderRadius: '16px', padding: '1.3rem',
-                }}>
-                <div style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '0.03em' }}>
-                  {n.source}
-                </div>
-                <h3 style={{
-                  color: '#f0f4f8', fontSize: '0.9rem', fontWeight: 700, margin: '0 0 0.5rem', lineHeight: 1.45,
-                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
-                }}>
-                  {n.title}
-                </h3>
-                <p style={{
-                  color: '#8a9ab0', fontSize: '0.78rem', lineHeight: 1.6, margin: '0 0 0.8rem',
-                  display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
-                }}>
-                  {n.description}
-                </p>
-                <span style={{ color: '#0ea5e9', fontSize: '0.76rem', fontWeight: 700 }}>查看原文 →</span>
-              </a>
-            )) : [0, 1, 2].map(i => (
-              <div key={i} style={{
-                background: 'rgba(14,165,233,0.04)', border: '1px solid rgba(14,165,233,0.12)',
-                borderRadius: '16px', padding: '1.3rem', minHeight: '110px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <span style={{ color: '#2a3a4a', fontSize: '0.8rem' }}>載入中…</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-            <Link href="/ai-news" style={{ color: '#38bdf8', fontSize: '0.83rem', fontWeight: 700, textDecoration: 'none' }}>
-              看所有 AI 快訊 →
+          {/* 工具箱 + 小遊戲 */}
+          <div style={{
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '18px', padding: '1.3rem 1.6rem',
+            display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem',
+          }}>
+            <Link href="/tools" style={{
+              textDecoration: 'none', textAlign: 'center',
+              background: 'rgba(132,204,22,0.08)', border: '1px solid rgba(132,204,22,0.2)',
+              borderRadius: '12px', padding: '0.9rem 0.5rem',
+            }}>
+              <div style={{ fontSize: '1.3rem', marginBottom: '0.3rem' }}>🛠</div>
+              <div style={{ color: '#bef264', fontSize: '0.82rem', fontWeight: 700 }}>工具箱</div>
+              <div style={{ color: '#4a5a2a', fontSize: '0.72rem' }}>實用小工具</div>
+            </Link>
+            <Link href="/games" style={{
+              textDecoration: 'none', textAlign: 'center',
+              background: 'rgba(251,191,36,0.08)', border: '1px solid rgba(251,191,36,0.2)',
+              borderRadius: '12px', padding: '0.9rem 0.5rem',
+            }}>
+              <div style={{ fontSize: '1.3rem', marginBottom: '0.3rem' }}>🎮</div>
+              <div style={{ color: '#fde68a', fontSize: '0.82rem', fontWeight: 700 }}>小遊戲</div>
+              <div style={{ color: '#5a4a1a', fontSize: '0.72rem' }}>動動腦放鬆一下</div>
             </Link>
           </div>
         </section>
@@ -561,9 +563,7 @@ export default function Home() {
         <footer style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '2rem 1.2rem 2.5rem', textAlign: 'center' }}>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.2rem 2rem', marginBottom: '1.2rem' }}>
             {[
-              { label: '小遊戲', href: '/games' },
-              { label: '互動牆', href: '/wall' },
-              { label: '實用工具', href: '/tools' },
+              { label: '💬 互動牆', href: '/wall' },
               { label: '🛒 小舖', href: 'https://still-time-corner.vercel.app', external: true },
             ].map(l => (
               l.external
