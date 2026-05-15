@@ -80,7 +80,7 @@ const QUIZZES = [
     title: '你從原生家庭帶走了什麼？',
     description: '你現在的某些反應，是很小的時候學會的生存方式。',
     time: '約 4 分鐘',
-    ready: false,
+    ready: true,
     color: '#f97316',
   },
   {
@@ -107,7 +107,7 @@ const QUIZZES = [
     title: '你的心理黑暗面是哪一型？',
     description: '控制者、破壞者、面具、逃離者——四種類型，你是哪一個？',
     time: '約 4 分鐘',
-    ready: false,
+    ready: true,
     color: '#9333ea',
   },
 ];

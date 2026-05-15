@@ -12,6 +12,8 @@ import selfDoubtQuiz from '../../../data/quizzes/self-doubt.json';
 import procrastinationQuiz from '../../../data/quizzes/procrastination.json';
 import noGoodPeopleQuiz from '../../../data/quizzes/no-good-people.json';
 import onlyGoodPeopleQuiz from '../../../data/quizzes/only-good-people.json';
+import familyWoundsQuiz from '../../../data/quizzes/family-wounds.json';
+import darkSideQuiz from '../../../data/quizzes/dark-side.json';
 
 type Option = { text: string; type: string };
 type Question = { q: string; options: Option[] };
@@ -33,6 +35,8 @@ const QUIZZES: Record<string, QuizData> = {
   'procrastination': procrastinationQuiz as QuizData,
   'no-good-people': noGoodPeopleQuiz as QuizData,
   'only-good-people': onlyGoodPeopleQuiz as QuizData,
+  'family-wounds': familyWoundsQuiz as QuizData,
+  'dark-side': darkSideQuiz as QuizData,
 };
 
 export default function QuizPage() {
