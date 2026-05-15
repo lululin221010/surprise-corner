@@ -520,26 +520,27 @@ export default function Home() {
         <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem', animation: 'fadeInUp 1s ease 0.35s both' }}>
           {/* AI快訊 1則 */}
           {aiNews[0] ? (
-            <a href={aiNews[0].link} target="_blank" rel="noopener noreferrer" className="news-card" style={{
-              display: 'block', textDecoration: 'none',
+            <div className="news-card" style={{
               background: 'rgba(14,165,233,0.07)', border: '1px solid rgba(14,165,233,0.22)',
               borderRadius: '18px', padding: '1.4rem 1.6rem',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                 <span style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 700 }}>🤖 AI 快訊 · {aiNews[0].source}</span>
-                <Link href="/ai-news" onClick={e => e.stopPropagation()} style={{ color: '#38bdf8', fontSize: '0.72rem', textDecoration: 'none', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
+                <Link href="/ai-news" style={{ color: '#38bdf8', fontSize: '0.72rem', textDecoration: 'none', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
                   看更多 →
                 </Link>
               </div>
-              <h3 style={{
-                color: '#f0f4f8', fontSize: '0.9rem', fontWeight: 700, margin: '0 0 0.4rem', lineHeight: 1.45,
-                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
-              }}>{aiNews[0].title}</h3>
-              <p style={{
-                color: '#8a9ab0', fontSize: '0.78rem', lineHeight: 1.6, margin: 0,
-                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
-              }}>{aiNews[0].description}</p>
-            </a>
+              <a href={aiNews[0].link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block' }}>
+                <h3 style={{
+                  color: '#f0f4f8', fontSize: '0.9rem', fontWeight: 700, margin: '0 0 0.4rem', lineHeight: 1.45,
+                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
+                }}>{aiNews[0].title}</h3>
+                <p style={{
+                  color: '#8a9ab0', fontSize: '0.78rem', lineHeight: 1.6, margin: 0,
+                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden',
+                }}>{aiNews[0].description}</p>
+              </a>
+            </div>
           ) : (
             <div style={{ background: 'rgba(14,165,233,0.04)', border: '1px solid rgba(14,165,233,0.12)', borderRadius: '18px', padding: '1.4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ color: '#2a3a4a', fontSize: '0.8rem' }}>🤖 AI 快訊載入中…</span>
