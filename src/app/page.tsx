@@ -530,7 +530,7 @@ export default function Home() {
               borderRadius: '18px', padding: '1.4rem 1.6rem',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 700 }}>🤖 AI 快訊 · {aiNews[0].source}</span>
+                <span style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 700 }}>📰 快訊 · {aiNews[0].source}</span>
                 <Link href="/ai-news" style={{ color: '#38bdf8', fontSize: '0.72rem', textDecoration: 'none', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
                   看更多 →
                 </Link>
@@ -548,7 +548,7 @@ export default function Home() {
             </div>
           ) : (
             <div style={{ background: 'rgba(14,165,233,0.04)', border: '1px solid rgba(14,165,233,0.12)', borderRadius: '18px', padding: '1.4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: '#2a3a4a', fontSize: '0.8rem' }}>🤖 AI 快訊載入中…</span>
+              <span style={{ color: '#2a3a4a', fontSize: '0.8rem' }}>📰 快訊載入中…</span>
               <Link href="/ai-news" style={{ color: '#38bdf8', fontSize: '0.78rem', textDecoration: 'none' }}>看更多 →</Link>
             </div>
           )}
