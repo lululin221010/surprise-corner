@@ -53,7 +53,7 @@ const QUIZZES = [
     title: '你的內在批評者有多大聲？',
     description: '自我懷疑不是謙遜，那個聲音從哪裡來、說了什麼。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#0ea5e9',
   },
   {
