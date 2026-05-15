@@ -151,6 +151,11 @@ export default function BooksPage() {
                 }}>{tag}</span>
               ))}
             </div>
+            <div style={{ marginBottom: '0.5rem' }}>
+              <span style={{ color: '#9ca3af', fontSize: '0.78rem' }}>{featured.name}</span>
+              <span style={{ color: '#6b7280', fontSize: '0.78rem', margin: '0 0.4rem' }}>·</span>
+              <span style={{ color: '#c4b5fd', fontSize: '0.88rem', fontWeight: 700 }}>{featured.vols[0].title}</span>
+            </div>
             <div style={{ color: '#e5e7eb', fontSize: '0.92rem', lineHeight: 1.85, marginBottom: '1.2rem' }}>
               {featured.vols[0].excerpt}⋯⋯
             </div>
