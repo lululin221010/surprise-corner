@@ -68,13 +68,6 @@ const BOOK_PREVIEWS = [
   },
 ];
 
-const READER_QUOTES = [
-  { text: '看完暗黑心理學 Vol.1 才發現，我媽一直在對我情感勒索。說出來很痛，但終於說出來了。', name: '讀者 C.', series: '暗黑心理學' },
-  { text: '認知心理學 Vol.3 把「確認偏誤」解釋得太清楚，我當下把手機放下來，重新看了一次我跟前男友的對話記錄。', name: '讀者 小艾', series: '認知心理學' },
-  { text: '買之前以為是說教書，結果根本是在說我。成長心理學看到一半眼眶紅了。', name: '讀者 YJ', series: '成長心理學' },
-  { text: '盧林的書不是那種讀完覺得「好有道理」然後繼續過一樣的生活——它讓我開始問問題。', name: '讀者 默默', series: '潛意識心理學' },
-];
-
 const BOOK_SERIES = [
   { name: '暗黑心理學', vols: 4, color: '#9333ea', desc: '操控、謊言與黑暗人格的真相' },
   { name: '認知心理學', vols: 6, color: '#0ea5e9', desc: '你以為你在思考，其實你沒有' },
@@ -187,8 +180,7 @@ function LuluBubble() {
 export default function Home() {
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
-const [quoteIdx, setQuoteIdx] = useState(0);
-  const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
+const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
   const [heroOffset, setHeroOffset] = useState(0);
 
   useEffect(() => {
@@ -217,10 +209,6 @@ const [quoteIdx, setQuoteIdx] = useState(0);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    const t = setInterval(() => setQuoteIdx(i => (i + 1) % READER_QUOTES.length), 5000);
-    return () => clearInterval(t);
-  }, []);
 
   const catColor = todayEntry ? (CATEGORY_COLORS[todayEntry.category] || '#8b5cf6') : '#8b5cf6';
 
@@ -393,32 +381,6 @@ const [quoteIdx, setQuoteIdx] = useState(0);
           </Link>
         </section>
 
-        {/* ── 讀者說（單卡輪播）── */}
-        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.3s both' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <span style={{ color: '#4a4868', fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>讀者說</span>
-          </div>
-          <div style={{
-            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)',
-            borderRadius: '20px', padding: '1.8rem 2rem', minHeight: '110px',
-          }}>
-            <p style={{ color: '#d4d0ea', fontSize: '0.9rem', lineHeight: 1.9, margin: '0 0 1rem', fontStyle: 'italic' }}>
-              「{READER_QUOTES[quoteIdx].text}」
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ color: '#5a5878', fontSize: '0.76rem' }}>— {READER_QUOTES[quoteIdx].name}</span>
-              <div style={{ display: 'flex', gap: '6px' }}>
-                {READER_QUOTES.map((_, i) => (
-                  <button key={i} onClick={() => setQuoteIdx(i)} style={{
-                    width: i === quoteIdx ? '18px' : '6px', height: '6px', borderRadius: '3px',
-                    background: i === quoteIdx ? '#8b5cf6' : '#3d3b5a',
-                    border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0,
-                  }} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* ── AI快訊 + 工具遊戲（各一張）── */}
         <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem', animation: 'fadeInUp 1s ease 0.35s both' }}>
