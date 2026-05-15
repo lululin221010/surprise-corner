@@ -14,6 +14,9 @@ interface Post {
   petName?: string;
   isStory?: boolean;
   creatorId: string | null;
+  aiTool?: string;
+  aiPrompt?: string;
+  imageUrl?: string;
 }
 
 const TABS = [
@@ -22,7 +25,10 @@ const TABS = [
   { key: '連載讀者', label: '📚 連載讀者' },
   { key: 'Podcast', label: '🎵 Podcast 聽眾' },
   { key: '許願牆',  label: '🎮 小遊戲/工具許願' },
+  { key: 'AI創作',  label: '🎨 AI 創作' },
 ];
+
+const AI_TOOLS = ['ChatGPT', 'Midjourney', 'Flux', 'Canva AI', 'Gemini', '其他'];
 
 function WallContent() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -56,7 +62,12 @@ function WallContent() {
     '連載讀者': '兔崽子',
     'Podcast':  '小舖',
     '許願牆':   '工具精靈 🧰',
+    'AI創作':   'AI 創作社群',
   };
+
+  const [aiTool, setAiTool] = useState('ChatGPT');
+  const [aiPrompt, setAiPrompt] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const STORY_HINT = '用一兩句話說個你的小故事，不用很長，生活裡一個讓你有感覺的瞬間就好 ✨';
   const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
 
@@ -87,7 +98,12 @@ function WallContent() {
   useEffect(() => { loadPosts(activeTab); }, [activeTab]);
 
   async function handleSubmit() {
-    if (!text.trim() || text.trim().length < 5) {
+    if (label === 'AI創作') {
+      if (!aiPrompt.trim() || aiPrompt.trim().length < 10) {
+        setMessage({ type: 'err', text: '請填寫 AI 指令（至少 10 個字）！' });
+        return;
+      }
+    } else if (!text.trim() || text.trim().length < 5) {
       setMessage({ type: 'err', text: '內容至少需要 5 個字！' });
       return;
     }
@@ -106,20 +122,22 @@ function WallContent() {
       const res = await fetch('/api/wall', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, isBookWish: isBookWish || undefined, isPodcastWish: isPodcastWish || undefined, label, creatorId }),
+        body: JSON.stringify({ text: label === 'AI創作' ? (text.trim() || '（無說明）') : text.trim(), to: to.trim(), from: from.trim(), petName: petName.trim() || undefined, isStory: isStory || undefined, isBookWish: isBookWish || undefined, isPodcastWish: isPodcastWish || undefined, label, creatorId, aiTool: label === 'AI創作' ? aiTool : undefined, aiPrompt: label === 'AI創作' ? aiPrompt.trim() : undefined, imageUrl: label === 'AI創作' ? (imageUrl.trim() || undefined) : undefined }),
       });
       if (!res.ok) {
         const err = await res.json();
         setMessage({ type: 'err', text: err.error || '送出失敗，請稍後再試' });
         return;
       }
-      setMessage({ type: 'ok', text: '✅ 已成功發布到互動牆！' });
+      setMessage({ type: 'ok', text: '✅ 已送出，審核通過後即會顯示！' });
       setText('');
       setTo(LOCKED_TO[label] ?? '');
       setFrom('');
       setIsStory(false);
       setIsBookWish(false);
       setIsPodcastWish(false);
+      setAiPrompt('');
+      setImageUrl('');
       await loadPosts(activeTab);
     } catch {
       setMessage({ type: 'err', text: '網路錯誤，請稍後再試' });
@@ -226,8 +244,54 @@ function WallContent() {
               <span style={{ color: '#c4b5fd', fontSize: '0.88rem' }}>🎙️ 想聽主持人解析某個事件或主題</span>
             </label>
           )}
+
+          {/* ── AI 創作專屬欄位 ── */}
+          {label === 'AI創作' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '0.6rem' }}>
+              {/* 使用工具 */}
+              <div>
+                <p style={{ color: '#a78bfa', fontSize: '0.78rem', marginBottom: '0.3rem' }}>使用工具</p>
+                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                  {AI_TOOLS.map(t => (
+                    <button key={t} type="button" onClick={() => setAiTool(t)} style={{
+                      padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.8rem', cursor: 'pointer',
+                      border: aiTool === t ? '1px solid rgba(167,139,250,0.9)' : '1px solid rgba(167,139,250,0.25)',
+                      background: aiTool === t ? 'rgba(124,58,237,0.4)' : 'rgba(255,255,255,0.05)',
+                      color: aiTool === t ? '#e9d5ff' : '#9ca3af',
+                    }}>{t}</button>
+                  ))}
+                </div>
+              </div>
+              {/* 指令 */}
+              <div>
+                <p style={{ color: '#a78bfa', fontSize: '0.78rem', marginBottom: '0.3rem' }}>AI 指令（必填）</p>
+                <textarea value={aiPrompt} onChange={e => setAiPrompt(e.target.value)}
+                  placeholder="貼上你輸入給 AI 的完整指令，讓其他人也能試試看 ✨" maxLength={800} rows={4}
+                  style={{
+                    width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
+                    border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', padding: '0.9rem 1rem',
+                    color: '#f3f4f6', fontSize: '0.88rem', lineHeight: 1.6, resize: 'none', outline: 'none', fontFamily: 'monospace',
+                  }}
+                />
+                <span style={{ color: '#4b5563', fontSize: '0.72rem' }}>{aiPrompt.length} / 800</span>
+              </div>
+              {/* 圖片連結 */}
+              <div>
+                <p style={{ color: '#a78bfa', fontSize: '0.78rem', marginBottom: '0.3rem' }}>成品圖片連結（選填）</p>
+                <input value={imageUrl} onChange={e => setImageUrl(e.target.value)}
+                  placeholder="把 AI 生成的圖片上傳到 Imgur / Google Photos，貼上連結"
+                  style={{
+                    width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
+                    border: '1px solid rgba(167,139,250,0.3)', borderRadius: '10px', padding: '0.7rem 1rem',
+                    color: '#f3f4f6', fontSize: '0.88rem', outline: 'none', fontFamily: 'inherit',
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
           <textarea value={text} onChange={e => setText(e.target.value)}
-            placeholder={isStory ? STORY_HINT : isBookWish ? '例：希望下一本是懸疑驚悚！或是溫暖的家庭故事、愛情小說也好 💜' : isPodcastWish ? '例：想聽你聊 AI 取代工作這件事、或是台灣房價為什麼一直漲？' : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={3}
+            placeholder={label === 'AI創作' ? '補充說明：這張圖怎麼用、效果如何、你改了什麼？（選填）' : isStory ? STORY_HINT : isBookWish ? '例：希望下一本是懸疑驚悚！或是溫暖的家庭故事、愛情小說也好 💜' : isPodcastWish ? '例：想聽你聊 AI 取代工作這件事、或是台灣房價為什麼一直漲？' : (LABEL_HINTS[label]?.content || '輸入你想說的話、一段故事、或今天的心情...')} maxLength={300} rows={label === 'AI創作' ? 2 : 3}
             style={{
               width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.07)',
               border: '1px solid rgba(167,139,250,0.3)', borderRadius: '12px', padding: '0.9rem 1rem',
@@ -297,7 +361,21 @@ function WallContent() {
                   寫給：{p.to}{p.from ? `　from：${p.from}` : '　（匿名）'}
                 </p>
               )}
-              <p style={{ margin: '0.4rem 0 0.8rem', lineHeight: 1.8, fontSize: '1rem' }}>{p.text}</p>
+              {/* AI 創作：圖片 + 指令 */}
+              {p.label === 'AI創作' && p.imageUrl && (
+                <img
+                  src={p.imageUrl} alt="AI 生成成品"
+                  onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  style={{ width: '100%', maxHeight: '360px', objectFit: 'contain', borderRadius: '10px', marginBottom: '0.8rem', background: '#000' }}
+                />
+              )}
+              {p.label === 'AI創作' && p.aiPrompt && (
+                <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(167,139,250,0.2)', borderRadius: '8px', padding: '0.7rem 0.9rem', marginBottom: '0.6rem' }}>
+                  <p style={{ color: '#6b7280', fontSize: '0.72rem', margin: '0 0 0.3rem' }}>📋 AI 指令 {p.aiTool && <span style={{ color: '#a78bfa' }}>· {p.aiTool}</span>}</p>
+                  <p style={{ color: '#d1d5db', fontSize: '0.85rem', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{p.aiPrompt}</p>
+                </div>
+              )}
+              <p style={{ margin: '0.4rem 0 0.8rem', lineHeight: 1.8, fontSize: '1rem' }}>{p.text !== '（無說明）' ? p.text : ''}</p>
               {p.reply && (
                 <div style={{
                   background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.25)',

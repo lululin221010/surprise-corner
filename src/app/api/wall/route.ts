@@ -30,14 +30,17 @@ export async function POST(req: Request) {
 
   const result = await db.collection("wall").insertOne({
     text: body.text.slice(0, 300),
-    to: body.to.trim().slice(0, 20),           // ✅ 收件人（必填）
-    from: body.from?.trim().slice(0, 20) || '', // ✅ 寄件人（空白=匿名）
-    label: body.label || '',                    // ✅ 類型標籤
+    to: body.to.trim().slice(0, 20),
+    from: body.from?.trim().slice(0, 20) || '',
+    label: body.label || '',
     creatorId: body.creatorId || null,
-    approved: false,                            // ✅ 預設待審核
+    approved: false,
     reply: '',
     ip,
     createdAt: new Date(),
+    aiTool:   body.aiTool   ? String(body.aiTool).slice(0, 30)    : undefined,
+    aiPrompt: body.aiPrompt ? String(body.aiPrompt).slice(0, 800) : undefined,
+    imageUrl: body.imageUrl ? String(body.imageUrl).slice(0, 500) : undefined,
   });
 
   return NextResponse.json({ ok: true, id: result.insertedId });
