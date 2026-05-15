@@ -410,33 +410,48 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
           </div>
         </section>
 
-        {/* ── 測驗 CTA ── */}
-        <section style={{ maxWidth: '540px', margin: '0 auto 5.5rem', padding: '0 1.2rem', textAlign: 'center', animation: 'fadeInUp 1s ease 0.45s both' }}>
-          <div style={{
-            background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.32)',
-            borderRadius: '22px', padding: '2.4rem 2rem',
-          }}>
-            <div style={{ fontSize: '2.4rem', marginBottom: '0.8rem', animation: 'float 3s ease-in-out infinite', display: 'inline-block' }}>🧬</div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#e9d5ff', margin: '0 0 0.6rem' }}>
-              你的心理黑暗面是哪一型？
-            </h2>
-            <p style={{ color: '#7a788e', fontSize: '0.86rem', marginBottom: '1.5rem', lineHeight: 1.65 }}>
-              控制者、破壞者、面具、逃離者——<br />四種類型，你是哪一個？
-            </p>
-            <Link href="/quiz" style={{
-              display: 'inline-block',
-              background: 'linear-gradient(135deg, #7c3aed, #ec4899)',
-              color: '#fff', borderRadius: '30px', padding: '0.7rem 2.2rem',
-              textDecoration: 'none', fontWeight: 700, fontSize: '0.93rem',
-              transition: 'opacity 0.2s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-            >
-              測一測 →
-            </Link>
-          </div>
-        </section>
+        {/* ── 今日測驗 CTA（每日輪換）── */}
+        {(() => {
+          const FEATURED = [
+            { slug: 'attachment', emoji: '🔗', title: '你的依附類型是哪一種？', desc: '不是測你愛不愛人，是測你怎麼在親密裡生存。', color: '#ec4899' },
+          ];
+          const quiz = FEATURED[getDayOfYear() % FEATURED.length];
+          return (
+            <section style={{ maxWidth: '540px', margin: '0 auto 5.5rem', padding: '0 1.2rem', textAlign: 'center', animation: 'fadeInUp 1s ease 0.45s both' }}>
+              <div style={{
+                background: `rgba(124,58,237,0.08)`, border: `1px solid ${quiz.color}44`,
+                borderRadius: '22px', padding: '2.4rem 2rem',
+              }}>
+                <div style={{ fontSize: '2.2rem', marginBottom: '0.7rem', animation: 'float 3s ease-in-out infinite', display: 'inline-block' }}>{quiz.emoji}</div>
+                <div style={{ color: '#4a4060', fontSize: '0.72rem', letterSpacing: '0.12em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>今日測驗</div>
+                <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#e9d5ff', margin: '0 0 0.6rem', lineHeight: 1.4 }}>
+                  {quiz.title}
+                </h2>
+                <p style={{ color: '#7a788e', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: 1.65 }}>
+                  {quiz.desc}
+                </p>
+                <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <Link href={`/quiz/${quiz.slug}`} style={{
+                    display: 'inline-block',
+                    background: `linear-gradient(135deg, #7c3aed, ${quiz.color})`,
+                    color: '#fff', borderRadius: '30px', padding: '0.65rem 2rem',
+                    textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem',
+                  }}>
+                    測一測 →
+                  </Link>
+                  <Link href="/quiz" style={{
+                    display: 'inline-block', color: '#6b5a8a',
+                    borderRadius: '30px', padding: '0.65rem 1.4rem',
+                    textDecoration: 'none', fontSize: '0.85rem',
+                    border: '1px solid rgba(107,90,138,0.3)',
+                  }}>
+                    全部測驗
+                  </Link>
+                </div>
+              </div>
+            </section>
+          );
+        })()}
 
         {/* ── 底部小連結 ── */}
         <footer style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '2rem 1.2rem 2.5rem', textAlign: 'center' }}>
