@@ -88,6 +88,9 @@ const CATEGORY_COLORS: Record<string, string> = {
   '心理學': '#9333ea',
   '腦科學': '#0ea5e9',
   '靈異意識': '#8b5cf6',
+  '貓咪科學': '#f97316',
+  '睡眠科學': '#06b6d4',
+  '行為經濟學': '#84cc16',
 };
 
 function getDayOfYear(): number {
@@ -95,12 +98,14 @@ function getDayOfYear(): number {
   return Math.floor((Date.now() - start.getTime()) / 86400000);
 }
 
-function getTodayEntry(): ColdEntry {
-  return coldData[getDayOfYear() % coldData.length];
+function getCurrentHourEntry(): ColdEntry {
+  const hourIndex = Math.floor(Date.now() / 3600000);
+  return coldData[hourIndex % coldData.length];
 }
 
 function getTodayPreview() {
-  return BOOK_PREVIEWS[getDayOfYear() % BOOK_PREVIEWS.length];
+  const slot = getDayOfYear() * 2 + (new Date().getHours() >= 12 ? 1 : 0);
+  return BOOK_PREVIEWS[slot % BOOK_PREVIEWS.length];
 }
 
 function Particles() {
@@ -186,8 +191,16 @@ export default function Home() {
   const [heroOffset, setHeroOffset] = useState(0);
 
   useEffect(() => {
-    setTodayEntry(getTodayEntry());
+    setTodayEntry(getCurrentHourEntry());
     setTodayPreview(getTodayPreview());
+    // 每小時整點自動更新
+    const now = new Date();
+    const msToNextHour = (60 - now.getMinutes()) * 60000 - now.getSeconds() * 1000;
+    const timeout = setTimeout(() => {
+      setTodayEntry(getCurrentHourEntry());
+      setTodayPreview(getTodayPreview());
+    }, msToNextHour);
+    return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
@@ -338,13 +351,13 @@ export default function Home() {
               </p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.6rem' }}>
                 <span style={{ color: '#3d3b5a', fontSize: '0.76rem' }}>想繼續讀？</span>
-                <a href={todayPreview.buyUrl} target="_blank" rel="noopener noreferrer" style={{
+                <Link href="/books" style={{
                   background: `linear-gradient(135deg, ${todayPreview.color}, ${todayPreview.color}aa)`,
                   color: '#fff', borderRadius: '20px', padding: '0.45rem 1.3rem',
                   textDecoration: 'none', fontWeight: 700, fontSize: '0.82rem',
                 }}>
-                  前往小舖購買 →
-                </a>
+                  進書評角落 →
+                </Link>
               </div>
             </div>
           </section>
@@ -362,11 +375,9 @@ export default function Home() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(285px, 1fr))', gap: '1rem' }}>
             {BOOK_SERIES.map(s => (
-              <a
+              <Link
                 key={s.name}
-                href="https://still-time-corner.vercel.app/digital"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/books"
                 className="book-card"
                 style={{
                   display: 'block', textDecoration: 'none',
@@ -387,7 +398,7 @@ export default function Home() {
                   <span style={{ color: s.color, fontSize: '0.76rem', fontWeight: 600 }}>共 {s.vols} 冊</span>
                   <span style={{ color: s.color, fontSize: '0.8rem', fontWeight: 700 }}>前往購買 →</span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
