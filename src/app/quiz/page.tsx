@@ -35,7 +35,7 @@ const QUIZZES = [
     title: '你有多擅長把自己搞垮？',
     description: '自我內耗不是脆弱，是一種長期養成的思考習慣。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#6366f1',
   },
   {

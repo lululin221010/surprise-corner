@@ -6,6 +6,7 @@ import attachmentQuiz from '../../../data/quizzes/attachment.json';
 import defenseQuiz from '../../../data/quizzes/defense.json';
 import traumaResponseQuiz from '../../../data/quizzes/trauma-response.json';
 import neverWrongQuiz from '../../../data/quizzes/never-wrong.json';
+import selfDrainQuiz from '../../../data/quizzes/self-drain.json';
 
 type Option = { text: string; type: string };
 type Question = { q: string; options: Option[] };
@@ -21,6 +22,7 @@ const QUIZZES: Record<string, QuizData> = {
   defense: defenseQuiz as QuizData,
   'trauma-response': traumaResponseQuiz as QuizData,
   'never-wrong': neverWrongQuiz as QuizData,
+  'self-drain': selfDrainQuiz as QuizData,
 };
 
 export default function QuizPage() {
