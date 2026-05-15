@@ -9,6 +9,7 @@ import neverWrongQuiz from '../../../data/quizzes/never-wrong.json';
 import selfDrainQuiz from '../../../data/quizzes/self-drain.json';
 import socialPressureQuiz from '../../../data/quizzes/social-pressure.json';
 import selfDoubtQuiz from '../../../data/quizzes/self-doubt.json';
+import procrastinationQuiz from '../../../data/quizzes/procrastination.json';
 
 type Option = { text: string; type: string };
 type Question = { q: string; options: Option[] };
@@ -27,6 +28,7 @@ const QUIZZES: Record<string, QuizData> = {
   'self-drain': selfDrainQuiz as QuizData,
   'social-pressure': socialPressureQuiz as QuizData,
   'self-doubt': selfDoubtQuiz as QuizData,
+  'procrastination': procrastinationQuiz as QuizData,
 };
 
 export default function QuizPage() {

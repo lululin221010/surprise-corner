@@ -98,7 +98,7 @@ const QUIZZES = [
     title: '你為什麼拖延？',
     description: '完美主義、恐懼失敗、還是根本不想做——原因不同解法不同。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#84cc16',
   },
   {
