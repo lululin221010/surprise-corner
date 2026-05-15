@@ -89,7 +89,7 @@ const QUIZZES = [
     title: '你有多在乎別人怎麼看你？',
     description: '社會輿論綁架測驗——臉面、眼光與你的日常決策。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#a855f7',
   },
   {
