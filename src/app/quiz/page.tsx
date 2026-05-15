@@ -140,6 +140,35 @@ export default function QuizListPage() {
           </p>
         </div>
 
+        {/* 引導測驗入口 */}
+        <Link href="/quiz/intro" style={{ textDecoration: 'none', display: 'block', marginBottom: '2.5rem' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(236,72,153,0.1))',
+            border: '1px solid rgba(139,92,246,0.4)',
+            borderRadius: '20px', padding: '2rem',
+            transition: 'transform 0.2s',
+          }}
+            onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
+            onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
+              <span style={{ fontSize: '2rem' }}>🧭</span>
+              <div>
+                <div style={{ fontSize: '0.65rem', color: '#8b5cf6', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>
+                  先從這裡開始
+                </div>
+                <h2 style={{ color: '#f0eeff', fontWeight: 900, fontSize: '1.1rem', margin: 0 }}>
+                  你的心理盲點在哪裡？
+                </h2>
+              </div>
+            </div>
+            <p style={{ color: '#7a788e', fontSize: '0.85rem', lineHeight: 1.65, margin: '0 0 1rem' }}>
+              不是線性問卷，是一條會分叉的路——你的答案決定你走哪條路，最後推薦最適合你的深入測驗。
+            </p>
+            <span style={{ color: '#a855f7', fontWeight: 700, fontSize: '0.88rem' }}>找出我的盲點 →</span>
+          </div>
+        </Link>
+
         {/* 已上線 */}
         {ready.length > 0 && (
           <>

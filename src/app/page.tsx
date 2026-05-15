@@ -413,6 +413,7 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
         {/* ── 今日測驗 CTA（每日輪換）── */}
         {(() => {
           const FEATURED = [
+            { slug: 'intro', emoji: '🧭', title: '你的心理盲點在哪裡？', desc: '不是線性問卷，是一條會分叉的路——你的答案決定你走哪條路。', color: '#a855f7' },
             { slug: 'attachment', emoji: '🔗', title: '你的依附類型是哪一種？', desc: '不是測你愛不愛人，是測你怎麼在親密裡生存。', color: '#ec4899' },
           ];
           const quiz = FEATURED[getDayOfYear() % FEATURED.length];

@@ -1,0 +1,235 @@
+{
+  "slug": "intro",
+  "title": "你的心理盲點在哪裡？",
+  "description": "不是選擇題，是一條會分叉的路。你的答案決定你走哪條路，每個人看到的題目都不一樣。",
+  "emoji": "🧭",
+  "start": "q1",
+  "questions": {
+    "q1": {
+      "q": "最近讓你最消耗的，是哪一種感覺？",
+      "options": [
+        { "text": "跟某個人之間說不清楚的拉扯", "next": "q_rel_1" },
+        { "text": "腦子裡一直在評判自己", "next": "q_self_1" },
+        { "text": "不知道別人怎麼看我、很在意", "next": "q_ext_1" },
+        { "text": "覺得人讓人失望，很難再相信", "next": "q_trust_1" }
+      ]
+    },
+
+    "q_rel_1": {
+      "q": "那個「拉扯」，最像哪種感覺？",
+      "options": [
+        { "text": "我需要更多確認，但又怕說出來", "next": "q_rel_2a" },
+        { "text": "我想靠近，但靠近了又想逃", "next": "q_rel_2b" }
+      ]
+    },
+    "q_rel_2a": {
+      "q": "對方沒回訊息，你的第一反應通常是？",
+      "options": [
+        { "text": "開始想是不是說錯了什麼", "next": "result_anxious_attach" },
+        { "text": "知道自己在擔心，但說不清楚為什麼", "next": "result_family_rel" }
+      ]
+    },
+    "q_rel_2b": {
+      "q": "你通常在什麼時候開始想「離開」？",
+      "options": [
+        { "text": "對方太靠近、太需要我", "next": "result_avoidant_attach" },
+        { "text": "不確定，有時候完全相反", "next": "result_disorganized_attach" }
+      ]
+    },
+
+    "q_self_1": {
+      "q": "那個「評判自己」的聲音，主要在說什麼？",
+      "options": [
+        { "text": "你不夠好、你做得不夠、你讓人失望", "next": "q_self_2a" },
+        { "text": "你的感受不重要、不要這樣、振作", "next": "q_self_2b" }
+      ]
+    },
+    "q_self_2a": {
+      "q": "這個「不夠好」的感覺，什麼時候最強烈？",
+      "options": [
+        { "text": "做錯事的時候，或覺得被人評判的時候", "next": "result_self_doubt" },
+        { "text": "達到了目標之後，反而更空", "next": "result_self_drain" }
+      ]
+    },
+    "q_self_2b": {
+      "q": "當你很難過但還是告訴自己「沒事」，你通常下一步是？",
+      "options": [
+        { "text": "繼續撐著，直到某天爆炸", "next": "result_self_drain" },
+        { "text": "找一件事讓自己忙起來，不去感覺", "next": "result_defense" }
+      ]
+    },
+
+    "q_ext_1": {
+      "q": "「在意別人怎麼看」，最讓你困擾的是哪種？",
+      "options": [
+        { "text": "做決定前會先想「他們會怎麼說」", "next": "q_ext_2a" },
+        { "text": "事情出問題了，很難承認是自己的問題", "next": "q_ext_2b" }
+      ]
+    },
+    "q_ext_2a": {
+      "q": "如果你做了一個別人都不認同的決定，你會？",
+      "options": [
+        { "text": "很難不解釋、不辯護、不尋求認可", "next": "result_social_pressure" },
+        { "text": "表面不在意，但心裡一直記著", "next": "result_social_passive" }
+      ]
+    },
+    "q_ext_2b": {
+      "q": "某件事出了問題，你的第一個念頭是？",
+      "options": [
+        { "text": "先想誰造成的，通常不是我", "next": "result_never_wrong" },
+        { "text": "可能是我的問題，但說出來很難", "next": "result_social_pressure" }
+      ]
+    },
+
+    "q_trust_1": {
+      "q": "「覺得人讓人失望」，你的版本比較像？",
+      "options": [
+        { "text": "有過幾次之後，現在很難完全相信人", "next": "q_trust_2a" },
+        { "text": "我其實還是很相信人，但一直被辜負", "next": "q_trust_2b" }
+      ]
+    },
+    "q_trust_2a": {
+      "q": "現在的你，對「靠近別人」的感覺是？",
+      "options": [
+        { "text": "有防備，會等看清楚了才給信任", "next": "result_no_good_people" },
+        { "text": "不確定，有時想靠近，有時又很排斥", "next": "result_disorganized_trust" }
+      ]
+    },
+    "q_trust_2b": {
+      "q": "你知道某個人對你不好，但還是繼續——這個情況發生過嗎？",
+      "options": [
+        { "text": "有，我覺得他們只是還沒理解我的好", "next": "result_only_good_people" },
+        { "text": "有，但我不知道為什麼停不下來", "next": "result_family_trust" }
+      ]
+    }
+  },
+
+  "results": {
+    "result_anxious_attach": {
+      "title": "你的盲點：焦慮型關係模式",
+      "label": "你把對方的回應當成自己存在的證明",
+      "body": "你非常善於感知對方的細微變化，但這個能力也讓你很容易把「對方在忙」解讀成「對方在遠離我」。你需要的確認，其實比任何人給得了你的都多——因為那個不安來自比這段關係更早的地方。",
+      "recommended": [
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "全面了解你在親密關係裡的模式" },
+        { "slug": "family-wounds", "emoji": "🏚", "title": "你從原生家庭帶走了什麼？", "why": "找到那個「更早的地方」" }
+      ]
+    },
+    "result_avoidant_attach": {
+      "title": "你的盲點：逃避型關係模式",
+      "label": "你不是不需要人，你只是太怕需要",
+      "body": "靠近讓你不舒服，不是因為你不在乎，是因為某些經驗讓你學到：需要人是危險的。所以你建了一道門，讓自己看起來獨立，但那道門也把真正的親密擋在外面了。",
+      "recommended": [
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "了解這個「門」從哪裡來" },
+        { "slug": "defense", "emoji": "🛡", "title": "你用哪種防禦機制保護自己？", "why": "探索你如何避開親密" }
+      ]
+    },
+    "result_disorganized_attach": {
+      "title": "你的盲點：混亂型關係模式",
+      "label": "你同時渴望和恐懼那個你最想要的東西",
+      "body": "你在關係裡很難有一個穩定的策略，因為你的系統裡有兩個互相矛盾的訊號——靠近是危險的，但不靠近更危險。這個矛盾不是你的問題，是某些很早的經歷留下的東西。",
+      "recommended": [
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "理解你的矛盾從哪裡來" },
+        { "slug": "family-wounds", "emoji": "🏚", "title": "你從原生家庭帶走了什麼？", "why": "找到那兩個互相矛盾訊號的源頭" }
+      ]
+    },
+    "result_family_rel": {
+      "title": "你的盲點：原生家庭模式在關係裡重演",
+      "label": "你現在的某些反應，是很小的時候學會的",
+      "body": "你的擔心和不安不是「想太多」，是一種學來的應對方式。那個方式在你小時候可能是有用的，但它帶進現在的關係裡，讓你一直用舊地圖走新的路。",
+      "recommended": [
+        { "slug": "family-wounds", "emoji": "🏚", "title": "你從原生家庭帶走了什麼？", "why": "找到那張舊地圖" },
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "了解舊地圖怎麼影響現在的關係" }
+      ]
+    },
+    "result_self_doubt": {
+      "title": "你的盲點：內在批評者太大聲",
+      "label": "你對自己的評判標準，比你對任何人都嚴苛",
+      "body": "那個「你不夠好」的聲音說了太久，久到你開始以為那是事實。但那個聲音不是你，那是某些你接收到的訊息，在你腦子裡繼續運作。它是可以被辨認、被質疑的。",
+      "recommended": [
+        { "slug": "self-doubt", "emoji": "🌫", "title": "你的內在批評者有多大聲？", "why": "直接測量那個聲音的強度和來源" },
+        { "slug": "defense", "emoji": "🛡", "title": "你用哪種防禦機制保護自己？", "why": "了解你怎麼跟那個聲音共存" }
+      ]
+    },
+    "result_self_drain": {
+      "title": "你的盲點：自我內耗",
+      "label": "你消耗自己的方式，比任何外部壓力都更有效",
+      "body": "你很擅長撐著。問題是，你撐著的方式是把自己的感受押後、讓自己繼續動、告訴自己之後再說。「之後」永遠不來，然後有一天就崩了。",
+      "recommended": [
+        { "slug": "self-drain", "emoji": "🕳", "title": "你有多擅長把自己搞垮？", "why": "找出你具體的內耗模式" },
+        { "slug": "self-doubt", "emoji": "🌫", "title": "你的內在批評者有多大聲？", "why": "了解那個推著你撐下去的聲音" }
+      ]
+    },
+    "result_defense": {
+      "title": "你的盲點：防禦機制太自動",
+      "label": "你保護自己的方式，有時也把你關在裡面",
+      "body": "你很快就能讓自己「沒事了」，但那個「沒事了」的速度有點太快。你的系統很擅長轉移、覆蓋、繼續前進——但那些沒被感覺的事，並沒有真的消失。",
+      "recommended": [
+        { "slug": "defense", "emoji": "🛡", "title": "你用哪種防禦機制保護自己？", "why": "找出你最常用的那一種" },
+        { "slug": "self-drain", "emoji": "🕳", "title": "你有多擅長把自己搞垮？", "why": "了解這個模式的長期代價" }
+      ]
+    },
+    "result_social_pressure": {
+      "title": "你的盲點：社會眼光佔了太多空間",
+      "label": "別人的評價進入你決策的方式，比你知道的深",
+      "body": "你不是在乎別人本身，你是在乎自己在別人眼裡的樣子——那個「樣子」可能從很小的時候就開始被建構，現在已經成了你做每個選擇前自動在跑的程序。",
+      "recommended": [
+        { "slug": "social-pressure", "emoji": "👁", "title": "你有多在乎別人怎麼看你？", "why": "測量眼光對你的實際影響範圍" },
+        { "slug": "never-wrong", "emoji": "🔮", "title": "錯的永遠不是我？", "why": "了解自我保護和在意眼光的關係" }
+      ]
+    },
+    "result_social_passive": {
+      "title": "你的盲點：被動式迴避",
+      "label": "你表面不在意，但心裡的帳記得比任何人都清楚",
+      "body": "你學會了不讓別人看見你在意。但「不讓人看見」和「真的不在意」是兩件事——那些壓下去的在意，會在某些時刻以另一種形式出來。",
+      "recommended": [
+        { "slug": "social-pressure", "emoji": "👁", "title": "你有多在乎別人怎麼看你？", "why": "找出那個隱藏的「在意」" },
+        { "slug": "defense", "emoji": "🛡", "title": "你用哪種防禦機制保護自己？", "why": "了解你的迴避是哪一種" }
+      ]
+    },
+    "result_never_wrong": {
+      "title": "你的盲點：責任感盲區",
+      "label": "你保護自我感的方式，讓某些事很難真正解決",
+      "body": "不是說你壞，是說你的系統很善於找到「為什麼這不是我的問題」——這個能力保護了你，但它也讓某些關係和情況很難真正改變，因為改變的起點通常需要先承認一部分是自己造成的。",
+      "recommended": [
+        { "slug": "never-wrong", "emoji": "🔮", "title": "錯的永遠不是我？", "why": "正面測量責任感的邊界" },
+        { "slug": "defense", "emoji": "🛡", "title": "你用哪種防禦機制保護自己？", "why": "了解你的保護機制如何運作" }
+      ]
+    },
+    "result_no_good_people": {
+      "title": "你的盲點：信任創傷",
+      "label": "你的防備不是悲觀，是某些真實傷害留下的東西",
+      "body": "你不是天生就不相信人，是你相信了之後發生了某些事，讓你的系統決定：下次要更小心。那個決定保護了你，但它現在可能讓你把每個人都套進了那個舊框架裡。",
+      "recommended": [
+        { "slug": "no-good-people", "emoji": "🌑", "title": "你相信這世界有好人嗎？", "why": "測量你的信任創傷程度" },
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "了解不信任怎麼影響你的依附模式" }
+      ]
+    },
+    "result_only_good_people": {
+      "title": "你的盲點：天真型防禦",
+      "label": "你的善良有時候是一種你沒發現的迴避方式",
+      "body": "你很難相信人會是壞的，不完全是因為你樂觀，也可能是因為接受「有些人確實不好」這件事太痛——所以你的系統選擇繼續相信。那個信念保護了你的心，但也讓你在某些情況下保護不了自己。",
+      "recommended": [
+        { "slug": "only-good-people", "emoji": "🌸", "title": "你是不是太相信這世界的好？", "why": "探索天真型防禦機制" },
+        { "slug": "defense", "emoji": "🛡", "title": "你用哪種防禦機制保護自己？", "why": "了解你的善良是不是一種迴避" }
+      ]
+    },
+    "result_disorganized_trust": {
+      "title": "你的盲點：混亂的信任模式",
+      "label": "你對人的感覺太矛盾，讓你很難知道該不該靠近",
+      "body": "你不是「難相處」，你是同時帶著「想相信」和「不敢相信」在跟人互動。這兩個聲音來自不同的地方，在你做決定之前就先吵起來了。",
+      "recommended": [
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "了解混亂信任模式的依附根源" },
+        { "slug": "family-wounds", "emoji": "🏚", "title": "你從原生家庭帶走了什麼？", "why": "找到那兩個聲音各自從哪裡來" }
+      ]
+    },
+    "result_family_trust": {
+      "title": "你的盲點：重複性關係模式",
+      "label": "你知道某些關係對你不好，但有一個比理智更強的力量讓你留著",
+      "body": "這不是軟弱，是一種熟悉感的引力。你的系統把某種「不舒服的感覺」認識成愛或關係的樣子，所以當一段關係讓你有那種感覺，它就覺得是對的——即使你的理智不這麼認為。",
+      "recommended": [
+        { "slug": "family-wounds", "emoji": "🏚", "title": "你從原生家庭帶走了什麼？", "why": "找到那個「熟悉感」的起點" },
+        { "slug": "attachment", "emoji": "🔗", "title": "你的依附類型是哪一種？", "why": "了解這個模式如何影響你選擇關係" }
+      ]
+    }
+  }
+}
