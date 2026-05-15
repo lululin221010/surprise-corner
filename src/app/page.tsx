@@ -498,7 +498,6 @@ export default function Home() {
             {[
               { label: '小遊戲', href: '/games' },
               { label: '互動牆', href: '/wall' },
-              { label: '角色聊天室', href: '/chat' },
               { label: '實用工具', href: '/tools' },
               { label: '🛒 小舖', href: 'https://still-time-corner.vercel.app', external: true },
             ].map(l => (
