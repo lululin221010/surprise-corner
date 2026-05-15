@@ -62,7 +62,7 @@ const QUIZZES = [
     title: '你相信這世界有好人嗎？',
     description: '信任創傷測驗——你對人的防備，是怎麼被養出來的。',
     time: '約 3 分鐘',
-    ready: false,
+    ready: true,
     color: '#7c3aed',
   },
   {
