@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
+import questionsRaw from '../data/daily-questions.json';
 
 type ColdEntry = {
   id: number;
@@ -13,6 +14,13 @@ type ColdEntry = {
 };
 
 const coldData = coldDataRaw as ColdEntry[];
+
+type DailyQuestion = { id: number; question: string; options: string[]; insight: string };
+const questionsData = questionsRaw as DailyQuestion[];
+
+function getTodayQuestion(): DailyQuestion {
+  return questionsData[getDayOfYear() % questionsData.length];
+}
 
 const LULU_QUOTES = [
   '喵。你今天看起來需要這個。',
@@ -187,6 +195,8 @@ function LuluBubble() {
 export default function Home() {
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
+  const [todayQuestion] = useState<DailyQuestion>(() => getTodayQuestion());
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
   const [heroOffset, setHeroOffset] = useState(0);
 
@@ -316,6 +326,50 @@ export default function Home() {
           ) : (
             <div style={{ textAlign: 'center', color: '#3d3b5a', padding: '3rem' }}>載入中…</div>
           )}
+        </section>
+
+        {/* ── 今日一問 ── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 0.92s ease 0.15s both' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
+            <span style={{ color: '#4a4868', fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              今日一問
+            </span>
+          </div>
+          <div style={{
+            background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(16px)',
+            borderRadius: '22px', padding: '2rem 2.2rem',
+            border: '1px solid rgba(236,72,153,0.25)',
+          }}>
+            <p style={{ color: '#f0eeff', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 1.4rem', lineHeight: 1.6 }}>
+              {todayQuestion.question}
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem', marginBottom: selectedOption !== null ? '1.4rem' : 0 }}>
+              {todayQuestion.options.map((opt, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedOption(i)}
+                  style={{
+                    textAlign: 'left', padding: '0.75rem 1.1rem',
+                    borderRadius: '12px', cursor: 'pointer', fontSize: '0.92rem',
+                    border: selectedOption === i ? '1px solid rgba(236,72,153,0.7)' : '1px solid rgba(255,255,255,0.12)',
+                    background: selectedOption === i ? 'rgba(236,72,153,0.15)' : 'rgba(255,255,255,0.04)',
+                    color: selectedOption === i ? '#f9a8d4' : '#c4b5fd',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+            {selectedOption !== null && (
+              <div style={{
+                borderTop: '1px solid rgba(236,72,153,0.2)', paddingTop: '1.2rem',
+                color: '#f9a8d4', fontSize: '0.87rem', fontStyle: 'italic', lineHeight: 1.7,
+              }}>
+                💗 {todayQuestion.insight}
+              </div>
+            )}
+          </div>
         </section>
 
         {/* ── 今日試讀 ── */}
