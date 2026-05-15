@@ -145,6 +145,33 @@ export default function QuizPage() {
             📚 {r.book}
           </div>
 
+          {/* 購書 CTA */}
+          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block', marginBottom: '2rem' }}>
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(236,72,153,0.08))',
+              border: '1px solid rgba(139,92,246,0.3)',
+              borderRadius: '16px', padding: '1.2rem 1.6rem',
+              display: 'flex', alignItems: 'center', gap: '1rem',
+              transition: 'border-color 0.2s',
+            }}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(139,92,246,0.6)')}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)')}
+            >
+              <div style={{ fontSize: '1.8rem', flexShrink: 0 }}>📖</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ color: '#c4b5fd', fontSize: '0.82rem', fontWeight: 700, marginBottom: '0.2rem' }}>
+                  想更深入了解自己？
+                </div>
+                <div style={{ color: '#7a6a9a', fontSize: '0.78rem', lineHeight: 1.5 }}>
+                  心理學電子書系列——讀完有被翻底的感覺
+                </div>
+              </div>
+              <div style={{ color: '#a855f7', fontSize: '0.82rem', fontWeight: 700, flexShrink: 0 }}>
+                看看 →
+              </div>
+            </div>
+          </a>
+
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button onClick={restart} style={{
               background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)',
