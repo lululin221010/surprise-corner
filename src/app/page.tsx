@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
-import questionsRaw from '../data/daily-questions.json';
 
 type ColdEntry = {
   id: number;
@@ -14,13 +13,6 @@ type ColdEntry = {
 };
 
 const coldData = coldDataRaw as ColdEntry[];
-
-type DailyQuestion = { id: number; question: string; options: string[]; insight: string };
-const questionsData = questionsRaw as DailyQuestion[];
-
-function getTodayQuestion(): DailyQuestion {
-  return questionsData[getDayOfYear() % questionsData.length];
-}
 
 const LULU_QUOTES = [
   '喵。你今天看起來需要這個。',
@@ -100,18 +92,6 @@ const CATEGORY_COLORS: Record<string, string> = {
   '睡眠科學': '#06b6d4',
   '行為經濟學': '#84cc16',
 };
-
-function getPercents(questionId: number, optCount: number): number[] {
-  const seeds = Array.from({ length: optCount }, (_, i) => {
-    const x = Math.sin(questionId * 9301 + i * 49297 + 233) * 10000;
-    const raw = Math.abs(x - Math.floor(x));
-    return 15 + Math.round(raw * 45);
-  });
-  const total = seeds.reduce((a, b) => a + b, 0);
-  const percents = seeds.map(s => Math.round(s / total * 100));
-  percents[0] += 100 - percents.reduce((a, b) => a + b, 0);
-  return percents;
-}
 
 function getDayOfYear(): number {
   const start = new Date(new Date().getFullYear(), 0, 0);
@@ -207,9 +187,7 @@ function LuluBubble() {
 export default function Home() {
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
-  const [todayQuestion] = useState<DailyQuestion>(() => getTodayQuestion());
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [quoteIdx, setQuoteIdx] = useState(0);
+const [quoteIdx, setQuoteIdx] = useState(0);
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
   const [heroOffset, setHeroOffset] = useState(0);
 
@@ -346,85 +324,6 @@ export default function Home() {
           )}
         </section>
 
-        {/* ── 今日一問 ── */}
-        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 0.92s ease 0.15s both' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
-            <span style={{ color: '#4a4868', fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-              今日一問
-            </span>
-          </div>
-          <div style={{
-            background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(16px)',
-            borderRadius: '22px', padding: '2rem 2.2rem',
-            border: '1px solid rgba(236,72,153,0.25)',
-          }}>
-            <p style={{ color: '#f0eeff', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 1.4rem', lineHeight: 1.6 }}>
-              {todayQuestion.question}
-            </p>
-            {(() => {
-              const percents = getPercents(todayQuestion.id, todayQuestion.options.length);
-              return (
-                <>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem', marginBottom: '1.4rem' }}>
-                    {todayQuestion.options.map((opt, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedOption(i)}
-                        style={{
-                          textAlign: 'left', padding: '0.75rem 1.1rem',
-                          borderRadius: '12px', cursor: 'pointer', fontSize: '0.92rem',
-                          border: selectedOption === i ? '1px solid rgba(236,72,153,0.7)' : '1px solid rgba(255,255,255,0.12)',
-                          background: selectedOption === i ? 'rgba(236,72,153,0.15)' : 'rgba(255,255,255,0.04)',
-                          color: selectedOption === i ? '#f9a8d4' : '#c4b5fd',
-                          transition: 'all 0.2s ease',
-                          position: 'relative', overflow: 'hidden',
-                        }}
-                      >
-                        {selectedOption !== null && (
-                          <div style={{
-                            position: 'absolute', left: 0, top: 0, bottom: 0,
-                            width: `${percents[i]}%`,
-                            background: selectedOption === i ? 'rgba(236,72,153,0.12)' : 'rgba(255,255,255,0.04)',
-                            transition: 'width 0.6s ease',
-                            borderRadius: '12px',
-                          }} />
-                        )}
-                        <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span>{opt}</span>
-                          {selectedOption !== null && (
-                            <span style={{ fontSize: '0.78rem', fontWeight: 700, opacity: 0.75, marginLeft: '0.8rem', whiteSpace: 'nowrap' }}>
-                              {percents[i]}%
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                  {selectedOption === null && (
-                    <div style={{ textAlign: 'center', color: '#4a3d6a', fontSize: '0.74rem', letterSpacing: '0.04em', marginTop: '-0.5rem', marginBottom: '0.4rem' }}>
-                      選一個，看看你和多少人一樣
-                    </div>
-                  )}
-                  {selectedOption !== null && (
-                    <div style={{
-                      borderTop: '1px solid rgba(236,72,153,0.2)', paddingTop: '1.2rem',
-                      color: '#f9a8d4', fontSize: '0.87rem', fontStyle: 'italic', lineHeight: 1.7,
-                    }}>
-                      💗 {todayQuestion.insight}
-                      <div style={{ marginTop: '0.5rem', color: '#6b5a7a', fontSize: '0.75rem', fontStyle: 'normal' }}>
-                        {percents[selectedOption] >= 40
-                          ? `${percents[selectedOption]}% 的人跟你選一樣`
-                          : percents[selectedOption] <= 20
-                          ? `只有 ${percents[selectedOption]}% 的人選這個`
-                          : `${percents[selectedOption]}% 的人也這樣選`}
-                      </div>
-                    </div>
-                  )}
-                </>
-              );
-            })()}
-          </div>
-        </section>
 
         {/* ── 今日試讀 ── */}
         {todayPreview && (
