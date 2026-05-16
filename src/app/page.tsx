@@ -1,7 +1,9 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
+
+const StarCanvas = lazy(() => import('../components/StarCanvas'));
 
 type ColdEntry = {
   id: number;
@@ -15,12 +17,11 @@ type ColdEntry = {
 const coldData = coldDataRaw as ColdEntry[];
 
 const LULU_QUOTES = [
-  '喵。你今天看起來需要這個。',
-  '我一天睡十六小時。這不是懶，這是智慧。',
-  '人類真奇怪。花一輩子找自己，我一出生就知道。',
-  '我不需要心理學，我就是答案。',
-  '（盯著你看三秒）……喵。',
-  '你在看我嗎？我也在看你。',
+  '今天又來了，你果然沒辦法抵抗好奇心。',
+  '貓咪說：你知道的太少了。',
+  '每天一個冷知識，讓你在朋友面前很厲害。',
+  '不看你會後悔的，我說的。',
+  '驚喜已備好，就等你了。',
 ];
 
 const BOOK_PREVIEWS = [
@@ -92,92 +93,16 @@ function getTodayPreview() {
   return BOOK_PREVIEWS[slot % BOOK_PREVIEWS.length];
 }
 
-function Particles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[] = [];
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        size: Math.random() * 2 + 0.5,
-        opacity: Math.random() * 0.6 + 0.2,
-      });
-    }
-    let animId: number;
-    function draw() {
-      if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(196,181,253,${p.opacity})`;
-        ctx.fill();
-      });
-      animId = requestAnimationFrame(draw);
-    }
-    draw();
-    const onResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-    window.addEventListener('resize', onResize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', onResize); };
-  }, []);
-  return (
-    <canvas ref={canvasRef} style={{
-      position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-      pointerEvents: 'none', zIndex: 0,
-    }} />
-  );
-}
-
-function LuluBubble() {
-  const [idx, setIdx] = useState(0);
-  const [visible, setVisible] = useState(true);
-  useEffect(() => {
-    const t = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => { setIdx(i => (i + 1) % LULU_QUOTES.length); setVisible(true); }, 400);
-    }, 5000);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <div style={{
-      display: 'inline-flex', alignItems: 'center', gap: '10px',
-      background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.35)',
-      borderRadius: '24px', padding: '10px 20px',
-      opacity: visible ? 1 : 0, transition: 'opacity 0.4s ease',
-      maxWidth: '360px',
-    }}>
-      <span style={{ fontSize: '1.3rem', flexShrink: 0 }}>🐱</span>
-      <span style={{ color: '#c4b5fd', fontSize: '0.87rem', fontStyle: 'italic', lineHeight: 1.5 }}>
-        {LULU_QUOTES[idx]}
-      </span>
-    </div>
-  );
-}
-
 export default function Home() {
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
-const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
-  const [heroOffset, setHeroOffset] = useState(0);
+  const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
+  const [luruIdx, setLuruIdx] = useState(0);
+  const [bubbleVisible, setBubbleVisible] = useState(true);
 
   useEffect(() => {
     setTodayEntry(getCurrentHourEntry());
     setTodayPreview(getTodayPreview());
-    // 每小時整點自動更新
     const now = new Date();
     const msToNextHour = (60 - now.getMinutes()) * 60000 - now.getSeconds() * 1000;
     const timeout = setTimeout(() => {
@@ -194,12 +119,13 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
       .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => setHeroOffset(window.scrollY * 0.25);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
+  function handleLuruClick() {
+    setBubbleVisible(false);
+    setTimeout(() => {
+      setLuruIdx(i => (i + 1) % LULU_QUOTES.length);
+      setBubbleVisible(true);
+    }, 180);
+  }
 
   const catColor = todayEntry ? (CATEGORY_COLORS[todayEntry.category] || '#8b5cf6') : '#8b5cf6';
 
@@ -212,7 +138,11 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
       <style>{`
         @keyframes fadeInUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes ruruFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
         @keyframes softGlow { 0%,100%{box-shadow:0 0 24px rgba(124,58,237,0.15)} 50%{box-shadow:0 0 48px rgba(124,58,237,0.4)} }
+        @keyframes bounceArrow { 0%,100%{transform:translateY(0);opacity:0.28} 50%{transform:translateY(5px);opacity:0.5} }
+        .ruru-float { animation: ruruFloat 3.2s ease-in-out infinite; display: inline-block; }
+        .bounce-arrow { animation: bounceArrow 1.6s ease-in-out infinite; display: inline-block; }
         .book-card { transition: transform 0.3s ease, border-color 0.3s ease; }
         .book-card:hover { transform: translateY(-5px); }
         .news-card { transition: transform 0.25s ease; }
@@ -221,36 +151,179 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
         .footer-link:hover { color: #8b5cf6; }
       `}</style>
 
-      <Particles />
-
       <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── HERO ── */}
-        <header style={{
-          textAlign: 'center',
-          padding: '5rem 1rem 3.5rem',
-          transform: `translateY(${heroOffset}px)`,
-          animation: 'fadeInUp 0.8s ease',
-        }}>
-          <div style={{ fontSize: '0.75rem', letterSpacing: '0.22em', color: '#5a5878', marginBottom: '0.8rem', textTransform: 'uppercase' }}>
-            盧林 · 有的沒的小舖
-          </div>
-          <h1 style={{
-            fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 900, margin: '0 0 0.6rem',
-            background: 'linear-gradient(135deg, #fff 0%, #c4b5fd 55%, #f0abfc 100%)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            letterSpacing: '-0.02em', lineHeight: 1.15,
+        <section style={{ position: 'relative', height: '100vh', minHeight: '600px', background: '#0d0820', overflow: 'hidden' }}>
+          <Suspense fallback={null}>
+            <StarCanvas />
+          </Suspense>
+
+          {/* 中央內容 */}
+          <div style={{
+            position: 'relative',
+            zIndex: 10,
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
-            盧林的電子書角落
-          </h1>
-          <p style={{ color: '#7c7a9e', fontSize: '0.95rem', marginBottom: '2rem' }}>
-            每天一個冷知識，每一本書都是更深的答案
-          </p>
-          <LuluBubble />
-        </header>
+            {/* 魯魯照片球 */}
+            <div style={{ position: 'relative', marginBottom: '32px' }}>
+              {/* 說話泡泡 */}
+              <div style={{
+                position: 'absolute',
+                bottom: 'calc(100% + 14px)',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'rgba(255,255,255,0.93)',
+                color: '#3b0764',
+                padding: '9px 16px',
+                borderRadius: '18px',
+                fontSize: '13px',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+                opacity: bubbleVisible ? 1 : 0,
+                transition: 'opacity 0.15s ease',
+                pointerEvents: 'none',
+                letterSpacing: '0.02em',
+              }}>
+                {LULU_QUOTES[luruIdx]}
+                <span style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 0,
+                  height: 0,
+                  borderLeft: '7px solid transparent',
+                  borderRight: '7px solid transparent',
+                  borderTop: '9px solid rgba(255,255,255,0.93)',
+                  display: 'block',
+                }} />
+              </div>
+
+              {/* 浮動容器 */}
+              <div className="ruru-float">
+                <button
+                  onClick={handleLuruClick}
+                  style={{
+                    width: '90px',
+                    height: '90px',
+                    borderRadius: '50%',
+                    border: '3px solid rgba(168,85,247,0.55)',
+                    boxShadow: '0 0 32px rgba(168,85,247,0.55), 0 0 64px rgba(88,28,135,0.35)',
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                    padding: 0,
+                    background: 'none',
+                    transition: 'filter 0.15s ease',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.filter = 'brightness(1.3) drop-shadow(0 0 18px rgba(168,85,247,0.9))';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.filter = '';
+                  }}
+                  title="點我讓魯魯說話"
+                >
+                  <img
+                    src="/images/lulu.jpg"
+                    alt="魯魯"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </button>
+              </div>
+            </div>
+
+            {/* 一句話 */}
+            <p style={{
+              color: 'rgba(255,255,255,0.88)',
+              fontSize: 'clamp(15px, 2.8vw, 21px)',
+              fontWeight: 300,
+              letterSpacing: '0.18em',
+              marginBottom: '36px',
+              textShadow: '0 2px 14px rgba(168,85,247,0.5)',
+            }}>
+              每天一個讓你想傳給朋友的驚喜
+            </p>
+
+            {/* 兩個按鈕 */}
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a
+                href="#gifts"
+                style={{
+                  background: 'linear-gradient(135deg, #7c50ee, #9333ea)',
+                  color: '#fff',
+                  padding: '13px 30px',
+                  borderRadius: '50px',
+                  fontWeight: 700,
+                  fontSize: '15px',
+                  textDecoration: 'none',
+                  boxShadow: '0 4px 22px rgba(124,80,238,0.55)',
+                  border: '1px solid rgba(167,139,250,0.3)',
+                  letterSpacing: '0.05em',
+                  display: 'inline-block',
+                  transition: 'filter 0.15s ease',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.15)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.filter = ''; }}
+              >
+                ✦ 看今天的驚喜
+              </a>
+              <a
+                href="/digital"
+                style={{
+                  background: 'rgba(168,85,247,0.12)',
+                  color: 'rgba(216,180,254,0.92)',
+                  padding: '13px 30px',
+                  borderRadius: '50px',
+                  fontWeight: 600,
+                  fontSize: '15px',
+                  textDecoration: 'none',
+                  border: '1px solid rgba(168,85,247,0.45)',
+                  letterSpacing: '0.05em',
+                  display: 'inline-block',
+                  transition: 'background 0.15s ease, border-color 0.15s ease',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.background = 'rgba(168,85,247,0.25)';
+                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(168,85,247,0.8)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.background = 'rgba(168,85,247,0.12)';
+                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(168,85,247,0.45)';
+                }}
+              >
+                逛電子書 📚
+              </a>
+            </div>
+
+            {/* 向下提示 */}
+            <div style={{
+              position: 'absolute',
+              bottom: '28px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              color: 'rgba(255,255,255,0.28)',
+              fontSize: '11px',
+              letterSpacing: '0.22em',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '3px',
+              pointerEvents: 'none',
+            }}>
+              <span>SCROLL</span>
+              <span className="bounce-arrow">↓</span>
+            </div>
+          </div>
+        </section>
 
         {/* ── 今日冷知識 ── */}
-        <section style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '0 1.2rem', animation: 'fadeInUp 0.9s ease 0.12s both' }}>
+        <section id="gifts" style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '3rem 1.2rem 0', animation: 'fadeInUp 0.9s ease 0.12s both' }}>
           {todayEntry ? (
             <div style={{
               background: 'rgba(255,255,255,0.055)', backdropFilter: 'blur(20px)',
@@ -292,8 +365,8 @@ const [aiNews, setAiNews] = useState<{ title: string; description: string; link:
                 display: 'inline-block', color: '#4a4868', fontSize: '0.78rem',
                 textDecoration: 'none', transition: 'color 0.2s',
               }}
-                onMouseEnter={e => (e.currentTarget.style.color = catColor)}
-                onMouseLeave={e => (e.currentTarget.style.color = '#4a4868')}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = catColor)}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#4a4868')}
               >
                 💬 有話想說？去互動牆
               </Link>
