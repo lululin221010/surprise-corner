@@ -284,11 +284,11 @@ export default function Home() {
                 <button
                   onClick={handleLuruClick}
                   style={{
-                    width: '90px',
-                    height: '90px',
+                    width: '140px',
+                    height: '140px',
                     borderRadius: '50%',
                     border: '3px solid rgba(168,85,247,0.55)',
-                    boxShadow: '0 0 32px rgba(168,85,247,0.55), 0 0 64px rgba(88,28,135,0.35)',
+                    boxShadow: '0 0 40px rgba(168,85,247,0.6), 0 0 80px rgba(88,28,135,0.4)',
                     cursor: 'pointer',
                     overflow: 'hidden',
                     padding: 0,
@@ -395,6 +395,54 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── 首屏正下方：冷知識快覽條 ── */}
+        {todayEntry && (
+          <div style={{
+            background: 'linear-gradient(135deg, #160c2e, #0d0820)',
+            borderBottom: '1px solid rgba(168,85,247,0.18)',
+            padding: '20px 24px',
+          }}>
+            <div style={{
+              maxWidth: '680px',
+              margin: '0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}>
+              <span style={{
+                background: `${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}1a`,
+                border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}55`,
+                color: CATEGORY_COLORS[todayEntry.category] || '#8b5cf6',
+                borderRadius: '20px',
+                padding: '3px 12px',
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                letterSpacing: '0.04em',
+                flexShrink: 0,
+              }}>🧠 {todayEntry.category}</span>
+              <p style={{
+                color: 'rgba(255,255,255,0.78)',
+                fontSize: '13px',
+                margin: 0,
+                lineHeight: 1.6,
+                flex: 1,
+                minWidth: '200px',
+              }}>
+                {todayEntry.text.length > 60 ? todayEntry.text.slice(0, 60) + '…' : todayEntry.text}
+              </p>
+              <a href="#gifts" style={{
+                color: 'rgba(168,85,247,0.85)',
+                fontSize: '12px',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+              }}>看完整 ↓</a>
+            </div>
+          </div>
+        )}
 
         {/* ── 今日冷知識 ── */}
         <section id="gifts" style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '3rem 1.2rem 0', animation: 'fadeInUp 0.9s ease 0.12s both' }}>
