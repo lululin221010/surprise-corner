@@ -244,43 +244,9 @@ export default function Home() {
             justifyContent: 'center',
           }}>
             {/* 魯魯照片球 */}
-            <div style={{ position: 'relative', marginBottom: '32px' }}>
-              {/* 說話泡泡 */}
-              <div style={{
-                position: 'absolute',
-                bottom: 'calc(100% + 14px)',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                background: 'rgba(255,255,255,0.93)',
-                color: '#3b0764',
-                padding: '9px 16px',
-                borderRadius: '18px',
-                fontSize: '13px',
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
-                opacity: bubbleVisible ? 1 : 0,
-                transition: 'opacity 0.15s ease',
-                pointerEvents: 'none',
-                letterSpacing: '0.02em',
-              }}>
-                {todayPair[luruIdx]}
-                <span style={{
-                  position: 'absolute',
-                  top: '100%',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: 0,
-                  height: 0,
-                  borderLeft: '7px solid transparent',
-                  borderRight: '7px solid transparent',
-                  borderTop: '9px solid rgba(255,255,255,0.93)',
-                  display: 'block',
-                }} />
-              </div>
-
-              {/* 浮動容器 */}
-              <div className="ruru-float">
+            <div style={{ marginBottom: '32px' }}>
+              {/* 球 + 泡泡一起浮動 */}
+              <div className="ruru-float" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <button
                   onClick={handleLuruClick}
                   style={{
@@ -309,6 +275,38 @@ export default function Home() {
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
                 </button>
+                {/* 說話泡泡 — 球正下方，箭頭朝上 */}
+                <div style={{
+                  marginTop: '14px',
+                  background: 'rgba(255,255,255,0.93)',
+                  color: '#3b0764',
+                  padding: '9px 18px',
+                  borderRadius: '18px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  maxWidth: '240px',
+                  textAlign: 'center',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+                  opacity: bubbleVisible ? 1 : 0,
+                  transition: 'opacity 0.15s ease',
+                  pointerEvents: 'none',
+                  letterSpacing: '0.02em',
+                  position: 'relative',
+                }}>
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: 0,
+                    height: 0,
+                    borderLeft: '7px solid transparent',
+                    borderRight: '7px solid transparent',
+                    borderBottom: '9px solid rgba(255,255,255,0.93)',
+                    display: 'block',
+                  }} />
+                  {todayPair[luruIdx]}
+                </div>
               </div>
             </div>
 
