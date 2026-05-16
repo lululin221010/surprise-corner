@@ -1,9 +1,10 @@
 'use client';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
 
-const StarCanvas = lazy(() => import('../components/StarCanvas'));
+const StarCanvas = dynamic(() => import('../components/StarCanvas'), { ssr: false });
 
 type ColdEntry = {
   id: number;
