@@ -310,24 +310,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 今日主題標籤 */}
-            {todayEntry && (
-              <div style={{ marginBottom: '18px' }}>
-                <span style={{
-                  background: `${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}22`,
-                  border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}66`,
-                  color: CATEGORY_COLORS[todayEntry.category] || '#c4b5fd',
-                  borderRadius: '30px',
-                  padding: '5px 16px',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  letterSpacing: '0.06em',
-                }}>
-                  今日主題：🧠 {todayEntry.category}
-                </span>
-              </div>
-            )}
-
             {/* 一句話 */}
             <p style={{
               color: 'rgba(255,255,255,0.92)',
