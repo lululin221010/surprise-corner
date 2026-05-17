@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
 import surprisesRaw from '../data/surprises.json';
+import featuredQuizRaw from '../data/featured-quiz.json';
 
 const StarCanvas = dynamic(() => import('../components/StarCanvas'), { ssr: false });
 
@@ -20,6 +21,9 @@ const coldData = coldDataRaw as ColdEntry[];
 
 type SurpriseEntry = { id: number; text: string; image?: string; caption?: string; date: string };
 const surprises = surprisesRaw as SurpriseEntry[];
+
+type FeaturedQuiz = { slug: string; title: string; desc: string };
+const featuredQuizzes = featuredQuizRaw as FeaturedQuiz[];
 
 const LULU_QUOTES = [
   // 好奇心系
@@ -176,20 +180,6 @@ export default function Home() {
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
   const [luruIdx, setLuruIdx] = useState(0);
   const [bubbleVisible, setBubbleVisible] = useState(true);
-  const [randomEntry, setRandomEntry] = useState<ColdEntry | null>(null);
-  const [surpriseEntry, setSurpriseEntry] = useState<SurpriseEntry | null>(null);
-
-  function drawRandom() {
-    const current = todayEntry?.id;
-    const pool = coldData.filter(e => e.id !== current);
-    setRandomEntry(pool[Math.floor(Math.random() * pool.length)]);
-  }
-
-  function drawSurprise() {
-    const current = surpriseEntry?.id;
-    const pool = surprises.length > 1 ? surprises.filter(s => s.id !== current) : surprises;
-    setSurpriseEntry(pool[Math.floor(Math.random() * pool.length)]);
-  }
 
   useEffect(() => {
     setTodayEntry(getCurrentEntry());
@@ -208,27 +198,24 @@ export default function Home() {
       .catch(() => {});
   }, []);
 
-  // 用日期當種子，每天固定抽 2 句，同一天永遠相同
-  const todayPair = (() => {
+  // 每天從不同位置開始，點擊往後循環，確保每天第一句不同
+  const luruStartIdx = (() => {
     const d = new Date();
     const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
-    const n = LULU_QUOTES.length;
-    const i1 = seed % n;
-    let i2 = (seed * 31 + 17) % n;
-    if (i2 === i1) i2 = (i2 + 1) % n;
-    return [LULU_QUOTES[i1], LULU_QUOTES[i2]];
+    return seed % LULU_QUOTES.length;
   })();
 
   function handleLuruClick() {
     setBubbleVisible(false);
     setTimeout(() => {
-      setLuruIdx(i => (i + 1) % 2);
+      setLuruIdx(i => i + 1);
       setBubbleVisible(true);
     }, 180);
   }
 
   const catColor = todayEntry ? (CATEGORY_COLORS[todayEntry.category] || '#8b5cf6') : '#8b5cf6';
-  const previewEntry = coldData[(getDayOfYear() * 7 + 13) % coldData.length];
+  const weekQuiz = featuredQuizzes[Math.floor(getDayOfYear() / 7) % featuredQuizzes.length];
+  const latestSurprise = surprises[surprises.length - 1];
 
   return (
     <main style={{
@@ -332,7 +319,7 @@ export default function Home() {
                     borderBottom: '9px solid rgba(255,255,255,0.93)',
                     display: 'block',
                   }} />
-                  {todayPair[luruIdx]}
+                  {LULU_QUOTES[(luruStartIdx + luruIdx) % LULU_QUOTES.length]}
                 </div>
               </div>
             </div>
@@ -380,29 +367,34 @@ export default function Home() {
               justifyContent: 'center', marginTop: '24px',
               maxWidth: '560px', width: '100%',
             }}>
-              {[
-                { emoji: '🎁', title: '今日驚喜', desc: '每天換一個，點了才知道', href: '/random', btn: '進入', color: '#a855f7' },
-                { emoji: '🧭', title: '最新測驗', desc: '測出你不知道的自己', href: '/quiz', btn: '測一測', color: '#ec4899' },
-                { emoji: '🧠', title: previewEntry.category, desc: previewEntry.text.slice(0, 36) + '…', href: '#gifts', btn: '看知識', color: CATEGORY_COLORS[previewEntry.category] || '#8b5cf6' },
-              ].map(card => (
-                <a key={card.title} href={card.href} style={{
-                  flex: '1 1 150px', minWidth: '140px', maxWidth: '175px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: `1px solid ${card.color}35`,
-                  borderRadius: '16px', padding: '1rem 0.8rem',
-                  textDecoration: 'none', display: 'flex',
-                  flexDirection: 'column', alignItems: 'center',
-                  gap: '5px', textAlign: 'center',
-                }}>
-                  <span style={{ fontSize: '1.4rem' }}>{card.emoji}</span>
-                  <span style={{ color: card.color, fontWeight: 700, fontSize: '0.85rem' }}>{card.title}</span>
-                  <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>{card.desc}</span>
-                  <span style={{
-                    marginTop: '4px', color: card.color, fontSize: '0.75rem', fontWeight: 600,
-                    border: `1px solid ${card.color}55`, borderRadius: '20px', padding: '3px 12px',
-                  }}>{card.btn} →</span>
+              {/* Card 1：隨手驚喜（最新一筆） */}
+              <a href="/random" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(168,85,247,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
+                {latestSurprise.image
+                  ? <img src={latestSurprise.image} alt="" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover' }} />
+                  : <span style={{ fontSize: '1.4rem' }}>✨</span>
+                }
+                <span style={{ color: '#a855f7', fontWeight: 700, fontSize: '0.85rem' }}>隨手驚喜</span>
+                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>{latestSurprise.text.slice(0, 28)}…</span>
+                <span style={{ marginTop: '4px', color: '#a855f7', fontSize: '0.75rem', fontWeight: 600, border: '1px solid rgba(168,85,247,0.55)', borderRadius: '20px', padding: '3px 12px' }}>進入 →</span>
+              </a>
+
+              {/* Card 2：本週測驗（週數輪換） */}
+              <a href={`/quiz/${weekQuiz.slug}`} style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(236,72,153,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
+                <span style={{ fontSize: '1.4rem' }}>🧭</span>
+                <span style={{ color: '#ec4899', fontWeight: 700, fontSize: '0.82rem', lineHeight: 1.3 }}>{weekQuiz.title}</span>
+                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>{weekQuiz.desc}</span>
+                <span style={{ marginTop: '4px', color: '#ec4899', fontSize: '0.75rem', fontWeight: 600, border: '1px solid rgba(236,72,153,0.55)', borderRadius: '20px', padding: '3px 12px' }}>測一測 →</span>
+              </a>
+
+              {/* Card 3：今日冷知識 */}
+              {todayEntry && (
+                <a href="#gifts" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}55`, borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
+                  <span style={{ fontSize: '1.4rem' }}>🧠</span>
+                  <span style={{ color: CATEGORY_COLORS[todayEntry.category] || '#8b5cf6', fontWeight: 700, fontSize: '0.85rem' }}>{todayEntry.category}</span>
+                  <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const }}>{todayEntry.text.slice(0, 40)}…</span>
+                  <span style={{ marginTop: '4px', color: CATEGORY_COLORS[todayEntry.category] || '#8b5cf6', fontSize: '0.75rem', fontWeight: 600, border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}55`, borderRadius: '20px', padding: '3px 12px' }}>看完整 →</span>
                 </a>
-              ))}
+              )}
             </div>
 
             {/* 向下提示 */}
@@ -426,53 +418,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 首屏正下方：冷知識快覽條 ── */}
-        {todayEntry && (
-          <div style={{
-            background: 'linear-gradient(135deg, #160c2e, #0d0820)',
-            borderBottom: '1px solid rgba(168,85,247,0.18)',
-            padding: '24px 24px 28px',
-          }}>
-            <div style={{
-              maxWidth: '680px',
-              margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '14px',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-            }}>
-              <span style={{
-                background: `${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}1a`,
-                border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}55`,
-                color: CATEGORY_COLORS[todayEntry.category] || '#8b5cf6',
-                borderRadius: '20px',
-                padding: '3px 12px',
-                fontSize: '0.72rem',
-                fontWeight: 700,
-                letterSpacing: '0.04em',
-                flexShrink: 0,
-              }}>🧠 {todayEntry.category}</span>
-              <p style={{
-                color: 'rgba(255,255,255,0.78)',
-                fontSize: '13px',
-                margin: 0,
-                lineHeight: 1.6,
-                flex: 1,
-                minWidth: '200px',
-              }}>
-                {todayEntry.text.length > 60 ? todayEntry.text.slice(0, 60) + '…' : todayEntry.text}
-              </p>
-              <a href="#gifts" style={{
-                color: 'rgba(168,85,247,0.85)',
-                fontSize: '12px',
-                textDecoration: 'none',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-              }}>看完整 ↓</a>
-            </div>
-          </div>
-        )}
 
         {/* ── 今日冷知識 ── */}
         <section id="gifts" style={{ maxWidth: '680px', margin: '0 auto 5rem', padding: '3rem 1.2rem 0', animation: 'fadeInUp 0.9s ease 0.12s both' }}>
@@ -528,116 +473,6 @@ export default function Home() {
           )}
         </section>
 
-        {/* ── 隨手驚喜 ── */}
-        <section style={{ maxWidth: '680px', margin: '0 auto 4rem', padding: '0 1.2rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
-            <span style={{ color: '#4a4868', fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>隨手驚喜</span>
-          </div>
-          {!surpriseEntry ? (
-            <div style={{ textAlign: 'center' }}>
-              <button
-                onClick={drawSurprise}
-                style={{
-                  background: 'rgba(168,85,247,0.1)',
-                  border: '1px dashed rgba(168,85,247,0.45)',
-                  color: '#c4b5fd', borderRadius: '50px',
-                  padding: '11px 28px', fontSize: '14px', fontWeight: 600,
-                  cursor: 'pointer', letterSpacing: '0.05em',
-                  transition: 'background 0.15s, border-color 0.15s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.2)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.1)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.45)'; }}
-              >
-                ✨ 來一個隨手驚喜
-              </button>
-            </div>
-          ) : (
-            <div style={{
-              background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(16px)',
-              borderRadius: '20px', overflow: 'hidden',
-              border: '1px solid rgba(168,85,247,0.25)',
-              animation: 'fadeInUp 0.4s ease both',
-            }}>
-              {surpriseEntry.image && (
-                <img
-                  src={surpriseEntry.image}
-                  alt={surpriseEntry.caption || '隨手驚喜'}
-                  style={{ width: '100%', maxHeight: '320px', objectFit: 'cover', display: 'block' }}
-                />
-              )}
-              <div style={{ padding: '1.5rem 1.8rem' }}>
-                {surpriseEntry.caption && (
-                  <div style={{ color: '#7c6fa0', fontSize: '0.74rem', marginBottom: '0.6rem', letterSpacing: '0.06em' }}>
-                    {surpriseEntry.caption} · {surpriseEntry.date}
-                  </div>
-                )}
-                <p style={{ fontSize: '0.96rem', lineHeight: 1.9, color: '#ddd8f0', margin: '0 0 1rem' }}>
-                  {surpriseEntry.text}
-                </p>
-                <button onClick={drawSurprise} style={{
-                  background: 'none', border: 'none', color: '#4a4868',
-                  fontSize: '0.78rem', cursor: 'pointer', padding: 0,
-                }}>再來一個 ↺</button>
-              </div>
-            </div>
-          )}
-        </section>
-
-        {/* ── 隨機冷知識 ── */}
-        <section style={{ maxWidth: '680px', margin: '0 auto 4rem', padding: '0 1.2rem', textAlign: 'center' }}>
-          {!randomEntry ? (
-            <button
-              onClick={drawRandom}
-              style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px dashed rgba(255,255,255,0.15)',
-                color: '#6b7280', borderRadius: '50px',
-                padding: '9px 22px', fontSize: '13px',
-                cursor: 'pointer', transition: 'background 0.15s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
-            >
-              🎲 再來一個冷知識
-            </button>
-          ) : (
-            <div style={{
-              background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(16px)',
-              borderRadius: '20px', padding: '1.8rem 2rem',
-              border: `1px solid ${CATEGORY_COLORS[randomEntry.category] || '#8b5cf6'}40`,
-              textAlign: 'left', animation: 'fadeInUp 0.4s ease both',
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
-                <span style={{
-                  background: `${CATEGORY_COLORS[randomEntry.category] || '#8b5cf6'}1a`,
-                  border: `1px solid ${CATEGORY_COLORS[randomEntry.category] || '#8b5cf6'}55`,
-                  color: CATEGORY_COLORS[randomEntry.category] || '#8b5cf6',
-                  borderRadius: '20px', padding: '3px 13px',
-                  fontSize: '0.74rem', fontWeight: 700,
-                }}>🎲 {randomEntry.category}</span>
-                <button onClick={drawRandom} style={{
-                  background: 'none', border: 'none', color: '#4a4868',
-                  fontSize: '0.78rem', cursor: 'pointer', padding: 0,
-                }}>再抽一次 ↺</button>
-              </div>
-              <p style={{ fontSize: '0.95rem', lineHeight: 1.9, color: '#ddd8f0', margin: 0 }}>
-                {randomEntry.text}
-              </p>
-              {randomEntry.lulu && (
-                <div style={{
-                  background: 'rgba(139,92,246,0.09)', border: '1px solid rgba(139,92,246,0.28)',
-                  borderRadius: '12px', padding: '0.75rem 1rem', marginTop: '1rem',
-                  display: 'flex', gap: '10px', alignItems: 'flex-start',
-                }}>
-                  <span style={{ flexShrink: 0 }}>🐱</span>
-                  <p style={{ color: '#c4b5fd', fontSize: '0.85rem', fontStyle: 'italic', margin: 0, lineHeight: 1.65 }}>
-                    {randomEntry.lulu}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-        </section>
 
         {/* ── 今日試讀 ── */}
         {todayPreview && (
