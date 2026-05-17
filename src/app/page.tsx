@@ -228,7 +228,7 @@ export default function Home() {
       <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── HERO ── */}
-        <section style={{ position: 'relative', height: '100vh', minHeight: '600px', background: '#0d0820', overflow: 'hidden' }}>
+        <section style={{ position: 'relative', height: '88vh', minHeight: '560px', background: '#0d0820', overflow: 'hidden' }}>
           <Suspense fallback={null}>
             <StarCanvas />
           </Suspense>
@@ -399,7 +399,7 @@ export default function Home() {
           <div style={{
             background: 'linear-gradient(135deg, #160c2e, #0d0820)',
             borderBottom: '1px solid rgba(168,85,247,0.18)',
-            padding: '20px 24px',
+            padding: '24px 24px 28px',
           }}>
             <div style={{
               maxWidth: '680px',
