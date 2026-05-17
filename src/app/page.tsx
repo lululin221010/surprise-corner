@@ -250,8 +250,8 @@ export default function Home() {
                 <button
                   onClick={handleLuruClick}
                   style={{
-                    width: '140px',
-                    height: '140px',
+                    width: '200px',
+                    height: '200px',
                     borderRadius: '50%',
                     border: '3px solid rgba(168,85,247,0.55)',
                     boxShadow: '0 0 40px rgba(168,85,247,0.6), 0 0 80px rgba(88,28,135,0.4)',
@@ -282,9 +282,9 @@ export default function Home() {
                   color: '#3b0764',
                   padding: '9px 18px',
                   borderRadius: '18px',
-                  fontSize: '13px',
+                  fontSize: '14px',
                   fontWeight: 600,
-                  maxWidth: '240px',
+                  maxWidth: '280px',
                   textAlign: 'center',
                   boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
                   opacity: bubbleVisible ? 1 : 0,
@@ -312,9 +312,9 @@ export default function Home() {
 
             {/* 一句話 */}
             <p style={{
-              color: 'rgba(255,255,255,0.88)',
-              fontSize: 'clamp(15px, 2.8vw, 21px)',
-              fontWeight: 300,
+              color: 'rgba(255,255,255,0.92)',
+              fontSize: 'clamp(16px, 3.2vw, 24px)',
+              fontWeight: 400,
               letterSpacing: '0.18em',
               marginBottom: '36px',
               textShadow: '0 2px 14px rgba(168,85,247,0.5)',
@@ -379,8 +379,8 @@ export default function Home() {
               bottom: '28px',
               left: '50%',
               transform: 'translateX(-50%)',
-              color: 'rgba(255,255,255,0.28)',
-              fontSize: '11px',
+              color: 'rgba(255,255,255,0.52)',
+              fontSize: '12px',
               letterSpacing: '0.22em',
               display: 'flex',
               flexDirection: 'column',
