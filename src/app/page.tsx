@@ -228,7 +228,7 @@ export default function Home() {
       <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── HERO ── */}
-        <section style={{ position: 'relative', height: '88vh', minHeight: '560px', background: '#0d0820', overflow: 'hidden' }}>
+        <section style={{ position: 'relative', height: '65vh', minHeight: '460px', background: '#0d0820', overflow: 'hidden' }}>
           <Suspense fallback={null}>
             <StarCanvas />
           </Suspense>
@@ -379,17 +379,17 @@ export default function Home() {
               bottom: '28px',
               left: '50%',
               transform: 'translateX(-50%)',
-              color: 'rgba(255,255,255,0.52)',
+              color: 'rgba(200,180,255,0.7)',
               fontSize: '12px',
-              letterSpacing: '0.22em',
+              letterSpacing: '0.1em',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '3px',
+              gap: '4px',
               pointerEvents: 'none',
             }}>
-              <span>SCROLL</span>
-              <span className="bounce-arrow">↓</span>
+              <span>🧠 今日冷知識在下方</span>
+              <span className="bounce-arrow" style={{ fontSize: '16px' }}>↓</span>
             </div>
           </div>
         </section>
