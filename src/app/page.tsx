@@ -146,9 +146,10 @@ function getDayOfYear(): number {
   return Math.floor((Date.now() - start.getTime()) / 86400000);
 }
 
-function getCurrentHourEntry(): ColdEntry {
-  const hourIndex = Math.floor(Date.now() / 3600000);
-  return coldData[hourIndex % coldData.length];
+function getCurrentEntry(): ColdEntry {
+  const d = new Date();
+  const slot = getDayOfYear() * 2 + (d.getHours() >= 6 && d.getHours() < 18 ? 0 : 1);
+  return coldData[slot % coldData.length];
 }
 
 function getTodayPreview() {
@@ -164,14 +165,18 @@ export default function Home() {
   const [bubbleVisible, setBubbleVisible] = useState(true);
 
   useEffect(() => {
-    setTodayEntry(getCurrentHourEntry());
+    setTodayEntry(getCurrentEntry());
     setTodayPreview(getTodayPreview());
     const now = new Date();
-    const msToNextHour = (60 - now.getMinutes()) * 60000 - now.getSeconds() * 1000;
+    const h = now.getHours();
+    const nextSlotHour = h < 6 ? 6 : h < 18 ? 18 : 30;
+    const next = new Date(now);
+    if (nextSlotHour === 30) { next.setDate(next.getDate() + 1); next.setHours(6, 0, 0, 0); }
+    else { next.setHours(nextSlotHour, 0, 0, 0); }
     const timeout = setTimeout(() => {
-      setTodayEntry(getCurrentHourEntry());
+      setTodayEntry(getCurrentEntry());
       setTodayPreview(getTodayPreview());
-    }, msToNextHour);
+    }, next.getTime() - now.getTime());
     return () => clearTimeout(timeout);
   }, []);
 
