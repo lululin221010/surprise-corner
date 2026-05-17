@@ -244,7 +244,7 @@ export default function Home() {
             justifyContent: 'center',
           }}>
             {/* 魯魯照片球 */}
-            <div style={{ marginBottom: '32px' }}>
+            <div style={{ marginBottom: '16px' }}>
               {/* 球 + 泡泡一起浮動 */}
               <div className="ruru-float" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <button
@@ -310,13 +310,31 @@ export default function Home() {
               </div>
             </div>
 
+            {/* 今日主題標籤 */}
+            {todayEntry && (
+              <div style={{ marginBottom: '18px' }}>
+                <span style={{
+                  background: `${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}22`,
+                  border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}66`,
+                  color: CATEGORY_COLORS[todayEntry.category] || '#c4b5fd',
+                  borderRadius: '30px',
+                  padding: '5px 16px',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  letterSpacing: '0.06em',
+                }}>
+                  今日主題：🧠 {todayEntry.category}
+                </span>
+              </div>
+            )}
+
             {/* 一句話 */}
             <p style={{
               color: 'rgba(255,255,255,0.92)',
               fontSize: 'clamp(16px, 3.2vw, 24px)',
               fontWeight: 400,
               letterSpacing: '0.18em',
-              marginBottom: '36px',
+              marginBottom: '18px',
               textShadow: '0 2px 14px rgba(168,85,247,0.5)',
             }}>
               每天一個讓你想傳給朋友的驚喜
@@ -343,33 +361,7 @@ export default function Home() {
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.15)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.filter = ''; }}
               >
-                ✦ 看今天的驚喜
-              </a>
-              <a
-                href="/digital"
-                style={{
-                  background: 'rgba(168,85,247,0.12)',
-                  color: 'rgba(216,180,254,0.92)',
-                  padding: '13px 30px',
-                  borderRadius: '50px',
-                  fontWeight: 600,
-                  fontSize: '15px',
-                  textDecoration: 'none',
-                  border: '1px solid rgba(168,85,247,0.45)',
-                  letterSpacing: '0.05em',
-                  display: 'inline-block',
-                  transition: 'background 0.15s ease, border-color 0.15s ease',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(168,85,247,0.25)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(168,85,247,0.8)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(168,85,247,0.12)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(168,85,247,0.45)';
-                }}
-              >
-                逛電子書 📚
+                今天這個你一定要看 ↓
               </a>
             </div>
 
