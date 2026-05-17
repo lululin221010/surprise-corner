@@ -97,6 +97,21 @@ export default function Navbar() {
         </Link>
       ))}
 
+      {/* 電子書外部連結 */}
+      <a
+        href="https://still-time-corner.vercel.app/digital"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          color: '#a78bfa',
+          textDecoration: 'none', padding: '0.4rem 1rem',
+          borderRadius: '20px', fontSize: '0.9rem', fontWeight: 600,
+          border: '1px solid rgba(167,139,250,0.35)',
+        }}
+      >
+        📖 電子書
+      </a>
+
       {/* ✅ 隱私權政策（靠右，小字）*/}
       <Link
         href="/privacy"

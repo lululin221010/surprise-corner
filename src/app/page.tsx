@@ -3,6 +3,7 @@ import { useEffect, useState, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
+import surprisesRaw from '../data/surprises.json';
 
 const StarCanvas = dynamic(() => import('../components/StarCanvas'), { ssr: false });
 
@@ -16,6 +17,9 @@ type ColdEntry = {
 };
 
 const coldData = coldDataRaw as ColdEntry[];
+
+type SurpriseEntry = { id: number; text: string; image?: string; caption?: string; date: string };
+const surprises = surprisesRaw as SurpriseEntry[];
 
 const LULU_QUOTES = [
   // 好奇心系
@@ -173,11 +177,18 @@ export default function Home() {
   const [luruIdx, setLuruIdx] = useState(0);
   const [bubbleVisible, setBubbleVisible] = useState(true);
   const [randomEntry, setRandomEntry] = useState<ColdEntry | null>(null);
+  const [surpriseEntry, setSurpriseEntry] = useState<SurpriseEntry | null>(null);
 
   function drawRandom() {
     const current = todayEntry?.id;
     const pool = coldData.filter(e => e.id !== current);
     setRandomEntry(pool[Math.floor(Math.random() * pool.length)]);
+  }
+
+  function drawSurprise() {
+    const current = surpriseEntry?.id;
+    const pool = surprises.length > 1 ? surprises.filter(s => s.id !== current) : surprises;
+    setSurpriseEntry(pool[Math.floor(Math.random() * pool.length)]);
   }
 
   useEffect(() => {
@@ -486,26 +497,76 @@ export default function Home() {
         </section>
 
         {/* ── 隨手驚喜 ── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 4rem', padding: '0 1.2rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
+            <span style={{ color: '#4a4868', fontSize: '0.78rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>隨手驚喜</span>
+          </div>
+          {!surpriseEntry ? (
+            <div style={{ textAlign: 'center' }}>
+              <button
+                onClick={drawSurprise}
+                style={{
+                  background: 'rgba(168,85,247,0.1)',
+                  border: '1px dashed rgba(168,85,247,0.45)',
+                  color: '#c4b5fd', borderRadius: '50px',
+                  padding: '11px 28px', fontSize: '14px', fontWeight: 600,
+                  cursor: 'pointer', letterSpacing: '0.05em',
+                  transition: 'background 0.15s, border-color 0.15s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.2)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.1)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.45)'; }}
+              >
+                ✨ 來一個隨手驚喜
+              </button>
+            </div>
+          ) : (
+            <div style={{
+              background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(16px)',
+              borderRadius: '20px', overflow: 'hidden',
+              border: '1px solid rgba(168,85,247,0.25)',
+              animation: 'fadeInUp 0.4s ease both',
+            }}>
+              {surpriseEntry.image && (
+                <img
+                  src={surpriseEntry.image}
+                  alt={surpriseEntry.caption || '隨手驚喜'}
+                  style={{ width: '100%', maxHeight: '320px', objectFit: 'cover', display: 'block' }}
+                />
+              )}
+              <div style={{ padding: '1.5rem 1.8rem' }}>
+                {surpriseEntry.caption && (
+                  <div style={{ color: '#7c6fa0', fontSize: '0.74rem', marginBottom: '0.6rem', letterSpacing: '0.06em' }}>
+                    {surpriseEntry.caption} · {surpriseEntry.date}
+                  </div>
+                )}
+                <p style={{ fontSize: '0.96rem', lineHeight: 1.9, color: '#ddd8f0', margin: '0 0 1rem' }}>
+                  {surpriseEntry.text}
+                </p>
+                <button onClick={drawSurprise} style={{
+                  background: 'none', border: 'none', color: '#4a4868',
+                  fontSize: '0.78rem', cursor: 'pointer', padding: 0,
+                }}>再來一個 ↺</button>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* ── 隨機冷知識 ── */}
         <section style={{ maxWidth: '680px', margin: '0 auto 4rem', padding: '0 1.2rem', textAlign: 'center' }}>
           {!randomEntry ? (
             <button
               onClick={drawRandom}
               style={{
-                background: 'rgba(168,85,247,0.1)',
-                border: '1px dashed rgba(168,85,247,0.45)',
-                color: '#c4b5fd',
-                borderRadius: '50px',
-                padding: '11px 28px',
-                fontSize: '14px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                letterSpacing: '0.05em',
-                transition: 'background 0.15s, border-color 0.15s',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px dashed rgba(255,255,255,0.15)',
+                color: '#6b7280', borderRadius: '50px',
+                padding: '9px 22px', fontSize: '13px',
+                cursor: 'pointer', transition: 'background 0.15s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.2)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.1)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.45)'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; }}
             >
-              🎲 再來一個驚喜
+              🎲 再來一個冷知識
             </button>
           ) : (
             <div style={{
