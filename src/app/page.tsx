@@ -228,6 +228,7 @@ export default function Home() {
   }
 
   const catColor = todayEntry ? (CATEGORY_COLORS[todayEntry.category] || '#8b5cf6') : '#8b5cf6';
+  const previewEntry = coldData[(getDayOfYear() * 7 + 13) % coldData.length];
 
   return (
     <main style={{
@@ -254,7 +255,7 @@ export default function Home() {
       <div style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── HERO ── */}
-        <section style={{ position: 'relative', height: '65vh', minHeight: '460px', background: '#0d0820', overflow: 'hidden' }}>
+        <section style={{ position: 'relative', minHeight: '560px', background: '#0d0820', overflow: 'hidden' }}>
           <Suspense fallback={null}>
             <StarCanvas />
           </Suspense>
@@ -263,11 +264,11 @@ export default function Home() {
           <div style={{
             position: 'relative',
             zIndex: 10,
-            height: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            padding: '52px 16px 88px',
           }}>
             {/* 魯魯照片球 */}
             <div style={{ marginBottom: '16px' }}>
@@ -276,8 +277,8 @@ export default function Home() {
                 <button
                   onClick={handleLuruClick}
                   style={{
-                    width: '200px',
-                    height: '200px',
+                    width: '280px',
+                    height: '280px',
                     borderRadius: '50%',
                     border: '3px solid rgba(168,85,247,0.55)',
                     boxShadow: '0 0 40px rgba(168,85,247,0.6), 0 0 80px rgba(88,28,135,0.4)',
@@ -371,6 +372,37 @@ export default function Home() {
               >
                 今天這個你一定要看 ↓
               </a>
+            </div>
+
+            {/* 三個內容預覽卡片 */}
+            <div style={{
+              display: 'flex', gap: '10px', flexWrap: 'wrap',
+              justifyContent: 'center', marginTop: '24px',
+              maxWidth: '560px', width: '100%',
+            }}>
+              {[
+                { emoji: '🎁', title: '今日驚喜', desc: '每天換一個，點了才知道', href: '/random', btn: '進入', color: '#a855f7' },
+                { emoji: '🧭', title: '最新測驗', desc: '測出你不知道的自己', href: '/quiz', btn: '測一測', color: '#ec4899' },
+                { emoji: '🧠', title: previewEntry.category, desc: previewEntry.text.slice(0, 36) + '…', href: '#gifts', btn: '看知識', color: CATEGORY_COLORS[previewEntry.category] || '#8b5cf6' },
+              ].map(card => (
+                <a key={card.title} href={card.href} style={{
+                  flex: '1 1 150px', minWidth: '140px', maxWidth: '175px',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${card.color}35`,
+                  borderRadius: '16px', padding: '1rem 0.8rem',
+                  textDecoration: 'none', display: 'flex',
+                  flexDirection: 'column', alignItems: 'center',
+                  gap: '5px', textAlign: 'center',
+                }}>
+                  <span style={{ fontSize: '1.4rem' }}>{card.emoji}</span>
+                  <span style={{ color: card.color, fontWeight: 700, fontSize: '0.85rem' }}>{card.title}</span>
+                  <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>{card.desc}</span>
+                  <span style={{
+                    marginTop: '4px', color: card.color, fontSize: '0.75rem', fontWeight: 600,
+                    border: `1px solid ${card.color}55`, borderRadius: '20px', padding: '3px 12px',
+                  }}>{card.btn} →</span>
+                </a>
+              ))}
             </div>
 
             {/* 向下提示 */}
