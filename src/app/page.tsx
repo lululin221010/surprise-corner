@@ -146,10 +146,19 @@ function getDayOfYear(): number {
   return Math.floor((Date.now() - start.getTime()) / 86400000);
 }
 
+// 每3小時換一次，切換點在 01:30/04:30/07:30…，與試讀的00:00/12:00錯開
+const SLOT_BOUNDARIES = [90, 270, 450, 630, 810, 990, 1170, 1350]; // 分鐘
 function getCurrentEntry(): ColdEntry {
   const d = new Date();
-  const slot = getDayOfYear() * 2 + (d.getHours() >= 6 && d.getHours() < 18 ? 0 : 1);
-  return coldData[slot % coldData.length];
+  const totalMin = d.getHours() * 60 + d.getMinutes();
+  const slotIdx = SLOT_BOUNDARIES.filter(b => totalMin >= b).length;
+  return coldData[(getDayOfYear() * 8 + slotIdx) % coldData.length];
+}
+function msToNextEntry(): number {
+  const now = new Date();
+  const totalMin = now.getHours() * 60 + now.getMinutes();
+  const next = SLOT_BOUNDARIES.find(b => b > totalMin) ?? (SLOT_BOUNDARIES[0] + 1440);
+  return ((next - totalMin) * 60 - now.getSeconds()) * 1000;
 }
 
 function getTodayPreview() {
@@ -163,20 +172,21 @@ export default function Home() {
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
   const [luruIdx, setLuruIdx] = useState(0);
   const [bubbleVisible, setBubbleVisible] = useState(true);
+  const [randomEntry, setRandomEntry] = useState<ColdEntry | null>(null);
+
+  function drawRandom() {
+    const current = todayEntry?.id;
+    const pool = coldData.filter(e => e.id !== current);
+    setRandomEntry(pool[Math.floor(Math.random() * pool.length)]);
+  }
 
   useEffect(() => {
     setTodayEntry(getCurrentEntry());
     setTodayPreview(getTodayPreview());
-    const now = new Date();
-    const h = now.getHours();
-    const nextSlotHour = h < 6 ? 6 : h < 18 ? 18 : 30;
-    const next = new Date(now);
-    if (nextSlotHour === 30) { next.setDate(next.getDate() + 1); next.setHours(6, 0, 0, 0); }
-    else { next.setHours(nextSlotHour, 0, 0, 0); }
     const timeout = setTimeout(() => {
       setTodayEntry(getCurrentEntry());
       setTodayPreview(getTodayPreview());
-    }, next.getTime() - now.getTime());
+    }, msToNextEntry());
     return () => clearTimeout(timeout);
   }, []);
 
@@ -475,6 +485,66 @@ export default function Home() {
           )}
         </section>
 
+        {/* ── 隨手驚喜 ── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 4rem', padding: '0 1.2rem', textAlign: 'center' }}>
+          {!randomEntry ? (
+            <button
+              onClick={drawRandom}
+              style={{
+                background: 'rgba(168,85,247,0.1)',
+                border: '1px dashed rgba(168,85,247,0.45)',
+                color: '#c4b5fd',
+                borderRadius: '50px',
+                padding: '11px 28px',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                letterSpacing: '0.05em',
+                transition: 'background 0.15s, border-color 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.2)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.8)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(168,85,247,0.1)'; e.currentTarget.style.borderColor = 'rgba(168,85,247,0.45)'; }}
+            >
+              🎲 再來一個驚喜
+            </button>
+          ) : (
+            <div style={{
+              background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(16px)',
+              borderRadius: '20px', padding: '1.8rem 2rem',
+              border: `1px solid ${CATEGORY_COLORS[randomEntry.category] || '#8b5cf6'}40`,
+              textAlign: 'left', animation: 'fadeInUp 0.4s ease both',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
+                <span style={{
+                  background: `${CATEGORY_COLORS[randomEntry.category] || '#8b5cf6'}1a`,
+                  border: `1px solid ${CATEGORY_COLORS[randomEntry.category] || '#8b5cf6'}55`,
+                  color: CATEGORY_COLORS[randomEntry.category] || '#8b5cf6',
+                  borderRadius: '20px', padding: '3px 13px',
+                  fontSize: '0.74rem', fontWeight: 700,
+                }}>🎲 {randomEntry.category}</span>
+                <button onClick={drawRandom} style={{
+                  background: 'none', border: 'none', color: '#4a4868',
+                  fontSize: '0.78rem', cursor: 'pointer', padding: 0,
+                }}>再抽一次 ↺</button>
+              </div>
+              <p style={{ fontSize: '0.95rem', lineHeight: 1.9, color: '#ddd8f0', margin: 0 }}>
+                {randomEntry.text}
+              </p>
+              {randomEntry.lulu && (
+                <div style={{
+                  background: 'rgba(139,92,246,0.09)', border: '1px solid rgba(139,92,246,0.28)',
+                  borderRadius: '12px', padding: '0.75rem 1rem', marginTop: '1rem',
+                  display: 'flex', gap: '10px', alignItems: 'flex-start',
+                }}>
+                  <span style={{ flexShrink: 0 }}>🐱</span>
+                  <p style={{ color: '#c4b5fd', fontSize: '0.85rem', fontStyle: 'italic', margin: 0, lineHeight: 1.65 }}>
+                    {randomEntry.lulu}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+        </section>
 
         {/* ── 今日試讀 ── */}
         {todayPreview && (
