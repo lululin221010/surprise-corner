@@ -228,14 +228,15 @@ export default function BooksPage() {
                     <div style={{ fontWeight: 700, color: '#e5e7eb', marginBottom: '0.6rem', fontSize: '0.93rem' }}>
                       Vol.{i + 1}　{v.title}
                     </div>
-                    <div style={{
-                      color: '#9ca3af', fontSize: '0.87rem', lineHeight: 1.8,
-                      borderLeft: `2px solid ${s.color}66`, paddingLeft: '1rem',
-                      marginBottom: '1rem',
-                    }}>
-                      {v.excerpt}⋯⋯
-                    </div>
-                    <a
+                    <div
+                      style={{
+                        fontSize: '0.88rem', color: '#c4b5d4', lineHeight: 1.8,
+                        borderLeft: `2px solid ${s.color}66`, paddingLeft: '1rem',
+                        marginBottom: '1rem',
+                      }}
+                      dangerouslySetInnerHTML={{ __html: v.excerpt + '⋯⋯' }}
+                    />
+                    <
                       href={`${ST_BASE}/digital`}
                       target="_blank"
                       rel="noopener noreferrer"

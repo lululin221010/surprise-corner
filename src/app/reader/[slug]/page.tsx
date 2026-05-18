@@ -187,9 +187,24 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
           letter-spacing: 1px;
         }
         .link-back:hover { color: var(--text); }
+        .fixed-bar {
+          position: fixed;
+          bottom: 0; left: 0; right: 0;
+          background: rgba(14,14,20,0.96);
+          border-top: 1px solid rgba(122,74,158,0.25);
+          backdrop-filter: blur(8px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 24px;
+          padding: 14px 24px;
+          z-index: 100;
+          flex-wrap: wrap;
+        }
         @media (max-width: 600px) {
           .reader-container { padding: 0 24px 80px; }
           .reader-title { font-size: 1.6rem; }
+          .fixed-bar { gap: 16px; padding: 12px 16px; }
         }
       `}</style>
 
@@ -234,6 +249,18 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
           </div>
 
         </div>
+      </div>
+
+      <div className="fixed-bar">
+        <a
+          href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-buy"
+        >
+          前往購買 →
+        </a>
+        <Link href={`/${seriesSlug}.html`} className="link-back">← 回到系列頁</Link>
       </div>
     </>
   );
