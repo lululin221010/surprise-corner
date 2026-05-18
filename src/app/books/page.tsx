@@ -236,7 +236,7 @@ export default function BooksPage() {
                       }}
                       dangerouslySetInnerHTML={{ __html: v.excerpt + '⋯⋯' }}
                     />
-                    <
+                    <a
                       href={`${ST_BASE}/digital`}
                       target="_blank"
                       rel="noopener noreferrer"
