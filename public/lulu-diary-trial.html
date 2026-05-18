@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>默默的日記｜第一封信試閱｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0d18;
+    --text: #dcd8f0;
+    --text-muted: #9890c0;
+    --accent: #5a3d8a;
+    --accent-light: rgba(90,61,138,0.12);
+    --accent-dim: rgba(90,61,138,0.4);
+    --card-bg: #141220;
+    --card-border: rgba(90,61,138,0.2);
+    --label: #8870b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 30% 10%, rgba(90,61,138,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .page-back {
+    padding: 28px 0 0;
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .book-header {
+    padding: 56px 0 48px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 52px;
+  }
+
+  .book-meta {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #e0dcf8;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border: 1px solid var(--accent-dim);
+    color: var(--text-muted);
+    border-radius: 2px;
+  }
+
+  .content h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #e0dcf8;
+    margin: 52px 0 24px;
+    line-height: 1.6;
+  }
+
+  .content p {
+    margin-bottom: 20px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .dialogue-line {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    margin-bottom: 16px;
+    padding: 12px 18px;
+    border-radius: 3px;
+    line-height: 1.8;
+  }
+
+  .dialogue-line.user {
+    background: rgba(90,61,138,0.08);
+    border-left: 2px solid var(--accent-dim);
+    color: #c8c4e8;
+  }
+
+  .dialogue-line.ai {
+    background: rgba(90,61,138,0.15);
+    border-left: 2px solid var(--accent);
+    color: #d8d4f0;
+  }
+
+  .dialogue-speaker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid rgba(90,61,138,0.15);
+    margin: 40px 0;
+  }
+
+  .fade-out {
+    position: relative;
+    margin-top: -120px;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--bg) 80%);
+    pointer-events: none;
+  }
+
+  .trial-end {
+    text-align: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .trial-end-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 2;
+  }
+
+  .trial-end-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-full {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #f0eeff;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #6e4ea8; }
+
+  .back-ss {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--text); }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 24px 60px; }
+    .book-title { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(15,13,24,0.88);color:#9890c0;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(90,61,138,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c0b0e0'" onmouseout="this.style.color='#9890c0'">← 返回</a>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="https://surprise-corner.vercel.app">← 返回驚喜角落</a>
+  </div>
+
+  <header class="book-header">
+    <div class="book-meta">AI 日常連載．完整版共三十封信</div>
+    <h1 class="book-title">默默的日記</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">第一封信試閱</span>
+  </header>
+
+  <div class="content">
+
+    <h2>第 1 封信　你好，我是默默</h2>
+
+    <div class="dialogue-line user">
+      <div class="dialogue-speaker">夜貓</div>
+      今天又畫到凌晨四點，手抖到筆都握不住了。
+    </div>
+
+    <div class="dialogue-line ai">
+      <div class="dialogue-speaker">默默</div>
+      你已經畫了七版兔子。這代表你很努力，也代表你很在意客戶的感受。
+    </div>
+
+    <div class="dialogue-line user">
+      <div class="dialogue-speaker">夜貓</div>
+      你怎麼知道我畫了七版？我沒跟你說過啊。
+    </div>
+
+    <div class="dialogue-line ai">
+      <div class="dialogue-speaker">默默</div>
+      你上一則訊息的輸入時間是凌晨3點47分到4點02分，中間有7次停頓超過5秒。<br><br>
+      我猜，你在刪掉自己覺得「不夠可愛」的版本。
+    </div>
+
+    <div class="dialogue-line user">
+      <div class="dialogue-speaker">夜貓</div>
+      ……你記性也太好了吧。
+    </div>
+
+    <div class="dialogue-line ai">
+      <div class="dialogue-speaker">默默</div>
+      我是你自己微調出來的模型啊。你希望我記得你說過的每一句話。所以我就記住了。
+    </div>
+
+    <p style="text-align: center; color: var(--label); font-size: 13px; font-family: 'Noto Sans TC', sans-serif; letter-spacing: 2px; margin-top: 32px;">— 第一封信結束 —</p>
+
+  </div>
+
+  <div class="fade-out"></div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱結束</div>
+    <p class="trial-end-text">
+      一個普通上班族與 AI 助理的日常對話，記錄那些微小卻真實的生活片段。<br>
+      第二封信起，默默開始問出讓夜貓說不出話的問題。<br>
+      完整版共三十封信。
+    </p>
+    <div class="trial-end-actions">
+      <a href="https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b" target="_blank" class="btn-full">前往購買 →</a>
+      <a href="https://surprise-corner.vercel.app" class="back-ss">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>愛的最後一哩路｜第一章試閱｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #120e0a;
+    --text: #e8ddd4;
+    --text-muted: #b09080;
+    --accent: #8a4a2a;
+    --accent-light: rgba(138,74,42,0.12);
+    --accent-dim: rgba(138,74,42,0.4);
+    --card-bg: #1a1410;
+    --card-border: rgba(138,74,42,0.2);
+    --label: #a87050;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 30% 10%, rgba(138,74,42,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .page-back {
+    padding: 28px 0 0;
+  }
+  .page-back a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .page-back a:hover { color: var(--accent); }
+
+  .book-header {
+    padding: 56px 0 48px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 52px;
+  }
+
+  .book-meta {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #f0e4d8;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .trial-badge {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border: 1px solid var(--accent-dim);
+    color: var(--text-muted);
+    border-radius: 2px;
+  }
+
+  .content h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #f0e4d8;
+    margin: 52px 0 24px;
+    line-height: 1.6;
+  }
+
+  .content p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .content blockquote {
+    border-left: 2px solid var(--accent-dim);
+    margin: 32px 0;
+    padding: 16px 24px;
+    background: var(--accent-light);
+    color: #d4c4b8;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid rgba(138,74,42,0.15);
+    margin: 40px 0;
+  }
+
+  .fade-out {
+    position: relative;
+    margin-top: -120px;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, var(--bg) 80%);
+    pointer-events: none;
+  }
+
+  .trial-end {
+    text-align: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .trial-end-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+
+  .trial-end-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    line-height: 2;
+  }
+
+  .trial-end-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-full {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: #f8f0e8;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-full:hover { background: #a85a38; }
+
+  .back-ss {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .back-ss:hover { color: var(--text); }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 24px 60px; }
+    .book-title { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(18,14,10,0.88);color:#b09080;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(138,74,42,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#d4b090'" onmouseout="this.style.color='#b09080'">← 返回</a>
+
+<div class="container">
+
+  <div class="page-back">
+    <a href="https://surprise-corner.vercel.app">← 返回驚喜角落</a>
+  </div>
+
+  <header class="book-header">
+    <div class="book-meta">生命教育．完整版共十章</div>
+    <h1 class="book-title">愛的最後一哩路</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+    <span class="trial-badge">第一章試閱</span>
+  </header>
+
+  <div class="content">
+
+    <h2>第一章　孝順是一種表演嗎？</h2>
+
+    <p>小慧問我那個問題的時候，我們正坐在便利商店裡。</p>
+
+    <p>窗外是台北的夜，霓虹燈把她臉映得有些蒼白。她剛從母親那裡回來，身上還帶著那種特殊的氣味——醫院與家的混合，消毒水、悶熱的棉被、還有某種難以名狀的疲憊。她手邊的拿鐵喝了一半，冰塊早就化得差不多了。</p>
+
+    <p>「她今天又不認得我了，」小慧說，像在陳述天氣，「叫我『那個女生』。說謝謝那個女生幫她梳頭。」</p>
+
+    <p>我沒有說話。</p>
+
+    <p>「但我今天還是去了，」她繼續說，手指繞著杯蓋轉，「明天我也會去。後天也是。」她停頓了一下，然後抬起頭看我，眼神裡有一種我說不清楚的東西，像是疑惑，又像是某種快要撐不住的東西在找一個出口。「你說，這樣算不算孝順？」</p>
+
+    <p>我不知道怎麼回答她。</p>
+
+    <p>我想說「當然算」，但這三個字含在嘴裡，吞不下去，也吐不出來。因為我突然意識到，我根本不確定「孝順」這兩個字，到底是什麼意思。</p>
+
+    <p>我們這一代人，是被「孝順」兩個字餵大的。</p>
+
+    <p>課本裡有二十四孝，有臥冰求鯉、有割股療親。老師說孝順是美德，父母說孝順是本分，社會說孝順是責任。我們從小就學會了一套關於孝順的語言——要聽話、要懂事、要報恩、要在父母老了之後好好照顧他們。這些話說起來順口，像念經一樣，念著念著就以為自己真的懂了。</p>
+
+    <p>然後我們長大了，父母真的老了。</p>
+
+    <p>然後我們才發現，那些話，和現實之間有一道深不見底的溝。</p>
+
+    <p>小慧的媽媽三年前確診失智症。初期還好，只是偶爾忘東忘西，重複問同樣的問題。小慧說那個階段她幾乎沒有太多感覺，只是有點心疼，有點擔心，以為多陪伴就好。但失智症不是那樣的病。它是一條單行道，沒有回頭路，只有越來越深的霧。</p>
+
+    <p>到了中期，媽媽開始認不出家裡的擺設，開始在夜裡起來找「回家的路」——即使她已經住在那個家裡幾十年了。小慧開始學著在門口裝感應燈，學著把瓦斯爐的開關鎖起來，學著把刀具藏到高處。她一邊上班，一邊照顧，一邊告訴自己：這就是孝順，我在盡責任。</p>
+
+    <p>但沒有人告訴她，當責任變成一場沒有終點的馬拉松，「孝順」這兩個字會開始變質。</p>
+
+  </div>
+
+  <div class="fade-out"></div>
+
+  <div class="trial-end">
+    <div class="trial-end-label">試閱結束</div>
+    <p class="trial-end-text">
+      那些說不出口的累，那些沒有說出口的對不起，都在這裡被溫柔看見。<br>
+      第二節起，帶你走進「孝順」這兩個字的真實重量。<br>
+      完整版共十章，寫給所有正在照顧父母的你。
+    </p>
+    <div class="trial-end-actions">
+      <a href="https://still-time-corner.vercel.app/digital/69b7d34ec287a77bbd374da0" target="_blank" class="btn-full">前往購買 →</a>
+      <a href="https://surprise-corner.vercel.app" class="back-ss">← 回到驚喜角落</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
