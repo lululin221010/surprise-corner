@@ -51,7 +51,7 @@ export default function RandomPage() {
             src={entry.image}
             alt={entry.caption || ''}
             style={{
-              width: '180px', height: '180px',
+              width: '280px', height: '280px',
               borderRadius: '50%', objectFit: 'cover',
               border: '3px solid rgba(168,85,247,0.45)',
               boxShadow: '0 0 30px rgba(168,85,247,0.35)',
