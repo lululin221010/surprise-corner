@@ -19,7 +19,7 @@ type ColdEntry = {
 
 const coldData = coldDataRaw as ColdEntry[];
 
-type SurpriseEntry = { id: number; text: string; image?: string; caption?: string; date: string };
+type SurpriseEntry = { id: string; date: string; image?: string; title?: string; text: string; category?: string };
 const surprises = surprisesRaw as SurpriseEntry[];
 
 type FeaturedQuiz = { slug: string; title: string; desc: string };

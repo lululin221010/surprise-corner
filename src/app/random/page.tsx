@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import surprisesRaw from '../../data/surprises.json';
 
-type SurpriseEntry = { id: number; text: string; image?: string; caption?: string; date: string };
+type SurpriseEntry = { id: string; date: string; image?: string; title?: string; text: string; category?: string };
 const surprises = surprisesRaw as SurpriseEntry[];
 
 export default function RandomPage() {
