@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const ST_BASE = 'https://still-time-corner.vercel.app';
+const SS_BASE = 'https://surprise-corner.vercel.app';
 
 const SERIES = [
   {
     name: '暗黑心理學',
+    slug: 'dark-psychology',
     tags: ['操控', '黑暗人格', '識破'],
     color: '#9333ea',
     emoji: '🌑',
@@ -20,6 +22,7 @@ const SERIES = [
   },
   {
     name: '認知心理學',
+    slug: 'cognitive-psychology',
     tags: ['思考偏誤', '決策', '大腦'],
     color: '#0ea5e9',
     emoji: '🧠',
@@ -35,6 +38,7 @@ const SERIES = [
   },
   {
     name: '成長心理學',
+    slug: 'growth-psychology',
     tags: ['改變', '習慣', '拖延'],
     color: '#10b981',
     emoji: '🌱',
@@ -50,6 +54,7 @@ const SERIES = [
   },
   {
     name: '人格心理學',
+    slug: 'personality-psychology',
     tags: ['自我', '人格', '防禦'],
     color: '#f59e0b',
     emoji: '🪞',
@@ -63,6 +68,7 @@ const SERIES = [
   },
   {
     name: '關係心理學',
+    slug: 'relationship-psychology',
     tags: ['關係', '依附', '邊界'],
     color: '#ec4899',
     emoji: '💔',
@@ -76,6 +82,7 @@ const SERIES = [
   },
   {
     name: '潛意識心理學',
+    slug: 'subconscious-psychology',
     tags: ['潛意識', '記憶', '身體'],
     color: '#8b5cf6',
     emoji: '🌊',
@@ -160,7 +167,7 @@ export default function BooksPage() {
               {featured.vols[0].excerpt}⋯⋯
             </div>
             <a
-              href={`${ST_BASE}/digital`}
+              href={`${SS_BASE}/${featured.slug}-vol1.html`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -171,7 +178,7 @@ export default function BooksPage() {
                 fontSize: '0.85rem', fontWeight: 700,
               }}
             >
-              購買完整版 →
+              試閱看看 →
             </a>
           </div>
         </section>
@@ -237,14 +244,14 @@ export default function BooksPage() {
                       dangerouslySetInnerHTML={{ __html: v.excerpt + '⋯⋯' }}
                     />
                     <a
-                      href={`${ST_BASE}/digital`}
+                      href={`${SS_BASE}/${s.slug}-vol${i + 1}.html`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
                         color: s.color, textDecoration: 'none', fontSize: '0.82rem', fontWeight: 600,
                       }}
                     >
-                      購買完整版 →
+                      試閱看看 →
                     </a>
                   </div>
                 ))}
