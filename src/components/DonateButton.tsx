@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 // 銀行帳號公開顯示（個人賣家標準做法，捐款不需要身份驗證）
 const BANK = {
-  name: '中國信託商業銀行',
-  code: '822',
-  account: '299540702145',
+  name: '台新銀行',
+  code: '812',
+  account: '0028881004927700',
   holder: '王珍珍',
 };
 
