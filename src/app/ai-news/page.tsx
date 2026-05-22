@@ -239,7 +239,7 @@ export default function NewsPage() {
           })}
         </div>
 
-        {/* ── 錢莊 AI 股票工具導流卡片 ── */}
+        {/* ── 收租AI 股票工具導流卡片 ── */}
         <a
           href="https://stock-dashboard-ochre-sigma.vercel.app"
           target="_blank"
@@ -257,7 +257,7 @@ export default function NewsPage() {
         >
           <div>
             <div style={{ color: '#34d399', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>
-              📊 錢莊 AI 股票訊號
+              📊 收租AI 股票訊號
             </div>
             <div style={{ color: '#9ca3af', fontSize: '0.82rem' }}>
               技術分析 × AI 選股工具・台股週推薦・免費使用

@@ -5,7 +5,7 @@ import articlesData from '@/data/lulu-stocks.json'
 
 export const metadata: Metadata = {
   title: '魯魯說股票 | Surprise Corner',
-  description: '由魯魯為你精選解析，台股趨勢、個股分析、投資觀點。看完文章別忘了到錢莊看今日訊號！',
+  description: '由魯魯為你精選解析，台股趨勢、個股分析、投資觀點。看完文章別忘了到收租AI看今日訊號！',
 }
 
 const articles = (articlesData as Array<{
@@ -49,7 +49,7 @@ export default function LuluStocksPage() {
               textDecoration: 'none',
             }}
           >
-            📊 免費看錢莊 AI 訊號 →
+            📊 免費看收租AI訊號 →
           </a>
         </div>
 
@@ -77,7 +77,7 @@ export default function LuluStocksPage() {
                   color: '#34d399', fontSize: '0.9rem', textDecoration: 'underline',
                 }}
               >
-                先去錢莊看看今日 AI 股票訊號？
+                先去收租AI看看今日股票訊號？
               </a>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function LuluStocksPage() {
               borderRadius: '30px', textDecoration: 'none', fontSize: '0.9rem',
             }}
           >
-            錢莊免費看首頁訊號 →
+            收租AI 免費看首頁訊號 →
           </a>
         </div>
 
