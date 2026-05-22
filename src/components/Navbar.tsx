@@ -10,7 +10,6 @@ const links = [
   // ✅ 移除「首頁」，Logo 本身即為首頁入口
   { href: '/books',         label: '📚 書評角落' },
   { href: '/ai-news',       label: '📰 快訊' },
-  { href: '/tools',         label: '🛠 工具箱' },
   { href: '/games',         label: '🎮 小遊戲' },
   // ✅ 管理頁面已從導覽列移除（直接輸入 /admin 仍可進入）
 ];
@@ -110,6 +109,21 @@ export default function Navbar() {
         }}
       >
         📖 電子書
+      </a>
+
+      {/* 錢莊股票工具外部連結 */}
+      <a
+        href="https://stock-dashboard-ochre-sigma.vercel.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          color: '#34d399',
+          textDecoration: 'none', padding: '0.4rem 1rem',
+          borderRadius: '20px', fontSize: '0.9rem', fontWeight: 600,
+          border: '1px solid rgba(52,211,153,0.35)',
+        }}
+      >
+        📊 股票工具
       </a>
 
       {/* ✅ 隱私權政策（靠右，小字）*/}
