@@ -239,6 +239,38 @@ export default function NewsPage() {
           })}
         </div>
 
+        {/* ── 錢莊 AI 股票工具導流卡片 ── */}
+        <a
+          href="https://stock-dashboard-ochre-sigma.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexWrap: 'wrap', gap: '1rem',
+            background: 'linear-gradient(135deg, #064e3b22, #065f4622)',
+            border: '1px solid rgba(52,211,153,0.35)', borderRadius: '14px',
+            padding: '1.1rem 1.5rem', marginBottom: '1.5rem', textDecoration: 'none',
+            transition: 'all 0.25s',
+          }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(52,211,153,0.7)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(52,211,153,0.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+        >
+          <div>
+            <div style={{ color: '#34d399', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>
+              📊 錢莊 AI 股票訊號
+            </div>
+            <div style={{ color: '#9ca3af', fontSize: '0.82rem' }}>
+              技術分析 × AI 選股工具・台股週推薦・免費使用
+            </div>
+          </div>
+          <div style={{
+            background: '#059669', color: '#fff', fontWeight: 700,
+            padding: '0.5rem 1.2rem', borderRadius: '30px', fontSize: '0.85rem', whiteSpace: 'nowrap',
+          }}>
+            免費看今日訊號 →
+          </div>
+        </a>
+
         {loading && (
           <div style={{ textAlign: 'center', color: '#a78bfa', padding: '3rem' }}>
             <div style={{ fontSize: '2rem' }}>⚡</div><p>載入最新消息中...</p>

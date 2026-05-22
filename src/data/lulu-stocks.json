@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "example",
+    "title": "（範例）魯魯說股票的第一篇文章",
+    "date": "2026-05-22",
+    "published": false,
+    "excerpt": "這是一個範例文章結構，實際內容由姐準備後，請 CC 將 published 改為 true 並填入內容。",
+    "image": null,
+    "content": "這是文章正文。\n\n每個空行會自動換段。\n\n目前這篇是隱藏的草稿（published: false），不會出現在列表頁面上。"
+  }
+]
