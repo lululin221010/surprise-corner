@@ -580,6 +580,54 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── 選股週報小橫幅 ── */}
+        <section style={{ maxWidth: '680px', margin: '0 auto 3.5rem', padding: '0 1.2rem', animation: 'fadeInUp 1s ease 0.38s both' }}>
+          <a
+            href="https://stock-dashboard-ochre-sigma.vercel.app/daily"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none', display: 'block' }}
+          >
+            <div style={{
+              background: 'rgba(16,185,129,0.07)',
+              border: '1px solid rgba(16,185,129,0.22)',
+              borderRadius: '18px',
+              padding: '1.1rem 1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              transition: 'border-color 0.2s, background 0.2s',
+            }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(16,185,129,0.5)';
+                (e.currentTarget as HTMLElement).style.background = 'rgba(16,185,129,0.12)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(16,185,129,0.22)';
+                (e.currentTarget as HTMLElement).style.background = 'rgba(16,185,129,0.07)';
+              }}
+            >
+              <div style={{ fontSize: '1.8rem', flexShrink: 0 }}>📊</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ color: '#10b981', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.2rem' }}>
+                  本週 AI 精選強弱股 · 免費看
+                </div>
+                <div style={{ color: '#3d6b5a', fontSize: '0.74rem', lineHeight: 1.5 }}>
+                  掃描 0050 + 熱門股，選出台美各 3 漲 2 跌，每週自動更新
+                </div>
+              </div>
+              <div style={{
+                color: '#10b981', fontSize: '0.76rem', fontWeight: 700,
+                border: '1px solid rgba(16,185,129,0.38)',
+                borderRadius: '20px', padding: '4px 13px',
+                whiteSpace: 'nowrap', flexShrink: 0,
+              }}>
+                看這週 →
+              </div>
+            </div>
+          </a>
+        </section>
+
         {/* ── 今日測驗 CTA（每日輪換）── */}
         {(() => {
           const FEATURED = [
