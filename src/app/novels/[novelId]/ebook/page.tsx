@@ -736,9 +736,9 @@ export default function EbookPage() {
                   連載更新中，歡迎繼續追蹤 🐾
                 </p>
                 <div className="footer-btns">
-                  <Link href="/novels" className="footer-browse">
-                    ← 返回小說列表
-                  </Link>
+                  <a href="https://still-time-corner.vercel.app/my-perks" className="footer-browse">
+                    ← 回到好康禮
+                  </a>
                 </div>
               </>
             ) : (
