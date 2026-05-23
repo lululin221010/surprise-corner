@@ -97,11 +97,8 @@ export default function EbookPage() {
       .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
   }
 
-  // ✅ 連載小說：試讀只顯示前 1/5 章節內文
-  const allChapterCount = serialInfo?.totalChapters
-    ?? (chaptersData as any[]).filter(c => c.novelId === novelId && c.isPublished).length
-  const previewCount = isSerial ? Math.max(1, Math.ceil(allChapterCount / 5)) : publishedChapters.length
-  const previewChapters = isSerial ? publishedChapters.slice(0, previewCount) : publishedChapters
+  // 連載小說：SS 全冊免費，不限試讀，顯示全部已發布章節
+  const previewChapters = publishedChapters
 
   // ✅ 顯示實際免費章節數
   const freeCount = publishedChapters.length
@@ -570,7 +567,7 @@ export default function EbookPage() {
             <span className="ebook-badge">電子書</span>
           </div>
           <div className="ebook-nav-actions">
-            {(novel as any).forSale !== false && (
+            {!isSerial && (novel as any).forSale !== false && (
               <a
                 href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
                 target="_blank"
@@ -583,16 +580,6 @@ export default function EbookPage() {
           </div>
         </nav>
 
-        {/* 連載說明橫幅 */}
-        {isSerial && (
-          <div style={{ background: 'rgba(180,144,80,0.08)', borderBottom: '1px solid rgba(180,144,80,0.12)', padding: '10px 24px', textAlign: 'center', fontSize: '0.8rem', color: '#9a8878', letterSpacing: '0.04em', lineHeight: 1.8 }}>
-            想一次看完完整版？前往
-            <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer" style={{ color: '#b49050', textDecoration: 'underline', margin: '0 4px' }}>
-              小舖
-            </a>
-            取得完整版
-          </div>
-        )}
 
         <div className="ebook-cover">
           <p className="cover-ornament">✦ &nbsp; SURPRISE CORNER &nbsp; ✦</p>
@@ -650,17 +637,6 @@ export default function EbookPage() {
           </div>
         )}
 
-        {/* 試讀區：連載小說只顯示前 1/5 章節內文 */}
-        {isSerial && previewChapters.length > 0 && (
-          <div style={{ maxWidth: 680, margin: '0 auto', padding: '32px 40px 0', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.72rem', letterSpacing: '0.3em', color: '#7a6a58' }}>
-              ✦ &nbsp; 試　讀 &nbsp; ✦
-            </p>
-            <p style={{ fontSize: '0.8rem', color: '#5a4a38', marginTop: 8 }}>
-              以下為前 {previewChapters.length} 集試讀內容
-            </p>
-          </div>
-        )}
 
         <div className="chapters-body">
           {previewChapters.map((chapter) => {
@@ -739,17 +715,13 @@ export default function EbookPage() {
               </div>
             )
           })}
-          {/* 試讀結束提示 */}
-          {isSerial && (publishedChapters.length > previewCount || futureChapters.length > 0) && (
+          {/* 持續更新提示 */}
+          {isSerial && futureChapters.length > 0 && (
             <div style={{ textAlign: 'center', padding: '48px 20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-              <p style={{ fontSize: '0.85rem', color: '#7a6a58', marginBottom: 16 }}>— 試讀結束 —</p>
-              <p style={{ fontSize: '0.9rem', color: '#9a8878', marginBottom: 24 }}>
-                更多章節請至上方目錄點選，或購買電子書一次看完 📖
+              <p style={{ fontSize: '0.85rem', color: '#7a6a58', marginBottom: 12 }}>— 持續更新中 —</p>
+              <p style={{ fontSize: '0.88rem', color: '#9a8878' }}>
+                後續章節陸續開放，定期回來看看 📖
               </p>
-              <a href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'inline-block', padding: '0.6rem 1.8rem', background: 'linear-gradient(135deg, rgba(180,144,80,0.25), rgba(160,80,100,0.2))', border: '1px solid rgba(180,144,80,0.35)', color: '#c4a060', fontSize: '0.85rem', letterSpacing: '0.08em', textDecoration: 'none' }}>
-                前往小舖購買完整版 →
-              </a>
             </div>
           )}
         </div>
@@ -758,7 +730,7 @@ export default function EbookPage() {
           <div className="ebook-footer">
             <div className="footer-ornament">✦</div>
             <p className="footer-hook">喜歡這個故事？</p>
-            {(novel as any).forSale === false ? (
+            {((novel as any).forSale === false || isSerial) ? (
               <>
                 <p className="footer-text">
                   連載更新中，歡迎繼續追蹤 🐾<br />
@@ -805,37 +777,6 @@ export default function EbookPage() {
               <WallPostForm label={novelId === 'lulu-life' ? '魯魯讀者' : '連載讀者'} />
             </div>
 
-            {/* 角色聊天 CTA：看完故事後引導去和角色說說話 */}
-            {(novelId === 'lulu-diary' || novelId === 'the-last-signal') && (
-              <div style={{
-                marginTop: '2rem',
-                padding: '1.5rem',
-                background: 'rgba(168,85,247,0.08)',
-                border: '1px solid rgba(168,85,247,0.2)',
-                borderRadius: '16px',
-              }}>
-                <p style={{ fontSize: '0.88rem', color: '#c4b5fd', marginBottom: '0.8rem', lineHeight: 1.7 }}>
-                  {novelId === 'lulu-diary'
-                    ? '💬 看完默默的故事，有沒有想和她說說話？'
-                    : '💬 看完林悅的故事，有沒有想問她那個訊號的事？'}
-                </p>
-                <Link
-                  href={novelId === 'lulu-diary' ? '/chat/lulu' : '/chat/signal'}
-                  style={{
-                    display: 'inline-block',
-                    background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
-                    color: '#fff',
-                    borderRadius: '10px',
-                    padding: '0.6rem 1.4rem',
-                    fontWeight: 700,
-                    fontSize: '0.88rem',
-                    textDecoration: 'none',
-                  }}
-                >
-                  {novelId === 'lulu-diary' ? '🐱 和默默聊聊' : '📡 和林悅說說話'} →
-                </Link>
-              </div>
-            )}
           </div>
         )}
 

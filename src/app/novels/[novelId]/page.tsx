@@ -17,23 +17,6 @@ function isPublishedByDate(publishedAt: string): boolean {
   return publishedAt <= taiwanToday
 }
 
-// 每本小說對應的角色聊天頁面
-const NOVEL_CHAT: Record<string, { path: string; label: string; color: string; border: string; textColor: string }> = {
-  'lulu-diary': {
-    path: '/chat/lulu',
-    label: '🐱 找默默聊聊',
-    color: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(168,85,247,0.15))',
-    border: 'rgba(167,139,250,0.35)',
-    textColor: '#c4b5fd',
-  },
-  'the-last-signal': {
-    path: '/chat/signal',
-    label: '📡 跟 林悅 說說話',
-    color: 'linear-gradient(135deg, rgba(14,165,233,0.2), rgba(2,132,199,0.15))',
-    border: 'rgba(125,211,252,0.35)',
-    textColor: '#7dd3fc',
-  },
-}
 
 interface Props { params: Promise<{ novelId: string }> }
 
@@ -73,7 +56,6 @@ export default async function NovelPage({ params }: Props) {
   )
 
   const ebookAvailable = freeChapters.length > 0
-  const chatInfo = NOVEL_CHAT[novelId]
 
   return (
     <>
@@ -164,29 +146,6 @@ export default async function NovelPage({ params }: Props) {
               </div>
             )}
 
-            {/* 角色聊天按鈕 */}
-            {chatInfo && (
-              <div style={{ marginTop: '4px' }}>
-                <Link
-                  href={chatInfo.path}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '6px',
-                    padding: '7px 18px',
-                    background: chatInfo.color,
-                    border: `1px solid ${chatInfo.border}`,
-                    color: chatInfo.textColor,
-                    textDecoration: 'none',
-                    fontFamily: 'Georgia, serif',
-                    fontSize: '0.8rem',
-                    letterSpacing: '0.06em',
-                    borderRadius: '4px',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  {chatInfo.label}
-                </Link>
-              </div>
-            )}
           </div>
         </div>
 
