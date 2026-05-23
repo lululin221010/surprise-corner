@@ -260,7 +260,7 @@ export default function NewsPage() {
               📊 收租AI 股票訊號
             </div>
             <div style={{ color: '#9ca3af', fontSize: '0.82rem' }}>
-              技術分析 × AI 選股工具・台股週推薦・免費使用
+              讀好書、收好租，一起來小舖
             </div>
           </div>
           <div style={{

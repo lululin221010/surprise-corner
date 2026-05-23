@@ -77,7 +77,7 @@ export default function LuluStocksPage() {
                   color: '#34d399', fontSize: '0.9rem', textDecoration: 'underline',
                 }}
               >
-                先去收租AI看看今日股票訊號？
+                讀好書、收好租，一起來小舖
               </a>
             </div>
           </div>
