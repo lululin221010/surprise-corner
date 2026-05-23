@@ -610,12 +610,22 @@ export default function EbookPage() {
             <p className="toc-label">目　錄</p>
             <div className="toc-grid">
               {publishedChapters.map((c) => (
-                <Link key={c.id} href={`/novels/${novelId}/${c.id}`} className="toc-row">
-                  <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
-                  <span>{c.title}</span>
-                  <span className="toc-dots" />
-                  <span className="toc-page">{c.publishedAt}</span>
-                </Link>
+                isSerial ? (
+                  // 連載小說：目錄不可點擊，只展示章節標題
+                  <div key={c.id} className="toc-row" style={{ cursor: 'default' }}>
+                    <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
+                    <span>{c.title}</span>
+                    <span className="toc-dots" />
+                    <span className="toc-page">{c.publishedAt}</span>
+                  </div>
+                ) : (
+                  <Link key={c.id} href={`/novels/${novelId}/${c.id}`} className="toc-row">
+                    <span className="toc-num">{String(c.chapterNumber).padStart(2, '0')}</span>
+                    <span>{c.title}</span>
+                    <span className="toc-dots" />
+                    <span className="toc-page">{c.publishedAt}</span>
+                  </Link>
+                )
               ))}
               {futureChapters.map((c) => (
                 <div key={c.id} className="toc-row" style={{ opacity: 0.4, cursor: 'default' }}>
@@ -647,7 +657,7 @@ export default function EbookPage() {
               ✦ &nbsp; 試　讀 &nbsp; ✦
             </p>
             <p style={{ fontSize: '0.8rem', color: '#5a4a38', marginTop: 8 }}>
-              以下為前 {previewChapters.length} 集試讀，更多章節請至上方目錄點選
+              以下為前 {previewChapters.length} 集試讀內容
             </p>
           </div>
         )}

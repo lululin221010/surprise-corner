@@ -1,11 +1,14 @@
 // 📄 路徑：src/app/novels/[novelId]/[chapterId]/page.tsx
 
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 import WallPostForm from '@/components/WallPostForm'
+
+// 連載小說不用章節頁，一律導回 ebook 試讀頁
+const SERIAL_NOVEL_IDS = ['lulu-diary', 'the-last-signal', 'lulu-life']
 
 // ✅ 判斷章節是否已到發布日（台灣時區 UTC+8）
 function isPublishedByDate(publishedAt: string): boolean {
@@ -69,6 +72,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ChapterPage({ params }: Props) {
   const { novelId, chapterId } = await params
+
+  // 連載小說章節頁不開放，直接導回 ebook 試讀頁
+  if (SERIAL_NOVEL_IDS.includes(novelId)) {
+    redirect(`/novels/${novelId}/ebook`)
+  }
+
   const novel = novelsData.find(n => n.id === novelId)
   const chapter = (chaptersData as any[]).find(c => c.id === chapterId && c.novelId === novelId)
   if (!novel || !chapter) notFound()
