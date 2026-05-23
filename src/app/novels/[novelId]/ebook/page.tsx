@@ -733,20 +733,11 @@ export default function EbookPage() {
             {((novel as any).forSale === false || isSerial) ? (
               <>
                 <p className="footer-text">
-                  連載更新中，歡迎繼續追蹤 🐾<br />
-                  小舖還有更多精采的書等你探索。
+                  連載更新中，歡迎繼續追蹤 🐾
                 </p>
                 <div className="footer-btns">
-                  <a
-                    href="https://still-time-corner.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-shop"
-                  >
-                    去小舖看看其他精采的書 →
-                  </a>
                   <Link href="/novels" className="footer-browse">
-                    繼續逛驚喜角落 →
+                    ← 返回小說列表
                   </Link>
                 </div>
               </>
