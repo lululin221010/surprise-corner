@@ -367,14 +367,11 @@ export default function Home() {
               justifyContent: 'center', marginTop: '24px',
               maxWidth: '560px', width: '100%',
             }}>
-              {/* Card 1：隨手驚喜（最新一筆） */}
+              {/* Card 1：驚喜好料 */}
               <a href="/random" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(168,85,247,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
-                {latestSurprise.image
-                  ? <img src={latestSurprise.image} alt="" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover' }} />
-                  : <span style={{ fontSize: '1.4rem' }}>✨</span>
-                }
-                <span style={{ color: '#a855f7', fontWeight: 700, fontSize: '0.85rem' }}>隨手驚喜</span>
-                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>{latestSurprise.text.slice(0, 28)}…</span>
+                <span style={{ fontSize: '1.4rem' }}>🍭</span>
+                <span style={{ color: '#a855f7', fontWeight: 700, fontSize: '0.85rem' }}>驚喜好料</span>
+                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>免費試讀・小舖好康</span>
                 <span style={{ marginTop: '4px', color: '#a855f7', fontSize: '0.75rem', fontWeight: 600, border: '1px solid rgba(168,85,247,0.55)', borderRadius: '20px', padding: '3px 12px' }}>進入 →</span>
               </a>
 

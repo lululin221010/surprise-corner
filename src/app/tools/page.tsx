@@ -23,7 +23,7 @@ const RANDOM_PAGES = [
   { href: '/ai-news', label: '🗞 AI快訊' },
   { href: '/creator', label: '✍️ 創作空間' },
   { href: '/novels', label: '📚 連載小說' },
-  { href: '/random', label: '🎲 隨機驚喜' },
+  { href: '/random', label: '🍭 驚喜好料' },
   { href: '/wall', label: '🔥 互動牆' },
   ];
 
