@@ -124,7 +124,7 @@ export default function Navbar() {
           border: '1px solid rgba(52,211,153,0.35)',
         }}
       >
-        📊 股票工具
+        📊 收租AI
       </a>
 
       {/* ✅ 隱私權政策（靠右，小字）*/}

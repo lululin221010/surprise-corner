@@ -103,7 +103,7 @@ export default function SurpriseGoodies() {
           <div style={{ fontSize: '1.6rem', marginBottom: '0.4rem' }}>🎁</div>
           <p style={{ fontWeight: 700, fontSize: '0.95rem', margin: '0 0 0.3rem' }}>還有更多好康在小舖</p>
           <p style={{ color: '#7c6fa0', fontSize: '0.78rem', margin: '0 0 1rem', lineHeight: 1.5 }}>
-            那個感覺系列會員免費閱讀、股票工具體驗、神秘贈品⋯
+            那個感覺系列會員免費閱讀、收租AI 股票工具體驗、神秘贈品⋯
           </p>
           <a href="https://still-time-corner.vercel.app/my-perks"
             target="_blank" rel="noopener noreferrer"
