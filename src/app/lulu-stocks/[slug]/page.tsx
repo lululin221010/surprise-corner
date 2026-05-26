@@ -107,10 +107,10 @@ export default function LuluStockArticlePage({ params }: { params: { slug: strin
           borderRadius: '14px', padding: '1.5rem', textAlign: 'center',
         }}>
           <p style={{ color: '#34d399', fontWeight: 800, fontSize: '1.05rem', margin: '0 0 0.4rem' }}>
-            📊 想看完整數據？
+            📊 想看 K 線圖＋完整 AI 分析？
           </p>
           <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 1rem' }}>
-            收租AI，免費看今日 K 線＋AI 訊號燈
+            免費體驗・每週精選 1 支完整版・不需信用卡
           </p>
           <a
             href="https://stock-dashboard-ochre-sigma.vercel.app"
@@ -124,7 +124,7 @@ export default function LuluStockArticlePage({ params }: { params: { slug: strin
               textDecoration: 'none', fontSize: '0.9rem',
             }}
           >
-            收租AI 免費看首頁訊號 →
+            🚀 免費體驗收租AI →
           </a>
           <p style={{ color: '#6b7280', fontSize: '0.75rem', margin: '0.8rem 0 0' }}>
             不用登入・免費使用・本站所有內容不構成投資建議
