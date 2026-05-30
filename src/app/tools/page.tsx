@@ -698,8 +698,9 @@ function RandomDecider() {
 
   // 新增選項到決策器
   function addOption() {
-    if (!inputVal.trim()) return;
-    setOptions(prev => [...prev, inputVal.trim()]);
+    const val = inputVal.trim().slice(0, 30);
+    if (!val) return;
+    setOptions(prev => [...prev, val]);
     setInputVal('');
     setActivePresetId(null); // 手動加了就不算預設情境
   }
@@ -735,10 +736,11 @@ function RandomDecider() {
     if (activePresetId === id) { setOptions([]); setResult(''); setActivePresetId(null); }
   }
 
-  // 抽籤動畫
+  // 抽籤動畫（最終結果不會跟上一次相同）
   function decide() {
     if (options.length < 2) return;
     setSpinning(true);
+    const prevResult = result;
     setResult('');
     let count = 0;
     const interval = setInterval(() => {
@@ -746,7 +748,16 @@ function RandomDecider() {
       count++;
       if (count > 15) {
         clearInterval(interval);
-        setResult(options[Math.floor(Math.random() * options.length)]);
+        // 如果選項 >1 個，確保結果不跟上次相同
+        let finalPick = options[Math.floor(Math.random() * options.length)];
+        if (options.length > 1) {
+          let tries = 0;
+          while (finalPick === prevResult && tries < 10) {
+            finalPick = options[Math.floor(Math.random() * options.length)];
+            tries++;
+          }
+        }
+        setResult(finalPick);
         setSpinning(false);
       }
     }, 80);
@@ -908,23 +919,11 @@ function RandomDecider() {
           borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
           <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
           <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.8rem' }}>✨ {result}</p>
-          <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem' }}>🔄 再抽一次</button>
-            <button
-              onClick={async () => {
-                const url = 'https://surprise-corner.vercel.app/tools?t=decide';
-                const text = `命運幫我選了：${result}！快來試試命運給你選什麼？`;
-                if (navigator.share) {
-                  try { await navigator.share({ title: '隨機決策器', text, url }); } catch {}
-                } else {
-                  await navigator.clipboard.writeText(`${text}\n${url}`);
-                }
-              }}
-              style={{ ...btnStyle(true), fontSize: '0.85rem' }}
-            >
-              🔗 分享這個結果
-            </button>
-          </div>
+          <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem', marginBottom: '1rem' }}>🔄 再抽一次</button>
+          <ShareButtons
+            title={`命運幫我選了：${result}！`}
+            content="快來試試命運給你選什麼？"
+          />
         </div>
       )}
     </div>
