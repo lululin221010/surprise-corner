@@ -1,7 +1,7 @@
 ﻿'use client';
 // 📄 路徑：src/app/tools/page.tsx
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import TodoNotice from '@/components/TodoNotice';
 import ShareButtons from '@/components/ShareButtons';
@@ -989,7 +989,33 @@ export default function ToolsPage() {
   const [timerInput, setTimerInput] = useState('25');
   const [timerRunning, setTimerRunning] = useState(false);
   const [randomPage] = useState(() => RANDOM_PAGES[Math.floor(Math.random() * RANDOM_PAGES.length)]);
+  const [shareToast, setShareToast] = useState('');
+
+  // ✅ 切換 tab 同時更新 URL（讓每個工具可以獨立分享）
+  const handleTabChange = useCallback((key: string) => {
+    setActiveTab(key as any);
+    window.history.pushState(null, '', '?t=' + key);
+  }, []);
+
+  // ✅ 分享單一工具
+  const shareTool = useCallback(async (key: string, label: string) => {
+    const url = `https://surprise-corner.vercel.app/tools?t=${key}`;
+    const text = `來試試這個免費小工具：${label}`;
+    if (navigator.share) {
+      try { await navigator.share({ title: label, text, url }); } catch {}
+    } else {
+      await navigator.clipboard.writeText(url);
+      setShareToast(label);
+      setTimeout(() => setShareToast(''), 2000);
+    }
+  }, []);
   const timerRef = useRef<ReturnType<typeof setInterval>|null>(null);
+
+  // ✅ 讀取 URL ?t= 參數，自動切換到對應工具
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get('t');
+    if (t) setActiveTab(t as any);
+  }, []);
 
   useEffect(() => {
     try {
@@ -1066,9 +1092,23 @@ export default function ToolsPage() {
             </p>
             <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
               {group.tabs.map(tab => (
-                <button key={tab.key} style={btnStyle(activeTab === tab.key)} onClick={() => setActiveTab(tab.key as any)}>
-                  {tab.label}
-                </button>
+                <div key={tab.key} style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                  <button style={btnStyle(activeTab === tab.key)} onClick={() => handleTabChange(tab.key)}>
+                    {tab.label}
+                  </button>
+                  {/* 🔗 分享這個工具 */}
+                  <button
+                    onClick={() => shareTool(tab.key, tab.label)}
+                    title={`分享「${tab.label}」`}
+                    style={{
+                      background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '50%', width: '22px', height: '22px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      cursor: 'pointer', fontSize: '0.65rem', color: '#6b7280',
+                      padding: 0, flexShrink: 0,
+                    }}
+                  >🔗</button>
+                </div>
               ))}
             </div>
           </div>
@@ -1229,10 +1269,23 @@ export default function ToolsPage() {
           </a>
         </div>
 
-        {/* 分享 */}
+        {/* 分享整頁 */}
         <div style={{ marginTop:'2rem' }}>
-          <ShareButtons title="驚喜角落 小工具" content="密碼產生、BMI計算、隨機決策、匯率換算……各種免費小工具一次搞定！" />
+          <p style={{ color:'#6b7280', fontSize:'0.8rem', textAlign:'center', marginBottom:'0.5rem' }}>分享整個工具箱</p>
+          <ShareButtons title="驚喜角落 小工具箱" content="密碼產生、BMI計算、隨機決策、匯率換算……各種免費小工具一次搞定！" />
         </div>
+
+        {/* 複製成功 toast */}
+        {shareToast && (
+          <div style={{
+            position:'fixed', bottom:'2rem', left:'50%', transform:'translateX(-50%)',
+            background:'rgba(124,58,237,0.95)', borderRadius:'30px',
+            padding:'0.6rem 1.4rem', color:'#fff', fontSize:'0.88rem',
+            fontWeight:700, zIndex:9999, whiteSpace:'nowrap',
+          }}>
+            ✅ 已複製「{shareToast}」的連結！
+          </div>
+        )}
 
         {/* 返回 & 隱私權 */}
         <div style={{ textAlign:'center', marginTop:'1.5rem', paddingBottom:'1rem', display:'flex', gap:'1.5rem', justifyContent:'center', alignItems:'center', flexWrap:'wrap' }}>
