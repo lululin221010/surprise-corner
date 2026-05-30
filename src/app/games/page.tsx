@@ -262,8 +262,8 @@ export default function GamesPage() {
         {/* 標題 */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🎮</div>
-          <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: '0 0 0.5rem' }}>遊戲 & 工具</h1>
-          <p style={{ color: '#9ca3af', fontSize: '0.95rem', margin: 0 }}>放空、好玩、順便做點事</p>
+          <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: '0 0 0.5rem' }}>小遊戲 & 占卜</h1>
+          <p style={{ color: '#9ca3af', fontSize: '0.95rem', margin: 0 }}>放空一下，玩幾分鐘再走</p>
         </div>
 
         {/* ── 小遊戲 & 占卜 ── */}
