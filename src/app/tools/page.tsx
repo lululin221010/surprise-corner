@@ -189,9 +189,29 @@ function AiToolPanel({ type, placeholder, label, emoji, signs }: AiPanelProps) {
 
       {aiResult && (
         <div style={{ marginTop: '1.5rem', background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '1.5rem' }}>
-          <p style={{ color: '#f3f4f6', fontSize: '1.1rem', lineHeight: 1.9, margin: '0 0 1.2rem', fontStyle: 'italic' }}>
+          <p style={{ color: '#f3f4f6', fontSize: '1.1rem', lineHeight: 1.9, margin: '0 0 1rem', fontStyle: 'italic' }}>
             「{aiResult}」
           </p>
+
+          {/* 分享結果 */}
+          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.2rem' }}>
+            {[
+              { label: 'LINE', color: '#00B900', href: `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(aiResult)}` },
+              { label: 'Facebook', color: '#1877F2', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}` },
+            ].map(btn => (
+              <a key={btn.label} href={btn.href} target="_blank" rel="noopener noreferrer" style={{
+                background: btn.color, color: '#fff', borderRadius: '8px',
+                padding: '0.4rem 1rem', fontSize: '0.82rem', fontWeight: 700,
+                textDecoration: 'none',
+              }}>{btn.label}</a>
+            ))}
+            <button onClick={async () => {
+              await navigator.clipboard.writeText(aiResult);
+            }} style={{
+              background: '#4b5563', color: '#fff', border: 'none', borderRadius: '8px',
+              padding: '0.4rem 1rem', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer',
+            }}>複製文字</button>
+          </div>
 
           {/* ✅ 尚未送出：顯示寫給誰 + 你的暱稱 */}
           {wallMsg !== 'ok' && (
@@ -999,8 +1019,20 @@ function BmiCalculator() {
         <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '1.2rem', textAlign: 'center' }}>
           <div style={{ fontSize: '3rem', fontWeight: 800, color: result.color, lineHeight: 1 }}>{result.bmi}</div>
           <div style={{ color: result.color, fontWeight: 700, fontSize: '1.1rem', margin: '0.3rem 0' }}>{result.label}</div>
-          <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0.5rem 0 0' }}>{result.tip}</p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+          <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0.5rem 0 0.8rem' }}>{result.tip}</p>
+          {/* 分享 BMI 結果 */}
+          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
+            {[
+              { label: 'LINE', color: '#00B900', href: `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent('https://surprise-corner.vercel.app/tools?t=bmi')}&text=${encodeURIComponent(`我的BMI是${result.bmi}，屬於${result.label}！快來算算你的BMI！`)}` },
+              { label: 'Facebook', color: '#1877F2', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://surprise-corner.vercel.app/tools?t=bmi')}` },
+            ].map(btn => (
+              <a key={btn.label} href={btn.href} target="_blank" rel="noopener noreferrer" style={{
+                background: btn.color, color: '#fff', borderRadius: '8px',
+                padding: '0.4rem 1rem', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none',
+              }}>{btn.label}</a>
+            ))}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
             {[{range:'< 18.5',label:'過輕',c:'#60a5fa'},{range:'18.5-24',label:'正常',c:'#10b981'},{range:'24-27',label:'過重',c:'#f59e0b'},{range:'27+',label:'肥胖',c:'#ef4444'}].map(s => (
               <div key={s.label} style={{ textAlign: 'center' }}>
                 <div style={{ color: s.c, fontSize: '0.7rem', fontWeight: 700 }}>{s.label}</div>
@@ -1191,7 +1223,11 @@ export default function ToolsPage() {
               <div style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(236,72,153,0.3))', borderRadius: '12px', padding: '2rem', marginBottom: '1.5rem' }}>
                 <p style={{ color: '#f3f4f6', fontSize: '1.2rem', lineHeight: 1.8, margin: 0, fontStyle: 'italic' }}>「{quote}」</p>
               </div>
-              <button onClick={() => setQuote(QUOTES[Math.floor(Math.random()*QUOTES.length)])} style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem' }}>🎲 換一句</button>
+              <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button onClick={() => setQuote(QUOTES[Math.floor(Math.random()*QUOTES.length)])} style={{ ...btnStyle(true), padding: '0.7rem 2rem', fontSize: '1rem' }}>🎲 換一句</button>
+                <a href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent('https://surprise-corner.vercel.app/tools?t=quote')}&text=${encodeURIComponent(quote)}`} target="_blank" rel="noopener noreferrer" style={{ background:'#00B900', color:'#fff', borderRadius:'8px', padding:'0.7rem 1.2rem', fontSize:'0.9rem', fontWeight:700, textDecoration:'none', display:'flex', alignItems:'center' }}>LINE</a>
+                <button onClick={async () => { await navigator.clipboard.writeText(quote); }} style={{ ...btnStyle(), padding:'0.7rem 1.2rem', fontSize:'0.9rem' }}>複製</button>
+              </div>
             </div>
           )}
 
