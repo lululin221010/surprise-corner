@@ -852,23 +852,31 @@ function RandomDecider() {
 
       {/* 手動輸入選項區 */}
       <p style={{ color: '#c4b5fd', fontSize: '0.8rem', margin: '0 0 0.5rem' }}>✏️ 或自己輸入選項：</p>
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.8rem' }}>
-        <input value={inputVal} onChange={e => setInputVal(e.target.value)}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
+        <input
+          value={inputVal}
+          onChange={e => setInputVal(e.target.value.slice(0, 30))}
           onKeyDown={e => e.key === 'Enter' && addOption()}
-          placeholder="輸入一個選項，按 Enter 新增" style={{ ...inputStyle, flex: 1 }} />
+          placeholder="輸入一個選項，按 Enter 新增"
+          maxLength={30}
+          style={{ ...inputStyle, flex: 1 }}
+        />
         <button onClick={addOption} style={{ ...btnStyle(true), flexShrink: 0 }}>+ 新增</button>
       </div>
+      {/* 字數提示 */}
+      <div style={{ textAlign: 'right', fontSize: '0.72rem', color: inputVal.length >= 28 ? '#f87171' : '#4b5563', marginBottom: '0.8rem' }}>
+        {inputVal.length} / 30
+      </div>
 
-      {/* 目前選項 */}
+      {/* 目前選項：只能清除全部，不能單獨刪除 */}
       {options.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.2rem', alignItems: 'center' }}>
           {options.map((opt, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem',
+            <div key={i} style={{
               background: 'rgba(124,58,237,0.25)', borderRadius: '20px', padding: '0.3rem 0.8rem',
-              fontSize: '0.85rem', color: '#e9d5ff' }}>
+              fontSize: '0.85rem', color: '#e9d5ff',
+            }}>
               {opt}
-              <button onClick={() => { setOptions(options.filter((_, j) => j !== i)); setResult(''); setActivePresetId(null); }}
-                style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', fontSize: '0.9rem', padding: '0', lineHeight: 1 }}>✕</button>
             </div>
           ))}
           <button onClick={() => { setOptions([]); setResult(''); setActivePresetId(null); }}
