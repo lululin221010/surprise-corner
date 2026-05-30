@@ -898,7 +898,23 @@ function RandomDecider() {
           borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
           <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
           <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.8rem' }}>✨ {result}</p>
-          <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem' }}>🔄 再抽一次</button>
+          <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem' }}>🔄 再抽一次</button>
+            <button
+              onClick={async () => {
+                const url = 'https://surprise-corner.vercel.app/tools?t=decide';
+                const text = `命運幫我選了：${result}！快來試試命運給你選什麼？`;
+                if (navigator.share) {
+                  try { await navigator.share({ title: '隨機決策器', text, url }); } catch {}
+                } else {
+                  await navigator.clipboard.writeText(`${text}\n${url}`);
+                }
+              }}
+              style={{ ...btnStyle(true), fontSize: '0.85rem' }}
+            >
+              🔗 分享這個結果
+            </button>
+          </div>
         </div>
       )}
     </div>
