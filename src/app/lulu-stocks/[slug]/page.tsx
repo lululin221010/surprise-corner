@@ -29,6 +29,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${article.title} | 魯魯說股票`,
     description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      images: article.image ? [{ url: article.image }] : [{ url: '/icon-512.png', width: 512, height: 512 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt,
+    },
   }
 }
 

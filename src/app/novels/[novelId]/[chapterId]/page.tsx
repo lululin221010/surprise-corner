@@ -68,6 +68,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${chapter.title} — ${novel.title}`,
     description: chapter.content.slice(0, 100) + '...',
+    openGraph: {
+      title: `${chapter.title} — ${novel.title}`,
+      description: chapter.content.slice(0, 100) + '...',
+      images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    },
+    twitter: {
+      card: 'summary',
+      title: `${chapter.title} — ${novel.title}`,
+      description: chapter.content.slice(0, 100) + '...',
+    },
   }
 }
 
