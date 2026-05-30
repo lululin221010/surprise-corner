@@ -863,10 +863,12 @@ function RandomDecider() {
         />
         <button onClick={addOption} style={{ ...btnStyle(true), flexShrink: 0 }}>+ 新增</button>
       </div>
-      {/* 字數提示 */}
-      <div style={{ textAlign: 'right', fontSize: '0.72rem', color: inputVal.length >= 28 ? '#f87171' : '#4b5563', marginBottom: '0.8rem' }}>
-        {inputVal.length} / 30
-      </div>
+      {/* 字數提示：≥25字才顯示 */}
+      {inputVal.length >= 25 && (
+        <div style={{ textAlign: 'right', fontSize: '0.72rem', color: inputVal.length >= 28 ? '#f87171' : '#f59e0b', marginBottom: '0.8rem' }}>
+          {inputVal.length} / 30
+        </div>
+      )}
 
       {/* 目前選項：只能清除全部，不能單獨刪除 */}
       {options.length > 0 && (
