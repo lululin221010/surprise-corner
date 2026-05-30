@@ -2,6 +2,8 @@
 // 📄 路徑：src/app/tools/audio-to-text/page.tsx
 
 import { useState, useRef } from 'react';
+import Link from 'next/link';
+import ShareButtons from '@/components/ShareButtons';
 
 const bg = 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)';
 const cardStyle: React.CSSProperties = {
@@ -213,7 +215,12 @@ export default function AudioToTextPage() {
           </ul>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '2rem', paddingBottom: '1rem' }}>
+        <div style={{ marginTop: '2rem' }}>
+          <p style={{ color: '#6b7280', fontSize: '0.8rem', textAlign: 'center', marginBottom: '0.5rem' }}>覺得好用？推薦給朋友 👇</p>
+          <ShareButtons title="免費語音轉文字工具" content="上傳音檔，AI 幫你轉成文字，支援中文、英文、日文，免費使用！" />
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', paddingBottom: '1rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Link href="/tools" style={{ color: '#7c3aed', fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>← 回小工具</Link>
           <a href="/privacy" style={{ color: '#4b5563', fontSize: '0.75rem', textDecoration: 'none' }}>隱私權政策</a>
         </div>
       </div>

@@ -3,6 +3,8 @@
 // 純前端 Canvas 浮水印工具
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import ShareButtons from '@/components/ShareButtons';
 
 const bg = 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)';
 const cardStyle: React.CSSProperties = {
@@ -257,7 +259,17 @@ export default function WatermarkPage() {
         {/* 隱藏的完整尺寸 canvas（用於下載） */}
         <canvas ref={canvasRef} style={{ display: 'none' }} />
 
-        <div style={{ textAlign: 'center', marginTop: '2rem', paddingBottom: '1rem' }}>
+        {/* 分享工具（不是分享結果） */}
+        <div style={{ marginTop: '2rem' }}>
+          <p style={{ color: '#6b7280', fontSize: '0.8rem', textAlign: 'center', marginBottom: '0.5rem' }}>
+            覺得好用？推薦給朋友 👇
+          </p>
+          <ShareButtons title="免費圖片加浮水印工具" content="幫你的照片加上文字浮水印，保護作品版權。免費、不需上傳、完全在瀏覽器處理！" />
+        </div>
+
+        {/* 返回 & 隱私權 */}
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', paddingBottom: '1rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+          <Link href="/tools" style={{ color: '#7c3aed', fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>← 回小工具</Link>
           <a href="/privacy" style={{ color: '#4b5563', fontSize: '0.75rem', textDecoration: 'none' }}>隱私權政策</a>
         </div>
       </div>
