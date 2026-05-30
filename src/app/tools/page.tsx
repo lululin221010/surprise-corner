@@ -680,6 +680,11 @@ function RandomDecider() {
       const saved = localStorage.getItem('sc_decide_presets');
       if (saved) setCustomPresets(JSON.parse(saved));
     } catch {}
+    // ✅ 恢復上次手動輸入的選項
+    try {
+      const savedOptions = localStorage.getItem('sc_decide_options');
+      if (savedOptions) setOptions(JSON.parse(savedOptions));
+    } catch {}
     setPresetsLoaded(true);
   }, []);
 
@@ -688,6 +693,12 @@ function RandomDecider() {
     if (!presetsLoaded) return;
     try { localStorage.setItem('sc_decide_presets', JSON.stringify(customPresets)); } catch {}
   }, [customPresets, presetsLoaded]);
+
+  // ✅ 自動儲存目前選項（手動輸入的）
+  useEffect(() => {
+    if (!presetsLoaded) return;
+    try { localStorage.setItem('sc_decide_options', JSON.stringify(options)); } catch {}
+  }, [options, presetsLoaded]);
 
   // 載入某個情境
   function loadPreset(preset: { id: string; label: string; options: string[] }) {
