@@ -231,7 +231,10 @@ export default function TarotGame() {
             )}
 
             <div className="mt-2 mb-2">
-              <ShareButtons title="我的塔羅占卜結果" content="用驚喜角落抽了牌陣，快來試試！" />
+              <ShareButtons
+                title={`我抽到了「${cards[0]?.card?.name ?? ''}」${cards[0]?.card?.isReversed ? '逆位' : '正位'}`}
+                content={cards.length > 1 ? `還有另外 ${cards.length - 1} 張牌，快來抽一張！` : '快來抽一張！'}
+              />
             </div>
 
             <button onClick={handleReset} className="text-[10px] font-bold text-purple-500 hover:text-purple-300 transition-colors py-4 opacity-40 hover:opacity-100 uppercase tracking-[0.4em]">

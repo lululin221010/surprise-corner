@@ -261,7 +261,10 @@ export default function BaziPage() {
               ✨ 以節氣（立春約2/4）為年分界，月柱以各月4日左右為基準，僅供娛樂參考
             </p>
 
-            <ShareButtons title="我的八字命盤" content="用驚喜角落算出我的四柱八字，快來試試！" />
+            <ShareButtons
+              title={`我的日主是${DAY_MASTER_DESC[result.dayMaster]?.title ?? result.dayMaster}`}
+              content={`${(['木','火','土','金','水'] as const).filter(el => !result.elements[el]).length > 0 ? `五行缺${(['木','火','土','金','水'] as const).filter(el => !result.elements[el]).join('')}，` : ''}來算算你的八字命盤！`}
+            />
           </div>
         )}
 

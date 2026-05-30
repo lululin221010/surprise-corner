@@ -309,7 +309,10 @@ export default function NameNumerologyPage() {
               大凶者也別慌，名字只是參考——請勿找父母算帳 😂
             </p>
 
-            <ShareButtons title="我的三才五格姓名學結果" content="用驚喜角落算出我的姓名筆劃分析，快來試試！" />
+            <ShareButtons
+              title={`我的姓名總格${result.grids.find((g: any) => g.label === '總格')?.fortune.rating ?? ''}！`}
+              content="來算算你的三才五格姓名學！"
+            />
           </div>
         )}
 
