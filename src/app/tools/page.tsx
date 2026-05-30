@@ -931,11 +931,21 @@ function RandomDecider() {
           borderRadius: '12px', padding: '1.5rem', textAlign: 'center' }}>
           <p style={{ color: '#9ca3af', fontSize: '0.85rem', margin: '0 0 0.5rem' }}>命運選擇了</p>
           <p style={{ color: '#f3f4f6', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.8rem' }}>✨ {result}</p>
-          <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem', marginBottom: '1rem' }}>🔄 再抽一次</button>
-          <ShareButtons
-            title={`命運幫我選了：${result}！`}
-            content="快來試試命運給你選什麼？"
-          />
+          <button onClick={decide} style={{ ...btnStyle(), fontSize: '0.85rem', marginBottom: '1.2rem' }}>🔄 再抽一次</button>
+          {/* 分享結果按鈕 */}
+          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {[
+              { label: 'Facebook', color: '#1877F2', onClick: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://surprise-corner.vercel.app/tools?t=decide')}`, '_blank', 'width=600,height=400') },
+              { label: 'LINE', color: '#00B900', onClick: () => window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent('https://surprise-corner.vercel.app/tools?t=decide')}&text=${encodeURIComponent(`命運幫我選了：${result}！快來試試命運給你選什麼？`)}`, '_blank', 'width=600,height=400') },
+              { label: '複製連結', color: '#6b7280', onClick: async () => { await navigator.clipboard.writeText(`命運幫我選了：${result}！快來試試命運給你選什麼？\nhttps://surprise-corner.vercel.app/tools?t=decide`); } },
+            ].map(btn => (
+              <button key={btn.label} onClick={btn.onClick} style={{
+                background: btn.color, color: '#fff', border: 'none',
+                borderRadius: '8px', padding: '0.45rem 1rem',
+                fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer',
+              }}>{btn.label}</button>
+            ))}
+          </div>
         </div>
       )}
     </div>
