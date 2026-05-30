@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: '每日星座運勢 | Surprise Corner',
     description: '牡羊到雙魚，12星座今日運勢一次看。愛情、事業、財運、健康全包！',
-    images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: '每日星座運勢 | Surprise Corner',
     description: '12星座今日運勢一次看，每天0點更新。',
   },

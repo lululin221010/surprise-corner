@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: '心理測驗 | Surprise Corner',
     description: '你的依附類型是什麼？你在用哪種防禦機制保護自己？12題左右，測出你從沒注意過的自己。',
-    images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: '心理測驗 | Surprise Corner',
     description: '多種心理測驗免費測，了解你的依附類型、防禦機制與內在模式。',
   },

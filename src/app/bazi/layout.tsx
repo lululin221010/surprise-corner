@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: '八字命盤 | Surprise Corner',
     description: '輸入生日，算出你的四柱八字與五行分佈，了解自己的命格與個性特質！',
-    images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: '八字命盤 | Surprise Corner',
     description: '輸入生日算出四柱八字，解析五行命格。免費，即時。',
   },

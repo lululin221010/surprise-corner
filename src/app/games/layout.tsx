@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: '遊戲 & 工具 | Surprise Corner',
     description: '小遊戲、占卜、命理、AI工具一次集合，隨時玩、完全免費！',
-    images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: '遊戲 & 工具 | Surprise Corner',
     description: '小遊戲、占卜、命理、AI工具一次集合，隨時玩、完全免費！',
   },

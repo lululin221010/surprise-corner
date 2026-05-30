@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: '三才五格姓名學 | Surprise Corner',
     description: '輸入你的姓名筆劃，算出天格、人格、地格、外格、總格五格吉凶！',
-    images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: '三才五格姓名學 | Surprise Corner',
     description: '傳統三才五格筆劃姓名學，免費即時分析。',
   },
