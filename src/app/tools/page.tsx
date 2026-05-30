@@ -2,7 +2,9 @@
 // 📄 路徑：src/app/tools/page.tsx
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import TodoNotice from '@/components/TodoNotice';
+import ShareButtons from '@/components/ShareButtons';
 
 const QUOTES = [
   '每一天都是嶄新的開始，別讓昨天的遺憾佔據今天的空間。',
@@ -1227,7 +1229,14 @@ export default function ToolsPage() {
           </a>
         </div>
 
-        <div style={{ textAlign:'center', marginTop:'2rem', paddingBottom:'1rem' }}>
+        {/* 分享 */}
+        <div style={{ marginTop:'2rem' }}>
+          <ShareButtons title="驚喜角落 小工具" content="密碼產生、BMI計算、隨機決策、匯率換算……各種免費小工具一次搞定！" />
+        </div>
+
+        {/* 返回 & 隱私權 */}
+        <div style={{ textAlign:'center', marginTop:'1.5rem', paddingBottom:'1rem', display:'flex', gap:'1.5rem', justifyContent:'center', alignItems:'center', flexWrap:'wrap' }}>
+          <Link href="/" style={{ color:'#7c3aed', fontSize:'0.9rem', textDecoration:'none', fontWeight:600 }}>← 回首頁</Link>
           <a href="/privacy" style={{ color:'#4b5563', fontSize:'0.75rem', textDecoration:'none' }}>隱私權政策</a>
         </div>
       </div>
