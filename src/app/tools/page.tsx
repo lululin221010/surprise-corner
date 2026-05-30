@@ -698,8 +698,9 @@ function RandomDecider() {
 
   // 新增選項到決策器
   function addOption() {
-    const val = inputVal.trim().slice(0, 30);
+    const val = inputVal.trim();
     if (!val) return;
+    if (val.length > 30) return; // 超過30字不加入（輸入框已限制，此為保險）
     setOptions(prev => [...prev, val]);
     setInputVal('');
     setActivePresetId(null); // 手動加了就不算預設情境
