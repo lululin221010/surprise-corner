@@ -11,7 +11,7 @@ const links = [
   { href: '/books',         label: '📚 書評角落' },
   { href: '/ai-news',       label: '📰 快訊' },
   { href: '/lulu-stocks',   label: '🐱 魯魯說股票' },
-  { href: '/games',         label: '🎮 小遊戲' },
+  { href: '/games',         label: '🎮 遊戲&工具' },
   // ✅ 管理頁面已從導覽列移除（直接輸入 /admin 仍可進入）
 ];
 

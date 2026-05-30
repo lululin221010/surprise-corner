@@ -2,6 +2,9 @@
 // 📄 路徑：src/app/games/page.tsx
 
 import Link from 'next/link';
+import { useState } from 'react';
+
+const BASE_URL = 'https://surprise-corner.vercel.app';
 
 const GAMES = [
   {
@@ -85,12 +88,167 @@ const GAMES = [
     glow: 'rgba(6,182,212,0.3)',
     tag: '益智',
   },
+  {
+    href: '/quiz',
+    icon: '🧠',
+    title: '心理測驗',
+    desc: '多種心理測驗，了解自己的個性、情緒與思維模式。',
+    color: '#8b5cf6',
+    glow: 'rgba(139,92,246,0.3)',
+    tag: '測驗',
+  },
+];
+
+const TOOLS = [
+  {
+    href: '/tools/watermark',
+    icon: '🖼️',
+    title: '圖片浮水印',
+    desc: '幫照片加上文字浮水印，保護你的作品版權。',
+    color: '#10b981',
+    glow: 'rgba(16,185,129,0.3)',
+    tag: '圖片',
+  },
+  {
+    href: '/tools/id-photo',
+    icon: '📷',
+    title: '證件照製作',
+    desc: '上傳照片，一鍵製作各尺寸證件照，免費下載。',
+    color: '#3b82f6',
+    glow: 'rgba(59,130,246,0.3)',
+    tag: '生活',
+  },
+  {
+    href: '/tools/audio-to-text',
+    icon: '🎙️',
+    title: '語音轉文字',
+    desc: '上傳音檔，AI 幫你轉成文字，支援多種語言。',
+    color: '#f59e0b',
+    glow: 'rgba(245,158,11,0.3)',
+    tag: 'AI',
+  },
+  {
+    href: '/tools/reminder',
+    icon: '⏰',
+    title: '提醒小工具',
+    desc: '設定倒數提醒，時間到會發出通知。',
+    color: '#ec4899',
+    glow: 'rgba(236,72,153,0.3)',
+    tag: '生活',
+  },
+  {
+    href: '/tools',
+    icon: '✨',
+    title: 'AI 生活工具箱',
+    desc: '情書、生日祝福、每日鼓勵、命名靈感…各種 AI 小工具一次搞定。',
+    color: '#a78bfa',
+    glow: 'rgba(167,139,250,0.3)',
+    tag: 'AI',
+  },
 ];
 
 const COMING_SOON = [
   { icon: '🃏', title: '魯魯記憶配對', desc: '翻牌配對魯魯的照片，考驗你的記憶力。' },
   { icon: '🎯', title: '幸運轉盤', desc: '轉出今日關鍵字，帶著它去過一天。' },
 ];
+
+function ShareButton({ href, title }: { href: string; title: string }) {
+  const [copied, setCopied] = useState(false);
+  const url = BASE_URL + href;
+
+  async function handleShare(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text: `來玩「${title}」！`, url });
+      } catch { /* 取消分享不處理 */ }
+    } else {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }
+
+  return (
+    <button
+      onClick={handleShare}
+      title="分享這個"
+      style={{
+        position: 'absolute', top: '0.8rem', left: '0.8rem',
+        background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.15)',
+        borderRadius: '50%', width: '2rem', height: '2rem',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'pointer', fontSize: '0.85rem', color: '#d1d5db',
+        transition: 'all 0.2s', zIndex: 2,
+      }}
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLElement).style.background = 'rgba(124,58,237,0.5)';
+        (e.currentTarget as HTMLElement).style.color = '#fff';
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.35)';
+        (e.currentTarget as HTMLElement).style.color = '#d1d5db';
+      }}
+    >
+      {copied ? '✓' : '🔗'}
+    </button>
+  );
+}
+
+interface Item {
+  href: string;
+  icon: string;
+  title: string;
+  desc: string;
+  color: string;
+  glow: string;
+  tag: string;
+}
+
+function ItemCard({ item, actionLabel }: { item: Item; actionLabel: string }) {
+  return (
+    <Link key={item.href} href={item.href} style={{ textDecoration: 'none' }}>
+      <div style={{
+        background: 'rgba(255,255,255,0.07)',
+        border: `1px solid ${item.color}44`,
+        borderRadius: '20px',
+        padding: '1.8rem 1.5rem',
+        cursor: 'pointer',
+        transition: 'all 0.2s',
+        boxShadow: `0 0 20px ${item.glow}`,
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+        onMouseEnter={e => {
+          (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
+          (e.currentTarget as HTMLElement).style.borderColor = `${item.color}99`;
+        }}
+        onMouseLeave={e => {
+          (e.currentTarget as HTMLElement).style.transform = 'none';
+          (e.currentTarget as HTMLElement).style.borderColor = `${item.color}44`;
+        }}
+      >
+        <ShareButton href={item.href} title={item.title} />
+        <span style={{
+          position: 'absolute', top: '1rem', right: '1rem',
+          background: `${item.color}33`, color: item.color,
+          fontSize: '0.7rem', fontWeight: 700, padding: '0.2rem 0.6rem',
+          borderRadius: '20px', border: `1px solid ${item.color}44`,
+        }}>{item.tag}</span>
+        <div style={{ fontSize: '3rem', marginBottom: '0.8rem' }}>{item.icon}</div>
+        <h2 style={{ color: '#f3f4f6', fontSize: '1.2rem', fontWeight: 800, margin: '0 0 0.5rem' }}>{item.title}</h2>
+        <p style={{ color: '#9ca3af', fontSize: '0.85rem', lineHeight: 1.6, margin: '0 0 1.2rem' }}>{item.desc}</p>
+        <span style={{
+          display: 'inline-block',
+          background: `linear-gradient(135deg, ${item.color}, ${item.color}cc)`,
+          color: '#fff', fontSize: '0.85rem', fontWeight: 700,
+          padding: '0.4rem 1.2rem', borderRadius: '30px',
+        }}>{actionLabel}</span>
+      </div>
+    </Link>
+  );
+}
 
 export default function GamesPage() {
   return (
@@ -104,52 +262,20 @@ export default function GamesPage() {
         {/* 標題 */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🎮</div>
-          <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: '0 0 0.5rem' }}>小遊戲</h1>
-          <p style={{ color: '#9ca3af', fontSize: '0.95rem', margin: 0 }}>放空一下，玩幾分鐘再走</p>
+          <h1 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, margin: '0 0 0.5rem' }}>遊戲 & 工具</h1>
+          <p style={{ color: '#9ca3af', fontSize: '0.95rem', margin: 0 }}>放空、好玩、順便做點事</p>
         </div>
 
-        {/* 遊戲卡片 */}
+        {/* ── 小遊戲 & 占卜 ── */}
+        <p style={{ color: '#6b7280', fontSize: '0.75rem', letterSpacing: '0.1em', margin: '0 0 1rem 0.2rem' }}>🎮 小遊戲 & 占卜</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.2rem', marginBottom: '3rem' }}>
-          {GAMES.map(g => (
-            <Link key={g.href} href={g.href} style={{ textDecoration: 'none' }}>
-              <div style={{
-                background: 'rgba(255,255,255,0.07)',
-                border: `1px solid ${g.color}44`,
-                borderRadius: '20px',
-                padding: '1.8rem 1.5rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                boxShadow: `0 0 20px ${g.glow}`,
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
-                  (e.currentTarget as HTMLElement).style.borderColor = `${g.color}99`;
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.transform = 'none';
-                  (e.currentTarget as HTMLElement).style.borderColor = `${g.color}44`;
-                }}
-              >
-                <span style={{
-                  position: 'absolute', top: '1rem', right: '1rem',
-                  background: `${g.color}33`, color: g.color,
-                  fontSize: '0.7rem', fontWeight: 700, padding: '0.2rem 0.6rem',
-                  borderRadius: '20px', border: `1px solid ${g.color}44`,
-                }}>{g.tag}</span>
-                <div style={{ fontSize: '3rem', marginBottom: '0.8rem' }}>{g.icon}</div>
-                <h2 style={{ color: '#f3f4f6', fontSize: '1.2rem', fontWeight: 800, margin: '0 0 0.5rem' }}>{g.title}</h2>
-                <p style={{ color: '#9ca3af', fontSize: '0.85rem', lineHeight: 1.6, margin: '0 0 1.2rem' }}>{g.desc}</p>
-                <span style={{
-                  display: 'inline-block',
-                  background: `linear-gradient(135deg, ${g.color}, ${g.color}cc)`,
-                  color: '#fff', fontSize: '0.85rem', fontWeight: 700,
-                  padding: '0.4rem 1.2rem', borderRadius: '30px',
-                }}>▶ 開始遊玩</span>
-              </div>
-            </Link>
-          ))}
+          {GAMES.map(g => <ItemCard key={g.href} item={g} actionLabel="▶ 開始" />)}
+        </div>
+
+        {/* ── 小工具 ── */}
+        <p style={{ color: '#6b7280', fontSize: '0.75rem', letterSpacing: '0.1em', margin: '0 0 1rem 0.2rem' }}>🛠️ 小工具</p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.2rem', marginBottom: '3rem' }}>
+          {TOOLS.map(t => <ItemCard key={t.href} item={t} actionLabel="→ 使用" />)}
         </div>
 
         {/* 即將推出 */}
