@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ShareButtons from '@/components/ShareButtons';
 
 const ST_BASE = 'https://still-time-corner.vercel.app';
 const SS_BASE = 'https://surprise-corner.vercel.app';
@@ -259,6 +260,11 @@ export default function BooksPage() {
             )}
           </section>
         ))}
+      </div>
+
+      {/* 分享 */}
+      <div style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+        <ShareButtons title="驚喜角落 書評角落" content="心理學、靈異、成長——來看看這些好書！" />
       </div>
 
       {/* 底部導覽 */}

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShareButtons from "@/components/ShareButtons";
 import { drawSpread, getAllSpreadTypes, formatCardReading } from "../../lib/tarot/tarotLogic";
 
 const MAX_FREE_DAILY = 5;
@@ -228,6 +229,10 @@ export default function TarotGame() {
                 </div>
               </div>
             )}
+
+            <div className="mt-2 mb-2">
+              <ShareButtons title="我的塔羅占卜結果" content="用驚喜角落抽了牌陣，快來試試！" />
+            </div>
 
             <button onClick={handleReset} className="text-[10px] font-bold text-purple-500 hover:text-purple-300 transition-colors py-4 opacity-40 hover:opacity-100 uppercase tracking-[0.4em]">
               — Clear Table —
