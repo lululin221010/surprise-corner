@@ -13,10 +13,10 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'),
   title: {
-    default: 'Surprise Corner 驚喜角落 - 免費心理測驗、塔羅占卜、星座運勢、命理工具',
+    default: 'Surprise Corner 驚喜角落 - 心理測驗・塔羅占卜・星座運勢・八字命盤・姓名學，全免費！',
     template: '%s | Surprise Corner 驚喜角落',
   },
-  description: '驚喜角落提供免費心理測驗、塔羅占卜、每日星座運勢、八字命盤、月亮星座、姓名學等工具，還有心理學書評與連載小說。想玩就玩，想測就測！',
+  description: '驚喜角落是完全免費的心理測驗與命理工具網站，提供塔羅占卜、每日星座運勢、八字命盤、月亮星座、姓名學、流年塔羅等工具，還有心理學書評、連載小說與 AI 生活工具。完全不用登入，想玩就玩，想測就測，每天都有新驚喜等你來發現！',
   keywords: ['心理測驗', '塔羅占卜', '星座運勢', '八字命盤', '月亮星座', '姓名學', '流年塔羅', '免費占卜', '命理工具', '心理學'],
   authors: [{ name: 'Surprise Corner' }],
   creator: 'Surprise Corner',
@@ -40,14 +40,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website', locale: 'zh_TW', url: 'https://surprise-corner.vercel.app', siteName: 'Surprise Corner',
-    title: 'Surprise Corner 驚喜角落 - 免費心理測驗、塔羅占卜、星座運勢、命理工具',
-    description: '驚喜角落提供免費心理測驗、塔羅占卜、每日星座運勢、八字命盤、月亮星座、姓名學等工具，還有心理學書評與連載小說。想玩就玩，想測就測！',
+    title: 'Surprise Corner 驚喜角落 - 心理測驗・塔羅占卜・星座運勢・八字命盤・姓名學，全免費！',
+    description: '驚喜角落是完全免費的心理測驗與命理工具網站，提供塔羅占卜、每日星座運勢、八字命盤、月亮星座、姓名學、流年塔羅等工具，還有心理學書評、連載小說與 AI 生活工具。完全不用登入，想玩就玩，想測就測，每天都有新驚喜等你來發現！',
     images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'Surprise Corner 驚喜角落' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Surprise Corner 驚喜角落 - 免費心理測驗、塔羅占卜、星座運勢、命理工具',
-    description: '驚喜角落提供免費心理測驗、塔羅占卜、每日星座運勢、八字命盤、月亮星座、姓名學等工具，還有心理學書評與連載小說。想玩就玩，想測就測！',
+    title: 'Surprise Corner 驚喜角落 - 心理測驗・塔羅占卜・星座運勢・八字命盤・姓名學，全免費！',
+    description: '驚喜角落是完全免費的心理測驗與命理工具網站，提供塔羅占卜、每日星座運勢、八字命盤、月亮星座、姓名學、流年塔羅等工具，還有心理學書評、連載小說與 AI 生活工具。完全不用登入，想玩就玩，想測就測！',
     images: ['/og-default.png'],
   },
   alternates: { canonical: 'https://surprise-corner.vercel.app' },
