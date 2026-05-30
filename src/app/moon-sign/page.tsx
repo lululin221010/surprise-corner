@@ -1,5 +1,6 @@
 'use client';
 // 📄 路徑：src/app/moon-sign/page.tsx
+import ShareButtons from '@/components/ShareButtons';
 // 月亮星座：輸入生日（+時間+城市）算太陽座、月亮座、上升座
 
 import { useState } from 'react';
@@ -186,6 +187,8 @@ export default function MoonSignPage() {
             <p style={{ color:'#4b5563', fontSize:'0.72rem', textAlign:'center', marginTop:'1rem' }}>
               ✨ 月亮座使用簡化公式計算，上升座需精確出生時間與出生地，結果僅供娛樂參考
             </p>
+
+            <ShareButtons title="我的太陽＋月亮＋上升星座" content="用驚喜角落算出我的三星座組合，快來試試！" />
           </div>
         )}
 

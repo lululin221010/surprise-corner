@@ -1,5 +1,6 @@
 'use client';
 // 📄 路徑：src/app/bazi/page.tsx
+import ShareButtons from '@/components/ShareButtons';
 // 八字命盤：輸入生日+時辰，算四柱天干地支＋五行分析
 
 import { useState } from 'react';
@@ -259,6 +260,8 @@ export default function BaziPage() {
             <p style={{ color:'#4b5563', fontSize:'0.72rem', textAlign:'center' }}>
               ✨ 以節氣（立春約2/4）為年分界，月柱以各月4日左右為基準，僅供娛樂參考
             </p>
+
+            <ShareButtons title="我的八字命盤" content="用驚喜角落算出我的四柱八字，快來試試！" />
           </div>
         )}
 

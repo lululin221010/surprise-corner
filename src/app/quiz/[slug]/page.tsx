@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import ShareButtons from '@/components/ShareButtons';
 import attachmentQuiz from '../../../data/quizzes/attachment.json';
 import defenseQuiz from '../../../data/quizzes/defense.json';
 import traumaResponseQuiz from '../../../data/quizzes/trauma-response.json';
@@ -182,7 +183,9 @@ export default function QuizPage() {
             </div>
           </a>
 
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <ShareButtons title={`${quiz.title} — ${r.title}`} content={r.label} />
+
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
             <button onClick={restart} style={{
               background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)',
               color: '#c4b5fd', borderRadius: '30px', padding: '0.65rem 1.8rem',

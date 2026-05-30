@@ -1,5 +1,6 @@
 'use client';
 // 📄 路徑：src/app/horoscope/page.tsx
+import ShareButtons from '@/components/ShareButtons';
 // 12星座每日運勢 — 日期種子組裝，每天固定、每天換新
 
 import { useState } from 'react';
@@ -273,6 +274,8 @@ export default function HoroscopePage() {
             <p style={{ color:'#4b5563', fontSize:'0.72rem', textAlign:'center', marginTop:'1rem' }}>
               ✨ 運勢僅供娛樂參考，每天 0 點更新
             </p>
+
+            <ShareButtons title={`${sign.name}今日運勢`} content={`整體 ${stars.overall} — 來看看你的星座運勢！`} />
           </div>
         )}
 

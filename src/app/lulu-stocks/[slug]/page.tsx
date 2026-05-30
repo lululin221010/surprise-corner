@@ -1,6 +1,7 @@
 // 📄 路徑：src/app/lulu-stocks/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import ShareButtons from '@/components/ShareButtons'
 import { Metadata } from 'next'
 import articlesData from '@/data/lulu-stocks.json'
 
@@ -98,6 +99,9 @@ export default function LuluStockArticlePage({ params }: { params: { slug: strin
             <p key={i} style={{ margin: '0 0 1.4rem' }}>{para}</p>
           ))}
         </article>
+
+        {/* 分享 */}
+        <ShareButtons title={article.title} content={article.excerpt} />
 
         {/* ── 自動附加 CTA（所有「魯魯說股票」文章底部都有）── */}
         <div style={{

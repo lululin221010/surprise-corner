@@ -6,6 +6,7 @@ import { Metadata } from 'next'
 import novelsData from '@/data/novels.json'
 import chaptersData from '@/data/chapters.json'
 import WallPostForm from '@/components/WallPostForm'
+import ShareButtons from '@/components/ShareButtons'
 
 // 連載小說不用章節頁，一律導回 ebook 試讀頁
 const SERIAL_NOVEL_IDS = ['lulu-diary', 'the-last-signal', 'lulu-life']
@@ -299,6 +300,11 @@ export default async function ChapterPage({ params }: Props) {
             </a>
           </div>
         )}
+
+        {/* 分享 */}
+        <div style={{ marginTop: '3rem' }}>
+          <ShareButtons title={chapter.title} content={`${novel.title} — ${chapter.title}`} />
+        </div>
 
         {/* 🐾 留言到作品牆 */}
         <WallPostForm

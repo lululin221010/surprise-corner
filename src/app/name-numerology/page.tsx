@@ -1,5 +1,6 @@
 'use client';
 // 📄 路徑：src/app/name-numerology/page.tsx
+import ShareButtons from '@/components/ShareButtons';
 // 姓名學：三才五格筆劃姓名學（使用者自填筆劃，無需字典）
 
 import { useState } from 'react';
@@ -307,6 +308,8 @@ export default function NameNumerologyPage() {
               大吉者恭喜，好名字繼續努力配得上它 🎉<br/>
               大凶者也別慌，名字只是參考——請勿找父母算帳 😂
             </p>
+
+            <ShareButtons title="我的三才五格姓名學結果" content="用驚喜角落算出我的姓名筆劃分析，快來試試！" />
           </div>
         )}
 

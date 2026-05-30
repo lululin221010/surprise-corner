@@ -1,5 +1,6 @@
 'use client';
 // 📄 路徑：src/app/tarot-year/page.tsx
+import ShareButtons from '@/components/ShareButtons';
 // 流年塔羅：輸入生日 → 生命靈數 → 今年主題牌 + 關鍵字
 
 import { useState } from 'react';
@@ -167,6 +168,8 @@ export default function TarotYearPage() {
             <p style={{ color:'#4b5563', fontSize:'0.72rem', textAlign:'center' }}>
               ✨ 流年牌以出生月日加當年份計算生命靈數，再對應大阿爾克那，僅供娛樂參考
             </p>
+
+            <ShareButtons title={`我今年的流年牌是「${result.yearCard.name}」`} content="用驚喜角落算出我的流年塔羅主題牌，快來試試！" />
           </div>
         )}
 
