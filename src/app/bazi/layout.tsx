@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '八字命盤',
+  title: { template: '%s | Surprise Corner', default: '八字命盤 | Surprise Corner' },
   description: '輸入生日算出四柱天干地支，解析你的五行命格、日主個性與天賦特質。完全免費，結果即時顯示。',
   openGraph: {
     title: '八字命盤 | Surprise Corner',

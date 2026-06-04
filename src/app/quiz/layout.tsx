@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '心理測驗',
+  title: { template: '%s | Surprise Corner', default: '測驗 | Surprise Corner' },
   description: '依附類型、防禦機制、創傷反應、自我懷疑……多種心理測驗免費測，了解真正的自己。',
   openGraph: {
     title: '心理測驗 | Surprise Corner',

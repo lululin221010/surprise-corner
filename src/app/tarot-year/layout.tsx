@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '流年塔羅',
+  title: { template: '%s | Surprise Corner', default: '流年塔羅 | Surprise Corner' },
   description: '輸入生日算出生命靈數，對應大阿爾克那流年牌，看見今年的主題與關鍵字。',
   openGraph: {
     title: '流年塔羅 | Surprise Corner',

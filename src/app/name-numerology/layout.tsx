@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '三才五格姓名學',
+  title: { template: '%s | Surprise Corner', default: '三才五格姓名學 | Surprise Corner' },
   description: '輸入姓名筆劃，算出五格吉凶、三才五行、命格總評。傳統姓名學完整分析，免費使用。',
   openGraph: {
     title: '三才五格姓名學 | Surprise Corner',

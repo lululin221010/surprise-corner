@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '書評角落',
+  title: { template: '%s | Surprise Corner', default: '書評角落 | Surprise Corner' },
   description: '心理學、靈異、成長——精選電子書試閱與書評。看完喜歡可以到小舖購買完整版。',
   openGraph: {
     title: '書評角落 | Surprise Corner',

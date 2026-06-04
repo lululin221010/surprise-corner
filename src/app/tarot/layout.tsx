@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '塔羅占卜',
+  title: { template: '%s | Surprise Corner', default: '塔羅占卜 | Surprise Corner' },
   description: '單張、三張、五張牌陣隨你選。每日最多5次免費抽牌，讓塔羅牌為你指引方向。',
   openGraph: {
     title: '塔羅占卜 | Surprise Corner',

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '小教室（籌備中）',
+  title: { template: '%s | Surprise Corner', default: '小教室 | Surprise Corner' },
   description: '每篇5分鐘，學一個真正用得上的知識。心理學、投資入門、AI工具、創作……不灌水、不廢話，說人話的小教室，即將開課！',
   openGraph: {
     title: '小教室 即將開課！| Surprise Corner 驚喜角落',

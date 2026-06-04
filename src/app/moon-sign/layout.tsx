@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '月亮星座 & 上升星座',
+  title: { template: '%s | Surprise Corner', default: '月亮星座 & 上升星座 | Surprise Corner' },
   description: '輸入生日算出太陽座、月亮座、上升座，解析你的內外在宇宙。三星座組合完整版，免費使用。',
   openGraph: {
     title: '月亮星座 & 上升星座 | Surprise Corner',

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '每日星座運勢',
+  title: { template: '%s | Surprise Corner', default: '每日星座運勢 | Surprise Corner' },
   description: '12星座今日運勢，愛情、事業、財運、健康一次看。每天0點更新，每天都不一樣。',
   openGraph: {
     title: '每日星座運勢 | Surprise Corner',
