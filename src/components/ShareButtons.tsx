@@ -18,7 +18,7 @@ export default function ShareButtons({ title, content }: ShareButtonsProps) {
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(shareUrl);
+      await navigator.clipboard.writeText(shareText + '\n' + shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -37,7 +37,7 @@ export default function ShareButtons({ title, content }: ShareButtonsProps) {
   };
 
   const shareToLine = () => {
-    const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
+    const url = `https://line.me/R/msg/text/?${encodeURIComponent(shareText + '\n' + shareUrl)}`;
     window.open(url, '_blank', 'width=600,height=400');
   };
 
