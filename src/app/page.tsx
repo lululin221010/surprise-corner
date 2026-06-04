@@ -375,7 +375,7 @@ export default function Home() {
               <a href="/quiz" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(236,72,153,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
                 <span style={{ fontSize: '1.4rem' }}>🎯</span>
                 <span style={{ color: '#ec4899', fontWeight: 700, fontSize: '0.85rem', lineHeight: 1.3 }}>好玩測驗</span>
-                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>心理・財務・性格・命理</span>
+                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>免費測出你不知道的自己</span>
                 <span style={{ marginTop: '4px', color: '#ec4899', fontSize: '0.75rem', fontWeight: 600, border: '1px solid rgba(236,72,153,0.55)', borderRadius: '20px', padding: '3px 12px' }}>測一測 →</span>
               </a>
 
