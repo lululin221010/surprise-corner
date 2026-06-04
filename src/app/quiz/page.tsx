@@ -3,6 +3,15 @@ import Link from 'next/link';
 
 const QUIZZES = [
   {
+    slug: 'finance-personality',
+    emoji: '🔍',
+    title: '你是哪種財務人格？',
+    description: '9 題情境，側寫你的真實投資模式——保險庫型、分析師型、衝鋒型、還是情緒驅動型？',
+    time: '約 3 分鐘',
+    ready: true,
+    color: '#f59e0b',
+  },
+  {
     slug: 'attachment',
     emoji: '🔗',
     title: '你的依附類型是哪一種？',
