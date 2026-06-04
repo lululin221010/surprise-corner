@@ -4,14 +4,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+function shareToLine(text: string) {
+  const url = typeof window !== 'undefined' ? window.location.href : '';
+  window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`, '_blank', 'width=600,height=400');
+}
+function shareGame() { shareToLine('🐟 來玩魯魯釣魚！用貓爪抓魚，限時挑戰，免費玩～'); }
 function shareResult(score: number, highScore: number) {
   const isNew = score === highScore && score > 0;
-  const text = isNew
-    ? `🏆 魯魯釣魚新紀錄！抓到 ${score} 分！你能超越我嗎？`
-    : `🐟 魯魯釣魚抓到 ${score} 分！來挑戰看看？`;
-  const url = typeof window !== 'undefined' ? window.location.href : '';
-  const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`;
-  window.open(lineUrl, '_blank', 'width=600,height=400');
+  shareToLine(isNew ? `🏆 魯魯釣魚新紀錄！抓到 ${score} 分！你能超越我嗎？` : `🐟 魯魯釣魚抓到 ${score} 分！來挑戰看看？`);
 }
 import Link from 'next/link';
 
@@ -345,11 +345,14 @@ export default function LuluFishPage() {
       />
 
       {ui.status === 'gameover' && (
-        <div style={{ marginTop: '0.8rem', textAlign: 'center' }}>
-          <button
-            onClick={() => shareResult(ui.score, ui.highScore)}
-            style={{ padding: '0.4rem 1.2rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' }}>
-            📣 分享成績到 LINE
+        <div style={{ marginTop: '0.8rem', textAlign: 'center', display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button onClick={() => shareResult(ui.score, ui.highScore)}
+            style={{ padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.78rem' }}>
+            🏆 分享成績
+          </button>
+          <button onClick={shareGame}
+            style={{ padding: '0.4rem 1rem', borderRadius: '20px', border: '1px solid rgba(0,185,0,0.5)', background: 'transparent', color: '#00B900', fontWeight: 700, cursor: 'pointer', fontSize: '0.78rem' }}>
+            🎮 分享遊戲
           </button>
         </div>
       )}
@@ -361,9 +364,13 @@ export default function LuluFishPage() {
         🟡 大金魚 3分 &nbsp;·&nbsp; 🔵 中魚 2分 &nbsp;·&nbsp; 🟠 小魚 1分
       </div>
 
-      <div style={{marginTop:'1.5rem',display:'flex',gap:'1.5rem'}}>
-        <Link href="/games" style={{color:'#7c3aed',fontSize:'0.9rem',textDecoration:'none',fontWeight:600}}>← 小遊戲</Link>
-        <Link href="/games/lulu-run" style={{color:'#f59e0b',fontSize:'0.9rem',textDecoration:'none',fontWeight:600}}>🐱 魯魯跑酷</Link>
+      <div style={{marginTop:'1.5rem',display:'flex',gap:'1rem',flexWrap:'wrap',alignItems:'center',justifyContent:'center'}}>
+        <Link href="/games" style={{color:'#7c3aed',fontSize:'0.85rem',textDecoration:'none',fontWeight:600}}>← 小遊戲</Link>
+        <Link href="/games/lulu-run" style={{color:'#f59e0b',fontSize:'0.85rem',textDecoration:'none',fontWeight:600}}>🐱 魯魯跑酷</Link>
+        <button onClick={shareGame}
+          style={{padding:'0.3rem 0.9rem',borderRadius:'20px',border:'1px solid rgba(0,185,0,0.4)',background:'transparent',color:'#00B900',fontWeight:600,cursor:'pointer',fontSize:'0.75rem'}}>
+          📣 傳給朋友
+        </button>
       </div>
     </div>
   );

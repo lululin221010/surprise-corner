@@ -5,11 +5,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 
-function shareResult(time: string, difficulty: string) {
-  const text = `🧩 數獨完成！難度「${difficulty}」，用時 ${time}！來挑戰看看？`;
+function shareToLine(text: string) {
   const url = typeof window !== 'undefined' ? window.location.href : '';
-  const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`;
-  window.open(lineUrl, '_blank', 'width=600,height=400');
+  window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`, '_blank', 'width=600,height=400');
+}
+function shareGame() { shareToLine('🧩 來玩數獨！三種難度，訓練腦力，免費玩～'); }
+function shareResult(time: string, difficulty: string) {
+  shareToLine(`🧩 數獨完成！難度「${difficulty}」，用時 ${time}！來挑戰看看？`);
 }
 
 // ─── Sudoku 產生器 ───────────────────────────────────────────────────
@@ -193,9 +195,13 @@ export default function SudokuPage() {
     >
       <div style={{ maxWidth: '420px', margin: '0 auto' }}>
 
-        {/* 返回 */}
-        <div style={{ marginBottom: '1.2rem' }}>
-          <Link href="/games" style={{ color: '#a78bfa', textDecoration: 'none', fontSize: '0.9rem' }}>← 小遊戲</Link>
+        {/* 返回 + 分享 */}
+        <div style={{ marginBottom: '1.2rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Link href="/games" style={{ color: '#a78bfa', textDecoration: 'none', fontSize: '0.85rem' }}>← 小遊戲</Link>
+          <button onClick={shareGame}
+            style={{ padding: '0.3rem 0.9rem', borderRadius: '20px', border: '1px solid rgba(0,185,0,0.4)', background: 'transparent', color: '#00B900', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem' }}>
+            📣 傳給朋友
+          </button>
         </div>
 
         {/* 標題 */}
@@ -240,14 +246,16 @@ export default function SudokuPage() {
             <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🎉</div>
             <div style={{ color: '#4ade80', fontWeight: 800, fontSize: '1.1rem' }}>完成！用時 {formatTime(timer)}</div>
             <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', marginTop: '0.7rem', flexWrap: 'wrap' }}>
-              <button
-                onClick={() => shareResult(formatTime(timer), DIFF_LABEL[difficulty])}
-                style={{ padding: '0.45rem 1.2rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.85rem' }}>
-                📣 分享到 LINE
+              <button onClick={() => shareResult(formatTime(timer), DIFF_LABEL[difficulty])}
+                style={{ padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' }}>
+                🏆 分享成績
               </button>
-              <button
-                onClick={() => startGame(difficulty)}
-                style={{ padding: '0.45rem 1.4rem', borderRadius: '20px', border: 'none', background: '#4ade80', color: '#000', fontWeight: 700, cursor: 'pointer', fontSize: '0.88rem' }}>
+              <button onClick={shareGame}
+                style={{ padding: '0.4rem 1rem', borderRadius: '20px', border: '1px solid rgba(0,185,0,0.5)', background: 'transparent', color: '#00B900', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' }}>
+                🎮 分享遊戲
+              </button>
+              <button onClick={() => startGame(difficulty)}
+                style={{ padding: '0.4rem 1.2rem', borderRadius: '20px', border: 'none', background: '#4ade80', color: '#000', fontWeight: 700, cursor: 'pointer', fontSize: '0.85rem' }}>
                 再玩一局
               </button>
             </div>
