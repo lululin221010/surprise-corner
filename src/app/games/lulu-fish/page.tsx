@@ -3,6 +3,16 @@
 // 貓爪跟著滑鼠/手指，碰到魚就抓到
 
 import { useEffect, useRef, useState } from 'react';
+
+function shareResult(score: number, highScore: number) {
+  const isNew = score === highScore && score > 0;
+  const text = isNew
+    ? `🏆 魯魯釣魚新紀錄！抓到 ${score} 分！你能超越我嗎？`
+    : `🐟 魯魯釣魚抓到 ${score} 分！來挑戰看看？`;
+  const url = typeof window !== 'undefined' ? window.location.href : '';
+  const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`;
+  window.open(lineUrl, '_blank', 'width=600,height=400');
+}
 import Link from 'next/link';
 
 const W = 600;
@@ -333,6 +343,16 @@ export default function LuluFishPage() {
         onTouchMove={onTouchMove}
         style={{ width:'100%', maxWidth:`${W}px`, borderRadius:'16px', border:'2px solid rgba(125,211,252,0.3)', cursor:'none', touchAction:'none', boxShadow:'0 0 40px rgba(14,165,233,0.3)' }}
       />
+
+      {ui.status === 'gameover' && (
+        <div style={{ marginTop: '0.8rem', textAlign: 'center' }}>
+          <button
+            onClick={() => shareResult(ui.score, ui.highScore)}
+            style={{ padding: '0.4rem 1.2rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' }}>
+            📣 分享成績到 LINE
+          </button>
+        </div>
+      )}
 
       <div style={{marginTop:'0.8rem',color:'#94a3b8',fontSize:'0.78rem',textAlign:'center'}}>
         🐾 移動滑鼠讓貓爪碰魚 &nbsp;|&nbsp; 📱 手機滑動螢幕

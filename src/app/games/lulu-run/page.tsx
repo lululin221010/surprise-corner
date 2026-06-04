@@ -5,6 +5,15 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 
+function shareResult(score: number, isNew: boolean) {
+  const text = isNew
+    ? `🏆 魯魯跑酷新紀錄！跑了 ${score}m！你能超越我嗎？`
+    : `🐱 魯魯跑酷跑了 ${score}m！來挑戰看看？`;
+  const url = typeof window !== 'undefined' ? window.location.href : '';
+  const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`;
+  window.open(lineUrl, '_blank', 'width=600,height=400');
+}
+
 // ── 常數 ─────────────────────────────────────────────
 const W = 600, H = 200;
 const GROUND = 158;
@@ -345,6 +354,11 @@ export default function LuluRunPage() {
             <p style={{ color: '#fca5a5', fontWeight: 700, fontSize: '1rem', margin: '0 0 0.3rem' }}>魯魯撞到了！</p>
             <p style={{ color: '#e9d5ff', fontSize: '1rem', margin: '0 0 0.15rem' }}>跑了 <strong style={{ color: '#c4b5fd' }}>{score}m</strong></p>
             {isNew && <p style={{ color: '#fcd34d', fontSize: '0.82rem', margin: '0 0 0.3rem' }}>🏆 新紀錄！</p>}
+            <button
+              onClick={(e) => { e.stopPropagation(); shareResult(score, isNew); }}
+              style={{ marginTop: '0.6rem', padding: '0.4rem 1.2rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.82rem' }}>
+              📣 分享成績到 LINE
+            </button>
             <p style={{ color: '#6b7280', fontSize: '0.72rem', marginTop: '0.5rem' }}>點擊 / 空白鍵 再試一次</p>
           </div>
         )}

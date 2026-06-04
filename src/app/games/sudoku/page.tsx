@@ -5,6 +5,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 
+function shareResult(time: string, difficulty: string) {
+  const text = `🧩 數獨完成！難度「${difficulty}」，用時 ${time}！來挑戰看看？`;
+  const url = typeof window !== 'undefined' ? window.location.href : '';
+  const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + '\n' + url)}`;
+  window.open(lineUrl, '_blank', 'width=600,height=400');
+}
+
 // ─── Sudoku 產生器 ───────────────────────────────────────────────────
 
 function shuffle<T>(arr: T[]): T[] {
@@ -232,11 +239,18 @@ export default function SudokuPage() {
           <div style={{ textAlign: 'center', marginBottom: '1rem', padding: '1rem', background: 'rgba(74,222,128,0.12)', border: '1px solid rgba(74,222,128,0.35)', borderRadius: '14px' }}>
             <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🎉</div>
             <div style={{ color: '#4ade80', fontWeight: 800, fontSize: '1.1rem' }}>完成！用時 {formatTime(timer)}</div>
-            <button
-              onClick={() => startGame(difficulty)}
-              style={{ marginTop: '0.7rem', padding: '0.45rem 1.4rem', borderRadius: '20px', border: 'none', background: '#4ade80', color: '#000', fontWeight: 700, cursor: 'pointer', fontSize: '0.88rem' }}>
-              再玩一局
-            </button>
+            <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', marginTop: '0.7rem', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => shareResult(formatTime(timer), DIFF_LABEL[difficulty])}
+                style={{ padding: '0.45rem 1.2rem', borderRadius: '20px', border: 'none', background: '#00B900', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: '0.85rem' }}>
+                📣 分享到 LINE
+              </button>
+              <button
+                onClick={() => startGame(difficulty)}
+                style={{ padding: '0.45rem 1.4rem', borderRadius: '20px', border: 'none', background: '#4ade80', color: '#000', fontWeight: 700, cursor: 'pointer', fontSize: '0.88rem' }}>
+                再玩一局
+              </button>
+            </div>
           </div>
         )}
 
