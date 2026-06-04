@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
 import surprisesRaw from '../data/surprises.json';
-import featuredQuizRaw from '../data/featured-quiz.json';
 
 const StarCanvas = dynamic(() => import('../components/StarCanvas'), { ssr: false });
 
@@ -22,8 +21,6 @@ const coldData = coldDataRaw as ColdEntry[];
 type SurpriseEntry = { id: string; date: string; image?: string; title?: string; text: string; category?: string };
 const surprises = surprisesRaw as SurpriseEntry[];
 
-type FeaturedQuiz = { slug: string; title: string; desc: string };
-const featuredQuizzes = featuredQuizRaw as FeaturedQuiz[];
 
 const LULU_QUOTES = [
   // 好奇心系
@@ -214,7 +211,6 @@ export default function Home() {
   }
 
   const catColor = todayEntry ? (CATEGORY_COLORS[todayEntry.category] || '#8b5cf6') : '#8b5cf6';
-  const weekQuiz = featuredQuizzes[Math.floor(getDayOfYear() / 7) % featuredQuizzes.length];
   const latestSurprise = surprises[surprises.length - 1];
 
   return (
@@ -375,11 +371,11 @@ export default function Home() {
                 <span style={{ marginTop: '4px', color: '#a855f7', fontSize: '0.75rem', fontWeight: 600, border: '1px solid rgba(168,85,247,0.55)', borderRadius: '20px', padding: '3px 12px' }}>進入 →</span>
               </a>
 
-              {/* Card 2：本週測驗（週數輪換） */}
-              <a href={`/quiz/${weekQuiz.slug}`} style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(236,72,153,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
-                <span style={{ fontSize: '1.4rem' }}>🧭</span>
-                <span style={{ color: '#ec4899', fontWeight: 700, fontSize: '0.82rem', lineHeight: 1.3 }}>{weekQuiz.title}</span>
-                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>{weekQuiz.desc}</span>
+              {/* Card 2：好玩測驗 */}
+              <a href="/quiz" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(236,72,153,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
+                <span style={{ fontSize: '1.4rem' }}>🎯</span>
+                <span style={{ color: '#ec4899', fontWeight: 700, fontSize: '0.85rem', lineHeight: 1.3 }}>好玩測驗</span>
+                <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>心理・財務・性格・命理</span>
                 <span style={{ marginTop: '4px', color: '#ec4899', fontSize: '0.75rem', fontWeight: 600, border: '1px solid rgba(236,72,153,0.55)', borderRadius: '20px', padding: '3px 12px' }}>測一測 →</span>
               </a>
 
