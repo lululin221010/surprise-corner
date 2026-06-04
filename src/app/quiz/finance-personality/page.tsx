@@ -352,9 +352,9 @@ export default function FinancePersonalityQuiz() {
               {`去看${p.name}同學最常踩的坑`}
             </p>
             <p style={{ color: '#6b7280', fontSize: '0.82rem', margin: '0 0 1rem' }}>
-              靜態Q&A，看看跟你一樣的人在問什麼
+              看看跟你同類型的人在問什麼，LuLu 給判斷框架不給答案
             </p>
-            <Link href="/classroom" style={{
+            <Link href={`/classroom/finance-qa?type=${resultKey}`} style={{
               display: 'inline-block',
               background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
               color: '#fff', fontWeight: 700,
