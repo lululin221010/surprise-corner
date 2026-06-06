@@ -37,7 +37,7 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
     '成長心理學': 'growth-psychology',
     '暗黑心理學': 'dark-psychology',
     '認知心理學': 'cognitive-psychology',
-    '潛意識心理學': 'subconscious-psychology',
+    '潛意識心理學': 'unconscious-psychology',
     '關係心理學': 'relationship-psychology',
   };
   const seriesSlug = seriesSlugMap[trial.series] ?? '';
