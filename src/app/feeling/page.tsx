@@ -229,21 +229,32 @@ export default function FeelingPage() {
     <main style={{ minHeight:'100vh', background:'#faf7f2', paddingBottom:80, fontFamily:'sans-serif' }}>
 
       {/* ══════════════════ HERO ══════════════════════════════════ */}
-      {/* ★ Hero 背景：/images/sena.jpg（溫暖但帶神秘感）
-          換圖只需改 backgroundImage 的路徑即可               */}
+      {/* ★ 換圖：把 /images/sena.jpg 換成其他路徑即可
+          object-position 控制焦點：'center 20%' = 臉部永遠在框內  */}
       <section style={{
-        backgroundImage: "url('/images/sena.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
         padding:'clamp(52px,9vw,88px) 24px clamp(40px,7vw,64px)',
         textAlign:'center',
         borderBottom:'1px solid rgba(200,160,60,0.15)',
         position:'relative', overflow:'hidden',
+        minHeight: 'clamp(340px,55vw,520px)',
+        display:'flex', flexDirection:'column', justifyContent:'center',
       }}>
-        {/* 暖色遮罩，讓文字清晰且保留照片氛圍 */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(160deg,rgba(253,246,227,0.82) 0%,rgba(245,232,200,0.78) 60%,rgba(230,210,170,0.7) 100%)', pointerEvents:'none' }} />
-        {/* 裝飾圓點 */}
-        <div style={{ position:'absolute', top:-100, right:-80, width:300, height:300, borderRadius:'50%', background:'rgba(210,160,60,0.06)', pointerEvents:'none' }} />
+        {/* 背景圖：img + object-fit，臉永遠在框內不被切掉 */}
+        <img
+          src="/images/sena.jpg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position:'absolute', inset:0,
+            width:'100%', height:'100%',
+            objectFit:'cover',
+            objectPosition:'center 20%',
+            pointerEvents:'none',
+            userSelect:'none',
+          }}
+        />
+        {/* 暖色遮罩 */}
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(160deg,rgba(253,246,227,0.84) 0%,rgba(245,232,200,0.80) 55%,rgba(230,210,170,0.72) 100%)', pointerEvents:'none' }} />
 
         {/* 所有文字加 relative 讓它蓋在遮罩上 */}
         <div style={{ position:'relative' }}>
