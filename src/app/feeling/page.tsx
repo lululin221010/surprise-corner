@@ -89,62 +89,61 @@ const TOOLS = [
 const PAGE_URL  = 'https://surprise-corner.vercel.app/feeling'
 const SHARE = {
   title:   '你也有過「那個感覺」嗎？',
-  line:    `我在 Surprise Corner 找到一個探索靈異・未知・邊界的角落，35 個故事免費看 👉 ${PAGE_URL}`,
-  fb:      `「那個感覺」系列：科學邊界、死亡不死、詛咒心理……35 冊免費閱讀 ${PAGE_URL}`,
-  copy:    `你也有過「那個感覺」嗎？\n靈異・未知・邊界 35 個故事 + 測驗・運勢・遊戲\n👉 ${PAGE_URL}`,
+  line:    `我在 Still Time 看到這個感覺，你也來看看？ 👉 ${PAGE_URL}`,
+  fb:      `我在 Still Time 看到這個感覺，你也來看看？ ${PAGE_URL}`,
+  copy:    `我在 Still Time 看到這個感覺，你也來看看？\n👉 ${PAGE_URL}`,
 }
 
 // ─────────────────────────────────────────────────────────────────
-// 元件：大型分享區塊（頭尾各一）
+// 元件：頂部小分享條（簡潔版）
+// ─────────────────────────────────────────────────────────────────
+function SmallShareBar() {
+  const [copied, setCopied] = useState(false)
+  const shareLine    = () => window.open(`https://line.me/R/msg/text/?${encodeURIComponent(SHARE.line)}`, '_blank')
+  const shareFb      = () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(PAGE_URL)}`, '_blank')
+  const shareThreads = () => window.open(`https://www.threads.net/intent/post?text=${encodeURIComponent(SHARE.line)}`, '_blank')
+  const copyLink     = () => { navigator.clipboard.writeText(SHARE.copy).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2200) }) }
+
+  return (
+    <div style={{ display:'flex', alignItems:'center', gap:8, flexWrap:'wrap', padding:'10px 16px', borderRadius:10, background:'rgba(250,245,235,0.8)', border:'1px solid rgba(200,150,50,0.18)' }}>
+      <span style={{ fontSize:'0.78rem', color:'#9a6830', fontFamily:'sans-serif', marginRight:4 }}>分享給朋友 →</span>
+      <button onClick={shareLine}    style={{ padding:'5px 13px', borderRadius:14, background:'#00B900', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.76rem', fontFamily:'sans-serif', fontWeight:700 }}>LINE</button>
+      <button onClick={shareFb}      style={{ padding:'5px 13px', borderRadius:14, background:'#1877F2', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.76rem', fontFamily:'sans-serif', fontWeight:700 }}>FB</button>
+      <button onClick={shareThreads} style={{ padding:'5px 13px', borderRadius:14, background:'#000', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.76rem', fontFamily:'sans-serif', fontWeight:700 }}>Threads</button>
+      <button onClick={copyLink}     style={{ padding:'5px 13px', borderRadius:14, background: copied ? '#16a34a' : '#e8dcc8', color: copied ? '#fff' : '#7a4a10', border:'none', cursor:'pointer', fontSize:'0.76rem', fontFamily:'sans-serif', fontWeight:700, transition:'all 0.2s' }}>
+        {copied ? '✓ 已複製' : '複製'}
+      </button>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────
+// 元件：底部大分享區塊
 // ─────────────────────────────────────────────────────────────────
 function BigShareBlock({ label }: { label: string }) {
   const [copied, setCopied] = useState(false)
-
-  function shareLine() {
-    window.open(`https://line.me/R/msg/text/?${encodeURIComponent(SHARE.line)}`, '_blank')
-  }
-  function shareFb() {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(PAGE_URL)}`, '_blank')
-  }
-  function shareThreads() {
-    window.open(`https://www.threads.net/intent/post?text=${encodeURIComponent(SHARE.line)}`, '_blank')
-  }
-  function copyLink() {
-    navigator.clipboard.writeText(SHARE.copy).then(() => {
-      setCopied(true); setTimeout(() => setCopied(false), 2200)
-    })
-  }
+  const shareLine    = () => window.open(`https://line.me/R/msg/text/?${encodeURIComponent(SHARE.line)}`, '_blank')
+  const shareFb      = () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(PAGE_URL)}`, '_blank')
+  const shareThreads = () => window.open(`https://www.threads.net/intent/post?text=${encodeURIComponent(SHARE.line)}`, '_blank')
+  const copyLink     = () => { navigator.clipboard.writeText(SHARE.copy).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2200) }) }
 
   return (
-    <div style={{
-      background: 'linear-gradient(135deg,#fdf6e3,#faf0d7)',
-      border: '1.5px solid rgba(200,150,50,0.28)',
-      borderRadius: 18, padding: '22px 22px 20px', textAlign: 'center',
-    }}>
-      <p style={{ margin:'0 0 4px', fontWeight:700, color:'#7a4a10', fontSize:'0.97rem', fontFamily:'sans-serif' }}>
-        🌙 {label}
-      </p>
-      <p style={{ margin:'0 0 16px', color:'#9a6830', fontSize:'0.8rem', fontFamily:'sans-serif' }}>
-        「我在 Surprise Corner 找到一個探索靈異・未知・邊界的角落，你也來看看！」
-      </p>
+    <div style={{ background:'linear-gradient(135deg,#fdf6e3,#faf0d7)', border:'1.5px solid rgba(200,150,50,0.28)', borderRadius:18, padding:'22px 22px 20px', textAlign:'center' }}>
+      <p style={{ margin:'0 0 14px', fontWeight:700, color:'#7a4a10', fontSize:'0.93rem', fontFamily:'sans-serif' }}>🌙 {label}</p>
       <div style={{ display:'flex', gap:10, justifyContent:'center', flexWrap:'wrap' }}>
-        {/* LINE */}
-        <button onClick={shareLine} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background:'#00B900', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700 }}>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
-          LINE 分享
+        <button onClick={shareLine}    style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background:'#00B900', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700 }}>
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE
         </button>
-        {/* Facebook */}
-        <button onClick={shareFb} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background:'#1877F2', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700 }}>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          FB 分享
+        <button onClick={shareFb}      style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background:'#1877F2', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700 }}>
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
         </button>
-        {/* Threads */}
         <button onClick={shareThreads} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background:'#000', color:'#fff', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700 }}>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.051-7.484-51.235-21.742C35.573 137.004 29.807 116.641 29.605 90c.202-26.641 5.968-47.004 17.142-60.516C57.93 15.226 75.172 7.911 97.981 7.742c22.976.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 3.24 125.056-6.004 98.02 5.862c-27.16-.164-49.48 9.13-66.38 27.64C16.236 50.286 8.877 74.09 8.647 90c.23 15.91 7.59 39.714 23.013 56.496 16.9 18.51 39.22 27.804 66.38 27.64 27.036.164 48.68-8.958 65.145-27.072 14.79-16.39 14.425-36.892 9.527-49.533-3.674-9.263-10.549-16.881-20.175-22.543zM96.513 160.268c-10.481.578-21.404-2.597-29.054-8.567-6.184-4.816-9.302-11.17-9.596-16.977-.494-9.343 6.648-19.845 28.087-21.082 2.458-.141 4.863-.209 7.22-.209 5.801 0 11.226.539 16.19 1.584-1.834 22.786-11.919 43.817-12.847 45.251z"/></svg>
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.051-7.484-51.235-21.742C35.573 137.004 29.807 116.641 29.605 90c.202-26.641 5.968-47.004 17.142-60.516C57.93 15.226 75.172 7.911 97.981 7.742c22.976.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 3.24 125.056-6.004 98.02 5.862c-27.16-.164-49.48 9.13-66.38 27.64C16.236 50.286 8.877 74.09 8.647 90c.23 15.91 7.59 39.714 23.013 56.496 16.9 18.51 39.22 27.804 66.38 27.64 27.036.164 48.68-8.958 65.145-27.072 14.79-16.39 14.425-36.892 9.527-49.533-3.674-9.263-10.549-16.881-20.175-22.543zM96.513 160.268c-10.481.578-21.404-2.597-29.054-8.567-6.184-4.816-9.302-11.17-9.596-16.977-.494-9.343 6.648-19.845 28.087-21.082 2.458-.141 4.863-.209 7.22-.209 5.801 0 11.226.539 16.19 1.584-1.834 22.786-11.919 43.817-12.847 45.251z"/></svg>
           Threads
         </button>
-        {/* 複製 */}
-        <button onClick={copyLink} style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background: copied ? '#16a34a' : '#e8dcc8', color: copied ? '#fff' : '#7a4a10', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700, transition:'all 0.2s' }}>
+        <button onClick={copyLink}     style={{ display:'flex', alignItems:'center', gap:6, padding:'8px 18px', borderRadius:20, background: copied ? '#16a34a' : '#e8dcc8', color: copied ? '#fff' : '#7a4a10', border:'none', cursor:'pointer', fontSize:'0.84rem', fontFamily:'sans-serif', fontWeight:700, transition:'all 0.2s' }}>
           {copied ? '✓ 已複製！' : '複製連結'}
         </button>
       </div>
@@ -228,66 +227,49 @@ export default function FeelingPage() {
   return (
     <main style={{ minHeight:'100vh', background:'#faf7f2', paddingBottom:80, fontFamily:'sans-serif' }}>
 
-      {/* ══════════════════ HERO ══════════════════════════════════ */}
-      {/* ★ 換圖：把 /images/sena.jpg 換成其他路徑即可
-          object-position 控制焦點：'center 20%' = 臉部永遠在框內  */}
-      <section style={{
-        textAlign:'center',
-        borderBottom:'1px solid rgba(200,160,60,0.15)',
-        position:'relative', overflow:'hidden',
-      }}>
-        {/* 照片完整顯示，寬度撐滿，高度自動跟比例走 */}
-        <img
-          src="/images/sena.jpg"
-          alt=""
-          aria-hidden="true"
-          style={{
-            display:'block',
-            width:'100%',
-            height:'auto',
-            pointerEvents:'none',
-            userSelect:'none',
-          }}
-        />
-        {/* 暖色遮罩疊在照片上 */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(160deg,rgba(253,246,227,0.80) 0%,rgba(245,232,200,0.75) 50%,rgba(230,210,170,0.65) 100%)', pointerEvents:'none' }} />
+      {/* ══════════════════ HERO ══════════════════════════════════
+          ★ 照片完整顯示，文字在下方，臉部完全不被遮蓋
+          ★ 換圖：把 /images/sena.jpg 換成其他路徑即可            */}
+      <section>
+        {/* 照片區：自然比例，底部漸層淡出到背景色 */}
+        <div style={{ position:'relative', lineHeight:0 }}>
+          <img
+            src="/images/sena.jpg"
+            alt=""
+            aria-hidden="true"
+            style={{ display:'block', width:'100%', height:'auto', pointerEvents:'none', userSelect:'none' }}
+          />
+          {/* 底部漸層：照片自然過渡到文字背景 */}
+          <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'35%', background:'linear-gradient(to bottom, transparent 0%, #faf7f2 100%)', pointerEvents:'none' }} />
+        </div>
 
-        {/* 文字絕對定位疊在照片上，垂直置中偏上 */}
-        <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'clamp(24px,5vw,60px) 24px' }}>
-          <p style={{ margin:'0 0 14px', fontSize:'0.72rem', letterSpacing:'0.42em', color:'#b08040' }}>SURPRISE CORNER</p>
+        {/* 文字區：照片下方，不遮臉 */}
+        <div style={{ background:'#faf7f2', textAlign:'center', padding:'28px 24px 32px', borderBottom:'1px solid rgba(200,160,60,0.12)' }}>
+          <p style={{ margin:'0 0 10px', fontSize:'0.7rem', letterSpacing:'0.42em', color:'#b08040', fontFamily:'sans-serif' }}>SURPRISE CORNER</p>
 
-          <h1 style={{ margin:'0 0 16px', fontSize:'clamp(2rem,5.8vw,3.6rem)', fontWeight:400, color:'#2a1800', lineHeight:1.18, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
+          <h1 style={{ margin:'0 0 12px', fontSize:'clamp(1.7rem,5.2vw,3.2rem)', fontWeight:400, color:'#2a1800', lineHeight:1.2, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
             你也有過「那個感覺」嗎？
           </h1>
 
-          <p style={{ margin:'0 auto 8px', maxWidth:540, fontSize:'clamp(0.92rem,2.2vw,1.1rem)', color:'#6a4a18', lineHeight:1.75, fontWeight:500 }}>
-            35 個靈異・未知・邊界故事 · 測驗 · 運勢 · 遊戲
+          <p style={{ margin:'0 auto 6px', maxWidth:520, fontSize:'clamp(0.9rem,2vw,1.05rem)', color:'#6a4a18', fontWeight:500, fontFamily:'sans-serif' }}>
+            35 個靈異・未知・邊界故事
           </p>
-          <p style={{ margin:'0 auto 20px', maxWidth:480, fontSize:'0.82rem', color:'#9a7040', lineHeight:1.6 }}>
-            包含科學邊界、死亡不死、詛咒心理、靈魂與意識等系列
+          <p style={{ margin:'0 auto 20px', maxWidth:460, fontSize:'0.82rem', color:'#9a7040', lineHeight:1.65, fontFamily:'sans-serif' }}>
+            科學邊界、死亡不死、詛咒心理、靈魂與意識等系列
           </p>
 
-          {/* 誘因標語 */}
-          <p style={{ margin:'0 auto 28px', fontSize:'0.82rem', color:'#9a6030', background:'rgba(255,220,140,0.4)', display:'inline-block', padding:'6px 18px', borderRadius:20, border:'1px solid rgba(200,150,50,0.3)' }}>
+          <p style={{ margin:'0 auto 24px', fontSize:'0.8rem', color:'#9a6030', background:'rgba(255,220,140,0.35)', display:'inline-block', padding:'5px 16px', borderRadius:18, border:'1px solid rgba(200,150,50,0.25)', fontFamily:'sans-serif' }}>
             ✨ 全部免費閱讀・不需登入・直接進入
           </p>
 
-          <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap' }}>
+          <div>
             <a href="#tf-series" style={{
-              display:'inline-block', padding:'13px 36px', borderRadius:32,
+              display:'inline-block', padding:'12px 34px', borderRadius:30,
               background:'linear-gradient(135deg,#c8862a,#9a5010)',
-              color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.95rem',
-              boxShadow:'0 4px 20px rgba(160,80,16,0.3)', letterSpacing:'0.04em',
+              color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.92rem',
+              boxShadow:'0 3px 16px rgba(160,80,16,0.25)', letterSpacing:'0.03em', fontFamily:'sans-serif',
             }}>
               探索 35 個故事 ↓
-            </a>
-            <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer" style={{
-              display:'inline-block', padding:'13px 28px', borderRadius:32,
-              background:'rgba(255,255,255,0.78)', color:'#8a5020',
-              border:'1.5px solid rgba(180,120,40,0.32)',
-              textDecoration:'none', fontWeight:500, fontSize:'0.88rem',
-            }}>
-              去小舖看完整版 ✨
             </a>
           </div>
         </div>
@@ -295,8 +277,8 @@ export default function FeelingPage() {
 
       <div style={{ maxWidth:880, margin:'0 auto', padding:'30px 18px 0' }}>
 
-        {/* ══ 頂部分享 ════════════════════════════════════════════ */}
-        <BigShareBlock label="邀請朋友一起感受「那個感覺」" />
+        {/* ══ 頂部分享（簡潔條） ══════════════════════════════════ */}
+        <SmallShareBar />
 
         {/* ══ 本週新感覺 ══════════════════════════════════════════ */}
         {/* ★ 維護說明：每週只要改上方 THIS_WEEK 陣列，這裡自動更新 */}
@@ -369,20 +351,12 @@ export default function FeelingPage() {
                     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(195px,1fr))', gap:8 }}>
                       {books.map(b => <BookCard key={`${b.s}-${b.v}`} book={b} />)}
                     </div>
-                    {/* 系列底部導流 */}
-                    <div style={{ marginTop:12, textAlign:'right' }}>
-                      <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
-                        style={{ fontSize:'0.78rem', color:meta.color, textDecoration:'none', borderBottom:`1px dashed ${meta.color}` }}>
-                        深入閱讀心理學？去小舖看看 →
-                      </a>
-                    </div>
                   </div>
                 )}
               </div>
             )
           })}
 
-          <LeadOut />
         </section>
 
         {/* ══ 情緒工具箱 ═════════════════════════════════════════ */}
@@ -406,7 +380,6 @@ export default function FeelingPage() {
               </Link>
             ))}
           </div>
-          <LeadOut text="工具箱用完，還想繼續？" />
         </section>
 
         {/* ══ 快訊入口 ════════════════════════════════════════════ */}
@@ -429,11 +402,12 @@ export default function FeelingPage() {
         {/* ══ 底部分享 ════════════════════════════════════════════ */}
         <section style={{ marginTop:48 }}>
           <BigShareBlock label="分享這個角落給朋友" />
-          <p style={{ marginTop:12, textAlign:'center', color:'#aaa', fontSize:'0.76rem' }}>
-            完整版心理學書籍在
+          {/* 唯一一次導流，輕輕放在最底部 */}
+          <p style={{ marginTop:16, textAlign:'center', color:'#b0a090', fontSize:'0.77rem', fontFamily:'sans-serif' }}>
+            想看更深入的心理學？
             <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
-              style={{ color:'#c8762a', marginLeft:4, borderBottom:'1px solid #c8762a40' }}>
-              有的沒的小舖 ✨
+              style={{ color:'#c8762a', marginLeft:4, textDecoration:'none', borderBottom:'1px solid rgba(200,120,42,0.3)' }}>
+              去有的沒的小舖 →
             </a>
           </p>
         </section>
