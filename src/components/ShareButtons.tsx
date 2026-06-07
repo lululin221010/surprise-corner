@@ -1,5 +1,5 @@
 // 📄 檔案路徑：src/components/ShareButtons.tsx
-// 功能：社群分享按鈕（Facebook, Twitter, LINE, 複製連結）
+// 功能：社群分享按鈕（Facebook, Threads, LINE, 複製連結）
 
 'use client';
 
@@ -31,9 +31,9 @@ export default function ShareButtons({ title, content }: ShareButtonsProps) {
     window.open(url, '_blank', 'width=600,height=400');
   };
 
-  const shareToTwitter = () => {
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-    window.open(url, '_blank', 'width=600,height=400');
+  const shareToThreads = () => {
+    const url = `https://www.threads.net/intent/post?text=${encodeURIComponent(shareText + '\n' + shareUrl)}`;
+    window.open(url, '_blank', 'width=600,height=600');
   };
 
   const shareToLine = () => {
@@ -55,16 +55,16 @@ export default function ShareButtons({ title, content }: ShareButtonsProps) {
         <span className="font-medium">Facebook</span>
       </button>
 
-      {/* Twitter */}
+      {/* Threads */}
       <button
-        onClick={shareToTwitter}
-        className="flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white rounded-lg hover:bg-[#1A94DA] transition-colors"
-        aria-label="分享到 Twitter"
+        onClick={shareToThreads}
+        className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+        aria-label="分享到 Threads"
       >
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 192 192">
+          <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.051-7.484-51.235-21.742C35.573 137.004 29.807 116.641 29.605 90c.202-26.641 5.968-47.004 17.142-60.516C57.93 15.226 75.172 7.911 97.981 7.742c22.976.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 3.24 125.056-6.004 98.02 5.862c-27.16-.164-49.48 9.13-66.38 27.64C16.236 50.286 8.877 74.09 8.647 90c.23 15.91 7.59 39.714 23.013 56.496 16.9 18.51 39.22 27.804 66.38 27.64 27.036.164 48.68-8.958 65.145-27.072 14.79-16.39 14.425-36.892 9.527-49.533-3.674-9.263-10.549-16.881-20.175-22.543zM96.513 160.268c-10.481.578-21.404-2.597-29.054-8.567-6.184-4.816-9.302-11.17-9.596-16.977-.494-9.343 6.648-19.845 28.087-21.082 2.458-.141 4.863-.209 7.22-.209 5.801 0 11.226.539 16.19 1.584-1.834 22.786-11.919 43.817-12.847 45.251z"/>
         </svg>
-        <span className="font-medium">Twitter</span>
+        <span className="font-medium">Threads</span>
       </button>
 
       {/* LINE */}
