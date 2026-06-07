@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 
 const links = [
   // ✅ 移除「首頁」，Logo 本身即為首頁入口
+  { href: '/feeling',       label: '👁️ 那個感覺' },
   { href: '/books',         label: '📚 書評角落' },
   { href: '/ai-news',       label: '📰 快訊' },
   { href: '/games',         label: '🎮 小遊戲' },
