@@ -257,7 +257,7 @@ export default function FeelingPage() {
           </p>
 
           <p style={{ margin:'0 auto 22px', fontSize:'0.79rem', color:'#9a6030', background:'rgba(255,220,140,0.32)', display:'inline-block', padding:'5px 16px', borderRadius:18, border:'1px solid rgba(200,150,50,0.22)' }}>
-            ✨ 全部免費・不需登入・直接進入
+            🎁 免費註冊，立即閱讀完整版
           </p>
 
           <div>
