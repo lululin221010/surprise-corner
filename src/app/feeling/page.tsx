@@ -232,32 +232,28 @@ export default function FeelingPage() {
       {/* ★ 換圖：把 /images/sena.jpg 換成其他路徑即可
           object-position 控制焦點：'center 20%' = 臉部永遠在框內  */}
       <section style={{
-        padding:'clamp(52px,9vw,88px) 24px clamp(40px,7vw,64px)',
         textAlign:'center',
         borderBottom:'1px solid rgba(200,160,60,0.15)',
         position:'relative', overflow:'hidden',
-        minHeight: 'clamp(340px,55vw,520px)',
-        display:'flex', flexDirection:'column', justifyContent:'center',
       }}>
-        {/* 背景圖：img + object-fit，臉永遠在框內不被切掉 */}
+        {/* 照片完整顯示，寬度撐滿，高度自動跟比例走 */}
         <img
           src="/images/sena.jpg"
           alt=""
           aria-hidden="true"
           style={{
-            position:'absolute', inset:0,
-            width:'100%', height:'100%',
-            objectFit:'cover',
-            objectPosition:'center 20%',
+            display:'block',
+            width:'100%',
+            height:'auto',
             pointerEvents:'none',
             userSelect:'none',
           }}
         />
-        {/* 暖色遮罩 */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(160deg,rgba(253,246,227,0.84) 0%,rgba(245,232,200,0.80) 55%,rgba(230,210,170,0.72) 100%)', pointerEvents:'none' }} />
+        {/* 暖色遮罩疊在照片上 */}
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(160deg,rgba(253,246,227,0.80) 0%,rgba(245,232,200,0.75) 50%,rgba(230,210,170,0.65) 100%)', pointerEvents:'none' }} />
 
-        {/* 所有文字加 relative 讓它蓋在遮罩上 */}
-        <div style={{ position:'relative' }}>
+        {/* 文字絕對定位疊在照片上，垂直置中偏上 */}
+        <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'clamp(24px,5vw,60px) 24px' }}>
           <p style={{ margin:'0 0 14px', fontSize:'0.72rem', letterSpacing:'0.42em', color:'#b08040' }}>SURPRISE CORNER</p>
 
           <h1 style={{ margin:'0 0 16px', fontSize:'clamp(2rem,5.8vw,3.6rem)', fontWeight:400, color:'#2a1800', lineHeight:1.18, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
