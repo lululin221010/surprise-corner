@@ -214,15 +214,20 @@ function BookCard({ book }: { book: typeof BOOKS[number] }) {
   )
 }
 
+// 其他角落（用於折疊發現區）
+const MORE_CORNERS = [
+  { icon:'📰', label:'AI 快訊',     desc:'每小時更新，今天發生了什麼',  href:'/ai-news',     color:'#475569' },
+  { icon:'📚', label:'書評角落',    desc:'好書說給你聽，找到下一本',    href:'/books',        color:'#0369a1' },
+  { icon:'📊', label:'魯魯說股票',  desc:'用貓咪的眼睛看市場',          href:'/lulu-stocks',  color:'#16a34a' },
+  { icon:'🏫', label:'小教室',      desc:'那些沒人教你的事',            href:'/classroom',    color:'#9333ea' },
+]
+
 // ─────────────────────────────────────────────────────────────────
 // 主頁面
 // ─────────────────────────────────────────────────────────────────
 export default function FeelingPage() {
-  const [openSeries, setOpenSeries] = useState<number | null>(null)
-
-  function toggleSeries(sid: number) {
-    setOpenSeries(prev => prev === sid ? null : sid)
-  }
+  const [openSeries,   setOpenSeries]   = useState<number | null>(null)
+  const [moreExpanded, setMoreExpanded] = useState(false)
 
   return (
     <main style={{ minHeight:'100vh', background:'#faf7f2', paddingBottom:80, fontFamily:'sans-serif' }}>
@@ -231,124 +236,107 @@ export default function FeelingPage() {
           ★ 照片完整顯示，文字在下方，臉部完全不被遮蓋
           ★ 換圖：把 /images/sena.jpg 換成其他路徑即可            */}
       <section>
-        {/* 照片區：自然比例，底部漸層淡出到背景色 */}
         <div style={{ position:'relative', lineHeight:0 }}>
-          <img
-            src="/images/sena.jpg"
-            alt=""
-            aria-hidden="true"
-            style={{ display:'block', width:'100%', height:'auto', pointerEvents:'none', userSelect:'none' }}
-          />
-          {/* 底部漸層：照片自然過渡到文字背景 */}
+          <img src="/images/sena.jpg" alt="" aria-hidden="true"
+            style={{ display:'block', width:'100%', height:'auto', pointerEvents:'none', userSelect:'none' }} />
           <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'35%', background:'linear-gradient(to bottom, transparent 0%, #faf7f2 100%)', pointerEvents:'none' }} />
         </div>
 
-        {/* 文字區：照片下方，不遮臉 */}
-        <div style={{ background:'#faf7f2', textAlign:'center', padding:'28px 24px 32px', borderBottom:'1px solid rgba(200,160,60,0.12)' }}>
-          <p style={{ margin:'0 0 10px', fontSize:'0.7rem', letterSpacing:'0.42em', color:'#b08040', fontFamily:'sans-serif' }}>SURPRISE CORNER</p>
+        <div style={{ background:'#faf7f2', textAlign:'center', padding:'24px 24px 30px', borderBottom:'1px solid rgba(200,160,60,0.12)' }}>
+          <p style={{ margin:'0 0 10px', fontSize:'0.68rem', letterSpacing:'0.42em', color:'#b08040' }}>SURPRISE CORNER</p>
 
-          <h1 style={{ margin:'0 0 12px', fontSize:'clamp(1.7rem,5.2vw,3.2rem)', fontWeight:400, color:'#2a1800', lineHeight:1.2, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
+          <h1 style={{ margin:'0 0 14px', fontSize:'clamp(1.7rem,5.2vw,3.2rem)', fontWeight:400, color:'#2a1800', lineHeight:1.2, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
             你也有過「那個感覺」嗎？
           </h1>
 
-          <p style={{ margin:'0 auto 6px', maxWidth:520, fontSize:'clamp(0.9rem,2vw,1.05rem)', color:'#6a4a18', fontWeight:500, fontFamily:'sans-serif' }}>
-            35 個靈異・未知・邊界故事
+          {/* ★ 副標：展示這個角落有多豐富 */}
+          <p style={{ margin:'0 auto 8px', maxWidth:560, fontSize:'clamp(0.88rem,2vw,1.02rem)', color:'#6a4a18', fontWeight:500, lineHeight:1.7 }}>
+            35 個靈異故事 · 測驗 · 塔羅 · 運勢 · 遊戲 · 快訊……
           </p>
-          <p style={{ margin:'0 auto 20px', maxWidth:460, fontSize:'0.82rem', color:'#9a7040', lineHeight:1.65, fontFamily:'sans-serif' }}>
-            科學邊界、死亡不死、詛咒心理、靈魂與意識等系列
+          <p style={{ margin:'0 auto 20px', maxWidth:400, fontSize:'0.8rem', color:'#9a7040', lineHeight:1.65 }}>
+            這裡有很多角落，等你慢慢探索
           </p>
 
-          <p style={{ margin:'0 auto 24px', fontSize:'0.8rem', color:'#9a6030', background:'rgba(255,220,140,0.35)', display:'inline-block', padding:'5px 16px', borderRadius:18, border:'1px solid rgba(200,150,50,0.25)', fontFamily:'sans-serif' }}>
-            ✨ 全部免費閱讀・不需登入・直接進入
+          <p style={{ margin:'0 auto 22px', fontSize:'0.79rem', color:'#9a6030', background:'rgba(255,220,140,0.32)', display:'inline-block', padding:'5px 16px', borderRadius:18, border:'1px solid rgba(200,150,50,0.22)' }}>
+            ✨ 全部免費・不需登入・直接進入
           </p>
 
           <div>
             <a href="#tf-series" style={{
-              display:'inline-block', padding:'12px 34px', borderRadius:30,
+              display:'inline-block', padding:'11px 32px', borderRadius:28,
               background:'linear-gradient(135deg,#c8862a,#9a5010)',
-              color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.92rem',
-              boxShadow:'0 3px 16px rgba(160,80,16,0.25)', letterSpacing:'0.03em', fontFamily:'sans-serif',
+              color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.9rem',
+              boxShadow:'0 3px 14px rgba(160,80,16,0.22)', letterSpacing:'0.03em',
             }}>
-              探索 35 個故事 ↓
+              開始探索 ↓
             </a>
           </div>
         </div>
       </section>
 
-      <div style={{ maxWidth:880, margin:'0 auto', padding:'30px 18px 0' }}>
+      <div style={{ maxWidth:880, margin:'0 auto', padding:'28px 18px 0' }}>
 
-        {/* ══ 頂部分享（簡潔條） ══════════════════════════════════ */}
-        <SmallShareBar />
-
-        {/* ══ 本週新感覺 ══════════════════════════════════════════ */}
-        {/* ★ 維護說明：每週只要改上方 THIS_WEEK 陣列，這裡自動更新 */}
-        <section style={{ marginTop:36 }}>
-          <div style={{ marginBottom:16, display:'flex', alignItems:'baseline', gap:10 }}>
-            <p style={{ margin:0, fontSize:'0.7rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 本週新感覺</p>
-            <span style={{ fontSize:'0.75rem', color:'#b08040', background:'rgba(200,150,50,0.12)', padding:'2px 10px', borderRadius:10, border:'1px solid rgba(200,150,50,0.25)' }}>每週更新</span>
+        {/* ══ 本週新感覺 ══════════════════════════════════════════
+            ★ 維護：每週只改上方 THIS_WEEK 陣列即可              */}
+        <section>
+          <div style={{ marginBottom:14, display:'flex', alignItems:'baseline', gap:10 }}>
+            <p style={{ margin:0, fontSize:'0.68rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 本週新感覺</p>
+            <span style={{ fontSize:'0.73rem', color:'#b08040', background:'rgba(200,150,50,0.1)', padding:'2px 9px', borderRadius:9, border:'1px solid rgba(200,150,50,0.22)' }}>每週更新</span>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:12 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))', gap:10 }}>
             {THIS_WEEK.map((item,i) => (
               <a key={i} href={item.trial} target="_blank" rel="noopener noreferrer"
-                style={{ display:'block', padding:'18px 16px', borderRadius:12, background:'#fff', border:`2px solid ${item.color}30`, textDecoration:'none', position:'relative', overflow:'hidden' }}>
-                <div style={{ position:'absolute', top:0, left:0, right:0, height:4, background:`linear-gradient(90deg,${item.color},${item.color}99)` }} />
-                <span style={{ fontSize:'0.68rem', color:item.color, fontWeight:700, letterSpacing:'0.08em', display:'block', marginBottom:5 }}>
-                  {item.series}
-                </span>
-                <h3 style={{ margin:'0 0 6px', fontSize:'0.95rem', fontWeight:700, color:'#1a0f05', lineHeight:1.4 }}>
-                  {item.title}
-                </h3>
-                <p style={{ margin:'0 0 10px', fontSize:'0.78rem', color:'#7a5a38', lineHeight:1.55 }}>
-                  {item.why}
-                </p>
-                <span style={{ fontSize:'0.75rem', color:item.color, fontWeight:700 }}>立刻試讀 →</span>
+                style={{ display:'block', padding:'16px 15px', borderRadius:11, background:'#fff', border:`2px solid ${item.color}28`, textDecoration:'none', position:'relative', overflow:'hidden' }}>
+                <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${item.color},${item.color}80)` }} />
+                <span style={{ fontSize:'0.66rem', color:item.color, fontWeight:700, letterSpacing:'0.08em', display:'block', marginBottom:4 }}>{item.series}</span>
+                <h3 style={{ margin:'0 0 5px', fontSize:'0.93rem', fontWeight:700, color:'#1a0f05', lineHeight:1.4 }}>{item.title}</h3>
+                <p style={{ margin:'0 0 9px', fontSize:'0.77rem', color:'#7a5a38', lineHeight:1.5 }}>{item.why}</p>
+                <span style={{ fontSize:'0.73rem', color:item.color, fontWeight:700 }}>立刻試讀 →</span>
               </a>
             ))}
           </div>
         </section>
 
         {/* ══ 那個感覺 35 本（手風琴）═══════════════════════════ */}
-        <section id="tf-series" style={{ marginTop:40 }}>
-          <div style={{ marginBottom:18 }}>
-            <p style={{ margin:'0 0 3px', fontSize:'0.7rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 那個感覺 系列</p>
-            <p style={{ margin:0, color:'#8a6030', fontSize:'0.83rem' }}>6 大系列 · 35 冊，點系列標題展開，點書名直接進入</p>
+        <section id="tf-series" style={{ marginTop:38 }}>
+          <div style={{ marginBottom:16 }}>
+            <p style={{ margin:'0 0 3px', fontSize:'0.68rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 那個感覺 系列</p>
+            <p style={{ margin:0, color:'#8a6030', fontSize:'0.82rem' }}>6 大系列 · 35 冊，點系列標題展開，點書名直接進入</p>
           </div>
 
           {[1,2,3,4,5,6].map(sid => {
-            const meta  = SERIES[sid]
-            const books = BOOKS.filter(b => b.s === sid)
+            const meta   = SERIES[sid]
+            const books  = BOOKS.filter(b => b.s === sid)
             const isOpen = openSeries === sid
             return (
-              <div key={sid} style={{ marginBottom:10, borderRadius:13, border:`1.5px solid ${meta.color}25`, overflow:'hidden', background:'#fff' }}>
-                {/* 手風琴頭：點擊展開 */}
+              <div key={sid} style={{ marginBottom:9, borderRadius:12, border:`1.5px solid ${meta.color}22`, overflow:'hidden', background:'#fff' }}>
                 <button
-                  onClick={() => toggleSeries(sid)}
+                  onClick={() => setOpenSeries(prev => prev === sid ? null : sid)}
                   style={{
-                    width:'100%', display:'flex', alignItems:'center', gap:12, padding:'14px 16px',
-                    background: isOpen ? `${meta.color}0f` : '#fff',
+                    width:'100%', display:'flex', alignItems:'center', gap:12, padding:'13px 15px',
+                    background: isOpen ? `${meta.color}0d` : '#fff',
                     border:'none', cursor:'pointer', textAlign:'left',
-                    borderBottom: isOpen ? `1px solid ${meta.color}20` : 'none',
+                    borderBottom: isOpen ? `1px solid ${meta.color}18` : 'none',
                     transition:'background 0.2s',
                   }}
                 >
                   <img src={meta.cover} alt={meta.name}
-                    style={{ width:44, height:60, objectFit:'cover', borderRadius:4, flexShrink:0, border:`1px solid ${meta.color}30` }}
+                    style={{ width:42, height:58, objectFit:'cover', borderRadius:4, flexShrink:0, border:`1px solid ${meta.color}28` }}
                     onError={(e)=>{ (e.target as HTMLImageElement).style.display='none' }} />
                   <div style={{ flex:1, minWidth:0, textAlign:'left' }}>
-                    <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:3 }}>
-                      <span style={{ fontSize:'1rem' }}>{meta.emoji}</span>
-                      <span style={{ fontWeight:700, color:meta.color, fontSize:'0.86rem' }}>系列 {sid}｜{meta.name}</span>
-                      <span style={{ fontSize:'0.71rem', color:'#aaa', marginLeft:'auto' }}>{books.length} 冊</span>
+                    <div style={{ display:'flex', alignItems:'center', gap:7, marginBottom:3 }}>
+                      <span style={{ fontSize:'0.95rem' }}>{meta.emoji}</span>
+                      <span style={{ fontWeight:700, color:meta.color, fontSize:'0.84rem' }}>系列 {sid}｜{meta.name}</span>
+                      <span style={{ fontSize:'0.69rem', color:'#bbb', marginLeft:'auto' }}>{books.length} 冊</span>
                     </div>
-                    <p style={{ margin:0, fontSize:'0.78rem', color:'#7a5a38', lineHeight:1.5 }}>{meta.tagline}</p>
+                    <p style={{ margin:0, fontSize:'0.77rem', color:'#7a5a38', lineHeight:1.5 }}>{meta.tagline}</p>
                   </div>
-                  <span style={{ color:meta.color, fontSize:'1.1rem', flexShrink:0, transform: isOpen?'rotate(180deg)':'none', transition:'transform 0.25s' }}>▾</span>
+                  <span style={{ color:meta.color, fontSize:'1rem', flexShrink:0, display:'inline-block', transform: isOpen?'rotate(180deg)':'none', transition:'transform 0.25s' }}>▾</span>
                 </button>
 
-                {/* 展開：書卡網格 */}
                 {isOpen && (
-                  <div style={{ padding:'14px 14px 16px' }}>
-                    <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(195px,1fr))', gap:8 }}>
+                  <div style={{ padding:'12px 13px 14px' }}>
+                    <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(185px,1fr))', gap:7 }}>
                       {books.map(b => <BookCard key={`${b.s}-${b.v}`} book={b} />)}
                     </div>
                   </div>
@@ -356,57 +344,73 @@ export default function FeelingPage() {
               </div>
             )
           })}
-
         </section>
 
-        {/* ══ 情緒工具箱 ═════════════════════════════════════════ */}
-        <section style={{ marginTop:44 }}>
-          <div style={{ marginBottom:16 }}>
-            <p style={{ margin:'0 0 3px', fontSize:'0.7rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 情緒工具箱</p>
-            <p style={{ margin:0, color:'#8a6030', fontSize:'0.83rem' }}>探索內心與未知的角落，全免費</p>
+        {/* ══ 情緒工具箱（緻密小卡）══════════════════════════════ */}
+        <section style={{ marginTop:40 }}>
+          <div style={{ marginBottom:14 }}>
+            <p style={{ margin:'0 0 3px', fontSize:'0.68rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 情緒工具箱</p>
+            <p style={{ margin:0, color:'#8a6030', fontSize:'0.82rem' }}>測驗、塔羅、命盤、聊天、遊戲——全免費，隨時進入</p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(155px,1fr))', gap:10 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(130px,1fr))', gap:8 }}>
             {TOOLS.map(tool => (
               <Link key={tool.href} href={tool.href} style={{
-                display:'block', padding:'18px 14px', borderRadius:12,
-                background:'#fff', border:`1.5px solid ${tool.color}20`,
+                display:'block', padding:'14px 10px 12px', borderRadius:10,
+                background:'#fff', border:`1.5px solid ${tool.color}18`,
                 textDecoration:'none', textAlign:'center',
-                transition:'box-shadow 0.15s',
               }}>
-                <span style={{ fontSize:'1.8rem', display:'block', marginBottom:8 }}>{tool.icon}</span>
-                <h3 style={{ margin:'0 0 4px', fontSize:'0.9rem', fontWeight:700, color:'#1a0f05' }}>{tool.title}</h3>
-                <p style={{ margin:'0 0 8px', fontSize:'0.75rem', color:'#6a4a28', lineHeight:1.5 }}>{tool.desc}</p>
-                <span style={{ fontSize:'0.75rem', color:tool.color, fontWeight:700 }}>進去看看 →</span>
+                <span style={{ fontSize:'1.5rem', display:'block', marginBottom:6 }}>{tool.icon}</span>
+                <h3 style={{ margin:'0 0 3px', fontSize:'0.82rem', fontWeight:700, color:'#1a0f05' }}>{tool.title}</h3>
+                <p style={{ margin:'0 0 7px', fontSize:'0.7rem', color:'#7a5a38', lineHeight:1.45 }}>{tool.desc}</p>
+                <span style={{ fontSize:'0.69rem', color:tool.color, fontWeight:700 }}>進去 →</span>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* ══ 快訊入口 ════════════════════════════════════════════ */}
-        <section style={{ marginTop:36 }}>
-          <Link href="/ai-news" style={{
-            display:'flex', alignItems:'center', justifyContent:'space-between',
-            padding:'16px 20px', borderRadius:12, background:'#fff',
-            border:'1.5px solid rgba(100,116,139,0.2)', textDecoration:'none',
-            flexWrap:'wrap', gap:8,
-          }}>
-            <div>
-              <p style={{ margin:'0 0 3px', fontSize:'0.7rem', letterSpacing:'0.3em', color:'#64748b', fontWeight:700 }}>■ 快訊</p>
-              <p style={{ margin:0, fontSize:'0.9rem', fontWeight:600, color:'#1a0f05' }}>📰 AI 快訊・今天發生了什麼</p>
-              <p style={{ margin:'3px 0 0', fontSize:'0.77rem', color:'#6a7a8a' }}>每小時更新，掌握最新趨勢</p>
+        {/* ══ 還有更多角落（可展開）═══════════════════════════════ */}
+        <section style={{ marginTop:32 }}>
+          <button
+            onClick={() => setMoreExpanded(p => !p)}
+            style={{
+              width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between',
+              padding:'13px 18px', borderRadius:11, background:'#fff',
+              border:'1.5px solid rgba(180,140,80,0.2)', cursor:'pointer',
+              transition:'background 0.15s',
+            }}
+          >
+            <div style={{ textAlign:'left' }}>
+              <span style={{ fontSize:'0.68rem', letterSpacing:'0.3em', color:'#b08040', fontWeight:700, display:'block', marginBottom:2 }}>■ 還有這些角落</span>
+              <span style={{ fontSize:'0.82rem', color:'#6a4a28' }}>快訊・書評・魯魯說股票・小教室……繼續挖</span>
             </div>
-            <span style={{ fontSize:'0.82rem', color:'#64748b', fontWeight:700 }}>前往 →</span>
-          </Link>
+            <span style={{ color:'#b08040', fontSize:'1rem', display:'inline-block', transform: moreExpanded?'rotate(180deg)':'none', transition:'transform 0.25s', flexShrink:0, marginLeft:12 }}>▾</span>
+          </button>
+
+          {moreExpanded && (
+            <div style={{ marginTop:8, display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))', gap:8 }}>
+              {MORE_CORNERS.map(c => (
+                <Link key={c.href} href={c.href} style={{
+                  display:'block', padding:'14px 14px 12px', borderRadius:10,
+                  background:'#fff', border:`1.5px solid ${c.color}18`,
+                  textDecoration:'none',
+                }}>
+                  <span style={{ fontSize:'1.3rem', display:'block', marginBottom:5 }}>{c.icon}</span>
+                  <h3 style={{ margin:'0 0 3px', fontSize:'0.84rem', fontWeight:700, color:'#1a0f05' }}>{c.label}</h3>
+                  <p style={{ margin:'0 0 8px', fontSize:'0.72rem', color:'#7a5a38', lineHeight:1.45 }}>{c.desc}</p>
+                  <span style={{ fontSize:'0.7rem', color:c.color, fontWeight:700 }}>前往 →</span>
+                </Link>
+              ))}
+            </div>
+          )}
         </section>
 
-        {/* ══ 底部分享 ════════════════════════════════════════════ */}
-        <section style={{ marginTop:48 }}>
+        {/* ══ 底部分享 + 一次導流 ═════════════════════════════════ */}
+        <section style={{ marginTop:52 }}>
           <BigShareBlock label="分享這個角落給朋友" />
-          {/* 唯一一次導流，輕輕放在最底部 */}
-          <p style={{ marginTop:16, textAlign:'center', color:'#b0a090', fontSize:'0.77rem', fontFamily:'sans-serif' }}>
+          <p style={{ marginTop:14, textAlign:'center', color:'#b0a090', fontSize:'0.75rem' }}>
             想看更深入的心理學？
             <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
-              style={{ color:'#c8762a', marginLeft:4, textDecoration:'none', borderBottom:'1px solid rgba(200,120,42,0.3)' }}>
+              style={{ color:'#c8762a', marginLeft:4, textDecoration:'none', borderBottom:'1px solid rgba(200,120,42,0.28)' }}>
               去有的沒的小舖 →
             </a>
           </p>
