@@ -89,9 +89,9 @@ const TOOLS = [
 const PAGE_URL  = 'https://surprise-corner.vercel.app/feeling'
 const SHARE = {
   title:   '你也有過「那個感覺」嗎？',
-  line:    `我在 Surprise Corner 找到「那個感覺」系列，35 個故事陪你療癒每個情緒夜晚 👉 ${PAGE_URL}`,
-  fb:      `我在 Surprise Corner 找到「那個感覺」，靈異・心理・科學 35 冊免費閱讀！ ${PAGE_URL}`,
-  copy:    `你也有過「那個感覺」嗎？\n35 個故事・測驗・運勢・遊戲，免費！\n👉 ${PAGE_URL}`,
+  line:    `我在 Surprise Corner 找到一個探索靈異・未知・邊界的角落，35 個故事免費看 👉 ${PAGE_URL}`,
+  fb:      `「那個感覺」系列：科學邊界、死亡不死、詛咒心理……35 冊免費閱讀 ${PAGE_URL}`,
+  copy:    `你也有過「那個感覺」嗎？\n靈異・未知・邊界 35 個故事 + 測驗・運勢・遊戲\n👉 ${PAGE_URL}`,
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -122,10 +122,10 @@ function BigShareBlock({ label }: { label: string }) {
       borderRadius: 18, padding: '22px 22px 20px', textAlign: 'center',
     }}>
       <p style={{ margin:'0 0 4px', fontWeight:700, color:'#7a4a10', fontSize:'0.97rem', fontFamily:'sans-serif' }}>
-        🫂 {label}
+        🌙 {label}
       </p>
       <p style={{ margin:'0 0 16px', color:'#9a6830', fontSize:'0.8rem', fontFamily:'sans-serif' }}>
-        「我在 Still Time 找到那個感覺，你也來看看吧！」
+        「我在 Surprise Corner 找到一個探索靈異・未知・邊界的角落，你也來看看！」
       </p>
       <div style={{ display:'flex', gap:10, justifyContent:'center', flexWrap:'wrap' }}>
         {/* LINE */}
@@ -229,56 +229,60 @@ export default function FeelingPage() {
     <main style={{ minHeight:'100vh', background:'#faf7f2', paddingBottom:80, fontFamily:'sans-serif' }}>
 
       {/* ══════════════════ HERO ══════════════════════════════════ */}
-      {/*
-        ★ 未來換背景圖：在下方 section 的 style 加上
-          backgroundImage: "url('/images/feeling-hero.jpg')",
-          backgroundSize: 'cover', backgroundPosition: 'center'
-        目前用純漸層色
-      */}
+      {/* ★ Hero 背景：/images/sena.jpg（溫暖但帶神秘感）
+          換圖只需改 backgroundImage 的路徑即可               */}
       <section style={{
-        background:'linear-gradient(155deg,#fdf6e3 0%,#faf0d7 45%,#f0e0c0 100%)',
+        backgroundImage: "url('/images/sena.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
         padding:'clamp(52px,9vw,88px) 24px clamp(40px,7vw,64px)',
         textAlign:'center',
         borderBottom:'1px solid rgba(200,160,60,0.15)',
         position:'relative', overflow:'hidden',
       }}>
+        {/* 暖色遮罩，讓文字清晰且保留照片氛圍 */}
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(160deg,rgba(253,246,227,0.82) 0%,rgba(245,232,200,0.78) 60%,rgba(230,210,170,0.7) 100%)', pointerEvents:'none' }} />
         {/* 裝飾圓點 */}
-        <div style={{ position:'absolute', top:-100, right:-80, width:300, height:300, borderRadius:'50%', background:'rgba(210,160,60,0.07)', pointerEvents:'none' }} />
-        <div style={{ position:'absolute', bottom:-60, left:-60, width:200, height:200, borderRadius:'50%', background:'rgba(180,100,30,0.05)', pointerEvents:'none' }} />
+        <div style={{ position:'absolute', top:-100, right:-80, width:300, height:300, borderRadius:'50%', background:'rgba(210,160,60,0.06)', pointerEvents:'none' }} />
 
-        <p style={{ margin:'0 0 14px', fontSize:'0.72rem', letterSpacing:'0.42em', color:'#b08040' }}>SURPRISE CORNER</p>
+        {/* 所有文字加 relative 讓它蓋在遮罩上 */}
+        <div style={{ position:'relative' }}>
+          <p style={{ margin:'0 0 14px', fontSize:'0.72rem', letterSpacing:'0.42em', color:'#b08040' }}>SURPRISE CORNER</p>
 
-        <h1 style={{ margin:'0 0 16px', fontSize:'clamp(2rem,5.8vw,3.6rem)', fontWeight:400, color:'#2a1800', lineHeight:1.18, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
-          你也有過「那個感覺」嗎？
-        </h1>
+          <h1 style={{ margin:'0 0 16px', fontSize:'clamp(2rem,5.8vw,3.6rem)', fontWeight:400, color:'#2a1800', lineHeight:1.18, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
+            你也有過「那個感覺」嗎？
+          </h1>
 
-        <p style={{ margin:'0 auto 10px', maxWidth:520, fontSize:'clamp(0.9rem,2.2vw,1.08rem)', color:'#7a5820', lineHeight:1.82 }}>
-          35 個故事．測驗．運勢．遊戲<br />
-          <span style={{ color:'#a07040', fontSize:'0.92em' }}>每天陪你療癒</span>
-        </p>
+          <p style={{ margin:'0 auto 8px', maxWidth:540, fontSize:'clamp(0.92rem,2.2vw,1.1rem)', color:'#6a4a18', lineHeight:1.75, fontWeight:500 }}>
+            35 個靈異・未知・邊界故事 · 測驗 · 運勢 · 遊戲
+          </p>
+          <p style={{ margin:'0 auto 20px', maxWidth:480, fontSize:'0.82rem', color:'#9a7040', lineHeight:1.6 }}>
+            包含科學邊界、死亡不死、詛咒心理、靈魂與意識等系列
+          </p>
 
-        {/* 誘因標語 */}
-        <p style={{ margin:'0 auto 28px', maxWidth:420, fontSize:'0.83rem', color:'#9a6030', background:'rgba(255,220,140,0.35)', display:'inline-block', padding:'6px 18px', borderRadius:20, border:'1px solid rgba(200,150,50,0.3)' }}>
-          ✨ 全部免費・不需登入・直接試讀
-        </p>
+          {/* 誘因標語 */}
+          <p style={{ margin:'0 auto 28px', fontSize:'0.82rem', color:'#9a6030', background:'rgba(255,220,140,0.4)', display:'inline-block', padding:'6px 18px', borderRadius:20, border:'1px solid rgba(200,150,50,0.3)' }}>
+            ✨ 全部免費閱讀・不需登入・直接進入
+          </p>
 
-        <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap' }}>
-          <a href="#tf-series" style={{
-            display:'inline-block', padding:'13px 36px', borderRadius:32,
-            background:'linear-gradient(135deg,#c8862a,#9a5010)',
-            color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.95rem',
-            boxShadow:'0 4px 20px rgba(160,80,16,0.28)', letterSpacing:'0.04em',
-          }}>
-            試讀 35 冊故事 ↓
-          </a>
-          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer" style={{
-            display:'inline-block', padding:'13px 28px', borderRadius:32,
-            background:'rgba(255,255,255,0.78)', color:'#8a5020',
-            border:'1.5px solid rgba(180,120,40,0.32)',
-            textDecoration:'none', fontWeight:500, fontSize:'0.88rem',
-          }}>
-            去小舖看完整版 ✨
-          </a>
+          <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap' }}>
+            <a href="#tf-series" style={{
+              display:'inline-block', padding:'13px 36px', borderRadius:32,
+              background:'linear-gradient(135deg,#c8862a,#9a5010)',
+              color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.95rem',
+              boxShadow:'0 4px 20px rgba(160,80,16,0.3)', letterSpacing:'0.04em',
+            }}>
+              探索 35 個故事 ↓
+            </a>
+            <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer" style={{
+              display:'inline-block', padding:'13px 28px', borderRadius:32,
+              background:'rgba(255,255,255,0.78)', color:'#8a5020',
+              border:'1.5px solid rgba(180,120,40,0.32)',
+              textDecoration:'none', fontWeight:500, fontSize:'0.88rem',
+            }}>
+              去小舖看完整版 ✨
+            </a>
+          </div>
         </div>
       </section>
 
@@ -318,7 +322,7 @@ export default function FeelingPage() {
         <section id="tf-series" style={{ marginTop:40 }}>
           <div style={{ marginBottom:18 }}>
             <p style={{ margin:'0 0 3px', fontSize:'0.7rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 那個感覺 系列</p>
-            <p style={{ margin:0, color:'#8a6030', fontSize:'0.83rem' }}>6 大系列 · 35 冊，點系列標題展開，點書名直接試讀</p>
+            <p style={{ margin:0, color:'#8a6030', fontSize:'0.83rem' }}>6 大系列 · 35 冊，點系列標題展開，點書名直接進入</p>
           </div>
 
           {[1,2,3,4,5,6].map(sid => {
@@ -378,7 +382,7 @@ export default function FeelingPage() {
         <section style={{ marginTop:44 }}>
           <div style={{ marginBottom:16 }}>
             <p style={{ margin:'0 0 3px', fontSize:'0.7rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 情緒工具箱</p>
-            <p style={{ margin:0, color:'#8a6030', fontSize:'0.83rem' }}>測驗・占卜・聊天・遊戲，全免費</p>
+            <p style={{ margin:0, color:'#8a6030', fontSize:'0.83rem' }}>探索內心與未知的角落，全免費</p>
           </div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(155px,1fr))', gap:10 }}>
             {TOOLS.map(tool => (
