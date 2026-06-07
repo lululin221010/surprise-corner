@@ -216,10 +216,9 @@ function BookCard({ book }: { book: typeof BOOKS[number] }) {
 
 // 其他角落（用於折疊發現區）
 const MORE_CORNERS = [
-  { icon:'📰', label:'AI 快訊',     desc:'每小時更新，今天發生了什麼',  href:'/ai-news',     color:'#475569' },
-  { icon:'📚', label:'書評角落',    desc:'好書說給你聽，找到下一本',    href:'/books',        color:'#0369a1' },
-  { icon:'📊', label:'魯魯說股票',  desc:'用貓咪的眼睛看市場',          href:'/lulu-stocks',  color:'#16a34a' },
-  { icon:'🏫', label:'小教室',      desc:'那些沒人教你的事',            href:'/classroom',    color:'#9333ea' },
+  { icon:'🏫', label:'小教室',   desc:'有趣的知識小課，那些沒人教你的事',  href:'/classroom', color:'#9333ea' },
+  { icon:'📰', label:'AI 快訊', desc:'每小時更新，今天發生了什麼',         href:'/ai-news',   color:'#475569' },
+  { icon:'📚', label:'書評角落', desc:'好書說給你聽，找到下一本',          href:'/books',     color:'#0369a1' },
 ]
 
 // ─────────────────────────────────────────────────────────────────
