@@ -1,8 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import ShareButtons from '@/components/ShareButtons'
+
+const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false })
 
 // ─────────────────────────────────────────────────────────────────
 // 35 本書（MD frontmatter 來源，death 系列無 Vol.4）
@@ -231,45 +234,47 @@ export default function FeelingPage() {
   return (
     <main style={{ minHeight:'100vh', background:'#faf7f2', paddingBottom:80, fontFamily:'sans-serif' }}>
 
-      {/* ══════════════════ HERO ══════════════════════════════════
-          ★ 照片完整顯示，文字在下方，臉部完全不被遮蓋
-          ★ 換圖：把 /images/sena.jpg 換成其他路徑即可            */}
-      <section>
-        <div style={{ position:'relative', lineHeight:0 }}>
-          <img src="/images/sena.jpg" alt="" aria-hidden="true"
-            style={{ display:'block', width:'100%', height:'auto', pointerEvents:'none', userSelect:'none' }} />
-          <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'35%', background:'linear-gradient(to bottom, transparent 0%, #faf7f2 100%)', pointerEvents:'none' }} />
-        </div>
+      {/* ══════════════════ HERO（魯魯星空風）══════════════════════ */}
+      <section style={{ position:'relative', minHeight:460, background:'#0d0820', overflow:'hidden', display:'flex', alignItems:'center', justifyContent:'center' }}>
+        <Suspense fallback={null}>
+          <StarCanvas />
+        </Suspense>
 
-        <div style={{ background:'#faf7f2', textAlign:'center', padding:'24px 24px 30px', borderBottom:'1px solid rgba(200,160,60,0.12)' }}>
-          <p style={{ margin:'0 0 10px', fontSize:'0.68rem', letterSpacing:'0.42em', color:'#b08040' }}>SURPRISE CORNER</p>
+        <div style={{ position:'relative', zIndex:10, textAlign:'center', padding:'52px 24px 60px', display:'flex', flexDirection:'column', alignItems:'center' }}>
+          {/* 魯魯圓形照 */}
+          <div style={{
+            width:120, height:120, borderRadius:'50%', overflow:'hidden', marginBottom:20,
+            border:'2.5px solid rgba(168,85,247,0.6)',
+            boxShadow:'0 0 30px rgba(168,85,247,0.5), 0 0 60px rgba(88,28,135,0.35)',
+          }}>
+            <img src="/images/lulu.jpg" alt="魯魯" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+          </div>
 
-          <h1 style={{ margin:'0 0 14px', fontSize:'clamp(1.7rem,5.2vw,3.2rem)', fontWeight:400, color:'#2a1800', lineHeight:1.2, fontFamily:'Georgia,serif', letterSpacing:'0.02em' }}>
+          <p style={{ margin:'0 0 10px', fontSize:'0.68rem', letterSpacing:'0.42em', color:'#7c3aed' }}>SURPRISE CORNER</p>
+
+          <h1 style={{ margin:'0 0 14px', fontSize:'clamp(1.7rem,5.2vw,3rem)', fontWeight:700, color:'#e9d5ff', lineHeight:1.25, letterSpacing:'0.02em' }}>
             你也有過「那個感覺」嗎？
           </h1>
 
-          {/* ★ 副標：展示這個角落有多豐富 */}
-          <p style={{ margin:'0 auto 8px', maxWidth:560, fontSize:'clamp(0.88rem,2vw,1.02rem)', color:'#6a4a18', fontWeight:500, lineHeight:1.7 }}>
+          <p style={{ margin:'0 auto 8px', maxWidth:520, fontSize:'clamp(0.88rem,2vw,1rem)', color:'#c4b5fd', lineHeight:1.7 }}>
             35 個靈異故事 · 測驗 · 塔羅 · 運勢 · 遊戲 · 快訊……
           </p>
-          <p style={{ margin:'0 auto 20px', maxWidth:400, fontSize:'0.8rem', color:'#9a7040', lineHeight:1.65 }}>
+          <p style={{ margin:'0 auto 20px', maxWidth:380, fontSize:'0.8rem', color:'#9ca3af', lineHeight:1.65 }}>
             這裡有很多角落，等你慢慢探索
           </p>
 
-          <p style={{ margin:'0 auto 22px', fontSize:'0.79rem', color:'#9a6030', background:'rgba(255,220,140,0.32)', display:'inline-block', padding:'5px 16px', borderRadius:18, border:'1px solid rgba(200,150,50,0.22)' }}>
+          <p style={{ margin:'0 auto 24px', fontSize:'0.79rem', color:'#c4b5fd', background:'rgba(124,58,237,0.18)', display:'inline-block', padding:'5px 18px', borderRadius:18, border:'1px solid rgba(167,139,250,0.3)' }}>
             🎁 免費註冊，立即閱讀完整版
           </p>
 
-          <div>
-            <a href="#tf-series" style={{
-              display:'inline-block', padding:'11px 32px', borderRadius:28,
-              background:'linear-gradient(135deg,#c8862a,#9a5010)',
-              color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.9rem',
-              boxShadow:'0 3px 14px rgba(160,80,16,0.22)', letterSpacing:'0.03em',
-            }}>
-              開始探索 ↓
-            </a>
-          </div>
+          <a href="#tf-series" style={{
+            display:'inline-block', padding:'11px 32px', borderRadius:28,
+            background:'linear-gradient(135deg,#7c3aed,#4f1d96)',
+            color:'#fff', textDecoration:'none', fontWeight:700, fontSize:'0.9rem',
+            boxShadow:'0 4px 18px rgba(124,58,237,0.4)', letterSpacing:'0.03em',
+          }}>
+            開始探索 ↓
+          </a>
         </div>
       </section>
 

@@ -7,13 +7,8 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 const links = [
-  // ✅ 移除「首頁」，Logo 本身即為首頁入口
-  { href: '/feeling',       label: '👁️ 那個感覺' },
-  { href: '/books',         label: '📚 書評角落' },
-  { href: '/ai-news',       label: '📰 快訊' },
-  { href: '/games',         label: '🎮 小遊戲' },
-  { href: '/tools',         label: '🛠️ 小工具' },
-  { href: '/classroom',     label: '🏫 小教室' },
+  { href: '/feeling', label: '👁️ 那個感覺' },
+  { href: '/play',    label: '🎮 玩一玩' },
   // ✅ 管理頁面已從導覽列移除（直接輸入 /admin 仍可進入）
 ];
 
@@ -99,7 +94,7 @@ export default function Navbar() {
         </Link>
       ))}
 
-      {/* 電子書外部連結 */}
+      {/* 電子書（含書評角落）→ ST digital */}
       <a
         href="https://still-time-corner.vercel.app/digital"
         target="_blank"
