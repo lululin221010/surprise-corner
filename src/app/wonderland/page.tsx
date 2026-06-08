@@ -6,17 +6,20 @@ import ShareButtons from '@/components/ShareButtons'
 
 const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false })
 
+// 7 張卡片，從正上方（-90°）順時針均分，間隔約 51.4°
+const STEP = 360 / 7
 const zones = [
   { name: '靈異鬼屋', icon: '👻', desc: '每天都有新鬼故事，你敢一個人看嗎？', href: '/feeling',   angle: -90 },
-  { name: '玩樂區',   icon: '🎮', desc: '各種互動小遊戲，無聊的時候來玩一下',  href: '/play',     angle: -30 },
-  { name: '心理學館', icon: '🧠', desc: '了解自己，比你想像的有趣多了',        href: '/quiz',     angle:  30 },
-  { name: '快訊站',   icon: '⚡', desc: '世界發生什麼了？AI 幫你整理重點',     href: '/ai-news',  angle:  90 },
-  { name: '收租 AI',  icon: '🤖', desc: 'AI 幫你整理，而不只是你幫 AI 打工',  href: '/intro',    angle: 150 },
-  { name: '小教室',   icon: '📚', desc: '每次學一點，慢慢就什麼都懂了',        href: '/classroom',angle: 210 },
+  { name: '玩樂區',   icon: '🎮', desc: '各種互動小遊戲，無聊的時候來玩一下',  href: '/play',     angle: -90 + STEP },
+  { name: '心理學館', icon: '🧠', desc: '了解自己，比你想像的有趣多了',        href: '/quiz',     angle: -90 + STEP * 2 },
+  { name: '快訊站',   icon: '⚡', desc: '世界發生什麼了？AI 幫你整理重點',     href: '/ai-news',  angle: -90 + STEP * 3 },
+  { name: '收租 AI',  icon: '🤖', desc: 'AI 幫你整理，而不只是你幫 AI 打工',  href: '/intro',    angle: -90 + STEP * 4 },
+  { name: '小教室',   icon: '📚', desc: '每次學一點，慢慢就什麼都懂了',        href: '/classroom',angle: -90 + STEP * 5 },
+  { name: '冷知識',   icon: '🧊', desc: '99% 的人不知道的事，今天你知道了',    href: '/',         angle: -90 + STEP * 6 },
 ]
 
 export default function Wonderland() {
-  const R = 270 // 環繞半徑（px）
+  const R = 295 // 環繞半徑（px），7張需要稍大
 
   return (
     <div className="min-h-screen bg-[#0a0719] text-white overflow-x-hidden relative">
