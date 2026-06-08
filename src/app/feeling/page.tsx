@@ -82,7 +82,6 @@ const TOOLS = [
   { icon:'🧠', title:'情緒測驗',   desc:'依附類型・心理防禦機制',     href:'/quiz',      color:'#7c3aed' },
   { icon:'🔮', title:'塔羅占卜',   desc:'抽一張牌，讓牌說話',         href:'/tarot',     color:'#9333ea' },
   { icon:'☯️', title:'八字命盤',   desc:'生辰洩漏的性格底色',         href:'/bazi',      color:'#b45309' },
-  { icon:'💬', title:'魯魯聊天',   desc:'只陪不評判的 AI 好友',       href:'/chat/lulu', color:'#0d9488' },
   { icon:'🎮', title:'小遊戲',     desc:'睡前五分鐘清空大腦',         href:'/games',     color:'#d97706' },
 ]
 
@@ -195,9 +194,9 @@ function BookCard({ book }: { book: typeof BOOKS[number] }) {
           </h3>
         </div>
         <div style={{ display:'flex', gap:6, marginTop:'auto', paddingTop:6 }}>
-          <a href={book.trial} target="_blank" rel="noopener noreferrer"
+          <a href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
             style={{ padding:'4px 11px', borderRadius:13, background:meta.color, color:'#fff', textDecoration:'none', fontSize:'0.72rem', fontFamily:'sans-serif', fontWeight:700 }}>
-            試讀 →
+            🎁 免費閱讀 →
           </a>
           <button onClick={()=>setShareOpen(o=>!o)}
             style={{ padding:'4px 9px', borderRadius:13, background: shareOpen?'#f5e8c8':'#f5f5f0', color:'#8a5020', border:'1px solid rgba(180,120,40,0.2)', cursor:'pointer', fontSize:'0.72rem', fontFamily:'sans-serif' }}>
@@ -289,13 +288,13 @@ export default function FeelingPage() {
           </div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))', gap:10 }}>
             {THIS_WEEK.map((item,i) => (
-              <a key={i} href={item.trial} target="_blank" rel="noopener noreferrer"
+              <a key={i} href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
                 style={{ display:'block', padding:'16px 15px', borderRadius:11, background:'#fff', border:`2px solid ${item.color}28`, textDecoration:'none', position:'relative', overflow:'hidden' }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${item.color},${item.color}80)` }} />
                 <span style={{ fontSize:'0.66rem', color:item.color, fontWeight:700, letterSpacing:'0.08em', display:'block', marginBottom:4 }}>{item.series}</span>
                 <h3 style={{ margin:'0 0 5px', fontSize:'0.93rem', fontWeight:700, color:'#1a0f05', lineHeight:1.4 }}>{item.title}</h3>
                 <p style={{ margin:'0 0 9px', fontSize:'0.77rem', color:'#7a5a38', lineHeight:1.5 }}>{item.why}</p>
-                <span style={{ fontSize:'0.73rem', color:item.color, fontWeight:700 }}>立刻試讀 →</span>
+                <span style={{ fontSize:'0.73rem', color:item.color, fontWeight:700 }}>🎁 免費註冊即可閱讀 →</span>
               </a>
             ))}
           </div>
