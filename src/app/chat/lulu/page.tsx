@@ -167,7 +167,7 @@ export default function LuluChatPage() {
         padding: '0 1rem', position: 'relative', zIndex: 1,
       }}>
         <a href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
-          onClick={() => window.gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'chat_lulu' })}
+          onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'chat_lulu' })}
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(168,85,247,0.1))',
