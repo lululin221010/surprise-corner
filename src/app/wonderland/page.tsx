@@ -19,7 +19,7 @@ const zones = [
 ]
 
 export default function Wonderland() {
-  const R = 295 // 環繞半徑（px），7張需要稍大
+  const R = 340 // 環繞半徑（px）
 
   return (
     <div className="min-h-screen bg-[#0a0719] text-white overflow-x-hidden relative">
