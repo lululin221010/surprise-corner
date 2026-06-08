@@ -186,6 +186,7 @@ export default function AIBookPromo() {
         {/* 購買按鈕 */}
         <a
           href="https://still-time-corner.vercel.app/digital/69a3c5f1081513b2186cc952"
+          onClick={() => window.gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'ai_book_promo' })}
           style={{
             display: 'inline-flex', flexDirection: 'column' as const, alignItems: 'center', gap: '4px',
             background: 'linear-gradient(135deg, #fbbf24, #f59e0b, #d97706)',

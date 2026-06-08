@@ -167,6 +167,7 @@ export default function SignalChatPage() {
         padding: '0 1rem', position: 'relative', zIndex: 1,
       }}>
         <a href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
+          onClick={() => window.gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'chat_signal' })}
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             background: 'linear-gradient(135deg,rgba(14,165,233,0.15),rgba(2,132,199,0.1))',

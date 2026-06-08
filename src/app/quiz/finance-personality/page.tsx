@@ -237,6 +237,7 @@ export default function FinancePersonalityQuiz() {
         const key = classify(newAnswers);
         setResultKey(key);
         setRadarScores(calcRadar(newAnswers));
+        window.gtag?.('event', 'complete_quiz', { event_category: 'quiz', quiz_slug: 'finance-personality' });
       } else {
         setAnswers(newAnswers);
         setCurrent(current + 1);

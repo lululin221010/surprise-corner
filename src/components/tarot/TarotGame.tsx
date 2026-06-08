@@ -118,6 +118,7 @@ export default function TarotGame() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-orange-400 to-pink-500 text-white px-6 py-2.5 rounded-xl font-black text-sm hover:opacity-90 transition-all"
+              onClick={() => window.gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'tarot' })}
             >
               📚 逛逛小舖找書緣
             </a>
