@@ -1,10 +1,7 @@
+'use client';
 // src/app/play/page.js — 玩一玩入口頁
 import Link from 'next/link';
 
-export const metadata = {
-  title: '玩一玩 | Surprise Corner',
-  description: '小遊戲、小工具、測驗，隨便玩玩。',
-};
 
 const CARDS = [
   {
