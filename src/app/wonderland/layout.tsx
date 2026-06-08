@@ -7,6 +7,14 @@ export const metadata: Metadata = {
     title: '驚喜樂世界 | SURPRISE CORNER',
     description: '六大神秘區域，每天都有新發現 💖',
     url: 'https://surprise-corner.vercel.app/wonderland',
+    images: [
+      {
+        url: 'https://surprise-corner.vercel.app/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: '驚喜樂世界 SURPRISE CORNER',
+      },
+    ],
   },
 }
 
