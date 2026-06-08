@@ -112,7 +112,7 @@ export default function Navbar() {
 
       {/* 收租AI 股票工具外部連結 */}
       <a
-        href="https://stock-dashboard-ochre-sigma.vercel.app"
+        href="https://stock-dashboard-ochre-sigma.vercel.app/intro"
         target="_blank"
         rel="noopener noreferrer"
         style={{
