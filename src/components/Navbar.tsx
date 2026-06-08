@@ -99,7 +99,7 @@ export default function Navbar() {
         href="https://still-time-corner.vercel.app/digital"
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => window.gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'navbar' })}
+        onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'navbar' })}
         style={{
           color: '#a78bfa',
           textDecoration: 'none', padding: '0.4rem 1rem',

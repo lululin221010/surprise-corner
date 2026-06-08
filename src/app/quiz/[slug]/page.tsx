@@ -74,7 +74,7 @@ export default function QuizPage() {
         const winner = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
         setAnswers(newAnswers);
         setResult(winner);
-        window.gtag?.('event', 'complete_quiz', { event_category: 'quiz', quiz_slug: slug });
+        (window as any).gtag?.('event', 'complete_quiz', { event_category: 'quiz', quiz_slug: slug });
       } else {
         setAnswers(newAnswers);
         setCurrent(current + 1);
@@ -158,7 +158,7 @@ export default function QuizPage() {
           </div>
 
           {/* 購書 CTA */}
-          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block', marginBottom: '2rem' }} onClick={() => window.gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'quiz_result' })}>
+          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block', marginBottom: '2rem' }} onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'quiz_result' })}>
             <div style={{
               background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(236,72,153,0.08))',
               border: '1px solid rgba(139,92,246,0.3)',
