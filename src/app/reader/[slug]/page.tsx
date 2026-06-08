@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import trialsData from '../../../data/trials/psychology-trials.json';
+import BuyButton from './BuyButton';
 
 type Trial = {
   slug: string;
@@ -236,14 +237,7 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
               購買後可在小舖自助取件，永久下載。
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-              <a
-                href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-buy"
-              >
-                前往購買 →
-              </a>
+              <BuyButton href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'} className="btn-buy" />
               <Link href={`/${seriesSlug}.html`} className="link-back">← 回到系列頁</Link>
             </div>
           </div>
@@ -252,14 +246,7 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
       </div>
 
       <div className="fixed-bar">
-        <a
-          href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-buy"
-        >
-          前往購買 →
-        </a>
+        <BuyButton href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'} className="btn-buy" />
         <Link href={`/${seriesSlug}.html`} className="link-back">← 回到系列頁</Link>
       </div>
     </>
