@@ -241,7 +241,6 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-buy"
-                onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'reader_inline' })}
               >
                 前往購買 →
               </a>
@@ -258,7 +257,6 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
           target="_blank"
           rel="noopener noreferrer"
           className="btn-buy"
-          onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'reader_fixed_bar' })}
         >
           前往購買 →
         </a>
