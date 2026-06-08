@@ -6,243 +6,212 @@ import ShareButtons from '@/components/ShareButtons'
 
 const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false })
 
-const ZONES = [
+const zones = [
   {
-    icon: '👻',
     name: '靈異鬼屋',
-    desc: '每天都有新鬼故事',
+    color: 'purple',
+    icon: '👻',
+    desc: '每天都有新鬼故事，你敢一個人看嗎？',
     href: '/feeling',
-    color: '#a855f7',
-    bg: 'rgba(88,28,135,0.45)',
-    border: 'rgba(168,85,247,0.35)',
+    glow: '#a855f7',
   },
   {
-    icon: '🎮',
     name: '玩樂區',
-    desc: '各種互動小遊戲',
+    color: 'orange',
+    icon: '🎮',
+    desc: '各種互動小遊戲，無聊的時候來玩一下',
     href: '/play',
-    color: '#f97316',
-    bg: 'rgba(124,45,18,0.45)',
-    border: 'rgba(249,115,22,0.35)',
+    glow: '#f97316',
   },
   {
-    icon: '🧠',
     name: '心理學館',
+    color: 'emerald',
+    icon: '🧠',
     desc: '了解自己，比你想像的有趣多了',
     href: '/quiz',
-    color: '#22c55e',
-    bg: 'rgba(20,83,45,0.45)',
-    border: 'rgba(34,197,94,0.35)',
+    glow: '#10b981',
   },
   {
-    icon: '⚡',
     name: '快訊站',
+    color: 'blue',
+    icon: '⚡',
     desc: '世界發生什麼了？AI 幫你整理重點',
     href: '/ai-news',
-    color: '#3b82f6',
-    bg: 'rgba(23,37,84,0.45)',
-    border: 'rgba(59,130,246,0.35)',
+    glow: '#3b82f6',
   },
   {
-    icon: '🤖',
     name: '收租 AI',
-    desc: 'AI 幫你賺錢，而不是你幫 AI 打工',
+    color: 'cyan',
+    icon: '🤖',
+    desc: 'AI 幫你整理，而不只是你幫 AI 打工',
     href: '/intro',
-    color: '#06b6d4',
-    bg: 'rgba(8,51,68,0.45)',
-    border: 'rgba(6,182,212,0.35)',
+    glow: '#06b6d4',
   },
   {
-    icon: '📚',
     name: '小教室',
-    desc: '每次學一點點，慢慢就什麼都懂了',
+    color: 'slate',
+    icon: '📚',
+    desc: '每次學一點，慢慢就什麼都懂了',
     href: '/classroom',
-    color: '#94a3b8',
-    bg: 'rgba(30,41,59,0.45)',
-    border: 'rgba(148,163,184,0.35)',
+    glow: '#94a3b8',
   },
 ]
 
-export default function WonderlandPage() {
+// Tailwind 動態 class 用 safelist 方式避免 purge，改用 inline style 注入
+const colorMap: Record<string, { border: string; shadow: string; bar: string }> = {
+  purple:  { border: 'rgba(168,85,247,0.3)',  shadow: 'rgba(168,85,247,0.4)',  bar: 'linear-gradient(90deg,transparent,#a855f7,transparent)' },
+  orange:  { border: 'rgba(249,115,22,0.3)',  shadow: 'rgba(249,115,22,0.4)',  bar: 'linear-gradient(90deg,transparent,#f97316,transparent)' },
+  emerald: { border: 'rgba(16,185,129,0.3)',  shadow: 'rgba(16,185,129,0.4)',  bar: 'linear-gradient(90deg,transparent,#10b981,transparent)' },
+  blue:    { border: 'rgba(59,130,246,0.3)',  shadow: 'rgba(59,130,246,0.4)',  bar: 'linear-gradient(90deg,transparent,#3b82f6,transparent)' },
+  cyan:    { border: 'rgba(6,182,212,0.3)',   shadow: 'rgba(6,182,212,0.4)',   bar: 'linear-gradient(90deg,transparent,#06b6d4,transparent)' },
+  slate:   { border: 'rgba(148,163,184,0.3)', shadow: 'rgba(148,163,184,0.4)', bar: 'linear-gradient(90deg,transparent,#94a3b8,transparent)' },
+}
+
+export default function Wonderland() {
   return (
-    <div className="relative min-h-screen bg-[#07071a] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#0a0719] text-white overflow-x-hidden relative">
       <StarCanvas />
 
-      {/* 全頁光暈底層 */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-800/20 blur-[140px] rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-pink-700/10 blur-[120px] rounded-full" />
-      </div>
-
-      {/* ── CSS 星點動畫（補充星空密度）── */}
+      {/* CSS 動畫 */}
       <style>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50%       { opacity: 1;   transform: scale(1.4); }
+        @keyframes palace-pulse {
+          0%,100% { filter: drop-shadow(0 0 30px #ffe066) drop-shadow(0 0 60px #a855f7); }
+          50%      { filter: drop-shadow(0 0 60px #ffe066) drop-shadow(0 0 100px #ec4899); }
         }
-        .star { position:absolute; border-radius:50%; background:#fff; animation: twinkle linear infinite; }
-        @keyframes palace-glow {
-          0%, 100% { filter: drop-shadow(0 0 20px #f0abfc) drop-shadow(0 0 50px #a855f7); }
-          50%       { filter: drop-shadow(0 0 40px #fde68a) drop-shadow(0 0 80px #f59e0b); }
-        }
-        .palace-emoji { animation: palace-glow 3s ease-in-out infinite; }
-        @keyframes ring-spin {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
-        }
-        @keyframes ring-spin-r {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(-360deg); }
-        }
-        .ring-1 { animation: ring-spin   8s linear infinite; }
-        .ring-2 { animation: ring-spin-r 12s linear infinite; }
-        @keyframes zone-float {
-          0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-6px); }
-        }
+        .palace { animation: palace-pulse 3s ease-in-out infinite; }
+
+        @keyframes ring-cw  { to { transform: rotate(360deg);  } }
+        @keyframes ring-ccw { to { transform: rotate(-360deg); } }
+        .ring-cw  { animation: ring-cw  10s linear infinite; }
+        .ring-ccw { animation: ring-ccw 15s linear infinite; }
+
+        .zone-card { transition: transform .4s, box-shadow .4s, border-color .4s; }
+        .zone-card:hover { transform: translateY(-12px); }
+
+        .bar-line { width: 0; transition: width .5s; background: var(--bar); }
+        .zone-card:hover .bar-line { width: 100%; }
+
+        .bg-ghost { transition: opacity .4s; }
+        .zone-card:hover .bg-ghost { opacity: 0.18 !important; }
       `}</style>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-8">
+      {/* 頂層光暈 */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-purple-700/20 blur-[140px] rounded-full" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
 
         {/* Header */}
-        <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
-          <Link href="/" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors">
-            <span>←</span><span>返回首頁</span>
+        <div className="flex items-center justify-between flex-wrap gap-3 mb-8">
+          <Link href="/" className="inline-flex items-center gap-2 text-purple-300 hover:text-white transition-colors text-sm">
+            ← 返回首頁
           </Link>
           <ShareButtons title="SURPRISE CORNER 驚喜樂世界" content="六大神秘區域，每天都有新發現 💖" />
         </div>
 
         {/* 主標題 */}
-        <div className="text-center mb-2">
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-widest bg-gradient-to-r from-yellow-200 via-pink-300 to-purple-300 bg-clip-text text-transparent mb-1">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-wider bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-2xl">
             SURPRISE CORNER
           </h1>
-          <p className="text-lg sm:text-2xl font-semibold text-purple-200">驚喜樂世界</p>
-          <p className="mt-2 text-sm text-slate-500">六大神秘區域，每天都有新發現 💖</p>
+          <p className="text-3xl md:text-5xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-300 mt-2">
+            驚喜樂世界
+          </p>
+          <p className="mt-6 text-lg text-purple-200/80">六大神秘區域，每天都有新發現 ❤️</p>
         </div>
 
-        {/* ────── 中央皇宮 + 環繞卡片 ────── */}
-        <div className="relative flex items-center justify-center" style={{ minHeight: '600px' }}>
+        {/* 中央發光皇宮 */}
+        <div className="flex justify-center mb-20 relative">
+          <div className="relative group">
+            {/* 背景大光暈 */}
+            <div className="absolute -inset-12 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-full blur-3xl opacity-25 group-hover:opacity-45 transition-opacity duration-700" />
 
-          {/* 桌機版：六張卡片環繞（CSS grid absolute 定位） */}
-          <div className="hidden lg:block w-full h-full absolute inset-0">
-            {ZONES.map((zone, i) => {
-              // 6 個位置：角度從頂部順時針均分 60°，稍微偏移讓皇宮可見
-              const angles = [-80, -20, 40, 110, 170, 230]
-              const rad = (angles[i] * Math.PI) / 180
-              const rx = 310 // 水平半徑
-              const ry = 240 // 垂直半徑
-              const cx = 50  // center %
-              const cy = 50
-              const px = cx + (rx / 6) * 100 * Math.cos(rad) / 10  // px unit
-              const py = cy + (ry / 6) * 100 * Math.sin(rad) / 10
-
-              return (
-                <FloatingCard
-                  key={zone.name}
-                  zone={zone}
-                  style={{
-                    position: 'absolute',
-                    left: `calc(50% + ${Math.cos(rad) * rx}px - 108px)`,
-                    top: `calc(50% + ${Math.sin(rad) * ry}px - 72px)`,
-                    width: '216px',
-                    animationDelay: `${i * 0.4}s`,
-                  }}
-                />
-              )
-            })}
-          </div>
-
-          {/* 中央皇宮圓形展示 */}
-          <div className="relative flex flex-col items-center justify-center z-10">
-            {/* 外旋轉裝飾環 */}
+            {/* 旋轉裝飾環 */}
             <div
-              className="ring-1 absolute"
+              className="ring-cw absolute"
               style={{
-                width: 280, height: 280,
+                inset: -24,
                 borderRadius: '50%',
-                border: '2px dashed rgba(251,191,36,0.25)',
+                border: '2px dashed rgba(251,191,36,0.3)',
+                pointerEvents: 'none',
               }}
             />
             <div
-              className="ring-2 absolute"
+              className="ring-ccw absolute"
               style={{
-                width: 240, height: 240,
+                inset: -8,
                 borderRadius: '50%',
-                border: '1.5px dashed rgba(216,180,254,0.2)',
+                border: '1.5px dashed rgba(216,180,254,0.25)',
+                pointerEvents: 'none',
               }}
             />
 
-            {/* 主光暈圓 */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                width: 220, height: 220,
-                background: 'radial-gradient(circle, rgba(168,85,247,0.25) 0%, rgba(245,158,11,0.1) 60%, transparent 100%)',
-              }}
-            />
+            {/* 皇宮主體圓 */}
+            <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full border-[10px] border-yellow-400/40 flex items-center justify-center shadow-2xl shadow-purple-600/50">
+              <div className="palace text-[180px] md:text-[230px] leading-none select-none group-hover:scale-105 transition-transform duration-500">
+                🏰
+              </div>
+            </div>
 
-            {/* 皇宮 emoji */}
-            <div className="palace-emoji text-[120px] sm:text-[150px] select-none leading-none mb-1">🏰</div>
-
-            {/* 標語牌 */}
-            <div
-              className="mt-2 px-6 py-1.5 rounded-full text-sm font-bold text-black"
-              style={{ background: 'linear-gradient(135deg, #fde68a, #f59e0b, #ec4899)' }}
-            >
+            {/* 皇宮標籤 */}
+            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-pink-500 text-black font-bold px-8 py-2.5 rounded-full text-xl shadow-xl whitespace-nowrap">
               驚喜樂世界 皇宮
             </div>
           </div>
         </div>
 
-        {/* 手機版：一般垂直卡片列表 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden mt-6">
-          {ZONES.map((zone) => (
-            <FloatingCard key={zone.name} zone={zone} />
-          ))}
+        {/* 六大區域卡片 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {zones.map((zone, i) => {
+            const c = colorMap[zone.color]
+            return (
+              <Link key={i} href={zone.href}>
+                <div
+                  className="zone-card relative p-8 rounded-3xl overflow-hidden cursor-pointer"
+                  style={{
+                    background: 'linear-gradient(135deg, #0f0a1e 0%, #000 100%)',
+                    border: `1px solid ${c.border}`,
+                  }}
+                  onMouseEnter={(e) => {
+                    ;(e.currentTarget as HTMLDivElement).style.boxShadow = `0 20px 60px ${c.shadow}`
+                    ;(e.currentTarget as HTMLDivElement).style.borderColor = zone.glow
+                  }}
+                  onMouseLeave={(e) => {
+                    ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
+                    ;(e.currentTarget as HTMLDivElement).style.borderColor = c.border
+                  }}
+                >
+                  {/* 背景大 ghost icon */}
+                  <div
+                    className="bg-ghost absolute -right-4 -top-4 text-[110px] opacity-[0.07] pointer-events-none select-none leading-none"
+                  >
+                    {zone.icon}
+                  </div>
+
+                  <div className="relative z-10">
+                    <div className="text-6xl mb-5 inline-block transition-transform duration-300 group-hover:scale-110">
+                      {zone.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">{zone.name}</h3>
+                    <p className="text-purple-200/65 leading-relaxed text-[15px]">{zone.desc}</p>
+                  </div>
+
+                  {/* 底部光條 */}
+                  <div
+                    className="bar-line absolute bottom-0 left-0 h-[3px] rounded-full"
+                    style={{ '--bar': c.bar } as React.CSSProperties}
+                  />
+                </div>
+              </Link>
+            )
+          })}
         </div>
 
-        {/* 底部 */}
-        <div className="text-center text-slate-600 text-xs mt-8 pb-4">
-          好奇心沒有盡頭 · 每天都有新發現 💖
-        </div>
+        <p className="text-center mt-16 text-purple-300/50 text-sm">
+          好奇心沒有盡頭，每天都有新發現 💖
+        </p>
       </div>
     </div>
-  )
-}
-
-// ─────────────────────────────────────────────────────────────────
-type Zone = (typeof ZONES)[number]
-
-function FloatingCard({ zone, style }: { zone: Zone; style?: React.CSSProperties }) {
-  return (
-    <Link href={zone.href} className="group block" style={style}>
-      <div
-        className="rounded-2xl p-4 h-full transition-all duration-300 hover:scale-105 cursor-pointer"
-        style={{
-          background: zone.bg,
-          border: `1px solid ${zone.border}`,
-          backdropFilter: 'blur(10px)',
-        }}
-        onMouseEnter={(e) => {
-          ;(e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 24px ${zone.color}66, 0 0 60px ${zone.color}22`
-          ;(e.currentTarget as HTMLDivElement).style.borderColor = zone.color
-        }}
-        onMouseLeave={(e) => {
-          ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
-          ;(e.currentTarget as HTMLDivElement).style.borderColor = zone.border
-        }}
-      >
-        <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">{zone.icon}</div>
-        <div className="font-bold text-base text-white mb-1">{zone.name}</div>
-        <div className="text-xs text-slate-400 leading-relaxed">{zone.desc}</div>
-        <div
-          className="mt-3 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
-          style={{ color: zone.color }}
-        >
-          進入 <span className="group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </div>
-    </Link>
   )
 }
