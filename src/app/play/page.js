@@ -23,13 +23,13 @@ const CARDS = [
     glow: 'rgba(8,145,178,0.2)',
   },
   {
-    icon: '🧠',
-    label: '測驗',
-    desc: '心理測驗、性格分析，看看你是哪種人',
-    href: '/quiz',
-    color: '#059669',
-    border: 'rgba(5,150,105,0.4)',
-    glow: 'rgba(5,150,105,0.2)',
+    icon: '💰',
+    label: '理財測驗',
+    desc: '你是哪種財務人格？9 題看穿你的投資模式',
+    href: '/quiz/finance-personality',
+    color: '#f59e0b',
+    border: 'rgba(245,158,11,0.4)',
+    glow: 'rgba(245,158,11,0.2)',
   },
 ];
 
