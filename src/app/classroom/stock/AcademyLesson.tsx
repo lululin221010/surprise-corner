@@ -114,6 +114,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
             <AcademyQuiz
               key={quizIndex}
               quiz={lesson.quizzes[quizIndex]}
+              certInfo={{ lessonId: lesson.id, lessonTitle: lesson.title, quizIndex }}
               onPass={handleQuizPass}
               onRetry={handleRetry}
             />

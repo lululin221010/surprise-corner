@@ -119,8 +119,20 @@ export default function ClassroomPage() {
         <ShareButtons title="驚喜學院 — 即將開課！" content="股市、心理學、AI工具……走進小門，發現大世界！快來訂閱搶先知道！" />
       </div>
 
+      {/* 我的證書 */}
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <Link href="/classroom/my-certs" style={{
+          display: 'inline-flex', alignItems: 'center', gap: '6px',
+          background: '#faf5ff', border: '1px solid #c4b5fd',
+          borderRadius: '20px', padding: '8px 18px',
+          color: '#7c3aed', fontSize: '0.85rem', textDecoration: 'none', fontWeight: 600,
+        }}>
+          🏅 查看我的榮譽證書
+        </Link>
+      </div>
+
       {/* 返回 */}
-      <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+      <div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
         <Link href="/" style={{ color: '#7c3aed', fontSize: '0.88rem', textDecoration: 'none', fontWeight: 600 }}>
           ← 回首頁
         </Link>
