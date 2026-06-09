@@ -23,8 +23,9 @@ export default function KlineAnatomy() {
       ctx.fillRect(0, 0, W, H)
 
       // ── K線座標 ──
-      const cx   = W * 0.38
-      const bw   = 36
+      const cx   = W * 0.42
+      const bw   = 32
+      const lOff = W * 0.13   // 比例偏移
       const high = H * 0.10   // 最高（上影線頂）
       const open = H * 0.30   // 開盤（實體頂，陽線）
       const close= H * 0.62   // 收盤（實體底，陽線）
@@ -56,8 +57,8 @@ export default function KlineAnatomy() {
         ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore()
       }
 
-      const labelX = cx + bw / 2 + 10
-      const labelXL = cx - bw / 2 - 10
+      const labelX  = cx + bw / 2 + lOff
+      const labelXL = cx - bw / 2 - lOff
 
       // 最高價（右側）
       dash(cx, high, labelX + 4, high)

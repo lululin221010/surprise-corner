@@ -44,7 +44,8 @@ export default function KlineShadow() {
       // ────────────────────────────────────
       // 左：上影線很長（上方有賣壓）
       // ────────────────────────────────────
-      const cx1 = W * 0.25
+      const lOff = W * 0.16   // 比例偏移，手機/桌機通用
+      const cx1 = W * 0.30
       const l1High  = topY + range * 0.05   // 最高（被打回）
       const l1Close = topY + range * 0.42   // 收盤
       const l1Open  = topY + range * 0.52   // 開盤
@@ -66,12 +67,12 @@ export default function KlineShadow() {
       ctx.restore()
 
       // 標籤
-      dash(cx1 - bw / 2 - 6, l1High,  cx1 - bw / 2 - 58, l1High,  '#ef4444')
-      lbl('最高價', cx1 - bw / 2 - 62, l1High, 'right', '#ef4444', 10)
-      lbl('↓ 衝上去了但被打回', cx1 - bw / 2 - 62, l1High + 12, 'right', '#ef4444', 9)
+      dash(cx1 - bw / 2 - 4, l1High,  cx1 - bw / 2 - lOff, l1High,  '#ef4444')
+      lbl('最高價', cx1 - bw / 2 - lOff - 2, l1High, 'right', '#ef4444', 10)
+      lbl('↓ 被打回', cx1 - bw / 2 - lOff - 2, l1High + 12, 'right', '#ef4444', 9)
 
-      dash(cx1 - bw / 2 - 6, l1Close, cx1 - bw / 2 - 58, l1Close, '#374151')
-      lbl('收盤', cx1 - bw / 2 - 62, l1Close, 'right', '#374151', 10)
+      dash(cx1 - bw / 2 - 4, l1Close, cx1 - bw / 2 - lOff, l1Close, '#374151')
+      lbl('收盤', cx1 - bw / 2 - lOff - 2, l1Close, 'right', '#374151', 10)
 
       lbl('上影線長', cx1, topY + (l1High + l1Close) / 2 - topY * 0.7, 'center', '#ef4444', 9, true)
       lbl('→ 上方賣壓很重', cx1, H * 0.91, 'center', '#ef4444', 10, true)
@@ -79,7 +80,7 @@ export default function KlineShadow() {
       // ────────────────────────────────────
       // 右：下影線很長（下方有買盤撐）
       // ────────────────────────────────────
-      const cx2 = W * 0.75
+      const cx2 = W * 0.70
       const l2High  = topY + range * 0.35
       const l2Open  = topY + range * 0.42
       const l2Close = topY + range * 0.52
@@ -101,12 +102,12 @@ export default function KlineShadow() {
       ctx.restore()
 
       // 標籤
-      dash(cx2 + bw / 2 + 6, l2Low,   cx2 + bw / 2 + 58, l2Low,   '#16a34a')
-      lbl('最低價', cx2 + bw / 2 + 62, l2Low, 'left', '#16a34a', 10)
-      lbl('↑ 跌下去了但被撐住', cx2 + bw / 2 + 62, l2Low + 12, 'left', '#16a34a', 9)
+      dash(cx2 + bw / 2 + 4, l2Low,   cx2 + bw / 2 + lOff, l2Low,   '#16a34a')
+      lbl('最低價', cx2 + bw / 2 + lOff + 2, l2Low, 'left', '#16a34a', 10)
+      lbl('↑ 被撐住', cx2 + bw / 2 + lOff + 2, l2Low + 12, 'left', '#16a34a', 9)
 
-      dash(cx2 + bw / 2 + 6, l2Close, cx2 + bw / 2 + 58, l2Close, '#374151')
-      lbl('收盤', cx2 + bw / 2 + 62, l2Close, 'left', '#374151', 10)
+      dash(cx2 + bw / 2 + 4, l2Close, cx2 + bw / 2 + lOff, l2Close, '#374151')
+      lbl('收盤', cx2 + bw / 2 + lOff + 2, l2Close, 'left', '#374151', 10)
 
       lbl('下影線長', cx2, l2Low - (l2Low - l2Close) * 0.5, 'center', '#16a34a', 9, true)
       lbl('→ 下方買盤很強', cx2, H * 0.91, 'center', '#16a34a', 10, true)
