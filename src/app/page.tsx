@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState, Suspense } from 'react';
+import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import coldDataRaw from '../data/cold-knowledge.json';
@@ -172,6 +173,11 @@ function getTodayPreview() {
 }
 
 export default function Home() {
+  const router = useRouter();
+
+  // 首頁直接導向驚喜樂世界
+  useEffect(() => { router.replace('/wonderland'); }, []);
+
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
@@ -253,114 +259,85 @@ export default function Home() {
             justifyContent: 'center',
             padding: '52px 16px 88px',
           }}>
-            {/* 魯魯照片球 */}
-            <div style={{ marginBottom: '16px' }}>
-              {/* 球 + 泡泡一起浮動 */}
-              <div className="ruru-float" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <button
-                  onClick={handleLuruClick}
-                  style={{
-                    width: '280px',
-                    height: '280px',
-                    borderRadius: '50%',
-                    border: '3px solid rgba(168,85,247,0.55)',
-                    boxShadow: '0 0 40px rgba(168,85,247,0.6), 0 0 80px rgba(88,28,135,0.4)',
-                    cursor: 'pointer',
-                    overflow: 'hidden',
-                    padding: 0,
-                    background: 'none',
-                    transition: 'filter 0.15s ease',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.filter = 'brightness(1.3) drop-shadow(0 0 18px rgba(168,85,247,0.9))';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.filter = '';
-                  }}
-                  title="點我讓魯魯說話"
-                >
-                  <img
-                    src="/images/lulu.jpg"
-                    alt="魯魯"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                </button>
-                {/* 說話泡泡 — 球正下方，箭頭朝上 */}
-                <div style={{
-                  marginTop: '14px',
-                  background: 'rgba(255,255,255,0.93)',
-                  color: '#3b0764',
-                  padding: '9px 18px',
-                  borderRadius: '18px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  maxWidth: '280px',
-                  textAlign: 'center',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
-                  opacity: bubbleVisible ? 1 : 0,
-                  transition: 'opacity 0.15s ease',
-                  pointerEvents: 'none',
-                  letterSpacing: '0.02em',
-                  position: 'relative',
-                }}>
-                  <span style={{
-                    position: 'absolute',
-                    bottom: '100%',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: 0,
-                    height: 0,
-                    borderLeft: '7px solid transparent',
-                    borderRight: '7px solid transparent',
-                    borderBottom: '9px solid rgba(255,255,255,0.93)',
-                    display: 'block',
-                  }} />
-                  {LULU_QUOTES[(luruStartIdx + luruIdx) % LULU_QUOTES.length]}
-                </div>
-              </div>
-            </div>
-
-            {/* 一句話 */}
-            <p style={{
-              color: 'rgba(255,255,255,0.92)',
-              fontSize: 'clamp(16px, 3.2vw, 24px)',
-              fontWeight: 400,
-              letterSpacing: '0.18em',
-              marginBottom: '18px',
-              textShadow: '0 2px 14px rgba(168,85,247,0.5)',
-            }}>
-              每天一個讓你想傳給朋友的驚喜
-            </p>
-
-            {/* 兩個按鈕 */}
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <a
-                href="#gifts"
-                style={{
-                  background: 'linear-gradient(135deg, #7c50ee, #9333ea)',
-                  color: '#fff',
-                  padding: '13px 30px',
-                  borderRadius: '50px',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  textDecoration: 'none',
-                  boxShadow: '0 4px 22px rgba(124,80,238,0.55)',
-                  border: '1px solid rgba(167,139,250,0.3)',
-                  letterSpacing: '0.05em',
-                  display: 'inline-block',
-                  transition: 'filter 0.15s ease',
+            {/* 城堡圖 */}
+            <div className="ruru-float" style={{ marginBottom: '20px' }}>
+              <a href="/wonderland" style={{
+                display: 'block',
+                width: '260px', height: '260px',
+                borderRadius: '50%',
+                border: '4px solid rgba(251,191,36,0.5)',
+                boxShadow: '0 0 50px rgba(168,85,247,0.7), 0 0 100px rgba(88,28,135,0.5)',
+                overflow: 'hidden',
+                transition: 'filter 0.2s ease, box-shadow 0.2s ease',
+              }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.filter = 'brightness(1.2)';
+                  (e.currentTarget as HTMLElement).style.boxShadow = '0 0 70px rgba(251,191,36,0.8), 0 0 120px rgba(168,85,247,0.6)';
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.15)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.filter = ''; }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.filter = '';
+                  (e.currentTarget as HTMLElement).style.boxShadow = '0 0 50px rgba(168,85,247,0.7), 0 0 100px rgba(88,28,135,0.5)';
+                }}
               >
-                今天這個你一定要看 ↓
+                <img
+                  src="/images/wonderland-castle.png"
+                  alt="驚喜樂世界"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
               </a>
             </div>
+
+            {/* 大標 */}
+            <h1 style={{
+              fontSize: 'clamp(28px, 6vw, 48px)',
+              fontWeight: 900,
+              letterSpacing: '0.12em',
+              margin: '0 0 8px',
+              background: 'linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #fbbf24 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textAlign: 'center',
+            }}>
+              驚喜樂世界
+            </h1>
+
+            {/* 副標 */}
+            <p style={{
+              color: 'rgba(200,180,255,0.8)',
+              fontSize: 'clamp(13px, 2.5vw, 17px)',
+              letterSpacing: '0.15em',
+              margin: '0 0 28px',
+              textAlign: 'center',
+            }}>
+              七大神秘區域，每天都有新發現 ❤️
+            </p>
+
+            {/* 進入按鈕 */}
+            <a
+              href="/wonderland"
+              style={{
+                background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
+                color: '#1a0533',
+                padding: '14px 38px',
+                borderRadius: '50px',
+                fontWeight: 800,
+                fontSize: '16px',
+                textDecoration: 'none',
+                boxShadow: '0 4px 28px rgba(251,191,36,0.5)',
+                letterSpacing: '0.08em',
+                display: 'inline-block',
+                transition: 'filter 0.15s ease',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.15)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.filter = ''; }}
+            >
+              進入驚喜樂世界 ✨
+            </a>
 
             {/* 三個內容預覽卡片 */}
             <div style={{
               display: 'flex', gap: '10px', flexWrap: 'wrap',
-              justifyContent: 'center', marginTop: '24px',
+              justifyContent: 'center', marginTop: '32px',
               maxWidth: '560px', width: '100%',
             }}>
               {/* Card 1：驚喜好料 */}

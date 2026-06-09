@@ -9,20 +9,25 @@ const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false
 // 7 張卡片，從正上方（-90°）順時針均分，間隔約 51.4°
 const STEP = 360 / 7
 const zones = [
-  { name: '靈異鬼屋', icon: '👻', desc: '每天都有新鬼故事，你敢一個人看嗎？', href: '/feeling',   angle: -90 },
-  { name: '玩樂區',   icon: '🎮', desc: '各種互動小遊戲，無聊的時候來玩一下',  href: '/play',     angle: -90 + STEP },
-  { name: '心理學館', icon: '🧠', desc: '了解自己，比你想像的有趣多了',        href: '/quiz',     angle: -90 + STEP * 2 },
-  { name: '快訊站',   icon: '⚡', desc: '世界發生什麼了？AI 幫你整理重點',     href: '/ai-news',  angle: -90 + STEP * 3 },
-  { name: '收租 AI',  icon: '🤖', desc: 'AI 幫你整理，而不只是你幫 AI 打工',  href: '/intro',    angle: -90 + STEP * 4 },
-  { name: '小教室',   icon: '📚', desc: '每次學一點，慢慢就什麼都懂了',        href: '/classroom',angle: -90 + STEP * 5 },
-  { name: '冷知識',   icon: '🧊', desc: '99% 的人不知道的事，今天你知道了',    href: '/',         angle: -90 + STEP * 6 },
+  { name: '靈異鬼屋', icon: '👻', desc: '每天都有新鬼故事，你敢一個人看嗎？', href: '/feeling',    angle: -90,            color: '#06b6d4' },
+  { name: '玩樂區',   icon: '🎮', desc: '各種互動小遊戲，無聊的時候來玩一下',  href: '/play',      angle: -90 + STEP,     color: '#f59e0b' },
+  { name: '心理學館', icon: '🧠', desc: '了解自己，比你想像的有趣多了',         href: '/quiz',      angle: -90 + STEP * 2, color: '#ec4899' },
+  { name: '快訊站',   icon: '⚡', desc: '世界發生什麼了？AI 幫你整理重點',      href: '/ai-news',   angle: -90 + STEP * 3, color: '#3b82f6' },
+  { name: '收租 AI',  icon: '🤖', desc: 'AI 幫你整理，而不只是你幫 AI 打工',   href: '/intro',     angle: -90 + STEP * 4, color: '#10b981' },
+  { name: '小教室',   icon: '📚', desc: '每次學一點，慢慢就什麼都懂了',         href: '/classroom', angle: -90 + STEP * 5, color: '#a78bfa' },
+  { name: '冷知識',   icon: '🧊', desc: '99% 的人不知道的事，今天你知道了',     href: '/',          angle: -90 + STEP * 6, color: '#fb923c' },
 ]
+
+// 城堡周圍漂浮粒子
+const SPARKS = ['✨','🌟','💫','⭐','🎇','🎆','🌠','💥','🎉','🎊']
 
 export default function Wonderland() {
   const R = 340 // 環繞半徑（px）
 
   return (
-    <div className="min-h-screen bg-[#0a0719] text-white overflow-x-hidden relative">
+    <div className="min-h-screen text-white overflow-x-hidden relative" style={{
+      background: 'radial-gradient(ellipse at 20% 0%, rgba(139,92,246,0.35) 0%, transparent 50%), radial-gradient(ellipse at 80% 10%, rgba(236,72,153,0.2) 0%, transparent 45%), radial-gradient(ellipse at 50% 100%, rgba(251,191,36,0.15) 0%, transparent 50%), #0f0823',
+    }}>
       <StarCanvas />
 
       <style>{`
@@ -42,11 +47,34 @@ export default function Wonderland() {
           50%      { transform: var(--base-t) translateY(-8px); }
         }
         .zone-float { animation: float 3s ease-in-out infinite; }
+
+        @keyframes spark-orbit {
+          0%   { transform: rotate(var(--sa)) translateX(var(--sr)) scale(1);   opacity: 0.9; }
+          50%  { transform: rotate(calc(var(--sa) + 180deg)) translateX(var(--sr)) scale(1.4); opacity: 1; }
+          100% { transform: rotate(calc(var(--sa) + 360deg)) translateX(var(--sr)) scale(1);   opacity: 0.9; }
+        }
+        .spark {
+          position: absolute; top: 50%; left: 50%;
+          animation: spark-orbit var(--sd) linear infinite;
+          transform-origin: 0 0;
+          font-size: var(--ss);
+          margin-top: -0.5em; margin-left: -0.5em;
+          pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+          0%   { transform: translateY(-20px) rotate(0deg);   opacity: 0; }
+          20%  { opacity: 1; }
+          100% { transform: translateY(80px)  rotate(360deg); opacity: 0; }
+        }
+        .confetti { animation: confetti-fall var(--cd) ease-in-out infinite; pointer-events: none; }
       `}</style>
 
-      {/* 頂部光暈 */}
+      {/* 背景彩霞光暈 */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-purple-700/20 blur-[140px] rounded-full" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[300px] bg-purple-600/25 blur-[120px] rounded-full" />
+        <div className="absolute top-0 right-1/4 w-[400px] h-[250px] bg-pink-500/20 blur-[100px] rounded-full" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-amber-400/10 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-10">
@@ -85,16 +113,25 @@ export default function Wonderland() {
             style={{ inset: 90, border: '1px dashed rgba(216,180,254,0.15)' }}
           />
 
-          {/* 中央皇宮 */}
+          {/* 中央城堡 */}
           <div className="relative z-20 flex flex-col items-center">
             {/* 外光暈 */}
-            <div className="absolute -inset-10 bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 rounded-full blur-3xl opacity-20" />
+            <div className="absolute -inset-10 bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 rounded-full blur-3xl opacity-30" />
 
-            <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full border-[8px] border-amber-400/40 shadow-2xl shadow-purple-600/50 flex items-center justify-center overflow-hidden">
-              {/* 內部漸層底色 */}
+            {/* 漂浮粒子 */}
+            {SPARKS.map((s, i) => (
+              <span key={i} className="spark" style={{
+                '--sa': `${i * 36}deg`,
+                '--sr': `${155 + (i % 3) * 20}px`,
+                '--sd': `${4 + (i % 4)}s`,
+                '--ss': `${14 + (i % 3) * 4}px`,
+                animationDelay: `${i * 0.4}s`,
+              } as React.CSSProperties}>{s}</span>
+            ))}
+
+            <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full border-[8px] border-amber-400/50 shadow-2xl shadow-purple-600/50 flex items-center justify-center overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-indigo-950 to-black" />
               <img src="/images/wonderland-castle.png" alt="驚喜樂世界" className="palace relative w-full h-full object-cover select-none" />
-              {/* pulse 環 */}
               <div className="absolute inset-0 rounded-full border-4 border-amber-300/40 animate-pulse" />
             </div>
 
@@ -116,33 +153,34 @@ export default function Wonderland() {
                 href={zone.href}
                 className="zone-float absolute w-48 group"
                 style={{
-                  top: '50%',
-                  left: '50%',
+                  top: '50%', left: '50%',
                   '--base-t': tx,
                   transform: tx,
                   animationDelay: `${i * 0.5}s`,
                 } as React.CSSProperties}
               >
                 <div
-                  className="rounded-2xl p-5 backdrop-blur-xl transition-all duration-400 group-hover:scale-110"
+                  className="rounded-2xl p-5 backdrop-blur-xl transition-all duration-300 group-hover:scale-110"
                   style={{
-                    background: 'rgba(10,7,30,0.85)',
-                    border: '1px solid rgba(168,85,247,0.3)',
+                    background: `rgba(22,14,50,0.88)`,
+                    border: `1px solid ${zone.color}44`,
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as HTMLDivElement
-                    el.style.borderColor = 'rgba(216,180,254,0.8)'
-                    el.style.boxShadow = '0 0 28px rgba(168,85,247,0.5), 0 8px 40px rgba(168,85,247,0.2)'
+                    el.style.borderColor = zone.color
+                    el.style.boxShadow = `0 0 28px ${zone.color}66, 0 8px 40px ${zone.color}33`
+                    el.style.background = `rgba(22,14,50,0.95)`
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget as HTMLDivElement
-                    el.style.borderColor = 'rgba(168,85,247,0.3)'
+                    el.style.borderColor = `${zone.color}44`
                     el.style.boxShadow = 'none'
+                    el.style.background = 'rgba(22,14,50,0.88)'
                   }}
                 >
                   <div className="text-4xl mb-3 transition-transform duration-300 group-hover:scale-125">{zone.icon}</div>
                   <h3 className="text-base font-bold mb-1 text-white">{zone.name}</h3>
-                  <p className="text-xs text-purple-200/60 leading-relaxed line-clamp-3">{zone.desc}</p>
+                  <p className="text-xs leading-relaxed line-clamp-3" style={{ color: `${zone.color}99` }}>{zone.desc}</p>
                 </div>
               </Link>
             )
@@ -156,13 +194,14 @@ export default function Wonderland() {
               <div
                 className="rounded-2xl p-4 transition-all duration-300 group-hover:scale-105"
                 style={{
-                  background: 'rgba(10,7,30,0.85)',
-                  border: '1px solid rgba(168,85,247,0.3)',
+                  background: 'rgba(22,14,50,0.90)',
+                  border: `1px solid ${zone.color}44`,
+                  boxShadow: `0 2px 12px ${zone.color}22`,
                 }}
               >
                 <div className="text-3xl mb-2">{zone.icon}</div>
                 <div className="text-sm font-bold text-white mb-1">{zone.name}</div>
-                <div className="text-[11px] text-purple-200/60 leading-relaxed line-clamp-2">{zone.desc}</div>
+                <div className="text-[11px] leading-relaxed line-clamp-2" style={{ color: `${zone.color}aa` }}>{zone.desc}</div>
               </div>
             </Link>
           ))}
