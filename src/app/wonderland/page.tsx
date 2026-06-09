@@ -93,7 +93,7 @@ export default function Wonderland() {
             <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full border-[8px] border-amber-400/40 shadow-2xl shadow-purple-600/50 flex items-center justify-center overflow-hidden">
               {/* 內部漸層底色 */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-indigo-950 to-black" />
-              <div className="palace relative text-[140px] md:text-[180px] leading-none select-none">🏰</div>
+              <img src="/images/wonderland-castle.png" alt="驚喜樂世界" className="palace relative w-full h-full object-cover select-none" />
               {/* pulse 環 */}
               <div className="absolute inset-0 rounded-full border-4 border-amber-300/40 animate-pulse" />
             </div>
