@@ -1,9 +1,13 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/AcademyQuiz.tsx
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Quiz } from './courses';
 import '../classroom.css';
+import {
+  getCurrentEmail, addCoins, useInventory, getAccount,
+  type UserAccount,
+} from '../coins';
 
 interface CertInfo {
   lessonId: string;
@@ -23,7 +27,6 @@ function saveCert(email: string, info: CertInfo) {
   const all: Record<string, { lessonId: string; lessonTitle: string; quizIndex: number; earnedAt: string }[]> =
     JSON.parse(localStorage.getItem(key) || '{}');
   if (!all[email]) all[email] = [];
-  // 避免重複儲存同一題
   const dup = all[email].some(c => c.lessonId === info.lessonId && c.quizIndex === info.quizIndex);
   if (!dup) {
     all[email].push({ ...info, earnedAt: new Date().toISOString() });
@@ -36,12 +39,49 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
   const [email, setEmail] = useState('');
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState('');
+  const [account, setAccount] = useState<UserAccount | null>(null);
+  const [coinMsg, setCoinMsg] = useState('');
+  const [skipped, setSkipped] = useState(false);   // 能量飲料用過
 
-  const answered = selected !== null;
-  const isCorrect = answered && selected === quiz.answerIndex;
+  useEffect(() => {
+    const em = getCurrentEmail();
+    setEmail(em);
+    if (em) setAccount(getAccount(em));
+  }, []);
+
+  const answered = selected !== null || skipped;
+  const isCorrect = skipped || (answered && selected === quiz.answerIndex);
+
+  function handleSelect(i: number) {
+    if (answered) return;
+    setSelected(i);
+    // 答對：+1 金幣
+    const correct = i === quiz.answerIndex;
+    if (correct && email) {
+      const total = addCoins(email, 1);
+      setAccount(getAccount(email));
+      setCoinMsg(`+1 🪙 累積 ${total} 金幣`);
+      setTimeout(() => setCoinMsg(''), 3000);
+    }
+  }
 
   function handleRetryQuiz() {
     setSelected(null);
+    setSkipped(false);
+  }
+
+  function handleEnergyDrink() {
+    if (!email) return;
+    const ok = useInventory(email, 'energyDrink');
+    if (!ok) {
+      setCoinMsg('☕ 庫存不足，前往商店購買');
+      setTimeout(() => setCoinMsg(''), 3000);
+      return;
+    }
+    setSkipped(true);
+    setAccount(getAccount(email));
+    setCoinMsg('☕ 能量飲料使用！跳過此題');
+    setTimeout(() => setCoinMsg(''), 3000);
   }
 
   function handleSave() {
@@ -55,22 +95,37 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
     setSaveError('');
   }
 
+  const drinkCount = account?.inventory?.energyDrink ?? 0;
+
   return (
     <div className="quiz-card">
       <p className="quiz-question">{quiz.question}</p>
 
+      {/* 金幣/飲料訊息 */}
+      {coinMsg && (
+        <div style={{
+          background: '#fef9c3', border: '1px solid #fde68a',
+          borderRadius: '8px', padding: '6px 12px',
+          fontSize: '0.78rem', color: '#92400e',
+          marginBottom: '0.6rem', textAlign: 'center',
+        }}>
+          {coinMsg}
+        </div>
+      )}
+
       <div style={{ marginBottom: '0.8rem' }}>
         {quiz.options.map((opt, i) => {
           let extraClass = '';
-          if (answered) {
+          if (answered && !skipped) {
             if (i === quiz.answerIndex) extraClass = ' correct';
             else if (i === selected) extraClass = ' wrong';
           }
+          if (answered && skipped && i === quiz.answerIndex) extraClass = ' correct';
           return (
             <button
               key={i}
               className={`quiz-option${extraClass}`}
-              onClick={() => !answered && setSelected(i)}
+              onClick={() => handleSelect(i)}
               style={{ cursor: answered ? 'default' : 'pointer' }}
             >
               {opt}
@@ -83,9 +138,9 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
       {answered && (
         <div className={isCorrect ? 'quiz-result-ok' : 'quiz-result-no'} style={{ marginBottom: '1rem' }}>
           <div style={{ fontWeight: 700, marginBottom: '4px' }}>
-            {isCorrect ? '✅ 答對了！' : '❌ 答錯了'}
+            {skipped ? '☕ 使用能量飲料跳過此題' : isCorrect ? '✅ 答對了！' : '❌ 答錯了'}
           </div>
-          {quiz.explanation}
+          {!skipped && quiz.explanation}
         </div>
       )}
 
@@ -110,7 +165,7 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
             {!saved ? (
               <div style={{ borderTop: '1px solid #e8e4ff', paddingTop: '0.8rem' }}>
                 <p style={{ color: '#64748b', fontSize: '0.72rem', marginBottom: '0.5rem' }}>
-                  輸入 Email 可儲存證書（不輸入也可繼續）
+                  輸入 Email 可儲存證書與金幣（不輸入也可繼續）
                 </p>
                 <div style={{ display: 'flex', gap: '0.4rem' }}>
                   <input
@@ -163,14 +218,37 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
         </>
       )}
 
-      {/* 答錯：重新測驗 + 重新上課 */}
+      {/* 答錯：重新測驗 + 重新上課 + 能量飲料 */}
       {answered && !isCorrect && (
-        <div style={{ display: 'flex', gap: '0.6rem' }}>
-          <button onClick={handleRetryQuiz} className="btn-next" style={{ flex: 1 }}>
-            重新測驗
-          </button>
-          <button onClick={onRetry} className="btn-prev" style={{ flex: 1 }}>
-            ← 重新上課
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.6rem' }}>
+            <button onClick={handleRetryQuiz} className="btn-next" style={{ flex: 1 }}>
+              重新測驗
+            </button>
+            <button onClick={onRetry} className="btn-prev" style={{ flex: 1 }}>
+              ← 重新上課
+            </button>
+          </div>
+
+          {/* 能量飲料按鈕 */}
+          <button
+            onClick={handleEnergyDrink}
+            style={{
+              width: '100%', padding: '9px',
+              background: drinkCount > 0 ? '#fef3c7' : '#f3f4f6',
+              border: `1px solid ${drinkCount > 0 ? '#fde68a' : '#e5e7eb'}`,
+              color: drinkCount > 0 ? '#92400e' : '#9ca3af',
+              borderRadius: '9px', fontSize: '0.82rem',
+              cursor: drinkCount > 0 ? 'pointer' : 'default',
+              fontWeight: 600,
+            }}
+          >
+            ☕ 使用能量飲料跳過此題（庫存 ×{drinkCount}）
+            {drinkCount === 0 && (
+              <span style={{ marginLeft: '0.4rem', fontSize: '0.72rem' }}>
+                — <a href="/classroom/shop" style={{ color: '#7c3aed' }}>前往商店購買</a>
+              </span>
+            )}
           </button>
         </div>
       )}

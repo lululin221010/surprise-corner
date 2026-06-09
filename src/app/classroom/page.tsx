@@ -119,15 +119,23 @@ export default function ClassroomPage() {
         <ShareButtons title="驚喜學院 — 即將開課！" content="股市、心理學、AI工具……走進小門，發現大世界！快來訂閱搶先知道！" />
       </div>
 
-      {/* 我的證書 */}
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+      {/* 我的證書 + 商店 */}
+      <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
         <Link href="/classroom/my-certs" style={{
           display: 'inline-flex', alignItems: 'center', gap: '6px',
           background: '#faf5ff', border: '1px solid #c4b5fd',
           borderRadius: '20px', padding: '8px 18px',
           color: '#7c3aed', fontSize: '0.85rem', textDecoration: 'none', fontWeight: 600,
         }}>
-          🏅 查看我的榮譽證書
+          🏅 我的榮譽證書
+        </Link>
+        <Link href="/classroom/shop" style={{
+          display: 'inline-flex', alignItems: 'center', gap: '6px',
+          background: '#fef9c3', border: '1px solid #fde68a',
+          borderRadius: '20px', padding: '8px 18px',
+          color: '#92400e', fontSize: '0.85rem', textDecoration: 'none', fontWeight: 600,
+        }}>
+          🛒 金幣商店
         </Link>
       </div>
 

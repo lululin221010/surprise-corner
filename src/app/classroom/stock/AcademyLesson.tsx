@@ -1,10 +1,14 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/AcademyLesson.tsx
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Lesson, SlideChart } from './courses';
 import AcademyQuiz from './AcademyQuiz';
 import '../classroom.css';
+import {
+  getCurrentEmail, addCoins, useInventory, saveBookmark, getBookmark, getAccount,
+  type UserAccount,
+} from '../coins';
 import KlineAnatomy from './charts/KlineAnatomy';
 import KlineRedBlack from './charts/KlineRedBlack';
 import KlineShadow from './charts/KlineShadow';
@@ -48,6 +52,20 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
+  const [email, setEmailState] = useState('');
+  const [account, setAccount] = useState<UserAccount | null>(null);
+  const [toastMsg, setToastMsg] = useState('');
+
+  // 初始化：載入 email + 書籤
+  useEffect(() => {
+    const em = getCurrentEmail();
+    setEmailState(em);
+    if (em) {
+      setAccount(getAccount(em));
+      const bk = getBookmark(em, lesson.id);
+      if (bk !== null) setSlideIndex(bk);
+    }
+  }, [lesson.id]);
 
   const totalSteps = lesson.slides.length + lesson.quizzes.length;
   const currentStep = showQuiz
@@ -58,25 +76,64 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
   const slide = lesson.slides[slideIndex];
   const isLastSlide = slideIndex === lesson.slides.length - 1;
 
-  // 重新上課：回到第一頁 slide，清掉測驗狀態
+  function showToast(msg: string) {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3000);
+  }
+
+  // 書籤功能
+  function handleBookmark() {
+    if (!email) {
+      showToast('請先在測驗頁輸入 Email 才能使用書籤');
+      return;
+    }
+    const ok = useInventory(email, 'bookmark');
+    if (!ok) {
+      showToast('📌 書籤不足，前往商店購買');
+      return;
+    }
+    saveBookmark(email, lesson.id, slideIndex);
+    setAccount(getAccount(email));
+    showToast(`📌 已在第 ${slideIndex + 1} 頁插入書籤！`);
+  }
+
   function handleRetry() {
     setSlideIndex(0);
     setShowQuiz(false);
     setQuizIndex(0);
   }
 
-  // 答對後：進下一題，或全部完成
   function handleQuizPass() {
     if (quizIndex < lesson.quizzes.length - 1) {
       setQuizIndex(i => i + 1);
     } else {
+      // 全部完成：+3🪙 bonus
+      if (email) {
+        const total = addCoins(email, 3);
+        showToast(`🎉 完課 bonus！+3 🪙 累積 ${total} 金幣`);
+      }
       onComplete();
     }
   }
 
+  const bookmarkCount = account?.inventory?.bookmark ?? 0;
+
   return (
     <div className="classroom-content">
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+
+        {/* Toast */}
+        {toastMsg && (
+          <div style={{
+            position: 'fixed', top: '1.2rem', left: '50%', transform: 'translateX(-50%)',
+            background: '#1e1b4b', color: '#fff', borderRadius: '20px',
+            padding: '8px 20px', fontSize: '0.82rem', fontWeight: 600,
+            zIndex: 9999, boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            whiteSpace: 'nowrap',
+          }}>
+            {toastMsg}
+          </div>
+        )}
 
         {/* 頂部導航 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -132,17 +189,19 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
               )}
             </div>
 
-            {/* 翻頁按鈕 */}
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            {/* 翻頁 + 書籤 */}
+            <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
               <button
                 className="btn-prev"
                 onClick={() => setSlideIndex(i => Math.max(0, i - 1))}
                 disabled={slideIndex === 0}
+                style={{ flex: '0 0 auto' }}
               >
                 ← 上一頁
               </button>
               <button
                 className="btn-next"
+                style={{ flex: 1 }}
                 onClick={() => {
                   if (isLastSlide) {
                     setShowQuiz(true);
@@ -153,6 +212,22 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
                 }}
               >
                 {isLastSlide ? `做隨堂測驗（${lesson.quizzes.length}題）→` : '下一頁 →'}
+              </button>
+              {/* 書籤按鈕 */}
+              <button
+                onClick={handleBookmark}
+                title={`書籤 ×${bookmarkCount}，儲存目前頁面`}
+                style={{
+                  flex: '0 0 auto',
+                  background: bookmarkCount > 0 ? '#fef9c3' : '#f3f4f6',
+                  border: `1px solid ${bookmarkCount > 0 ? '#fde68a' : '#e5e7eb'}`,
+                  borderRadius: '9px', padding: '9px 12px',
+                  fontSize: '1rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                }}
+              >
+                📌
+                <span style={{ fontSize: '0.7rem', color: '#92400e' }}>{bookmarkCount}</span>
               </button>
             </div>
 
