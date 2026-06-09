@@ -9,9 +9,10 @@ import '../classroom.css';
 interface Props {
   quiz: Quiz;
   onComplete: () => void;
+  onRetry: () => void;
 }
 
-export default function AcademyQuiz({ quiz, onComplete }: Props) {
+export default function AcademyQuiz({ quiz, onComplete, onRetry }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
 
   const answered = selected !== null;
@@ -63,25 +64,38 @@ export default function AcademyQuiz({ quiz, onComplete }: Props) {
       )}
 
       {answered && isCorrect && (
-        <div style={{
-          background: 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
-          border: '1px solid #c7d2fe',
-          borderRadius: '12px', padding: '1.4rem', marginBottom: '1rem', textAlign: 'center',
-        }}>
-          <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🏅</div>
-          <div style={{ color: '#4338ca', fontWeight: 900, fontSize: '1.1rem', marginBottom: '0.3rem' }}>
-            驚喜榮譽證書
+        <>
+          <div style={{
+            background: 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
+            border: '1px solid #c7d2fe',
+            borderRadius: '12px', padding: '1.4rem', marginBottom: '1rem', textAlign: 'center',
+          }}>
+            <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🏅</div>
+            <div style={{ color: '#4338ca', fontWeight: 900, fontSize: '1.1rem', marginBottom: '0.3rem' }}>
+              驚喜榮譽證書
+            </div>
+            <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6 }}>
+              恭喜完成本堂課！<br />
+              <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
+            </div>
           </div>
-          <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6 }}>
-            恭喜完成本堂課！<br />
-            <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
-          </div>
-        </div>
+          <button className="btn-next" onClick={onComplete} style={{ width: '100%' }}>
+            繼續下一課 →
+          </button>
+        </>
       )}
 
-      {answered && (
-        <button className="btn-next" onClick={onComplete} style={{ width: '100%' }}>
-          繼續下一課 →
+      {answered && !isCorrect && (
+        <button
+          onClick={onRetry}
+          style={{
+            width: '100%', padding: '12px',
+            background: '#ffffff', border: '1px solid #7c3aed',
+            borderRadius: '10px', color: '#7c3aed',
+            fontSize: '13px', fontWeight: 600, cursor: 'pointer',
+          }}
+        >
+          ← 重新上課
         </button>
       )}
     </div>

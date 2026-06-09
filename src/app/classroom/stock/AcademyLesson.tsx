@@ -49,6 +49,11 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
 
+  function handleRetry() {
+    setSlideIndex(0);
+    setShowQuiz(false);
+  }
+
   const slide = lesson.slides[slideIndex];
   const isLast = slideIndex === lesson.slides.length - 1;
 
@@ -78,7 +83,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
         </div>
 
         {showQuiz ? (
-          <AcademyQuiz quiz={lesson.quiz} onComplete={onComplete} />
+          <AcademyQuiz quiz={lesson.quiz} onComplete={onComplete} onRetry={handleRetry} />
         ) : (
           <div>
             {/* 講義卡片 */}
