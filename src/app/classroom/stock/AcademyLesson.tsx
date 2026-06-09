@@ -98,11 +98,21 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
 
         {showQuiz ? (
           <>
-            {/* 測驗題號提示 */}
-            <div style={{ color: '#a78bfa', fontSize: '0.72rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.08em' }}>
-              隨堂測驗 {quizIndex + 1} / {lesson.quizzes.length}
+            {/* 測驗頂部：返回講義 + 題號 */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+              <button
+                onClick={() => { setShowQuiz(false); setSlideIndex(lesson.slides.length - 1); }}
+                style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.82rem', cursor: 'pointer' }}
+              >
+                ← 回上一頁講義
+              </button>
+              <div style={{ color: '#a78bfa', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em' }}>
+                隨堂測驗 {quizIndex + 1} / {lesson.quizzes.length}
+              </div>
             </div>
+            {/* key={quizIndex} 確保換題時 state 完全重置 */}
             <AcademyQuiz
+              key={quizIndex}
               quiz={lesson.quizzes[quizIndex]}
               onPass={handleQuizPass}
               onRetry={handleRetry}
