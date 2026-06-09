@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 const links = [
-  { href: '/feeling', label: '👁️ 那個感覺' },
   { href: '/play',    label: '🎮 玩一玩' },
   // ✅ 管理頁面已從導覽列移除（直接輸入 /admin 仍可進入）
 ];

@@ -99,7 +99,7 @@ export default function Wonderland() {
             </div>
 
             <div className="mt-4 bg-gradient-to-r from-amber-400 via-yellow-300 to-pink-500 text-black font-bold px-8 py-2 rounded-full text-lg shadow-xl whitespace-nowrap">
-              驚喜樂世界 皇宮
+              驚喜樂世界
             </div>
           </div>
 
