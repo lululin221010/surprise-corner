@@ -175,9 +175,10 @@ export default function NewsPage() {
   const [activeTab, setActiveTab] = useState('all');
   const [randomPage] = useState(() => {
   const pages = [
-    { href: '/novels', label: '📚 連載小說' },
-    { href: '/podcast', label: '🎙 Podcast' },
-    { href: '/tools', label: '🛠 工具箱' },
+    { href: '/wonderland', label: '🏰 驚喜樂世界' },
+    { href: '/quiz', label: '🎯 心理測驗' },
+    { href: '/classroom', label: '🏫 小教室' },
+    { href: '/play', label: '🎮 玩一玩' },
   ];
   return pages[Math.floor(Math.random() * pages.length)];
 });

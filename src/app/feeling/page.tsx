@@ -407,6 +407,35 @@ export default function FeelingPage() {
           )}
         </section>
 
+        {/* ══ 連載故事 ═════════════════════════════════════════════ */}
+        <section style={{ marginTop:52, marginBottom:8 }}>
+          <p style={{ color:'#9ca3af', fontSize:'0.72rem', letterSpacing:'0.1em', marginBottom:'1rem', textAlign:'center' }}>
+            同個宇宙，繼續探索
+          </p>
+          <div style={{ display:'flex', gap:'1rem', flexWrap:'wrap', justifyContent:'center' }}>
+            <a href="/novels/the-last-signal/ebook" style={{ flex:'1 1 240px', maxWidth:'320px', textDecoration:'none',
+              background:'rgba(6,182,212,0.07)', border:'1px solid rgba(6,182,212,0.3)',
+              borderRadius:'16px', padding:'1.2rem 1.4rem', display:'flex', gap:'1rem', alignItems:'flex-start' }}>
+              <span style={{ fontSize:'2rem', flexShrink:0 }}>📡</span>
+              <div>
+                <div style={{ color:'#67e8f9', fontWeight:700, fontSize:'0.95rem', marginBottom:'0.3rem' }}>最後的信號</div>
+                <div style={{ color:'#6b7280', fontSize:'0.82rem', lineHeight:1.6 }}>工程師截獲深空訊號，解碼過程中發現隱藏組織的秘密。科幻連載・免費</div>
+                <div style={{ color:'#06b6d4', fontSize:'0.75rem', marginTop:'0.5rem', fontWeight:600 }}>開始閱讀 →</div>
+              </div>
+            </a>
+            <a href="/novels/lulu-diary/ebook" style={{ flex:'1 1 240px', maxWidth:'320px', textDecoration:'none',
+              background:'rgba(167,139,250,0.07)', border:'1px solid rgba(167,139,250,0.3)',
+              borderRadius:'16px', padding:'1.2rem 1.4rem', display:'flex', gap:'1rem', alignItems:'flex-start' }}>
+              <span style={{ fontSize:'2rem', flexShrink:0 }}>🤖</span>
+              <div>
+                <div style={{ color:'#c4b5fd', fontWeight:700, fontSize:'0.95rem', marginBottom:'0.3rem' }}>默默的日記</div>
+                <div style={{ color:'#6b7280', fontSize:'0.82rem', lineHeight:1.6 }}>普通上班族與 AI 助理的日常，那些微小卻真實的生活片段。日常連載・免費</div>
+                <div style={{ color:'#a78bfa', fontSize:'0.75rem', marginTop:'0.5rem', fontWeight:600 }}>開始閱讀 →</div>
+              </div>
+            </a>
+          </div>
+        </section>
+
         {/* ══ 底部分享 + 一次導流 ═════════════════════════════════ */}
         <section style={{ marginTop:52 }}>
           <BigShareBlock label="分享這個角落給朋友" />
