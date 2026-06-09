@@ -1,12 +1,28 @@
 // 📄 路徑：src/app/classroom/stock/courses.ts
 // 課程資料 — 內容由妹另外提供後填入
 
+export interface SlideChart {
+  type:
+    | 'kline-anatomy'
+    | 'kline-redblack'
+    | 'kline-shadow'
+    | 'kline-patterns'
+    | 'kline-combo'
+    | 'volume-bar'
+    | 'volume-breakout'
+    | 'ma-lines'
+    | 'ma-cross-gold'
+    | 'ma-cross-dead'
+    | 'support-resistance'
+    | 'kd-oscillator'
+    | 'rsi-line'
+  config?: Record<string, unknown>
+}
+
 export interface Slide {
-  type: 'text' | 'chart' | 'image';
   title: string;
   body: string;
-  chartData?: object;
-  imageUrl?: string;
+  chart?: SlideChart;
 }
 
 export interface QuizOption {
@@ -52,9 +68,9 @@ const courses: Course[] = [
         duration: '5分鐘',
         slides: [
           {
-            type: 'text',
             title: '股票是一張所有權憑證',
             body: '課程內容整備中……',
+            chart: { type: 'kline-anatomy' },
           },
         ],
         quiz: {

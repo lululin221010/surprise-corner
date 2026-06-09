@@ -3,8 +3,40 @@
 // 上課翻頁元件 — 接收 lesson，管理 slide 翻頁 + 測驗
 
 import { useState } from 'react';
-import type { Lesson } from './courses';
+import type { Lesson, SlideChart } from './courses';
 import AcademyQuiz from './AcademyQuiz';
+import KlineAnatomy from './charts/KlineAnatomy';
+import KlineRedBlack from './charts/KlineRedBlack';
+import KlineShadow from './charts/KlineShadow';
+import KlinePatterns from './charts/KlinePatterns';
+import KlineCombo from './charts/KlineCombo';
+import VolumeBar from './charts/VolumeBar';
+import VolumeBreakout from './charts/VolumeBreakout';
+import MaLines from './charts/MaLines';
+import MaCrossGold from './charts/MaCrossGold';
+import MaCrossDead from './charts/MaCrossDead';
+import SupportResistance from './charts/SupportResistance';
+import KdOscillator from './charts/KdOscillator';
+import RsiLine from './charts/RsiLine';
+
+function renderChart(chart: SlideChart) {
+  switch (chart.type) {
+    case 'kline-anatomy':      return <KlineAnatomy />;
+    case 'kline-redblack':     return <KlineRedBlack />;
+    case 'kline-shadow':       return <KlineShadow />;
+    case 'kline-patterns':     return <KlinePatterns />;
+    case 'kline-combo':        return <KlineCombo />;
+    case 'volume-bar':         return <VolumeBar />;
+    case 'volume-breakout':    return <VolumeBreakout />;
+    case 'ma-lines':           return <MaLines />;
+    case 'ma-cross-gold':      return <MaCrossGold />;
+    case 'ma-cross-dead':      return <MaCrossDead />;
+    case 'support-resistance': return <SupportResistance />;
+    case 'kd-oscillator':      return <KdOscillator />;
+    case 'rsi-line':           return <RsiLine />;
+    default:                   return null;
+  }
+}
 
 interface Props {
   lesson: Lesson;
@@ -60,6 +92,11 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
             <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.8, whiteSpace: 'pre-wrap' }}>
               {slide.body}
             </p>
+            {slide.chart && (
+              <div className="slide-chart-wrap">
+                {renderChart(slide.chart)}
+              </div>
+            )}
           </div>
 
           {/* 翻頁按鈕 */}
