@@ -6,7 +6,7 @@ import type { Lesson, SlideChart } from './courses';
 import AcademyQuiz from './AcademyQuiz';
 import '../classroom.css';
 import {
-  getCurrentEmail, addCoins, useInventory, saveBookmark, getBookmark, getAccount,
+  getCurrentEmail, awardLessonBonus, useInventory, saveBookmark, getBookmark, getAccount,
   type UserAccount,
 } from '../coins';
 import KlineAnatomy from './charts/KlineAnatomy';
@@ -107,10 +107,10 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
     if (quizIndex < lesson.quizzes.length - 1) {
       setQuizIndex(i => i + 1);
     } else {
-      // 全部完成：+3🪙 bonus
+      // 全部完成：+2🪙 bonus（每堂課只給一次）
       if (email) {
-        const total = addCoins(email, 3);
-        showToast(`🎉 完課 bonus！+3 🪙 累積 ${total} 金幣`);
+        const { awarded, totalCoins } = awardLessonBonus(email, lesson.id);
+        if (awarded) showToast(`🎉 完課 bonus！+2 🪙 累積 ${totalCoins} 金幣`);
       }
       onComplete();
     }

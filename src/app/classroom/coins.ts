@@ -10,12 +10,14 @@ export interface UserAccount {
   }
   equippedTitle: string | null
   earnedTitles: string[]
-  bookmarks: Record<string, number>   // lessonId → slideIndex
-  discountCodes: string[]             // 已生成的折扣碼
-  cardUnlocked: boolean               // 🎨 學院名片
+  bookmarks: Record<string, number>       // lessonId → slideIndex
+  discountCodes: string[]
+  cardUnlocked: boolean
+  // 防重複刷幣
+  completedQuizzes: Record<string, number[]>  // lessonId → [quizIndex, ...]
+  completedLessons: string[]                  // lessonId[]（完課 bonus 只給一次）
 }
 
-// 目前使用中的 email（跨元件共享）
 const CURRENT_EMAIL_KEY = 'sc_current_email'
 
 export function getCurrentEmail(): string {
@@ -27,8 +29,6 @@ export function setCurrentEmail(email: string) {
   if (typeof window === 'undefined') return
   localStorage.setItem(CURRENT_EMAIL_KEY, email.toLowerCase().trim())
 }
-
-// ── 帳號操作 ──
 
 function storageKey(email: string) {
   return `sc_academy_${email.toLowerCase().trim()}`
@@ -44,6 +44,8 @@ function defaultAccount(email: string): UserAccount {
     bookmarks: {},
     discountCodes: [],
     cardUnlocked: false,
+    completedQuizzes: {},
+    completedLessons: [],
   }
 }
 
@@ -60,8 +62,7 @@ export function saveAccount(acc: UserAccount) {
   localStorage.setItem(storageKey(acc.email), JSON.stringify(acc))
 }
 
-// ── 金幣 ──
-
+// ── 金幣（原始，不檢查重複）──
 export function addCoins(email: string, amount: number): number {
   if (!email) return 0
   const acc = getAccount(email)
@@ -79,8 +80,47 @@ export function spendCoins(email: string, amount: number): boolean {
   return true
 }
 
-// ── 庫存 ──
+// ── 答對測驗 +1🪙（僅首次，同一題不重複）──
+// 回傳 { awarded: boolean, totalCoins: number }
+export function awardQuizCoin(email: string, lessonId: string, quizIndex: number) {
+  if (!email) return { awarded: false, totalCoins: 0 }
+  const acc = getAccount(email)
+  const done = acc.completedQuizzes[lessonId] || []
+  if (done.includes(quizIndex)) {
+    return { awarded: false, totalCoins: acc.coins }
+  }
+  acc.completedQuizzes[lessonId] = [...done, quizIndex]
+  acc.coins += 1
+  saveAccount(acc)
+  return { awarded: true, totalCoins: acc.coins }
+}
 
+export function isQuizCompleted(email: string, lessonId: string, quizIndex: number): boolean {
+  if (!email) return false
+  const acc = getAccount(email)
+  return (acc.completedQuizzes[lessonId] || []).includes(quizIndex)
+}
+
+// ── 完課 bonus +2🪙（每堂課只給一次）──
+export function awardLessonBonus(email: string, lessonId: string) {
+  if (!email) return { awarded: false, totalCoins: 0 }
+  const acc = getAccount(email)
+  if (acc.completedLessons.includes(lessonId)) {
+    return { awarded: false, totalCoins: acc.coins }
+  }
+  acc.completedLessons = [...acc.completedLessons, lessonId]
+  acc.coins += 2
+  saveAccount(acc)
+  return { awarded: true, totalCoins: acc.coins }
+}
+
+export function isLessonCompleted(email: string, lessonId: string): boolean {
+  if (!email) return false
+  const acc = getAccount(email)
+  return acc.completedLessons.includes(lessonId)
+}
+
+// ── 庫存 ──
 export function addInventory(email: string, item: keyof UserAccount['inventory'], qty = 1) {
   if (!email) return
   const acc = getAccount(email)
@@ -98,7 +138,6 @@ export function useInventory(email: string, item: keyof UserAccount['inventory']
 }
 
 // ── 書籤 ──
-
 export function saveBookmark(email: string, lessonId: string, slideIndex: number) {
   if (!email) return
   const acc = getAccount(email)
@@ -113,7 +152,6 @@ export function getBookmark(email: string, lessonId: string): number | null {
 }
 
 // ── 折扣碼 ──
-
 export function generateDiscountCode(email: string): string {
   const acc = getAccount(email)
   const rand = Math.random().toString(36).toUpperCase().slice(2, 8)
@@ -124,7 +162,6 @@ export function generateDiscountCode(email: string): string {
 }
 
 // ── 稱號 ──
-
 export const AVAILABLE_TITLES = [
   'K線偵探', '量能大師', '均線達人',
   '支撐壓力王', '偵探學員', '驚喜學院認證',
@@ -150,7 +187,6 @@ export function equipTitle(email: string, title: string): boolean {
 }
 
 // ── 學院名片 ──
-
 export function unlockCard(email: string) {
   if (!email) return
   const acc = getAccount(email)
@@ -158,8 +194,44 @@ export function unlockCard(email: string) {
   saveAccount(acc)
 }
 
-// ── 商店商品定義 ──
+// ── 三階證書門檻定義 ──
+export interface TierDef {
+  key: 'basic' | 'intermediate' | 'advanced'
+  label: string
+  emoji: string
+  color: string
+  required: number   // 需完成幾堂課
+  description: string
+}
 
+export const CERT_TIERS: TierDef[] = [
+  {
+    key: 'basic',
+    label: '初階認證',
+    emoji: '🥉',
+    color: '#b45309',
+    required: 3,
+    description: '完成任意 3 堂課，掌握基礎讀圖能力',
+  },
+  {
+    key: 'intermediate',
+    label: '中階認證',
+    emoji: '🥈',
+    color: '#6b7280',
+    required: 6,
+    description: '再完成 3 堂課，能獨立分析技術訊號',
+  },
+  {
+    key: 'advanced',
+    label: '高階認證',
+    emoji: '🥇',
+    color: '#d97706',
+    required: 14,
+    description: '完成全部 14 堂課，具備完整投資判讀能力',
+  },
+]
+
+// ── 商店商品定義 ──
 export interface ShopItem {
   id: string
   name: string
@@ -172,28 +244,28 @@ export const SHOP_ITEMS: ShopItem[] = [
   {
     id: 'energyDrink',
     name: '☕ 能量飲料',
-    desc: '答錯測驗時可使用，直接過這一題，每次購買 1 罐',
+    desc: '答錯測驗時使用，直接跳過此題（庫存消耗 1 罐）',
     price: 2,
     coming: false,
   },
   {
     id: 'bookmark',
     name: '📌 課程書籤',
-    desc: '在課程中儲存目前頁面，下次自動跳回來',
+    desc: '儲存目前頁面，下次進入自動跳回（每次用掉 1 枚）',
     price: 3,
     coming: false,
   },
   {
     id: 'discountCode',
     name: '🎁 小舖折扣碼',
-    desc: '生成一組序號，加 LINE 出示可折抵 NT$30',
+    desc: '生成序號，加 LINE 截圖出示可折抵 NT$30',
     price: 5,
     coming: false,
   },
   {
     id: 'card',
     name: '🎨 學院名片',
-    desc: '解鎖個人學習歷程圖卡，可截圖分享到社群',
+    desc: '解鎖學習歷程圖卡，可截圖分享社群',
     price: 20,
     coming: false,
   },

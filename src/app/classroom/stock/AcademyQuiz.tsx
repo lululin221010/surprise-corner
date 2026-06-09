@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import type { Quiz } from './courses';
 import '../classroom.css';
 import {
-  getCurrentEmail, addCoins, useInventory, getAccount,
+  getCurrentEmail, awardQuizCoin, useInventory, getAccount, isQuizCompleted,
   type UserAccount,
 } from '../coins';
 
@@ -42,12 +42,16 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
   const [account, setAccount] = useState<UserAccount | null>(null);
   const [coinMsg, setCoinMsg] = useState('');
   const [skipped, setSkipped] = useState(false);   // 能量飲料用過
+  const [alreadyDone, setAlreadyDone] = useState(false); // 首次答對標記
 
   useEffect(() => {
     const em = getCurrentEmail();
     setEmail(em);
-    if (em) setAccount(getAccount(em));
-  }, []);
+    if (em) {
+      setAccount(getAccount(em));
+      setAlreadyDone(isQuizCompleted(em, certInfo.lessonId, certInfo.quizIndex));
+    }
+  }, [certInfo.lessonId, certInfo.quizIndex]);
 
   const answered = selected !== null || skipped;
   const isCorrect = skipped || (answered && selected === quiz.answerIndex);
@@ -55,12 +59,16 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
   function handleSelect(i: number) {
     if (answered) return;
     setSelected(i);
-    // 答對：+1 金幣
+    // 答對：+1 金幣（僅首次）
     const correct = i === quiz.answerIndex;
     if (correct && email) {
-      const total = addCoins(email, 1);
+      const { awarded, totalCoins } = awardQuizCoin(email, certInfo.lessonId, certInfo.quizIndex);
       setAccount(getAccount(email));
-      setCoinMsg(`+1 🪙 累積 ${total} 金幣`);
+      if (awarded) {
+        setCoinMsg(`+1 🪙 累積 ${totalCoins} 金幣`);
+      } else {
+        setCoinMsg('已計分過，不重複給幣 ✓');
+      }
       setTimeout(() => setCoinMsg(''), 3000);
     }
   }

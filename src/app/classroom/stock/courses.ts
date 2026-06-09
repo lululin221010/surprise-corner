@@ -37,6 +37,7 @@ export interface Lesson {
   emoji: string
   description: string
   duration: string
+  tier: 'basic' | 'intermediate' | 'advanced'
   slides: Slide[]
   quizzes: Quiz[]
 }
@@ -61,6 +62,7 @@ export const stockCourse: Course = {
       emoji: '🕯️',
       description: '每根蠟燭都是一份案件紀錄，學會讀它。',
       duration: '20分鐘',
+      tier: 'basic',
       slides: [
         {
           title: '圖表裡藏著什麼？',
@@ -142,6 +144,7 @@ export const stockCourse: Course = {
       emoji: '📊',
       description: '價格會說謊，成交量不會。',
       duration: '20分鐘',
+      tier: 'basic',
       slides: [
         {
           title: '為什麼要看量？',
@@ -220,6 +223,7 @@ export const stockCourse: Course = {
       emoji: '📉',
       description: '黃金交叉、死亡交叉，趨勢判斷的核心工具。',
       duration: '20分鐘',
+      tier: 'basic',
       slides: [
         {
           title: '趨勢是偵探最好的朋友',
