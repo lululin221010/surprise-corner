@@ -47,7 +47,7 @@ export default function Academy() {
         <h2 style={{ color: '#1e1b4b', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.3rem' }}>
           {activeCourse.emoji} {activeCourse.title}
         </h2>
-        <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.desc}</p>
+        <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.description}</p>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {activeCourse.lessons.map((lesson, i) => {
@@ -117,7 +117,7 @@ export default function Academy() {
                 {course.title}
               </div>
               <div style={{ color: '#6b7280', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                {course.desc}
+                {course.description}
               </div>
               <div style={{ color: '#a78bfa', fontSize: '0.72rem', marginTop: '0.4rem' }}>
                 {course.lessons.length} 堂課

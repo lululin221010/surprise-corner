@@ -1,6 +1,5 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/AcademyLesson.tsx
-// 上課翻頁元件 — 接收 lesson，管理 slide 翻頁 + 測驗
 
 import { useState } from 'react';
 import type { Lesson, SlideChart } from './courses';
@@ -48,42 +47,67 @@ interface Props {
 export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [quizIndex, setQuizIndex] = useState(0);
 
+  const totalSteps = lesson.slides.length + lesson.quizzes.length;
+  const currentStep = showQuiz
+    ? lesson.slides.length + quizIndex
+    : slideIndex;
+  const progress = Math.round((currentStep / totalSteps) * 100);
+
+  const slide = lesson.slides[slideIndex];
+  const isLastSlide = slideIndex === lesson.slides.length - 1;
+
+  // 重新上課：回到第一頁 slide，清掉測驗狀態
   function handleRetry() {
     setSlideIndex(0);
     setShowQuiz(false);
+    setQuizIndex(0);
   }
 
-  const slide = lesson.slides[slideIndex];
-  const isLast = slideIndex === lesson.slides.length - 1;
+  // 答對後：進下一題，或全部完成
+  function handleQuizPass() {
+    if (quizIndex < lesson.quizzes.length - 1) {
+      setQuizIndex(i => i + 1);
+    } else {
+      onComplete();
+    }
+  }
 
   return (
     <div className="classroom-content">
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
         {/* 頂部導航 */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <button
             onClick={onBack}
-            style={{ background: 'none', border: 'none', color: '#6366f1', fontSize: '0.85rem', cursor: 'pointer' }}
+            style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.85rem', cursor: 'pointer' }}
           >
             ← 返回課程列表
           </button>
-          <div style={{ color: '#64748b', fontSize: '0.8rem' }}>
+          <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
             {lesson.emoji} {lesson.title}
           </div>
         </div>
 
         {/* 進度條 */}
         <div className="prog-wrap" style={{ marginBottom: '1.5rem' }}>
-          <div
-            className="prog-fill"
-            style={{ width: `${((slideIndex + (showQuiz ? 1 : 0)) / (lesson.slides.length + 1)) * 100}%` }}
-          />
+          <div className="prog-fill" style={{ width: `${progress}%` }} />
         </div>
 
         {showQuiz ? (
-          <AcademyQuiz quiz={lesson.quiz} onComplete={onComplete} onRetry={handleRetry} />
+          <>
+            {/* 測驗題號提示 */}
+            <div style={{ color: '#a78bfa', fontSize: '0.72rem', fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.08em' }}>
+              隨堂測驗 {quizIndex + 1} / {lesson.quizzes.length}
+            </div>
+            <AcademyQuiz
+              quiz={lesson.quizzes[quizIndex]}
+              onPass={handleQuizPass}
+              onRetry={handleRetry}
+            />
+          </>
         ) : (
           <div>
             {/* 講義卡片 */}
@@ -108,9 +132,16 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
               </button>
               <button
                 className="btn-next"
-                onClick={() => isLast ? setShowQuiz(true) : setSlideIndex(i => i + 1)}
+                onClick={() => {
+                  if (isLastSlide) {
+                    setShowQuiz(true);
+                    setQuizIndex(0);
+                  } else {
+                    setSlideIndex(i => i + 1);
+                  }
+                }}
               >
-                {isLast ? '做隨堂測驗 →' : '下一頁 →'}
+                {isLastSlide ? `做隨堂測驗（${lesson.quizzes.length}題）→` : '下一頁 →'}
               </button>
             </div>
 
