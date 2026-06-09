@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import type { Quiz } from './courses';
+import '../classroom.css';
 
 interface Props {
   quiz: Quiz;
@@ -17,40 +18,28 @@ export default function AcademyQuiz({ quiz, onComplete }: Props) {
   const isCorrect = answered && quiz.options[selected].correct;
 
   return (
-    <div style={{
-      background: 'rgba(255,255,255,0.04)',
-      border: '1px solid rgba(167,139,250,0.25)',
-      borderRadius: '16px',
-      padding: '1.8rem',
-    }}>
-      <div style={{ color: '#c4b5fd', fontSize: '0.75rem', letterSpacing: '0.1em', marginBottom: '0.8rem' }}>
+    <div className="quiz-card">
+      <div style={{ color: '#6366f1', fontSize: '0.75rem', letterSpacing: '0.1em', marginBottom: '0.8rem', fontWeight: 600 }}>
         🧠 隨堂測驗
       </div>
-      <p style={{ color: '#e9d5ff', fontSize: '1rem', fontWeight: 700, marginBottom: '1.2rem', lineHeight: 1.6 }}>
+      <p style={{ color: '#1a1a2e', fontSize: '1rem', fontWeight: 700, marginBottom: '1.2rem', lineHeight: 1.6 }}>
         {quiz.question}
       </p>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem', marginBottom: '1.2rem' }}>
+      <div style={{ marginBottom: '1rem' }}>
         {quiz.options.map((opt, i) => {
-          let bg = 'rgba(255,255,255,0.05)';
-          let border = '1px solid rgba(255,255,255,0.1)';
+          let extraClass = '';
           if (answered && i === selected) {
-            bg = isCorrect ? 'rgba(52,211,153,0.12)' : 'rgba(239,68,68,0.12)';
-            border = `1px solid ${isCorrect ? 'rgba(52,211,153,0.5)' : 'rgba(239,68,68,0.5)'}`;
+            extraClass = isCorrect ? ' correct' : ' wrong';
           } else if (answered && opt.correct) {
-            bg = 'rgba(52,211,153,0.08)';
-            border = '1px solid rgba(52,211,153,0.3)';
+            extraClass = ' correct';
           }
           return (
             <button
               key={i}
               onClick={() => !answered && setSelected(i)}
-              style={{
-                background: bg, border, borderRadius: '10px',
-                padding: '0.85rem 1rem', textAlign: 'left',
-                color: '#e9d5ff', fontSize: '0.9rem', cursor: answered ? 'default' : 'pointer',
-                transition: 'all 0.2s',
-              }}
+              className={`quiz-option${extraClass}`}
+              style={{ cursor: answered ? 'default' : 'pointer' }}
             >
               {opt.label}
             </button>
@@ -60,14 +49,14 @@ export default function AcademyQuiz({ quiz, onComplete }: Props) {
 
       {answered && (
         <div style={{
-          background: isCorrect ? 'rgba(52,211,153,0.08)' : 'rgba(239,68,68,0.08)',
-          border: `1px solid ${isCorrect ? 'rgba(52,211,153,0.3)' : 'rgba(239,68,68,0.3)'}`,
-          borderRadius: '10px', padding: '0.9rem 1rem', marginBottom: '1.2rem',
+          background: isCorrect ? '#f0fdf4' : '#fef2f2',
+          border: `1px solid ${isCorrect ? '#86efac' : '#fca5a5'}`,
+          borderRadius: '8px', padding: '0.9rem 1rem', marginBottom: '1rem',
         }}>
-          <div style={{ color: isCorrect ? '#34d399' : '#f87171', fontWeight: 700, marginBottom: '0.3rem' }}>
+          <div style={{ color: isCorrect ? '#15803d' : '#b91c1c', fontWeight: 700, marginBottom: '0.3rem' }}>
             {isCorrect ? '✅ 答對了！' : '❌ 答錯了'}
           </div>
-          <div style={{ color: '#9ca3af', fontSize: '0.85rem', lineHeight: 1.6 }}>
+          <div style={{ color: '#374151', fontSize: '0.85rem', lineHeight: 1.6 }}>
             {quiz.options[selected!].explanation}
           </div>
         </div>
@@ -75,36 +64,23 @@ export default function AcademyQuiz({ quiz, onComplete }: Props) {
 
       {answered && isCorrect && (
         <div style={{
-          background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(52,211,153,0.1))',
-          border: '1px solid rgba(167,139,250,0.4)',
-          borderRadius: '14px', padding: '1.4rem', marginBottom: '1rem', textAlign: 'center',
+          background: 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
+          border: '1px solid #c7d2fe',
+          borderRadius: '12px', padding: '1.4rem', marginBottom: '1rem', textAlign: 'center',
         }}>
           <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🏅</div>
-          <div style={{
-            color: '#fff', fontWeight: 900, fontSize: '1.1rem',
-            background: 'linear-gradient(135deg, #c4b5fd, #6ee7b7)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            marginBottom: '0.3rem',
-          }}>
+          <div style={{ color: '#4338ca', fontWeight: 900, fontSize: '1.1rem', marginBottom: '0.3rem' }}>
             驚喜榮譽證書
           </div>
-          <div style={{ color: '#9ca3af', fontSize: '0.78rem', lineHeight: 1.6 }}>
+          <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6 }}>
             恭喜完成本堂課！<br />
-            <span style={{ color: '#a78bfa' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
+            <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
           </div>
         </div>
       )}
 
       {answered && (
-        <button
-          onClick={onComplete}
-          style={{
-            width: '100%', padding: '0.85rem',
-            background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-            border: 'none', borderRadius: '10px',
-            color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
-          }}
-        >
+        <button className="btn-next" onClick={onComplete} style={{ width: '100%' }}>
           繼續下一課 →
         </button>
       )}

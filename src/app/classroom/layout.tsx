@@ -16,5 +16,9 @@ export const metadata: Metadata = {
 };
 
 export default function ClassroomLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <div style={{ minHeight: '100vh', background: '#f5f3ff', color: '#1e1b4b' }}>
+      {children}
+    </div>
+  );
 }

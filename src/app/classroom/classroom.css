@@ -1,0 +1,323 @@
+/* ── 教室通用樣式 ── */
+
+.classroom-navbar {
+  background: #ffffff;
+  border-bottom: 0.5px solid #e8e4ff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.classroom-back {
+  font-size: 13px;
+  color: #7c3aed;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.classroom-breadcrumb {
+  font-size: 12px;
+  color: #a78bfa;
+}
+
+/* 進度條 */
+.prog-wrap {
+  height: 3px;
+  background: #e8e4ff;
+}
+
+.prog-fill {
+  height: 3px;
+  background: #7c3aed;
+  transition: width 0.3s ease;
+}
+
+/* 講義卡片 */
+.slide-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 0.5px solid #e8e4ff;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(124, 58, 237, 0.06);
+}
+
+.slide-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.slide-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7c3aed;
+}
+
+.slide-page-label {
+  font-size: 11px;
+  color: #a78bfa;
+  font-weight: 500;
+}
+
+.slide-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: #1e1b4b;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.slide-body {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+/* 圖表佔位 */
+.chart-placeholder {
+  background: #f8f7ff;
+  border: 1.5px dashed #c4b5fd;
+  border-radius: 10px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: #a78bfa;
+  font-size: 12px;
+  width: 100%;
+}
+
+/* 圖表實際區塊 */
+.slide-chart-wrap {
+  margin-top: 16px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 導航按鈕 */
+.lesson-nav {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 20px;
+  margin-top: 4px;
+}
+
+.btn-prev {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #e8e4ff;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #7c3aed;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-prev:hover {
+  background: #f5f3ff;
+}
+
+.btn-prev:disabled {
+  color: #c4b5fd;
+  border-color: #e8e4ff;
+  cursor: default;
+}
+
+.btn-next {
+  flex: 2;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #ffffff;
+  background: #7c3aed;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-next:hover {
+  background: #6d28d9;
+}
+
+/* 偵探提示卡 */
+.hint-card {
+  background: #f5f3ff;
+  border: 0.5px solid #ddd6fe;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.hint-label {
+  font-size: 11px;
+  color: #7c3aed;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.hint-text {
+  font-size: 13px;
+  color: #4c1d95;
+  line-height: 1.6;
+}
+
+/* 測驗 */
+.quiz-wrap {
+  padding: 0 16px 20px;
+}
+
+.quiz-section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #7c3aed;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.quiz-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 0.5px solid #e8e4ff;
+  padding: 18px;
+  box-shadow: 0 1px 4px rgba(124, 58, 237, 0.06);
+}
+
+.quiz-question {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e1b4b;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #e8e4ff;
+  border-radius: 9px;
+  font-size: 13px;
+  color: #374151;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 8px;
+  transition: all 0.12s;
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: #a78bfa;
+  background: #f5f3ff;
+}
+
+.quiz-option.correct {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.quiz-option.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.quiz-result-ok {
+  background: #f0fdf4;
+  border: 0.5px solid #bbf7d0;
+  border-radius: 9px;
+  padding: 11px 13px;
+  font-size: 13px;
+  color: #15803d;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+.quiz-result-no {
+  background: #fef2f2;
+  border: 0.5px solid #fecaca;
+  border-radius: 9px;
+  padding: 11px 13px;
+  font-size: 13px;
+  color: #b91c1c;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+/* 完課蓋章 */
+.cert-banner {
+  background: #7c3aed;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.cert-banner-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.cert-banner-sub {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* 課程列表 */
+.course-list-item {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 0.5px solid #e8e4ff;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.12s;
+  text-align: left;
+  width: 100%;
+}
+
+.course-list-item:hover {
+  background: #f5f3ff;
+}
+
+.course-list-item.done {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+
+.course-list-item.locked {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* 內容容器 */
+.classroom-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px 16px 40px;
+}

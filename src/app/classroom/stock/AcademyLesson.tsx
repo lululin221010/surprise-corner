@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import type { Lesson, SlideChart } from './courses';
 import AcademyQuiz from './AcademyQuiz';
+import '../classroom.css';
 import KlineAnatomy from './charts/KlineAnatomy';
 import KlineRedBlack from './charts/KlineRedBlack';
 import KlineShadow from './charts/KlineShadow';
@@ -52,87 +53,69 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
   const isLast = slideIndex === lesson.slides.length - 1;
 
   return (
-    <div>
-      {/* 頂部導航 */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <button
-          onClick={onBack}
-          style={{ background: 'none', border: 'none', color: '#6b7280', fontSize: '0.85rem', cursor: 'pointer' }}
-        >
-          ← 返回課程列表
-        </button>
-        <div style={{ color: '#6b7280', fontSize: '0.8rem' }}>
-          {lesson.emoji} {lesson.title}
-        </div>
-      </div>
+    <div className="classroom-content">
+      <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
-      {/* 進度條 */}
-      <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '4px', height: '4px', marginBottom: '2rem' }}>
-        <div style={{
-          background: 'linear-gradient(90deg, #7c3aed, #a855f7)',
-          height: '100%', borderRadius: '4px',
-          width: `${((slideIndex + (showQuiz ? 1 : 0)) / (lesson.slides.length + 1)) * 100}%`,
-          transition: 'width 0.4s ease',
-        }} />
-      </div>
-
-      {showQuiz ? (
-        <AcademyQuiz quiz={lesson.quiz} onComplete={onComplete} />
-      ) : (
-        <div>
-          {/* Slide */}
-          <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(167,139,250,0.2)',
-            borderRadius: '16px', padding: '2rem', marginBottom: '1.5rem', minHeight: '200px',
-          }}>
-            <h2 style={{ color: '#e9d5ff', fontSize: '1.2rem', fontWeight: 800, marginBottom: '1rem' }}>
-              {slide.title}
-            </h2>
-            <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.8, whiteSpace: 'pre-wrap' }}>
-              {slide.body}
-            </p>
-            {slide.chart && (
-              <div className="slide-chart-wrap">
-                {renderChart(slide.chart)}
-              </div>
-            )}
-          </div>
-
-          {/* 翻頁按鈕 */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-            <button
-              onClick={() => setSlideIndex(i => Math.max(0, i - 1))}
-              disabled={slideIndex === 0}
-              style={{
-                flex: 1, padding: '0.85rem',
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '10px', color: slideIndex === 0 ? '#374151' : '#9ca3af',
-                fontSize: '0.9rem', cursor: slideIndex === 0 ? 'default' : 'pointer',
-              }}
-            >
-              ← 上一頁
-            </button>
-            <button
-              onClick={() => isLast ? setShowQuiz(true) : setSlideIndex(i => i + 1)}
-              style={{
-                flex: 2, padding: '0.85rem',
-                background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-                border: 'none', borderRadius: '10px',
-                color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
-              }}
-            >
-              {isLast ? '做隨堂測驗 →' : '下一頁 →'}
-            </button>
-          </div>
-
-          {/* slide 頁碼 */}
-          <div style={{ textAlign: 'center', marginTop: '1rem', color: '#4b5563', fontSize: '0.78rem' }}>
-            {slideIndex + 1} / {lesson.slides.length}
+        {/* 頂部導航 */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
+          <button
+            onClick={onBack}
+            style={{ background: 'none', border: 'none', color: '#6366f1', fontSize: '0.85rem', cursor: 'pointer' }}
+          >
+            ← 返回課程列表
+          </button>
+          <div style={{ color: '#64748b', fontSize: '0.8rem' }}>
+            {lesson.emoji} {lesson.title}
           </div>
         </div>
-      )}
+
+        {/* 進度條 */}
+        <div className="prog-wrap" style={{ marginBottom: '1.5rem' }}>
+          <div
+            className="prog-fill"
+            style={{ width: `${((slideIndex + (showQuiz ? 1 : 0)) / (lesson.slides.length + 1)) * 100}%` }}
+          />
+        </div>
+
+        {showQuiz ? (
+          <AcademyQuiz quiz={lesson.quiz} onComplete={onComplete} />
+        ) : (
+          <div>
+            {/* 講義卡片 */}
+            <div className="slide-card" style={{ marginBottom: '1.2rem' }}>
+              <h2 className="slide-title">{slide.title}</h2>
+              <p className="slide-body">{slide.body}</p>
+              {slide.chart && (
+                <div className="slide-chart-wrap">
+                  {renderChart(slide.chart)}
+                </div>
+              )}
+            </div>
+
+            {/* 翻頁按鈕 */}
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button
+                className="btn-prev"
+                onClick={() => setSlideIndex(i => Math.max(0, i - 1))}
+                disabled={slideIndex === 0}
+              >
+                ← 上一頁
+              </button>
+              <button
+                className="btn-next"
+                onClick={() => isLast ? setShowQuiz(true) : setSlideIndex(i => i + 1)}
+              >
+                {isLast ? '做隨堂測驗 →' : '下一頁 →'}
+              </button>
+            </div>
+
+            {/* 頁碼 */}
+            <div style={{ textAlign: 'center', marginTop: '0.8rem', color: '#94a3b8', fontSize: '0.78rem' }}>
+              {slideIndex + 1} / {lesson.slides.length}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
