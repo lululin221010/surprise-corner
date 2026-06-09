@@ -103,6 +103,15 @@ function LoginContent() {
               <p className="text-xs text-slate-500 mt-1.5">第一次登入自動建立學員帳號</p>
             </div>
 
+            {/* 新學員說明 */}
+            <div className="bg-indigo-950/50 border border-indigo-800/40 rounded-xl p-3">
+              <p className="text-xs text-indigo-300 leading-relaxed">
+                🎁 <strong>驚喜學院 × 有的沒的小舖</strong><br/>
+                註冊學院帳號，同時自動開通小舖書架——<br/>
+                同一個 email，兩邊都能用，不需要分開註冊。
+              </p>
+            </div>
+
             {error && <p className="text-red-400 text-sm">⚠️ {error}</p>}
 
             <button

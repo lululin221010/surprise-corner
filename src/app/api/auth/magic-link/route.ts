@@ -1,45 +1,74 @@
 // POST /api/auth/magic-link
 // 輸入 email + nickname → 寄出一次性登入連結（15 分鐘有效）
-// 若 email 不存在 → 自動建立帳號（首次註冊）
+// 若 email 不存在 → 自動建立帳號（首次註冊），同時在 ST BookStoreDB 建立帳號
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { Resend } from 'resend';
 import { dbConnect } from '@/lib/dbConnect';
 
-const resend  = new Resend(process.env.RESEND_API_KEY);
-const SS_URL  = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
-const FROM    = '有的沒的小舖 <noreply@still-time-corner.vercel.app>';
+const resend = new Resend(process.env.RESEND_API_KEY);
+const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
+const FROM   = '有的沒的小舖 <noreply@still-time-corner.vercel.app>';
 
 export async function POST(request: Request) {
   try {
     const { email, nickname } = await request.json();
     if (!email) return NextResponse.json({ success: false, error: '請輸入 email' }, { status: 400 });
 
-    const db    = await dbConnect();
-    const users = db.collection('academyUsers');
+    const cleanEmail = email.toLowerCase().trim();
 
-    let user = await users.findOne({ email: email.toLowerCase().trim() });
+    // ── SS 學院 DB ──
+    const ssDb    = await dbConnect('SurpriseCornerDB');
+    const ssUsers = ssDb.collection('academyUsers');
+
+    let user    = await ssUsers.findOne({ email: cleanEmail });
+    let isNew   = false;
 
     if (!user) {
-      // 首次註冊
-      const nick = (nickname || '').trim() || email.split('@')[0];
-      await users.insertOne({
-        email:              email.toLowerCase().trim(),
+      isNew = true;
+      const nick = (nickname || '').trim() || cleanEmail.split('@')[0];
+
+      // 1. 建立 SS 學院帳號
+      await ssUsers.insertOne({
+        email:              cleanEmail,
         nickname:           nick,
         points:             0,
         completedLessons:   [],
         completedAcademies: [],
         createdAt:          new Date(),
       });
-      user = await users.findOne({ email: email.toLowerCase().trim() });
+
+      // 2. 同時在 ST BookStoreDB.users 建立帳號（若不存在）
+      try {
+        const stDb    = await dbConnect('BookStoreDB');
+        const stUsers = stDb.collection('users');
+        const exists  = await stUsers.findOne({ email: cleanEmail });
+        if (!exists) {
+          await stUsers.insertOne({
+            email,
+            // 隨機無法使用的密碼雜湊，讓用戶只能走 magic link 登入
+            password:    '$2b$10$' + crypto.randomBytes(22).toString('base64').slice(0, 53),
+            name:        nick,
+            fullAccess:  false,
+            createdAt:   new Date(),
+            updatedAt:   new Date(),
+            fromAcademy: true,  // 標記從學院註冊
+          });
+        }
+      } catch (stErr) {
+        // ST 建帳失敗不影響 SS 流程，只記 log
+        console.warn('⚠️ ST 建帳失敗（不影響 SS）:', stErr);
+      }
+
+      user = await ssUsers.findOne({ email: cleanEmail });
     }
 
-    // 產生 token，15 分鐘有效
+    // ── 產生 magic token（15 分鐘）──
     const token  = crypto.randomBytes(32).toString('hex');
     const expiry = new Date(Date.now() + 15 * 60 * 1000);
 
-    await users.updateOne(
-      { email: user!.email },
+    await ssUsers.updateOne(
+      { email: cleanEmail },
       { $set: { magicToken: token, magicTokenExpiry: expiry } }
     );
 
@@ -47,7 +76,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from:    FROM,
-      to:      user!.email,
+      to:      cleanEmail,
       subject: '【驚喜學院】一鍵登入連結',
       html: `
 <!DOCTYPE html>
@@ -72,6 +101,14 @@ export async function POST(request: Request) {
               點下方按鈕即可直接登入學院，不需要密碼。<br/>
               <span style="color:#64748b;font-size:13px;">連結 15 分鐘內有效，使用一次後失效。</span>
             </p>
+            ${isNew ? `
+            <div style="margin:0 0 24px;padding:14px 16px;background:#1e1b4b;border-radius:10px;border-left:3px solid #7c3aed;">
+              <p style="margin:0;color:#c4b5fd;font-size:13px;line-height:1.8;">
+                🎉 歡迎加入驚喜學院！<br/>
+                你的<strong>有的沒的小舖書架帳號</strong>也已同步開通，<br/>
+                同一個 email 可登入小舖查看購買記錄。
+              </p>
+            </div>` : ''}
             <div style="text-align:center;margin:32px 0;">
               <a href="${loginUrl}"
                  style="display:inline-block;padding:14px 40px;
@@ -101,7 +138,7 @@ export async function POST(request: Request) {
 </html>`,
     });
 
-    return NextResponse.json({ success: true, isNew: !user });
+    return NextResponse.json({ success: true, isNew });
   } catch (error) {
     console.error('❌ SS magic-link 失敗:', error);
     return NextResponse.json({ success: false, error: '寄信失敗，請稍後再試' }, { status: 500 });
