@@ -56,7 +56,7 @@ export default function Wonderland() {
           <Link href="/" className="inline-flex items-center gap-2 text-purple-300 hover:text-white transition-colors text-sm">
             ← 返回首頁
           </Link>
-          <ShareButtons title="SURPRISE CORNER 驚喜樂世界" content="六大神秘區域，每天都有新發現 💖" />
+          <ShareButtons title="SURPRISE CORNER 驚喜樂世界" content="七大神秘區域，每天都有新發現 💖" />
         </div>
 
         {/* 主標題 */}
@@ -67,7 +67,7 @@ export default function Wonderland() {
           <p className="text-3xl md:text-5xl mt-2 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent font-medium">
             驚喜樂世界
           </p>
-          <p className="mt-4 text-lg text-purple-200/80">六大神秘區域，每天都有新發現 ❤️</p>
+          <p className="mt-4 text-lg text-purple-200/80">七大神秘區域，每天都有新發現 ❤️</p>
         </div>
 
         {/* ── 桌機版：圓形環繞 ── */}

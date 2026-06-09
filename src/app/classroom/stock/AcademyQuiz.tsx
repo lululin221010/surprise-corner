@@ -73,6 +73,28 @@ export default function AcademyQuiz({ quiz, onComplete }: Props) {
         </div>
       )}
 
+      {answered && isCorrect && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(52,211,153,0.1))',
+          border: '1px solid rgba(167,139,250,0.4)',
+          borderRadius: '14px', padding: '1.4rem', marginBottom: '1rem', textAlign: 'center',
+        }}>
+          <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🏅</div>
+          <div style={{
+            color: '#fff', fontWeight: 900, fontSize: '1.1rem',
+            background: 'linear-gradient(135deg, #c4b5fd, #6ee7b7)',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+            marginBottom: '0.3rem',
+          }}>
+            驚喜榮譽證書
+          </div>
+          <div style={{ color: '#9ca3af', fontSize: '0.78rem', lineHeight: 1.6 }}>
+            恭喜完成本堂課！<br />
+            <span style={{ color: '#a78bfa' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
+          </div>
+        </div>
+      )}
+
       {answered && (
         <button
           onClick={onComplete}

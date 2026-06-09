@@ -47,12 +47,13 @@ export default function Academy() {
         padding: '2rem 1rem 6rem',
       }}>
         <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <button
-            onClick={() => setActiveCourse(null)}
-            style={{ background: 'none', border: 'none', color: '#6b7280', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '1.5rem' }}
-          >
-            ← 所有課程
-          </button>
+          <div style={{ color: '#6b7280', fontSize: '0.8rem', marginBottom: '1rem' }}>
+            <Link href="/classroom" style={{ color: '#6b7280', textDecoration: 'none' }}>小教室</Link>
+            <span style={{ margin: '0 0.4rem' }}>›</span>
+            <button onClick={() => setActiveCourse(null)} style={{ background: 'none', border: 'none', color: '#6b7280', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>股市學院</button>
+            <span style={{ margin: '0 0.4rem' }}>›</span>
+            <span style={{ color: '#9ca3af' }}>{activeCourse.title}</span>
+          </div>
           <h2 style={{ color: '#e9d5ff', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.4rem' }}>
             {activeCourse.emoji} {activeCourse.title}
           </h2>
@@ -106,26 +107,22 @@ export default function Academy() {
     }}>
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
-        {/* 返回 */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <Link href="/classroom" style={{ color: '#6b7280', fontSize: '0.85rem', textDecoration: 'none' }}>
-            ← 所有學院
-          </Link>
-        </div>
-
-        {/* 標題 */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '0.8rem' }}>📈</div>
+        {/* 學院 Header */}
+        <div style={{ marginBottom: '2rem' }}>
+          <div style={{ color: '#6b7280', fontSize: '0.8rem', marginBottom: '0.6rem' }}>
+            <Link href="/classroom" style={{ color: '#6b7280', textDecoration: 'none' }}>小教室</Link>
+            <span style={{ margin: '0 0.4rem' }}>›</span>
+            <span style={{ color: '#9ca3af' }}>股市學院</span>
+          </div>
           <h1 style={{
-            color: '#fff', fontSize: '2rem', fontWeight: 900, margin: '0 0 0.5rem',
+            color: '#fff', fontSize: '1.8rem', fontWeight: 900, margin: '0 0 0.4rem',
             background: 'linear-gradient(135deg, #fff 0%, #6ee7b7 60%, #34d399 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>
-            股市學院
+            📈 股市學院
           </h1>
-          <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
-            每篇5分鐘，看懂一個股市概念。<br />
-            K線、法人籌碼、均線……說人話，不廢話。
+          <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>
+            每篇5分鐘，看懂一個股市概念。K線、法人籌碼、均線……說人話，不廢話。
           </p>
         </div>
 

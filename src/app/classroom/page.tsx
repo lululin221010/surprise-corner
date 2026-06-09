@@ -10,12 +10,12 @@ const LIVE_ACADEMIES = [
 ];
 
 const COMING_TOPICS = [
-  { icon: '🧠', title: '心理學小教室', desc: '每篇5分鐘，讀懂一個心理學概念。依附、防禦、認知偏誤……從日常角度出發，不燒腦。' },
-  { icon: '💰', title: '理財小教室', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
-  { icon: '🤖', title: 'AI 工具小教室', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
-  { icon: '✍️', title: '寫作與創作小教室', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
-  { icon: '🔬', title: '科學小教室', desc: '量子力學、相對論、演化論……用你看得懂的語言，講清楚那些聽起來很難的科學。' },
-  { icon: '🌍', title: '人文社會小教室', desc: '歷史、哲學、社會學……幫你建立思考框架，看懂這個世界為什麼是這樣。' },
+  { icon: '🧠', title: '心理學院', desc: '每篇5分鐘，讀懂一個心理學概念。依附、防禦、認知偏誤……從日常角度出發，不燒腦。' },
+  { icon: '💰', title: '理財學院', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
+  { icon: '🤖', title: 'AI 工具學院', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
+  { icon: '✍️', title: '創作學院', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
+  { icon: '🔬', title: '科學學院', desc: '量子力學、相對論、演化論……用你看得懂的語言，講清楚那些聽起來很難的科學。' },
+  { icon: '🌍', title: '人文學院', desc: '歷史、哲學、社會學……幫你建立思考框架，看懂這個世界為什麼是這樣。' },
 ];
 
 export default function ClassroomPage() {
@@ -32,26 +32,14 @@ export default function ClassroomPage() {
           <div style={{ fontSize: '3.5rem', marginBottom: '0.8rem' }}>🏫</div>
           <h1 style={{
             color: '#fff', fontSize: '2rem', fontWeight: 900,
-            margin: '0 0 0.5rem',
+            margin: '0 0 0.3rem',
             background: 'linear-gradient(135deg, #fff 0%, #c4b5fd 60%, #f0abfc 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>
-            小教室
+            驚喜學院
           </h1>
-          <div style={{
-            display: 'inline-block',
-            background: 'rgba(251,191,36,0.15)',
-            border: '1px solid rgba(251,191,36,0.4)',
-            borderRadius: '20px', padding: '0.3rem 1rem',
-            color: '#fbbf24', fontSize: '0.8rem', fontWeight: 700,
-            letterSpacing: '0.1em', marginBottom: '1rem',
-          }}>
-            🔨 籌備中
-          </div>
-          <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
-            每篇5分鐘，學一個真正用得上的知識。<br />
-            心理學、投資、AI工具、創作……<br />
-            不灌水、不廢話，說人話的小教室。
+          <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.7, margin: '0 0 1rem' }}>
+            走進小門，發現大世界
           </p>
         </div>
 
@@ -127,10 +115,10 @@ export default function ClassroomPage() {
         }}>
           <div style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>💬</div>
           <p style={{ color: '#4ade80', fontWeight: 700, fontSize: '1rem', margin: '0 0 0.4rem' }}>
-            想第一個知道小教室開課？
+            想第一個知道驚喜學院開課？
           </p>
           <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: '0 0 1rem' }}>
-            加入 LINE，開課第一時間通知你
+            加入 LINE，新學院開放第一時間通知你
           </p>
           <a
             href="https://line.me/R/ti/p/@983agawb"
@@ -152,7 +140,7 @@ export default function ClassroomPage() {
           <p style={{ color: '#6b7280', fontSize: '0.8rem', textAlign: 'center', marginBottom: '0.8rem' }}>
             覺得有趣？先分享給朋友，一起等開課 👇
           </p>
-          <ShareButtons title="驚喜角落 小教室 — 即將開課！" content="心理學、投資、AI工具……5分鐘學一個真正用得上的知識，快來訂閱搶先知道！" />
+          <ShareButtons title="驚喜學院 — 即將開課！" content="股市、心理學、AI工具……走進小門，發現大世界！快來訂閱搶先知道！" />
         </div>
 
         {/* 返回 */}
