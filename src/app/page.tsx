@@ -669,6 +669,7 @@ export default function Home() {
         <footer style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '2rem 1.2rem 2.5rem', textAlign: 'center' }}>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.2rem 2rem', marginBottom: '1.2rem' }}>
             {[
+              { label: '🏫 小教室', href: '/classroom' },
               { label: '💬 互動牆', href: '/wall' },
               { label: '🛒 小舖', href: 'https://still-time-corner.vercel.app', external: true },
             ].map(l => (

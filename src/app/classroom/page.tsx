@@ -5,11 +5,17 @@
 import Link from 'next/link';
 import ShareButtons from '@/components/ShareButtons';
 
+const LIVE_ACADEMIES = [
+  { icon: '📈', title: '股市學院', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
+];
+
 const COMING_TOPICS = [
   { icon: '🧠', title: '心理學小教室', desc: '每篇5分鐘，讀懂一個心理學概念。依附、防禦、認知偏誤……從日常角度出發，不燒腦。' },
-  { icon: '📈', title: '投資入門小教室', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。' },
+  { icon: '💰', title: '理財小教室', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
   { icon: '🤖', title: 'AI 工具小教室', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
   { icon: '✍️', title: '寫作與創作小教室', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
+  { icon: '🔬', title: '科學小教室', desc: '量子力學、相對論、演化論……用你看得懂的語言，講清楚那些聽起來很難的科學。' },
+  { icon: '🌍', title: '人文社會小教室', desc: '歷史、哲學、社會學……幫你建立思考框架，看懂這個世界為什麼是這樣。' },
 ];
 
 export default function ClassroomPage() {
@@ -47,6 +53,38 @@ export default function ClassroomPage() {
             心理學、投資、AI工具、創作……<br />
             不灌水、不廢話，說人話的小教室。
           </p>
+        </div>
+
+        {/* 已開放的學院 */}
+        <p style={{ color: '#6b7280', fontSize: '0.75rem', letterSpacing: '0.1em', margin: '0 0 1rem 0.2rem' }}>
+          現在開課
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+          {LIVE_ACADEMIES.map(t => (
+            <Link key={t.title} href={t.href} style={{
+              background: 'rgba(52,211,153,0.06)',
+              border: '1px solid rgba(52,211,153,0.3)',
+              borderRadius: '16px', padding: '1.4rem 1.5rem',
+              display: 'flex', gap: '1rem', alignItems: 'flex-start',
+              textDecoration: 'none',
+            }}>
+              <span style={{ fontSize: '2rem', flexShrink: 0 }}>{t.icon}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ color: '#6ee7b7', fontWeight: 700, fontSize: '1rem', marginBottom: '0.3rem' }}>
+                  {t.title}
+                </div>
+                <div style={{ color: '#6b7280', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                  {t.desc}
+                </div>
+              </div>
+              <div style={{
+                flexShrink: 0, alignSelf: 'center',
+                color: '#34d399', fontSize: '0.72rem', fontWeight: 700,
+              }}>
+                進入學院 →
+              </div>
+            </Link>
+          ))}
         </div>
 
         {/* 即將推出的主題 */}
