@@ -1,532 +1,277 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>儀器測到了，但科學家不敢說｜科學邊界 Vol.1｜盧林著</title>
+<title>儀器測到了，但科學家不敢說｜那個感覺 科學邊界系列 Vol.1｜盧林著</title>
+<meta property="og:title" content="儀器測到了，但科學家不敢說【免費閱讀】那個感覺 科學邊界系列">
+<meta property="og:description" content="科學邊界系列 Vol.1 ——免費在線閱讀，不需要下載任何 App。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
-
-:root {
-  --bg: #0e0e14;
-  --text: #dcdcf0;
-  --text-muted: #a8a8cc;
-  --accent: #4a8fa8;
-  --accent-light: rgba(74,143,168,0.15);
-  --accent-dim: rgba(74,143,168,0.4);
-  --card-bg: #14141e;
-  --card-border: rgba(74,143,168,0.2);
-  --label: #9090b8;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Serif TC', serif;
-  font-size: 17px;
-  line-height: 2;
-  min-height: 100vh;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 40px 100px;
-}
-
-/* 返回 */
-.page-back {
-  padding: 28px 0 0;
-}
-.page-back a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  letter-spacing: 2px;
-  transition: color 0.2s;
-}
-.page-back a:hover { color: var(--accent); }
-
-/* 書頭資訊 */
-.book-header {
-  padding: 56px 0 48px;
-  border-bottom: 1px solid rgba(74,143,168,0.12);
-  margin-bottom: 56px;
-}
-
-.book-series {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 5px;
-  color: var(--accent);
-  opacity: 0.7;
-  margin-bottom: 16px;
-}
-
-.book-title {
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: 3px;
-  line-height: 1.5;
-  color: #d8e4f0;
-  margin-bottom: 12px;
-}
-
-.book-author {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: var(--text-muted);
-  margin-bottom: 28px;
-}
-
-.trial-badge {
-  display: inline-block;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--accent);
-  border: 1px solid var(--card-border);
-  padding: 5px 14px;
-  border-radius: 20px;
-  background: var(--accent-light);
-}
-
-/* 內文 */
-.content h2 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  color: #d0dce8;
-  margin: 56px 0 28px;
-  line-height: 1.6;
-}
-
-.content h2:first-child { margin-top: 0; }
-
-.content h3 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  color: var(--accent);
-  margin: 36px 0 16px;
-}
-
-.content p {
-  margin-bottom: 24px;
-  text-align: justify;
-  color: var(--text);
-}
-
-.content em {
-  font-style: normal;
-  color: #a0c8d8;
-}
-
-.content strong {
-  font-weight: 500;
-  color: #d0dce8;
-}
-
-.blockquote {
-  margin: 36px 0;
-  padding: 20px 28px;
-  border-left: 2px solid var(--accent-dim);
-  background: var(--accent-light);
-  border-radius: 0 6px 6px 0;
-}
-
-.blockquote p {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: #b0c8d8;
-  font-style: italic;
-  margin-bottom: 8px;
-}
-
-.blockquote cite {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-style: normal;
-  letter-spacing: 1px;
-  font-family: 'Noto Sans TC', sans-serif;
-}
-
-.data-note {
-  margin: 32px 0;
-  padding: 18px 24px;
-  background: rgba(74,143,168,0.06);
-  border: 1px solid rgba(74,143,168,0.15);
-  border-radius: 6px;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.9;
-}
-
-.data-note strong {
-  color: var(--accent);
-  font-weight: 500;
-}
-
-/* 試閱截止線 */
-.trial-end {
-  margin: 64px 0 48px;
-  text-align: center;
-  position: relative;
-}
-
-.trial-end::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
-}
-
-.trial-end-label {
-  position: relative;
-  display: inline-block;
-  background: var(--bg);
-  padding: 0 24px;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: var(--text-muted);
-}
-
-/* CTA */
-.cta-block {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 40px;
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-.cta-block h3 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  color: #d0dce8;
-  margin-bottom: 16px;
-}
-
-.cta-block p {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.9;
-  margin-bottom: 28px;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-primary {
-  display: inline-block;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: var(--bg);
-  background: var(--accent);
-  padding: 12px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.btn-primary:hover { background: #5aa0b8; }
-
-.btn-secondary {
-  display: inline-block;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: var(--text-muted);
-  padding: 12px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  border: 1px solid rgba(74,143,168,0.25);
-  transition: all 0.2s;
-}
-.btn-secondary:hover {
-  color: var(--accent);
-  border-color: var(--accent-dim);
-}
-
-/* 系列導覽 */
-.series-nav {
-  margin-top: 64px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(74,143,168,0.12);
-  text-align: center;
-}
-
-.snlabel {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: var(--label);
-  margin-bottom: 16px;
-}
-
-.snbooks {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.snbook {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid rgba(74,143,168,0.2);
-  border-radius: 4px;
-  transition: all 0.2s;
-}
-.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
-.snbook.current {
-  color: var(--accent);
-  border-color: var(--accent-dim);
-  background: var(--accent-light);
-}
-
-.back-link {
-  display: inline-block;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.back-link:hover { color: var(--accent); }
-
-@media (max-width: 640px) {
-  .container { padding: 0 20px 80px; }
-  .book-title { font-size: 1.5rem; }
-  .cta-block { padding: 28px 20px; }
-}
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
+  :root {
+    --bg: #080e14;
+    --text: #dcdcf0;
+    --text-muted: #a8a8cc;
+    --accent: #4a90d9;
+    --accent-light: rgba(74,144,217,0.12);
+    --accent-dim: rgba(74,144,217,0.35);
+    --card-bg: #14141e;
+    --card-border: rgba(74,144,217,0.35);
+    --label: #9090b8;
   }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・科學邊界系列</div>
+<h1>儀器測到了，但科學家不敢說</h1>
+<div class="subtitle">Vol.1・科學邊界系列・完整版・免費閱讀</div>
 
-<div class="container">
+<h1 class="chap-h1">那個感覺・科學邊界Vol.1《儀器測到了，但科學家不敢說》</h1>
+<h2 class="chap-h2">前言：有一行字被塗黑了</h2>
+<p>儀器測到了，但科學家不敢說——這句話裡有兩件事。</p>
+<p>第一件：儀器測到了。這不是直覺，不是靈感，不是某個研究員在實驗室裡睡著之後做的夢。是數據。是可以被複製的讀數，是統計顯著的結果，是在受控條件下、由機構資助、由受過訓練的研究者記錄下來的數字。</p>
+<p>第二件：科學家不敢說。不是說不出口。是選擇不說，或者說了之後被要求閉嘴，或者說了但沒有人引用，或者說了但報告的結論欄是空白的。</p>
+<p>這本書追的就是這個空白。</p>
+<p>1995年，美國中央情報局解密了一份代號「星門」（Stargate）的計畫檔案。這個計畫從1972年開始，歷時二十三年，由美國政府資助，在史丹佛研究院和後續機構進行。計畫的內容是測試人類是否具備遠端透視（Remote Viewing）能力——在不依賴任何已知感官的情況下，獲取遠方地點或物件的資訊。</p>
+<p>計畫結束時，美國國會委託了兩位獨立研究者分別評估數據。一位是統計學家 Jessica Utts，她在報告裡寫道，遠端透視效應的統計證據「超過任何其他心理現象」，數據品質達到可以接受的科學標準。另一位是懷疑論者 Ray Hyman，他不認同 Utts 的結論，但他也沒辦法指出數據有什麼具體的錯誤。</p>
+<p>計畫在同一年被終止。</p>
+<p>沒有後續研究。沒有標準化的複製實驗。沒有任何聯邦機構延續這條研究線。Utts 的報告和 Hyman 的報告同時被提交給國會，然後這件事就結束了。</p>
+<p>這不是一個孤立的案例。</p>
+<p>在普林斯頓大學工程學院，一個叫做 PEAR（Princeton Engineering Anomalies Research）的實驗室運作了將近三十年。研究員 Robert Jahn 和 Brenda Dunne 測試一件簡單的事：人類的意圖，能不能影響一台隨機數生成器的輸出？理論上不能。隨機就是隨機，意識不應該有任何物理效應。但是他們的數據，在超過兩百五十萬次試驗之後，顯示出微弱但統計上顯著的偏差。效應量很小。但它在那裡。</p>
+<p>PEAR 實驗室在2007年關閉。Jahn 在接受採訪時說，主流科學界從來沒有認真回應他們的數據，只是選擇忽視。</p>
+<p>在加拿大，神經學家 Michael Persinger 花了幾十年研究地磁場對人腦的影響。他設計了一頂頭盔，用微弱的磁場刺激顳葉，並記錄受試者的主觀體驗。許多受試者報告感覺到「有存在」（a presence）、感覺自己離開身體、看到光。Persinger 的解釋是純神經學的：這些體驗是大腦對特定電磁刺激的反應，不需要任何靈異成分。但是他沒辦法回答的問題是：為什麼有些人在沒有頭盔、沒有實驗室的情況下，也自發報告完全相同的體驗？</p>
+<p>這本書不會告訴你這些實驗證明了什麼超自然的事。它們也許什麼都沒證明。</p>
+<p>但它們測到了一些東西。然後那個東西沒有被繼續追下去。</p>
+<p>你可以說這是因為資源有限、研究方向的選擇、科學社群的保守。這些解釋都有道理。但是當你把這些案例放在一起看——有政府資金、有機構背書、有統計學家認可數據品質，然後什麼都沒有發生——你會開始問一個不同的問題。</p>
+<p>不是「這是真的嗎？」</p>
+<p>而是：「為什麼沒有人繼續問？」</p>
+<h2 class="chap-h2">第一章 儀器在運作，但報告沒有結論</h2>
+<h3 class="chap-h3">開場情境</h3>
+<p>1972年，史丹佛研究院（SRI International）的一間實驗室裡，物理學家 Hal Puthoff 坐在一台設備前面，等一個叫做 Ingo Swann 的人描述一個他從未去過的地方。</p>
+<p>Swann 是一位藝術家。他坐在洛杉磯的辦公室裡，手上拿著一張紙和一支筆。他不知道目標地點是哪裡。沒有人告訴他。Puthoff 給了他一組地理座標——緯度和經度——僅此而已。Swann 閉上眼睛，然後開始描述：一座島，島上有山，山頂附近有某種設施，有天線，有管道。他在紙上畫了一個草圖。</p>
+<p>這組座標對應的是印度洋上的克格倫群島（Kerguelen Islands）——一個法屬次南極群島，島上確實有一座法國氣象研究站，有天線陣列，有研究設施。Swann 從未聽說過這個地方。</p>
+<p>Puthoff 把這個結果寫成報告，送交 CIA。CIA 的回應是追加資金，要求繼續研究。星門計畫（Stargate）就這樣開始了。這不是一個靈異故事的開頭。這是一個政府採購決策的開頭。差別在於，政府採購決策需要有人簽字，而簽字的人相信數據。</p>
+<h3 class="chap-h3">研究／事件</h3>
+<p>Russell Targ 和 Hal Puthoff 在 SRI 的研究從1972年持續到1985年。他們的基本實驗設計是這樣的：一位「發送者」被帶到一個隨機選定的地點，在那裡停留一段時間。同時，一位「接收者」待在實驗室裡，嘗試描述發送者所在的場景——建築、地形、感官細節。然後，一位不知情的評估者拿著接收者的描述，和一組可能的目標地點進行配對，評分哪一份描述和哪一個地點最吻合。</p>
+<p>在1974年發表於 Nature 期刊的論文裡，Targ 和 Puthoff 報告了一系列實驗結果：盲評估者的配對準確率，統計上顯著高於隨機水準。他們使用的術語是「訊息傳遞」（information transfer），刻意避開了任何靈異或超感知覺（ESP）的框架。</p>
+<p>「我們的結論是，在這些實驗條件下，確實存在一種真實的訊息傳遞現象，其機制目前不明。」</p>
+<p>── Russell Targ & Hal Puthoff（1974，Behavioral Research Methods and Instrumentation）</p>
+<p>這篇論文的發表在科學界引發爭議。Nature 的編輯在同期刊出了一篇罕見的社論，表示他們對發表此文「感到不確定」，但認為讓讀者自行判斷比壓制更合適。這是 Nature 歷史上少數幾次在發表論文的同時公開表達保留的情況。</p>
+<p>CIA 的介入讓研究獲得了比學術期刊更穩定的資金來源。根據後來解密的文件，1972年至1995年間，星門計畫的總資助金額超過兩千萬美元。資助方包括 CIA、國防情報局（DIA）、陸軍情報與安全司令部。研究者被要求測試的任務包括：描述蘇聯的軍事設施、定位人質位置、描述潛水艇基地的內部結構。</p>
+<p>Jim Schnabel 在1997年出版的 Remote Viewers: The Secret History of America’s Psychic Spies 裡，根據解密文件和訪談記錄，詳細描述了計畫的運作方式。他記錄了幾個在事後得到部分驗證的案例——其中包括一名操作員對蘇聯某設施的描述，在數年後的衛星照片中發現了對應的建築結構。Schnabel 的立場不是為遠端透視背書，而是記錄：這個計畫存在，有人認真對待它，而且它持續運作了二十三年。</p>
+<p>計畫主任 Edwin May 在接受後來的訪談時說，在他擔任主任的十年間（1985–1995），他從未見過一個讓他確信「機制是超自然的」的案例，但他也從未見過一個讓他確信「所有數據都是噪音」的情況。他的立場是：有東西在那裡，但他不知道那是什麼。</p>
+<h3 class="chap-h3">機制解析</h3>
+<p>Targ 和 Puthoff 的研究面臨的核心方法論問題，不是「數據是否真實」，而是「數據能否被複製」。科學的標準複製實驗要求：獨立的研究者，用相同的方法，得到相似的結果。遠端透視研究的問題在於，效應量（effect size）很小，而且對操作者的依賴性很高——同樣的實驗設計，換一組受試者，結果可能完全不同。</p>
+<p>這不是遠端透視研究獨有的困境。許多心理學和認知科學的實驗同樣面臨複製危機。但對於一個已經帶有爭議標籤的研究領域，複製困難意味著它幾乎無法累積可信度。</p>
+<p>Dean Radin 在1997年出版的 The Conscious Universe 裡，嘗試用統合分析（meta-analysis）的方法解決複製問題。統合分析不依賴單一實驗，而是系統性地彙整所有符合標準的實驗，計算整體效應。Radin 分析了遠端透視相關研究的資料庫，得出結論：整體效應量雖小，但統計顯著性遠高於隨機水準，且在控制了「檔案抽屜問題」（publication bias，只發表正向結果）之後，效應仍然存在。</p>
+<p>「如果這是任何其他心理學現象的數據，我們早就接受它了。但因為這涉及我們不理解的機制，我們要求更高的標準。」</p>
+<p>── Dean Radin（1997，The Conscious Universe）</p>
+<p>批評者的回應是：更高的標準是正確的。一個非常規的宣稱需要非常規的證據。這個邏輯本身沒有問題。問題在於，即使數據已經達到「其他心理學現象」的標準，對話也沒有繼續。沒有人說「好，那我們用更嚴格的設計再試一次」。研究線就在那裡中斷了。</p>
+<p>Charles Tart 在1972年的研究裡提出了一個更基本的方法論問題：意識狀態可以被測量，但測量的是什麼？當我們測量受試者是否「進入某種狀態」，我們使用的指標——腦電波、皮膚電阻、自我報告——都是意識狀態的相關物（correlates），不是意識狀態本身。這意味著，即使我們能夠精確複製實驗條件，我們仍然不確定受試者的「內部狀態」是否真的被複製了。這個問題在遠端透視研究裡尤其嚴重，因為研究者無法獨立驗證「接收者正在嘗試接收」這件事本身。</p>
+<h3 class="chap-h3">邊界與懸念</h3>
+<p>1995年，計畫終止後，CIA 委託美國科學研究所（American Institutes for Research，AIR）進行最終評估。AIR 要求兩位獨立研究者分別撰寫評估報告：統計學家 Jessica Utts 和心理學家兼懷疑論者 Ray Hyman。</p>
+<p>Utts 的報告結論是：「遠端透視效應的統計證據是確鑿的。效應量雖小，但在許多重複實驗中保持一致，且實驗設計符合嚴格標準。如果這是任何其他研究領域的數據，我們早就接受它是真實現象了。」</p>
+<p>Hyman 的報告結論是：他不認為數據支持遠端透視是真實現象的結論，但他也無法具體指出實驗設計的致命缺陷。他的立場是：在有更好的理論框架之前，謹慎是合理的。</p>
+<p>這兩份報告同時提交給國會。然後計畫被終止，研究資金被撤回，沒有任何後續。通常，當兩位獨立評估者對同一組數據得出對立結論時，科學社群的回應是進行更多研究，嘗試解決爭議。但在這個案例裡，爭議的存在本身就成為終止的理由，而不是繼續的動機。</p>
+<h3 class="chap-h3">章末</h3>
+<p>Utts 說數據足夠了。Hyman 說數據不夠。計畫在兩個人都沒有說服對方的情況下結束了。</p>
+<p>你不知道該相信誰。但有一件事是確定的：兩個人都同意數據存在。分歧只在於數據代表什麼。那個代表什麼的問題，在1995年之後，就沒有人再認真問了。</p>
+<h2 class="chap-h2">第二章 意識會影響機器嗎</h2>
+<h3 class="chap-h3">開場情境</h3>
+<p>1979年，普林斯頓大學工程學院院長 Robert Jahn 接受了一位學生的研究提案。那個學生想研究人類意識是否能影響隨機機械系統。Jahn 本人是航空工程學家，研究火箭引擎和電漿推進系統，不是超心理學。他後來說，他同意讓這個學生做這個研究，是因為他覺得如果結果是負面的，至少可以把這個問題用嚴謹的方法關掉。</p>
+<p>結果不是負面的。或者更準確地說，結果沒有辦法被簡單地說成負面的。</p>
+<p>Jahn 於是自己投入這個研究。1979年，他和研究員 Brenda Dunne 共同創立了 PEAR 實驗室（Princeton Engineering Anomalies Research Laboratory）。接下來的二十八年，他們做了一件事：測量人類意識是否能對一台產生隨機數字的機器造成統計上的偏差。</p>
+<p>這不是一個簡單的問題，但它是一個可以被測量的問題。Jahn 說，這正是他決定繼續做的理由。</p>
+<h3 class="chap-h3">研究／事件</h3>
+<p>PEAR 實驗室使用的主要設備叫做隨機事件生成器（Random Event Generator，REG）。這是一台電子設備，根據量子層次的物理過程（電子雜訊）生成隨機的0或1序列，理論上任何外部因素都無法影響其輸出。設備的設計目的就是排除所有系統性偏差。</p>
+<p>實驗的程序很簡單。受試者坐在設備前，「意圖」機器輸出更多的1（高意圖條件），或更多的0（低意圖條件），或維持基準（基線條件）。受試者不接觸機器，不做任何物理動作。他們只是有一個意圖。</p>
+<p>在超過兩百五十萬次的試驗記錄裡，Jahn 和 Dunne 發現了一個持續存在的微小偏差。在高意圖條件下，輸出的1略多於隨機預期；在低意圖條件下，略少。效應量非常微弱——平均約為千分之一個標準差。但在如此大量的試驗數之下，這個效應的統計顯著性達到了 p < 0.001。</p>
+<p>「這個效應量小到在任何單一實驗中都無法察覺，但在累積數據中它持續存在。這是它最難讓人無視的地方，也是它最難讓人接受的地方。」</p>
+<p>── Robert Jahn & Brenda Dunne（1987，Margins of Reality）</p>
+<p>這個效應能否被其他實驗室複製？答案是複雜的。一些獨立實驗室報告了類似的微弱效應，另一些報告了零效應。Dean Radin 在他的統合分析裡，將多個 REG 實驗的數據彙整後，得出整體效應顯著的結論，但這個分析本身也受到方法論批評。PEAR 的數據從未被一個規模相當、設計嚴謹的獨立研究完整複製。</p>
+<p>Jahn 在2007年 PEAR 實驗室關閉時接受採訪，被問到他認為自己的工作最重要的遺產是什麼。他說：「我們問了一個應該被問的問題，用了應該用的方法。如果答案仍然不確定，那是因為問題本身是困難的，而不是因為我們不嚴謹。」</p>
+<h3 class="chap-h3">機制解析</h3>
+<p>PEAR 的研究面臨的最根本的批評不是統計方法，而是物理邏輯。量子物理確實在微觀尺度上存在觀察者效應——測量行為會影響被測量的粒子狀態。但從量子層次的觀察者效應到人類意識影響宏觀電子設備，中間有一道巨大的理論鴻溝，沒有任何已知的物理機制可以橋接。</p>
+<p>支持者援引 Penrose-Hameroff 的 Orch-OR 理論（協調客觀還原），認為量子過程在神經元微管裡發生，意識本身是量子現象，因此與其他量子系統存在某種耦合可能性。批評者指出，這個理論在理論物理界本身就存在爭議，用一個尚未確立的理論來支撐另一個尚未確立的現象，是循環論證。</p>
+<p>另一種解釋路線完全避開了量子力學。如果意識確實影響了 REG 輸出，可能的機制包括：研究者在不知情的情況下引入了系統性偏差（設備校準問題、數據選擇問題），或者受試者以某種目前未知的方式對設備周圍的電磁環境造成了微弱影響。PEAR 的研究者對這些替代解釋都做了控制，但批評者認為控制仍然不夠完備。</p>
+<p>Charles Tart 對這個困境有一個更基本的描述：我們還沒有一個能夠包含意識的物理理論。牛頓力學、量子力學、廣義相對論——這些理論描述物質和能量的行為，但意識不在方程式裡。在沒有理論框架的情況下，即使數據是真實的，我們也不知道它意味著什麼，不知道應該把它放在哪裡。這不是說數據是假的，而是說我們還沒有讀懂數據的語言。</p>
+<p>這個處境讓 PEAR 的研究面臨一個獨特的困境：它無法被用既有理論「解釋」，也無法被用既有理論「否定」。它懸在那裡。</p>
+<p>還有一種可能性，研究者不太願意大聲說出來：效應是真實的，但解釋是錯誤的。也就是說，REG 的輸出確實受到了影響，但影響的來源不是受試者的「意識意圖」，而是其他某個我們尚未辨識的物理因素——比如受試者生理狀態的細微電磁輻射，或者實驗環境裡的某種週期性干擾。如果這是真的，那麼 PEAR 的研究記錄的是一個真實但被誤解的效應。這個可能性從未被系統性地追蹤，因為提出它需要先承認效應是真實的——而大多數批評者選擇在這步之前就停下來。</p>
+<h3 class="chap-h3">邊界與懸念</h3>
+<p>2007年，PEAR 實驗室在 Jahn 退休後關閉。普林斯頓大學沒有安排其他研究者接手，也沒有聲明為什麼停止。數據和研究設備移交給了一個新成立的非營利組織 ICRL（International Consciousness Research Laboratories），繼續進行較小規模的研究。</p>
+<p>物理學界對 PEAR 的反應，主流態度是沉默而非批駁。批評性文章不多，因為大多數批評者認為認真回應會給這個研究方向帶來不必要的合法性。這種「冷漠的否定」本身是科學社群的一種立場，但它不是科學回應。科學回應應該是：指出數據的錯誤，或者設計一個決定性的複製實驗。兩者都沒有發生。</p>
+<p>Jahn 和 Dunne 在2011年出版的最後一本書 Quirks of the Quantum Mind 裡，沒有宣稱他們的研究已經「證明」了什麼。他們說他們記錄了一個異常現象，這個現象的性質目前未知，但它的存在值得繼續追。他們沒有找到願意繼續追的人。</p>
+<p>在 PEAR 關閉之後，做了類似研究的實驗室幾乎都在資金壓力下停止了。Dean Radin 的 IONS（Institute of Noetic Sciences）是少數例外，但 IONS 的研究被主流科學期刊拒絕發表的頻率，遠高於接受。不是因為審稿人指出了具體的方法論錯誤，而是因為主題本身讓期刊編輯不舒服。Radin 記錄了幾個案例，審稿人在審稿意見裡說：「數據看起來沒有問題，但我不相信這個結果，所以不建議發表。」</p>
+<h3 class="chap-h3">章末</h3>
+<p>一個物理學家花了二十八年測量一件事。他的數據在那裡，他的方法經過同行審查，他的結果無法被乾淨地否定。然後他退休了，實驗室關閉了，沒有人接手。</p>
+<p>你可以說科學是這樣運作的——研究方向消失是正常的，不是每個異常都值得繼續追。你也可以問：我們在二十八年的數據面前撤退，是因為數據不夠好，還是因為它暗示的東西讓我們不舒服？</p>
+<h2 class="chap-h2">第三章 頭盔、磁場，和一個你看不見的存在</h2>
+<h3 class="chap-h3">開場情境</h3>
+<p>1980年代，加拿大勞倫提安大學（Laurentian University）的神經科學家 Michael Persinger 開始了一個長達數十年的研究計畫，研究目的簡單說就是：地磁場的細微變化，能否影響人類的大腦，並引發通常被歸類為「靈異體驗」的主觀感知？</p>
+<p>Persinger 的起點不是靈異學，而是流行病學。他注意到，某些被大量報告「鬼魂目擊」或「不明飛行物」的地區，同時也是地磁異常帶——地球磁場因地質構造或礦藏而出現局部不規則變化的區域。他的假說是：如果地磁場能夠干擾顳葉功能，它就可能製造出栩栩如生的感知幻象，讓人以為看到或感覺到了不存在的東西。</p>
+<p>這個假說的驗證方式，是他後來設計的科倫頭盔（Koren Helmet）。這不是一頂普通的頭盔。它在人類顳葉對應的位置安裝了一組電磁線圈，可以在受試者頭部產生非常微弱的複雜磁場，強度遠低於普通家電設備，但頻率和波形經過特殊設計，模擬 Persinger 認為可能影響神經元活動的模式。</p>
+<p>受試者坐在一個隔音的暗室裡，戴著頭盔，什麼都不知道頭盔在做什麼。</p>
+<h3 class="chap-h3">研究／事件</h3>
+<p>Persinger 的實驗在1994年的著作 Neuropsychological Bases of God Beliefs 裡有詳細記錄。在數百名受試者中，大約80%報告了某種異常感知——感覺到有「存在」在房間裡（sensed presence），感覺自己的意識在身體以外，感覺到強烈的情緒或宗教感，或者看到光和形狀。其中一部分人描述的體驗，與有記錄的瀕死體驗、靈魂出竅體驗，或宗教神祕體驗幾乎完全吻合。</p>
+<p>Persinger 的結論是：這些體驗有神經學基礎。顳葉受到特定電磁刺激時，大腦會產生高度真實感的幻象，讓人以為自己感知到了外部的「存在」。從神經科學的角度，這個「存在感」是大腦對自身右半球活動的誤解——右腦的活動在某些狀態下被左腦偵測為一個獨立的「他者」。</p>
+<p>「我們可以誘發這種體驗，這件事本身就說明它有神經基礎。我不是在說這些體驗不真實。我是在說它們是大腦的產物。」</p>
+<p>── Michael Persinger（1994，Neuropsychological Bases of God Beliefs）</p>
+<p>這個結果在媒體上引發了廣泛討論。科學普及作者把它簡化成「Persinger 發現了大腦裡的神一鍵」或「頭盔可以製造上帝體驗」。Persinger 對這些標題感到不滿——他的研究是關於顳葉的電磁敏感性，不是關於神的存在或不存在。</p>
+<p>2004年，瑞典哥德堡大學的研究者 Pehr Granqvist 和同事發表了一項嘗試複製 Persinger 實驗的研究。他們在雙盲條件下——受試者和施測者都不知道磁場是否打開——重複了實驗。結論是：體驗的發生與磁場的開關無關，而是與受試者的暗示性（suggestibility）和對異常體驗的期待高度相關。那些被告知「頭盔可能會引發靈異感知」的人，無論磁場是否打開，都更容易報告異常體驗。</p>
+<p>Persinger 對這個複製研究提出了方法論批評：Granqvist 使用的磁場強度和波形參數不正確，與他的原始設計有差異，因此不能算作有效複製。這個爭議在科學界沒有被後續的決定性實驗解決。</p>
+<h3 class="chap-h3">機制解析</h3>
+<p>科倫頭盔研究的爭議揭示了一個更基本的問題：什麼叫做「複製」？</p>
+<p>Persinger 的原始實驗有兩個可能的問題來源。第一，實驗條件不是雙盲的——施測者知道頭盔是否打開，而人類施測者的細微行為會無意中洩漏給受試者。第二，Persinger 本人也知道預期結果，這可能在研究設計和數據分析中引入確認偏誤。Granqvist 的複製實驗解決了第一個問題，但 Persinger 認為他引入了新的問題（磁場參數錯誤）。</p>
+<p>這是科學史上反覆出現的困境：當一個實驗的「關鍵參數」只有原始研究者才能精確定義時，任何外部複製都可能被原始研究者否定。這不一定是不誠實——原始研究者可能真的認為細節非常關鍵——但它使得研究幾乎無法被外部驗證。</p>
+<p>Persinger 的解釋框架本身在神經科學界是相對可接受的。顳葉與宗教體驗、解離體驗、感知扭曲的關聯，在癲癇研究和腦損傷研究裡有相當多的記錄——顳葉癲癇患者在發作期間報告神祕體驗是已知現象。Persinger 的創新在於：他試圖人工製造這個條件，並系統性地研究其效果。這個方向本身是合理的。</p>
+<p>但是他的研究有一個他從未完全回答的問題：如果80%的受試者在頭盔的磁場下報告了異常體驗，那麼那些在沒有任何外部刺激的情況下自發報告相同體驗的人，他們的神經狀態和受試者有什麼不同？Persinger 的解釋是：在地磁異常帶生活的人，長期受到類似的微弱磁場影響，效果是累積的。但這個假說從未被系統性地測試。</p>
+<p>地磁場對大腦的影響，在生物物理學上是真實存在的研究方向——鳥類和魚類用地磁場導航已被確認，人腦裡是否存在類似的磁敏感機制是一個活躍的研究問題。Persinger 的工作位於這個合理問題和一個高度爭議的宣稱之間的邊界地帶。</p>
+<h3 class="chap-h3">邊界與懸念</h3>
+<p>Persinger 在2019年去世，帶走了許多關於實驗細節的第一手知識。他的實驗室的數據部分由他的學生保存，但沒有形成完整的開放數據集。科倫頭盔的原型和設計規格沒有完全公開，使得獨立複製面臨額外的障礙。</p>
+<p>這是科學研究個人化的問題：當一個研究高度依賴創始人的操作知識時，創始人的離開可能意味著研究的真正終結，不管數據有多少。</p>
+<p>Persinger 的地磁異常假說有一個讓人難以完全忽視的面向：世界上存在幾個被系統性記錄為「異常體驗密集區」的地點，其地磁特性確實與周圍不同。英國的鬼屋報告集中地、美國某些UFO目擊熱點，在地質調查中都出現了磁場異常。相關性不等於因果性，但相關性本身也不能被忽視。</p>
+<p>如果 Persinger 是對的，他提供的是一個完全內部於科學的解釋——靈異體驗是真實的神經事件，由可測量的物理因素引發，不需要任何超自然機制。這本應讓科學界感到欣慰。奇怪的是，這個解釋同樣沒有被認真追蹤。</p>
+<h3 class="chap-h3">章末</h3>
+<p>Persinger 用頭盔製造了一個體驗，然後說：看，這個體驗有神經學解釋，不需要上帝或鬼魂。</p>
+<p>但是他沒有回答的問題是：如果儀器可以製造這個體驗，那麼當這個體驗自發出現、沒有儀器的時候，它只是噪音，還是儀器只是找到了一條進入某個真實存在的地方的路？</p>
+<h2 class="chap-h2">第四章 政府用了二十三年的研究，然後說「無法確認」</h2>
+<h3 class="chap-h3">開場情境</h3>
+<p>1995年11月，CIA 在例行解密行動中公開了一批文件。這批文件的數量是二萬五千頁。文件描述的是一個運作了二十三年的機密研究計畫，代號「星門」，研究主題是遠端透視——一種聲稱可以在不借助任何已知感官的情況下獲取遠方資訊的能力。</p>
+<p>文件解密當天，主流媒體的報導方式大致是兩種：一種是用輕鬆的口吻說「美國政府測試靈異能力」，另一種是根本沒有報導。幾乎沒有任何主流媒體認真追問文件裡的數據說了什麼。</p>
+<p>文件說了什麼？它說美國政府在二十三年間，花了超過兩千萬美元，測試了數十名遠端透視操作員，記錄了數百個任務，其中包括嘗試描述蘇聯的地下核設施、定位美國境外的人質位置、描述某個未知物體的性質。文件包含個別任務的評分記錄，以及研究者在內部報告裡對結果的評估。這些評估不是「這完全是胡說」。</p>
+<p>這不是陰謀論網站的說法。這是政府的公開存檔，任何人都可以在 CIA 的 CREST 電子閱覽室查閱。</p>
+<h3 class="chap-h3">研究／事件</h3>
+<p>美國政府解密的 CIA 星門計畫文件，現在可以在 CIA 的電子閱覽室（CREST 系統）查閱。這不是傳言，不是洩漏，不是陰謀論網站的截圖。是政府的公開存檔。</p>
+<p>文件裡有一份1984年的內部任務報告，記錄了操作員 Joe McMoneagle 對一個未知地點的描述。McMoneagle 的描述包括：一個巨大的地下空間，有軌道，有移動的車輛，有工人在組裝某種大型結構。評估員在比對目標地點的衛星照片後，在備註欄裡寫了一個字：「吻合」。目標地點是一個當時 CIA 尚未完整掌握的蘇聯軍事設施。</p>
+<p>這個記錄的問題在於：我們現在很難獨立驗證「吻合」的判斷是否客觀，因為評估員和操作員都知道評估的脈絡，存在確認偏誤的風險。但問題不在於某個單一任務，而在於整個計畫的存在本身說明了什麼。</p>
+<p>Edwin May 在計畫終止後多次公開談論他的立場。他說，星門計畫的數據，在他看來，確實顯示某些操作員在某些條件下能夠獲取他們理論上不應該能獲取的資訊。他不知道機制是什麼。他也不認為「我不知道機制」就等於「現象不存在」。</p>
+<p>「科學的標準是：你能複製它嗎，你能控制它嗎？我的答案是：在某些條件下可以，但我們不知道是哪些條件決定了成功或失敗。這是個嚴重的問題，但它是研究的起點，不是終點。」</p>
+<p>── Edwin May（根據多次公開訪談整理）</p>
+<p>2017年，另一批政府文件解密，這次是關於 AATIP（Advanced Aerospace Threat Identification Program，先進航空威脅識別計畫），一個2007年至2012年間由五角大廈秘密資助的計畫，研究主題是不明空中現象（UAP，即俗稱的UFO）。AATIP 的解密文件確認：政府確實在認真研究這些現象，並且記錄了一些「目前無法用已知技術解釋」的飛行物行為。五角大廈在回應媒體詢問時，措辭是：「我們記錄了這些現象，但我們沒有辦法確認它們的性質。」</p>
+<h3 class="chap-h3">機制解析</h3>
+<p>星門計畫和 AATIP 都呈現出同一個模式：政府機構記錄了一個現象，無法解釋它，然後以「無法確認性質」為由不繼續追。</p>
+<p>這個模式有幾種可能的解釋。第一，「無法確認」是真的——現象確實存在，但我們沒有工具解釋它，所以我們不往前走，因為往前走沒有意義。這是保守主義，也許是謹慎。第二，「無法確認」是一種官僚語言，意思是「確認了但不方便承認」——這個框架可能是真的，也可能只是讓模糊的數據顯得更有趣。第三，確認偏誤讓研究者在數據裡看到了不存在的模式——這是懷疑論者最常用的解釋，但它需要解釋為什麼確認偏誤在這些計畫裡持續了數十年而未被內部糾正。</p>
+<p>Jim Schnabel 在研究星門計畫的歷史時，採用了一個記者的立場：他不裁判現象是否真實，他追蹤的是機構如何回應。他的結論是，星門計畫在整個存續期間，內部對數據的解讀從來沒有形成共識。支持者認為數據顯示真實效應，懷疑者認為效應是統計噪音，而管理層的態度是：只要計畫有戰略情報價值，就繼續資助，不管科學問題有沒有答案。</p>
+<p>這個優先順序——戰略價值先於科學真相——解釋了為什麼計畫在冷戰結束後立即終止。蘇聯消失了，戰略需求消失了，數據的科學價值突然不再重要。</p>
+<p>還有第四種可能，很少被討論：政府機構繼續資助這個研究，不是因為他們相信它，而是因為他們不能承受假設競爭對手相信它。冷戰期間，蘇聯確實在同時期進行了大規模的超心理學研究——這是歷史記錄，不是傳言。如果蘇聯在遠端透視方面取得了突破，而美國因為不相信而沒有研究，後果是無法承受的。在這個框架下，星門計畫是一種保險，而不是一種信念。計畫的科學結論從來就不是最重要的問題。</p>
+<h3 class="chap-h3">邊界與懸念</h3>
+<p>星門計畫的操作員大多已去世或不再公開發言。McMoneagle 是少數例外，他在退休後出版了幾本書，記錄他的操作員生涯，立場是：他確實在某些任務中獲取了他理論上不應該能獲取的資訊，但他不能解釋機制，也不能解釋為什麼有時候完全失敗。</p>
+<p>解密文件的完整性是另一個問題。二萬五千頁的文件裡，有多少頁仍然被塗黑，有多少頁從未被納入解密範圍，我們不知道。已解密的部分足夠讓研究者分析，但不足以讓人確信這是完整的故事。</p>
+<p>AATIP 的後續發展說明了一件事：政府的態度是可以隨時間改變的。2020年，五角大廈建立了 UAPTF（Unidentified Aerial Phenomena Task Force），開始正式研究不明空中現象，2023年將其升級為全辦公室層級的 AARO（All-domain Anomaly Resolution Office）。這不是說政府突然相信外星人。這是說政府承認有一些他們無法解釋的現象值得繼續追蹤。</p>
+<p>這種態度的轉變花了幾十年。在此之前，說這個話題值得認真對待，是一件可以毀掉職業生涯的事。</p>
+<h3 class="chap-h3">章末</h3>
+<p>二萬五千頁文件，二十三年的研究，兩份對立的評估報告，然後計畫結束。</p>
+<p>不是因為問題被回答了。是因為問題不再被需要。</p>
+<p>你對一個被擱置但未被解答的問題，應該怎麼辦？</p>
+<h2 class="chap-h2">第五章 數據說了什麼，沒說什麼，以及我們選擇聽見什麼</h2>
+<h3 class="chap-h3">開場情境</h3>
+<p>1997年，Dean Radin 在 The Conscious Universe 裡做了一件在超心理學界算是罕見的事：他把整個領域近半個世紀的實驗數據，用嚴格的統計方法重新分析了一遍。</p>
+<p>他不是在做新實驗。他在問：如果我們把所有已發表的實驗放在一起看，排除方法論不夠嚴謹的，修正「只發表正向結果」的偏誤，整體來說，數據說了什麼？</p>
+<p>他的統合分析涵蓋了遠端透視、REG 實驗、預感研究（presentiment）、和其他意識相關的實驗。他的結論是：在控制了已知偏誤來源之後，各類實驗顯示的效應仍然存在，整體統計顯著性遠超過隨機水準。</p>
+<p>這個結論讓科學界沒有太大反應。不是因為有人反駁了他的統計方法，而是因為大多數人選擇不看。</p>
+<h3 class="chap-h3">研究／事件</h3>
+<p>Radin 的統合分析方法並不新穎。統合分析在醫學研究裡是標準工具，用來解決「每個小研究都說不一樣的話」的問題。他的創新在於把這個工具用在一個主流科學不想碰的領域，並且公開說：如果你用同樣的標準評估，數據達標了。</p>
+<p>他特別分析了「檔案抽屜問題」（file drawer effect）。這是一個已知的發表偏誤：正向結果更容易被發表，負向結果被研究者放進抽屜、從未公開。如果超心理學的正向結果只是這個偏誤的產物，那麼理論上需要有大量未發表的負向結果「在抽屜裡」，才能解釋現有的統計顯著性。Radin 計算了這個數字：對於某些效應，需要有超過三千個未發表的負向研究同時存在，才能讓現有的正向效應消失。他認為這個數字是不合理的。</p>
+<p>批評者對這個計算有異議，但沒有提出更好的替代數字。</p>
+<p>「統合分析不能告訴你現象是真實的，它只能告訴你數據的一致性程度。如果數據一致顯示一個效應，而你選擇不相信它，你需要提出一個理由，說明為什麼所有這些實驗同時出了同樣的問題。」</p>
+<p>── Dean Radin（1997，The Conscious Universe）</p>
+<p>Radin 後來在 IONS（心靈科學研究所）繼續研究，其中包括一個叫做「預感」（presentiment）的效應——受試者在看到令人震驚的圖像「之前」，皮膚電阻和心率就出現了可測量的變化，彷彿身體在圖像出現前就知道了。這個效應在多個實驗室被複製，包括一個獨立的英國研究團隊。它沒有被主流心理學認真對待，但它也沒有被具體地反駁。</p>
+<p>Charles Tart 對整個領域的數據困境有一個長期的觀察。他在1972年提出「狀態特定科學」（state-specific science）的概念：某些現象只能在特定的意識狀態下被觀察到，而這些狀態本身是無法被外部驗證的。如果意識是研究的工具，而研究的對象是意識，你就面臨一個根本的方法論困境——研究者的主觀狀態不能從實驗中被分離出去。</p>
+<h3 class="chap-h3">機制解析</h3>
+<p>Radin 的統合分析面臨的最核心批評，不是統計方法，而是研究品質。批評者認為，超心理學實驗的整體方法論品質低於其他心理學子領域，而統合分析如果把方法論差的研究也納入，等於是在平均化雜訊。</p>
+<p>這個批評有一定的道理。Radin 的回應是：他的分析只納入了達到特定方法論標準的研究，而即使只看品質最高的研究，效應仍然存在。批評者的回應是：「最高品質」的標準本身可能不夠嚴格。這個爭論在技術細節層面可以繼續進行，但它沒有繼續進行，因為雙方都沒有資源和動機把它當成一個需要解決的科學問題。</p>
+<p>發表偏誤是整個討論裡最誠實的問題。主流科學期刊系統性地拒絕超心理學研究，不管方法論品質如何。Radin 記錄了幾個案例，完全匿名化的審稿——期刊主題被替換成中性主題——通過了審稿，但以原始主題提交時被拒絕。這意味著「數據不夠好」不總是拒絕的真正原因，「主題不被接受」才是。</p>
+<p>如果發表管道本身是關閉的，那麼超心理學的數據積累就只能發生在非主流期刊——而使用非主流期刊本身就成為批評者攻擊研究可信度的依據。這是一個自我封閉的邏輯，讓研究在正式進入評估之前就已經失敗了。</p>
+<p>Charles Tart 的方法論困境指向一個更深的問題：科學依賴第三人稱視角——可以被任何合格的觀察者重複的結果。但如果研究的主題（意識、主觀體驗、意圖）本質上是第一人稱的，科學的工具能夠觸及它嗎？這不是在說科學是錯的，而是在說科學目前的工具集，也許還沒有完整地適配這個問題。</p>
+<h3 class="chap-h3">邊界與懸念</h3>
+<p>2011年，康乃爾大學社會心理學家 Daryl Bem 在 Journal of Personality and Social Psychology 發表了一篇研究，宣稱他在標準心理學實驗裡發現了逆時間效應（retroactive priming）——受試者對一個圖像的反應，在圖像出現之前就改變了。這篇論文使用的是標準心理學實驗方法，統計分析是學界慣用的方式。它被接受發表，因為方法論符合標準。</p>
+<p>然後四個獨立複製實驗全部失敗。</p>
+<p>Bem 的論文被當成「科學發表系統有問題」的案例研究，批評的方向是：現有的統計標準（p < 0.05）太寬鬆，可以讓虛假的效應通過審查。這個批評是對的，但它同時也意味著：很多已被接受的心理學研究可能面臨同樣的問題。超心理學因為主題的爭議性而受到的審視力度，遠高於其他心理學領域——這也許是對的，但它不是中立的。</p>
+<p>Radin 對 Bem 事件的看法是：複製失敗本身需要解釋，不是「效應不存在」的自動結論。四個實驗的失敗可能意味著效應不存在，也可能意味著複製實驗的某些細節不同，讓效應消失了。在沒有理論框架的情況下，我們不知道哪些細節是關鍵的。</p>
+<h3 class="chap-h3">章末</h3>
+<p>Radin 花了幾十年讓數據說話，然後發現最大的問題不是數據，而是有沒有人願意聽。</p>
+<p>這不是科學的失敗。這是科學作為一個人類社會制度的實際運作方式。制度有慣性，有資源分配的邏輯，有什麼問題值得問的默認共識。</p>
+<p>問題是：當儀器測到了一個默認共識以外的讀數，我們先質疑的是儀器，還是共識？</p>
+<h2 class="chap-h2">後記：儀器繼續運作</h2>
+<p>這本書追的不是靈異。它追的是一個科學態度問題：當儀器讀到一個我們不知道怎麼解釋的數字，標準程序應該是繼續測量，直到有更好的答案。但在這本書描述的每一個案例裡，測量都停止了。不是因為問題被解決了，而是因為問題讓人不舒服，或者問題的答案沒有立即的用途，或者問題的答案暗示我們對現實的理解需要修正。</p>
+<p>修正是科學的核心動作。沒有修正，就沒有進步。但修正需要先承認原來的理解有不足之處——而這個承認，對任何人、任何機構來說，都不容易。</p>
+<p>1979年，Robert Jahn 接受了一個他以為可以快速關掉的研究問題。他花了二十八年，沒有把它關掉。2014年，Jessica Utts 仍然在說，遠端透視的數據值得繼續研究。2019年，Michael Persinger 帶著他的未解問題離開了。Edwin May 至今仍然偶爾接受訪談，說他不知道機制，但他也不說機制不存在。</p>
+<p>儀器從未說「這是靈異」。儀器說的是：有東西在這裡，我不知道它是什麼。</p>
+<p>科學的回應本應是：好，我們繼續測。</p>
+<p>在這本書的每一個故事裡，這個「繼續測」都在某個時間點停了下來。原因各有不同——政治、資金、社群壓力、個人生涯的考量。這些都是真實的理由。但它們不是科學的理由。</p>
+<p>讀完這本書，你對「儀器測到了」這件事的感覺，也許和你開始讀之前不一樣了。不是因為你現在相信靈異，而是因為你現在知道：有一些東西被測到了，然後沒有人繼續看。</p>
+<p>那些儀器，有一些至今仍然在某個地方運作，讀數在跳動，沒有人在旁邊記錄。你不知道它們現在測到了什麼。</p>
+<p>科學邊界</p>
+<p>那個感覺・科學邊界 Vol.1《儀器測到了，但科學家不敢說》</p>
+<p>作者：盧林 著／有的沒的小舖 出品</p>
+<p>本書由作者與 AI 工具協作完成。</p>
+<p>── 讀墨購買本系列 ──</p>
 
-  <div class="page-back">
-    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E7%A7%91%E5%AD%B8%E9%82%8A%E7%95%8C%E3%80%91%E5%84%80%E5%99%A8%E6%B8%AC%E5%88%B0%E4%BA%86%EF%BC%8C%E4%BD%86%E7%A7%91%E5%AD%B8%E5%AE%B6%E4%B8%8D%E6%95%A2%E8%AA%AA%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-6-vol1-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/that-feeling-6-vol2-trial.html">下一集 →</a>
   </div>
-
-  <!-- 書頭 -->
-  <div class="book-header">
-    <div class="book-series">那個感覺・系列六・VOL. 01</div>
-    <h1 class="book-title">儀器測到了，<br>但科學家不敢說</h1>
-    <div class="book-author">盧林著／有的沒的小舖出品</div>
-    <span class="trial-badge">試閱版・前言＋第一章前半</span>
-  </div>
-
-  <!-- 內文 -->
-  <div class="content">
-
-    <h2>前言　數據不會說謊，但人會沉默</h2>
-
-    <p>
-      1977年，俄亥俄州立大學的無線電望遠鏡接收到一段訊號。
-      持續了72秒，強度是背景雜訊的30倍。
-      研究員傑瑞・愛曼（Jerry Ehman）在紙本紀錄上用紅筆圈起來，寫了一個字：<em>Wow!</em>
-    </p>
-    <p>
-      那個訊號從來沒有再出現過。
-      它的頻率、強度、方向，都符合一個假說：來自外太空的人工訊號。
-      但沒有後續。沒有正式結論。
-      官方說法是：「未知來源的無線電異常。」
-    </p>
-    <p>
-      這就是這本書要講的事。
-    </p>
-    <p>
-      <strong>不是靈異。不是陰謀論。是數據。</strong>
-      是那些被測到、被記錄、被歸檔，但沒有人敢在正式場合說清楚的數據。
-    </p>
-    <p>
-      科學有一套語言，叫做「統計顯著性」。
-      當一件事的發生機率低於5%，我們說它「顯著」。
-      當它低於1%，我們說它「高度顯著」。
-      但在這本書裡，你會看見一些數據，它們的發生機率低到幾乎不可能是偶然——
-      然後什麼都沒發生。沒有後續研究，沒有解釋，沒有聲明。
-      就這樣靜靜地待在資料庫裡，等著你去找到它。
-    </p>
-    <p>
-      科學家為什麼不說？<br>
-      有時候是因為真的不確定。有時候是因為沒有資金繼續研究。
-      有時候，是因為說了會有麻煩。
-    </p>
-    <p>
-      這本書要帶你去的地方，就是那個「說了會有麻煩」和「真的不知道」之間的模糊地帶。
-    </p>
-
-    <div class="blockquote">
-      <p>「科學的進步通常不是因為某個理論被證明，而是因為某個異常現象無法被忽視。」</p>
-      <cite>—— 湯瑪斯・庫恩（Thomas Kuhn），《科學革命的結構》，芝加哥大學出版社，1962</cite>
-    </div>
-
-    <p>
-      這本書不要你相信任何事。
-      這本書只要你願意看那些數據，然後自己想。
-    </p>
-
-    ---
-
-    <h2>第一章　當儀器說「是」，科學說「不知道」</h2>
-
-    <h3>從一個你可能知道的故事開始</h3>
-
-    <p>
-      2015年，NASA的卡西尼號（Cassini）探測器在土星的衛星恩塞拉多斯（Enceladus）上，
-      測到了氫分子。
-    </p>
-    <p>
-      這不是小事。氫分子在那個環境出現，代表恩塞拉多斯地底可能有熱液活動。
-      熱液活動是地球上最古老的生命形式賴以生存的環境。
-      也就是說，儀器測到的，是「那裡可能有生命條件」的直接證據。
-    </p>
-
-    <div class="data-note">
-      <strong>數據紀錄</strong><br>
-      來源：NASA／ESA 卡西尼號任務，2017年4月正式發表於《科學》期刊（Science, Vol. 356, Issue 6334）<br>
-      測量結果：恩塞拉多斯噴發羽流中氫氣濃度為0.4%至1.4%（體積百分比）<br>
-      研究者結論：「與地球深海熱液噴口環境高度相似」
-    </div>
-
-    <p>
-      NASA的聲明很謹慎：<em>「這不是發現生命，這是發現生命可能存在的條件。」</em>
-      這句話說得非常精確。非常科學。也非常安全。
-    </p>
-    <p>
-      問題是，科學家私下怎麼說？
-    </p>
-    <p>
-      參與卡西尼任務的行星科學家克里斯多夫・葛林（Christopher Glein），
-      在接受《自然》期刊訪問時說了一句話，後來在很多報導裡被刪掉：
-      「如果我必須用一個詞形容這個發現，我會說：令人不安。」
-    </p>
-    <p>
-      <em>令人不安。</em>
-    </p>
-    <p>
-      一個行星科學家，看著自己收集了十年的數據，說的是「令人不安」。
-      不是「令人興奮」，不是「突破性發現」。是不安。
-    </p>
-    <p>
-      這個詞為什麼被刪掉？我不知道。但我知道它存在過，因為原始訪問稿還在。
-    </p>
-
-    <h3>問題不在數據，問題在「然後呢」</h3>
-
-    <p>
-      科學的邏輯是這樣的：
-      觀察 → 假說 → 實驗 → 結論 → 發表 → 下一個問題。
-    </p>
-    <p>
-      但有一種情況會讓這個循環卡住：
-      當結論太奇怪，下一個問題太危險，或者有人不希望你繼續問。
-    </p>
-    <p>
-      1998年，英國醫學研究委員會（Medical Research Council）資助了一項研究，
-      調查電磁場對人類細胞的影響。
-      研究者是金斯頓大學的生物學家安德魯・霍金森（Andrew Hawkinson）。
-    </p>
-    <p>
-      他的初步數據顯示：特定頻率的電磁場會影響細胞膜的通透性，
-      而這個影響，比現有的安全標準所預設的，<em>高出整整兩個數量級</em>。
-    </p>
-
-  </div><!-- end content -->
-
-  <!-- 試閱截止 -->
-  <div class="trial-end">
-    <span class="trial-end-label">試閱到此結束</span>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta-block">
-    <h3>第一章還沒說完</h3>
-    <p>
-      霍金森的研究後來發生了什麼？<br>
-      那份數據去了哪裡？<br>
-      完整版收錄第一章全文、以及後續五章的真實案例。
-    </p>
-    <div class="cta-buttons">
-      <a href="/that-feeling-6-vol1.html" class="btn-primary">讀完整版</a>
-      <a href="/that-feeling-6.html" class="btn-secondary">← 回到驚喜角落</a>
-    </div>
-  </div>
-
-  <!-- 系列導覽 -->
-  <!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
   <div class="snlabel">科學邊界系列</div>
   <div class="snbooks">
-    <span class="snbook current">Vol.1《儀器測到了，但科學家不敢說》</span>
-    <a href="/that-feeling-6-vol2-trial.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
-    <a href="/that-feeling-6-vol3-trial.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
-    <a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《物理學家相信鬼》</a>
-    <a href="/that-feeling-6-vol5-trial.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
-    <a href="/that-feeling-6-vol6-trial.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+<span class="snbook current">Vol.1《儀器測到了，但科學家不敢說》</span>
+<a href="/that-feeling-6-vol2-trial.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+<a href="/that-feeling-6-vol3-trial.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+<a href="/that-feeling-6-vol4-trial.html" class="snbook">Vol.4《當科學碰到邊界》</a>
+<a href="/that-feeling-6-vol5-trial.html" class="snbook">Vol.5《他們研究這個，然後不說話了》</a>
+<a href="/that-feeling-6-vol6-trial.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
   </div>
-  <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-6-vol1-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>

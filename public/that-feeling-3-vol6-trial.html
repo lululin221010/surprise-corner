@@ -1,441 +1,220 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>解咒｜那個感覺 系列三 Vol.6 試閱｜盧林著</title>
+<title>解咒｜那個感覺 詛咒心理系列 Vol.6｜盧林著</title>
+<meta property="og:title" content="解咒【免費閱讀】那個感覺 詛咒心理系列">
+<meta property="og:description" content="詛咒心理系列 Vol.6 ——免費在線閱讀，不需要下載任何 App。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
-
-:root {
-  --bg: #0e0e14;
-  --text: #dcdcf0;
-  --text-muted: #a8a8cc;
-  --accent: #7a4a9e;
-  --card-bg: #14141e;
-  --label: #9090b8;
-  --curse-accent: #9e4a6a;
-  --curse-dim: rgba(158,74,106,0.4);
-  --curse-light: rgba(158,74,106,0.10);
-  --curse-border: rgba(158,74,106,0.22);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Serif TC', serif;
-  font-size: 17px;
-  line-height: 2;
-  min-height: 100vh;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(122,74,158,0.05) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 30% at 10% 90%, rgba(158,74,106,0.04) 0%, transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.page-back {
-  position: relative;
-  z-index: 10;
-  padding: 24px 48px;
-}
-.page-back a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  letter-spacing: 2px;
-  transition: color 0.2s;
-}
-.page-back a:hover { color: var(--curse-accent); }
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 48px 80px;
-}
-
-.trial-badge {
-  display: inline-block;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: var(--curse-accent);
-  border: 1px solid var(--curse-border);
-  padding: 4px 12px;
-  border-radius: 3px;
-  margin-bottom: 24px;
-  opacity: 0.85;
-}
-
-.book-header {
-  padding: 16px 0 48px;
-  border-bottom: 1px solid var(--curse-border);
-  margin-bottom: 56px;
-}
-.series-info {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: var(--label);
-  margin-bottom: 16px;
-}
-.book-title {
-  font-size: 2.4rem;
-  font-weight: 500;
-  letter-spacing: 4px;
-  color: #e8d0d8;
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-.book-subtitle {
-  font-size: 1rem;
-  color: var(--text-muted);
-  letter-spacing: 2px;
-  font-weight: 300;
-  font-family: 'Noto Sans TC', sans-serif;
-}
-
-.chapter-label {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 5px;
-  color: var(--curse-accent);
-  opacity: 0.7;
-  margin-bottom: 20px;
-}
-h2 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: #e0d0d8;
-  letter-spacing: 2px;
-  margin-bottom: 32px;
-  line-height: 1.6;
-}
-h3 {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #d0c0c8;
-  letter-spacing: 1px;
-  margin: 36px 0 20px;
-}
-p {
-  margin-bottom: 24px;
-  text-align: justify;
-  color: var(--text);
-}
-
-.blockquote {
-  background: var(--curse-light);
-  border-left: 3px solid var(--curse-accent);
-  padding: 24px 28px;
-  margin: 32px 0;
-  border-radius: 0 6px 6px 0;
-}
-.blockquote p {
-  font-style: italic;
-  color: #e0c8d0;
-  margin-bottom: 8px;
-}
-.blockquote p:last-child { margin-bottom: 0; }
-.blockquote .source {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  color: var(--text-muted);
-  font-style: normal;
-}
-
-.section-divider {
-  text-align: center;
-  margin: 48px 0;
-  color: var(--curse-dim);
-  letter-spacing: 8px;
-  font-size: 14px;
-}
-
-.cutoff-zone {
-  position: relative;
-  overflow: hidden;
-  max-height: 260px;
-}
-.cutoff-zone::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 200px;
-  background: linear-gradient(transparent, var(--bg) 80%);
-  pointer-events: none;
-}
-
-.paywall {
-  text-align: center;
-  padding: 56px 32px 48px;
-  background: var(--card-bg);
-  border: 1px solid var(--curse-border);
-  border-radius: 12px;
-  margin: 0 0 60px;
-}
-.paywall-label {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 10px;
-  letter-spacing: 5px;
-  color: var(--label);
-  margin-bottom: 20px;
-}
-.paywall h3 {
-  font-size: 1.3rem;
-  color: #e8d0d8;
-  margin: 0 0 12px;
-  letter-spacing: 2px;
-}
-.paywall p {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 32px;
-  text-align: center;
-  line-height: 1.9;
-}
-.paywall-btn {
-  display: inline-block;
-  background: var(--curse-accent);
-  color: #fff;
-  text-decoration: none;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 13px;
-  letter-spacing: 3px;
-  padding: 14px 36px;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-.paywall-btn:hover { background: #b05070; }
-.paywall-return {
-  display: block;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  color: var(--text-muted);
-  text-decoration: none;
-  margin-top: 16px;
-  letter-spacing: 2px;
-  transition: color 0.2s;
-}
-.paywall-return:hover { color: var(--curse-accent); }
-
-.author-sig {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--label);
-  text-align: center;
-  padding-bottom: 40px;
-}
-
-.series-nav {
-  position: relative;
-  z-index: 1;
-  background: rgba(14,14,20,0.95);
-  border-top: 1px solid rgba(122,74,158,0.12);
-  padding: 32px 48px;
-}
-.snlabel {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: var(--label);
-  margin-bottom: 16px;
-}
-.snbooks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.snbook {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  padding: 6px 14px;
-  border-radius: 4px;
-  border: 1px solid rgba(122,74,158,0.2);
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.snbook:hover { border-color: var(--accent); color: var(--text); }
-.snbook.current {
-  border-color: var(--curse-accent);
-  color: var(--curse-accent);
-  background: var(--curse-light);
-}
-.back-link {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-size: 12px;
-  color: var(--text-muted);
-  text-decoration: none;
-  letter-spacing: 2px;
-  transition: color 0.2s;
-}
-.back-link:hover { color: var(--curse-accent); }
-
-@media (max-width: 640px) {
-  .page-back { padding: 20px 24px; }
-  .container { padding: 0 24px 60px; }
-  .book-title { font-size: 1.8rem; }
-  .series-nav { padding: 24px; }
-}
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
+  :root {
+    --bg: #0a0d14;
+    --text: #dcdcf0;
+    --text-muted: #a8a8cc;
+    --accent: #5b8dd9;
+    --accent-light: rgba(91,141,217,0.12);
+    --accent-dim: rgba(91,141,217,0.35);
+    --card-bg: #14141e;
+    --card-border: rgba(91,141,217,0.35);
+    --label: #9090b8;
   }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・詛咒心理系列</div>
+<h1>解咒</h1>
+<div class="subtitle">Vol.6・詛咒心理系列・完整版・免費閱讀</div>
 
-<div class="page-back"><a href="/that-feeling-3.html">← 返回詛咒與心理</a></div>
+<h1 class="chap-h1">那個感覺・詛咒與心理Vol.6《解咒》</h1>
+<h2 class="chap-h2">前言：我們走到這裡了</h2>
+<p>五冊過去，這個系列問了一個沒有輕鬆答案的問題：詛咒的力量從哪裡來？</p>
+<p>我們看了 Nocebo 效應讓人真實死亡的案例，看了認知扭曲如何讓預言自我實現，看了詛咒的文化結構在不同文明裡幾乎相同，看了家族腳本如何跨世代傳遞，也看了身體怎麼被信念傷害——章魚壺心肌病、HPA 軸失調、免疫抑制。每一冊都在說同一件事：詛咒不需要超自然的力量，它只需要你足夠相信。</p>
+<p>以下是前五冊的核心發現：</p>
+<p>這一冊是終點，也是起點。它要處理的問題是：解咒。</p>
+<p>但「解咒」不是一個輕鬆的題目。如果前五冊的核心論點是正確的——詛咒的力量來自信念，信念通過心理和生理機制造成真實的影響——那麼解咒就不只是一個儀式的問題，它是一個信念系統的根本改變。而根本改變信念，從來都不是容易的事。</p>
+<p>這一冊不會給你一個「五步驟解咒法」。它會給你的，是對解咒機制的清楚理解：為什麼某些解咒有效，為什麼某些沒有，以及什麼樣的改變才是真正持久的。理解機制，讓你可以做出有根據的選擇，而不是在各種聲稱能解咒的方法之間盲目嘗試。</p>
+<h2 class="chap-h2">第一章 為什麼解咒有時候真的有效</h2>
+<p>先從一個不應該被迴避的問題開始：解咒儀式有時候真的有效。不是象徵性地有效，不是讓人感覺好一點，而是真實地讓被詛咒的人的症狀消失、生活改善、身體恢復。</p>
+<p>解咒有效，不需要詛咒是超自然的，也不需要解咒是欺騙。它需要的只是：一個足夠有力量的儀式，在被詛咒者的信念系統裡創造出「詛咒已被解除」的真實感受。</p>
+<h3 class="chap-h3">Vanders 案例的核心邏輯</h3>
+<p>Clifton Meador 用假的「解毒儀式」讓 Vance Vanders 完全康復。Meador 沒有真的解除任何詛咒，他做的是：在 Vanders 的信念框架裡，創造出一個「詛咒已被處理」的戲劇性事件，讓信念從「我被詛咒了，我要死了」轉變為「詛咒被解除了，我會活下去」。這個信念的改變，反過來改變了他的生理狀態——Nocebo 效應關閉，身體開始恢復。</p>
+<p>Meador 做的事，本質上和任何文化裡的解咒儀式是一樣的：創造一個在當事人信念系統裡有意義的「轉折事件」，讓「被詛咒」的敘事被「解咒」的敘事所取代。這個機制不依賴超自然力量，它依賴的是信念在生理上的真實力量。</p>
+<h3 class="chap-h3">安慰劑效應的真實邊界</h3>
+<p>哈佛大學安慰劑研究項目的主任 Ted Kaptchuk 在多個研究裡顯示，安慰劑效應可以產生真實的、可測量的生理改變：神經化學物質分泌、免疫細胞的活化、以及可以用儀器測量的客觀改善。2010 年，Kaptchuk 讓腸躁症患者服用明確標示為「安慰劑」的藥片，不隱瞞說明。結果：即使知道自己服用的是安慰劑，症狀依然顯著改善，改善程度高於完全不治療的對照組。</p>
+<p>這個研究說明了一個重要的事：安慰劑效應的一部分來自儀式本身——有意識地、以固定順序服藥這個行為的結構，而不完全取決於欺騙或信念。解咒儀式有類似的結構性效果。</p>
+<h3 class="chap-h3">儀式為什麼有效：神經科學</h3>
+<p>解咒儀式的效果在神經科學層面有幾個機制。第一是預期的改變：大腦是一台預測機器，持續根據信念預測身體狀態。當解咒儀式改變了預期——從「壞事將繼續發生」到「保護已就位」——大腦根據新的預測調整身體：皮質醇下降、副交感神經激活、免疫功能恢復。</p>
+<p>第二是多巴胺系統的激活：解咒儀式通常伴隨強烈的情緒體驗——恐懼消解、希望重燃、社區接納。這些激活了大腦的獎勵迴路，觸發多巴胺和內啡肽分泌，強化了「詛咒已解除」這個新信念的神經連結。</p>
+<p>第三是敘事的轉折：心理學家 Dan McAdams 的研究顯示，人類是用「故事」來組織自我認同的。解咒儀式在敘事層面創造了一個清楚的轉折點——「在那之前我是被詛咒的人，在那之後我是被解救的人」。這個敘事轉折改變了自我認同，而自我認同的改變帶來行為和生理狀態的連鎖改變。</p>
+<p>值得注意的是，這三個機制——預期改變、獎勵迴路激活、敘事轉折——在跨文化的解咒儀式裡幾乎普遍存在。這不是巧合。幾千年來，各文化的解咒實踐在沒有神經科學知識的情況下，直覺地發現了什麼對人類的信念系統有效。儀式的戲劇性、社群的見證、清楚的「之前」和「之後」——這些都是在做同一件事：讓大腦真實地接受「情況已經改變了」這個訊息。</p>
+<h2 class="chap-h2">第二章 什麼樣的解咒是無效的</h2>
+<p>既然解咒可以真的有效，為什麼很多人在解咒之後依然「被詛咒」？理解失效的解咒，和理解有效的解咒一樣重要。</p>
+<h3 class="chap-h3">表面儀式，沒有信念改變</h3>
+<p>解咒儀式的效果依賴信念的真實轉變。如果一個人走過了所有的儀式步驟，但在心理深處依然相信自己被詛咒——儀式只是形式，沒有改變底層的信念——那麼儀式結束後，Nocebo 效應依然運作。</p>
+<p>這解釋了為什麼有些人「解咒」之後不久又「中咒」：他們的底層信念沒有改變，所以很快就回到了原來的心理狀態。儀式創造的信念改變是短暫的，因為它沒有觸及信念真正的根源。</p>
+<p>Vol.2 討論的認知扭曲和習得性無助，在解咒之後依然存在，除非它們被直接處理。一個被詛咒感困住的人，往往需要的不只是一個解咒儀式，而是對整個信念系統的系統性工作。</p>
+<h3 class="chap-h3">解咒強化了詛咒的現實</h3>
+<p>這是解咒的一個諷刺：某些形式的解咒，通過確認「詛咒是真實的」這個前提，反而強化了詛咒信念的力量。</p>
+<p>當一個解咒師告訴你「你確實被詛咒了，我可以看見詛咒附在你身上」，然後進行解咒儀式——這個過程確認了詛咒的真實性。下次你遇到不順，你的大腦會更快地用「又被詛咒了」來解釋。解咒師創造了一個需要持續服務的客戶。</p>
+<p>這個機制在人類學文獻裡被廣泛記錄：在詛咒文化興旺的社區裡，解咒服務的需求持續存在，不是因為詛咒不斷被施放，而是因為「詛咒是真實的、可以被識別的、需要專業處理的」這個信念系統持續被維持。解咒師和施咒者共同維持了這個系統。</p>
+<h3 class="chap-h3">依賴外部解咒的陷阱</h3>
+<p>和習得性無助的邏輯類似，持續依賴外部解咒師的人，往往發展出一種「我自己無法解決詛咒，需要專業人士介入」的信念。這個信念在心理上讓他們更脆弱，而不是更強韌。</p>
+<p>每一次成功的外部解咒，都確認了「解咒能力在外部」這個假設。這讓他們在下次遭遇困難時，第一個反應是「我又被詛咒了，需要再去解咒」，而不是「我遇到了困難，我可以做些什麼」。</p>
+<p>真正有效的解咒——無論是通過傳統儀式還是心理治療——應該最終讓當事人建立起自己的「解咒能力」：面對困難時的心理資源、在逆境中維持能動性的能力，以及對自己不被命運決定的深層信念。</p>
+<h3 class="chap-h3">財務剝削的問題</h3>
+<p>在討論解咒的倫理問題時，無法迴避財務剝削的現象。世界各地都有以「解咒」為由對脆弱的人進行財務剝削的案例，台灣也不例外。</p>
+<p>一個判斷標準：任何聲稱解咒需要大量金錢、並且暗示不支付就無法完成解咒的服務，都應該被嚴格審視。真實有效的傳統解咒儀式，在大多數文化裡都有固定的、社區可以接受的費用，而不是無上限地索取。當「解咒費用」超出了正常的服務範圍，它就成了利用詛咒信仰的詐騙。</p>
+<p>值得記住的是：真正的解咒師——無論是傳統儀式的執行者還是心理治療師——工作的目標是讓你不再需要他們，而不是讓你持續依賴他們。任何讓你越來越依賴的「解咒服務」，在動機上就已經出了問題。</p>
+<h2 class="chap-h2">第三章 認知重構：從根改變信念</h2>
+<p>最持久的解咒，發生在信念的根部。不是改變儀式，不是找到更有效的解咒師，而是改變「我被詛咒了」這個信念的底層結構——那些讓這個信念看起來顯然為真的認知框架。</p>
+<p>認知行為治療（CBT）是目前有最多臨床研究支持的心理治療方法之一，它的核心工具——認知重構——正好直接針對這個問題。</p>
+<h3 class="chap-h3">認知重構的基本邏輯</h3>
+<p>Aaron Beck 在 1960 年代發展認知治療時，觀察到抑鬱症患者的思考模式有系統性的扭曲（Vol.2 詳細討論了這些扭曲）。他的治療方法的核心是：幫助病人識別這些扭曲，然後系統性地挑戰和替換它們。</p>
+<p>認知重構不是「正能量思考」——它不是讓你告訴自己「事情會變好的」。它是幫助你識別你對事件的詮釋是否準確，以及是否有其他同樣或更有根據的詮釋。</p>
+<p>對於「被詛咒的感覺」，認知重構的第一步是識別這個信念的具體內容：「我被詛咒了」意味著什麼？「我的不順是由某個外部惡意力量造成的，而我對結果沒有任何影響力。」然後問：這個詮釋有什麼證據？有沒有反例？有沒有其他同樣可以解釋這些事件的框架？</p>
+<h3 class="chap-h3">蘇格拉底式提問</h3>
+<p>認知治療裡有一個重要的技術叫「蘇格拉底式提問」（Socratic questioning）：治療師不直接告訴病人「你的想法是錯的」，而是通過一系列問題，幫助病人自己看見信念的不準確之處。</p>
+<p>這個方法可以自我應用。當「我被詛咒了」的感覺出現，試著問自己幾個問題：這個信念的證據是什麼？有沒有其他可以解釋同樣事件的解釋？如果一個朋友告訴我他有同樣的感覺，我會怎麼回應他？這個信念讓我做了什麼行動，或者不做什麼行動？這些行動讓情況變好了還是變糟了？</p>
+<p>這些問題不是為了立刻推翻詛咒信念，而是為了在它和你之間製造一些距離——讓你開始把它看成一個可以被檢視的信念，而不是一個不被質疑的事實。</p>
+<h3 class="chap-h3">行為實驗的重要性</h3>
+<p>認知重構光靠思考往往不夠。最有效的信念改變，通常需要「行為實驗」：實際去做你因為「詛咒信念」而迴避的事，然後真實地觀察結果。</p>
+<p>習得性無助的解藥不是被告知「你可以的」，而是真實地體驗到「我的行為可以改變結果」。每一個這樣的體驗，都在神經層面削弱了「我被詛咒，我的行動沒有用」這個信念的強度，同時強化了「我可以影響結果」這個替代信念的神經連結。</p>
+<p>關鍵是從小的、低風險的實驗開始，讓成功的體驗逐漸積累，而不是試圖一次性地用一個重大挑戰來推翻詛咒信念——後者在失敗時只會強化原有的信念。</p>
+<h3 class="chap-h3">敘事治療：重寫你的故事</h3>
+<p>澳洲心理學家 Michael White 和 David Epston 在 1990 年出版的《敘事治療的手段》（Narrative Means to Therapeutic Ends）裡，提出了「敘事治療」的框架：問題不是人本身，問題是人和問題的關係；治療的目標是幫助人找到一個不同的、讓他們有能動性的故事版本來組織他們的生命。</p>
+<p>在詛咒信念的脈絡裡，敘事治療的工作是：把「我是被詛咒的人」這個主導故事，轉化為一個不同的故事——不是「我很幸運，詛咒其實不存在」，而是「我經歷了很多困難，這些困難有它們的原因，而我有能力在這個基礎上做出選擇」。</p>
+<p>這個轉化不否定過去的困難，它改變的是主角和困難的關係：從「被動的受詛咒者」到「在困難中依然有選擇的人」。這個身份的轉變，比任何儀式都更根本。</p>
+<p>敘事治療有一個具體的工具：「外化」（externalisation）。White 和 Epston 主張把問題從「我就是這樣的人」分離出來，變成「這個問題在我的生命裡產生了什麼影響」。對詛咒信念來說，外化可以這樣進行：把「被詛咒」從你的身份裡拉出來，問「這個詛咒信念對我的生活做了什麼」而不是「我是一個被詛咒的人」。這個問法的轉換，在心理上打開了一個空間：如果詛咒信念是一個可以被觀察的東西，那麼你和它之間就有了距離，而有距離，就有改變的可能。</p>
+<h2 class="chap-h2">第四章 身體的解咒</h2>
+<p>Vol.5 說明了詛咒怎麼通過生理機制傷害身體。這一章要說的是對應的另一面：解咒也需要在身體層面發生，而不只是在認知層面。</p>
+<p>信念儲存在大腦裡，但大腦不是孤立的——它和身體的每一個系統都有雙向的溝通。改變身體的狀態，可以改變大腦的信念；改變大腦的信念，可以改變身體的狀態。解咒需要同時從兩個方向進行。</p>
+<h3 class="chap-h3">神經系統的重新調節</h3>
+<p>長期的詛咒信念讓自律神經系統（ANS）持續偏向交感神經激活——也就是持續的「戰或逃」狀態。解咒在生理層面的一個重要工作，是幫助神經系統重新調節，讓副交感神經系統（休息和恢復狀態）能夠正常運作。</p>
+<p>神經科學家 Stephen Porges 在他的「多重迷走神經理論」（Polyvagal Theory，1994 年提出）裡描述了自律神經系統的三個層次：社會參與系統（安全和連結的狀態）、戰或逃系統（激活和危險的狀態）、和凍結系統（崩潰和無助的狀態）。長期的詛咒信念讓人持續在後兩個狀態裡，而恢復需要啟動社會參與系統——這需要真實的安全感和連結感，而不只是認知上的理解。</p>
+<p>身體層面促進神經系統重新調節的方法，包括有研究支持的：緩慢的深呼吸（延長呼氣可以激活副交感神經系統）、規律的有氧運動（降低基線皮質醇水平）、身體接觸（社交觸碰激活催產素系統）、以及安全的社會環境（Porges 理論的核心：真正的安全感必須被身體感知到，不只是理智上知道）。</p>
+<p>Porges 的理論有一個對解咒特別重要的含義：你無法單純靠「告訴自己要放鬆」來讓神經系統真正放鬆。神經系統需要接收到真實的安全訊號——來自環境、來自他人、來自身體本身的訊號——才會真正轉換狀態。這意味著，解咒的環境和關係，和解咒的認知工作一樣重要。</p>
+<h3 class="chap-h3">創傷知情的身體工作</h3>
+<p>當詛咒信念和創傷（個人或世代的）深度交纏時，純粹的認知工作往往不夠——創傷在身體裡有它自己的記憶。</p>
+<p>精神科醫師 Bessel van der Kolk 在他 2014 年的著作《身體的記憶》（The Body Keeps the Score）裡，詳細記錄了創傷如何在身體層面留下痕跡，以及為什麼某些創傷需要透過身體工作（而不只是談話治療）才能真正被處理。他的研究支持的治療方式包括 EMDR（眼動脫敏與再處理）、身體感知治療（Somatic Experiencing）、以及瑜伽（對創傷後壓力症候群有實驗支持）。</p>
+<p>這些方法不是「解咒」的傳統形式，但它們做的事情和解咒儀式在功能上有重疊：它們幫助身體從「威脅尚未解除」的狀態移動到「威脅已經過去，我是安全的」的狀態。這個移動，在神經層面就是解咒。</p>
+<p>van der Kolk 的研究裡有一個令人印象深刻的發現：對於深度創傷，EMDR 的效果在某些研究裡超過了傳統談話治療。EMDR 通過雙側眼球運動（或其他雙側刺激）在重新激活創傷記憶的同時降低其情緒強度——這個機制目前神經科學上的解釋還在研究中，但臨床效果在多個隨機對照試驗裡得到了驗證。如果你的詛咒信念和具體的創傷事件有連結，EMDR 可能是值得了解的選項。</p>
+<h3 class="chap-h3">睡眠的修復功能</h3>
+<p>詛咒信念往往嚴重影響睡眠——噩夢、失眠、睡眠品質低落。這不是小問題：睡眠是身體修復和神經系統重新調節最重要的時間。持續的睡眠剝奪會讓焦慮和負面信念更難被改變，形成一個詛咒→睡眠障礙→更難改變信念→詛咒持續的惡性循環。</p>
+<p>改善睡眠因此是解咒工作的一個重要但常被忽略的面向。認知行為治療針對失眠（CBT-I）有大量研究支持，它的效果在長期追蹤研究裡優於安眠藥物。它的核心是：改變對睡眠的錯誤信念（「我今晚一定睡不著」本身就是一個讓人睡不著的 Nocebo 預期），以及建立有助於睡眠的行為習慣。</p>
+<h2 class="chap-h2">第五章 關係與社群在解咒裡的角色</h2>
+<p>Vol.3 說明了詛咒的社會傳播機制：社區對詛咒的確認，是讓詛咒效果最大化的關鍵因素。Meador 在治療 Vanders 時，特意召集了他的家人在場——因為他知道，解咒需要在社會層面發生，不只是在個人層面。</p>
+<p>這個邏輯的反面同樣成立：真正有效的解咒，需要社會支持。孤立的個人比有社區支持的人，更難走出詛咒信念。</p>
+<h3 class="chap-h3">安全依附關係的修復作用</h3>
+<p>依附理論的研究顯示，安全的依附關係有強大的「緩衝」功能：對一個有安全依附基礎的人來說，面對逆境時的心理韌性顯著更強。這個緩衝功能，在生理層面是通過催產素系統實現的——社會連結和支持，真實地降低了壓力荷爾蒙的水平。</p>
+<p>對於那些在不安全依附環境裡長大、繼承了家族詛咒腳本的人，建立安全依附關係往往是解咒最重要也最困難的工作。這不一定意味著找到「完美的」伴侶或朋友——研究顯示，即使是和治療師建立的安全治療關係，也可以在一定程度上修復不安全依附留下的神經痕跡。</p>
+<p>依附研究者 Mary Main 在 1990 年代的成人依附訪談（Adult Attachment Interview，AAI）研究裡發現，一個人能否提供孩子安全依附，不只取決於他自己小時候是否得到安全依附，而是取決於他是否能夠「連貫地反思自己的依附歷史」。換句話說：你不需要有一個完美的童年才能打破家族詛咒，你需要的是有能力去理解和整合那個不完美的童年。這個整合的工作，本身就是解咒。</p>
+<h3 class="chap-h3">社群的見證功能</h3>
+<p>傳統解咒儀式裡，社群的見證是不可或缺的部分。當解咒在社群面前進行，社群成員看見了「這個人已經被解咒了」，他們對待這個人的方式會改變——從把他當作「被詛咒的人」到把他當作「已被解救的人」。這個社會身份的轉變，通過比馬龍效應，真實地改變了這個人的際遇。</p>
+<p>在現代語境裡，這個社群見證的功能可以由不同的結構來承擔：心理治療的督導關係、支持小組、宗教社群、或者任何讓一個人感到「我的改變被看見和確認了」的社會環境。</p>
+<p>這個需求不是軟弱的表現，它是人類神經系統的基本運作方式：社會認可激活獎勵迴路，讓新的信念和身份更容易被神經系統接受和鞏固。</p>
+<h3 class="chap-h3">毒性社群的問題</h3>
+<p>社群可以解咒，也可以維持甚至強化詛咒。如果你生活在一個深信詛咒、不斷確認你「被詛咒」的社群裡，個人層面的信念改變會持續面臨社群層面的阻力。</p>
+<p>這不是說你必須完全離開這個社群，但它說明了環境對信念的影響不可忽視。持續地暴露在「我們家的人命不好」「你跟你爸一樣走不出去」這樣的家族敘事裡，個人的認知重構工作會面對持續的逆風。</p>
+<p>在某些情況下，拉開距離——物理上的距離、情感上的距離、或者至少是在某些對話中設定邊界——是解咒工作的必要條件，而不是可選的附加步驟。</p>
+<p>邊界的設定不是拋棄家族，它是保護自己的認知重構工作不被持續侵蝕的現實需要。心理學上有一個概念叫「情緒傳染」（emotional contagion）：我們的神經系統會自動同步周圍人的情緒狀態，通過鏡像神經元和其他機制。長時間待在充滿詛咒信念的環境裡，你的神經系統會持續接收到「危險尚未解除」的訊號，無論你的認知層面理解了什麼。物理或情感距離，有時候是讓神經系統有機會真正重新調節的唯一方式。</p>
+<h2 class="chap-h2">第六章 與詛咒和解，還是徹底走出去</h2>
+<p>這一章要處理系列最後一個問題，也是最個人的一個問題：解咒的目標是什麼？</p>
+<p>有兩個不同的方向，而哪個更適合你，取決於你是誰，以及你的詛咒信念在你的生命裡扮演了什麼角色。</p>
+<h3 class="chap-h3">徹底走出去的路</h3>
+<p>「徹底走出去」意味著：你不再相信詛咒作為解釋框架是有用的，你用不同的語言理解你的困難——心理的、社會的、歷史的——並且你的決策和行動不再被「我被詛咒了」這個信念所限制。</p>
+<p>這條路需要的工作包括：認知重構（替換扭曲的思考模式）、行為實驗（重建自我效能感）、可能的創傷處理（如果詛咒信念和創傷深度交纏）、以及對家族腳本的有意識重寫。</p>
+<p>這條路不要求你變成一個「不信任何靈性」的人。你可以對靈性或宗教有真實的信仰，同時不用「我被詛咒了」作為解釋你人生困難的框架。兩者是可以並存的。</p>
+<p>徹底走出去的標誌不是「不再遇到困難」，而是「遇到困難時，我的第一個反應不再是詛咒」。你開始問「我能做什麼」而不是「誰在針對我」。這個轉變，是能動性的恢復。</p>
+<h3 class="chap-h3">與詛咒和解的路</h3>
+<p>另一條路是「和解」：你保留了某些靈性信仰，包括對詛咒可能存在的開放性，但你和這個信仰的關係改變了。它不再控制你，你有時候考慮它，但你同時也採取行動。</p>
+<p>這條路的核心是 Vol.1 結尾說的那個判準：你的信念是否保留了你的能動性。你相信詛咒，同時還是去看醫生；你去廟裡問事，同時還是繼續工作和學習；你覺得某件事「可能有靈性的成分」，同時還是做你能做的事——那麼這個信念沒有在傷害你，和解是可以的。</p>
+<p>心理學家 William James 在他 1902 年的著作《宗教經驗的種種》（The Varieties of Religious Experience）裡，描述了宗教信仰的「實用主義」評估標準：一個信仰的價值，在於它是否讓相信它的人活得更好、更有意義、對世界有更多貢獻。這個標準同樣適用於詛咒信仰——如果你的靈性框架讓你活得更好，那就保留它；如果它在傷害你，那就處理它。</p>
+<h3 class="chap-h3">沒有完美的解咒</h3>
+<p>最後一件要說清楚的事：完美的解咒不存在。</p>
+<p>即使你做了所有的工作——認知重構、行為實驗、創傷處理、社群支持、身體的重新調節——在某些特別艱難的時刻，「我被詛咒了」的感覺可能還是會升起。這不代表你沒有進步，也不代表你需要從頭開始。</p>
+<p>解咒不是一個事件，它是一個持續的實踐。每一次那個感覺升起，你選擇質疑它而不是接受它；每一次遇到困難，你問「我能做什麼」而不是「命運為什麼這樣對我」——這些選擇就是解咒。它不是某一天突然完成的，它是在無數個選擇的時刻裡，一點一點地發生的。</p>
+<p>這不是令人氣餒的結論。它是誠實的結論。而誠實，從來都是真正解咒的第一步。</p>
+<h2 class="chap-h2">後記：詛咒結束的地方</h2>
+<p>六冊走下來，我們從「詛咒是真的嗎」問到了「怎麼解咒」。</p>
+<p>我想在最後說一件事，是這整個系列的底層假設，但我一直沒有明說：</p>
+<p>詛咒最有力量的地方，不是它能對你做什麼，而是它讓你停止做什麼。</p>
+<p>一個人相信自己被詛咒，真正的損失不是厄運本身——厄運每個人都有，在統計上沒有人比其他人更多或更少。真正的損失是他停止嘗試的那些事情、他不去發展的那些關係、他不敢追求的那些可能性，因為他相信那些事情對「被詛咒的人」沒有意義。</p>
+<p>詛咒結束的地方，不是在儀式完成之後，不是在巫師宣告解除之後，而是在你再次開始嘗試的那一刻。</p>
+<p>那一刻，你已經在解咒了。</p>
+<p>你不需要先相信詛咒不存在，才能開始行動。你只需要在相信它存在的同時，還是做了某件事。那個「某件事」，就是詛咒裂開的地方。</p>
+<p>── 盧林</p>
+<p>詛咒與心理</p>
+<p>那個感覺・詛咒與心理 Vol.6《解咒》</p>
+<p>作者：盧林 著／有的沒的小舖 出品</p>
+<p>本書由作者與 AI 工具協作完成。</p>
+<p>── 讀墨購買本系列 ──</p>
 
-<div class="container">
-
-  <div class="trial-badge">試閱版　PREVIEW</div>
-
-  <div class="book-header">
-    <div class="series-info">那個感覺　系列三　VOL.6</div>
-    <h1 class="book-title">解咒</h1>
-    <div class="book-subtitle">詛咒與心理　第六冊　終冊</div>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E8%A9%9B%E5%92%92%E5%BF%83%E7%90%86%E3%80%91%E8%A7%A3%E5%92%92%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-3-vol6-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/feeling">看其他系列</a>
   </div>
-
-  <!-- 前言 -->
-  <div class="chapter-label">前言　PREFACE</div>
-  <h2>我們走到這裡了</h2>
-
-  <p>
-    六冊走下來，我們看了很多東西。
-  </p>
-  <p>
-    詛咒的定義和心理機制（Vol.1）。相信被詛咒的人，心理在做什麼（Vol.2）。全球詛咒文化的共同結構（Vol.3）。家族腳本和世代創傷（Vol.4）。以及詛咒怎麼在沒有任何超自然力量的情況下，真實地傷害和殺死人（Vol.5）。
-  </p>
-  <p>
-    這一冊是終點，也是起點。它要處理的問題是：解咒。
-  </p>
-  <p>
-    但「解咒」不是一個輕鬆的題目。如果前五冊的核心論點是正確的——詛咒的力量來自信念，信念通過心理和生理機制造成真實的影響——那麼解咒就不只是一個儀式的問題，它是一個信念系統的根本改變。而根本改變信念，從來都不是容易的事。
-  </p>
-  <p>
-    這一冊不會給你一個「五步驟解咒法」。它會給你的，是對解咒機制的清楚理解：為什麼某些解咒有效，為什麼某些沒有，以及什麼樣的改變才是真正持久的。理解機制，讓你可以做出有根據的選擇，而不是在各種聲稱能解咒的方法之間盲目嘗試。
-  </p>
-
-  <div class="section-divider">· · ·</div>
-
-  <!-- 第一章 -->
-  <div class="chapter-label">第一章　CHAPTER ONE</div>
-  <h2>為什麼解咒有時候真的有效</h2>
-
-  <p>
-    先從一個不應該被迴避的問題開始：解咒儀式有時候真的有效。不是象徵性地有效，不是讓人感覺好一點，而是真實地讓被詛咒的人的症狀消失、生活改善、身體恢復。
-  </p>
-  <p>
-    這個事實在很多人的框架裡很難處理。如果你是不信詛咒的人，「解咒有效」這個事實好像在為詛咒的存在背書。如果你是信詛咒的人，「解咒有效是因為安慰劑效應」這個解釋好像在貶低你的信仰。
-  </p>
-  <p>
-    但這兩個框架都把問題搞複雜了。解咒有效，不需要詛咒是超自然的，也不需要解咒是欺騙。它需要的只是：一個足夠有力量的儀式，在被詛咒者的信念系統裡創造出「詛咒已被解除」的真實感受。
-  </p>
-
-  <h3>Vance Vanders 案例的啟示</h3>
-  <p>
-    回到 Vol.5 裡的 Vance Vanders 案例。醫生 Clifton Meador 用一個假的「解毒儀式」讓一個相信自己被詛咒到快死的人完全康復。Meador 沒有真的解除任何詛咒，他做的是：在 Vanders 的信念框架裡，創造出一個「詛咒已被處理」的戲劇性事件。
-  </p>
-  <p>
-    這個事件讓 Vanders 的信念從「我被詛咒了，我要死了」轉變為「詛咒被解除了，我會活下去」。這個信念的改變，反過來改變了他的生理狀態——Nocebo 效應關閉，身體開始恢復。
-  </p>
-  <p>
-    Meador 做的事，本質上和任何文化裡的解咒儀式是一樣的：創造一個在當事人信念系統裡有意義的「轉折事件」，讓「被詛咒」的敘事被「解咒」的敘事所取代。
-  </p>
-
-  <h3>安慰劑效應的力量邊界</h3>
-  <p>
-    安慰劑效應在很多人的印象裡是一個「弱效應」——它讓你感覺好一點，但不能真正治病。這個印象是錯的。
-  </p>
-  <p>
-    哈佛大學安慰劑研究項目（Program in Placebo Studies and the Therapeutic Encounter）的主任 Ted Kaptchuk 在他的多個研究裡顯示，安慰劑效應可以產生真實的、可測量的生理改變：腦部的神經化學物質分泌、免疫細胞的活化、甚至腦部腫瘤患者的症狀改善。這些不是主觀感受的改善，它們是可以用儀器測量的客觀生理變化。</p>
-  <p>
-    2010年，Kaptchuk 發表了一個特別有趣的研究：他給腸躁症患者服用明確標示為「安慰劑」的藥片——不隱瞞，明確告知病人「這是安慰劑，沒有活性成分」。結果：即使知道自己服用的是安慰劑，這些患者的症狀依然顯著改善，而且改善程度高於完全不治療的對照組。
-  </p>
-
-  <!-- 截斷點 -->
-  <div class="cutoff-zone">
-    <h3>儀式為什麼有效：神經科學的解釋</h3>
-    <p>
-      安慰劑效應和解咒儀式的效果，在神經科學層面有幾個重疊的機制。
-    </p>
-    <p>
-      第一個機制是預期的改變。大腦是一台預測機器——它不斷地根據過去的經驗和當前的信息，預測接下來會發生什麼，並且根據這個預測來調整身體的準備狀態。當一個有效的解咒儀式改變了你的預期——從「壞事將繼續發生」到「保護已就位，我是安全的」——你的大腦開始根據新的預測調整身體狀態。皮質醇水平下降，副交感神經系統激活，免疫功能恢復，睡眠品質改善。這些都是預期改變帶來的真實生理變化。
-    </p>
-    <p>
-      第二個機制是多巴胺系統的激活。解咒儀式通常伴隨著強烈的情緒體驗——恐懼的消解、希望的重燃、社區的接納。這些情緒體驗激活了大腦的獎勵迴路，觸發多巴胺和內啡肽的分泌。這不只讓你「感覺好一點」，它改變了大腦對身體狀態的詮釋，並且強化了「詛咒已解除」這個新信念的神經連結。
-    </p>
-  </div>
-
-  <!-- 付費牆 -->
-  <div class="paywall">
-    <div class="paywall-label">試閱到此　PREVIEW ENDS HERE</div>
-    <h3>繼續讀完整版</h3>
-    <p>
-      完整版包含：<br>
-      前言＋六章＋後記，全書逾 12,000 字<br>
-      認知重構與信念系統的深層改變方法<br>
-      什麼樣的解咒是無效甚至有害的<br>
-      系列終章：與詛咒和解，還是徹底走出去
-    </p>
-    
-    <a href="/that-feeling-3.html" class="paywall-return">← 回到驚喜角落</a>
-  </div>
-
-  <div class="author-sig">盧林著　有的沒的小舖出品</div>
-
-</div>
-
-<!-- 系列導覽 -->
-<!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
-  <div class="snlabel">詛咒與心理系列</div>
+  <div class="snlabel">詛咒心理系列</div>
   <div class="snbooks">
-    <a href="/that-feeling-3-vol1-trial.html" class="snbook">Vol.1《詛咒是真的嗎》</a>
-    <a href="/that-feeling-3-vol2-trial.html" class="snbook">Vol.2《你被詛咒了嗎》</a>
-    <a href="/that-feeling-3-vol3-trial.html" class="snbook">Vol.3《世界怎麼詛咒人》</a>
-    <a href="/that-feeling-3-vol4-trial.html" class="snbook">Vol.4《家族的咒》</a>
-    <a href="/that-feeling-3-vol5-trial.html" class="snbook">Vol.5《詛咒怎麼殺人》</a>
-    <span class="snbook current">Vol.6《解咒》</span>
+<a href="/that-feeling-3-vol1-trial.html" class="snbook">Vol.1《詛咒是真的嗎》</a>
+<a href="/that-feeling-3-vol2-trial.html" class="snbook">Vol.2《你被詛咒了嗎》</a>
+<a href="/that-feeling-3-vol3-trial.html" class="snbook">Vol.3《世界怎麼詛咒人》</a>
+<a href="/that-feeling-3-vol4-trial.html" class="snbook">Vol.4《家族的咒》</a>
+<a href="/that-feeling-3-vol5-trial.html" class="snbook">Vol.5《詛咒怎麼殺人》</a>
+<span class="snbook current">Vol.6《解咒》</span>
   </div>
-  <a href="/that-feeling-3.html" class="back-link">← 返回詛咒與心理系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-3-vol6-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>

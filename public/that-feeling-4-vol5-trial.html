@@ -1,325 +1,108 @@
-﻿<!DOCTYPE html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>不死的執念｜那個感覺 系列四 Vol.5｜盧林著</title>
+<title>不死的執念｜那個感覺 死亡不死系列 Vol.5｜盧林著</title>
+<meta property="og:title" content="不死的執念【免費閱讀】那個感覺 死亡不死系列">
+<meta property="og:description" content="死亡不死系列 Vol.5 ——免費在線閱讀，不需要下載任何 App。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e14;
+    --bg: #08100f;
     --text: #dcdcf0;
     --text-muted: #a8a8cc;
-    --accent: #7a4a9e;
-    --accent-light: rgba(122,74,158,0.15);
-    --accent-dim: rgba(122,74,158,0.4);
+    --accent: #7aacb0;
+    --accent-light: rgba(122,172,176,0.12);
+    --accent-dim: rgba(122,172,176,0.35);
     --card-bg: #14141e;
-    --card-border: rgba(122,74,158,0.2);
+    --card-border: rgba(122,172,176,0.35);
     --label: #9090b8;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Serif TC', serif;
-    font-size: 17px;
-    line-height: 2;
-    min-height: 100vh;
-  }
-  .page-back {
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .page-back a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    transition: color 0.2s;
-  }
-  .page-back a:hover { color: var(--accent); }
-  .content {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 40px 80px;
-  }
-  .book-meta {
-    margin-bottom: 52px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .series-label {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 16px;
-  }
-  h1.book-title {
-    font-size: 2.4rem;
-    font-weight: 500;
-    letter-spacing: 4px;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  .author {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--label);
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-  }
-  .trial-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border: 1px solid var(--accent-dim);
-    border-radius: 3px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--accent);
-  }
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--text);
-    margin-top: 56px;
-    margin-bottom: 28px;
-    letter-spacing: 2px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text);
-    margin-top: 40px;
-    margin-bottom: 20px;
-  }
-  p {
-    margin-bottom: 24px;
-    text-align: justify;
-    color: var(--text);
-  }
-  blockquote {
-    margin: 36px 0;
-    padding: 24px 28px;
-    border-left: 2px solid var(--accent-dim);
-    background: var(--card-bg);
-    border-radius: 0 6px 6px 0;
-  }
-  blockquote p {
-    margin-bottom: 8px;
-    color: var(--text-muted);
-    font-size: 16px;
-    font-style: italic;
-  }
-  blockquote cite {
-    display: block;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 12px;
-    color: var(--label);
-    font-style: normal;
-    letter-spacing: 1px;
-  }
-  .trial-end {
-    margin-top: 60px;
-    padding: 40px 36px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    text-align: center;
-  }
-  .trial-end .te-label {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 16px;
-  }
-  .trial-end p {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-    text-align: center;
-  }
-  .cta-group {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .btn-full {
-    display: inline-block;
-    padding: 12px 28px;
-    background: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 5px;
-    color: #fff;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .btn-full:hover { background: #6a3a8e; }
-  .btn-back {
-    display: inline-block;
-    padding: 12px 20px;
-    color: var(--text-muted);
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .btn-back:hover { color: var(--accent); }
-  .series-nav {
-    margin-top: 60px;
-    padding: 36px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-  }
-  .snlabel {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 20px;
-  }
-  .snbooks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-  .snbook {
-    display: inline-block;
-    padding: 6px 14px;
-    border: 1px solid var(--card-border);
-    border-radius: 4px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
-  .snbook.current {
-    border-color: var(--accent-dim);
-    color: var(--accent);
-    background: var(--accent-light);
-  }
-  .back-link {
-    display: inline-block;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .back-link:hover { color: var(--accent); }
-  @media (max-width: 680px) {
-    .content { padding: 40px 24px 60px; }
-    .page-back { padding: 16px 24px; }
-    h1.book-title { font-size: 1.9rem; }
-    .series-nav { padding: 24px; }
-  }
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・死亡不死系列</div>
+<h1>不死的執念</h1>
+<div class="subtitle">Vol.5・死亡不死系列・完整版・免費閱讀</div>
 
-<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+<h1 class="chap-h1">那個感覺・死亡與不死Vol.5《不死的執念》</h1>
+<h2 class="chap-h2">前言：亞利桑那州的冷凍倉庫</h2>
+<p>2002年7月5日,美國職棒傳奇球星泰德·威廉斯過世,享年83歲。幾天後,他的遺體被送進亞利桑那州斯科茨代爾市郊的一棟低調建築。那裡是 Alcor 生命延續基金會的總部,一個人體冷凍保存機構。威廉斯的頭顱被切下,浸入液態氮,儲存溫度維持在攝氏零下196度。 他的女兒芭芭拉宣稱她父親從未表示過想要冷凍保存,並且指控她的弟弟約翰·亨利違背了父親的意願。《運動畫刊》後來的調查報導指出,Alcor 內部有人目睹威廉斯的頭部曾被意外碰撞,造成損傷。Alcor 否認了部分細節,但這個事件讓人體冷凍保存這個話題第一次進入美國主流公眾視野。 Alcor 目前儲存著大約200具遺體和頭顱,每個人或他們的家屬都支付了高額費用——全身保存約20萬美元,只保存頭部約8萬美元——購買的是一個承諾:未來的技術將能夠復活他們。這個承諾目前沒有任何科學依據,但也沒有科學依據可以確定地否定它。 人類一直想要不死。從秦始皇到矽谷億萬富翁,這個欲望從未消失,只是換了不同的語言和技術包裝。這本書不是要告訴你這個欲望是對還是錯,而是要告訴你,當我們說「我想要永生」的時候,我們真正在說什麼,以及這個欲望在今天的科技條件下,實際上帶來了什麼。 ##</p>
+<h2 class="chap-h2">人體冷凍保存的技術與爭議 Alcor 的運作方式 Alcor 生命延續基金會成立於1972年,總部位於美國亞利桑那州斯科茨代爾。它是目前全球兩個主要人體冷凍保存機構之一(另一個是位於密西根州的 Cryonics Institute)。Alcor 的核心技術是「玻璃化」(vitrification),這個過程試圖避免冷凍過程中冰晶形成對細胞造成的破壞。 當一個 Alcor 會員被宣布臨床死亡後,等待在旁的待命小組立刻開始行動。他們首先進行體外循環,維持腦部的血液流動和氧氣供應,防止腦組織因缺氧而快速退化。這個過程必須在宣布死亡後幾分鐘內開始,延遲會大幅降低保存效果。 接著,遺體的血液被置換成含有高濃度冷凍保護劑(cryoprotectant)的溶液。這種溶液的主要成分類似於醫學上用於器官移植的保存液,但濃度高出許多——大約是器官保存液的十倍。高濃度的目的是讓細胞內外的液體在降溫過程中不形成冰晶,而是直接轉變成類似玻璃的固態結構,這就是「玻璃化」的核心原理。 整個冷卻過程需要數小時到一天,溫度最終降至攝氏零下196度,然後遺體被存放在一個充滿液態氮的杜瓦瓶(Dewar)裡。這些杜瓦瓶高約3.5公尺,每個可以存放四具全身遺體或數個頭顱。理論上,在這個溫度下,一切化學反應幾乎完全停止,遺體可以無限期保存。 2018年,加州大學舊金山分校的研究團隊在《自然》(Nature)子刊《自然通訊》發表了一項研究,成功將兔子腎臟玻璃化保存,然後解凍後移植回活體兔子,腎臟恢復了部分功能。這是玻璃化技術在複雜器官上的一個重要突破,證明了在某種程度上,這個技術是可行的。 但兔子腎臟和人類大腦之間,存在一個科學上幾乎無法跨越的鴻溝。 連結組:那一百兆個連接 即使冷凍保存能夠完整地保存細胞結構,復活一個人面臨的核心問題是:大腦裡記錄著這個人的記憶、個性、知識和感受的,是神經元之間數以兆計的突觸連接,也就是所謂的「連結組」(connectome)。這個連接網絡的具體配置,就是你這個人的物理載體,是你所有記憶和個性的基礎。 一個成年人大腦大約有860億個神經元,每個神經元平均有7000個突觸連接,總連接數量大約是100兆。神經科學家塞巴斯蒂安·宋(Sebastian Seung)在他2012年的著作《連結組》(Connectome)裡說:「你就是你的連結組。」 2023年,哈佛大學和谷歌的研究者合作,完成了一個立方毫米人類大腦皮質的完整連結組繪製,發表在《科學》(Science)期刊。一立方毫米——大約是一粒沙子的大小——包含了大約57000個神經元和大約1.5億個突觸連接。繪製這個一粒沙大小的連結組,用了多年時間,產生的數據量是1.4PB(拍位元組)。 人類大腦的體積大約是一升,也就是100萬個立方毫米。把這個計算放大到全腦的規模,完整繪製人類大腦連結組需要的數據量,大約是現在全球互聯網數據總量的幾十倍。在可預見的未來,這在技術上仍然是不可能的。 更關鍵的問題是:即使未來技術能夠讀取連結組,我們是否就能「復活」那個人?連結組記錄的是神經元之間的物理連接,但意識的產生是否僅僅取決於這些連接,還是需要某種我們還不理解的額外條件?這個問題,在科學上還沒有共識。 冷凍的實際爭議 除了「就算保存了也沒辦法讀取」的問題,冷凍保存本身的技術效果在科學界也有爭議。 2016年,一個由神經科學家肯尼斯·海沃斯(Kenneth Hayworth)參與的研究,在《低溫生物學》期刊記錄了一個讓 Alcor 感到尷尬的結果:使用 Alcor 標準程序保存的兔子大腦,在電子顯微鏡下顯示出了明顯的突觸結構破壞,在某些區域幾乎難以辨識。這意味著即使是 Alcor 引以為傲的玻璃化技術,在保存最關鍵的神經連接方面,效果可能遠不如他們宣稱的那麼理想。 Alcor 的支持者反駁說,這個研究的條件和他們實際的操作程序有差異,而且冷凍保存的目標不是讓大腦在今天就可以被解讀,而是讓結構損傷最小化,以等待未來更好的技術。這是一個很難被直接反駁的立場,因為「未來的技術」是一個可以無限期延伸的承諾。 主流神經科學界對人體冷凍保存的立場,目前是:它是一個基於真實但遠遠不足夠的科學基礎上的商業操作,其核心承諾(未來的技術可以復活這些人)目前沒有科學依據支持,也沒有科學依據可以確定地否定。 泰德·威廉斯事件 2002年7月,棒球傳奇球員泰德·威廉斯過世,享年83歲。他的兒子約翰·亨利·威廉斯把遺體送進了 Alcor,費用約為12萬美元。 這個決定立刻引發了家族衝突。威廉斯的女兒芭芭拉宣稱她父親從未表示過想要冷凍保存,並且指控她的弟弟違背了父親的意願。《運動畫刊》後來做了一個調查,報導 Alcor 內部有人聲稱看到威廉斯的頭部曾被意外碰撞,以及頭顱被單獨存放、和身體分開的情況。 Alcor 否認了這些報告裡的部分細節,但這個事件讓人體冷凍保存這個話題第一次進入了美國主流公眾的視野,也引發了關於「誰有權決定遺體的處置方式」的法律討論。 約翰·亨利·威廉斯在2004年因白血病過世,享年35歲,他的遺體也被送進了 Alcor,和他父親存放在一起。 ##</h2>
+<h2 class="chap-h2">意識上傳的哲學地雷 「心靈上傳」是什麼 意識上傳(mind uploading),或者更技術性的說法「全腦模擬」(whole brain emulation),是指把一個人的神經連接結構完整地掃描,轉換成數位格式,然後在電腦上運行一個能夠「表現得和那個人一樣」的模擬程序。理論上,這樣的模擬程序就是「那個人」,在數位基底上繼續存在,可以在網路上移動,可以在機器人身體上運行,可以被備份,可以理論上永久存在。 這個想法在科幻文學和流行文化裡非常普遍,但它的哲學複雜程度遠超過大多數人的直覺預期。 複製問題:那個「你」是你嗎 意識上傳的第一個也是最根本的問題,被哲學家稱為「複製問題」(copy problem)或「同一性問題」(identity problem)。 假設技術已經成熟,一個機器把你的大腦完整地掃描,然後在電腦上運行一個你的完整模擬。這個模擬有你的所有記憶、你的個性、你的思考方式。它相信它是你,它感覺到它是你。然後,掃描完成後,你的生物身體被關掉了。 問題是:那個數位版本的「你」,是你,還是一個相信自己是你的複製品? 哲學家德里克·帕菲特(Derek Parfit)在他1984年的著作《理性與個人》(Reasons and Persons)裡對這個問題進行了最深刻的分析。他提出了一個思想實驗:如果你在火星傳送過去,你的原版身體在地球被分解,而火星上完整地重建了你,那個在火星上的人是你嗎? 帕菲特的結論是:「個人同一性」本身是一個比我們以為的更模糊的概念。你現在的你,和你十年前的你,已經在物質上和心理上都發生了巨大的改變,但你仍然相信那是同一個你。「同一性」本來就是一個程度問題,不是一個是否問題。從這個角度看,一個完整的意識上傳是否是「你」,取決於你如何定義「你」。 但帕菲特的分析也指向了另一個不舒服的方向:如果意識上傳留下了你的生物身體(也就是「你」繼續活著,同時數位版的「你」也開始運行),那麼哪一個才是真正的你?兩個都是?都不是?大多數人的直覺告訴他們「那個數位的是複製品,不是我」,但他們很難清楚地說出為什麼,尤其是如果那個數位版本在每個可觀測的方式上都和你完全一樣。 連續性問題 意識上傳的第二個哲學問題是連續性問題(continuity problem)。你的主觀感受——那個你「在場」的感覺,那個你「正在體驗」的感受——是一個持續的流。即使在睡眠中,這個流在第二天早上繼續了。 但意識上傳,在任何版本裡,都需要在某個時間點「複製」你的狀態,然後在另一個基底上重新「啟動」它。在這個過程中,原有的那個連續流——你正在體驗的那個流——在物理上停止了。之後開始的數位版本,即使在功能上完全相同,它的「在場」感受也是重新開始的,而不是連續的。 這個問題對全身麻醉也適用,在一定程度上。你在全身麻醉下是否「連續」地存在,還是你實際上消失了,然後一個非常相似的版本重新醒來,這在哲學上也是有爭議的。但麻醉至少是在同一個大腦裡發生的,而意識上傳涉及的是基底的根本改變。 意識上傳的支持者通常用「模式同一性」(pattern identity)來回應這個問題:重要的不是組成你的物質,而是那個模式。如果模式被完整保存,那個模式的新實例就是你。這個立場在邏輯上是一致的,但它隱含了一個非常強的假設:意識只是信息模式,沒有任何超出這個模式的「額外東西」。而這個假設,正是大衛·查默斯的「意識困難問題」質疑的核心。 「殭屍問題」 查默斯在他關於意識的哲學工作裡提出了「哲學殭屍」(philosophical zombie)的思想實驗:想像一個在所有物理和行為上都和你完全相同的存在,但它沒有任何主觀體驗——它沒有「感受到」任何東西,雖然它說它感受到了。這樣的存在是邏輯上可能的嗎? 如果哲學殭屍是邏輯上可能的,那麼意識不能僅僅是大腦的物理模式,因為那個模式可以在沒有意識的情況下存在。這對意識上傳的意義是:一個完整的大腦模擬,可能在功能上完全和你一樣,但沒有任何主觀體驗——它是一個殭屍版的你。 意識上傳的技術支持者,通常認為查默斯的論點依賴的是直覺而非邏輯,而意識不過是信息處理的一個特定組織方式。這個爭論在哲學界持續了三十年,沒有解決。 ##</h2>
+<h2 class="chap-h2">庫茲威爾的奇點預言 奇點的定義 雷·庫茲威爾(Ray Kurzweil)是美國發明家和未來學家,在光學字符識別、語音合成等技術領域有真實的重要貢獻,目前是谷歌的工程總監。他是這個時代最系統性、也最執著的科技不死論支持者。 他在2005年出版的《奇點迫近》(The Singularity Is Near)是超人類主義(transhumanism)的核心文本之一。書裡的核心預測是:人工智能將在2029年左右達到人類水平,然後在2045年左右,人工智能的能力將以指數級速度超越所有人類智能的總和,這個時間點被他稱為「奇點」(Singularity)。 在奇點之後,根據庫茲威爾的預測,技術進步的速度將快到人類無法預測,舊有的限制——包括死亡——將被技術克服。他在書裡具體預測,到2030年代,人類將能夠通過奈米機器人修復細胞損傷,將老化過程逆轉;到2040年代,意識上傳將成為可能。 庫茲威爾的預測方法論基礎是「收益加速定律」(Law of Accelerating Returns)——技術的指數級進步規律,最知名的例子是摩爾定律(每兩年,每美元可以購買的計算能力翻一倍)。他把這個規律推廣到所有信息技術,並且用它預測了一個幾十年後的世界,在那個世界裡一切現有的限制都被技術克服。 批評:指數外推的危險 庫茲威爾的預測有兩個層次的批評。第一個層次是技術批評:過去的指數進步不保證未來的指數進步。摩爾定律在2010年代開始放緩,部分因為物理限制(晶體管已經逼近原子大小),部分因為商業和技術原因。庫茲威爾把所有信息技術的進步都套用同一條指數曲線,但不同領域的技術進步速度差異極大,而且很多技術面臨的不只是工程問題,而是基本物理限制。 生物學的問題尤其複雜。神經科學家大衛·伊格爾曼(David Eagleman)在多個場合說,大腦的運作複雜程度遠超過我們目前的理解,「更快的電腦」不能自動解決這個理解問題,因為問題的核心是理論,不是計算能力。 第二個層次是哲學批評:即使技術按照庫茲威爾的預測發展,他提出的「解決方案」——意識上傳、奈米機器人——所涉及的哲學問題(意識的本質、個人同一性),在他的框架裡完全沒有被觸及。他預設了意識是一種可以被數位化的信息模式,但這個假設本身就是哲學界最大的爭議問題之一。 2019年,在他的2029年預測的十年前,人工智能研究者邁克斯·泰格馬克(Max Tegmark)評估說庫茲威爾的早期預測有一個有趣的特性:那些他預測在「十年後」發生的事,通常比那個時間點晚了五到十年;那些他預測在「三十年後」發生的事,目前還沒有人知道。 庫茲威爾的個人計畫 庫茲威爾在他的生活裡踐行他的信仰。他每天服用超過八十種補充劑和藥物,以期延長他的壽命直到奇點到來。他在2004年寫了一本書《永遠健康》(Fantastic Voyage),詳述了他的個人健康方案。 他的父親弗雷德里克·庫茲威爾(Fredric Kurzweil)在1970年死於心臟病,享年58歲。雷·庫茲威爾在他的書裡說,他相信如果技術足夠發達,可以把他父親的基因組重建出來,並且在那個基因組基礎上創造一個他父親的「功能性等同物」。他和他的父親有深厚的感情,這個計畫有非常明顯的個人情感驅動。 他還已經和 Alcor 簽約,在他死後冷凍保存,等待他預測的那個可以復活的未來。換言之,如果奇點如期到來,他希望從兩個方向都有保障。 ##</h2>
+<h2 class="chap-h2">長生術的歷史 秦始皇與不死藥 想要長生不死的欲望,在有記錄的人類歷史裡,從來沒有消失過。 秦始皇(西元前259至210年)是最著名的案例之一。他在統一中國之後,開始執著地尋找長生不死的方法。他派遣徐福帶領數千人出海尋找傳說中的仙藥,徐福再也沒有回來。他服用了大量的道士提供的長生丹,其中包含大量的汞,這可能實際上加速了他的死亡。他在49歲死於巡遊途中,可能死因包括汞中毒造成的器官衰竭。 這個故事的結構驚人地現代:一個擁有極大權力和資源的人,相信他的地位讓他有資格超越普通人類的命運,尋求能夠打破這個命運的技術,在追求這個目標的過程中受到了那些技術本身的傷害,最終以普通人的方式死去。 煉金術的長生夢 中世紀歐洲的煉金術士也追求長生不死,稱之為「長生不老藥」(elixir of life)或「哲人石」(philosopher’s stone)的另一個功能。煉金術士帕拉塞爾蘇斯(Paracelsus,1493-1541)相信人體的衰老是一種化學失衡,可以通過正確的化學物質糾正。他實際上在很多方面推動了現代藥理學的發展,但他的長生目標沒有實現——他在47歲死去。 法國啟蒙時代的孔多塞(Marquis de Condorcet,1743-1794)在他生命的最後幾年(他在法國大革命期間被迫逃亡,最終被逮捕,在獄中死去)寫了一本《人類精神進步史表綱要》(Sketch for a Historical Picture of the Progress of the Human Mind),書裡預測科學最終將把人類壽命無限延長。這是啟蒙時代科學樂觀主義和人類進步觀念的最早系統性表達之一,也是現代超人類主義的智識先驅。 20世紀的長生實驗 20世紀有幾個值得記錄的長生追求案例,它們之所以值得記錄,部分是因為它們的荒謬,部分是因為它們揭示了人類在這個問題上的輕信。 1927年,俄裔法籍外科醫生謝爾蓋·沃羅諾夫(Serge Voronoff)在一個國際外科醫師大會上宣布,他發現了返老還童的方法:把黑猩猩的睪丸組織移植到老年男性身上。他在接下來幾年裡進行了超過五百例這樣的手術,吸引了大量富裕的老年男性顧客,並且一度在學術界和媒體獲得了嚴肅的關注。到1930年代,大量的複製研究無法重現他宣稱的效果,他的名聲崩潰,他的技術被列為偽科學。 這個案例讓人不舒服地預示了一個模式:一個關於對抗衰老的宣稱,被有錢的老年男性大量採用,在科學審查之前就形成了商業規模,最後被發現完全沒有效果。這個模式在今天仍然以各種形式持續上演。 NMN、端粒酶與今天的抗老產業 今天的抗老化產業,在科學嚴謹程度上是一個非常寬廣的光譜。一端有嚴肅的長壽研究,包括哈佛醫學院大衛·辛克萊(David Sinclair)的 NAD+ 前驅物(NMN、NR)研究,以及索爾克研究所對 GDF11 蛋白的研究;另一端有大量沒有臨床依據的補充劑和商業計畫,它們借用科學語言,銷售對象是有足夠錢和足夠焦慮的消費者。 辛克萊在他2019年的書《老而不衰》(Lifespan)裡提出了一個「信息理論衰老假說」:細胞老化不是因為基因損傷,而是因為基因信息的「讀取噪音」增加,細胞忘記了如何正確地執行它的功能。如果這個假說是對的,那麼理論上可以通過重置基因讀取模式來逆轉衰老。 2023年,辛克萊和同事在《細胞》(Cell)期刊發表了一個研究,用這個方法在老鼠身上逆轉了視網膜的老化。這是一個有同行評審的嚴肅研究,但從老鼠眼睛到人類全身老化逆轉,中間的距離非常遙遠,而且這個假說本身還在被驗證。 目前的現實是:人類已知最長壽的人是讓娜·卡爾芒(Jeanne Calment),她在1997年以122歲過世。這個記錄在她死後25年仍然沒有被打破,而且在可預見的未來,任何宣稱能讓人活到200歲的商業產品,都還沒有足夠的科學依據支持這個宣稱。 ##</h2>
+<h2 class="chap-h2">矽谷的長生意志 科技富豪與死亡的對賭 在21世紀,追求不死的欲望找到了新的資金來源:科技產業的億萬富翁。 2013年,Google 宣布成立 Calico(California Life Company),專注於研究和對抗衰老。Google 的共同創辦人拉里·佩奇(Larry Page)是這個項目的主要推動者。Calico 和 AbbVie 製藥公司合作,投資了超過15億美元,但十年後,它發表的研究成果相對於投入資金,在業界被普遍認為是令人失望的。 PayPal 共同創辦人彼得·泰爾(Peter Thiel)公開說他相信死亡是一個可以解決的問題,並且投資了多個長壽研究項目,包括 SENS 研究基金會。他在接受採訪時說:「大多數人已經接受了死亡,這非常奇怪。我不認為死亡是自然秩序的一部分。」 歐雷·德·格雷(Aubrey de Grey)是 SENS 研究基金會的創辦人,一個英國計算機科學家出身的長壽研究理論家。他把衰老描述為一種「工程問題」——細胞損傷的積累,如果可以定期修復,原則上可以無限期延緩死亡。他把他的框架稱為「可忽略老化的逆轉策略」(Strategies for Engineered Negligible Senescence,SENS),並且預測他在世時就有50%的機率能夠活到「逃脫速度」(longevity escape velocity)——也就是每年平均壽命延長超過一年,讓你的預期剩餘壽命不斷增加而不是減少。 主流老化生物學界對德·格雷的評估是:他提出的部分問題是真實的,但他對解決方案的時間表是極度樂觀的,而且他的框架把一個複雜的生物學問題過度簡化成了一個工程問題。生物學不是機械,老化涉及的不只是可以被識別和修復的損傷,而是整個系統複雜度的增加,在任何技術層面都還沒有令人信服的解決路徑。 Bryan Johnson 與 Project Blueprint 目前最受媒體關注的個人長生追求,是科技企業家布萊恩·強森(Bryan Johnson,Braintree 的創辦人)的「Blueprint 計畫」。從2021年開始,他每年花費超過200萬美元,雇用一個醫療團隊,對自己的身體進行全方位的測量和優化,目標是讓他的各項生理指標達到20歲水平。 他的計畫在公開報告裡包含每天服用超過一百種補充劑和藥物、極其嚴格的飲食控制(每天第一餐在上午六點,晚上六點前完成所有進食)、每晚嚴格的八小時睡眠、以及大量的醫學測試,包括定期的血液分析、MRI、眼底攝影等。他也嘗試了血漿輸注(把他兒子的血漿輸入他的身體),雖然後來他說他決定暫停這個部分,因為數據不支持持續的效益。 醫學界對強森計畫的評估是:他的部分措施(睡眠、飲食控制、定期檢查)有充分的科學支持;他的部分措施(大量補充劑的長期組合效果)缺乏研究;他的血漿輸注嘗試在科學上還處於非常初步的階段,沒有足夠的臨床依據支持在健康成年人身上使用。 但強森計畫最重要的意義,可能不在於它的醫學效果,而在於它展示的那種執念的強度:一個擁有足夠資源的人,願意把日常生活的幾乎所有方面都重組,圍繞一個「不想死」的目標。這種強度,讓人想起了秦始皇,只是換了一個語言系統。 ##</h2>
+<h2 class="chap-h2">不死會讓人生變得什麼樣 波赫士的亞歷山大圖書館 阿根廷作家豪爾赫·路易斯·波赫士(Jorge Luis Borges)在1947年寫了一篇短篇小說,叫做《永生》(The Immortal)。故事裡的主角通過某種方式獲得了不死,然後花了幾千年時間發現,在無限的時間面前,所有的事情都失去了意義——因為任何事情都可以被推遲,在無限的時間裡,任何你沒有做的事最終都會被做到,任何你沒有成為的人最終也會成為。 波赫士說:「荷馬寫了《奧德賽》。如果我們有無限的時間,我也會。」 這個思想實驗觸及了一個真正的哲學問題:死亡,可能是賦予人生意義的必要條件之一。 有限性的功能 哲學家馬丁·海德格爾(Martin Heidegger)在《存在與時間》(Being and Time,1927)裡說,「向死而生」(Being-toward-death)是人類存在的根本結構之一。正是因為知道自己終將死去,人才能夠對當下的選擇和行動賦予意義。如果你有無限的時間,為什麼今天要做任何事? 心理學研究支持這個哲學直覺。史丹佛大學心理學家蘿拉·卡斯滕森(Laura Carstensen)的「社會情緒選擇理論」(Socioemotional Selectivity Theory)研究顯示,當人們感覺到時間有限(無論是因為年齡還是因為疾病),他們更傾向於投入真正對他們重要的事,而不是追求新奇或積累資源。時間的有限性,讓人更清楚地看到什麼真正重要。 這不是說不死一定是壞的。但它是說,在思考「我想要永生」這個問題的時候,你需要問一個更深的問題:你想要永生,是因為你有那麼多你想做而時間不夠的事,還是因為你害怕消失?這兩個動機,會帶來非常不同的生活方式。 社會層次的問題 不死的問題不只是個人的,它是社會的。 如果長生技術成為可能,它首先會成為誰的選項?在幾乎所有可以預見的情況下,答案是:那些能夠負擔的人。這意味著財富和壽命的不平等,將以一種前所未有的方式結合。一個億萬富翁可以活1000年,一個普通工人的壽命仍然是80年,這個世界的倫理含義,超過了任何現有的社會不平等框架。 更實際的問題是:如果沒有人死去,所有的位置都被佔滿了,新的一代還有什麼空間?知識、文化、政治觀念的更新,很大程度上是通過世代交替發生的。不死的世界,可能是一個停滯的世界,被幾千年前出生的人掌握著所有的資源和權力。 這些問題沒有簡單的答案。但它們是任何認真討論「技術長生」的人必須面對的現實,而不只是哲學遊戲。 ## 後記 那個你真正想要的問題 如果今天有一顆真正有效的長生藥,你會吃嗎? 大多數人的第一反應是「當然」。但停下來想久一點,你可能會發現這不是一個簡單的問題。 你願意永遠活下去,但你的朋友和家人也願意嗎?如果他們不願意,或者他們付不起那顆藥的費用,你是要一個人永遠活著,還是你寧可和他們一起終結? 你的身體活著,但你是誰這件事,每十年就會發生根本性的改變。一千年後的你,和今天的你,可能在價值觀、信仰、記憶的重點上完全不同。那個一千年後的你,是「你」活下去了,還是一個非常遙遠的親戚,佔據著你的身體? 也許更誠實的答案是:我們對「不死」的渴望,在很大程度上是對「消失」的恐懼,而不是對「永遠活著」的真實渴望。我們想要的不是無限的時間,而是足夠的時間,足夠在這裡完成我們覺得重要的事。 那個「足夠」比無限更難定義,也更值得思考。而這個問題,可能比任何長生技術都更接近你真正想知道的答案。</h2>
+<p>死亡與不死</p>
+<p>Vol.1《你為什麼怕死》 Vol.2《瀕死之後》 Vol.3《與死者同在》 Vol.4《轉世的案例》 Vol.5《不死的執念》 Vol.6《好好告別》</p>
 
-<div class="content">
-
-  <div class="book-meta">
-    <div class="series-label">那個感覺　系列四　Vol.5</div>
-    <h1 class="book-title">不死的執念</h1>
-    <div class="author">盧林著｜有的沒的小舖出品</div>
-    <span class="trial-badge">試　閱　版</span>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E6%AD%BB%E4%BA%A1%E4%B8%8D%E6%AD%BB%E3%80%91%E4%B8%8D%E6%AD%BB%E7%9A%84%E5%9F%B7%E5%BF%B5%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-4-vol5-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/that-feeling-4-vol6-trial.html">下一集 →</a>
   </div>
-
-  <h2>前言　人類願意花多少錢不消失</h2>
-
-  <p>在美國亞利桑那州斯科茨代爾，有一棟外觀普通的建築，裡面存放著大約兩百個人體，以及更多顆被單獨保存的頭顱。它們被浸泡在攝氏負196度的液態氮裡，等待一個也許永遠不會到來的時刻：科技進步到足以把他們復活。</p>
-
-  <p>這家公司叫做 Alcor 生命延伸基金會（Alcor Life Extension Foundation）。全身保存需要大約20萬美元，只保存頭顱（神經保存）需要8萬美元。他們有幾千名已支付費用、等待死後被冷凍的會員。</p>
-
-  <p>這不是科幻小說。這是一門正在運作的生意，有法人登記、有會計師、有員工，今天仍然在接受新的申請。</p>
-
-  <p>這是人類最直白的不死計畫之一。不需要靠信仰，不需要靠靈魂的假設，只需要相信科技會在某個未來的時間點追上死亡。</p>
-
-  <p>問題在於：「某個未來的時間點」這個短語，本身就需要非常嚴肅地被審視。這本書要帶你看的，是這個問題的全部厚度——從冷凍保存的實際科學現狀，到意識上傳的哲學困境，到雷·庫茲威爾（Ray Kurzweil）的奇點預言，以及歷史上每一個宣稱找到了長生方法的人，最後都去了哪裡。</p>
-
-  <h2>第一章　Alcor 與液態氮裡的人</h2>
-
-  <h3>冷凍保存的科學基礎</h3>
-
-  <p>人體冷凍保存的想法，最早由物理學家羅伯特·埃廷格（Robert Ettinger）在1964年的著作《永生的前景》（The Prospect of Immortality）裡系統性地提出。埃廷格的邏輯是：死亡在很多情況下是一個可以逆轉的過程，只要造成「死亡」的損傷不是不可修復的。如果一個人在死亡後立即被冷凍，讓身體的分解過程停止，那麼未來的醫學技術也許能夠治療原本造成死亡的疾病，並且將人復活。</p>
-
-  <p>Alcor 成立於1972年，是目前全球最大的人體冷凍保存機構。在技術層面，它的操作程序在死亡宣告後立即開始：工作人員對身體進行化學處理，用一種叫做「玻璃化」（vitrification）的方法，把體內的水分替換成低溫保護劑，以防止細胞在極低溫下因為冰晶形成而被破壞。然後身體被緩慢降溫，最終存放在液態氮的溫度。</p>
-
-  <p>2005年，Alcor 的首席科學家布萊恩·韋羅斯科（Brian Wowk）和同事在學術期刊發表了玻璃化技術的改進成果，顯示用這個方法保存的兔子腎臟，在解凍後仍然可以在另一隻兔子身上正常運作。這是低溫保存領域的一個里程碑，被作為技術可行性的重要證據。</p>
-
-  <p>但兔子腎臟和人類大腦之間，存在一個巨大的鴻溝。</p>
-
-  <h3>真正的問題：大腦的連結組</h3>
-
-  <p>即使冷凍保存能夠完整地保存細胞結構（目前這一點本身就有爭議），復活一個人面臨的核心問題是：大腦裡記錄著這個人的記憶、個性、知識和感受的，是神經元之間數以兆計的突觸連接，也就是所謂的「連結組」（connectome）。</p>
-
-  <p>一個成年人大腦大約有860億個神經元，每個神經元平均有7000個突觸連接，總連接數量大約是100兆。這個連接網絡的具體配置，就是你這個人的物理載體。任何復活程序，不只需要讓細胞存活，還需要讓這個100兆連接的精確配置完整地保存下來，並且在復活時精確地重建。</p>
-
-  <p>目前，科學家連繪製一隻線蟲（302個神經元）的完整連結組，都花了二十多年的時間。人類大腦連結組的完整繪製，在可預見的未來仍然是技術上不可能的任務。</p>
-
-  <div class="trial-end">
-    <div class="te-label">試　閱　到　此</div>
-    <p>第一章後半進入 Alcor 保存的真實案例，以及目前冷凍保存技術在科學上的確切爭議點。</p>
-    <div class="cta-group">
-      
-      <a href="/that-feeling-4.html" class="btn-back">← 回到驚喜角落</a>
-    </div>
-  </div>
-
-  <!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
-  <div class="snlabel">死亡與不死系列</div>
+  <div class="snlabel">死亡不死系列</div>
   <div class="snbooks">
-    <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
-    <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
-    <a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
-    <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
-    <span class="snbook current">Vol.5《不死的執念》</span>
-    <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+<a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+<a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+<a href="/that-feeling-4-vol3-trial.html" class="snbook">Vol.3《與死者同在》</a>
+<a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+<span class="snbook current">Vol.5《不死的執念》</span>
+<a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
   </div>
-  <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-4-vol5-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>

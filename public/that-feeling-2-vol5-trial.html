@@ -1,172 +1,198 @@
-﻿<!DOCTYPE html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>台灣人為什麼這麼怕｜那個感覺 系列二 Vol.5｜盧林著</title>
+<title>台灣人為什麼這麼怕｜那個感覺 台灣在地系列 Vol.5｜盧林著</title>
+<meta property="og:title" content="台灣人為什麼這麼怕【免費閱讀】那個感覺 台灣在地系列">
+<meta property="og:description" content="台灣在地系列 Vol.5 ——免費在線閱讀，不需要下載任何 App。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e14; --text: #dcdcf0; --text-muted: #a8a8cc;
-    --accent: #7a4a9e; --accent-light: rgba(122,74,158,0.15); --accent-dim: rgba(122,74,158,0.4);
-    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #9090b8;
-    --tw-accent: #c0392b; --tw-accent-light: rgba(192,57,43,0.12); --tw-accent-dim: rgba(192,57,43,0.35);
+    --bg: #100808;
+    --text: #dcdcf0;
+    --text-muted: #a8a8cc;
+    --accent: #c0392b;
+    --accent-light: rgba(192,57,43,0.12);
+    --accent-dim: rgba(192,57,43,0.35);
+    --card-bg: #14141e;
+    --card-border: rgba(192,57,43,0.35);
+    --label: #9090b8;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; min-height: 100vh; }
-  .page-back { padding: 20px 32px; border-bottom: 1px solid rgba(122,74,158,0.1); }
-  .page-back a { color: var(--text-muted); text-decoration: none; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; transition: color 0.2s; }
-  .page-back a:hover { color: var(--accent); }
-  .main-content { max-width: 720px; margin: 0 auto; padding: 60px 48px; }
-  .book-meta { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid rgba(122,74,158,0.15); }
-  .series-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--tw-accent); opacity: 0.8; margin-bottom: 16px; }
-  .book-title { font-size: 2.4rem; font-weight: 500; letter-spacing: 4px; color: #e8e8f5; line-height: 1.4; margin-bottom: 12px; }
-  .book-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 24px; }
-  .trial-badge { display: inline-block; padding: 5px 14px; border: 1px solid var(--tw-accent-dim); font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--tw-accent); opacity: 0.8; }
-  h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 3px; color: #e0e0f0; margin: 56px 0 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(122,74,158,0.15); }
-  h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #c8c8e8; margin: 36px 0 18px; }
-  p { margin-bottom: 24px; text-align: justify; color: var(--text); }
-  strong { color: #e0e0f0; font-weight: 500; }
-  .quote-block { border-left: 2px solid var(--tw-accent-dim); padding: 20px 28px; margin: 36px 0; background: var(--tw-accent-light); }
-  .quote-block p { color: #d0d0e8; font-size: 15px; margin-bottom: 0; line-height: 2.2; }
-  .data-note { background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px 28px; margin: 32px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.9; }
-  .data-note .note-label { font-size: 10px; letter-spacing: 4px; color: var(--label); margin-bottom: 10px; }
-  .fade-out { position: relative; margin-bottom: 0; }
-  .fade-out::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
-  .trial-end { margin: 60px 0 0; padding: 48px 40px; background: var(--card-bg); border: 1px solid var(--card-border); text-align: center; position: relative; overflow: hidden; }
-  .trial-end::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--tw-accent-dim), transparent); }
-  .trial-end-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--label); margin-bottom: 20px; }
-  .trial-end h3 { font-size: 1.2rem; letter-spacing: 3px; color: #e0e0f0; margin: 0 0 16px; border: none; }
-  .trial-end p { font-family: 'Noto Sans TC', sans-serif; font-size: 14px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.9; text-align: center; }
-  .btn-full { display: inline-block; padding: 12px 32px; background: var(--tw-accent-light); border: 1px solid var(--tw-accent-dim); color: var(--tw-accent); font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; text-decoration: none; transition: background 0.25s, color 0.25s; margin-bottom: 16px; }
-  .btn-full:hover { background: rgba(192,57,43,0.25); color: #e88; }
-  .back-ss-inline { display: block; margin-top: 16px; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-  .back-ss-inline:hover { color: var(--accent); }
-  .series-nav { max-width: 720px; margin: 0 auto; padding: 40px 48px 60px; border-top: 1px solid rgba(122,74,158,0.1); }
-  .snlabel { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 20px; }
-  .snbooks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-  .snbook { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(122,74,158,0.2); color: var(--text-muted); text-decoration: none; letter-spacing: 1px; transition: border-color 0.2s, color 0.2s; }
-  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
-  .snbook.current { border-color: var(--tw-accent-dim); color: #e88; background: var(--tw-accent-light); cursor: default; }
-  .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-  .back-link:hover { color: var(--accent); }
-  @media (max-width: 640px) { .main-content { padding: 40px 24px; } .book-title { font-size: 1.8rem; } .series-nav { padding: 40px 24px 60px; } }
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・台灣在地系列</div>
+<h1>台灣人為什麼這麼怕</h1>
+<div class="subtitle">Vol.5・台灣在地系列・完整版・免費閱讀</div>
 
-<div class="page-back"><a href="/that-feeling-2.html">← 返回台灣在地系列</a></div>
+<h1 class="chap-h1">那個感覺・台灣在地Vol.5《台灣人為什麼這麼怕》</h1>
+<h2 class="chap-h2">前言 你怕什麼，你說不清楚</h2>
+<p>你家裡有沒有什麼不能做的事情？不能把筷子插在飯上、不能在室內開傘、不能拍別人肩膀三下、晚上不能剪指甲——這些禁忌你可能從小就知道，但你說不清楚為什麼。</p>
+<p>你怕，但你不知道你在怕什麼。這是台灣禁忌文化最有趣的地方：很多人同時遵守著一套他們沒有完全相信、也沒有完全理解的規則。那個「寧可信其有」的心態，驅動了大量的日常行為。</p>
+<p>這本書要做的，是把那套規則的結構說清楚。不是為了告訴你該不該相信它，而是為了讓你理解它是怎麼被建構出來的、它在你的日常生活裡做了什麼、以及當代台灣人是怎麼跟它協商的。台灣的禁忌系統不是一套雜亂無章的迷信集合。它有邏輯，有結構，有在特定歷史和地理條件下形成的合理性。</p>
+<p>你說不清楚你在怕什麼——但那個說不清楚本身，就是理解台灣文化的一把鑰匙。</p>
+<h2 class="chap-h2">第一章 禁忌的結構——恐懼是怎麼被組織起來的</h2>
+<h3 class="chap-h3">禁忌不是迷信，是一套風險管理系統</h3>
+<p>人類學家瑪莉・道格拉斯（Mary Douglas）在1966年出版的《潔淨與危險》（Purity and Danger）裡，提出了一個對理解禁忌非常有用的框架：禁忌不是關於真實的危險，而是關於對「秩序被破壞」的焦慮。污染——觸發禁忌感的東西——就是那些「不在正確位置上的東西」。鞋子放在桌上讓人不舒服，因為鞋子屬於地板，不屬於桌子。那個不舒服感，就是禁忌感的基本結構。</p>
+<p>台灣的禁忌系統，在這個框架裡可以被理解為一套關於生死、陰陽、吉凶的分類系統。屬於「死亡」範疇的東西不應該出現在「生命慶典」的脈絡裡。屬於「陰」的東西不應該在「陽」的時間出現。當這些界線被跨越，禁忌感就出現了。</p>
+<p>道格拉斯的框架在台灣禁忌系統裡幾乎可以一一對應。把筷子插在飯裡讓人不舒服，因為那個動作屬於祭祀儀式，把它帶入日常飲食，就是把死亡的符號引入活人的餐桌——兩個不該相混的分類發生了碰撞。在室內開傘讓人不安，因為傘的使用場景屬於「外部、行走」，把它展開在家裡這個「內部、靜止」的空間，破壞了兩個分類之間的邊界。理解了這個底層邏輯，你會發現台灣的很多禁忌，其實是一套非常一致的分類秩序的具體表現。</p>
+<h3 class="chap-h3">禁忌的三個功能層次</h3>
+<p>台灣的禁忌系統在三個不同的層次上同時運作。第一層是實用性的：很多禁忌在它形成的歷史背景下，有非常具體的安全或衛生邏輯。「不能把筷子插在飯上」，因為那是祭祀死者的方式，把它帶進日常飲食是邊界混亂的訊號。「晚上不能剪指甲」，在沒有電燈的年代確實有受傷的風險。</p>
+<p>第二層是社會性的：禁忌是一個社群邊界的標記。遵守同樣的禁忌，代表你是這個社群的成員。第三層是心理性的：禁忌提供了一套對不確定性的管理機制。遵守相關禁忌讓你感覺「我已經盡了我能做的」，那個「已盡責」的感覺降低了焦慮，讓人可以繼續行動。</p>
+<p>這三個功能層次往往同時存在，不是選其中一個解釋。一個禁忌可以同時有它的歷史衛生根據、社群邊界功能、和個人心理功能——這也是為什麼禁忌這麼難被單純的「你知道這個其實不科學吧」給破除。要破除一個禁忌，你需要同時處理它在三個層次上服務的需求，光靠知識層面的說服是不夠的。</p>
+<p>心理學研究</p>
+<p>心理學家斯圖亞特・沃辛顿（Stuart Vyse）在研究迷信行為時發現，在不確定性高、個人控制感低的情境下，迷信行為的頻率顯著上升。台灣人在重要決策前的廟宇問事、運動員在重要比賽前的儀式性行為——這些行為的心理功能是相同的：在無法完全掌控的情境裡，製造一種「我做了某些事」的感覺，把焦慮轉化為行動。</p>
+<h3 class="chap-h3">禁忌的地理差異</h3>
+<p>台灣的禁忌不是全島統一的。閩南人、客家人、不同地區的原住民族，各自有不同的禁忌系統，有些重疊，有些衝突。客家文化的禁忌系統跟閩南文化有不少差異，某些在閩南文化裡被認為不吉利的行為，在客家文化裡是中性的。這種差異在歷史上是族群邊界的標記，在當代則常常製造跨族群家庭的文化摩擦。</p>
+<p>一個具體的例子：閩南文化對農曆七月的禁忌非常嚴格，認為這個月鬼門開，各種禁止事項繁多。客家文化雖然同樣有七月普渡的傳統，但整體的禁忌嚴格程度較低，對農曆七月的敬畏感不如閩南社群強烈。在閩客雜居的地區，夫妻雙方對農曆七月行為規範的分歧，有時候成為家庭衝突的來源——不是因為有人不尊重，而是兩套禁忌系統對「七月該怎麼過」本來就有不同的預設。</p>
+<p>原住民族的禁忌系統又是另一個維度。泰雅族對飲食和行為的禁忌（gaga）有非常嚴格的規範，違反的後果在傳統上被認為是集體性的——不只傷害個人，也傷害整個族群。這種「禁忌違反的後果是集體性的」邏輯，跟閩南文化的禁忌邏輯（違反主要傷害個人或家庭）有本質的差異。台灣是一個禁忌高密度、但禁忌系統高度分歧的社會——大家都在怕，但怕的東西不完全一樣。</p>
+<h2 class="chap-h2">第二章 沖煞與犯沖——身體在空間裡的沖煞邏輯</h2>
+<h3 class="chap-h3">什麼是沖煞</h3>
+<p>「沖煞」是台灣民間信仰裡一個核心概念，指的是人的身體或命格跟特定空間、時間、或其他人的命格之間產生了不相容的碰撞。沖煞的結果是身體或運勢受損——不舒服、倒楣、生病，或者更嚴重的事情。</p>
+<p>沖煞的邏輯建立在一個前提上：人不是孤立的個體，人的身體和命格跟外在的空間、時間、以及他人之間有持續的能量交互作用。當那個交互作用的結果是負面的，就叫做沖煞。</p>
+<p>這個前提在西方理性主義的框架裡是形而上學的，但在台灣的日常生活脈絡裡，它是一個非常實用的問題診斷工具。當你不明原因地持續不舒服、持續倒楣，「可能沖煞了」提供了一個解釋框架和對應的解決方向，讓你從被動承受變成主動處理。這個功能在心理學上是真實的：擁有一個解釋，哪怕那個解釋的正確性無法被驗證，比沒有解釋更能讓人從焦慮的狀態裡回復行動能力。</p>
+<h3 class="chap-h3">產後坐月子——沖煞邏輯的身體應用</h3>
+<p>台灣的坐月子文化，是沖煞邏輯在身體層面最系統性的應用。產後的女性在傳統上被認為身體特別脆弱、對外界的不良影響特別敏感，因此需要嚴格的隔離和保護。不能吹風、不能碰冷水、飲食有嚴格限制、外出有禁忌——這套規範，從現代醫學的角度有部分是有依據的（產後免疫力確實較低），有部分是過度的，但整體而言，它是沖煞邏輯在一個具體脆弱情境裡的系統性應用。</p>
+<p>有意思的是，台灣的坐月子文化在現代化過程中，是少數幾個維持得相當完整的傳統身體實踐之一。受過高等教育、在其他方面完全現代化的台灣女性，很多在生育後仍然嚴格遵守坐月子規範——有些是相信其效果，有些是「反正遵守比不遵守安全」，有些是面對家人壓力。這個現象說明，沖煞邏輯在台灣的生命力，遠超過它在理性主義框架裡應該有的生命力。</p>
+<p>台灣在2000年代開始出現商業化的「坐月子中心」，讓產後女性在專門的機構進行月子調養。這個產業的出現本身很有意思：它把一個傳統的、家庭內部的儀式實踐，轉化成了一個商業服務，同時結合了傳統的禁忌框架（有些中心提供傳統食補、維持傳統禁忌規範）和現代的醫療照護。根據產業統計，台灣月子中心產業年產值超過百億新台幣，反映了這個傳統實踐在當代的持續需求和商業轉化能力。</p>
+<p>醫療人類學</p>
+<p>醫療人類學者呂理政在研究台灣民俗醫療時指出，沖煞概念跟中醫的「氣」的概念有深度連結：身體的健康取決於氣的流通和平衡，外界的負面影響（沖煞）會擾動身體的氣，導致失衡。這個框架讓沖煞不只是一個靈異概念，而是一個整合進身體觀的完整系統。</p>
+<h3 class="chap-h3">嬰兒的脆弱性與沖煞保護</h3>
+<p>台灣民間信仰認為嬰兒特別容易被沖煞。嬰兒的靈魂未定，跟陰陽兩界的界線特別薄，容易受到各種不好的影響。因此嬰兒有大量的保護禁忌：不能帶去參加喪禮（死亡能量會傷害嬰兒）、不能讓陌生人隨便稱讚（讚美可能引來覬覦）、需要配戴特定的護身符。</p>
+<p>這些保護措施從現代醫學的角度不是全部無意義的。帶新生兒去人群密集的喪禮確實有感染風險；避免讓陌生人接觸嬰兒確實降低了病原體傳播的機會。傳統的沖煞保護邏輯，在很多情況下跟衛生防疫邏輯在行為上是重疊的——只是用不同的語言解釋同一套行為。</p>
+<p>職場沖煞是另一個在當代台灣非常活躍的應用領域。搬進新辦公室要擇日、重要合約簽定前要問事、對某個商業夥伴感覺「磁場不合」——這些判斷和行為，在現代化的商業環境裡照樣大量存在，只是往往不被公開討論。台灣有相當比例的中小企業主在重大決策前會徵詢命理師或廟宇的意見，這個比例在某些調查裡高達三到四成。沖煞的邏輯，在從傳統農業社會進入工商社會的過程中，完成了它的轉型，找到了新的應用場景。</p>
+<h2 class="chap-h2">第三章 犯太歲——時間的禁忌邏輯</h2>
+<h3 class="chap-h3">為什麼每年都有很多人覺得特別難過</h3>
+<p>農曆新年前後，台灣的廟宇擠滿了來「安太歲」的人。太歲是中國傳統星象系統裡的一個概念，指的是跟木星對應的假想星體，每年在不同的地支方位運行。當你的生肖跟當年太歲的地支相沖或相刑，你就「犯太歲」了，這一年被認為諸事不順，需要特別謹慎和保護。</p>
+<p>太歲信仰的歷史可以追溯到漢代，最初跟實際的天文觀測有關聯，隨著時間演變成了以地支生肖為核心的命理框架。台灣廟宇的安太歲服務，通常包括在廟裡點一盞太歲燈、或者由法師進行特定的化解儀式。這個服務的費用從幾百到幾千元不等，全台各主要廟宇每年從安太歲服務獲得的收入相當可觀——以某些香火鼎盛的廟宇為例，農曆年前的安太歲服務人次可以達到數萬人，構成廟宇年度收入的重要來源。</p>
+<p>台灣每年有大量人口犯太歲——因為跟太歲相關的地支不只是「正沖」一種，還有「偏沖」「刑」「破」「害」等多種關係，每種各自影響不同的生肖。計算下來，每年差不多有三分之一到一半的台灣人，在某種程度上跟太歲有不好的關係。這個覆蓋率，讓安太歲成為台灣廟宇最重要的年度服務之一。</p>
+<h3 class="chap-h3">犯太歲的心理效應——預言的自我實現</h3>
+<p>犯太歲文化有一個值得認真討論的心理效應：當一個人相信自己今年犯太歲，他可能真的在這一年遭遇更多困難——不是因為太歲真的在影響他，而是因為「今年會不好」的預期改變了他的行為和認知。</p>
+<p>預期犯太歲的人，可能對負面事件更加敏感，更容易注意到和記憶壞事，而忽略好事；可能因為焦慮而做出更保守或更魯莽的決策；可能在本來可以解決的困難前更快放棄，因為「今年本來就會這樣」。這是心理學上的「預言自我實現」（self-fulfilling prophecy）和「確認偏誤」（confirmation bias）的典型組合。</p>
+<p>反過來，安太歲儀式的心理效果也是真實的：做了儀式之後，那個焦慮被象徵性地處理了，心理負擔減輕，行為可能因此更從容，結果反而真的更好。信仰的安慰劑效應，在這裡有具體的運作空間。</p>
+<p>這個雙向效應說明了一件重要的事：犯太歲文化的力量，不在於太歲這個天文（或命理）概念的客觀效力，而在於相信這件事之後，人的心理和行為發生的真實變化。一個在生活裡充分運作的信仰系統，不需要它的形而上學前提是正確的，它只需要對信仰者的實際生活產生真實的效果——而犯太歲文化確實做到了這一點，只是那個效果的機制跟信仰者以為的不一樣。</p>
+<p>統計觀察</p>
+<p>台灣有幾位命理研究者嘗試系統性地追蹤「犯太歲年」的實際事故率和負面事件率，與非犯太歲年進行比較。這類研究在方法論上有嚴重挑戰（定義和測量都困難），但目前尚無嚴格的統計研究支持犯太歲與負面事件之間存在超出隨機的相關性。太歲的影響，在現有的量化研究框架裡，更可能是心理性的而非命理性的。</p>
+<h2 class="chap-h2">第四章 數字、顏色、方向——日常生活的禁忌地圖</h2>
+<h3 class="chap-h3">數字的吉凶</h3>
+<p>台灣對數字的吉凶有一套相當完整的系統，而且這個系統跟全球其他華人社會有部分重疊、部分差異。4因為諧音「死」而被廣泛認為不吉利，這個禁忌普遍到很多台灣建築的電梯直接跳過4樓（用3A或5代替）。8因為諧音「發」而被認為吉利，房價、車牌、電話號碼含8的往往有溢價。</p>
+<p>但台灣的數字禁忌比4和8複雜得多。閩南語的諧音系統跟普通話不同，製造了一套台灣特有的吉凶數字邏輯。在閩南語裡，「4」唸作「sì」，諧音「死」，這跟普通話的邏輯相同。但「18」在閩南語唸起來諧音「會發」，在台灣反而是個吉利的數字。「168」在閩南語音諧接近「一路發」，是台灣商業場合非常常見的吉利數字組合，店名、電話末碼出現這個組合的比例遠高於隨機分布。</p>
+<p>這個差異讓台灣的數字禁忌跟中國大陸的版本有不少出入，外地人到台灣有時候會遭遇這個文化落差。更有趣的是，隨著台灣普通話教育的普及和網路文化的影響，一些原本只在閩南語語境裡有意義的數字禁忌，開始被不會說閩南語的年輕世代以普通話的邏輯重新詮釋，造成同一個數字在不同世代之間有不同吉凶評價的現象。</p>
+<h3 class="chap-h3">顏色的邊界——紅白之間</h3>
+<p>台灣文化對顏色有非常明確的吉凶分類，核心是紅色（吉，生命，喜慶）和白色（喪，死亡，哀悼）的對立。這個分類在日常生活裡製造了大量的行為規範：婚禮用紅色，喪禮用白色；逢年過節送禮不能送白色包裝；白花在某些脈絡下是禁忌。</p>
+<p>這個顏色禁忌跟西方文化有根本的差異——西方的婚禮用白色，台灣的傳統婚禮用紅色；西方的喪禮用黑色，台灣的傳統喪禮用白色。這個差異在當代台灣製造了有趣的文化協商：受西方文化影響的台灣年輕人越來越多選擇白色婚紗，但很多台灣長輩仍然對白色婚禮有保留。</p>
+<p>這個張力在實際的婚禮籌備過程裡往往製造具體的家庭談判。新娘想穿白色婚紗，婆婆或媽媽認為「白色不好」——結果通常是某種折衷：白色婚紗留在婚禮的前段，在傳統儀式環節換上紅色旗袍或禮服。這個折衷本身是一個非常台灣式的解決方案：兩套分類系統都被尊重，各自在對應的脈絡裡運作，不需要決定哪一套是對的。</p>
+<p>黑色在台灣禁忌系統裡的位置比較複雜。傳統上黑色跟陰暗和死亡相關，但在現代都市文化裡，黑色已經是時尚和正式場合的標準色，這個傳統禁忌已經大幅弱化。顏色禁忌的演化，是台灣傳統禁忌系統面對現代化時適應和調整的一個具體案例。</p>
+<h3 class="chap-h3">方向與風水——空間的吉凶邏輯</h3>
+<p>台灣的風水文化，是空間禁忌最系統化的表現。風水的基本邏輯是：空間的配置影響居住者的氣，而氣的狀態影響健康、財富和運勢。門的朝向、床的位置、廁所和廚房的相對位置、以及房屋對街道和周圍建築的關係——這些都被納入風水的分析框架。</p>
+<p>台灣的房地產市場深受風水觀念影響。同一棟建築，風水條件好的單位售價往往高於風水條件差的。「虎口屋」（房屋正對T字路口的末端）被認為有「煞氣」，在市場上的售價通常有折扣。根據部分房仲業者的統計，有明顯風水缺陷的物件（如正沖路口、頂樓加蓋不規則、近殯儀館）的成交價可能比周邊正常物件低10%到20%，在某些傳統信仰較強的地區折扣更大。這些市場效應說明風水禁忌對台灣人的財務決策有真實的影響，不管相信者的信仰程度如何。</p>
+<p>風水師在台灣是一個具有相當社會地位的職業。從企業辦公室的空間配置，到住宅的室內裝潢，到廠房的選址，風水諮詢在台灣的商業決策裡是一個常見的環節。在台灣的中小企業文化裡，「老闆信風水」不是一個需要特別說明的事，而是一個普遍存在的現實。</p>
+<h2 class="chap-h2">第五章 禁忌的世代傳遞——你怎麼學會怕的</h2>
+<h3 class="chap-h3">身體先學會，大腦後來才知道</h3>
+<p>禁忌的傳遞，很少是通過明確的語言教導完成的。你不是在某一天被人坐下來解釋「這些禁忌的理由是這樣的，所以你要遵守」。你是在日常生活的互動裡，透過觀察和模仿，把這套規則裝進了身體。</p>
+<p>你看到大人在某個情況下臉色改變，你學會了那個情況是需要注意的。你做了某件事，大人立刻有反應，你學會了那件事不能做。你聽到長輩說「這樣不好」，你不知道為什麼不好，但你知道不好。這套學習過程是前語言的，是身體性的，是在你有能力評估那些規則的理由之前就完成的。</p>
+<p>這就是為什麼禁忌這麼難被理性批評破壞。你不是因為相信禁忌的理由才遵守禁忌——你是因為身體已經把禁忌學進去了，違反它會讓你感到不舒服，而那個不舒服感是即時的、感官的，遠比任何理性論證更有說服力。</p>
+<p>法國社會學家皮耶・布迪厄（Pierre Bourdieu）把這種身體層面的知識稱為「習性」（habitus）：一套被身體化的傾向、感知方式和行動方式，在個人有意識地思考之前就發揮作用。台灣的禁忌系統，是習性在文化傳承層面最鮮明的案例之一——那個「不舒服感」不是你的個人反應，而是你的身體替整個文化系統代言。</p>
+<h3 class="chap-h3">隔代傳遞的強度</h3>
+<p>有趣的是，台灣很多禁忌的傳遞強度，隔代比親代更強。祖父母對孫子女施加的禁忌要求，往往比父母對子女更嚴格，傳遞的焦慮感也更強烈。這個現象有幾個可能的解釋。</p>
+<p>第一是時間距離：祖父母那一代生活在禁忌系統更完整、更有效力的環境裡，他們對那套系統的情感依附更深。第二是焦慮的代際放大：祖父母對孫子女的焦慮往往比父母更強，因為他們有更長的時間來累積「這個世界有多危險」的印象，同時對孫子女的影響力更有限，所以用禁忌來彌補。第三是社會角色：在台灣家庭結構裡，照顧孫子女的祖父母往往承擔了「保護者」的角色定義，而禁忌是保護工具的一部分。</p>
+<p>社會學觀察</p>
+<p>台灣的家庭社會學研究顯示，在有祖父母參與育兒的家庭裡，兒童接觸到的禁忌數量和禁忌的遵守嚴格程度，顯著高於核心家庭。這個差異在都市化程度高的地區尤為明顯，因為都市核心家庭的父母往往因為工作需要祖父母協助育兒，在禁忌問題上的話語權相對弱化。</p>
+<h3 class="chap-h3">禁忌的斷裂——年輕世代的協商</h3>
+<p>台灣的年輕世代在禁忌系統上，普遍採取了一種「選擇性遵守」的態度：某些禁忌繼續遵守（通常是跟重要人生節點相關的，例如婚喪喜慶的禁忌），某些禁忌被放棄（通常是日常生活中執行成本高而感知效益低的）。</p>
+<p>這個選擇性遵守不是隨機的，它有規律：凡是跟家族長輩的情感關係緊密掛鉤的禁忌，遵守率更高；凡是跟個人日常生活直接衝突的禁忌，放棄率更高。禁忌的命運，在很大程度上取決於它跟人際關係的連結程度，而不是取決於人們對它的信仰程度。</p>
+<p>一個觀察值得特別說明：台灣年輕人對禁忌的「選擇性遵守」，跟他們的「選擇性相信」並不是同一件事。有很多年輕人繼續遵守某個禁忌，不是因為相信它，而是因為「遵守比較省事」「不遵守要跟長輩解釋很麻煩」「萬一是真的怎麼辦」。這種態度讓禁忌的遵守行為比禁忌的信仰更有韌性——一個行為可以在信仰瓦解之後很久，靠著慣性和人際成本繼續維持。這解釋了為什麼台灣的禁忌系統在整體世俗化的趨勢下，消退的速度比很多人預期的慢。</p>
+<h2 class="chap-h2">第六章 當禁忌失效——恐懼談判的幾種方式</h2>
+<h3 class="chap-h3">禁忌失效的幾種方式</h3>
+<p>禁忌失效不是一件少見的事。台灣人對禁忌失效有幾種不同的處理方式，每一種都說明了一些關於這個系統的有趣事情。</p>
+<p>第一種是重新詮釋：「其實那個禁忌的意思是……」用新的框架讓舊的禁忌在當代脈絡裡繼續有意義。火葬對傳統土葬禁忌系統的衝擊，就是透過這種重新詮釋被消化的。第二種是例外化：「那個禁忌在某些情況下可以例外」。當禁忌跟現實需求衝突時，例外條款讓兩者都能維持。第三種是放棄並轉移：禁忌被放棄，但對應的焦慮需求轉移到另一個管道——可能是更世俗的風險管理（買保險、做健檢），可能是另一個信仰系統。</p>
+<p>這三種處理方式的共同點，是它們都沒有讓對應的焦慮消失——它們只是改變了焦慮的形式和出口。這說明了一件重要的事：禁忌系統的生存，不取決於具體禁忌的存活，而取決於禁忌所服務的那個底層焦慮是否持續。只要不確定性存在，只要人對自己無法掌控的事情感到恐懼，就會有新的禁忌和儀式長出來填補那個需求。</p>
+<h3 class="chap-h3">「寧可信其有」的理性基礎</h3>
+<p>台灣人對禁忌的「寧可信其有」態度，表面上看起來不理性，但從決策理論的角度有它的邏輯。遵守禁忌的成本通常很低（不把筷子插在飯上花了你多少代價？），而如果禁忌是真的，違反它的代價可能很高（倒楣、生病、壞事）。在成本不對稱的情況下，保守策略有它的理性基礎。</p>
+<p>這個邏輯跟帕斯卡賭注（Pascal’s Wager）的結構類似：如果上帝存在，信仰的代價小而收益大；如果上帝不存在，信仰的代價也很小。台灣的禁忌系統，在很多信眾的心裡就是這樣運作的——不是完全相信，而是在不確定性下做出的理性保守選擇。</p>
+<p>這個「寧可信其有」的邏輯，在台灣特別根深柢固，有它的歷史原因。台灣的移民史和殖民史，讓這個島嶼上的人積累了大量「你以為平安，其實不是」的集體經驗。那種對不確定性的高度警覺，不只是禁忌系統製造的，也是真實的歷史經驗強化的。在這個脈絡裡，「寧可信其有」不只是一個認知偏誤，也是一個對特定歷史情境的合理反應。</p>
+<h3 class="chap-h3">恐懼的未來——禁忌系統在當代台灣的生存策略</h3>
+<p>台灣的禁忌系統，面對現代化、都市化、科學教育的衝擊，展現出了驚人的適應能力。它沒有整體消失，而是在調整形式、找到新的宿主、跟新的生活形態協商。</p>
+<p>最明顯的適應是數位化。禁忌和化解方法在LINE群組、Facebook、YouTube上大量流通，形成了一個高速傳播的禁忌知識網絡。傳統上需要面對面傳遞的禁忌知識，現在可以在幾秒內傳給幾百人。台灣有大量的命理相關YouTube頻道，訂閱數超過十萬的頻道有數十個，每到農曆新年前後的犯太歲、安太歲相關影片，單支播放量往往超過百萬。這讓禁忌系統的覆蓋面在某些方面反而擴大了，即使遵守的嚴格程度在下降。</p>
+<p>另一個適應是商業化。禁忌製造了需求，需求製造了市場。安太歲服務、風水諮詢、各種護身符和化煞道具、坐月子中心、命理App——這些服務在台灣構成了一個規模相當大的產業，且在年輕消費者中仍然有市場。禁忌不只是文化，它也是經濟。那些宣告「我不信這些」的人，往往在某個特定的人生節點，因為婚姻、生育、搬家、事業決策，而重新接觸這個系統，成為它的消費者。禁忌系統的商業化，讓它在世俗化的社會裡找到了一個穩定的生存形式：你不需要真的相信它，你只需要願意為它付費。</p>
+<h2 class="chap-h2">後記 你的恐懼是你的，也是大家的</h2>
+<p>你從這本書裡學到了什麼，取決於你帶著什麼問題來讀它。</p>
+<p>如果你來讀這本書，是因為你想知道那些禁忌是不是真的——我沒有辦法給你一個確定的答案，但我給了你一個框架來理解它們為什麼存在，以及它們在做什麼。</p>
+<p>如果你來讀這本書，是因為你覺得自己遵守了一些自己也不太相信的規則，想搞清楚這是怎麼回事——我希望你現在對那個「不太相信但還是遵守」的狀態有了更清楚的理解。那不是矛盾，那是兩套認知系統並行運作的正常結果。</p>
+<p>台灣的禁忌系統，是幾百年來住在這塊島嶼上的人，在面對各種不確定性時發展出來的集體應對工具。它不完美，有些部分需要被更新，有些部分製造了不必要的焦慮。但它的存在本身，說明了一件事：人類需要一套方法來面對不確定性，這個需求是真實的，不管你用什麼框架來滿足它。</p>
+<p>你怕什麼，你說不清楚。但恐懼本身並不需要說清楚才有效果——它在你的身體裡、你的決策裡、你跟家人的互動裡，安靜地、持續地運作。現在你對它有了多一點的語言，但語言未必能讓它消失。有時候，理解一個恐懼讓你更能帶著它生活；有時候，理解它會讓你開始質疑它的必要性。這兩種結果，我都覺得比對它一無所知更好。</p>
+<p>台灣在地</p>
+<p>那個感覺・台灣在地 Vol.5《台灣人為什麼這麼怕》</p>
+<p>作者：盧林 著／有的沒的小舖 出品</p>
+<p>本書由作者與 AI 工具協作完成。</p>
+<p>── 讀墨購買本系列 ──</p>
 
-<div class="main-content">
-
-  <div class="book-meta">
-    <div class="series-tag">那個感覺 · 系列二 · VOL. 5</div>
-    <h1 class="book-title">台灣人為什麼這麼怕</h1>
-    <div class="book-subtitle">禁忌、沖煞、犯太歲——恐懼的文化結構</div>
-    <span class="trial-badge">開放試閱 · 前言 + 第一章節選</span>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E5%8F%B0%E7%81%A3%E5%9C%A8%E5%9C%B0%E3%80%91%E5%8F%B0%E7%81%A3%E4%BA%BA%E7%82%BA%E4%BB%80%E9%BA%BC%E9%80%99%E9%BA%BC%E6%80%95%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-2-vol5-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/that-feeling-2-vol6-trial.html">下一集 →</a>
   </div>
-
-  <h2>前言　你怕什麼，你說不清楚</h2>
-
-  <p>你家裡有沒有什麼不能做的事情？不能把筷子插在飯上、不能在室內開傘、不能拍別人肩膀三下、晚上不能剪指甲——這些禁忌你可能從小就知道，但你說不清楚為什麼。</p>
-
-  <p>你怕，但你不知道你在怕什麼。這是台灣禁忌文化最有趣的地方：很多人同時遵守著一套他們沒有完全相信、也沒有完全理解的規則。那個「寧可信其有」的心態，驅動了大量的日常行為。</p>
-
-  <p>這本書要做的，是把那套規則的結構說清楚。不是為了告訴你該不該相信它，而是為了讓你理解它是怎麼被建構出來的、它在你的日常生活裡做了什麼、以及當代台灣人是怎麼跟它協商的。</p>
-
-  <p>台灣的禁忌系統不是一套雜亂無章的迷信集合。它有邏輯，有結構，有在特定歷史和地理條件下形成的合理性。把那個邏輯說清楚，你會發現你以前覺得奇怪的那些規則，其實很多都有非常具體的道理——即使那個道理跟你以為的完全不同。</p>
-
-  <p>我們從最根本的問題開始：禁忌是什麼，它為什麼存在？</p>
-
-  <h2>第一章　禁忌的結構：恐懼是怎麼被組織起來的</h2>
-
-  <h3>禁忌不是迷信，是一套風險管理系統</h3>
-
-  <p>人類學家瑪莉・道格拉斯（Mary Douglas）在1966年出版的《潔淨與危險》（Purity and Danger）裡，提出了一個對理解禁忌非常有用的框架：禁忌不是關於真實的危險，而是關於對「秩序被破壞」的焦慮。</p>
-
-  <p>她的核心論點是：每個社會都有一套關於「什麼東西應該在什麼地方」的隱性分類系統。污染（pollution）——也就是觸發禁忌感的東西——就是那些「不在正確位置上的東西」。鞋子放在桌上不衛生嗎？不一定。但它讓人不舒服，因為鞋子屬於地板，不屬於桌子。那個不舒服感，就是禁忌感的基本結構。</p>
-
-  <p>台灣的禁忌系統，在道格拉斯的框架裡可以被理解為一套關於生死、陰陽、吉凶的分類系統。屬於「死亡」範疇的東西（白色、喪禮相關的行為、特定的數字）不應該出現在「生命慶典」的脈絡裡。屬於「陰」的東西不應該在「陽」的時間出現。當這些界線被跨越，禁忌感就出現了——不一定是因為真的有什麼危險，而是因為分類系統被擾動了。</p>
-
-  <h3>禁忌的三個功能層次</h3>
-
-  <p>台灣的禁忌系統在三個不同的層次上同時運作。第一層是實用性的：很多禁忌在它形成的歷史背景下，有非常具體的安全或衛生邏輯。「不能把筷子插在飯上」，因為那是祭祀死者的方式，把它帶進日常飲食會讓在場的人聯想到死亡——這是一個邊界維護的邏輯，不是毫無根據的迷信。「晚上不能剪指甲」，在沒有電燈的年代，確實有受傷的風險。</p>
-
-  <p>第二層是社會性的：禁忌是一個社群邊界的標記。遵守同樣的禁忌，代表你是這個社群的成員。不遵守禁忌，輕則讓長輩不舒服，重則被認為是對社群規範的挑戰。禁忌的遵守，是一種社會信號——我知道這裡的規則，我接受這裡的框架。</p>
-
-  <p>第三層是心理性的：禁忌提供了一套對不確定性的管理機制。當你不知道某件事情的結果，遵守相關禁忌讓你感覺「我已經盡了我能做的」，把剩下的交給命運。那個「已盡責」的感覺，降低了焦慮，讓人可以繼續行動。</p>
-
-  <div class="data-note">
-    <div class="note-label">心理學研究</div>
-    心理學家斯圖亞特・沃辛顿（Stuart Vyse）在研究迷信行為時發現，在不確定性高、個人控制感低的情境下，迷信行為的頻率顯著上升。運動員在重要比賽前的儀式性行為、學生在考試前的特定準備動作、台灣人在重要決策前的廟宇問事——這些行為的心理功能是相同的：在無法完全掌控的情境裡，製造一種「我做了某些事」的感覺，把焦慮轉化為行動。
-  </div>
-
-  <h3>禁忌的地理差異：同一個島，不同的怕法</h3>
-
-  <p>台灣的禁忌不是全島統一的。閩南人、客家人、不同地區的原住民族，各自有不同的禁忌系統，有些重疊，有些衝突，有些是同一個底層邏輯在不同文化包裝下的變體。</p>
-
-  <p>客家文化的禁忌系統，跟閩南文化有不少差異。某些在閩南文化裡被認為不吉利的行為，在客家文化裡是中性的；某些閩南文化裡完全沒有的禁忌，在客家社區裡是嚴格執行的。這種差異在歷史上是族群邊界的標記，在當代則常常製造跨族群家庭的文化摩擦。</p>
-
-  <p>原住民族的禁忌系統更是高度在地化，跟漢人的系統在底層邏輯上有根本的差異。泰雅族的gaga禁忌、布農族的狩獵禁忌、阿美族的祭典禁忌——這些系統跟漢人的禁忌文化雖然表面上都是「不能做某些事」，但它們的宇宙觀基礎是完全不同的。</p>
-
-  <div class="fade-out">
-    <p>這種禁忌的多樣性，在當代台灣的都市環境裡製造了一個有趣的現象：你在台北街頭遇到的任何一個人，他遵守的禁忌系統可能跟你的完全不同，而你們都不一定知道對方的規則是什麼。台灣是一個禁忌高密度、但禁忌系統高度分歧的社會——大家都在怕，但怕的東西不完全一樣。</p>
-  </div>
-
-  <div class="trial-end">
-    <div class="trial-end-label">試閱到這裡</div>
-    <h3>後面還有很多</h3>
-    <p>
-      第一章繼續拆解台灣禁忌系統的深層結構。<br>
-      第二章專門談沖煞：你的身體在空間裡<br>
-      是怎麼被認為會跟不好的東西相遇的。<br>
-      第三章談犯太歲——為什麼每年都有那麼多人<br>
-      覺得自己這年特別難過。
-    </p>
-    
-    <a href="/that-feeling-2.html" class="back-ss-inline">← 回到驚喜角落</a>
-  </div>
-
-</div>
-
-<!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
   <div class="snlabel">台灣在地系列</div>
   <div class="snbooks">
-    <a href="/that-feeling-2-vol1-trial.html" class="snbook">Vol.1《這裡本來就不一樣》</a>
-    <a href="/that-feeling-2-vol2-trial.html" class="snbook">Vol.2《那些廟在說什麼》</a>
-    <a href="/that-feeling-2-vol3-trial.html" class="snbook">Vol.3《你家附近的鬼故事》</a>
-    <a href="/that-feeling-2-vol4-trial.html" class="snbook">Vol.4《死了要去哪》</a>
-    <span class="snbook current">Vol.5《台灣人為什麼這麼怕》</span>
-    <a href="/that-feeling-2-vol6-trial.html" class="snbook">Vol.6《這塊土地上的聲音》</a>
+<a href="/that-feeling-2-vol1-trial.html" class="snbook">Vol.1《這裡本來就不一樣》</a>
+<a href="/that-feeling-2-vol2-trial.html" class="snbook">Vol.2《那些廟在說什麼》</a>
+<a href="/that-feeling-2-vol3-trial.html" class="snbook">Vol.3《你家附近的鬼故事》</a>
+<a href="/that-feeling-2-vol4-trial.html" class="snbook">Vol.4《台灣人為什麼這麼怕》</a>
+<span class="snbook current">Vol.5《台灣人為什麼這麼怕》</span>
+<a href="/that-feeling-2-vol6-trial.html" class="snbook">Vol.6《這塊土地上的聲音》</a>
   </div>
-  <a href="/that-feeling-2.html" class="back-link">← 返回台灣在地系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-2-vol5-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>

@@ -1,342 +1,123 @@
-﻿<!DOCTYPE html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>都市傳說解剖｜那個感覺 系列五 Vol.2｜盧林著</title>
+<title>都市傳說解剖｜那個感覺 集體靈異系列 Vol.2｜盧林著</title>
+<meta property="og:title" content="都市傳說解剖【免費閱讀】那個感覺 集體靈異系列">
+<meta property="og:description" content="集體靈異系列 Vol.2 ——免費在線閱讀，不需要下載任何 App。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e14;
+    --bg: #080f0c;
     --text: #dcdcf0;
     --text-muted: #a8a8cc;
-    --accent: #7a4a9e;
-    --accent-light: rgba(122,74,158,0.15);
-    --accent-dim: rgba(122,74,158,0.4);
+    --accent: #4caf76;
+    --accent-light: rgba(76,175,118,0.12);
+    --accent-dim: rgba(76,175,118,0.35);
     --card-bg: #14141e;
-    --card-border: rgba(122,74,158,0.2);
+    --card-border: rgba(76,175,118,0.35);
     --label: #9090b8;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Serif TC', serif;
-    font-size: 17px;
-    line-height: 2;
-    min-height: 100vh;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  .page-back {
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .page-back a {
-    color: var(--text-muted);
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    transition: color 0.2s;
-  }
-  .page-back a:hover { color: var(--accent); }
-
-  .main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 72px 48px 80px;
-  }
-
-  .book-meta {
-    text-align: center;
-    margin-bottom: 64px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .book-series {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 20px;
-  }
-  .book-title {
-    font-size: 2.4rem;
-    font-weight: 500;
-    letter-spacing: 4px;
-    line-height: 1.4;
-    margin-bottom: 16px;
-  }
-  .book-subtitle {
-    font-size: 15px;
-    color: var(--text-muted);
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 24px;
-  }
-  .book-author {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--label);
-    letter-spacing: 2px;
-  }
-  .trial-badge {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 5px 16px;
-    border: 1px solid var(--accent-dim);
-    border-radius: 20px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--accent);
-  }
-
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    margin: 56px 0 28px;
-    color: var(--text);
-  }
-  h2:first-of-type { margin-top: 0; }
-
-  p {
-    margin-bottom: 24px;
-    text-align: justify;
-    color: var(--text);
-  }
-
-  .quote-block {
-    margin: 36px 0;
-    padding: 24px 32px;
-    border-left: 3px solid var(--accent-dim);
-    background: var(--card-bg);
-    border-radius: 0 6px 6px 0;
-  }
-  .quote-block p {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    line-height: 1.9;
-  }
-  .quote-block p:last-child { margin-bottom: 0; }
-  .quote-source {
-    display: block;
-    margin-top: 10px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 12px;
-    color: var(--label);
-    letter-spacing: 1px;
-  }
-
-  .trial-end {
-    margin: 60px 0 0;
-    padding: 40px 36px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    text-align: center;
-  }
-  .trial-end-label {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 16px;
-  }
-  .trial-end h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-  }
-  .trial-end p {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-    text-align: center;
-  }
-  .btn-full {
-    display: inline-block;
-    padding: 12px 32px;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    border-radius: 4px;
-    transition: opacity 0.2s;
-  }
-  .btn-full:hover { opacity: 0.85; }
-  .back-ss {
-    display: block;
-    margin-top: 16px;
-    color: var(--text-muted);
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    transition: color 0.2s;
-  }
-  .back-ss:hover { color: var(--accent); }
-
-  .series-nav {
-    max-width: 720px;
-    margin: 60px auto;
-    padding: 40px 48px;
-    border-top: 1px solid var(--card-border);
-    text-align: center;
-  }
-  .snlabel {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 20px;
-  }
-  .snbooks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-  .snbook {
-    padding: 6px 14px;
-    border: 1px solid var(--card-border);
-    border-radius: 4px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 12px;
-    color: var(--text-muted);
-    transition: all 0.2s;
-    display: inline-block;
-  }
-  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
-  .snbook.current {
-    color: var(--accent);
-    border-color: var(--accent-dim);
-    background: var(--accent-light);
-  }
-  .back-link {
-    color: var(--text-muted);
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    transition: color 0.2s;
-  }
-  .back-link:hover { color: var(--accent); }
-
-  @media (max-width: 640px) {
-    .page-back { padding: 16px 20px; }
-    .main { padding: 48px 20px 60px; }
-    .book-title { font-size: 1.8rem; }
-    .series-nav { padding: 32px 20px; }
-  }
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・集體靈異系列</div>
+<h1>都市傳說解剖</h1>
+<div class="subtitle">Vol.2・集體靈異系列・完整版・免費閱讀</div>
 
-<div class="page-back"><a href="/that-feeling-5.html">← 返回集體靈異</a></div>
+<h1 class="chap-h1">那個感覺・集體靈異Vol.2《都市傳說解剖》</h1>
+<h2 class="chap-h2">前言 一個不存在的蜘蛛</h2>
+<p>妳穿上新衣服。 或者不是新的,是在某家店的試衣間裡試穿的。妳覺得頭皮癢,但沒有在意。回家之後頭癢得更厲害,第二天開始發高燒。妳去醫院,醫生檢查妳的頭皮,然後驚慌失措地叫人。妳的頭髮裡,有蜘蛛。或者更準確地說,有蜘蛛卵,幾百顆,剛孵化。蜘蛛在妳頭皮裡產卵了,牠們是在那件衣服的領子裡等待的。 這是一個妳可能在1990年代聽過的故事。那個故事有很多版本,有些說是試衣間,有些說是飯店的枕頭,有些說是進口服飾的標籤。但核心是一樣的:一個看似安全的日常行為,暗藏致命的危險,而那個危險是妳看不見的寄生生物。 這個故事是假的。 完全是假的。沒有記錄在案的蜘蛛在人類頭皮產卵的案例,更不用說那種方式的孵化會有什麼結果。蜘蛛的生殖行為不是這樣的,人類的生理條件也不允許那樣的寄生發生。但那個故事在1990年代的美國、英國、澳洲、台灣幾乎同步出現,被人口耳相傳,被寫進報章雜誌的警示專欄,被當成真實事件在學校和辦公室裡流傳。 那個故事之所以被傳播,和蜘蛛無關。它和妳對某種特定的危險的恐懼有關——一種看不見的、會慢慢擴散的、在妳的身體裡發生的危險。這個故事的力量不在於它的真假,而在於它精準地抓住了一個焦慮的形狀。 這本書要解剖的,就是這類故事。 ##</p>
+<h2 class="chap-h2">什麼是都市傳說 都市傳說不是謠言,不是神話,也不是純粹的虛構故事。它是一個有特殊結構的現代敘事形式,有特定的傳播條件和社會功能。 民俗學家揚·哈羅德·布倫萬(Jan Harold Brunvand)在他1981年的著作《消失的搭便車者:美國都市傳說及其意義》(The Vanishing Hitchhiker: American Urban Legends and Their Meanings)中,為都市傳說下了一個至今仍被學界廣泛使用的定義:都市傳說是一種在當代社會口耳相傳的敘事,它通常被當事人相信或半相信,它的來源往往是「朋友的朋友」,它有清楚的情節結構,而且它反映了該社會的焦慮、價值觀或道德教訓。</h2>
+<p>布倫萬在《消失的搭便車者》中指出,都市傳說的共同特徵包括:它有一個清楚的敘事結構(開頭、發展、結局),它通常帶有道德訓誡或情緒衝擊,它的來源永遠是「我朋友的朋友」而非第一人稱,以及它往往反映了敘述者所在社會的集體焦慮。 ——Jan Harold Brunvand,《The Vanishing Hitchhiker: American Urban Legends and Their Meanings》,1981年,W. W. Norton & Company</p>
+<p>「朋友的朋友」這個結構非常重要。它讓故事保持了一種可信度——不是遠古傳說,不是明顯的虛構,而是「就在你的社交圈附近發生的事」——同時又讓它無法被追溯和驗證,因為那個「朋友」永遠無法被找到。 這個距離感是都市傳說得以存活的關鍵。太遠的事你不在乎,太近的事可以被驗證。「朋友的朋友」是那個剛好無法驗證、又剛好近到讓你覺得有關係的距離。 都市傳說和謠言的區別在於:謠言通常是關於特定的人或事件,它的目的是傳遞訊息(或錯誤訊息);都市傳說是一個完整的故事,它的目的是傳遞一種感受——恐懼、警示、道德判斷,或者一種「這個世界比你以為的更危險」的提醒。 都市傳說也和神話不同。神話是一個社會對自己起源和宇宙觀的解釋,它的敘述者知道它是神聖的故事,不一定是字面上的事實。都市傳說的敘述者通常相信它是真的,或者至少相信它「可能是真的」——這個相信,才是都市傳說力量的來源。 民俗學家彼得·盧里(Peter Lürie)在研究都市傳說的傳播時提出了一個分類框架,把都市傳說分成三種功能類型:警告型(warning legends,告訴你某種行為的危險後果)、污染型(contamination legends,告訴你某個原本安全的東西其實被污染或危害了)、以及顛覆型(subversion legends,告訴你你信任的機構或人其實在傷害你)。蜘蛛頭髮的故事屬於污染型——那個安全的日常行為(試衣服)其實暗藏危機。 這三種類型覆蓋了人類焦慮的三個主要方向:自己的行為帶來的後果,環境對自己的威脅,以及信任的對象背叛自己。幾乎所有持久流傳的都市傳說,都可以在這三個焦慮中找到它的根。 都市傳說的真假不是重點。重點是:一個社會願意相信某個故事,本身就說明了那個社會當時在怕什麼。研究都市傳說,是在讀一個社會的潛意識日記——那些它沒有辦法直接說出口、只能透過故事來表達的東西。 還有一件事值得說清楚:有些都市傳說是真的,或者至少有真實的原型。「消失的搭便車者」這個類型——一個人搭載了一個女鬼,後來發現那個女鬼早已去世——在全球各地有幾十個有記錄的版本,其中有幾個確實有當地新聞報導作為原型,只是在流傳過程中被大幅改造了。都市傳說的「假」,往往不是完全的無中生有,而是一個真實的事件被放大、扭曲、移植到不同情境,直到變成一個可以無限複製的故事模板。 這個從「真實事件」到「可複製故事」的轉化過程,本身就值得深究。下一章,我們來看傳播的機制。 ##</p>
+<h2 class="chap-h2">它為什麼會傳播 並不是所有的故事都能傳播。大多數故事你聽了就忘,少數故事你會轉述給別人,更少數的故事會在一個社會裡存活幾十年。都市傳說屬於最後這一類。它們是敘事上的「適者生存」——只有那些符合特定條件的故事,才能在人與人之間的傳遞中存活下來。 認知心理學家奇普·希思(Chip Heath)和丹·希思(Dan Heath)在他們2007年的著作《創意黏力學》(Made to Stick)中,分析了為什麼某些概念和故事比其他的更容易被記住和傳播。他們提出了六個要素的框架,縮寫為 SUCCESs:簡單(Simple)、出乎意料(Unexpected)、具體(Concrete)、可信(Credible)、情緒化(Emotional)、故事(Story)。</h2>
+<p>希思兄弟在分析可傳播訊息時指出,那些能長期存活的故事,幾乎都具備「違反預期」的核心元素——它告訴你一件你以為你懂,但其實你不懂的事。這種認知落差(knowledge gap)製造了一種緊迫感,讓人想要填補那個空白,而填補空白最自然的方式,就是把故事說給別人聽。 ——Chip Heath & Dan Heath,《Made to Stick: Why Some Ideas Survive and Others Die》,2007年,Random House</p>
+<p>蜘蛛頭髮的故事完美符合這個框架。它簡單(一個行動、一個後果)、出乎意料(試衣服會導致蜘蛛在你頭上產卵?)、具體(試衣間、發高燒、醫院),有「朋友的朋友」作為可信度來源,帶有強烈的情緒衝擊(噁心、恐懼),而且有完整的故事結構。 但這只解釋了為什麼它容易被記住。還有另一個問題:為什麼人們「想要」傳播它? 社會心理學家把這個稱為「社會訊號」(social signaling)。當你把一個故事傳遞給別人,你不只是在傳遞訊息,你也在傳遞關於你自己的訊息:你是一個關心別人安危的人,你是一個消息靈通的人,你是一個知道「真相」的人。傳遞警告型都市傳說,讓你扮演一個保護者的角色;傳遞顛覆型都市傳說,讓你扮演一個揭發者的角色。這些角色都是有吸引力的。 史丹佛大學社會學家馬克·格蘭諾維特(Mark Granovetter)在他關於資訊傳播的研究中指出,訊息在社交網絡中的傳播速度,和傳播者的動機直接相關。當傳播一個訊息對傳播者有社會收益(讓你看起來聰明、消息靈通、善意),那個訊息的傳播速度就會加快。都市傳說幾乎對傳播者永遠有社會收益——你傳播它,你就是那個「知道的人」。 還有一個更深層的機制:「情感喚起」(affective arousal)對記憶的強化效果。神經科學的研究已經非常清楚地證明,帶有情緒衝擊的記憶,比中性記憶保存得更好,也更容易被提取。杏仁核(amygdala)——大腦中負責處理情緒,尤其是恐懼反應的結構——在強烈情緒刺激時,會增強記憶的固化過程。簡單說:嚇到你的事情,你更容易記住,也更容易想起來告訴別人。</p>
+<p>神經科學家詹姆斯·麥高(James McGaugh)在加州大學爾灣分校長年研究情緒與記憶的關係,他的研究確認,壓力荷爾蒙(腎上腺素和去甲腎上腺素)在情緒性事件發生時的釋放,會直接強化那段記憶的神經編碼,使其比一般記憶更持久、更鮮明。這個機制在演化上有其道理:你最需要記住的,是那些可能傷害你的事情。 ——James McGaugh,〈Memory consolidation and the amygdala〉,2004年,《Trends in Neurosciences》</p>
+<p>這三個機制加在一起——故事結構的可記憶性、傳播的社會收益、情緒喚起對記憶的強化——解釋了為什麼都市傳說可以在沒有任何中央組織的情況下,跨越地域和時代地傳播。它不需要有人刻意推廣,它自己就會找到宿主,然後繼續走下去。 但這個機制有一個有趣的副作用:故事在傳播過程中,會自動優化自己。每一次轉述,都是一次篩選——那些讓故事更引人的細節被保留,讓故事顯得囉嗦或削弱衝擊力的細節被去掉。幾十次轉述之後,故事會變得比它的原版更精簡、更震撼、更「完美」。這就是為什麼經過長時間流傳的都市傳說,通常在敘事上有種令人不舒服的完整性——它被人類的口耳相傳「打磨」過了。 傳播的速度也和社會的溝通技術直接相關。在沒有網路的年代,都市傳說的傳播需要幾個月甚至幾年才能跨越一個國家。電話普及之後,速度變快了。網路時代到來之後,傳播速度變成以小時計算。社群媒體出現之後,一個都市傳說可以在幾分鐘內傳遍全球。但有趣的是,速度加快了,故事的結構沒有改變——那個「朋友的朋友」的框架依然有效,只是「朋友」現在可以是你在網路上從未見過面的人。 ##</p>
+<h2 class="chap-h2">蚯蚓漢堡與食物焦慮 1978年,美國。一個故事開始在各地流傳:麥當勞的漢堡肉裡摻了蚯蚓,因為蚯蚓比牛肉便宜,而且蛋白質含量高,所以公司在偷偷使用它來降低成本。消息來源?朋友的朋友,一個在工廠工作的人,親眼看見的。 這個傳說傳播的速度快到麥當勞總部不得不正式發表聲明澄清,當時的美國農業部也介入說明,蚯蚓肉根本不符合食品法規,更不用說成本比牛肉高得多,根本不存在用蚯蚓替代的經濟誘因。但澄清的效果有限——那個故事繼續流傳,甚至一直延燒到1980年代,據估計那幾年麥當勞因此損失了大約三成的部分市場銷售額。 這個傳說為什麼能傳播,答案不在蚯蚓,在食物。 食物是人類最古老的焦慮對象之一。你吃進身體的東西,會變成你身體的一部分——這個事實在認知上非常難以讓人完全放鬆。人類學家瑪麗·道格拉斯(Mary Douglas)在她1966年的著作《純潔與危險》(Purity and Danger)中分析了人類對食物污染的文化性恐懼,她指出幾乎所有的文化都有關於「不潔食物」的禁忌,這些禁忌的具體內容因文化而異,但背後的心理結構是一樣的:對於「不應該進入身體的東西進入了身體」的深層恐懼。</h2>
+<p>道格拉斯指出,污染焦慮(pollution anxiety)的核心是邊界的模糊:當某個東西跨越了「應該在外面」和「可以進入身體」之間的邊界,就會觸發強烈的噁心反應和危險感。這個反應是普世性的,但它在食品工業化之後的社會裡特別強烈,因為你再也看不見你的食物在進入你口中之前經歷了什麼。 ——Mary Douglas,《Purity and Danger: An Analysis of Concepts of Pollution and Taboo》,1966年,Routledge & Kegan Paul</p>
+<p>1978年的美國,正是食品工業化快速擴張的時代。麥當勞在那個年代的擴張速度驚人——它代表的是一種新的、你完全不知道食物是怎麼製造的飲食方式。你走進一家店,點了一個漢堡,但那個漢堡肉是從哪裡來的,在什麼環境下處理的,裡面有什麼,你完全不知道,你只能相信那個金色拱門。 蚯蚓漢堡的傳說,是對那個「相信」的不舒服感找到了一個出口。它說的不是蚯蚓,它說的是:你以為你知道你在吃什麼,但你不知道。你以為你可以信任那個品牌,但你不應該。 心理學家保羅·羅津(Paul Rozin)長年研究人類的噁心反應,他在賓夕法尼亞大學的實驗記錄了一個有趣的現象:即使受試者知道某個「污染物」不可能造成任何實際傷害,他們依然會拒絕接觸它。在一個實驗中,他讓受試者把一個乾淨的、消過毒的蟑螂放進一杯果汁,然後把蟑螂拿出來,再問受試者願不願意喝那杯果汁。幾乎所有受試者都說不願意,即使他們承認那杯果汁在理性上是安全的。 羅津把這個稱為「污染法則」(law of contagion):一旦你知道某個令人噁心的東西曾經接觸過某個食物,那個食物就永遠被「污染」了,無論實際的物理狀態如何。蚯蚓漢堡傳說的效力,就建立在這個心理機制上。你一旦聽說了那個故事,麥當勞的漢堡在你腦中就已經「被污染了」——即使你完全不相信那個故事,下次看見那個漢堡,你還是會有一瞬間的不舒服感。 這也解釋了為什麼食物類的都市傳說特別難被澄清消除:它的效力不需要你相信它,只需要你聽過它。 污染焦慮在現代社會變得更加複雜,因為食物的生產鏈變長了。你的食物在到達你的盤子之前,可能經過了十幾個環節——養殖場、屠宰場、加工廠、倉儲、運輸、超市或餐廳廚房。每一個環節,你都看不見。這個不可見性,為都市傳說留下了巨大的想像空間。蚯蚓漢堡傳說只是其中一個版本,類似的故事在全球各地有幾百種變體,針對不同的速食品牌、不同的加工食品,但核心焦慮是一樣的:我看不見我的食物經歷了什麼。 從認知角度來說,這種焦慮是合理的。人類演化了幾百萬年,在那個過程中,食物的來源永遠是可見的——你看得見動物被捕獵,你看得見植物被採集,你看得見食物被烹煮。食品工業化只有幾十年的歷史,我們的大腦還沒有演化出對「看不見來源的食物」的信任機制。都市傳說填補了這個認知缺口:它提供了一個「你看不見的過程裡發生了什麼」的故事,即使那個故事是錯的,它依然滿足了大腦想要理解不可見過程的需求。 ##</p>
+<h2 class="chap-h2">下水道裡的鱷魚 紐約市的下水道裡住著鱷魚。 這大概是美國最著名的都市傳說之一,而且它有一個比大多數都市傳說都更清楚的起源:1935年2月10日,《紐約時報》刊登了一則真實的新聞報導,標題是〈Alligator Found in Uptown Sewer〉(在上城下水道發現鱷魚)。幾個哈林區的青少年在鏟雪時,從一個下水道開口裡拉出了一隻大約1.2公尺長的鱷魚,那隻鱷魚在被拉出來之後不久就死了,原因可能是下水道的低溫。 這是真實事件。一隻鱷魚,真的在1935年出現在紐約的下水道裡,一次,然後死掉了。 但是在接下來的幾十年裡,這個故事變成了一個完全不同的東西:紐約市的下水道裡住著一個完整的鱷魚族群,牠們是幾十年前被人類當寵物養、後來被沖進馬桶丟棄的鱷魚的後代,牠們在黑暗中繁殖,眼睛已經退化,皮膚因為長期接觸污水而變色,牠們偶爾會爬出來攻擊人。 從一隻1935年死掉的鱷魚,到一個在地下繁殖了幾代的族群,這個距離是怎麼產生的? 民俗學家布倫萬追蹤了這個傳說的演化歷程,他發現關鍵的轉折點是1959年羅伯特·戴利(Robert Daley)出版的著作《紐約地下世界》(The World Beneath the City),書中援引了一位前任下水道督察的說法,聲稱在1930年代確實有多次在下水道中發現鱷魚的記錄。這本書為那個1935年的真實事件提供了一個「還有更多」的框架,讓那個孤立事件看起來像是冰山一角。</h2>
+<p>布倫萬在分析下水道鱷魚傳說時指出,這個傳說之所以能持久存活,在於它完美結合了兩種焦慮:對城市地下空間的恐懼(我們腳下有一個我們完全不了解的世界),以及對「被遺棄的東西」的焦慮(那些我們以為處理掉了的東西,其實還在某個地方活著,而且在成長)。 ——Jan Harold Brunvand,《The Vanishing Hitchhiker: American Urban Legends and Their Meanings》,1981年,W. W. Norton & Company</p>
+<p>「被遺棄的東西還活著」是一個非常強大的敘事原型。它的變體遍布各種文化的都市傳說:那個被拋棄的嬰兒長大後回來復仇,那個被拋棄的寵物在荒野中存活,那個以為被解決了的問題以另一種形式重新出現。都市傳說研究者把這類故事歸類為「回歸的受害者」(return of the repressed)類型,借用佛洛伊德的概念:那些我們以為已經壓制或消除的東西,會從意想不到的地方回來。 下水道本身,在都市傳說裡是一個特別豐富的場景。它是城市的隱藏面,是那些我們不願意看見的東西去的地方——廢物、污水、被沖走的東西。它在物理上就是城市的「潛意識」,一個存在但被遮蔽的空間。任何被放進這個空間的故事,都帶著一種特殊的張力:那個空間是真實的,它就在你腳下,但你對它的內容毫無所知。 下水道系統是現代城市基礎建設的一部分,但它的運作對大多數市民來說是完全不可見的。你打開水龍頭,水來了;你沖馬桶,東西消失了。但那個「消失」的過程去了哪裡,發生了什麼,幾乎沒有人真正知道。這個不可見性,讓下水道成為都市傳說的完美舞台——它足夠真實,讓你無法完全忽視它;它足夠神秘,讓任何關於它的故事都顯得可能。 下水道鱷魚傳說還觸及了另一個深層的城市焦慮:廢棄物的回歸。你以為你處理掉的東西,其實沒有真正消失,它只是去了一個你看不見的地方,而在那個地方,它可能以一種你無法預料的方式繼續存在、變異、成長。這個焦慮在環保意識抬頭之後變得更加具體——我們現在知道,我們扔掉的塑膠最後去了海洋,我們排放的化學物質最後進入了食物鏈。下水道鱷魚傳說,在某種意義上,是對這個「廢棄物不會真正消失」的集體認知的一個象徵性表達。 有意思的是,紐約市的下水道管理部門在多次被媒體詢問時,都確認他們從未在正式巡檢中發現任何鱷魚。但這個否認,反而成為傳說的一部分——「當然他們不會承認」。一旦一個都市傳說進入了顛覆型的邏輯(當局在隱瞞),官方的否認就成了它的燃料,而不是滅火器。 ##</p>
+<h2 class="chap-h2">針頭與愛滋 1980年代末到1990年代初,一個傳說開始在美國、英國、澳洲幾乎同步出現:有人在電影院的座椅上、電話亭的投幣口、加油站的油槍握把上發現了針頭,針頭上附著一張小紙條,上面寫著:「歡迎加入愛滋俱樂部。」 這個傳說有幾個不同的版本,但核心是一樣的:一個故意散播HIV的人,用被HIV感染的針頭刺傷毫無防備的陌生人。警告說注意公共場所的針頭,避免觸摸不明物體。 這個傳說出現的時間點非常精確:正好是愛滋病恐慌在西方社會達到高峰的時期。1987年,美國每週有超過一千人死於愛滋病相關疾病,但大眾對愛滋病的傳播途徑仍然充滿了誤解和恐懼。許多人不清楚HIV是否可以透過日常接觸傳播,媒體的報導也參差不齊。在這個訊息混亂、恐懼高漲的情境下,針頭愛滋傳說出現了。 從公衛的角度,這個傳說幾乎完全是錯的。HIV在體外的存活時間非常短,即使針頭上有殘留的血液,感染的機率也極低。美國疾管局(CDC)在那個時期發表了多份聲明,解釋為什麼這種傳播方式在現實中幾乎不可能發生。但聲明沒有阻止傳說的傳播。</h2>
+<p>公衛學者黛安·戈斯坦(Diane Goldstein)在她關於愛滋病都市傳說的研究中指出,當一個社會面對一種新的、未知的、致命的疾病時,都市傳說會扮演一種「風險地圖」的角色:它把那個抽象的、無形的威脅,轉化成一個具體的、可以想像如何避免的場景。針頭愛滋傳說的功能不是提供正確的防疫知識,而是提供一個讓恐懼變得「可管理」的敘事框架。 ——Diane Goldstein,《Once Upon a Virus: AIDS Legends and Vernacular Risk Perception》,2004年,University Press of Colorado</p>
+<p>但這個「風險地圖」有一個危險的副作用:它把HIV感染的威脅,從「主要透過性行為和共用針頭傳播」,轉移到「隨機的陌生人故意攻擊」。這個轉移有一個隱含的邏輯:愛滋病不是一個公衛問題,而是一個道德問題——感染者是壞人,他們想要報復「正常人」。 這個邏輯強化了當時對HIV感染者的污名化,也讓真正有風險的人因為恐懼被貼標籤而不敢就醫。從公衛的角度,針頭愛滋傳說不只是無效的,它是有害的——它消耗了社會的恐懼能量,但把那個能量導向了錯誤的方向。 這是都市傳說最值得嚴肅看待的一面:它不只是無害的娛樂性故事,在特定的情境下,它可以成為一種集體認知的扭曲力量,讓一個社會對真實的問題產生錯誤的理解和回應。 同樣的機制,在2020年代初的新冠病毒流行期間,以各種新的形式重新出現。那些關於「有人故意散播病毒」「某個族群是病毒的來源」的傳說,和針頭愛滋傳說在結構上幾乎完全相同:未知的威脅、具體的惡意行為者、群體性的替罪羊。 都市傳說不會死,它只會換衣服。 ##</p>
+<h2 class="chap-h2">台灣的版本 都市傳說不是西方的專利。台灣有自己的版本,而且台灣的版本非常清楚地反映了台灣社會在不同時期的特定焦慮。 先說一個你可能聽過的:「夜市的珍珠奶茶裡面放了豬油和塑化劑,你喝的那個黑色粉圓,根本不是地瓜粉做的,是用廢棄輪胎的橡膠做的。」 這個傳說在2011年台灣爆發「塑化劑風波」之後大量流傳——當時的塑化劑食安事件確實是真實的,不肖廠商確實在食品中添加了塑化劑。但「橡膠粉圓」的部分是傳說,沒有被驗出,也沒有任何科學上的理由讓廠商這樣做。真實事件製造了一個焦慮情境,都市傳說在那個情境裡乘勢而起,填補了「我不知道食物裡還有什麼」的恐懼空白。 珍珠奶茶的傳說之所以特別有效,是因為珍珠奶茶是台灣最具代表性的街頭飲食之一。它是日常的、熟悉的、幾乎每個人都喝過的。當這個熟悉的東西被指控含有危險成分,那個衝擊特別大——因為它不是「某個遙遠的食品」,而是「我昨天才喝的那杯」。這個傳說在2011年之後的幾年裡持續流傳,即使食藥署多次澄清市售粉圓的成分檢驗結果,傳說依然沒有完全消失。 另一個台灣本土的傳說類型,和廟宇與禁忌有關。「不要在某個特定時間進某座廟,否則會被帶走。」「拍廟裡的神像,回去看照片會發現背景有不明人形。」這類傳說的結構,和西方的都市傳說完全一樣——具體的地點、「朋友的朋友」的來源框架、不可驗證的結局——但它的內容是完全本土的,反映的是台灣社會對民間信仰邊界的不確定感。</h2>
+<p>台灣民俗研究者林美容在她關於台灣民間禁忌的研究中指出,台灣的禁忌傳說有一個特殊的雙重性:它們既是民間信仰的延伸(確實存在對某些空間和時間的禁忌觀念),又是當代都市傳說的形式(在現代社會中以「朋友的朋友」的框架流傳)。這個雙重性讓它們的可信度特別高——它有傳統文化作為背書,又有現代目擊者的陳述。 ——林美容,《台灣民俗學的建構》,2003年,前衛出版社</p>
+<p>台灣的廟宇都市傳說有一個特別有趣的面向:它們通常不是「完全禁止」,而是「條件性禁忌」——某個時間不能去,某個動作不能做,某種狀態的人不適合進入。這種條件性,讓傳說變得更難被驗證(「我去了沒事」不能證明傳說是假的,因為你可能不符合那個條件),也讓它更容易被傳播(因為你可以把它當成一種「小心一點總是好的」的預防性知識)。 台灣還有一類獨特的都市傳說,和「租屋」有關。「那個房間之所以特別便宜,是因為有人在裡面死過。」「那棟大樓的某一層特別安靜,因為那一層住的都是已經去世的承租人。」這類傳說在台灣房價高漲、租屋市場供需失衡的年代特別活躍——它反映的焦慮,是對「我租的房子有什麼我不知道的歷史」的不安,以及更深層的「在這個城市裡,我能夠負擔的空間,是不是連正常人都不想要的」。 租屋傳說有一個特殊的經濟背景:當房租佔一個人收入的比例高到某個程度,租屋就不再只是一個交易行為,而是變成一個「我被迫接受一個我其實負擔不起的選擇」的處境。在這個處境下,「這個房間便宜是因為它有問題」的傳說,其實是一種對不平等現狀的情緒表達——不是房子有問題,是這個讓我只能租這種房子的經濟結構有問題。 台灣的都市傳說裡有一個有趣的趨勢:很多傳說在網路時代被「驗證」了——有人真的去查了,真的去問了房東,真的去調了資料,然後發現那個故事有一部分是真的,或者完全是假的。但這個驗證,並沒有消滅那類傳說。它只是讓傳說更加分化:一部分人說「你看我說吧」,另一部分人說「就算這次是假的,不代表沒有」。 都市傳說在網路時代並沒有消失,它只是變快了,變得更難追蹤,傳播的地理邊界消失了,但它的心理結構沒有任何改變。你今天在社群媒體上看到的那些「朋友說他認識的一個人」的故事,和1970年代美國人口耳相傳的蜘蛛頭髮故事,骨子裡是一樣的東西。 網路也帶來了新的變化:都市傳說可以被追溯、被查證、被澄清的速度變快了。但同時,它也可以被重新包裝、被改編、被賦予新的情境,然後以新的形式重新流傳。一個被證明是假的傳說,可以在幾個月後以稍微不同的版本重新出現,針對不同的對象,反映不同的焦慮,但核心結構依然是一樣的。</p>
+<p>後記 你在傳播什麼 這本書快結束了,我想問你一個問題。 你最近一次把一個「朋友的朋友親身經歷」的故事說給別人聽,是什麼時候?那個故事說的是什麼?你說它的時候,是什麼感覺——警告?分享?讓氣氛更有趣?讓自己看起來消息靈通? 你不需要回答我,但值得花一點時間想一想,因為那個問題的答案,比故事本身更有意思。你選擇傳播什麼故事,你傳播它的方式,你在傳播過程中強調了哪些細節、省略了哪些,這些選擇透露的,是你當下最在乎什麼、最不安什麼、最希望別人理解什麼。 都市傳說是一個社會的集體作品,但每一次個別的傳播,都是個人選擇。你說「你聽說過嗎」的那一刻,你就成了那個傳說的共同作者。 這不是說你不應該傳播故事。故事是人類最古老的溝通工具,都市傳說是它在當代社會最有活力的形式之一。問題不在於傳播本身,而在於意識。 你知道蚯蚓漢堡傳說說的不是蚯蚓,而是對食品工業化的不信任。你知道下水道鱷魚說的不是鱷魚,而是對城市隱藏空間的焦慮。你知道針頭愛滋說的不是針頭,而是對一個新的、無形的、致命的威脅的恐懼——以及那個恐懼被轉化成對特定群體的污名化之後,可以造成的實際傷害。 你現在知道這些了。下次你聽到一個「朋友的朋友」的故事,你多了一個選擇:你可以問,這個故事在說的,除了它表面上說的那件事,還有什麼? 那個問題,通常比故事本身更值得聊。</p>
+<p>集體靈異</p>
+<p>Vol.1《你們都看見了》 Vol.2《都市傳說解剖》 Vol.3《UFO與我們》 Vol.4《恐慌怎麼擴散》 Vol.5《邪教的邏輯》 Vol.6《你記錯了,我們一起記錯了》</p>
 
-<div class="main">
-
-  <div class="book-meta">
-    <div class="book-series">那個感覺 · 系列五 · Vol.2</div>
-    <h1 class="book-title">都市傳說解剖</h1>
-    <div class="book-subtitle">它從哪裡來，為什麼你會相信，它想說什麼</div>
-    <div class="book-author">盧林著｜有的沒的小舖出品</div>
-    <div class="trial-badge">試　閱　版</div>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E9%9B%86%E9%AB%94%E9%9D%88%E7%95%B0%E3%80%91%E9%83%BD%E5%B8%82%E5%82%B3%E8%AA%AA%E8%A7%A3%E5%89%96%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-5-vol2-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/that-feeling-5-vol3-trial.html">下一集 →</a>
   </div>
-
-  <!-- 前言 -->
-  <h2>前言　那個故事你聽過嗎</h2>
-
-  <p>1970年代，美國各地流傳著一個故事。版本很多，但核心一樣：一個女人在試衣間試衣服，感覺有點頭暈，以為是燈光的問題，付完錢就回家了。幾天後她開始發高燒，然後醫院的檢查結果出來了：她的頭髮裡住著一窩蜘蛛，已經在她的頭皮下產卵。</p>
-
-  <p>這個故事在沒有網路的年代，靠著口耳相傳，傳遍了整個美國。每個地方的版本都有點不同——有些說是百貨公司，有些說是廉價商場，有些說是她朋友的朋友的朋友親身經歷。</p>
-
-  <p>這個故事從來沒有發生過。沒有任何醫療記錄，沒有任何新聞報導，沒有任何可以追溯的真實案例。</p>
-
-  <p>但是它傳播了。而且它傳播得非常成功——成功到今天如果你在某些地方問起，還是有人說他們「聽說有人真的遇到了」。</p>
-
-  <p>這就是都市傳說。它不是謠言，不是誤解，不是錯誤訊息。它是一種特殊的敘事形式，有自己的生成邏輯，有自己的傳播規則，有自己的社會功能。它告訴你的，不是那個故事裡的事是不是真的，而是說那個故事的人，在那個時候，怕什麼，相信什麼，想說什麼卻說不直接。</p>
-
-  <p>這本書要做的，就是把都市傳說翻過來，看看它的裡面是什麼。</p>
-
-  <!-- 第一章前半 -->
-  <h2>第一章　都市傳說是什麼，不是什麼</h2>
-
-  <p>「都市傳說」這個名字有點誤導。它不一定發生在都市，也不一定是傳說，更不一定是假的。</p>
-
-  <p>這個詞的英文是 urban legend，由民俗學家簡·哈洛德·布倫萬（Jan Harold Brunvand）在他1981年出版的《消失的搭便車者》（The Vanishing Hitchhiker）一書中系統性地引入學術討論。布倫萬給都市傳說的定義是：一種以故事形式流傳的民俗，通常被敘述者聲稱是真實發生的，且往往附帶一個「朋友的朋友」的來源框架（a friend of a friend，學術縮寫FOAF）。</p>
-
-  <div class="quote-block">
-    <p>布倫萬在《消失的搭便車者》中指出，都市傳說的共同特徵包括：它有一個清楚的敘事結構（開頭、發展、結局），它通常帶有道德訓誡或情緒衝擊，它的來源永遠是「我朋友的朋友」而非第一人稱，以及它往往反映了敘述者所在社會的集體焦慮。</p>
-    <span class="quote-source">——Jan Harold Brunvand，《The Vanishing Hitchhiker: American Urban Legends and Their Meanings》，1981年，W. W. Norton & Company</span>
-  </div>
-
-  <p>「朋友的朋友」這個結構非常重要。它讓故事保持了一種可信度——不是遠古傳說，不是明顯的虛構，而是「就在你的社交圈附近發生的事」——同時又讓它無法被追溯和驗證，因為那個「朋友」永遠無法被找到。</p>
-
-  <p>這個距離感是都市傳說得以存活的關鍵。太遠的事你不在乎，太近的事可以被驗證。「朋友的朋友」是那個剛好無法驗證、又剛好近到讓你覺得有關係的距離。</p>
-
-  <p>都市傳說和謠言的區別在於：謠言通常是關於特定的人或事件，它的目的是傳遞訊息（或錯誤訊息）；都市傳說是一個完整的故事，它的目的是傳遞一種感受——恐懼、警示、道德判斷，或者一種「這個世界比你以為的更危險」的提醒。</p>
-
-  <p>都市傳說也和神話不同。神話是一個社會對自己起源和宇宙觀的解釋，它的敘述者知道它是神聖的故事，不一定是字面上的事實。都市傳說的敘述者通常相信它是真的，或者至少相信它「可能是真的」——這個相信，才是都市傳說力量的來源。</p>
-
-  <p>民俗學家彼得·盧里（Peter Lürie）在研究都市傳說的傳播時提出了一個分類框架，把都市傳說分成三種功能類型：警告型（warning legends，告訴你某種行為的危險後果）、污染型（contamination legends，告訴你某個原本安全的東西其實被污染或危害了）、以及顛覆型（subversion legends，告訴你你信任的機構或人其實在傷害你）。蜘蛛頭髮的故事屬於污染型——那個安全的日常行為（試衣服）其實暗藏危機。</p>
-
-  <p>這三種類型覆蓋了人類焦慮的三個主要方向：自己的行為帶來的後果，環境對自己的威脅，以及信任的對象背叛自己。幾乎所有持久流傳的都市傳說，都可以在這三個焦慮中找到它的根。</p>
-
-</div><!-- .main -->
-
-<!-- 試閱截止 -->
-<div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
-  <div class="trial-end">
-    <div class="trial-end-label">試　閱　到　此</div>
-    <h3>後面還有六章，每個都是你聽過的故事</h3>
-    <p>接下來會解剖你熟悉的都市傳說如何誕生、為什麼在特定時代爆發式傳播，以及它們在說的，是那個社會當時無法直接開口說的什麼。包含：麥當勞蚯蚓漢堡、下水道鱷魚、針頭愛滋、以及台灣本土的版本。</p>
-    
-    <a href="/that-feeling-5.html" class="back-ss">← 回到驚喜角落</a>
-  </div>
-</div>
-
-<!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
   <div class="snlabel">集體靈異系列</div>
   <div class="snbooks">
-    <a href="/that-feeling-5-vol1-trial.html" class="snbook">Vol.1《你們都看見了》</a>
-    <span class="snbook current">Vol.2《都市傳說解剖》</span>
-    <a href="/that-feeling-5-vol3-trial.html" class="snbook">Vol.3《UFO與我們》</a>
-    <a href="/that-feeling-5-vol4-trial.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
-    <a href="/that-feeling-5-vol5-trial.html" class="snbook">Vol.5《邪教的邏輯》</a>
-    <a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+<a href="/that-feeling-5-vol1-trial.html" class="snbook">Vol.1《你們都看見了》</a>
+<span class="snbook current">Vol.2《都市傳說解剖》</span>
+<a href="/that-feeling-5-vol3-trial.html" class="snbook">Vol.3《UFO與我們》</a>
+<a href="/that-feeling-5-vol4-trial.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+<a href="/that-feeling-5-vol5-trial.html" class="snbook">Vol.5《邪教的邏輯》</a>
+<a href="/that-feeling-5-vol6-trial.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
   </div>
-  <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-5-vol2-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>

@@ -1,170 +1,195 @@
-﻿<!DOCTYPE html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>你和你之間的距離｜那個感覺 系列一 Vol.5｜盧林著</title>
+<title>你和你之間的距離｜那個感覺 靈魂與意識系列 Vol.5｜盧林著</title>
+<meta property="og:title" content="你和你之間的距離【免費閱讀】那個感覺 靈魂與意識系列">
+<meta property="og:description" content="靈魂與意識系列 Vol.5 ——免費在線閱讀，不需要下載任何 App。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e14; --text: #dcdcf0; --text-muted: #a8a8cc;
-    --accent: #7a4a9e; --accent-light: rgba(122,74,158,0.15); --accent-dim: rgba(122,74,158,0.4);
-    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #9090b8;
-    --s1-accent: #7a4a9e; --s1-accent-light: rgba(122,74,158,0.12); --s1-accent-dim: rgba(122,74,158,0.35);
+    --bg: #0e0e14;
+    --text: #dcdcf0;
+    --text-muted: #a8a8cc;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.35);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.35);
+    --label: #9090b8;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; min-height: 100vh; }
-  .page-back { padding: 20px 32px; border-bottom: 1px solid rgba(122,74,158,0.1); }
-  .page-back a { color: var(--text-muted); text-decoration: none; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; transition: color 0.2s; }
-  .page-back a:hover { color: var(--accent); }
-  .main-content { max-width: 720px; margin: 0 auto; padding: 60px 48px; }
-  .book-meta { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid rgba(122,74,158,0.15); }
-  .series-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--s1-accent); opacity: 0.8; margin-bottom: 16px; }
-  .book-title { font-size: 2.4rem; font-weight: 500; letter-spacing: 4px; color: #e8e8f5; line-height: 1.4; margin-bottom: 12px; }
-  .book-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 24px; }
-  .trial-badge { display: inline-block; padding: 5px 14px; border: 1px solid var(--s1-accent-dim); font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--s1-accent); opacity: 0.8; }
-  h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 3px; color: #e0e0f0; margin: 56px 0 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(122,74,158,0.15); }
-  h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #c8c8e8; margin: 36px 0 18px; }
-  p { margin-bottom: 24px; text-align: justify; color: var(--text); }
-  strong { color: #e0e0f0; font-weight: 500; }
-  .quote-block { border-left: 2px solid var(--s1-accent-dim); padding: 20px 28px; margin: 36px 0; background: var(--s1-accent-light); }
-  .quote-block p { color: #d0d0e8; font-size: 15px; margin-bottom: 0; line-height: 2.2; }
-  .data-note { background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px 28px; margin: 32px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.9; }
-  .data-note .note-label { font-size: 10px; letter-spacing: 4px; color: var(--label); margin-bottom: 10px; }
-  .fade-out { position: relative; margin-bottom: 0; }
-  .fade-out::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
-  .trial-end { margin: 60px 0 0; padding: 48px 40px; background: var(--card-bg); border: 1px solid var(--card-border); text-align: center; position: relative; overflow: hidden; }
-  .trial-end::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--s1-accent-dim), transparent); }
-  .trial-end-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--label); margin-bottom: 20px; }
-  .trial-end h3 { font-size: 1.2rem; letter-spacing: 3px; color: #e0e0f0; margin: 0 0 16px; border: none; }
-  .trial-end p { font-family: 'Noto Sans TC', sans-serif; font-size: 14px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.9; text-align: center; }
-  .btn-full { display: inline-block; padding: 12px 32px; background: var(--s1-accent-light); border: 1px solid var(--s1-accent-dim); color: var(--s1-accent); font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; text-decoration: none; transition: background 0.25s, color 0.25s; margin-bottom: 16px; }
-  .btn-full:hover { background: rgba(122,74,158,0.25); color: #c0a0f0; }
-  .back-ss-inline { display: block; margin-top: 16px; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-  .back-ss-inline:hover { color: var(--accent); }
-  .series-nav { max-width: 720px; margin: 0 auto; padding: 40px 48px 60px; border-top: 1px solid rgba(122,74,158,0.1); }
-  .snlabel { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 20px; }
-  .snbooks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-  .snbook { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(122,74,158,0.2); color: var(--text-muted); text-decoration: none; letter-spacing: 1px; transition: border-color 0.2s, color 0.2s; }
-  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
-  .snbook.current { border-color: var(--s1-accent-dim); color: #c0a0f0; background: var(--s1-accent-light); cursor: default; }
-  .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-  .back-link:hover { color: var(--accent); }
-  @media (max-width: 640px) { .main-content { padding: 40px 24px; } .book-title { font-size: 1.8rem; } .series-nav { padding: 40px 24px 60px; } }
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・靈魂與意識系列</div>
+<h1>你和你之間的距離</h1>
+<div class="subtitle">Vol.5・靈魂與意識系列・完整版・免費閱讀</div>
 
-<div class="page-back"><a href="/that-feeling-1.html">← 返回靈魂與意識系列</a></div>
+<h1 class="chap-h1">那個感覺・靈魂與意識Vol.5《你和你之間的距離》</h1>
+<h2 class="chap-h2">前言：那個看著你的，是你</h2>
+<p>有一種體驗，很多人有過，但說不清楚它是什麼。</p>
+<p>你站在某個地方，突然有一種感覺：你在看著你自己。不是從鏡子裡看，不是從照片裡看，是從另一個位置看——像是有另一個你，飄在某個你說不出的地方，靜靜地看著這個正在站著、呼吸、思考的你。那個感覺通常只維持幾秒，然後消失，你繼續你的日子，不太確定剛才發生了什麼。</p>
+<p>大多數人把它歸類為「奇怪的感覺」然後就算了。</p>
+<p>但有些人，那個感覺不消失。</p>
+<p>人格解體障礙（Depersonalization Disorder）的患者，活在一種持續的「你和你之間有距離」的狀態裡。他們看著自己的手，那是一雙手，但不是「我的手」——那個「我的」感覺消失了。他們聽見自己說話，那是一個聲音，但不是「我的聲音」。他們思考，但思考發生在一個和「我」分開的地方，像是在旁觀一個和自己長得一樣的人。</p>
+<p>這不是比喻。這是他們能找到的最精確的描述。</p>
+<p>Olaf Blanke 是瑞士洛桑聯邦理工學院的神經科學家。2002 年，他在《Nature》發表了一篇後來被大量引用的論文——用電極刺激一名癲癇患者的大腦，準確地複製了離體體驗（OBE）的感覺。他在後續研究裡，用同樣的方法，讓受試者看見了「另一個自己」——一個坐在他們面前、和他們動作一樣的幻影。當事人說，那個幻影是「我」，但它不是「我」。</p>
+<p>Blanke 的研究讓神經科學第一次有了一個可重複的方法，製造「你和你之間的距離」。</p>
+<p>但製造它，不等於解釋它。</p>
+<p>Thomas Metzinger 的自我模型理論，試圖從另一個方向逼近這個問題。他說，大腦建構的那個「我」的感覺，是一個模型，不是一個實體。如果那個模型出錯了——出錯的方式，是同時建構了兩個「我的模型」——你就會感覺到「你和你之間有距離」，就像兩個視窗顯示了同一個程式的兩個不同版本。</p>
+<p>這本書要問的問題是：那個距離，是什麼？</p>
+<h2 class="chap-h2">第一章 他看見了另一個自己</h2>
+<p>2002 年，Olaf Blanke 和他在日內瓦大學醫院的同事，正在為一名 43 歲的女性癲癇患者進行術前評估。這種評估的標準程序，是用電極直接刺激大腦皮質的不同區域，一邊記錄患者的即時反應，一邊確認癲癇的起源位置。患者保持清醒，每次刺激後報告自己的感覺。這是一個需要極大耐心和精確度的程序，刺激的位置差幾毫米，反應可能完全不同。</p>
+<p>當 Blanke 的電極觸及右側角回（right angular gyrus）的時候，那名患者突然說：「我從天花板上看見了自己躺在床上。」她描述得非常清楚——她的視角在天花板上方大約兩公尺的地方，她看見了自己的身體從上方俯視，看見了自己的腿，看見了床邊的儀器。她的語氣是困惑的，不是恐懼的，更接近一種「這是怎麼回事」的疑惑。</p>
+<p>Blanke 在那個當下意識到，他剛剛用電刺激，在受控的實驗室條件下，觸發了一個通常只在瀕死體驗或極端感覺剝奪狀態下才會出現的現象。他停止刺激，患者的視角立刻回到她的身體。他再次刺激，那個俯視的感覺再次出現。可重複，可關閉，位置精確——右側角回。</p>
+<p>這篇論文在 2002 年發表於《Nature》，篇幅只有兩頁，但它的影響遠超過兩頁。它是第一個在受控條件下、可重複地觸發 OBE 的實驗，讓離體體驗從「無法研究的主觀報告」，變成「有了神經定位的可研究現象」。</p>
+<p>Blanke 後來把研究範圍擴大。他用類似的電刺激方法，以及後來更先進的虛擬實境技術，系統地研究大腦對「身體在哪裡」「我在哪裡」這兩個問題的處理方式。他的核心發現是：大腦對自我位置的感知，依賴幾個感覺系統的整合——視覺、前庭覺、本體感覺。當這些系統的輸入不一致時，大腦沒有辦法建立一個穩定的「我在這裡」的定位，於是產生了「我在身體之外某個地方」的感覺。</p>
+<p>在角回電刺激實驗之後，Blanke 的研究方向延伸到了一個更奇怪的現象：autoscopy（自視症）。OBE 是「你從外部看自己的身體」，你知道那個身體是你的，但你的視角在別的地方。Autoscopy 不一樣——它是「你看見了另一個你」，一個和你長得一樣、做著和你一樣動作的影像，出現在你面前。患者不只是視角改變，而是看見了一個完整的、獨立的「另一個自己」。</p>
+<p>Blanke 在後續研究裡，記錄了幾個 autoscopy 的案例，和 OBE 案例做比較。兩者有一個重要的差異：OBE 的患者通常清楚地知道「那個身體是我的，但我的視角在外面」；autoscopy 的患者有時候說不清楚「哪一個才是我」——他們看見那個幻影，感覺它是「我」，但他們自己也在這裡，也是「我」。兩個「我」同時存在，讓他們非常不安，因為那違反了他們對「我只有一個」的基本預設。</p>
+<p>Blanke 在一篇 2004 年的論文裡，提出了一個區分框架：OBE 是「自我定位改變，但自我感完整」；autoscopy 是「自我感被複製，出現了第二個帶著完整自我感的影像」。這個區分，在現象學上是清楚的，但在神經機制上，他沒辦法完整解釋為什麼同樣區域的異常，會產生這兩種不同的結果。</p>
+<p>在 Blanke 記錄的一個 autoscopy 案例裡，患者描述，當他看見那個「另一個自己」的時候，他有一個非常強烈的衝動：他想走向那個影像，想和它握手。他覺得那個影像有意識，有感覺，可以回應他。他知道邏輯上那是不可能的，但那個衝動是真實的，強烈的，不是他能控制的。Blanke 在論文裡記錄了這個細節，然後沒有進一步分析它。那個「想和另一個自己握手」的衝動，在他的神經科學框架裡，沒有一個位置。</p>
+<p>角回（angular gyrus）為什麼那麼重要？它位於頂葉，是大腦裡一個整合不同感覺輸入的區域——它接收來自視覺皮質、前庭系統、本體感覺系統的訊號，把它們整合成一個關於「身體在哪裡」的統一表徵。它是多模態感覺整合的樞紐，也是「自我定位感」的關鍵區域之一。</p>
+<p>當角回的功能被電刺激干擾，這些來自不同系統的感覺訊號就無法被正確整合。視覺說「我在這裡看」，前庭系統說「我的身體在床上」，本體感覺說「我的肢體在這個位置」——三個系統的訊號不一致，大腦沒有辦法建立一個穩定的「我在哪裡」的定位。它的解決方案，是建立一個新的、不在任何一個感覺輸入位置的「視角」，讓那個視角從上方俯視，把所有衝突的感覺訊號都包含在同一個圖像裡。這就是 OBE。它不是靈魂出竅，是大腦在感覺訊號衝突時的一個應急解法。</p>
+<p>autoscopy 的機制更複雜，目前理解得更少。Blanke 的假說是，autoscopy 涉及的不只是自我定位的失調，還涉及「身體影像」（body image）的重複——大腦同時建構了兩個完整的身體影像，一個是「這個身體在這裡」，一個是「這個身體在那裡」，兩個都帶著「這是我」的標記。為什麼大腦會做這件事？在正常情況下，它有什麼機制防止這件事發生？那個防止機制在什麼條件下會失效？這些問題，Blanke 的研究提出了，但沒有完整回答。</p>
+<p>身體整合感知的研究，在 Blanke 之後有很大的進展。橡皮手錯覺（Rubber Hand Illusion）實驗，讓我們看到大腦對「哪個身體部位是我的」的判斷，是可以被非常簡單的視覺和觸覺衝突所改變的——你看著一隻假的橡皮手被觸摸，同時你真實的手也被以同樣的節奏觸摸，幾分鐘後，大多數人會開始感覺那隻橡皮手「是我的」。這個錯覺告訴我們，「身體的邊界」不是固定的，大腦對它的判斷，隨時在根據感覺輸入更新。如果連「手是不是我的」都可以被操弄，「我在哪裡」和「另一個我在哪裡」，就更不是一個固定的問題了。</p>
+<p>Blanke 的研究，在神經科學裡是一個重要的里程碑。它給了研究者一個可以操作的入口，讓 OBE 和自我定位的研究從純粹的主觀報告，變成可以在實驗室裡控制和測量的現象。但它的解釋邊界也非常清楚：Blanke 解釋了 OBE 的觸發機制——角回整合失調，自我定位漂移。他沒有解釋，為什麼在那個漂移的狀態下，那個從天花板俯視的視角，仍然帶著完整的「我在這裡」的感覺。那個完整的、清醒的、有自我感的「觀察者」是什麼，它從哪裡來，Blanke 的電極沒有辦法回答。</p>
+<p>Blanke 的電極讓「你和你之間有距離」這件事，在實驗室裡成為可能。但它讓那個距離更難解釋，不是更容易。</p>
+<p>你和你之間的那個距離，是什麼做的？</p>
+<h2 class="chap-h2">第二章 兩個「我」為什麼不一樣</h2>
+<p>在 Blanke 的研究裡，OBE 和 autoscopy 被放在同一個框架下討論，因為它們都涉及「自我定位的異常」。但在臨床描述上，這兩個現象的差異，比它們的相似性更讓人不安。</p>
+<p>OBE 的患者通常描述一種相對平靜的狀態——他們在外面，他們在看，他們的身體在那裡，他們知道自己是「我」，只是位置不對。有一種奇怪，但不是撕裂感。那個「我」是完整的，只是搬到了另一個地方。</p>
+<p>autoscopy 患者的描述，不是這樣的。他們描述的，是一種根本性的不確定：那個在面前的影像，帶著「我」的全部特徵——它長得像我，它的動作和我一樣，它看起來有意識——但我也在這裡，我也是我。兩個完整的「我」同時存在，都帶著「這是我」的主觀感。那個不確定，不是「我在哪裡」，而是「哪個才是我」。</p>
+<p>這個差異，指向的是一個更根本的問題：「我」的感覺，和「位置」的感覺，是不是兩件分開的事？</p>
+<p>Blanke 在 2004 年的論文裡，試圖從神經機制的角度解釋 OBE 和 autoscopy 的差異。他的框架是：OBE 主要是自我定位（self-location）的失調，而 autoscopy 還涉及了身體所有感（sense of ownership）的重複——不只是「我的視角在別的地方」，而是「有兩個東西都帶著『這是我的身體』的感覺」。</p>
+<p>這個區分，在理論上是清楚的。但它帶出了一個更困難的問題：「身體所有感」是什麼？為什麼大腦在正常狀態下，只把「這是我的身體」的標記，貼在一個地方？那個「只貼一個」的機制是什麼，它在 autoscopy 裡是怎麼失效的？</p>
+<p>Blanke 沒有完整的答案。他的研究工具——電刺激和神經造影——讓他可以找到相關，但找到相關，不等於找到機制。角回的電刺激和 autoscopy 有相關，但角回不是唯一涉及的區域，而且同樣的電刺激，在不同的患者身上，有時候觸發 OBE，有時候觸發 autoscopy，有時候兩者都沒有。為什麼同樣的刺激，在不同的人身上產生不同的結果？這個問題，Blanke 的框架沒有辦法回答。</p>
+<p>另一個讓這個問題更難處理的，是 autoscopy 的患者對那個「另一個我」的情緒反應，非常不一致。有些患者描述強烈的恐懼，有些描述好奇，有些描述了一種說不清楚的親切感，甚至是想接觸那個影像的衝動。如果 autoscopy 純粹是感覺整合的失調，為什麼不同患者對同樣的「感覺整合失調結果」，有如此不同的情緒反應？情緒反應說明當事人對那個「另一個我」，有某種超出純粹感知的理解或解讀，而那個理解或解讀，不在 Blanke 的感覺整合框架裡。</p>
+<p>OBE 和 autoscopy 的差異，指向一個自我感的多層次結構。身體所有感（sense of ownership）和自我定位（self-location）是兩個可以分開的系統。橡皮手錯覺實驗早就說明了這一點——你可以讓一個人感覺一隻不是他的手「是我的」，同時他清楚地知道他的真實的手在別的地方。所有感和位置感是分開的，由不同的神經機制負責，可以獨立被操弄。</p>
+<p>autoscopy 在這個框架裡，是所有感的「翻倍」——兩個地方的東西，都被標記為「這是我的身體」。這在理論上是可能的，就像橡皮手錯覺讓你同時對橡皮手和真實的手都有所有感一樣。但 autoscopy 的強度，遠超過橡皮手錯覺——不只是「這雙手都是我的」，而是「這兩個完整的、有意識的存在，都是我」。</p>
+<p>這個強度的差異，暗示 autoscopy 涉及的，不只是身體所有感的重複，還涉及了一個更高層次的「自我感」的重複——那個「有某個東西在這裡，是我，有意識，有感受」的感覺，出現在兩個地方。Metzinger 的自我模型理論，對這個現象有一個理論上的解讀，我們在第三章會展開。</p>
+<p>Blanke 的研究讓「你和你之間的距離」這件事，在實驗上有了一個可以操作的版本。但它同時讓這個問題的難度變得更清楚：製造那個距離，比解釋它容易得多。你可以用電極在幾毫秒內製造一個「另一個我」，但你沒有辦法用同樣的電極解釋為什麼當事人會想走向那個影像，為什麼他感覺它有意識，為什麼他不確定「哪個才是我」。</p>
+<p>那些問題，在感覺整合的框架之外。它們在哪裡？Metzinger 試圖回答。</p>
+<h2 class="chap-h2">第三章 最小的那個「我」</h2>
+<p>Thomas Metzinger 在他 2003 年的著作《Being No One》裡，花了很長的篇幅建立一個關於自我感的階層結構。他的目標，不只是解釋 OBE 或 autoscopy，而是解釋「我」這個感覺的整個結構——從最底層的、最不依賴環境的那個「有某個東西在這裡」，到最複雜的、依賴記憶和社會身份的那個「我是一個有故事的人」。</p>
+<p>他給這個結構的最底層，一個名稱：最小自我（minimal self）。</p>
+<p>最小自我是意識體驗裡，最不可約化的那個部分。它不依賴記憶——你可以把一個人的所有記憶清空，只要他還有意識，他還有那個「有某個東西在這裡，現在，在體驗」的感覺。它不依賴身體的精確位置感——OBE 患者的位置感錯位了，但那個「有某個東西在這裡，在看，在感受」的最小自我，依然完整存在，只是「這裡」變成了天花板上方兩公尺的地方。它不依賴社會身份——你可以不知道自己叫什麼名字，不知道自己是誰，但只要意識在，那個最小自我就在。</p>
+<p>Metzinger 說，那個最小自我，是你所有體驗的底色。你不注意到它，就像你不注意到空氣，因為它永遠在那裡。但如果它消失了——麻醉、深度睡眠、某些神經損傷——那個「有體驗在發生」的感覺就消失了，整個意識的結構就塌掉了。</p>
+<p>Metzinger 在建立最小自我的概念時，用了大量的異常意識狀態案例作為支撐——不是作為趣味案例，而是作為「自然實驗」，讓那些在正常狀態下看不見的機制，在它們出錯的時候變得可見。他討論了人格解體（depersonalization）作為最小自我的邊界案例。人格解體患者還有意識，還能思考和感受，但那個「這是我的體驗，這個體驗屬於我」的感覺消失了。他們不是沒有最小自我——他們還有「有某個東西在這裡，在體驗」的感覺。他們失去的，是一個稍微高一層的連結：「那個在體驗的東西，是我」。</p>
+<p>Metzinger 把這個區分稱為自我感的歸屬連結（ownership link）——連結「有某個體驗在發生」和「那個體驗是我的」這兩件事的那條線。人格解體是那條線斷了，但最小自我的底層還在。</p>
+<p>這個框架，讓 autoscopy 有了一個可以放置的位置：autoscopy 是歸屬連結翻倍——那條「這個體驗是我的」的連結，同時出現在兩個地方。兩個完整的「有體驗在發生」的結構，都連著「這是我的」的標記，讓患者同時在兩個地方都有最小自我的感覺。Metzinger 在書裡提出，這在理論上是可能的——PSM 模型的建構，沒有邏輯上的限制說它只能建構一個版本。如果觸發 PSM 的神經條件同時在兩個地方被滿足，大腦可能同時建構兩個完整的自我模型，兩個都「透明」，兩個都讓使用者感覺「這是我」。</p>
+<p>最小自我的神經基礎是什麼？Metzinger 本人對這個問題保持謹慎，他認為單一的神經定位，對一個如此基本的現象來說，可能是一個錯誤的問題設定——最小自我可能不是一個「位置」，而是一種「整合狀態」，是大腦多個區域協作達到某個特定配置時出現的屬性。</p>
+<p>近年的意識神經科學，有幾個方向在逼近這個問題。Tononi 的整合資訊理論（IIT）對最小自我有一個框架性的解讀：任何有足夠高 Φ 值的系統，都有某種程度的最小自我——有某個東西在「感受它自己存在著」的狀態。預設模式網絡（Default Mode Network，DMN）的研究，也和最小自我的問題有關。DMN 在靜息狀態下活躍，被認為是自我相關處理的神經基礎。當 DMN 的活動被壓制（深度冥想、麻醉、某些解離狀態），自我感的某些層次會消退，但最底層的「有某個東西在體驗」的感覺，通常在 DMN 壓制之後依然存在，只是失去了自我相關的內容。這暗示最小自我，可能不在 DMN 裡，而在更底層的、更古老的神經結構裡——可能和腦幹的覺醒系統（arousal system）有更直接的關係。</p>
+<p>Metzinger 的框架說，最小自我是所有更複雜的自我感的基礎。Blanke 的研究說，自我的定位和所有感，是可以被分開操弄的。如果把這兩個框架放在一起，autoscopy 的那個「另一個我」，是不是有它自己的最小自我？如果它有，那「最小自我可以有兩個」這件事，是不是意味著「我只有一個」，從來就不是一個邏輯上的必然，只是一個大腦通常維持的預設狀態？</p>
+<p>Metzinger 的最小自我概念，讓 autoscopy 的問題變得更清晰，但也更深了。如果最小自我是可以翻倍的，那麼「你和你之間的距離」就不只是一個感知的錯誤——它是大腦對「我只有一個」這個預設，在某些條件下的放棄。那個放棄不是崩潰，而是另一種可能的狀態，一種大腦在正常情況下不會去的地方，但在特定的神經條件下可以到達的地方。</p>
+<p>那個地方，讓我們看到了一個平時看不到的事實：「我只有一個」，是被主動維持的，不是自然成立的。它被主動維持，意味著維持它需要代價——神經資源的代價，注意力的代價，也許是其他某種我們還沒有辦法測量的代價。「我只有一個」，維持這件事，你付出了什麼？</p>
+<h2 class="chap-h2">第四章 那個預測沒有被測試</h2>
+<p>Metzinger 在《Being No One》裡提出的那個預測——PSM 可以同時建構兩個完整的自我模型——是一個可測試的科學預測。</p>
+<p>可測試，不等於被測試了。</p>
+<p>這個預測在 2003 年出版之後，沒有引起大量的實驗跟進。原因有幾個，每一個都說明了科學作為社會活動的某種結構性特徵。Metzinger 的書本身，是一本超過 600 頁的哲學兼神經科學著作，寫給專業讀者，不是為了產生可以快速跟進的實驗假說。它的影響力在哲學圈很大，在神經科學的實驗室裡，需要更多時間轉化成具體的研究問題。Blanke 的研究，是從另一個方向做的——從實驗觀察到理論，而不是從理論預測到實驗。兩個方向在 autoscopy 這個現象上有交集，但它們使用的語言和框架不完全相同，對話需要額外的橋接工作。那個橋接，至今仍然不完整。</p>
+<p>要驗證「大腦可以同時建構兩個完整的 PSM」，你需要幾個條件。第一，你需要一個可以穩定誘發 autoscopy 的方法——Blanke 的電刺激提供了一個可能，但它不夠穩定，不同患者的反應不一致，而且不是所有人都適合電極刺激。虛擬實境技術在近年提供了更溫和的方法，可以透過視覺和觸覺的衝突，製造「看見另一個自己」的幻覺，但這種方法誘發的 autoscopy 強度，通常比臨床案例低很多。</p>
+<p>第二，你需要一個可以同時測量「兩個自我模型的神經活動」的方式。這在技術上非常困難——你需要知道哪些神經活動對應哪個「我」，而不只是看到「有某些自我相關的神經活動在發生」。現有的神經造影技術（fMRI、EEG），在空間解析度或時間解析度上，都還沒有辦法做到這個區分。</p>
+<p>第三，也是最困難的，你需要能夠在受試者體驗 autoscopy 的當下，直接訪問他們的主觀報告，了解那個「另一個我」的體驗內容是什麼——它有最小自我的感覺嗎？它只是一個影像，還是有某種主觀性的存在感？這個訪問，需要受試者在一個非常特殊的意識狀態下，保持清醒和溝通能力，同時體驗到「另一個我」的存在。</p>
+<p>Blanke 在他後期的研究裡，部分地逼近了這些技術問題。他用機器人手臂，設計了一個可以製造「背後有另一個存在」的幻覺的實驗——受試者的背部被觸摸，同時機器人手臂在他們看不見的背後，做出同樣的觸摸動作，但時間上有一點延遲。這個時間差，讓大腦的感覺整合系統陷入混亂，一部分受試者報告感覺背後有一個存在，有幾個受試者甚至說那個存在「是另一個我」。這個實驗觸及了 Metzinger 的預測，但沒有完整地測試它。它製造了一個「另一個存在的感覺」，但沒有製造一個「帶著完整自我感的另一個我」。</p>
+<p>為什麼這個預測這麼難測試，不只是技術問題？有一個更根本的困難：Metzinger 的預測，是關於主觀體驗的預測，不是關於神經活動的預測。他說的是：如果 PSM 可以同時建構兩個完整的自我模型，使用者會同時有兩個帶著「這是我」感覺的主觀體驗。這個預測要被真正測試，你需要能夠確認那個主觀體驗確實存在——不只是有某種神經活動，而是有某種「從內部感受到的完整自我感」。</p>
+<p>這把測試帶回了 Chalmers 的困難問題：主觀體驗不能被客觀測量，你只能透過報告來推斷它。而報告，可能不準確，可能不完整，可能無法覆蓋體驗的全部內容。Metzinger 自己對這個困難有清醒的認識。他在書裡說，他的理論是關於意識的理論，而意識的核心問題，沒有一個純粹從外部進行的測量方式可以完全解決。他的理論是一個框架，讓問題更清楚，不是一個直接可以被實驗驗證的模型。</p>
+<p>科學對這類預測的態度，通常是「等技術跟上」。但「等技術跟上」，可能需要很長的時間。在那段時間裡，那個預測就繼續懸在那裡，不是被證實了，也不是被否定了，只是還沒有人能夠到達它。</p>
+<p>Blanke 的實驗和 Metzinger 的理論，在 autoscopy 這個現象上有一個交集。那個交集讓兩個框架的邊界都更清楚了——Blanke 的感覺整合模型到了哪裡停下來，Metzinger 的主觀現象學從哪裡開始。那個交集本身，是一個科學進展。但那個交集還沒有被完整探索。Metzinger 的預測還沒有被測試。autoscopy 的機制還沒有完整的解釋。「你和你之間的距離，是什麼做的」這個問題，還在等待一個足夠好的工具。</p>
+<h2 class="chap-h2">第五章 我看著我自己</h2>
+<p>1880 年代，法國神經學家 Jules Cotard 記錄了一個他後來命名為「虛無妄想症」（Cotard’s Syndrome）的案例。患者，一名中年女性，相信自己已經死了——不是比喻，不是隱喻，是字面意義上的，她相信她的身體裡沒有器官，她的血液裡沒有血液，她已經死去了但還在行走。她拒絕進食，因為死人不需要吃東西。</p>
+<p>Cotard 記錄的，不是一個關於死亡恐懼的心理案例，而是一個關於自我感的極端解離的神經案例。那名患者的最小自我——「有某個東西在這裡，在體驗」——以某種方式，和「那個東西是我，是活著的，是有身體的」這個更高層次的自我感，完全斷開了。她在體驗，但她不相信那個體驗屬於一個活著的存在。這個案例，和 autoscopy 走的是同一個問題的不同方向：不是「我在那裡，但我也在這裡」，而是「有某個東西在這裡，但那個東西不是一個活著的我」。</p>
+<p>人格解體障礙，是「你和你之間的距離」最常見的臨床形式。估計有 1–2% 的人口有過持續性的人格解體症狀，短暫的人格解體體驗，在普通人口裡，則相當普遍——壓力、睡眠剝奪、某些藥物，都可以觸發短暫的「我看著自己」的感覺。</p>
+<p>人格解體的臨床描述，從 19 世紀末開始出現在精神科文獻裡。法國精神科醫師 Maurice Krishaber 在 1873 年描述了幾個患者，他們說自己感覺「不像自己」，感覺自己是在旁觀自己的生活，感覺周圍的世界失去了真實感。他把這個狀態叫做「神經病性去人格化」，用的是當時能找到的最接近的術語。</p>
+<p>法國哲學家兼心理學家 Henri Frédéric Amiel 在他長達五萬頁的日記裡，留下了大量對自己人格解體狀態的詳細描述。他寫道（大意）：「我感覺我在觀察自己，我看見自己在思考，但那個思考和『我』之間，有一道玻璃。我觸碰不到它，它也觸碰不到我。」這些描述在今天被認為是人格解體的教科書級案例，而 Amiel 本人從未尋求治療，因為在那個年代，沒有人知道這是一個有名字的狀態。</p>
+<p>到了 20 世紀，人格解體作為一個精神科診斷逐漸被確立。但它在診斷系統裡的位置，長期是尷尬的——它不是精神病，患者沒有幻覺，沒有妄想，現實檢驗能力完整，他們知道自己的體驗是異常的。它也不是焦慮症，雖然焦慮常常伴隨著它。它是一種難以分類的狀態，讓那些試圖用現有診斷框架理解它的人，一直處於困惑中。</p>
+<p>現代神經科學對人格解體障礙的研究，在過去二十年有了相當大的進展。神經造影研究顯示，人格解體狀態下，前額葉皮質對邊緣系統（特別是杏仁核）有異常強的抑制作用。杏仁核是情緒反應的核心區域，正常情況下，當你感受到某件事，杏仁核會產生對應的情緒反應，那個情緒反應，是讓你感覺「這件事和我有關，這件事在發生在我身上」的關鍵成分之一。</p>
+<p>在人格解體狀態下，前額葉的過度抑制讓杏仁核的反應幾乎消失——你看到一件事，你認知到它，但沒有情緒反應，沒有那個「這件事是我的，這件事在發生在我身上」的身體感受。結果就是那種玻璃後面的感覺：你在那裡，你在看，但那個看，沒有「我的」感覺。</p>
+<p>這個機制解釋了為什麼壓力可以觸發人格解體——長期壓力會讓前額葉的抑制功能失調，而那個失調，可能走向兩個方向：前額葉抑制不足，讓人情緒過度反應（焦慮、創傷後壓力症）；前額葉抑制過度，讓人情緒反應消失（人格解體）。它們是同一個系統失調的兩個不同方向。</p>
+<p>這個神經機制，讓 Metzinger 的 PSM 框架有了一個更具體的神經基礎：那個「這個體驗是我的」的歸屬連結，依賴杏仁核的情緒標記功能。沒有那個情緒標記，PSM 的透明性就消失了——你可以「看見」那個模型，但你沒有辦法「認同」它。人格解體，從這個角度來看，不是自我感消失了，是讓你認同那個自我感的情緒橋梁，被切斷了。</p>
+<p>神經科學的人格解體研究，在機制上有了相當清楚的框架：前額葉過度抑制杏仁核，情緒標記消失，歸屬連結斷開。這個框架是真實的，有神經造影的支持，有治療上的應用（某些 SSRI 和情緒調節訓練，對人格解體有一定效果）。但它解釋的，是「為什麼那個歸屬連結斷了」，沒有解釋「那個歸屬連結是什麼」。</p>
+<p>就像 Blanke 解釋了「角回失調讓位置感改變」，沒有解釋「為什麼位置改變後，還有一個完整的我在那個新位置」；神經科學解釋了「杏仁核抑制讓情緒標記消失」，沒有解釋「那個沒有情緒標記的、在玻璃後面觀察的，是什麼」。</p>
+<p>「我看著我自己」這件事，從 1873 年 Krishaber 的第一批臨床描述，到今天的神經造影研究，我們對它的機制知道了很多。但那個在玻璃後面看的，那個讓患者說「這不是我」的，那個讓 autoscopy 患者說「那個也是我」的——</p>
+<p>那個，依然說不清楚。</p>
+<p>你和你之間的距離，由什麼組成，你現在比讀這本書之前更清楚了嗎？還是更不清楚了？</p>
+<h2 class="chap-h2">後記：距離不消失，只是變得可見</h2>
+<p>你和你之間，一直有一段距離。</p>
+<p>大多數時候，你感覺不到它，因為你太習慣了。那個「我在這裡」的感覺，穩定到你從來不會去問它是怎麼被維持的，是誰在維持它，需要什麼條件才能維持它。</p>
+<p>Blanke 的電極，Metzinger 的理論，還有那些活在人格解體狀態裡的人，讓我們看到了一件事：那個穩定，是主動維持的，不是理所當然的。大腦在每一個當下，都在做一件非常複雜的事——把來自不同感覺系統的訊號整合起來，建構一個統一的「我在這裡」，然後讓你以為那個統一是自然存在的，不是被建構出來的。</p>
+<p>當那個建構出了問題，距離就出現了。你看見了另一個自己，或者你感覺自己站在玻璃後面，或者你看著自己的手，感覺它不是你的。</p>
+<p>那個距離，讓你看見了平時看不見的機制。</p>
+<p>這本書沒有辦法讓那個距離消失，也不打算讓它消失。它只是讓你知道：那個距離一直在那裡，只是大多數時候，你沒有看到它。</p>
+<p>現在你看到了。帶著它繼續走，看看它能帶你到哪裡。</p>
+<p>靈魂與意識</p>
+<p>那個感覺・靈魂與意識 Vol.5《你和你之間的距離》</p>
+<p>作者：盧林 著／有的沒的小舖 出品</p>
+<p>本書由作者與 AI 工具協作完成。</p>
+<p>── 讀墨購買本系列 ──</p>
 
-<div class="main-content">
-
-  <div class="book-meta">
-    <div class="series-tag">那個感覺 · 系列一 · VOL. 5</div>
-    <h1 class="book-title">你和你之間的距離</h1>
-    <div class="book-subtitle">催眠、解離狀態與意識層次</div>
-    <span class="trial-badge">開放試閱 · 前言 + 第一章節選</span>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E9%9D%88%E9%AD%82%E8%88%87%E6%84%8F%E8%AD%98%E3%80%91%E4%BD%A0%E5%92%8C%E4%BD%A0%E4%B9%8B%E9%96%93%E7%9A%84%E8%B7%9D%E9%9B%A2%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-1-vol5-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/that-feeling-1-vol6-trial.html">下一集 →</a>
   </div>
-
-  <h2>前言　你以為你是一個完整的人</h2>
-
-  <p>你以為你是一個完整的人。有一個固定的「你」，住在你的身體裡，掌管你的想法和行為，持續存在於時間裡。</p>
-
-  <p>這個感覺非常真實。但它很可能是錯的。</p>
-
-  <p>神經科學和心理學過去幾十年的研究，持續在侵蝕這個「完整自我」的概念。意識不是一個統一的整體，而是多個平行系統的即時協作結果。「你」不是一個固定的核心，而是一個動態的、隨時在重組的過程。在某些條件下——催眠、解離、強烈壓力、特定的靈修練習——這個過程的正常組織方式會被擾動，製造出那種「我不像我自己」或者「那個做了那件事的人不是我」的體驗。</p>
-
-  <p>這本書要探討的，就是你和你之間的那個距離。那個距離在催眠狀態裡有多遠，在解離的時候有多深，在你試圖用意識探索意識的時候會遇到什麼邊界。</p>
-
-  <p>不是要嚇你。是要讓你對自己更好奇。</p>
-
-  <h2>第一章　催眠不是你想的那樣</h2>
-
-  <h3>你對催眠的印象來自哪裡</h3>
-
-  <p>你對催眠的印象，很可能來自電影、舞台表演、或者新聞裡的聳動報導。那些印象製造了一個非常特定的催眠形象：一個人把懷錶在你面前晃，你的眼睛逐漸失焦，然後你進入了一個完全被對方控制的狀態，做了各種你清醒時不會做的事情，醒來之後什麼都不記得。</p>
-
-  <p>這個形象跟真實的催眠研究之間的距離，大概跟好萊塢的手術室跟真實的手術室之間的距離差不多。</p>
-
-  <p>催眠是一個真實的心理現象，有超過一百五十年的科學研究歷史，在心理治療、疼痛管理、和意識研究上有有記錄的效果。但它的運作方式、能做到的事情、以及它對「自我控制」的影響，跟大眾印象裡的版本有根本性的差異。</p>
-
-  <h3>催眠狀態的實際樣子</h3>
-
-  <p>催眠狀態不是睡著。被催眠的人是清醒的、有意識的、可以說話的，而且在絕大多數情況下，他們知道自己在被催眠。催眠更接近的比喻，是一種高度專注的「吸收」狀態（absorption）：注意力高度集中在催眠師提供的引導上，對外部刺激的注意力相應降低，但不是消失。</p>
-
-  <p>催眠的深度因人而異，差別巨大。人口中大約有10至15%是「高催眠感受性」（high hypnotizability）的人，他們對催眠的反應非常強烈，可以在催眠狀態下經歷幻覺、遺忘、以及複雜的感知改變。另外10至15%對催眠幾乎沒有反應。其餘的大多數人在這兩個極端之間。</p>
-
-  <div class="data-note">
-    <div class="note-label">研究背景</div>
-    史丹佛大學的Ernest Hilgard在1960至70年代建立了一套系統性的催眠感受性測量工具（Stanford Hypnotic Susceptibility Scale），至今仍是催眠研究的標準工具之一。Hilgard的研究顯示，催眠感受性是一個相對穩定的個體特質，跟智力無關，跟吸收能力（absorption）和想像力的豐富程度有較高的相關性。
-  </div>
-
-  <h3>催眠能控制你嗎</h3>
-
-  <p>催眠最常見的誤解，是它讓人「失去意志」、變得「完全聽話」。這個誤解的來源，一部分是舞台催眠表演——那些在台上做出各種奇怪行為的「受催眠者」，看起來像是完全被催眠師控制了。</p>
-
-  <p>但研究顯示，舞台催眠裡發生的事情，有更複雜的解釋。被選上台的人，往往是事先被篩選過的高催眠感受性者；舞台環境本身（觀眾、表演期待、社會壓力）對行為有強大的影響；而催眠師的指令，在大多數情況下只有在受試者「願意配合」的前提下才有效——如果催眠師要求受催眠者做他們強烈反對的事，大多數人仍然會拒絕。</p>
-
-  <p>催眠研究者把這個現象描述為：催眠增加了人對建議的接受性，但不能覆蓋核心的道德判斷和個人意志。你在催眠狀態裡，仍然是你——只是一個更願意接受引導、對某些體驗更開放的你。</p>
-
-  <div class="fade-out">
-    <p>這個「更願意接受引導」的狀態，是催眠在心理治療上有效的原因，也是它被誤解的原因。治療性催眠的效果，建立在催眠師和來訪者的合作關係上——不是控制，而是引導。治療師用催眠狀態的高接受性，幫助來訪者接觸平常被防禦機制阻擋的記憶、感受、或行為模式。這個過程的主動者，始終是來訪者本人，不是催眠師。</p>
-  </div>
-
-  <div class="trial-end">
-    <div class="trial-end-label">試閱到這裡</div>
-    <h3>後面還有很多</h3>
-    <p>
-      第一章繼續談催眠的神經機制——<br>
-      大腦在催眠狀態下實際發生了什麼。<br>
-      第二章進入解離：那個「我不像我自己」的感覺，<br>
-      是怎麼發生的，它的邊界在哪裡。<br>
-      第三章談多重人格——它是真實的嗎？
-    </p>
-    
-    <a href="/that-feeling-1.html" class="back-ss-inline">← 回到驚喜角落</a>
-  </div>
-
-</div>
-
-<!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
   <div class="snlabel">靈魂與意識系列</div>
   <div class="snbooks">
-    <a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
-    <a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
-    <a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
-    <a href="/that-feeling-1-vol4-trial.html" class="snbook">Vol.4《另一個人的記憶》</a>
-    <span class="snbook current">Vol.5《你和你之間的距離》</span>
-    <a href="/that-feeling-1-vol6-trial.html" class="snbook">Vol.6《意識的邊界在哪裡》</a>
+<a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
+<a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
+<a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
+<a href="/that-feeling-1-vol4-trial.html" class="snbook">Vol.4《另一個人的記憶》</a>
+<span class="snbook current">Vol.5《你和你之間的距離》</span>
+<a href="/that-feeling-1-vol6-trial.html" class="snbook">Vol.6《意識的邊界在哪裡》</a>
   </div>
-  <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-1-vol5-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>

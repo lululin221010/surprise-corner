@@ -1,337 +1,198 @@
-﻿<!DOCTYPE html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>與死者同在｜那個感覺 系列四 Vol.3｜盧林著</title>
+<title>與死者同在｜那個感覺 死亡不死系列 Vol.3｜盧林著</title>
+<meta property="og:title" content="與死者同在【免費閱讀】那個感覺 死亡不死系列">
+<meta property="og:description" content="死亡不死系列 Vol.3 ——免費在線閱讀，不需要下載任何 App。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e14;
+    --bg: #08100f;
     --text: #dcdcf0;
     --text-muted: #a8a8cc;
-    --accent: #7a4a9e;
-    --accent-light: rgba(122,74,158,0.15);
-    --accent-dim: rgba(122,74,158,0.4);
+    --accent: #7aacb0;
+    --accent-light: rgba(122,172,176,0.12);
+    --accent-dim: rgba(122,172,176,0.35);
     --card-bg: #14141e;
-    --card-border: rgba(122,74,158,0.2);
+    --card-border: rgba(122,172,176,0.35);
     --label: #9090b8;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Serif TC', serif;
-    font-size: 17px;
-    line-height: 2;
-    min-height: 100vh;
-  }
-  .page-back {
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .page-back a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    transition: color 0.2s;
-  }
-  .page-back a:hover { color: var(--accent); }
-  .content {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 40px 80px;
-  }
-  .book-meta {
-    margin-bottom: 52px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .series-label {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 16px;
-  }
-  h1.book-title {
-    font-size: 2.4rem;
-    font-weight: 500;
-    letter-spacing: 4px;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  .author {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--label);
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-  }
-  .trial-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border: 1px solid var(--accent-dim);
-    border-radius: 3px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--accent);
-  }
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--text);
-    margin-top: 56px;
-    margin-bottom: 28px;
-    letter-spacing: 2px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text);
-    margin-top: 40px;
-    margin-bottom: 20px;
-  }
-  p {
-    margin-bottom: 24px;
-    text-align: justify;
-    color: var(--text);
-  }
-  blockquote {
-    margin: 36px 0;
-    padding: 24px 28px;
-    border-left: 2px solid var(--accent-dim);
-    background: var(--card-bg);
-    border-radius: 0 6px 6px 0;
-  }
-  blockquote p {
-    margin-bottom: 8px;
-    color: var(--text-muted);
-    font-size: 16px;
-    font-style: italic;
-  }
-  blockquote cite {
-    display: block;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 12px;
-    color: var(--label);
-    font-style: normal;
-    letter-spacing: 1px;
-  }
-  .trial-end {
-    margin-top: 60px;
-    padding: 40px 36px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    text-align: center;
-  }
-  .trial-end .te-label {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 16px;
-  }
-  .trial-end p {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-    text-align: center;
-  }
-  .cta-group {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .btn-full {
-    display: inline-block;
-    padding: 12px 28px;
-    background: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 5px;
-    color: #fff;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .btn-full:hover { background: #6a3a8e; }
-  .btn-back {
-    display: inline-block;
-    padding: 12px 20px;
-    color: var(--text-muted);
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .btn-back:hover { color: var(--accent); }
-  .series-nav {
-    margin-top: 60px;
-    padding: 36px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-  }
-  .snlabel {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--label);
-    margin-bottom: 20px;
-  }
-  .snbooks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-  .snbook {
-    display: inline-block;
-    padding: 6px 14px;
-    border: 1px solid var(--card-border);
-    border-radius: 4px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
-  .snbook.current {
-    border-color: var(--accent-dim);
-    color: var(--accent);
-    background: var(--accent-light);
-  }
-  .back-link {
-    display: inline-block;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .back-link:hover { color: var(--accent); }
-  @media (max-width: 680px) {
-    .content { padding: 40px 24px 60px; }
-    .page-back { padding: 16px 24px; }
-    h1.book-title { font-size: 1.9rem; }
-    .series-nav { padding: 24px; }
-  }
-
-  /* 手機可讀性優化 */
-  @media (max-width: 600px) {
-    body { font-size: 16px; line-height: 1.9; }
-    .container { padding: 0 20px 60px; }
-    .book-title { font-size: 1.6rem; letter-spacing: 2px; }
-    .content h2 { font-size: 1.15rem; letter-spacing: 1px; margin: 36px 0 18px; }
-    .content p { margin-bottom: 20px; }
-    .series-grid { grid-template-columns: 1fr; }
-    .vol-grid { grid-template-columns: 1fr; }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Serif TC',serif; font-size:17px; line-height:2; max-width:680px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h1 { font-size:1.6rem; font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:.4em; margin-bottom:.3em; }
+  .subtitle { color:var(--text-muted); font-size:.9rem; margin-bottom:2rem; }
+  .chap-h1 { font-size:1.3rem; font-weight:700; color:var(--accent); margin:2.5rem 0 .8rem; border-left:4px solid var(--accent); padding-left:.8rem; }
+  .chap-h2 { font-size:1.15rem; font-weight:700; color:#c4b5fd; margin:2rem 0 .6rem; }
+  .chap-h3 { font-size:1rem; font-weight:600; color:var(--text-muted); margin:1.5rem 0 .4rem; }
+  p { margin:.6em 0; }
+  hr { border:none; border-top:1px solid #2a2a40; margin:2rem 0; }
+  .series-badge { display:inline-block; background:var(--accent-light); color:var(--accent); font-size:.8rem; padding:.2rem .7rem; border-radius:20px; margin-bottom:.8rem; font-family:'Noto Sans TC',sans-serif; border:1px solid var(--accent-dim); }
+  .back { display:inline-block; margin-bottom:1.5rem; color:var(--text-muted); text-decoration:none; font-size:.9rem; font-family:'Noto Sans TC',sans-serif; }
+  .back:hover { color:var(--text); }
+  /* share box */
+  .share-box { background:linear-gradient(135deg,#1a1030,#0f0820); border:1px solid var(--accent-dim); border-radius:16px; padding:1.8rem 1.4rem; margin-top:3rem; text-align:center; }
+  .share-box h3 { color:#c4b5fd; font-size:1rem; margin-bottom:.4rem; font-family:'Noto Sans TC',sans-serif; }
+  .share-box p { color:var(--text-muted); font-size:.85rem; margin-bottom:1rem; line-height:1.65; font-family:'Noto Sans TC',sans-serif; }
+  .share-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .share-btn { display:inline-block; padding:.55rem 1.4rem; border-radius:24px; font-weight:700; font-size:.88rem; text-decoration:none; cursor:pointer; border:none; font-family:'Noto Sans TC',sans-serif; }
+  .btn-line  { background:#06c755; color:#fff; }
+  .btn-copy  { background:#4a4a6a; color:#fff; }
+  .btn-next  { background:var(--accent); color:#fff; }
+  /* series nav */
+  .series-nav { margin-top:2.5rem; padding:1.2rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; }
+  .snlabel { font-size:.8rem; color:var(--label); margin-bottom:.6rem; font-family:'Noto Sans TC',sans-serif; }
+  .snbooks { display:flex; flex-wrap:wrap; gap:.4rem .6rem; margin-bottom:.8rem; }
+  .snbook { font-size:.82rem; padding:.2rem .6rem; border-radius:12px; border:1px solid var(--accent-dim); color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .snbook.current { background:var(--accent-light); color:var(--accent); font-weight:600; }
+  .snbook:not(.current):hover { background:var(--accent-light); color:var(--text); }
+  .back-link { display:inline-block; font-size:.82rem; color:var(--text-muted); text-decoration:none; font-family:'Noto Sans TC',sans-serif; }
+  .back-link:hover { color:var(--text); }
 </style>
 </head>
 <body>
-<a href="javascript:history.back()" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(14,14,20,0.88);color:#a8a8cc;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 18px;border-radius:20px;border:1px solid rgba(122,74,158,0.35);backdrop-filter:blur(8px);letter-spacing:1px;transition:color 0.2s;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='#a8a8cc'">← 返回</a>
+<a href="https://surprise-corner.vercel.app/feeling" class="back">← 回那個感覺</a>
+<div class="series-badge">那個感覺・死亡不死系列</div>
+<h1>與死者同在</h1>
+<div class="subtitle">Vol.3・死亡不死系列・完整版・免費閱讀</div>
 
-<div class="page-back"><a href="/that-feeling-4.html">← 返回死亡與不死系列</a></div>
+<h1 class="chap-h1">那個感覺・死亡與不死Vol.3《與死者同在》</h1>
+<h2 class="chap-h2">前言：他們說死去的人還在房間裡</h2>
+<p>2003年，英國布里斯托大學的研究團隊發表了一項調查：他們訪談了293位喪偶者，問他們有沒有「感覺到」已故配偶的存在。結果：86%的人說有。</p>
+<p>這不是小規模研究，也不是特定宗教或文化的現象。類似的調查在美國、日本、德國、瑞典都做過，結果都在70-90%之間。喪親者「感覺到」死者還在的體驗，比我們以為的普遍得多。而且這些體驗不是模糊的印象，很多人描述得非常具體：聽見死者的聲音、看見死者的身影、聞到死者的氣味、感覺到死者坐在床邊。</p>
+<p>這些體驗通常發生在喪親後的幾週或幾個月內，但也有人在多年後還會經歷。有些人只經歷一次，有些人持續經歷。有些人覺得這是安慰，有些人覺得困擾。有些人會主動跟死者「說話」，有些人試圖避免這些體驗。但幾乎所有經歷過的人都有一個共通點：他們不敢跟別人說。</p>
+<p>為什麼？因為怕被當成瘋子。在現代社會，「看見死人」是精神疾病的症狀，不是正常的哀傷反應。精神醫學手冊把「幻覺」定義為「在沒有外在刺激的情況下產生的感知體驗」，而看見、聽見、感覺到不存在的人，就是幻覺。所以大部分喪親者會選擇沉默，不跟家人說、不跟朋友說、不跟醫生說。他們把這些體驗藏起來，當作自己的秘密。</p>
+<p>但1977年，兩位研究者決定打破這個沉默。Karlis Osis 和 Erlendur Haraldsson 花了十年時間，在美國和印度收集了超過1,000個臨終床邊的報告，訪談醫生、護士、家屬，問他們：臨終者在死前有沒有看見什麼、聽見什麼、說什麼。他們發現：很多臨終者會在死前幾小時或幾分鐘，說他們看見已故的親人「來接」他們。而這個模式，在美國和印度、基督教和印度教、不同文化和宗教背景下，都驚人地一致。</p>
+<p>這本書不是要證明「鬼存在」。這本書要問的是：那些說「死去的人還在」的人，他們經歷了什麼？這些體驗有什麼模式？科學怎麼解釋這些模式？解釋到哪裡就停下來了？</p>
+<p>這本書也不會告訴你死者是不是真的還在。但它會告訴你：「與死者同在」的體驗，不是少數人的幻覺，而是一個跨文化、跨時代、可重複觀察到的現象。而這個現象，科學還沒有完全理解。</p>
+<h2 class="chap-h2">第一章 Osis 的跨文化研究</h2>
+<p>Karlis Osis 是拉脫維亞裔的超心理學家，1957年移民美國後在美國超心理學會（American Society for Psychical Research）工作。他不是一個容易相信超自然現象的人，他的訓練是實驗心理學，他的方法是量化數據、統計分析、嚴格的研究設計。</p>
+<p>1959年，Osis 開始一個計畫：系統性收集臨終者的報告。他設計了一份問卷，寄給美國各地的醫生和護士，問他們：你有沒有觀察到臨終病人在死前出現異常的視覺或聽覺體驗？如果有，請詳細描述病人說了什麼、看見了什麼、當時的生理狀態是什麼。十年後，他收集了640份有效問卷，涵蓋超過35,000個死亡案例。其中大約1,300個案例報告了臨終異象。</p>
+<p>但 Osis 不滿足於只在美國收集數據。他想知道：這些異象是文化建構的，還是普遍存在的？如果是文化建構，那美國和印度的臨終異象應該完全不同，因為兩個文化對死後世界的想像完全不同。如果是普遍存在，那應該有一些跨文化的共通元素。</p>
+<p>1972年，Osis 和冰島裔的研究夥伴 Erlendur Haraldsson 開始在印度重複同樣的研究。他們訪談了印度的醫生和護士，用同樣的問卷，問同樣的問題。五年後，他們收集了704份印度的問卷，涵蓋超過16,000個死亡案例，其中442個案例報告了臨終異象。</p>
+<p>1977年，他們把這兩組數據整理成一本書：《At the Hour of Death》（死亡時刻）。這本書的核心發現是：美國和印度的臨終異象有驚人的相似性。</p>
+<p>最常見的臨終異象類型是：看見已故親人（67%的美國案例、61%的印度案例）。病人會說：「媽媽在那裡」或「爺爺來了」，指向房間的某個角落。有時候他們會描述這個人的衣著、表情、動作，非常具體。Osis 記錄了一個案例：一位美國老太太在死前幾小時突然坐起來，對著空氣說：「哦，Henry 來了！」（Henry 是她已故的丈夫）然後她躺下，幾分鐘後過世。類似的案例在印度也有：一位印度教病人說他看見他已故的父親穿著白色的衣服站在床邊。</p>
+<p>第二常見的是：看見宗教人物或「光的存在」（23%的美國案例、17%的印度案例）。美國病人會說看見耶穌、天使、聖母瑪利亞。印度病人會說看見 Yamraj（死神）、Yamdoots（死神的使者）、或 Krishna。這個差異符合文化背景，但有趣的是：這些「存在」的功能是一樣的——他們來「接」病人，不是來審判或懲罰。</p>
+<p>第三個共通元素是：這些異象通常帶來平靜和接受（78%的案例）。病人在看見已故親人或宗教人物之後，通常會變得很平靜，不再掙扎，不再恐懼。有些病人會說：「我準備好了」或「我要走了」。Osis 特別強調：這個平靜不是藥物或生理衰竭造成的，因為很多案例裡病人的意識在那時候是清醒的，沒有服用鎮靜劑或嗎啡。</p>
+<p>Osis 和 Haraldsson 把這些發現整理成統計表，比較美國和印度的數據。結果顯示：雖然宗教人物的具體形象不同，但臨終異象的結構是一樣的——看見來接的存在、感到平靜、準備離開。這個一致性很難用文化建構來解釋，因為如果這些異象只是大腦根據文化期待創造出來的，那它們應該反映文化的全部內容，包括審判、懲罰、地獄、天堂的細節。但實際上這些異象非常簡單：有人來接，然後你走。</p>
+<p>但這裡有一個問題：Osis 的數據是二手報告。他不是直接訪談臨終者，而是訪談醫護人員和家屬，問他們「病人說了什麼」。這引入了記憶扭曲和詮釋偏誤的可能性。也許醫護人員或家屬在轉述時，無意識地把病人的話重新詮釋成符合「來接」模式的描述。</p>
+<p>Osis 承認這個限制，但他也指出：他的問卷設計有意避免誘導性問題。他不問「病人有沒有看見已故親人」，而是問「病人有沒有報告任何異常的視覺或聽覺體驗，如果有，請描述」。而且他收集的案例裡，有很多是醫護人員覺得「很奇怪」的描述——例如病人說看見一個他們不知道已經過世的人，或看見一個他們根本不認識的人。這些案例很難用「期待」或「詮釋」來解釋。</p>
+<p>另一個質疑是：也許這些異象是藥物或缺氧造成的。Osis 檢視了病人的用藥記錄和生理狀態。他發現：服用嗎啡或鎮靜劑的病人，報告臨終異象的比例反而比較低。這跟藥物假說相反——如果這些異象是藥物引發的幻覺，那服藥的病人應該更容易看見，而不是更不容易。缺氧假說也有問題：缺氧通常造成混亂、恐慌、片段的幻覺，不是清晰的、有意義的、帶來平靜的體驗。</p>
+<p>那麼為什麼是「來接」？為什麼臨終者看見的總是來接他們的親人，而不是來糾纏的仇人、來索債的債主、來審判的神明？Osis 沒有給出確定的答案，但他提出了一個可能性：也許這些異象反映的不是文化期待，而是某種更基本的、跨文化的心理或意識過程。也許在死亡即將來臨時，人類的意識會進入一種特殊的狀態，在這個狀態下，某些普遍的模式會浮現——而「被接引」就是其中一個模式。</p>
+<p>這個解釋聽起來很模糊，但 Osis 的數據確實顯示：臨終異象有一些文化無法完全解釋的共通性。這不表示這些異象是「真的」，但它表示它們不只是隨機的幻覺。它們有結構、有模式、有功能。而這個結構、模式、功能，是什麼？</p>
+<h2 class="chap-h2">第二章 死者來接的模式</h2>
+<p>Osis 和 Haraldsson 的研究裡，最讓人困惑的不是「病人看見已故親人」這件事本身，而是這些異象的時間點。</p>
+<p>大部分臨終異象發生在死前幾小時或幾分鐘。不是死前幾天，也不是死前幾秒，而是一個很精確的時間窗口：當死亡已經不可避免，但意識還清醒的時候。Osis 發現：在這個時間窗口內看見「來接者」的病人，通常在幾小時內就會過世。而那些在死前好幾天就開始出現幻覺的病人，看見的通常不是「來接」的親人，而是混亂的、恐怖的、片段的影像。</p>
+<p>這個時間點的精確性很難用生理機制來解釋。如果這些異象是大腦缺氧或器官衰竭造成的，那它們應該隨著生理狀態惡化而逐漸出現，而不是突然在某個特定時刻集中出現。但 Osis 的數據顯示：臨終異象不是漸進的，而是突然的——病人在某個時刻之前還在說其他事情，然後突然說「他們來了」。</p>
+<p>更奇怪的是：這些「來接者」的身分有一個很明顯的模式——他們幾乎都是已經過世的人。Osis 的統計顯示：在報告看見親人的案例裡，94%看見的是已故親人，只有6%看見的是還活著的人。這個比例跟病人認識的人的比例完全相反——病人認識的人裡，活著的遠比死去的多，但異象裡看見的幾乎都是死去的。</p>
+<p>這個模式很難用「期待」來解釋。如果病人只是看見他們想見的人，那應該有更多活著的親人出現，尤其是那些不在病床旁邊的親人。但實際上，異象裡的「來接者」幾乎都是已經不在這個世界的人。</p>
+<p>Osis 記錄了一個特別引人注目的案例：一位10歲的女孩在死前說她看見她的哥哥來接她。問題是：這個女孩不知道她哥哥已經過世了。她哥哥在她住院期間意外死亡，但家人為了不讓她擔心，沒有告訴她。她在死前幾小時說：「哥哥在這裡，他來接我了。」家人震驚了，因為她不可能知道哥哥已經死了。</p>
+<p>類似的案例在 Osis 的收集裡有好幾個。有病人說看見一個他們不知道已經過世的朋友、親戚、鄰居。這些案例很難用「文化期待」或「心理安慰」來解釋，因為病人沒有理由期待看見這些人。他們以為這些人還活著。</p>
+<p>那麼「來接」這個動作是什麼意思？為什麼不是「來陪伴」或「來等待」？Osis 注意到：在大部分案例裡，病人描述的不只是「看見」親人，而是感覺到親人「來帶他走」。有病人會說：「他們要我跟他們走」或「他們說該走了」。有些病人會伸出手，像是要握住某個看不見的手。有些病人會說：「我準備好了」然後閉上眼睛。</p>
+<p>這個「來接」的動作，在不同文化裡有不同的詮釋。在基督教文化裡，這被理解為「升天」——天使或已故親人來帶靈魂去天堂。在印度教文化裡，這被理解為「輪迴」——Yamdoots 來帶靈魂去下一世。但 Osis 指出：這些文化詮釋是後來加上去的，病人當下的描述通常很簡單，就是「有人來接我」。文化會用自己的語言去解釋這個體驗，但體驗本身是跨文化的。</p>
+<p>那麼為什麼這個體驗會帶來平靜？Osis 的數據顯示：在看見「來接者」之後，大部分病人會停止掙扎、停止抗拒、接受即將到來的死亡。有些病人在看見之前還在說「我不想死」，看見之後就說「我準備好了」。這個轉變不是藥物或疲憊造成的，因為很多案例裡病人的意識在那時候是清醒的，甚至比之前更清醒。</p>
+<p>Osis 訪談了一些醫護人員，問他們：你覺得這些異象是真的還是幻覺？大部分人說不知道，但他們觀察到一個共通點：看見「來接者」的病人，死得比較平靜。沒有看見的病人，通常會掙扎到最後一刻。這不是證據，但這是一個模式。</p>
+<p>那麼科學怎麼解釋這個模式？最常見的解釋是：這些異象是大腦的自我安慰機制。當大腦意識到死亡不可避免時，它會創造出一個安慰性的幻覺，讓你覺得「有人來接你」，這樣你就不會那麼害怕。這個解釋的邏輯很清楚：演化會偏好那些能夠減少痛苦的機制，而「來接」的幻覺確實減少了臨終的恐懼和掙扎。</p>
+<p>但這個解釋有一個問題：為什麼「來接」這個特定的形式？為什麼不是「你會睡著」或「你會變成星星」或其他更簡單的安慰？為什麼幾乎所有文化的臨終異象都包含「有人來帶你走」這個元素？如果這只是大腦隨機創造的安慰，那不同的人應該創造出不同的安慰形式。但實際上這個形式非常一致。</p>
+<p>Osis 沒有答案，但他提出了一個問題：也許「來接」不只是幻覺，也許它反映了某種我們還不理解的過程。不是說「鬼真的存在」，而是說「死亡的過程可能比我們以為的更複雜」。</p>
+<h2 class="chap-h2">第三章 哀傷幻覺的科學</h2>
+<p>2009年，威爾斯大學的 Agneta Grimby 發表了一項長期追蹤研究，訪談了50位喪偶者，從配偶過世後開始追蹤，每隔幾個月訪談一次，持續兩年。她想知道：喪親後「感覺到死者存在」的體驗有多普遍、持續多久、內容是什麼。</p>
+<p>結果顯示：在配偶過世後第一個月，82%的喪偶者報告了某種形式的「與死者接觸」體驗。這些體驗包括：聽見死者的聲音（36%）、看見死者的身影（28%）、感覺到死者的觸碰（18%）、聞到死者的氣味（14%）、或只是一種「他／她在這裡」的感覺，沒有具體的感官內容（54%）。</p>
+<p>這些體驗通常發生在特定的情境：獨處時、在家裡、在死者生前常待的地方、在情緒低落或特別想念死者的時候。有些人會在睡前或剛醒來時「感覺到」死者躺在旁邊。有些人會在做飯時「聽見」死者在廚房走動。有些人會在看電視時「看見」死者坐在他／她生前常坐的椅子上。</p>
+<p>Grimby 發現：這些體驗在喪親後第一個月最頻繁，然後逐漸減少，但不會完全消失。在配偶過世後一年，仍有52%的喪偶者報告偶爾還會有這些體驗。兩年後，這個比例降到34%。有些人一輩子都會偶爾「感覺到」死者，尤其是在特別的日子——生日、結婚紀念日、節日。</p>
+<p>那麼科學怎麼解釋這些體驗？最主流的解釋來自神經科學和認知心理學：這些是哀傷幻覺（grief hallucinations）。</p>
+<p>人類的大腦會為常見的感知對象建立預期模型。如果你跟一個人一起生活幾十年，你的大腦會建立一個非常精確的模型——他／她的聲音、走路方式、氣味、習慣。這個模型不只是記憶，而是一種自動的預期：當你聽見開門聲，你會「預期」看見那個人走進來；當你在廚房，你會「預期」聽見那個人在客廳看電視。</p>
+<p>當這個人突然不在了，你的大腦還沒來得及更新模型。所以當類似的情境出現時，大腦會自動激活預期，讓你「感覺到」那個人還在。這不是你故意想像，而是大腦的自動反應。就像截肢的人會有「幻肢」——雖然手臂已經不在了，但大腦的模型還在，所以你還是會感覺到手臂的存在、甚至感到手臂的疼痛。</p>
+<p>這個解釋可以解釋為什麼哀傷幻覺通常發生在熟悉的環境、為什麼內容跟死者的生前習慣高度相關、為什麼會隨時間逐漸減少（因為大腦慢慢更新了模型）。它也解釋了為什麼喪親者通常知道這些體驗「不是真的」——他們的理性知道那個人已經死了，但他們的感知系統還沒更新。</p>
+<p>但這個解釋無法解釋所有案例。有些喪親者報告的體驗，不符合「預期模型」的邏輯。例如：有人說他們在從未去過的地方「看見」死者。有人說他們「聽見」死者說了生前從未說過的話。有人說他們「感覺到」死者傳達了一個訊息、一個警告、或一個安慰，而這個訊息是喪親者事先不知道的。</p>
+<p>2016年，一項針對哀傷幻覺的質性研究訪談了120位喪親者，問他們：這些體驗對你來說是什麼？大部分人說：這是安慰。他們知道這「可能」是幻覺，但這不重要。重要的是這些體驗讓他們感覺到「死者還關心他們」、「死者還在某種形式上存在」、「他們之間的連結沒有完全斷掉」。</p>
+<p>研究者發現：那些把這些體驗詮釋為「與死者真實接觸」的人，哀傷調適得比較好。那些把這些體驗詮釋為「只是幻覺」的人，反而更容易陷入憂鬱。這不是說「相信鬼存在」對心理健康比較好，而是說「允許自己感覺到連結」比「強迫自己接受完全斷裂」更有幫助。</p>
+<p>這帶來一個問題：如果這些體驗是幻覺，但它們有正面的心理功能，那我們應該鼓勵還是勸阻？精神醫學的標準答案是：如果幻覺造成困擾或功能障礙，就需要治療；如果幻覺是良性的、暫時的、不影響日常功能，就不需要干預。但這個答案迴避了一個更根本的問題：為什麼人類需要這種幻覺？</p>
+<p>演化心理學的答案是：因為人類是高度社會性的動物，我們的生存依賴長期穩定的社會連結。當一個重要的連結突然斷裂，大腦需要時間來適應這個巨大的改變。「哀傷幻覺」給了大腦這個緩衝時間——你還可以「感覺到」那個人，所以你不會立刻崩潰；但你也知道這個人不會真的回來，所以你慢慢接受現實。這是一種心理上的「軟著陸」。</p>
+<p>但這個解釋還是沒有回答：為什麼這些幻覺的內容這麼一致？為什麼喪親者幾乎都報告「死者很平靜」「死者說他／她很好」「死者要我放下」？如果這只是大腦創造的安慰，為什麼不是「死者說他／她很想你」「死者要你一直記得他／她」？為什麼這個安慰的形式，總是「放手」而不是「抓緊」？</p>
+<h2 class="chap-h2">第四章 象徵性語言</h2>
+<p>1992年，兩位資深的安寧療護護士 Maggie Callanan 和 Patricia Kelley 出版了一本書：《Final Gifts》（最後的禮物）。這本書記錄了她們在安寧病房工作二十多年的觀察，特別是臨終病人的語言模式。</p>
+<p>她們發現：很多臨終病人在死前幾天或幾週，會開始使用一種象徵性語言（symbolic language）。他們不直接說「我要死了」，而是說「我要去旅行了」「我要回家了」「我要上車了」。他們不說「我很害怕」，而是說「房間裡太多人了」「他們一直在等我」「我不知道怎麼去那裡」。</p>
+<p>Callanan 和 Kelley 把這些語言模式整理成幾個類別。最常見的是旅程隱喻（journey metaphor）。病人會說：「我需要收拾行李」「火車快來了」「我該走了」。有時候他們會問：「我怎麼去那裡？」或「誰會帶我去？」這些問題聽起來很實際，但如果你直接回答「去哪裡」，病人通常會很困惑，因為他們問的不是物理上的地點。</p>
+<p>第二常見的是等待某人（waiting for someone）。病人會說：「他們還沒來」「我在等他」「她說她會來接我」。有時候護士或家屬會問：「誰要來？」病人會說出一個已故親人的名字，或只是說「他們」，不指明是誰。Callanan 和 Kelley 發現：這些病人通常在說完這句話後不久就過世，好像他們真的在等某個訊號或某個時刻。</p>
+<p>第三個模式是未完成的任務（unfinished business）。病人會說：「我還沒做完」「我需要先處理一件事」「我不能走，他們還需要我」。這些話通常不是指具體的事務，而是一種心理上的牽掛——對家人的擔心、對過去的遺憾、對未來的不安。Callanan 和 Kelley 觀察到：當家人允許病人「放下」這些牽掛時——例如告訴病人「我們會沒事的，你可以走了」——病人通常很快就會過世。</p>
+<p>Callanan 和 Kelley 把這種語言模式叫做臨終意識（nearing death awareness）。她們認為：臨終病人並不是在胡言亂語或產生幻覺，而是在用一種象徵性的語言，描述他們內在的經驗。這個經驗是什麼？她們的答案是：臨終病人意識到自己正在經歷一個過渡，從這個世界到另一個狀態，而他們用旅程、等待、未完成任務這些隱喻來描述這個過渡。</p>
+<p>這個觀點在安寧療護界引起了很大的共鳴。很多護士和家屬說：這解釋了我們多年來觀察到但不知道怎麼理解的現象。但在醫學界，這個觀點受到質疑。批評者說：這些語言模式可能只是大腦功能退化的症狀——混亂的思考、失去邏輯、無法區分現實和想像。用「象徵性語言」來美化這個過程，可能會讓家屬誤解病人的狀態，延誤必要的醫療干預。</p>
+<p>Callanan 和 Kelley 反駁：臨終意識跟譫妄（delirium）是不同的。譫妄的特徵是混亂、焦慮、無法溝通、內容隨機變化。臨終意識的特徵是清晰、平靜、可以溝通、內容有一致的主題。而且很多臨終意識發生在病人的認知功能還完全正常的時候，不是在器官衰竭或藥物影響下。</p>
+<p>她們舉了一個案例：一位70歲的男性癌症末期病人，意識清楚，沒有服用任何影響認知的藥物。他對護士說：「我需要買機票。」護士問：「你要去哪裡？」他說：「我不知道，但我需要機票。」護士問：「誰要跟你一起去？」他說：「我媽媽。她說她會等我。」（他媽媽已經過世20年。）兩天後，他過世了。</p>
+<p>這個案例裡，病人的語言是清晰的、有邏輯的，但內容是象徵性的。他不是真的要買機票，他是在用「買機票」這個動作來表達「我在準備離開」。他不是真的看見他媽媽在等他，他是在用「我媽媽在等我」來表達「我感覺到一個熟悉的、安全的存在在引導我」。</p>
+<p>Callanan 和 Kelley 建議家屬：不要糾正病人，不要說「你媽媽已經死了」或「你不需要機票」。而是順著病人的語言，問：「你覺得什麼時候會走？」「你需要我幫你準備什麼？」這種對話方式，讓病人感覺到被理解、被支持，而不是被否定或被當成神智不清。</p>
+<p>但這帶來一個倫理問題：我們是在尊重病人的主觀經驗，還是在強化他們的幻覺？如果臨終意識只是大腦功能退化的症狀，那順著病人的話說，是不是在欺騙他們？</p>
+<p>Callanan 和 Kelley 的答案是：這不是真假的問題，這是意義的問題。對病人來說，「我媽媽在等我」這句話是有意義的，它幫助他們理解和接受即將發生的事。我們可以說這是幻覺，但這個幻覺有它的功能——它讓死亡不那麼恐怖，它提供了一個框架來理解一個無法理解的經驗。</p>
+<p>而且，她們指出：就算臨終意識是幻覺，它也是一個非常普遍的、跨文化的、有特定模式的幻覺。為什麼臨終病人幾乎都用「旅程」「等待」「回家」這些隱喻，而不是其他的？為什麼他們看見的幾乎都是「來接」的親人，而不是「留下」的仇人？這個一致性，是值得認真對待的。</p>
+<h2 class="chap-h2">第五章 解釋的邊界</h2>
+<p>神經科學可以解釋哀傷幻覺的機制：大腦的預期模型、多巴胺系統的失調、前額葉的抑制功能減弱。心理學可以解釋象徵性語言的功能：提供意義、減少焦慮、幫助過渡。但這些解釋都無法回答一個核心問題：為什麼內容這麼一致？</p>
+<p>如果「與死者同在」的體驗只是大腦創造的安慰，那不同的人應該創造出不同的安慰形式，反映他們各自的文化、性格、經驗。但實際上，這些體驗跨越文化、宗教、年齡、性別，都有驚人的相似性。</p>
+<p>Osis 和 Haraldsson 的跨文化研究顯示：美國和印度的臨終異象，在結構上是一樣的——看見來接的存在、感到平靜、準備離開。Grimby 的喪親研究顯示：不同的喪偶者，報告的「與死者接觸」體驗，在模式上是一致的——感覺到死者的存在、聽見安慰的話、被鼓勵「放下」。Callanan 和 Kelley 的安寧觀察顯示：臨終病人的象徵性語言，都圍繞著「旅程」「等待」「回家」這些主題。</p>
+<p>這個一致性，不是文化傳播可以完全解釋的。不同文化對死後世界的想像差異很大——天堂 vs 輪迴、審判 vs 解脫、天使 vs 神明——但臨終體驗的核心元素是跨文化的。這表示：這些體驗可能反映了某種比文化更基本的東西。</p>
+<p>那是什麼？一個可能性是：人類大腦在面對死亡時，有一些普遍的反應模式。就像恐懼、悲傷、喜悅這些情緒是跨文化的，「死亡接近時的意識狀態」可能也是跨文化的。這不是說「靈魂存在」，而是說「大腦在特定情境下會產生特定類型的體驗」。</p>
+<p>但這個解釋還是無法回答：為什麼這些體驗總是帶來安慰？為什麼不是恐懼、混亂、絕望？演化心理學會說：因為安慰有生存價值——平靜的死亡對個體和群體都比較好。但這個解釋有循環論證的問題：如果死亡是終點，那「平靜的死亡」對個體沒有任何生存價值，因為個體已經結束了。它只對留下來的人有價值——看到親人平靜地離開，比看到親人掙扎痛苦地離開，對心理創傷比較小。</p>
+<p>也許這就是答案：這些體驗不是為了死者，而是為了生者。「與死者同在」的體驗，讓喪親者感覺到連結沒有完全斷掉，讓他們可以慢慢適應失去。臨終異象，讓家屬看到病人在死前變得平靜，讓他們比較容易接受死亡。象徵性語言，讓照顧者知道病人在經歷什麼，讓他們可以提供適當的支持。</p>
+<p>但這個解釋還是有一個漏洞：很多「與死者同在」的體驗是私密的，沒有跟任何人分享。如果這些體驗只是為了幫助生者，為什麼它們會發生在沒有目擊者的時候？為什麼喪親者會在獨處時「感覺到」死者？這個體驗對誰有幫助？</p>
+<p>也許對喪親者本人。也許這些體驗不需要有目擊者，它們本身就是一種心理調適機制。它們讓你感覺到「那個人還在某種形式上存在」，這讓失去變得不那麼絕對、不那麼無法承受。你知道這「可能」是幻覺，但這個幻覺給了你繼續活下去的理由。</p>
+<p>這帶來一個哲學問題：如果一個幻覺有正面的心理功能，那它還是「只是」幻覺嗎？還是它有某種更深的真實性——不是物理上的真實，而是心理上的、意義上的真實？</p>
+<p>William James 在1902年的《The Varieties of Religious Experience》裡提出了一個概念：實用主義的真實（pragmatic truth）。他說：如果一個信念讓你活得更好、更有意義、更能面對困難，那這個信念在實用意義上是「真的」，不管它在客觀意義上是否為真。「與死者同在」的體驗，可能就是這種實用主義的真實——它不一定是物理上真實的，但它在心理上、意義上是真實的。</p>
+<p>但科學不接受這種真實。科學要的是可檢驗的、可重複的、客觀的真實。而「與死者同在」的體驗，無法被客觀檢驗——你無法測量「死者的存在」，你只能記錄「喪親者的主觀報告」。這兩件事不一樣。</p>
+<p>所以我們卡在兩個真實之間：主觀的真實 vs 客觀的真實、意義的真實 vs 物理的真實。而目前的科學工具，只能處理後者，無法處理前者。</p>
+<p>也許有一天我們會有新的工具、新的概念、新的方法，可以研究主觀經驗而不把它簡化成大腦活動。也許我們會發展出一種科學，可以認真對待「意義」這個維度，而不只是把它當成「神經活動的副產品」。</p>
+<p>但在那之前，「與死者同在」的體驗會繼續發生，跨越文化，跨越時代，帶來安慰或困惑，被詮釋為真實或幻覺，被接受或被壓抑。而那些經歷過的人，會繼續在心裡保守這個秘密，或小心翼翼地跟少數幾個人分享，害怕被否定，但也無法否定自己的經驗。</p>
+<p>因為對他們來說，那個體驗是真的。不管科學怎麼說。</p>
+<h2 class="chap-h2">後記：也許「同在」不需要物理形式</h2>
+<p>這本書講了三組研究者的工作：Osis 和 Haraldsson 的跨文化臨終異象研究、Grimby 的喪親者追蹤研究、Callanan 和 Kelley 的安寧護士觀察。他們研究不同的現象，但他們得到了相同的發現：「與死者同在」的體驗，比我們以為的普遍得多。</p>
+<p>Osis 和 Haraldsson 的數據顯示：60-70%的臨終者，在死前會看見已故親人「來接」。Grimby 的數據顯示：80%以上的喪偶者，在喪親後會「感覺到」死者的存在。Callanan 和 Kelley 的觀察顯示：大部分臨終病人，會用象徵性語言描述一個「過渡」的過程。</p>
+<p>這些不是少數人的特殊經驗，這是大部分人在面對死亡或失去時，都會經歷的普遍現象。但因為文化的禁忌、醫學的病理化、理性主義的否定，大部分人選擇把這些經驗藏起來，不跟別人說，甚至不跟自己承認。</p>
+<p>這本書不是要證明「死者真的還在」。這本書要說的是：「與死者同在」的體驗是真實的心理現象，有它的模式、有它的功能、有它的意義。它不一定表示死者在物理上還存在，但它表示死者在心理上、在關係上、在意義上，沒有完全消失。</p>
+<p>也許「同在」不需要物理形式。也許一個人可以在你心裡、在你的記憶裡、在你對世界的理解裡，繼續「存在」。也許當你「感覺到」死者在陪伴你時，你感覺到的不是一個鬼魂，而是一種連結——一種超越物理形式的、但仍然真實的連結。</p>
+<p>科學可以說這是幻覺，但這不會改變體驗的真實性。你知道你感覺到了什麼。你知道那個感覺對你來說有什麼意義。科學可以解釋機制，但它無法否定意義。</p>
+<p>Callanan 和 Kelley 在《Final Gifts》的結尾記錄了她們多年的觀察：臨終者在最後留給我們的，不是遺產或遺言，而是他們對死亡的親身體驗——死亡可以是平靜的，可以是有意義的，可以是某種形式的重聚。這不是宗教信仰，這是基於多年觀察的報告。</p>
+<p>也許死亡不是我們以為的那個樣子。也許「同在」不會因為物理形式的消失而結束。也許我們需要的，不是證明或否定，而是保持開放——對自己的經驗開放，對他人的經驗開放，對那些科學還無法完全理解的東西開放。</p>
+<p>因為有些經驗，比解釋更重要。你感覺到的那個人，也許從未真正離開。</p>
+<p>那個感覺・死亡與不死</p>
+<p>那個感覺・死亡與不死 Vol.3《與死者同在》</p>
+<p>作者：盧林 著／有的沒的小舖 出品</p>
+<p>本書由作者與 AI 工具協作完成。</p>
+<p>── 讀墨購買本系列 ──</p>
 
-<div class="content">
-
-  <div class="book-meta">
-    <div class="series-label">那個感覺　系列四　Vol.3</div>
-    <h1 class="book-title">與死者同在</h1>
-    <div class="author">盧林著｜有的沒的小舖出品</div>
-    <span class="trial-badge">試　閱　版</span>
+<div class="share-box">
+  <h3>📖 讀完了嗎？</h3>
+  <p>那個感覺系列全部免費——如果這篇讓你有什麼感覺，分享給也許也在找答案的人。</p>
+  <div class="share-btns">
+    <a class="share-btn btn-line"
+       href="https://line.me/R/msg/text/?%E3%80%90%E9%82%A3%E5%80%8B%E6%84%9F%E8%A6%BA%E3%83%BB%E6%AD%BB%E4%BA%A1%E4%B8%8D%E6%AD%BB%E3%80%91%E8%88%87%E6%AD%BB%E8%80%85%E5%90%8C%E5%9C%A8%EF%BD%9C%E5%85%8D%E8%B2%BB%E9%96%B1%E8%AE%80%20%F0%9F%93%96%0Ahttps%3A%2F%2Fsurprise-corner.vercel.app%2Fthat-feeling-4-vol3-trial.html"
+       target="_blank" rel="noopener noreferrer">LINE 分享</a>
+    <button class="share-btn btn-copy" onclick="copyLink()">複製連結</button>
+    <a class="share-btn btn-next" href="/that-feeling-4-vol4-trial.html">下一集 →</a>
   </div>
-
-  <h2>前言　靈媒不是你想的那種問題</h2>
-
-  <p>如果你聽到「靈媒」這個詞，你可能想到的是兩種東西：電視上的表演者，用模糊的語言套話讓觀眾感動落淚；或是收費昂貴的神棍，專門盯著剛失去親人、判斷力暫時下降的人。</p>
-
-  <p>這兩種東西都存在，而且都有詳盡的紀錄。詹姆斯·蘭迪（James Randi）——一位職業魔術師和懷疑論者——花了他職業生涯的大部分時間拆解靈媒的把戲，他的工作記錄了一個讓人不舒服的真相：大多數宣稱能夠與死者溝通的人，使用的都是可以被識別和複製的心理技術，和靈界沒有任何關係。</p>
-
-  <p>但這本書不是要討論騙局。騙局的部分已經被充分記錄了。</p>
-
-  <p>這本書要討論的是另一個問題：在那些被系統性排除了明顯欺騙可能性的受控條件下，靈媒現象裡有沒有任何東西是目前已知的心理學或物理學無法解釋的？</p>
-
-  <p>這個問題的答案，比「靈媒是騙子」和「靈媒是真的」都更複雜，也更有趣。</p>
-
-  <h2>第一章　十九世紀的通靈桌與科學家的介入</h2>
-
-  <h3>靈性主義運動的誕生</h3>
-
-  <p>1848年3月，美國紐約州海德斯維爾（Hydesville），凱特和瑪格麗特·福克斯（Kate and Maggie Fox）兩姐妹宣稱她們能夠與一個在屋裡發出神祕敲擊聲的「靈」溝通。她們的家人和鄰居來見證，發現那些敲擊聲似乎在回應問題。消息傳開，吸引了大批訪客，最終演變成19世紀最大的宗教社會現象之一：靈性主義運動（Spiritualism）。</p>
-
-  <p>到1850年代，美國和英國有數以百萬計的人相信人死後靈魂繼續存在，並且可以透過靈媒與生者溝通。通靈桌旋轉（table-turning）、自動書寫、降靈會（séance），成為維多利亞時代中產階級的社交活動。</p>
-
-  <p>科學家沒有置身事外。1869年，英國皇家學會成立了一個調查委員會，研究靈性主義現象。1882年，英國科學促進協會的部分成員成立了「心靈研究學會」（Society for Psychical Research，SPR），成員包括物理學家威廉·巴雷特（William Barrett）、哲學家亨利·席威克（Henry Sidgwick），以及後來的諾貝爾物理學獎得主雷利勛爵（Lord Rayleigh）。</p>
-
-  <p>這群人的態度不是相信靈性主義，而是認為這個現象普遍到值得嚴肅調查。他們用當時最嚴格的科學方法收集和評估證據，試圖區分欺騙、自我欺騙、和真正無法解釋的現象。</p>
-
-  <h3>福克斯姐妹的後來</h3>
-
-  <p>1888年，瑪格麗特·福克斯在一場公開演講中承認，那些敲擊聲是她們用腳趾關節發出的。這個「坦白」在懷疑論者之間被視為對整個靈性主義運動的終極否定。</p>
-
-  <p>但事情比這複雜。一年後，瑪格麗特撤回了她的坦白，說那次公開演講是在精神崩潰和財務壓力下做出的，並不是真實的。她在1893年去世，沒有再做任何官方聲明。</p>
-
-  <p>凱特從未做過任何坦白。</p>
-
-  <p>這個開頭故事的細節，預示了整個靈媒研究史的特質：充滿了「確定」然後「不確定」，「揭穿」然後「反揭穿」，很少有真正乾淨的結局。</p>
-
-  <h3>丹尼爾·鄧格拉斯·洪姆：讓科學家困惑的靈媒</h3>
-
-  <p>在19世紀所有的靈媒中，最讓認真的調查者感到困惑的是丹尼爾·鄧格拉斯·洪姆（Daniel Dunglas Home，1833-1886）。洪姆從未收費，從不在黑暗或封閉的環境裡工作（這和大多數靈媒相反），而且從未被抓到詐騙。</p>
-
-  <p>英國物理學家威廉·克魯克斯（William Crookes）——真空管的發明者，皇家學會院士——在1870年至1873年間對洪姆進行了一系列受控實驗，包括在自己家中的實驗室環境裡。克魯克斯記錄了洪姆讓物體漂浮、在光線下被觀察到、讓樂器在無人接觸的情況下演奏等現象。</p>
-
-  <p>克魯克斯發表了他的觀察報告，結論是這些現象是真實的，無法用已知的物理機制解釋。這個結論讓他在科學圈裡受到廣泛嘲諷，但他拒絕撤回。他說：「我沒有說這是不可能的，我說的是我觀察到了它。」</p>
-
-  <p>洪姆從來沒有被揭穿。他的案例至今仍在被研究者爭論。懷疑論者說克魯克斯被洪姆欺騙了，或者克魯克斯在記錄上不夠嚴謹。信奉者說這是有記錄的最強「物理靈媒」案例之一。唯一可以確定的是：沒有人能夠複製洪姆的現象，但也沒有人能夠確定地解釋它是如何被製造出來的。</p>
-
-  <div class="trial-end">
-    <div class="te-label">試　閱　到　此</div>
-    <p>第一章後半進入20世紀的受控靈媒實驗，以及蓋瑞·施瓦茲的亞利桑那大學靈媒研究計畫。</p>
-    <div class="cta-group">
-      
-      <a href="/that-feeling-4.html" class="btn-back">← 回到驚喜角落</a>
-    </div>
-  </div>
-
-  <!-- 免費閱讀 CTA（會員好康禮） -->
-<div style="margin:0 auto 32px;max-width:580px;text-align:center;padding:22px 20px 24px;background:linear-gradient(135deg,#1a1030,#0f0820);border:1px solid rgba(139,92,246,0.35);border-radius:16px;">
-  <p style="margin:0 0 5px;font-size:1rem;font-weight:700;color:#c4b5fd;font-family:sans-serif;">🎁 完整版免費閱讀</p>
-  <p style="margin:0 0 16px;font-size:0.85rem;color:#9ca3af;line-height:1.65;font-family:sans-serif;">
-    那個感覺系列全部免費——<br>
-    在<strong style="color:#a78bfa;">有的沒的小舖</strong>免費註冊，即可直接閱讀完整版
-  </p>
-  <a href="https://still-time-corner.vercel.app/login?next=/my-perks"
-     style="display:inline-block;padding:11px 28px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;border-radius:24px;font-weight:700;font-size:0.9rem;font-family:sans-serif;">
-    免費註冊，立即閱讀完整版 →
-  </a>
 </div>
 
 <div class="series-nav">
-  <div class="snlabel">死亡與不死系列</div>
+  <div class="snlabel">死亡不死系列</div>
   <div class="snbooks">
-    <a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
-    <a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
-    <span class="snbook current">Vol.3《與死者同在》</span>
-    <a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
-    <a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
-    <a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
+<a href="/that-feeling-4-vol1-trial.html" class="snbook">Vol.1《你為什麼怕死》</a>
+<a href="/that-feeling-4-vol2-trial.html" class="snbook">Vol.2《瀕死之後》</a>
+<span class="snbook current">Vol.3《與死者同在》</span>
+<a href="/that-feeling-4-vol4-trial.html" class="snbook">Vol.4《轉世的案例》</a>
+<a href="/that-feeling-4-vol5-trial.html" class="snbook">Vol.5《不死的執念》</a>
+<a href="/that-feeling-4-vol6-trial.html" class="snbook">Vol.6《好好告別》</a>
   </div>
-  <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  <a href="https://surprise-corner.vercel.app/feeling" class="back-link">← 返回那個感覺</a>
 </div>
 
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://surprise-corner.vercel.app/that-feeling-4-vol3-trial.html').then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '已複製 ✓';
+    setTimeout(() => { btn.textContent = '複製連結'; }, 2000);
+  });
+}
+</script>
 </body>
 </html>
