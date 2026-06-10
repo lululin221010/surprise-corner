@@ -1,6 +1,6 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/Academy.tsx
-// 股市學院主介面 — 課程列表 + 課程進入點
+// 股市書院主介面 — 課程列表 + 課程進入點
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -39,7 +39,7 @@ export default function Academy() {
         <div className="classroom-breadcrumb" style={{ marginBottom: '1rem' }}>
           <Link href="/classroom" className="classroom-back" style={{ display: 'inline' }}>小教室</Link>
           <span style={{ margin: '0 0.4rem' }}>›</span>
-          <button onClick={() => setActiveCourse(null)} className="classroom-back" style={{ fontSize: '12px' }}>股市學院</button>
+          <button onClick={() => setActiveCourse(null)} className="classroom-back" style={{ fontSize: '12px' }}>股市書院</button>
           <span style={{ margin: '0 0.4rem' }}>›</span>
           <span>{activeCourse.title}</span>
         </div>
@@ -89,10 +89,10 @@ export default function Academy() {
         <div className="classroom-breadcrumb" style={{ marginBottom: '0.6rem' }}>
           <Link href="/classroom" className="classroom-back" style={{ display: 'inline', fontSize: '12px' }}>小教室</Link>
           <span style={{ margin: '0 0.4rem' }}>›</span>
-          <span>股市學院</span>
+          <span>股市書院</span>
         </div>
         <h1 style={{ color: '#1e1b4b', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.3rem' }}>
-          📈 股市學院
+          📈 股市書院
         </h1>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>
           每篇5分鐘，看懂一個股市概念。K線、法人籌碼、均線……說人話，不廢話。

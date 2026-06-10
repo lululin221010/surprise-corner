@@ -274,7 +274,7 @@ export default function ShopPage() {
             borderRadius: '20px', padding: '8px 18px',
             color: '#7c3aed', fontSize: '0.85rem', textDecoration: 'none', fontWeight: 600,
           }}>
-            📈 去股市學院賺金幣
+            📈 去股市書院賺金幣
           </Link>
         </div>
 

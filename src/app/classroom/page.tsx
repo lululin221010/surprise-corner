@@ -7,16 +7,16 @@ import ShareButtons from '@/components/ShareButtons';
 import './classroom.css';
 
 const LIVE_ACADEMIES = [
-  { icon: '📈', title: '股市學院', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
+  { icon: '📈', title: '股市書院', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
 ];
 
 const COMING_TOPICS = [
-  { icon: '🧠', title: '心理學院', desc: '每篇5分鐘，讀懂一個心理學概念。依附、防禦、認知偏誤……從日常角度出發，不燒腦。' },
-  { icon: '💰', title: '理財學院', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
-  { icon: '🤖', title: 'AI 工具學院', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
-  { icon: '✍️', title: '創作學院', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
-  { icon: '🔬', title: '科學學院', desc: '量子力學、相對論、演化論……用你看得懂的語言，講清楚那些聽起來很難的科學。' },
-  { icon: '🌍', title: '人文學院', desc: '歷史、哲學、社會學……幫你建立思考框架，看懂這個世界為什麼是這樣。' },
+  { icon: '🧠', title: '心理學書院', desc: '每篇5分鐘，讀懂一個心理學概念。依附、防禦、認知偏誤……從日常角度出發，不燒腦。' },
+  { icon: '💰', title: '理財書院', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
+  { icon: '🤖', title: 'AI工具書院', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
+  { icon: '✍️', title: '創作書院', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
+  { icon: '🔬', title: '科學書院', desc: '量子力學、相對論、演化論……用你看得懂的語言，講清楚那些聽起來很難的科學。' },
+  { icon: '🌍', title: '人文書院', desc: '歷史、哲學、社會學……幫你建立思考框架，看懂這個世界為什麼是這樣。' },
 ];
 
 export default function ClassroomPage() {

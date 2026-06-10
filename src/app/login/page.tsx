@@ -129,7 +129,7 @@ function LoginContent() {
 
         <div className="text-center mt-6">
           <Link href="/classroom/stock" className="text-purple-500 underline text-xs">
-            ← 回到股市學院
+            ← 回到股市書院
           </Link>
         </div>
       </div>
