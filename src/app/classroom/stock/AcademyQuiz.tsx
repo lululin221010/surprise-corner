@@ -18,6 +18,7 @@ interface CertInfo {
 interface Props {
   quiz: Quiz;
   certInfo: CertInfo;
+  isLast: boolean;   // 是否為本堂最後一題（整堂全對才發證書）
   onPass: () => void;
   onRetry: () => void;
 }
@@ -34,7 +35,7 @@ function saveCert(email: string, info: CertInfo) {
   }
 }
 
-export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) {
+export default function AcademyQuiz({ quiz, certInfo, isLast, onPass, onRetry }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const [email, setEmail] = useState('');
   const [saved, setSaved] = useState(false);
@@ -152,9 +153,10 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
         </div>
       )}
 
-      {/* 答對：榮譽證書 + Email 儲存 + 繼續 */}
+      {/* 答對：最後一題才發證書（整堂全對），中間題只給繼續按鈕 */}
       {answered && isCorrect && (
         <>
+          {isLast && (
           <div style={{
             background: 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
             border: '1px solid #c7d2fe',
@@ -165,7 +167,7 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
               驚喜榮譽證書
             </div>
             <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6, marginBottom: '0.8rem' }}>
-              恭喜答對！<br />
+              恭喜完成本堂全部測驗！<br />
               <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
             </div>
 
@@ -219,9 +221,10 @@ export default function AcademyQuiz({ quiz, certInfo, onPass, onRetry }: Props) 
               </div>
             )}
           </div>
+          )}
 
           <button className="btn-next" onClick={onPass} style={{ width: '100%' }}>
-            繼續下一題 →
+            {isLast ? '完成本堂課 →' : '繼續下一題 →'}
           </button>
         </>
       )}
