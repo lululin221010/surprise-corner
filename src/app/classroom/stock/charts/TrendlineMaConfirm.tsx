@@ -107,14 +107,13 @@ export default function TrendlineMaConfirm() {
         ctx.restore()
       }
 
-      // ── 線標籤 ──
-      lbl('趨勢線', bx(12.4), py(tl(12.4)) + 14, '#2563eb', 10.5, true, 'right')
-      lbl('20日均線', bx(12.4), py(ma(12.4)) - 12, '#f59e0b', 10.5, true, 'right')
+      // ── 線標籤（20日均線上移到K棒上方空白，趨勢線放右下空白）──
+      lbl('20日均線', rightX, topY + 36, '#f59e0b', 10.5, true, 'right')
+      lbl('趨勢線', rightX, py(tl(12.6)) + 14, '#2563eb', 10.5, true, 'right')
 
       // ── 雙重確認框 ──
       lbl('雙重確認 ＝ 相對安全的多方環境', leftX, topY + 2, '#1e1b4b', 11.5, true)
       lbl('① 股價在趨勢線上方  ② 均線多頭排列', leftX, topY + 18, '#7c3aed', 10.5)
-      lbl('兩個訊號同時說「是」，可信度才高', leftX, topY + 33, '#94a3b8', 9.5)
 
       // 底部軸線
       ctx.strokeStyle = '#e5e7eb'

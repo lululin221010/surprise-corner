@@ -112,7 +112,7 @@ export default function TrendlineBasic() {
       }
       lbl('上升趨勢線：連「收盤價」波段低點', leftX, topY + 2, '#2563eb', 11.5, true)
       lbl('三點吻合 ＝ 有效趨勢線', leftX, topY + 18, '#7c3aed', 10.5)
-      lbl('影線可以穿過，取點看收盤', bx(11), py(tl(11)) + 16, '#94a3b8', 10, false, 'right')
+      lbl('影線可以穿過，取點看收盤', rightX, botY - 8, '#94a3b8', 10, false, 'right')
 
       // 底部軸線
       ctx.strokeStyle = '#e5e7eb'

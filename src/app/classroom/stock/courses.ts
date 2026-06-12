@@ -56,7 +56,7 @@ export interface Course {
 
 export const stockCourse: Course = {
   id: 'stock-basics',
-  title: '股市書院',
+  title: '股市入門',
   description: '每篇5分鐘，看懂一個股市概念。K線、法人籌碼、均線……說人話，不廢話。',
   emoji: '📈',
   lessons: [

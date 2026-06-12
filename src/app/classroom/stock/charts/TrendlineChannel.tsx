@@ -110,15 +110,13 @@ export default function TrendlineChannel() {
         ctx.restore()
       }
 
-      // ── 買點 / 觀察點標註 ──
-      lbl('▲ 買點參考', bx(5), py(lo(5)) + 18, '#16a34a', 10, true)
-      lbl('▲ 買點參考', bx(10), py(lo(10)) + 18, '#16a34a', 10, true)
-      lbl('▼ 注意（減碼/觀察）', bx(3), py(hi(3)) - 14, '#ef4444', 10, true)
-      lbl('▼ 注意', bx(8), py(hi(8)) - 14, '#ef4444', 10, true)
+      // ── 買點 / 觀察點標註（通道外空白區，避開K棒）──
+      lbl('▼ 注意（減碼/觀察）', bx(2), py(hi(2)) - 16, '#ef4444', 10, true)
+      lbl('▲ 買點參考', bx(9.5), py(lo(9.5)) + 28, '#16a34a', 10, true)
 
-      // ── 軌道名稱 ──
+      // ── 軌道名稱（端點外空白處）──
       lbl('上軌＝壓力線', bx(12.4), py(hi(12.4)) - 12, '#ef4444', 10.5, true, 'right')
-      lbl('下軌＝支撐線', bx(12.4), py(lo(12.4)) + 14, '#16a34a', 10.5, true, 'right')
+      lbl('下軌＝支撐線', leftX, botY - 8, '#16a34a', 10.5, true)
 
       // ── 頂部說明 ──
       lbl('趨勢通道：天花板和地板一目了然', leftX, topY + 2, '#1e1b4b', 11.5, true, 'left')
