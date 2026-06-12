@@ -22,6 +22,10 @@ import MaCrossDead from './charts/MaCrossDead';
 import SupportResistance from './charts/SupportResistance';
 import KdOscillator from './charts/KdOscillator';
 import RsiLine from './charts/RsiLine';
+import TrendlineBasic from './charts/TrendlineBasic';
+import TrendlineBreakout from './charts/TrendlineBreakout';
+import TrendlineChannel from './charts/TrendlineChannel';
+import TrendlineMaConfirm from './charts/TrendlineMaConfirm';
 
 function renderChart(chart: SlideChart) {
   switch (chart.type) {
@@ -38,6 +42,10 @@ function renderChart(chart: SlideChart) {
     case 'support-resistance': return <SupportResistance />;
     case 'kd-oscillator':      return <KdOscillator />;
     case 'rsi-line':           return <RsiLine />;
+    case 'trendline-basic':      return <TrendlineBasic />;
+    case 'trendline-breakout':   return <TrendlineBreakout />;
+    case 'trendline-channel':    return <TrendlineChannel />;
+    case 'trendline-ma-confirm': return <TrendlineMaConfirm />;
     default:                   return null;
   }
 }
