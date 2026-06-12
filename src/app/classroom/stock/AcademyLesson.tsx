@@ -26,6 +26,7 @@ import TrendlineBasic from './charts/TrendlineBasic';
 import TrendlineBreakout from './charts/TrendlineBreakout';
 import TrendlineChannel from './charts/TrendlineChannel';
 import TrendlineMaConfirm from './charts/TrendlineMaConfirm';
+import AdvancedChart from './charts/AdvancedCharts';
 
 function renderChart(chart: SlideChart) {
   switch (chart.type) {
@@ -46,7 +47,8 @@ function renderChart(chart: SlideChart) {
     case 'trendline-breakout':   return <TrendlineBreakout />;
     case 'trendline-channel':    return <TrendlineChannel />;
     case 'trendline-ma-confirm': return <TrendlineMaConfirm />;
-    default:                   return null;
+    // 進階課新圖殼統一走 AdvancedCharts registry
+    default:                   return <AdvancedChart type={chart.type} />;
   }
 }
 
