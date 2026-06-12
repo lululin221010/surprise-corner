@@ -292,6 +292,168 @@ function drawPatternComparison(ctx: CanvasRenderingContext2D, W: number, H: numb
   lbl(ctx, '同樣是「漲完震盪」，量縮是休息，量亂是出貨', W * 0.08, H * 0.06 + 16, '#7c3aed', 10)
 }
 
+function poly(ctx: CanvasRenderingContext2D, pts: Array<[number, number]>, color: string, width = 2, dash?: number[]) {
+  ctx.save()
+  ctx.strokeStyle = color
+  ctx.lineWidth = width
+  if (dash) ctx.setLineDash(dash)
+  ctx.beginPath()
+  pts.forEach(([x, y], i) => { if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y) })
+  ctx.stroke()
+  ctx.restore()
+}
+
+const MA_COLORS = { ma5: '#ef4444', ma20: '#f59e0b', ma60: '#2563eb' }
+
+// ── 進03：多頭排列 vs 空頭排列 ──
+function drawMaAlignment(ctx: CanvasRenderingContext2D, W: number, H: number) {
+  const topY = H * 0.26, botY = H * 0.78, mid = W / 2
+  const lane = (x0: number, x1: number, up: boolean) => {
+    const px = (f: number) => x0 + (x1 - x0) * f
+    const py = (v: number) => botY - v * (botY - topY) // v: 0..1
+    const base = up ? [0.15, 0.3, 0.45, 0.6, 0.75] : [0.85, 0.7, 0.55, 0.4, 0.25]
+    const mk = (offset: number, color: string) =>
+      poly(ctx, base.map((v, i) => [px(i / 4), py(Math.min(0.98, Math.max(0.02, v + offset)))] as [number, number]), color, 2.2)
+    if (up) { mk(0.14, MA_COLORS.ma5); mk(0, MA_COLORS.ma20); mk(-0.14, MA_COLORS.ma60) }
+    else { mk(-0.14, MA_COLORS.ma5); mk(0, MA_COLORS.ma20); mk(0.14, MA_COLORS.ma60) }
+  }
+  lane(W * 0.08, mid - 16, true)
+  lane(mid + 16, W * 0.92, false)
+  ctx.strokeStyle = '#e5e7eb'; ctx.lineWidth = 1
+  ctx.beginPath(); ctx.moveTo(mid, topY - 6); ctx.lineTo(mid, botY + 4); ctx.stroke()
+  lbl(ctx, '多頭排列：5 > 20 > 60', (W * 0.08 + mid) / 2, botY + 16, '#ef4444', 10.5, true, 'center')
+  lbl(ctx, '短線騎在長線上面', (W * 0.08 + mid) / 2, botY + 30, '#64748b', 9.5, false, 'center')
+  lbl(ctx, '空頭排列：5 < 20 < 60', (mid + W * 0.92) / 2, botY + 16, '#16a34a', 10.5, true, 'center')
+  lbl(ctx, '短線壓在長線下面', (mid + W * 0.92) / 2, botY + 30, '#64748b', 9.5, false, 'center')
+  lbl(ctx, '均線排列：誰在上面，誰說話', W * 0.08, H * 0.06, '#1e1b4b', 11.5, true)
+  const ly = H * 0.06 + 16
+  lbl(ctx, '━ 5日', W * 0.08, ly, MA_COLORS.ma5, 10, true)
+  lbl(ctx, '━ 20日', W * 0.08 + 52, ly, MA_COLORS.ma20, 10, true)
+  lbl(ctx, '━ 60日', W * 0.08 + 112, ly, MA_COLORS.ma60, 10, true)
+}
+
+// ── 進03：黃金交叉 / 死亡交叉 ──
+function drawMaCrossover(ctx: CanvasRenderingContext2D, W: number, H: number) {
+  const g = makeGeom(W, H, 0, 100, 10, 0.85, 0.24)
+  const px = (f: number) => g.leftX + (g.rightX - g.leftX) * f
+  // 20日（橘）：先降後升再降；60日（藍）：平緩
+  const ma60: Array<[number, number]> = [[px(0), g.py(52)], [px(0.25), g.py(50)], [px(0.5), g.py(52)], [px(0.75), g.py(56)], [px(1), g.py(54)]]
+  const ma20: Array<[number, number]> = [[px(0), g.py(38)], [px(0.18), g.py(42)], [px(0.3), g.py(52)], [px(0.5), g.py(72)], [px(0.68), g.py(74)], [px(0.82), g.py(58)], [px(1), g.py(42)]]
+  poly(ctx, ma60, MA_COLORS.ma60, 2.2)
+  poly(ctx, ma20, MA_COLORS.ma20, 2.2)
+  // 交叉點：黃金 ≈ px(0.3)、死亡 ≈ px(0.84)
+  const gx = px(0.3), gy = g.py(52), dx = px(0.84), dy = g.py(57)
+  ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(gx, gy, 10, 0, Math.PI * 2); ctx.stroke()
+  ctx.strokeStyle = '#64748b'; ctx.beginPath(); ctx.arc(dx, dy, 10, 0, Math.PI * 2); ctx.stroke()
+  // 黃金交叉下方空白、死亡交叉上方空白
+  lbl(ctx, '↑ 黃金交叉', gx, gy + 26, '#f59e0b', 10.5, true, 'center')
+  lbl(ctx, '短均線上穿長均線', gx, gy + 40, '#94a3b8', 9.5, false, 'center')
+  lbl(ctx, '↓ 死亡交叉', dx, dy - 38, '#64748b', 10.5, true, 'center')
+  lbl(ctx, '短均線下穿長均線', dx, dy - 24, '#94a3b8', 9.5, false, 'center')
+  header(ctx, g, '交叉＝排列形成的瞬間', '⚠️ 配合量能確認：放量交叉才可信，縮量可疑')
+  axis(ctx, g)
+}
+
+// ── 進03：葛蘭碧四大時機 ──
+function drawMaGranville(ctx: CanvasRenderingContext2D, W: number, H: number) {
+  const g = makeGeom(W, H, 0, 100, 10, 0.85, 0.24)
+  const px = (f: number) => g.leftX + (g.rightX - g.leftX) * f
+  // 20日均線：山丘型
+  const ma: Array<[number, number]> = []
+  for (let f = 0; f <= 1.001; f += 0.05) {
+    ma.push([px(f), g.py(35 + 38 * Math.sin(Math.PI * Math.min(1, f)))])
+  }
+  poly(ctx, ma, MA_COLORS.ma20, 2.4)
+  // 股價（藍細線）繞著均線：①上穿 ②回測彈起 ③跌破 ④反彈遇壓
+  const price: Array<[number, number]> = [
+    [px(0), g.py(26)], [px(0.1), g.py(33)], [px(0.16), g.py(45)], // ① 上穿
+    [px(0.26), g.py(62)], [px(0.34), g.py(58)], [px(0.38), g.py(66)], // ② 回測彈起
+    [px(0.48), g.py(80)], [px(0.56), g.py(76)], [px(0.62), g.py(64)], // ③ 跌破
+    [px(0.7), g.py(54)], [px(0.78), g.py(62)], [px(0.84), g.py(52)], // ④ 反彈遇壓
+    [px(0.94), g.py(38)], [px(1), g.py(30)],
+  ]
+  poly(ctx, price, '#475569', 1.8)
+  const mark = (f: number, p: number, t: string, buy: boolean, above: boolean) => {
+    const x = px(f), y = g.py(p)
+    const color = buy ? '#ef4444' : '#16a34a'
+    ctx.strokeStyle = color; ctx.lineWidth = 1.8
+    ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2); ctx.stroke()
+    lbl(ctx, t, x, y + (above ? -18 : 20), color, 10.5, true, 'center')
+  }
+  mark(0.13, 38, '①買', true, false)
+  mark(0.34, 58, '②買', true, false)
+  mark(0.6, 67, '③賣', false, true)
+  mark(0.78, 62, '④賣', false, true)
+  header(ctx, g, '葛蘭碧精華四式：①②買　③④賣', '核心：均線是趨勢，股價偏離會回歸')
+  footer(ctx, g, '━ 20日均線　─ 股價')
+  axis(ctx, g)
+}
+
+// ── 進03：均線糾結與發散 ──
+function drawMaSqueeze(ctx: CanvasRenderingContext2D, W: number, H: number) {
+  const g = makeGeom(W, H, 0, 100, 10, 0.85, 0.24)
+  const px = (f: number) => g.leftX + (g.rightX - g.leftX) * f
+  const SPLIT = 0.58
+  const tangle = (phase: number, color: string, endOff: number) => {
+    const pts: Array<[number, number]> = []
+    for (let f = 0; f <= SPLIT; f += 0.04) {
+      pts.push([px(f), g.py(46 + Math.sin(f * 18 + phase) * 4)])
+    }
+    for (let f = SPLIT + 0.04; f <= 1.001; f += 0.04) {
+      const t = (f - SPLIT) / (1 - SPLIT)
+      pts.push([px(f), g.py(46 + t * endOff + Math.sin(f * 6 + phase) * 1)])
+    }
+    poly(ctx, pts, color, 2.2)
+  }
+  tangle(0, MA_COLORS.ma5, 34)
+  tangle(2, MA_COLORS.ma20, 20)
+  tangle(4, MA_COLORS.ma60, 8)
+  // 糾結區虛線框
+  ctx.strokeStyle = '#94a3b8'; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.2
+  ctx.strokeRect(px(0.02), g.py(56), px(SPLIT) - px(0.02), g.py(36) - g.py(56))
+  ctx.setLineDash([])
+  // 標籤：糾結區下方空白、發散區下方空白
+  lbl(ctx, '糾結期＝觀望', px(0.28), g.py(24), '#64748b', 10.5, true, 'center')
+  lbl(ctx, '交叉頻繁，進場易被洗', px(0.28), g.py(15), '#94a3b8', 9.5, false, 'center')
+  lbl(ctx, '發散＝趨勢確立', px(0.82), g.py(24), '#ef4444', 10.5, true, 'center')
+  lbl(ctx, '間距擴大才出手', px(0.82), g.py(15), '#94a3b8', 9.5, false, 'center')
+  header(ctx, g, '均線糾結不進場，發散才出手')
+  const ly2 = H * 0.06 + 16
+  lbl(ctx, '━ 5日', W * 0.08, ly2, MA_COLORS.ma5, 10, true)
+  lbl(ctx, '━ 20日', W * 0.08 + 52, ly2, MA_COLORS.ma20, 10, true)
+  lbl(ctx, '━ 60日', W * 0.08 + 112, ly2, MA_COLORS.ma60, 10, true)
+  axis(ctx, g)
+}
+
+// ── 進03：均線排列＋量能辨真假 ──
+function drawMaVolume(ctx: CanvasRenderingContext2D, W: number, H: number) {
+  const bars: Bar[] = [
+    { o: 60, h: 64, l: 58, c: 63 }, { o: 63, h: 68, l: 62, c: 67 },
+    { o: 67, h: 72, l: 65, c: 71 }, { o: 71, h: 76, l: 70, c: 75 },
+    { o: 75, h: 80, l: 73, c: 79 }, { o: 79, h: 83, l: 77, c: 82 },
+    { o: 82, h: 85, l: 80, c: 83 }, { o: 83, h: 86, l: 81, c: 84 },
+    { o: 84, h: 86, l: 82, c: 85 }, { o: 85, h: 87, l: 83, c: 84 },
+    { o: 84, h: 86, l: 82, c: 85 }, { o: 85, h: 87, l: 84, c: 86 },
+  ]
+  const vols = [55, 65, 78, 85, 90, 80, 45, 38, 30, 26, 22, 18]
+  const g = makeGeom(W, H, 50, 95, bars.length, 0.62, 0.24)
+  drawBars(ctx, g, bars)
+  // 20日均線（在K棒下方）
+  const maPts: Array<[number, number]> = bars.map((b, i) => [g.bx(i), g.py(b.c - 6)] as [number, number])
+  poly(ctx, maPts, MA_COLORS.ma20, 2)
+  // 量能子圖
+  const vTop = H * 0.66, vBot = H * 0.84
+  vols.forEach((v, i) => {
+    const x = g.bx(i)
+    const h2 = (v / 100) * (vBot - vTop)
+    ctx.fillStyle = i <= 5 ? '#ef4444' : '#cbd5e1'
+    ctx.fillRect(x - g.barW / 2, vBot - h2, g.barW, h2)
+  })
+  lbl(ctx, '放量多頭 ✓ 可跟', (g.bx(0) + g.bx(5)) / 2, vBot + 11, '#ef4444', 9.5, true, 'center')
+  lbl(ctx, '量縮虛漲 ⚠ 小心頭部', (g.bx(6) + g.bx(11)) / 2, vBot + 11, '#64748b', 9.5, true, 'center')
+  header(ctx, g, '排列看方向，量能辨真假', '同樣是多頭排列，量縮的後半段要提高警覺')
+}
+
 // ── registry ──
 const REGISTRY: Record<string, (ctx: CanvasRenderingContext2D, W: number, H: number) => void> = {
   'gap-intro': drawGapIntro,
@@ -299,7 +461,15 @@ const REGISTRY: Record<string, (ctx: CanvasRenderingContext2D, W: number, H: num
   'gap-measured-target': drawGapMeasuredTarget,
   'flag-pattern': drawFlagPattern,
   'pattern-comparison': drawPatternComparison,
+  'ma-alignment': drawMaAlignment,
+  'ma-crossover': drawMaCrossover,
+  'ma-granville': drawMaGranville,
+  'ma-squeeze': drawMaSqueeze,
+  'ma-volume': drawMaVolume,
 }
+
+// 圖殼總覽測試頁用（/classroom/stock/charts-test）
+export const ADVANCED_CHART_TYPES = Object.keys(REGISTRY)
 
 export default function AdvancedChart({ type }: { type: string }) {
   const ref = useRef<HTMLCanvasElement>(null)
