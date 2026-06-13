@@ -1184,26 +1184,25 @@ function arrow(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number
 
 // 三層篩選流程（縱向）
 function drawStockScreenFlow(ctx: CanvasRenderingContext2D, W: number, H: number) {
-  const cxm = W / 2, bw = W * 0.56
+  const cxm = W / 2, bw = W * 0.74
   const steps: Array<[string, string, string]> = [
     ['① 市場條件', '大盤多空？適合進場嗎？', '#eef2ff'],
-    ['② 個股條件', '技術面 + 籌碼面篩選', '#f5f3ff'],
+    ['② 個股條件', '技術面＋籌碼面篩選', '#f5f3ff'],
     ['③ 時機條件', '進場訊號出現了嗎？', '#fef2f2'],
   ]
-  const y0 = H * 0.17, bh = H * 0.13, gap = H * 0.055
+  const y0 = H * 0.16, bh = H * 0.15, gap = H * 0.045
   steps.forEach(([t, d, fill], i) => {
     const y = y0 + i * (bh + gap)
     boxRect(ctx, cxm - bw / 2, y, bw, bh, fill, '#7c3aed')
-    lbl(ctx, t, cxm - bw / 2 + 12, y + bh / 2, '#1e1b4b', 10.5, true)
-    lbl(ctx, d, cxm - bw / 2 + 88, y + bh / 2, '#64748b', 9)
-    lbl(ctx, '✗ 淘汰', cxm + bw / 2 + 8, y + bh / 2, '#94a3b8', 8.5, false)
+    lbl(ctx, t, cxm - bw / 2 + 14, y + bh * 0.36, '#1e1b4b', 10, true)
+    lbl(ctx, d, cxm - bw / 2 + 14, y + bh * 0.74, '#64748b', 9)
     if (i < 2) arrow(ctx, cxm, y + bh, cxm, y + bh + gap, '#94a3b8', 1.6)
   })
-  const wy = y0 + 3 * (bh + gap) - gap * 0.4
-  arrow(ctx, cxm, wy + bh * 0.6, cxm, wy + bh, '#94a3b8', 1.6)
-  boxRect(ctx, cxm - bw / 2, wy + bh, bw, bh * 0.92, '#1e1b4b', '#1e1b4b')
-  lbl(ctx, '三層都過 → 進 Watchlist → 等進場訊號', cxm, wy + bh + bh * 0.46, '#f0d080', 9.5, true, 'center')
-  lbl(ctx, '選股三層漏斗：缺一層都會降低勝率', W * 0.07, H * 0.06, '#1e1b4b', 11.5, true)
+  const wy = y0 + 3 * (bh + gap)
+  arrow(ctx, cxm, y0 + 2 * (bh + gap) + bh, cxm, wy, '#94a3b8', 1.6)
+  boxRect(ctx, cxm - bw / 2, wy, bw, bh * 0.9, '#1e1b4b', '#1e1b4b')
+  lbl(ctx, '三層都過 → 進 Watchlist 等訊號', cxm, wy + bh * 0.45, '#f0d080', 9.5, true, 'center')
+  lbl(ctx, '選股三層漏斗：缺一層都會降低勝率', W * 0.07, H * 0.06, '#1e1b4b', 11, true)
 }
 
 // 市場三相位（多頭/整理/空頭）— 共用 高01、高08
@@ -1367,8 +1366,8 @@ function drawExitTrailing(ctx: CanvasRenderingContext2D, W: number, H: number) {
   // 出場點（股價跌破停利線 ≈ f0.7, 價80 vs 停利82）
   const ex = px(0.7), ey = py(82)
   ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(ex, ey, 9, 0, Math.PI * 2); ctx.stroke()
-  lbl(ctx, '✕ 跌破停利線→出場', ex, ey - 16, '#ef4444', 9.5, true, 'center')
-  lbl(ctx, '停利線跟著最高點上移', px(0.2), py(72), '#ef4444', 9, true)
+  lbl(ctx, '✕ 跌破停利線 → 出場', ex + 6, ey - 18, '#ef4444', 9.5, true, 'center')
+  lbl(ctx, '停利線跟著最高點上移', px(0.42), py(58), '#ef4444', 9, true, 'center')
   lbl(ctx, '─ 股價　┅ 移動停利線', rightX, top - 8, '#94a3b8', 9, false, 'right')
   lbl(ctx, '移動停利：讓獲利奔跑，回落才下車', W * 0.08, H * 0.07, '#1e1b4b', 11, true)
   lbl(ctx, '幅度依「該股正常波動」設定，不是你的心理承受度', W * 0.08, H * 0.95, '#94a3b8', 8.5)
@@ -1402,21 +1401,21 @@ function drawPositionPyramid(ctx: CanvasRenderingContext2D, W: number, H: number
   const mid = W / 2, top = H * 0.24, bot = H * 0.82
   // 左：分批進場（50→100%）
   const lx0 = W * 0.08, lx1 = mid - 14
-  const inSteps = [[0, 0.5], [0.5, 1]]
-  inSteps.forEach(([s, e], i) => {
-    const y = bot - (i + 1) * ((bot - top) / 2.4)
-    const h2 = (bot - top) / 2.4 - 4
-    boxRect(ctx, lx0, y, (lx1 - lx0) * (e as number), h2, '#fef2f2', '#fca5a5')
-    lbl(ctx, i === 0 ? '先進50%' : '回測支撐 +50%', lx0 + 8, y + h2 / 2, '#b91c1c', 9, true)
+  const inSteps = ['先進 50%', '回測支撐 +50%']
+  inSteps.forEach((t, i) => {
+    const y = bot - (2 - i) * ((bot - top) / 2.4) + 4
+    const h2 = (bot - top) / 2.4 - 8
+    boxRect(ctx, lx0, y, (lx1 - lx0) * (i === 0 ? 0.62 : 1), h2, '#fef2f2', '#fca5a5')
+    lbl(ctx, t, lx0 + 8, y + h2 / 2, '#b91c1c', 9, true)
   })
   lbl(ctx, '分批進場', (lx0 + lx1) / 2, bot + 14, '#ef4444', 10, true, 'center')
-  // 右：分批出場（-30→移動停利→-70）
+  // 右：分批出場（全寬，文字才裝得下）
   const rx0 = mid + 14, rx1 = W * 0.92
-  const outSteps = ['第一目標 出30–50%', '移動停利保護', '轉弱/反轉 全出']
+  const outSteps = ['第一目標 出30–50%', '移動停利保護', '轉弱／反轉 全出']
   outSteps.forEach((t, i) => {
     const y = top + i * ((bot - top) / 3.2) + 4
     const h2 = (bot - top) / 3.2 - 6
-    boxRect(ctx, rx0, y, (rx1 - rx0) * (1 - i * 0.22), h2, '#f0fdf4', '#86efac')
+    boxRect(ctx, rx0, y, rx1 - rx0, h2, '#f0fdf4', '#86efac')
     lbl(ctx, t, rx0 + 8, y + h2 / 2, '#15803d', 8.5, true)
   })
   lbl(ctx, '分批出場', (rx0 + rx1) / 2, bot + 14, '#16a34a', 10, true, 'center')
@@ -1556,16 +1555,21 @@ function drawCycleSystemSettingsMap(ctx: CanvasRenderingContext2D, W: number, H:
 function drawSystemIterationCycle(ctx: CanvasRenderingContext2D, W: number, H: number) {
   const cx = W / 2, cy = H * 0.56, r = Math.min(W, H) * 0.3
   const nodes = ['v1.0 上線', '真實跑 3 個月', '覆盤歸因', 'v2.0 修訂']
-  const n = nodes.length
-  nodes.forEach((t, i) => {
+  const n = nodes.length, bw = W * 0.3, bh = 28
+  const pos = nodes.map((_, i) => {
     const a = -Math.PI / 2 + (i / n) * Math.PI * 2
-    const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a)
-    boxRect(ctx, x - W * 0.13, y - 14, W * 0.26, 28, '#eef2ff', '#7c3aed')
-    lbl(ctx, t, x, y, '#1e1b4b', 9.5, true, 'center')
-    // 弧形箭頭到下一節點
-    const a2 = -Math.PI / 2 + ((i + 1) / n) * Math.PI * 2
-    const mx = cx + r * 1.0 * Math.cos((a + a2) / 2), my = cy + r * 1.0 * Math.sin((a + a2) / 2)
-    arrow(ctx, x + r * 0.3 * Math.cos(a + 1.3), y + r * 0.3 * Math.sin(a + 1.3), mx, my, '#94a3b8', 1.2)
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)] as [number, number]
+  })
+  // 先畫箭頭（在框下層）：順時針連接相鄰節點，兩端留 44px 避開框
+  for (let i = 0; i < n; i++) {
+    const [x1, y1] = pos[i], [x2, y2] = pos[(i + 1) % n]
+    const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1
+    arrow(ctx, x1 + dx / len * 44, y1 + dy / len * 44, x2 - dx / len * 44, y2 - dy / len * 44, '#94a3b8', 1.4)
+  }
+  // 再畫框（蓋在箭頭上）
+  pos.forEach(([x, y], i) => {
+    boxRect(ctx, x - bw / 2, y - bh / 2, bw, bh, '#eef2ff', '#7c3aed')
+    lbl(ctx, nodes[i], x, y, '#1e1b4b', 9.5, true, 'center')
   })
   lbl(ctx, '個人系統', cx, cy, '#7c3aed', 10.5, true, 'center')
   lbl(ctx, '系統不是寫完就固定，會隨你成長更新', W * 0.07, H * 0.08, '#1e1b4b', 11, true)
