@@ -1033,16 +1033,16 @@ function drawWeeklyPullbackEntry(ctx: CanvasRenderingContext2D, W: number, H: nu
 function drawStockScreenFunnel(ctx: CanvasRenderingContext2D, W: number, H: number) {
   const cxm = W / 2
   const layers: Array<[number, string, string, string]> = [
-    [0.78, '第一層：大環境（月/週線多頭嗎？）', '#eef2ff', '#4338ca'],
-    [0.58, '第二層：強勢族群（法人買哪裡？）', '#f5f3ff', '#7c3aed'],
-    [0.38, '第三層：個股技術（位置/量價OK？）', '#fef2f2', '#ef4444'],
+    [0.92, '第一層：大環境（月/週線多頭？）', '#eef2ff', '#4338ca'],
+    [0.74, '第二層：強勢族群（法人買哪？）', '#f5f3ff', '#7c3aed'],
+    [0.58, '第三層：個股技術（位置/量價？）', '#fef2f2', '#ef4444'],
   ]
   const y0 = H * 0.18, lh = H * 0.155, gap = H * 0.035
   layers.forEach(([wf, t, fill, color], i) => {
     const y = y0 + i * (lh + gap)
     const w = W * (wf as number)
     boxRect(ctx, cxm - w / 2, y, w, lh, fill as string, color as string)
-    lbl(ctx, t as string, cxm, y + lh / 2, color as string, 9.5, true, 'center')
+    lbl(ctx, t as string, cxm, y + lh / 2, color as string, 9, true, 'center')
   })
   const by = y0 + 3 * (lh + gap) + 4
   boxRect(ctx, cxm - W * 0.27, by, W * 0.54, H * 0.12, '#1e1b4b', '#1e1b4b')
@@ -1367,7 +1367,7 @@ function drawExitTrailing(ctx: CanvasRenderingContext2D, W: number, H: number) {
   const ex = px(0.7), ey = py(82)
   ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(ex, ey, 9, 0, Math.PI * 2); ctx.stroke()
   lbl(ctx, '✕ 跌破停利線 → 出場', ex + 6, ey - 18, '#ef4444', 9.5, true, 'center')
-  lbl(ctx, '停利線跟著最高點上移', px(0.42), py(58), '#ef4444', 9, true, 'center')
+  lbl(ctx, '停利線跟著最高點上移', px(0.26), py(87), '#ef4444', 9, true, 'center')
   lbl(ctx, '─ 股價　┅ 移動停利線', rightX, top - 8, '#94a3b8', 9, false, 'right')
   lbl(ctx, '移動停利：讓獲利奔跑，回落才下車', W * 0.08, H * 0.07, '#1e1b4b', 11, true)
   lbl(ctx, '幅度依「該股正常波動」設定，不是你的心理承受度', W * 0.08, H * 0.95, '#94a3b8', 8.5)
@@ -1480,7 +1480,7 @@ function drawJournalTemplate(ctx: CanvasRenderingContext2D, W: number, H: number
 
 // 三圓交集
 function drawSystemDefinitionFramework(ctx: CanvasRenderingContext2D, W: number, H: number) {
-  const cx = W / 2, cy = H * 0.5, r = Math.min(W, H) * 0.26
+  const cx = W / 2, cy = H * 0.58, r = Math.min(W, H) * 0.23
   const circles: Array<[number, number, string, string]> = [
     [cx, cy - r * 0.6, '可複製', '#ef4444'],
     [cx - r * 0.6, cy + r * 0.5, '可檢驗', '#2563eb'],
@@ -1636,6 +1636,18 @@ const REGISTRY: Record<string, (ctx: CanvasRenderingContext2D, W: number, H: num
 
 // 圖殼總覽測試頁用（/classroom/stock/charts-test）
 export const ADVANCED_CHART_TYPES = Object.keys(REGISTRY)
+
+// 供匯出頁用：把單一圖殼畫進指定 ctx（自帶白底），座標相對 (0,0)~(W,H)
+export function drawAdvancedChart(ctx: CanvasRenderingContext2D, type: string, W: number, H: number): boolean {
+  const fn = REGISTRY[type]
+  if (!fn) return false
+  ctx.save()
+  ctx.fillStyle = '#ffffff'
+  ctx.fillRect(0, 0, W, H)
+  fn(ctx, W, H)
+  ctx.restore()
+  return true
+}
 
 export default function AdvancedChart({ type }: { type: string }) {
   const ref = useRef<HTMLCanvasElement>(null)
