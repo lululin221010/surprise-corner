@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import ShareButtons from '@/components/ShareButtons'
+import { Suspense } from 'react'
 
 const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false })
 
@@ -28,7 +29,7 @@ export default function Wonderland() {
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{
       background: 'radial-gradient(ellipse at 20% 0%, rgba(139,92,246,0.35) 0%, transparent 50%), radial-gradient(ellipse at 80% 10%, rgba(236,72,153,0.2) 0%, transparent 45%), radial-gradient(ellipse at 50% 100%, rgba(251,191,36,0.15) 0%, transparent 50%), #0f0823',
     }}>
-      <StarCanvas />
+      <Suspense fallback={null}><StarCanvas /></Suspense>
 
       <style>{`
         @keyframes palace-glow {
