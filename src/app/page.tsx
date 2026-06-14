@@ -198,6 +198,9 @@ export default function Home() {
       .catch(() => {});
   }, []);
 
+  // 首頁直接導向驚喜樂世界
+  useEffect(() => { router.replace('/wonderland'); }, []);
+
   // 每天從不同位置開始，點擊往後循環，確保每天第一句不同
   const luruStartIdx = (() => {
     const d = new Date();
