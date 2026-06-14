@@ -9,7 +9,7 @@ console.log('所有環境變數 keys:', Object.keys(process.env).slice(0, 10));
 console.log('========================================');
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
+  reactCompiler: false,
 };
 
 export default nextConfig;
