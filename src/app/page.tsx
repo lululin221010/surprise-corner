@@ -175,9 +175,6 @@ function getTodayPreview() {
 export default function Home() {
   const router = useRouter();
 
-  // 首頁直接導向驚喜樂世界
-  // useEffect(() => { router.replace('/wonderland'); }, []);
-
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
   const [aiNews, setAiNews] = useState<{ title: string; description: string; link: string; source: string }[]>([]);
@@ -361,7 +358,7 @@ export default function Home() {
                 <a href="#gifts" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}55`, borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
                   <span style={{ fontSize: '1.4rem' }}>🧠</span>
                   <span style={{ color: CATEGORY_COLORS[todayEntry.category] || '#8b5cf6', fontWeight: 700, fontSize: '0.85rem' }}>{todayEntry.category}</span>
-                  <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const }}>{todayEntry.text.slice(0, 40)}…</span>
+                  <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const }}>{todayEntry.text?.slice(0, 40)}…</span>
                   <span style={{ marginTop: '4px', color: CATEGORY_COLORS[todayEntry.category] || '#8b5cf6', fontSize: '0.75rem', fontWeight: 600, border: `1px solid ${CATEGORY_COLORS[todayEntry.category] || '#8b5cf6'}55`, borderRadius: '20px', padding: '3px 12px' }}>看完整 →</span>
                 </a>
               )}
