@@ -176,7 +176,7 @@ export default function Home() {
   const router = useRouter();
 
   // 首頁直接導向驚喜樂世界
-  useEffect(() => { router.replace('/wonderland'); }, []);
+  // useEffect(() => { router.replace('/wonderland'); }, []);
 
   const [todayEntry, setTodayEntry] = useState<ColdEntry | null>(null);
   const [todayPreview, setTodayPreview] = useState<typeof BOOK_PREVIEWS[0] | null>(null);
