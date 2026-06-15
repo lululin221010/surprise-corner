@@ -66,19 +66,19 @@ export default function Academy() {
               <p style={{ color: '#6b7280', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>
                 前 4 堂免費試學<br />
                 解鎖後 3/4 課程只需 <strong style={{ color: '#7c3aed' }}>NT$149</strong><br />
-                加 LINE 告知「解鎖股市書院」即可
+                銀行轉帳，付款後自動通知店長
               </p>
               <a
-                href="https://line.me/R/ti/p/@983agawb"
+                href="https://still-time-corner.vercel.app/digital/6a3005b4687710b6846cc020"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  display: 'block', background: '#06C755', color: '#fff',
+                  display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff',
                   fontWeight: 700, fontSize: '1rem', padding: '0.75rem',
                   borderRadius: '30px', textDecoration: 'none', marginBottom: '0.8rem',
                 }}
               >
-                加 LINE 解鎖 →
+                前往結帳解鎖 →
               </a>
               <button
                 onClick={() => setShowLockModal(false)}
