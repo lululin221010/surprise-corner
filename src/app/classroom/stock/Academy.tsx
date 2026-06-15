@@ -108,15 +108,16 @@ export default function Academy() {
               <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🔒</div>
               <h3 style={{ color: '#1e1b4b', fontWeight: 800, marginBottom: '0.5rem' }}>解鎖完整課程</h3>
               <p style={{ color: '#6b7280', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>
-                前 4 堂免費試學<br />
-                解鎖後 3/4 課程只需 <strong style={{ color: '#7c3aed' }}>NT$149</strong><br />
-                銀行轉帳，付款後自動通知店長
+                購買電子書，SS 互動課程同步解鎖<br />
+                <strong style={{ color: '#7c3aed' }}>
+                  {activeCourse?.id === 'stock-master' ? 'NT$449' : 'NT$349'}
+                </strong>，買一邊兩邊都能用
               </p>
               <a
                 href={
                   activeCourse?.id === 'stock-master'
-                    ? 'https://still-time-corner.vercel.app/digital/6a300ba0a2f91bb4b25f8df1'
-                    : 'https://still-time-corner.vercel.app/digital/6a3005b4687710b6846cc020'
+                    ? 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa'
+                    : 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9'
                 }
                 target="_blank"
                 rel="noopener noreferrer"
