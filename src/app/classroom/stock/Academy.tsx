@@ -17,9 +17,10 @@ export default function Academy() {
   const [showUnlockInput, setShowUnlockInput] = useState(false);
   const [unlockCode, setUnlockCode] = useState('');
   const [unlockStatus, setUnlockStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [isUnlocked, setIsUnlocked] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return localStorage.getItem('sc_stock_unlock_ss-stock-intro') === 'true';
+  const [unlockedCourses, setUnlockedCourses] = useState<Set<string>>(() => {
+    if (typeof window === 'undefined') return new Set();
+    const keys = ['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master'];
+    return new Set(keys.filter(k => localStorage.getItem(`sc_stock_unlock_${k}`) === 'true'));
   });
 
   async function handleVerifyCode() {
@@ -31,7 +32,7 @@ export default function Academy() {
       const data = await res.json();
       if (data.valid) {
         localStorage.setItem(`sc_stock_unlock_${data.target}`, 'true');
-        setIsUnlocked(true);
+        setUnlockedCourses(prev => new Set(prev).add(data.target));
         setUnlockStatus('success');
         setTimeout(() => setShowLockModal(false), 1500);
       } else {
@@ -96,7 +97,11 @@ export default function Academy() {
                 銀行轉帳，付款後自動通知店長
               </p>
               <a
-                href="https://still-time-corner.vercel.app/digital/6a3005b4687710b6846cc020"
+                href={
+                  activeCourse?.id === 'stock-master'
+                    ? 'https://still-time-corner.vercel.app/digital/6a300ba0a2f91bb4b25f8df1'
+                    : 'https://still-time-corner.vercel.app/digital/6a3005b4687710b6846cc020'
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -148,8 +153,10 @@ export default function Academy() {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {activeCourse.lessons.map((lesson, i) => {
             const done = completedLessons.has(lesson.id);
-            const freeCount = Math.ceil(activeCourse.lessons.length / 4);
-            const locked = !isUnlocked && i >= freeCount;
+            const isFree = activeCourse.id === 'stock-basics';
+            const courseUnlockKey = activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
+              : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
+            const locked = !isFree && !unlockedCourses.has(courseUnlockKey);
             return (
               <button
                 key={lesson.id}
