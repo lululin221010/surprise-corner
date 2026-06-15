@@ -2,6 +2,7 @@
 // 📄 路徑：src/app/classroom/stock/AcademyQuiz.tsx
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import type { Quiz } from './courses';
 import '../classroom.css';
 import {
@@ -145,11 +146,21 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, onPass, onRetry }:
 
       {/* 解說 */}
       {answered && (
-        <div className={isCorrect ? 'quiz-result-ok' : 'quiz-result-no'} style={{ marginBottom: '1rem' }}>
-          <div style={{ fontWeight: 700, marginBottom: '4px' }}>
-            {skipped ? '☕ 使用能量飲料跳過此題' : isCorrect ? '✅ 答對了！' : '❌ 答錯了'}
+        <div className={isCorrect ? 'quiz-result-ok' : 'quiz-result-no'} style={{ marginBottom: '1rem', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+          {!skipped && (
+            <Image
+              src={isCorrect ? '/images/lulu-expressions/魯魯_表情_高興.png' : '/images/lulu-expressions/魯魯_表情_沮喪.png'}
+              alt={isCorrect ? '魯魯高興' : '魯魯沮喪'}
+              width={70} height={70}
+              style={{ borderRadius: '8px', flexShrink: 0, objectFit: 'cover' }}
+            />
+          )}
+          <div>
+            <div style={{ fontWeight: 700, marginBottom: '4px' }}>
+              {skipped ? '☕ 使用能量飲料跳過此題' : isCorrect ? '✅ 答對了！' : '❌ 答錯了'}
+            </div>
+            {!skipped && quiz.explanation}
           </div>
-          {!skipped && quiz.explanation}
         </div>
       )}
 
