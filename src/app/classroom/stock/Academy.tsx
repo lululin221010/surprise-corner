@@ -13,6 +13,7 @@ export default function Academy() {
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
+  const [showLockModal, setShowLockModal] = useState(false);
 
   function handleLessonComplete() {
     if (!activeLesson) return;
@@ -49,30 +50,75 @@ export default function Academy() {
         </h2>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.description}</p>
 
+        {/* 解鎖提示 Modal */}
+        {showLockModal && (
+          <div style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
+            zIndex: 999, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '1rem',
+          }} onClick={() => setShowLockModal(false)}>
+            <div style={{
+              background: '#fff', borderRadius: '16px', padding: '1.8rem 1.5rem',
+              maxWidth: '340px', width: '100%', textAlign: 'center',
+            }} onClick={e => e.stopPropagation()}>
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🔒</div>
+              <h3 style={{ color: '#1e1b4b', fontWeight: 800, marginBottom: '0.5rem' }}>解鎖完整課程</h3>
+              <p style={{ color: '#6b7280', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>
+                前 4 堂免費試學<br />
+                解鎖後 3/4 課程只需 <strong style={{ color: '#7c3aed' }}>NT$149</strong><br />
+                加 LINE 告知「解鎖股市書院」即可
+              </p>
+              <a
+                href="https://line.me/R/ti/p/@983agawb"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block', background: '#06C755', color: '#fff',
+                  fontWeight: 700, fontSize: '1rem', padding: '0.75rem',
+                  borderRadius: '30px', textDecoration: 'none', marginBottom: '0.8rem',
+                }}
+              >
+                加 LINE 解鎖 →
+              </a>
+              <button
+                onClick={() => setShowLockModal(false)}
+                style={{ background: 'none', border: 'none', color: '#9ca3af', fontSize: '0.85rem', cursor: 'pointer' }}
+              >
+                先不急
+              </button>
+            </div>
+          </div>
+        )}
+
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {activeCourse.lessons.map((lesson, i) => {
             const done = completedLessons.has(lesson.id);
+            const freeCount = Math.ceil(activeCourse.lessons.length / 4);
+            const locked = i >= freeCount;
             return (
               <button
                 key={lesson.id}
-                onClick={() => setActiveLesson(lesson)}
+                onClick={() => locked ? setShowLockModal(true) : setActiveLesson(lesson)}
                 className={`course-list-item${done ? ' done' : ''}`}
+                style={locked ? { opacity: 0.5, cursor: 'pointer' } : {}}
               >
                 <div style={{
                   width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0,
-                  background: done ? '#dcfce7' : '#ede9fe',
+                  background: done ? '#dcfce7' : locked ? '#f3f4f6' : '#ede9fe',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: done ? '#15803d' : '#7c3aed', fontSize: '0.78rem', fontWeight: 700,
+                  color: done ? '#15803d' : locked ? '#9ca3af' : '#7c3aed', fontSize: '0.78rem', fontWeight: 700,
                 }}>
-                  {done ? '✓' : i + 1}
+                  {done ? '✓' : locked ? '🔒' : i + 1}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>
+                  <div style={{ color: locked ? '#9ca3af' : '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>
                     {lesson.emoji} {lesson.title}
                   </div>
-                  <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {lesson.duration}</div>
+                  <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>
+                    {locked ? '🔒 付費解鎖' : `⏱ ${lesson.duration}`}
+                  </div>
                 </div>
-                <div style={{ color: '#a78bfa', fontSize: '0.8rem' }}>→</div>
+                <div style={{ color: locked ? '#d1d5db' : '#a78bfa', fontSize: '0.8rem' }}>→</div>
               </button>
             );
           })}
