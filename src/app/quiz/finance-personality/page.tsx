@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import ShareButtons from '@/components/ShareButtons';
 
 // [風險意願, 分析傾向, 耐心指數, 系統紀律] 各 0–10
@@ -98,12 +99,12 @@ const QUESTIONS = [
 ];
 
 const PERSONALITIES: Record<string, {
-  emoji: string; name: string; tag: string;
+  emoji: string; name: string; tag: string; image: string;
   headline: string; desc: string; report: string; action: string;
   color: string; radar: number[];
 }> = {
   vault: {
-    emoji: '🔒', name: '保險庫型', tag: '穩守本金',
+    emoji: '🔒', name: '保險庫型', tag: '穩守本金', image: '/images/lulu-cards/魯魯_投資人_觀望型.png',
     headline: '你的錢從來不冒險，但你知道嗎——不動也是一種風險。',
     desc: '你重視安全感勝過一切，本金不能少是你的底線。市場漲跌對你來說是別人的事，你寧可少賺也不要睡不著覺。',
     report: '這不是缺點，這是清醒的自我認識。問題不在你的個性，在於「保本工具」本身有沒有跑贏通膨——如果沒有，帳面沒動，實質購買力正在縮水。你需要的不是改變風格，而是搞清楚你現在用的工具，真的保住了什麼。',
@@ -112,7 +113,7 @@ const PERSONALITIES: Record<string, {
     radar: [20, 45, 90, 85],
   },
   analyst: {
-    emoji: '📊', name: '穩健分析型', tag: '看懂才動',
+    emoji: '📊', name: '穩健分析型', tag: '看懂才動', image: '/images/lulu-cards/魯魯_投資人_穩健型.png',
     headline: '你不衝動，但你也不會讓錢閒著——你只是需要看懂才敢動。',
     desc: '你會查資料，會比較，不跟風但也不排斥機會。你的問題通常不是「敢不敢」，而是「資訊夠不夠、邏輯通不通」。',
     report: '這個模式長期來看勝率最高。你的風險在另一邊——分析太久變成遲遲不動，或是資訊太多反而卡住。調查局叫這個「分析癱瘓」，是穩健型最常見的隱性成本。你需要的不是更多資訊，而是一套讓你知道「夠了可以動」的判斷框架。',
@@ -121,7 +122,7 @@ const PERSONALITIES: Record<string, {
     radar: [60, 90, 65, 80],
   },
   active: {
-    emoji: '⚡', name: '積極出擊型', tag: '有意識地衝',
+    emoji: '⚡', name: '積極出擊型', tag: '有意識地衝', image: '/images/lulu-cards/魯魯_投資人_衝鋒型.png',
     headline: '你敢進場，也敢出場——但你知道自己在賭什麼嗎？',
     desc: '你有研究習慣，也有行動力，不怕波動，喜歡主動掌控。你不是衝動，你是有意識地選擇積極。',
     report: '積極本身不是問題，問題在於積極的邊界在哪裡。歷史數據顯示，主動操作者中長期跑贏指數的比例不到20%——不是因為他們不努力，是因為交易成本和情緒在侵蝕報酬。你的功課是：搞清楚你的積極，有沒有在創造真實的超額報酬。你需要的不是收手，而是一套檢驗自己是否真的在贏的方法。',
@@ -130,7 +131,7 @@ const PERSONALITIES: Record<string, {
     radar: [85, 80, 40, 70],
   },
   follower: {
-    emoji: '🌊', name: '情緒驅動型', tag: '感覺跑在邏輯前',
+    emoji: '🌊', name: '情緒驅動型', tag: '感覺跑在邏輯前', image: '/images/lulu-cards/魯魯_投資人_跟風型.png',
     headline: '你不是不聰明，你只是讓感覺跑在邏輯前面。',
     desc: '市場熱的時候你會心動，市場跌的時候你會懷疑自己。你的決定常常來自外部——別人說好、新聞說漲、朋友在買。這不是缺點，這是人類大腦的預設值，85%的散戶都在這裡。',
     report: '問題不在你的個性，在於你目前沒有一個系統在保護你不被情緒帶著走。靠意志力對抗情緒，長期勝率極低。真正有效的方法是：設計一個讓情緒沒有機會出手的結構——定期定額、自動扣款、勞退自提，讓機制替你做決定。你需要的不是改變個性，而是建一個不需要靠意志力的系統。',
@@ -333,6 +334,14 @@ export default function FinancePersonalityQuiz() {
                 {p.report}
               </p>
             </div>
+          </div>
+
+          {/* 魯魯分享圖 */}
+          <div style={{ marginBottom: '1.5rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <Image src={p.image} alt={`${p.name}投資人分享圖`} width={680} height={680} style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <p style={{ color: '#6b7280', fontSize: '0.78rem', textAlign: 'center', padding: '0.5rem', margin: 0 }}>
+              長按圖片儲存，分享給朋友測測看 👇
+            </p>
           </div>
 
           {/* Share */}

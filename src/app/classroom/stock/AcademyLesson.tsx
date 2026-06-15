@@ -2,6 +2,17 @@
 // 📄 路徑：src/app/classroom/stock/AcademyLesson.tsx
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
+const LESSON_CARDS: Record<string, { src: string; alt: string }[]> = {
+  'kline':     [{ src: '/images/lulu-cards/魯魯_知識卡_K線是什麼.png', alt: 'K線是什麼知識卡' }],
+  'lesson-8':  [{ src: '/images/lulu-cards/魯魯_知識卡_三大法人.png', alt: '三大法人知識卡' }],
+  'lesson-13': [{ src: '/images/lulu-cards/魯魯_知識卡_停損觀念.png', alt: '停損觀念知識卡' }],
+  'lesson-14': [
+    { src: '/images/lulu-cards/魯魯_知識卡_損失規避.png', alt: '損失規避知識卡' },
+    { src: '/images/lulu-cards/魯魯_知識卡_確認偏誤.png', alt: '確認偏誤知識卡' },
+  ],
+};
 import type { Lesson, SlideChart } from './courses';
 import AcademyQuiz from './AcademyQuiz';
 import '../classroom.css';
@@ -62,6 +73,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
+  const [showLessonCard, setShowLessonCard] = useState(false);
   const [email, setEmailState] = useState('');
   const [account, setAccount] = useState<UserAccount | null>(null);
   const [toastMsg, setToastMsg] = useState('');
@@ -122,11 +134,49 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
         const { awarded, totalCoins } = awardLessonBonus(email, lesson.id);
         if (awarded) showToast(`🎉 完課 bonus！+2 🪙 累積 ${totalCoins} 金幣`);
       }
-      onComplete();
+      if (LESSON_CARDS[lesson.id]) {
+        setShowLessonCard(true);
+      } else {
+        onComplete();
+      }
     }
   }
 
   const bookmarkCount = account?.inventory?.bookmark ?? 0;
+
+  if (showLessonCard) {
+    const cards = LESSON_CARDS[lesson.id] ?? [];
+    return (
+      <div className="classroom-content">
+        <div style={{ maxWidth: 560, margin: '0 auto', padding: '2rem 1rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🎉</div>
+          <h2 style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+            {lesson.title} 完課！
+          </h2>
+          <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+            長按圖片儲存，帶走這堂的知識卡
+          </p>
+          {cards.map((card) => (
+            <div key={card.src} style={{ marginBottom: '1rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <Image src={card.src} alt={card.alt} width={560} height={420} style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </div>
+          ))}
+          <button
+            onClick={onComplete}
+            style={{
+              marginTop: '1rem', width: '100%',
+              background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
+              color: '#fff', fontWeight: 700, fontSize: '1rem',
+              border: 'none', borderRadius: '30px', padding: '0.75rem 2rem',
+              cursor: 'pointer',
+            }}
+          >
+            回課程列表 →
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="classroom-content">
