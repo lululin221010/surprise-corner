@@ -14,6 +14,33 @@ export default function Academy() {
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
   const [showLockModal, setShowLockModal] = useState(false);
+  const [showUnlockInput, setShowUnlockInput] = useState(false);
+  const [unlockCode, setUnlockCode] = useState('');
+  const [unlockStatus, setUnlockStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [isUnlocked, setIsUnlocked] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('sc_stock_unlock_ss-stock-intro') === 'true';
+  });
+
+  async function handleVerifyCode() {
+    const code = unlockCode.trim().toUpperCase();
+    if (!code) return;
+    setUnlockStatus('loading');
+    try {
+      const res = await fetch(`https://still-time-corner.vercel.app/api/verify-unlock?code=${encodeURIComponent(code)}`);
+      const data = await res.json();
+      if (data.valid) {
+        localStorage.setItem(`sc_stock_unlock_${data.target}`, 'true');
+        setIsUnlocked(true);
+        setUnlockStatus('success');
+        setTimeout(() => setShowLockModal(false), 1500);
+      } else {
+        setUnlockStatus('error');
+      }
+    } catch {
+      setUnlockStatus('error');
+    }
+  }
 
   function handleLessonComplete() {
     if (!activeLesson) return;
@@ -80,6 +107,34 @@ export default function Academy() {
               >
                 前往結帳解鎖 →
               </a>
+              {/* 解鎖碼輸入區 */}
+              {!showUnlockInput ? (
+                <button
+                  onClick={() => setShowUnlockInput(true)}
+                  style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.82rem', cursor: 'pointer', textDecoration: 'underline', display: 'block', margin: '0 auto 0.5rem' }}
+                >
+                  已付款？輸入解鎖碼
+                </button>
+              ) : (
+                <div style={{ marginBottom: '0.8rem' }}>
+                  <input
+                    type="text"
+                    value={unlockCode}
+                    onChange={e => { setUnlockCode(e.target.value.toUpperCase()); setUnlockStatus('idle'); }}
+                    placeholder="SS-XXXX-XXXX"
+                    style={{ width: '100%', padding: '0.6rem', border: '2px solid #e5e7eb', borderRadius: '8px', fontFamily: 'monospace', fontSize: '1rem', textAlign: 'center', letterSpacing: '2px', boxSizing: 'border-box' }}
+                  />
+                  {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.78rem', margin: '0.3rem 0 0' }}>解鎖碼無效，請確認後再試</p>}
+                  {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.78rem', margin: '0.3rem 0 0' }}>✅ 解鎖成功！</p>}
+                  <button
+                    onClick={handleVerifyCode}
+                    disabled={unlockStatus === 'loading'}
+                    style={{ marginTop: '0.5rem', width: '100%', padding: '0.6rem', background: '#7c3aed', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem' }}
+                  >
+                    {unlockStatus === 'loading' ? '驗證中…' : '確認解鎖'}
+                  </button>
+                </div>
+              )}
               <button
                 onClick={() => setShowLockModal(false)}
                 style={{ background: 'none', border: 'none', color: '#9ca3af', fontSize: '0.85rem', cursor: 'pointer' }}
@@ -94,7 +149,7 @@ export default function Academy() {
           {activeCourse.lessons.map((lesson, i) => {
             const done = completedLessons.has(lesson.id);
             const freeCount = Math.ceil(activeCourse.lessons.length / 4);
-            const locked = i >= freeCount;
+            const locked = !isUnlocked && i >= freeCount;
             return (
               <button
                 key={lesson.id}
