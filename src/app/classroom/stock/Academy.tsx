@@ -9,6 +9,22 @@ import type { Course, Lesson } from './courses';
 import AcademyLesson from './AcademyLesson';
 import '../classroom.css';
 
+// 試讀本：入門前3堂 + 進階前2堂 + 高階前1堂，動態組合，不複製內容
+function buildTrialCourse(allCourses: Course[]): Course {
+  const [basic, advanced, master] = allCourses;
+  return {
+    id: 'stock-trial',
+    title: '股市書院試讀本',
+    description: '入門 3 堂 × 進階 2 堂 × 高階 1 堂，免費體驗完整學習路徑。',
+    emoji: '🎁',
+    lessons: [
+      ...basic.lessons.slice(0, 3).map(l => ({ ...l, id: `trial-b-${l.id}` })),
+      ...advanced.lessons.slice(0, 2).map(l => ({ ...l, id: `trial-a-${l.id}` })),
+      ...master.lessons.slice(0, 1).map(l => ({ ...l, id: `trial-m-${l.id}` })),
+    ],
+  };
+}
+
 export default function Academy() {
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
@@ -153,7 +169,7 @@ export default function Academy() {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {activeCourse.lessons.map((lesson, i) => {
             const done = completedLessons.has(lesson.id);
-            const isFree = activeCourse.id === 'stock-basics';
+            const isFree = activeCourse.id === 'stock-basics' || activeCourse.id === 'stock-trial';
             const courseUnlockKey = activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
               : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
             const locked = !isFree && !unlockedCourses.has(courseUnlockKey);
@@ -212,12 +228,12 @@ export default function Academy() {
         選擇課程
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-        {courses.map(course => (
+        {[buildTrialCourse(courses), ...courses].map(course => (
           <button
             key={course.id}
             onClick={() => setActiveCourse(course)}
             className="course-list-item"
-            style={{ padding: '1.2rem 1.4rem', borderRadius: '14px' }}
+            style={{ padding: '1.2rem 1.4rem', borderRadius: '14px', ...(course.id === 'stock-trial' ? { border: '2px solid #a78bfa', background: '#faf5ff' } : {}) }}
           >
             <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{course.emoji}</span>
             <div style={{ flex: 1, textAlign: 'left' }}>
