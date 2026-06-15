@@ -154,7 +154,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack }: Props) {
             {lesson.title} 完課！
           </h2>
           <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-            長按圖片儲存，帶走這堂的知識卡
+            手機長按 / 電腦右鍵，儲存知識卡帶走
           </p>
           {cards.map((card) => (
             <div key={card.src} style={{ marginBottom: '1rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>

@@ -340,7 +340,7 @@ export default function FinancePersonalityQuiz() {
           <div style={{ marginBottom: '1.5rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
             <Image src={p.image} alt={`${p.name}投資人分享圖`} width={680} height={680} style={{ width: '100%', height: 'auto', display: 'block' }} />
             <p style={{ color: '#6b7280', fontSize: '0.78rem', textAlign: 'center', padding: '0.5rem', margin: 0 }}>
-              長按圖片儲存，分享給朋友測測看 👇
+              手機長按 / 電腦右鍵，儲存並分享給朋友測測看 👇
             </p>
           </div>
 
