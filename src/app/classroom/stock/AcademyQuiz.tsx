@@ -165,24 +165,22 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, on
         </div>
       )}
 
-      {/* 答對：最後一題才發證書（整堂全對），中間題只給繼續按鈕 */}
+      {/* 答對：最後一題才發證書（整堂全對），中間題只給繼續按鈕；isFree=true 不發單堂證書 */}
       {answered && isCorrect && (
         <>
-          {isLast && (
+          {isLast && !isFree && (
           <div style={{
-            background: isFree ? 'linear-gradient(135deg, #fef3c7, #fde68a)' : 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
-            border: isFree ? '2px solid #f59e0b' : '1px solid #c7d2fe',
+            background: 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
+            border: '1px solid #c7d2fe',
             borderRadius: '12px', padding: '1.2rem', marginBottom: '0.8rem', textAlign: 'center',
           }}>
-            <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>{isFree ? '🎖️' : '🏅'}</div>
-            <div style={{ color: isFree ? '#92400e' : '#4338ca', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>
-              {isFree ? '好康體驗證書' : '驚喜榮譽證書'}
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🏅</div>
+            <div style={{ color: '#4338ca', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>
+              驚喜榮譽證書
             </div>
-            <div style={{ color: isFree ? '#78350f' : '#374151', fontSize: '0.78rem', lineHeight: 1.6, marginBottom: '0.8rem' }}>
+            <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6, marginBottom: '0.8rem' }}>
               恭喜完成本堂全部測驗！<br />
-              <span style={{ color: isFree ? '#a16207' : '#6366f1' }}>
-                {isFree ? '可收藏紀念，無折抵功能' : '憑此證書至有的沒的小舖兌換專屬福利'}
-              </span>
+              <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
             </div>
 
             {/* Email 儲存區塊 */}
