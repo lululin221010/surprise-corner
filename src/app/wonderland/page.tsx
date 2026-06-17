@@ -16,7 +16,7 @@ const zones = [
   { name: '快訊站',   icon: '⚡', desc: '世界發生什麼了？AI 幫你整理重點',      href: '/ai-news',   angle: -90 + STEP * 3, color: '#3b82f6' },
   { name: '收租 AI',  icon: '🤖', desc: 'AI 幫你整理，而不只是你幫 AI 打工',   href: 'https://stock-dashboard-ochre-sigma.vercel.app', angle: -90 + STEP * 4, color: '#10b981' },
   { name: '小教室',   icon: '📚', desc: '每次學一點，慢慢就什麼都懂了',         href: '/classroom', angle: -90 + STEP * 5, color: '#a78bfa' },
-  { name: '冷知識',   icon: '🧊', desc: '99% 的人不知道的事，今天你知道了',     href: '/ai-news',   angle: -90 + STEP * 6, color: '#fb923c' },
+  { name: '冷知識',   icon: '🧊', desc: '99% 的人不知道的事，今天你知道了',     href: '/#gifts',    angle: -90 + STEP * 6, color: '#fb923c' },
 ]
 
 // 城堡周圍漂浮粒子
