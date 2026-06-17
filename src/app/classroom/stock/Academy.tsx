@@ -80,7 +80,10 @@ export default function Academy() {
   if (activeCourse) {
     return (
       <div className="classroom-content">
-        {/* 麵包屑 */}
+        {/* 返回 + 麵包屑 */}
+        <button onClick={() => setActiveCourse(null)} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '0.5rem', padding: 0 }}>
+          ← 返回股市書院
+        </button>
         <div className="classroom-breadcrumb" style={{ marginBottom: '1rem' }}>
           <Link href="/classroom" className="classroom-back" style={{ display: 'inline' }}>小教室</Link>
           <span style={{ margin: '0 0.4rem' }}>›</span>
