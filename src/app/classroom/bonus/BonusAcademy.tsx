@@ -2,6 +2,7 @@
 // 📄 路徑：src/app/classroom/bonus/BonusAcademy.tsx
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { PSYCH_SERIES, FREE_LESSONS } from '../psychology/courses-data';
 import type { PsychLesson } from '../psychology/courses-data';
 import BonusLesson from './BonusLesson';
@@ -18,7 +19,7 @@ const ACADEMY_SECTIONS = [
     id: 'stock',
     label: '股市書院好康',
     emoji: '📈',
-    comingSoon: true,    // 尚未建置
+    comingSoon: false,
     items: [] as { lesson: PsychLesson; bookTitle: string; subtitle: string }[],
   },
   {
@@ -78,10 +79,17 @@ export default function BonusAcademy() {
               )}
             </div>
 
-            {section.comingSoon ? (
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px dashed rgba(255,255,255,0.08)', borderRadius: '12px', padding: '1.2rem', color: '#475569', fontSize: '0.85rem', textAlign: 'center' }}>
-                股市書院入門・進階・高階第1組即將免費開放
-              </div>
+            {section.id === 'stock' ? (
+              <Link href="/classroom/stock/trial" style={{ textDecoration: 'none' }}>
+                <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
+                  <div style={{ fontSize: '1.3rem', flexShrink: 0 }}>🎁</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.9rem' }}>股市書院試讀本</div>
+                    <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.1rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+                  </div>
+                  <div style={{ color: '#7c3aed', fontSize: '0.8rem', fontWeight: 600, flexShrink: 0 }}>開始 →</div>
+                </div>
+              </Link>
             ) : (
               <>
                 {/* 心理學學系篩選 */}

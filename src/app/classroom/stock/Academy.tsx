@@ -229,12 +229,12 @@ export default function Academy() {
         選擇課程
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-        {[buildTrialCourse(courses), ...courses].map(course => (
+        {courses.map(course => (
           <button
             key={course.id}
             onClick={() => setActiveCourse(course)}
             className="course-list-item"
-            style={{ padding: '1.2rem 1.4rem', borderRadius: '14px', ...(course.id === 'stock-trial' ? { border: '2px solid #a78bfa', background: '#faf5ff' } : {}) }}
+            style={{ padding: '1.2rem 1.4rem', borderRadius: '14px' }}
           >
             <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{course.emoji}</span>
             <div style={{ flex: 1, textAlign: 'left' }}>
