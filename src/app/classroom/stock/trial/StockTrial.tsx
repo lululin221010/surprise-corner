@@ -102,16 +102,31 @@ function AllDonePage({ onBack }: { onBack: () => void }) {
 }
 
 // ── 主元件 ────────────────────────────────────────────────
+const STORAGE_KEY = 'sc_stock_trial_done';
+
 export default function StockTrial() {
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
-  const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
-  const [showAllDone, setShowAllDone] = useState(false);
+  const [completedLessons, setCompletedLessons] = useState<Set<string>>(() => {
+    if (typeof window === 'undefined') return new Set();
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      return new Set(saved);
+    } catch { return new Set(); }
+  });
+  const [showAllDone, setShowAllDone] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      return (saved as string[]).length >= TRIAL_LESSONS.length;
+    } catch { return false; }
+  });
 
   function handleComplete() {
     if (!activeLesson) return;
     const next = new Set(completedLessons).add(activeLesson.id);
     setCompletedLessons(next);
     setActiveLesson(null);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
     if (next.size >= TRIAL_LESSONS.length) setShowAllDone(true);
   }
 
