@@ -11,6 +11,7 @@ import '../classroom.css';
 interface ActiveItem {
   lesson: PsychLesson;
   bookTitle: string;
+  allGroupTitles: string[];   // 完整書的所有組別標題，用於顯示目錄
 }
 
 // 書院分區定義（未來加股市/AI直接往這裡加）
@@ -45,6 +46,7 @@ export default function BonusAcademy() {
       <BonusLesson
         lesson={active.lesson}
         bookTitle={active.bookTitle}
+        allGroupTitles={active.allGroupTitles}
         onBack={() => setActive(null)}
       />
     );
@@ -115,7 +117,11 @@ export default function BonusAcademy() {
                     .filter(f => psychFilter === 'all' || f.seriesId === psychFilter)
                     .map(item => (
                       <div key={item.bookId}
-                        onClick={() => setActive({ lesson: item.lesson, bookTitle: item.bookTitle })}
+                        onClick={() => {
+                          const fullBook = PSYCH_SERIES.flatMap(s => s.books).find(b => b.id === item.bookId);
+                          const allGroupTitles = fullBook ? fullBook.lessons.map(l => l.title) : [];
+                          setActive({ lesson: item.lesson, bookTitle: item.bookTitle, allGroupTitles });
+                        }}
                         style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer', transition: 'all 0.15s' }}>
                         <div style={{ fontSize: '1.3rem', flexShrink: 0 }}>{item.seriesEmoji}</div>
                         <div style={{ flex: 1, minWidth: 0 }}>

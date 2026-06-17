@@ -76,42 +76,59 @@ function BonusQuiz({ question, options, answerIndex, explanation, onPass, onRetr
   );
 }
 
-// ── 購買指引頁 ────────────────────────────────────────────
-function PurchaseGuide({ bookTitle, onBack }: { bookTitle: string; onBack: () => void }) {
+// ── 購買指引頁（含目錄 + 好康證書）────────────────────────
+function PurchaseGuide({ bookTitle, allGroupTitles, onBack }: { bookTitle: string; allGroupTitles: string[]; onBack: () => void }) {
   return (
     <div className="classroom-content">
-      <div style={{ maxWidth: 560, margin: '0 auto', padding: '1rem', textAlign: 'center' }}>
-        <Image src="/images/lulu-expressions/魯魯_表情_想通了.png" alt="魯魯想通了" width={80} height={80} style={{ borderRadius: '50%', margin: '0 auto 1rem' }} />
-        <h2 style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-          喜歡這一組嗎？
-        </h2>
-        <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-          《{bookTitle}》完整版還有更多組別，<br />
-          買電子書即可解鎖全部內容，永久可讀。
-        </p>
+      <div style={{ maxWidth: 560, margin: '0 auto', padding: '1rem' }}>
 
-        <div style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: '16px', padding: '1.2rem', marginBottom: '1.2rem', textAlign: 'left' }}>
-          <div style={{ color: '#a78bfa', fontWeight: 700, marginBottom: '0.6rem' }}>📦 買電子書包含</div>
-          <div style={{ color: '#cbd5e1', fontSize: '0.88rem', lineHeight: 2 }}>
-            ✓ 全書完整組別（包含今天這組）<br />
-            ✓ 每組一題情境測驗<br />
-            ✓ 完讀後取得榮譽證書<br />
-            ✓ 永久可讀，跨裝置
+        {/* 好康收藏證書 */}
+        <div style={{ background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '16px', padding: '1.2rem', marginBottom: '1.4rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🎖️</div>
+          <div style={{ color: '#92400e', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>好康體驗證書</div>
+          <div style={{ color: '#78350f', fontSize: '0.8rem', lineHeight: 1.6 }}>
+            已完成《{bookTitle}》第一組體驗<br />
+            <span style={{ color: '#a16207', fontSize: '0.72rem' }}>可收藏紀念，無折抵功能</span>
           </div>
         </div>
 
+        {/* 本書目錄 */}
+        <div style={{ marginBottom: '1.4rem' }}>
+          <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
+            📖 《{bookTitle}》完整目錄
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+            {allGroupTitles.map((title, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.45rem 0.7rem', borderRadius: '8px', background: i === 0 ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.03)', border: i === 0 ? '1px solid rgba(124,58,237,0.3)' : '1px solid transparent' }}>
+                <span style={{ color: i === 0 ? '#a78bfa' : '#475569', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>
+                  {i === 0 ? '✅' : `第${i + 1}組`}
+                </span>
+                <span style={{ color: i === 0 ? '#c4b5fd' : '#64748b', fontSize: '0.82rem' }}>{title}</span>
+              </div>
+            ))}
+          </div>
+          {allGroupTitles.length > 1 && (
+            <div style={{ marginTop: '0.8rem', padding: '0.6rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#94a3b8', fontSize: '0.78rem' }}>
+              ✨ 以上精彩內容，前往小舖解鎖
+            </div>
+          )}
+        </div>
+
+        {/* 購買按鈕 */}
         <a
           href="https://still-time-corner.vercel.app/digital"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg, #7c3aed, #06b6d4)', color: '#fff', fontWeight: 700, fontSize: '1rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', textDecoration: 'none', marginBottom: '0.8rem' }}
+          style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg, #7c3aed, #06b6d4)', color: '#fff', fontWeight: 700, fontSize: '1rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', textDecoration: 'none', marginBottom: '0.8rem', textAlign: 'center' }}
         >
-          前往小舖購買電子書 →
+          前往小舖購買完整版 →
         </a>
 
-        <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '0.85rem', cursor: 'pointer' }}>
-          ← 回好康書院繼續逛
-        </button>
+        <div style={{ textAlign: 'center' }}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '0.85rem', cursor: 'pointer' }}>
+            ← 回好康書院繼續逛
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -121,15 +138,16 @@ function PurchaseGuide({ bookTitle, onBack }: { bookTitle: string; onBack: () =>
 interface Props {
   lesson: PsychLesson;
   bookTitle: string;
+  allGroupTitles: string[];
   onBack: () => void;
 }
 
-export default function BonusLesson({ lesson, bookTitle, onBack }: Props) {
+export default function BonusLesson({ lesson, bookTitle, allGroupTitles, onBack }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [showPurchase, setShowPurchase] = useState(false);
 
-  if (showPurchase) return <PurchaseGuide bookTitle={bookTitle} onBack={onBack} />;
+  if (showPurchase) return <PurchaseGuide bookTitle={bookTitle} allGroupTitles={allGroupTitles} onBack={onBack} />;
 
   const safeIndex = Math.min(slideIndex, lesson.slides.length - 1);
   const slide = lesson.slides[safeIndex];
