@@ -21,11 +21,55 @@ function buildTrialGroups() {
 const TRIAL_GROUPS = buildTrialGroups();
 const TRIAL_LESSONS = TRIAL_GROUPS.flatMap(g => g.lessons);
 
+// 完整課堂目錄（試讀的標 ✅，其餘列名）
+const FULL_CATALOG = [
+  {
+    label: '📈 股市入門', price: 'NT$249',
+    lessons: courses[0].lessons.map((l, i) => ({ title: l.title, isTrial: i < 3 })),
+  },
+  {
+    label: '📊 股市進階', price: 'NT$349',
+    lessons: courses[1].lessons.map((l, i) => ({ title: l.title, isTrial: i < 2 })),
+  },
+  {
+    label: '🏆 股市高階', price: 'NT$449',
+    lessons: courses[2].lessons.map((l, i) => ({ title: l.title, isTrial: i < 1 })),
+  },
+];
+
 // ── 全部完成後的最終頁 ─────────────────────────────────────
 function AllDonePage({ onBack }: { onBack: () => void }) {
   return (
     <div className="classroom-content">
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '1rem' }}>
+
+        {/* 完整課程目錄 — 在證書前 */}
+        <div style={{ marginBottom: '1.4rem' }}>
+          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.8rem' }}>
+            📖 股市書院完整課程目錄
+          </div>
+          {FULL_CATALOG.map(course => (
+            <div key={course.label} style={{ marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                <span style={{ color: '#374151', fontWeight: 700, fontSize: '0.85rem' }}>{course.label}</span>
+                <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{course.price}</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                {course.lessons.map((l, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: l.isTrial ? 'rgba(124,58,237,0.08)' : 'transparent' }}>
+                    <span style={{ color: l.isTrial ? '#a78bfa' : '#d1d5db', fontSize: '0.7rem', flexShrink: 0, width: '1.2rem' }}>
+                      {l.isTrial ? '✅' : `${i + 1}.`}
+                    </span>
+                    <span style={{ color: l.isTrial ? '#4b5563' : '#9ca3af', fontSize: '0.8rem' }}>{l.title}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div style={{ padding: '0.55rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#6b7280', fontSize: '0.78rem', marginTop: '0.5rem' }}>
+            ✨ 以上精彩內容，前往小舖解鎖
+          </div>
+        </div>
 
         {/* 好康體驗證書 */}
         <div style={{ background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '16px', padding: '1.4rem', marginBottom: '1.4rem', textAlign: 'center' }}>
@@ -34,26 +78,6 @@ function AllDonePage({ onBack }: { onBack: () => void }) {
           <div style={{ color: '#78350f', fontSize: '0.82rem', lineHeight: 1.7 }}>
             恭喜完成股市書院試讀本全 6 堂！<br />
             <span style={{ color: '#a16207', fontSize: '0.72rem' }}>可收藏紀念，無折抵功能</span>
-          </div>
-        </div>
-
-        {/* 課程目錄預覽 */}
-        <div style={{ marginBottom: '1.4rem' }}>
-          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
-            📖 股市書院完整課程一覽
-          </div>
-          {[
-            { label: '📈 股市入門', count: 15, price: 'NT$249' },
-            { label: '📊 股市進階', count: 10, price: 'NT$349' },
-            { label: '🏆 股市高階', count: 9,  price: 'NT$449' },
-          ].map(c => (
-            <div key={c.label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.55rem 0.8rem', borderRadius: '8px', background: 'rgba(124,58,237,0.05)', border: '1px solid rgba(124,58,237,0.1)', marginBottom: '0.35rem' }}>
-              <span style={{ color: '#374151', fontSize: '0.85rem', fontWeight: 600 }}>{c.label}</span>
-              <span style={{ color: '#9ca3af', fontSize: '0.78rem' }}>{c.count} 堂 · {c.price}</span>
-            </div>
-          ))}
-          <div style={{ marginTop: '0.7rem', padding: '0.55rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#6b7280', fontSize: '0.78rem' }}>
-            ✨ 以上精彩內容，前往小舖解鎖
           </div>
         </div>
 
