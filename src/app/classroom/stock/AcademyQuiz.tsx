@@ -20,6 +20,7 @@ interface Props {
   quiz: Quiz;
   certInfo: CertInfo;
   isLast: boolean;   // 是否為本堂最後一題（整堂全對才發證書）
+  isFree?: boolean;  // 好康/試讀模式：橘金色證書，無折抵
   onPass: () => void;
   onRetry: () => void;
 }
@@ -36,7 +37,7 @@ function saveCert(email: string, info: CertInfo) {
   }
 }
 
-export default function AcademyQuiz({ quiz, certInfo, isLast, onPass, onRetry }: Props) {
+export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, onPass, onRetry }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const [email, setEmail] = useState('');
   const [saved, setSaved] = useState(false);
@@ -169,17 +170,19 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, onPass, onRetry }:
         <>
           {isLast && (
           <div style={{
-            background: 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
-            border: '1px solid #c7d2fe',
+            background: isFree ? 'linear-gradient(135deg, #fef3c7, #fde68a)' : 'linear-gradient(135deg, #eef2ff, #f0fdf4)',
+            border: isFree ? '2px solid #f59e0b' : '1px solid #c7d2fe',
             borderRadius: '12px', padding: '1.2rem', marginBottom: '0.8rem', textAlign: 'center',
           }}>
-            <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🏅</div>
-            <div style={{ color: '#4338ca', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>
-              驚喜榮譽證書
+            <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>{isFree ? '🎖️' : '🏅'}</div>
+            <div style={{ color: isFree ? '#92400e' : '#4338ca', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>
+              {isFree ? '好康體驗證書' : '驚喜榮譽證書'}
             </div>
-            <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6, marginBottom: '0.8rem' }}>
+            <div style={{ color: isFree ? '#78350f' : '#374151', fontSize: '0.78rem', lineHeight: 1.6, marginBottom: '0.8rem' }}>
               恭喜完成本堂全部測驗！<br />
-              <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
+              <span style={{ color: isFree ? '#a16207' : '#6366f1' }}>
+                {isFree ? '可收藏紀念，無折抵功能' : '憑此證書至有的沒的小舖兌換專屬福利'}
+              </span>
             </div>
 
             {/* Email 儲存區塊 */}

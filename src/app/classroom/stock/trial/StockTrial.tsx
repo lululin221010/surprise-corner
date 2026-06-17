@@ -36,6 +36,7 @@ export default function StockTrial() {
         lesson={activeLesson}
         onComplete={handleComplete}
         onBack={() => setActiveLesson(null)}
+        isFree={true}
       />
     );
   }
