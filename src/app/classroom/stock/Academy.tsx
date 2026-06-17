@@ -29,8 +29,6 @@ export default function Academy() {
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
-  const [showLockModal, setShowLockModal] = useState(false);
-  const [showUnlockInput, setShowUnlockInput] = useState(false);
   const [unlockCode, setUnlockCode] = useState('');
   const [unlockStatus, setUnlockStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [unlockedCourses, setUnlockedCourses] = useState<Set<string>>(() => {
@@ -50,7 +48,7 @@ export default function Academy() {
         localStorage.setItem(`sc_stock_unlock_${data.target}`, 'true');
         setUnlockedCourses(prev => new Set(prev).add(data.target));
         setUnlockStatus('success');
-        setTimeout(() => setShowLockModal(false), 1500);
+        // 成功後 1.5 秒自動消除提示（inline 模式不需關閉 modal）
       } else {
         setUnlockStatus('error');
       }
@@ -97,76 +95,49 @@ export default function Academy() {
         </h2>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.description}</p>
 
-        {/* 解鎖提示 Modal */}
-        {showLockModal && (
-          <div style={{
-            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-            zIndex: 999, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '1rem',
-          }} onClick={() => setShowLockModal(false)}>
-            <div style={{
-              background: '#fff', borderRadius: '16px', padding: '1.8rem 1.5rem',
-              maxWidth: '340px', width: '100%', textAlign: 'center',
-            }} onClick={e => e.stopPropagation()}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🔒</div>
-              <h3 style={{ color: '#1e1b4b', fontWeight: 800, marginBottom: '0.5rem' }}>解鎖完整課程</h3>
-              <p style={{ color: '#6b7280', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>
-                購買電子書，SS 互動課程同步解鎖<br />
-                <strong style={{ color: '#7c3aed' }}>
-                  {activeCourse?.id === 'stock-master' ? 'NT$449' : 'NT$349'}
-                </strong>，買一邊兩邊都能用
-              </p>
-              <a
-                href={
-                  activeCourse?.id === 'stock-master'
-                    ? 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa'
-                    : 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9'
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff',
-                  fontWeight: 700, fontSize: '1rem', padding: '0.75rem',
-                  borderRadius: '30px', textDecoration: 'none', marginBottom: '0.8rem',
-                }}
-              >
-                前往結帳解鎖 →
-              </a>
-              {/* 解鎖碼輸入區 */}
-              {!showUnlockInput ? (
-                <button
-                  onClick={() => setShowUnlockInput(true)}
-                  style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.82rem', cursor: 'pointer', textDecoration: 'underline', display: 'block', margin: '0 auto 0.5rem' }}
-                >
-                  已付款？輸入解鎖碼
-                </button>
-              ) : (
-                <div style={{ marginBottom: '0.8rem' }}>
-                  <input
-                    type="text"
-                    value={unlockCode}
-                    onChange={e => { setUnlockCode(e.target.value.toUpperCase()); setUnlockStatus('idle'); }}
-                    placeholder="SS-XXXX-XXXX"
-                    style={{ width: '100%', padding: '0.6rem', border: '2px solid #e5e7eb', borderRadius: '8px', fontFamily: 'monospace', fontSize: '1rem', textAlign: 'center', letterSpacing: '2px', boxSizing: 'border-box' }}
-                  />
-                  {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.78rem', margin: '0.3rem 0 0' }}>解鎖碼無效，請確認後再試</p>}
-                  {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.78rem', margin: '0.3rem 0 0' }}>✅ 解鎖成功！</p>}
-                  <button
-                    onClick={handleVerifyCode}
-                    disabled={unlockStatus === 'loading'}
-                    style={{ marginTop: '0.5rem', width: '100%', padding: '0.6rem', background: '#7c3aed', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem' }}
-                  >
-                    {unlockStatus === 'loading' ? '驗證中…' : '確認解鎖'}
-                  </button>
-                </div>
-              )}
-              <button
-                onClick={() => setShowLockModal(false)}
-                style={{ background: 'none', border: 'none', color: '#9ca3af', fontSize: '0.85rem', cursor: 'pointer' }}
-              >
-                先不急
+        {/* 未解鎖時的 inline 解鎖區塊 */}
+        {activeCourse.id !== 'stock-basics' && !unlockedCourses.has(
+          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced' : 'ss-stock-master'
+        ) && (
+          <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', padding: '1rem', marginBottom: '1.2rem' }}>
+            <div style={{ color: '#b45309', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+              🔑 輸入解鎖碼，或購買電子書解鎖本課程
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.6rem' }}>
+              <input
+                type="text"
+                value={unlockCode}
+                onChange={e => { setUnlockCode(e.target.value.toUpperCase()); setUnlockStatus('idle'); }}
+                placeholder="SS-XXXX-XXXX"
+                onKeyDown={e => e.key === 'Enter' && handleVerifyCode()}
+                style={{ flex: 1, padding: '8px 10px', fontSize: '0.85rem', borderRadius: '8px', border: '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.7)', color: '#1e1b4b', outline: 'none', fontFamily: 'monospace', letterSpacing: '1px' }}
+              />
+              <button onClick={handleVerifyCode} disabled={unlockStatus === 'loading'}
+                style={{ padding: '8px 14px', background: '#f59e0b', color: '#1c1917', border: 'none', borderRadius: '8px', fontSize: '0.82rem', cursor: 'pointer', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                {unlockStatus === 'loading' ? '…' : '解鎖'}
               </button>
             </div>
+            {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>解鎖碼無效，請確認後再試</p>}
+            {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>✅ 解鎖成功！</p>}
+            <div style={{ display: 'flex', gap: '0.6rem' }}>
+              <a
+                href={activeCourse.id === 'stock-master'
+                  ? 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa'
+                  : 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9'}
+                target="_blank" rel="noopener noreferrer"
+                style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
+                轉帳購買{activeCourse.id === 'stock-master' ? '（NT$449）' : '（NT$349）'} →
+              </a>
+            </div>
+          </div>
+        )}
+
+        {/* 已解鎖提示 */}
+        {activeCourse.id !== 'stock-basics' && unlockedCourses.has(
+          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced' : 'ss-stock-master'
+        ) && (
+          <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '10px', padding: '0.5rem 0.8rem', marginBottom: '1.2rem', color: '#16a34a', fontSize: '0.8rem' }}>
+            ✅ 已解鎖，全部課程開放閱讀
           </div>
         )}
 
@@ -180,7 +151,7 @@ export default function Academy() {
             return (
               <button
                 key={lesson.id}
-                onClick={() => locked ? setShowLockModal(true) : setActiveLesson(lesson)}
+                onClick={() => !locked && setActiveLesson(lesson)}
                 className={`course-list-item${done ? ' done' : ''}`}
                 style={locked ? { opacity: 0.5, cursor: 'pointer' } : {}}
               >
@@ -232,28 +203,43 @@ export default function Academy() {
         選擇課程
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-        {courses.map(course => (
-          <button
-            key={course.id}
-            onClick={() => setActiveCourse(course)}
-            className="course-list-item"
-            style={{ padding: '1.2rem 1.4rem', borderRadius: '14px' }}
-          >
-            <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{course.emoji}</span>
-            <div style={{ flex: 1, textAlign: 'left' }}>
-              <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>
-                {course.title}
+        {courses.map(course => {
+          const isFree = course.id === 'stock-basics';
+          const unlockKey = course.id === 'stock-advanced' ? 'ss-stock-advanced'
+            : course.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
+          const isUnlocked = isFree || unlockedCourses.has(unlockKey);
+          return (
+            <button
+              key={course.id}
+              onClick={() => setActiveCourse(course)}
+              className="course-list-item"
+              style={{ padding: '1.2rem 1.4rem', borderRadius: '14px', border: `1px solid ${isUnlocked && !isFree ? 'rgba(34,197,94,0.3)' : 'rgba(196,181,253,0.4)'}` }}
+            >
+              <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{course.emoji}</span>
+              <div style={{ flex: 1, textAlign: 'left' }}>
+                <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>
+                  {course.title}
+                </div>
+                <div style={{ color: '#6b7280', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                  {course.description}
+                </div>
+                <div style={{ color: '#a78bfa', fontSize: '0.72rem', marginTop: '0.4rem' }}>
+                  {course.lessons.length} 堂課
+                </div>
               </div>
-              <div style={{ color: '#6b7280', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                {course.description}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem', flexShrink: 0 }}>
+                {isFree ? (
+                  <span style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.3)', color: '#7c3aed', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>全部免費</span>
+                ) : isUnlocked ? (
+                  <span style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>✅ 已解鎖</span>
+                ) : (
+                  <span style={{ background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', color: '#b45309', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>🔒 需解鎖</span>
+                )}
+                <span style={{ color: '#7c3aed', fontSize: '0.8rem' }}>→</span>
               </div>
-              <div style={{ color: '#a78bfa', fontSize: '0.72rem', marginTop: '0.4rem' }}>
-                {course.lessons.length} 堂課
-              </div>
-            </div>
-            <div style={{ color: '#7c3aed', fontSize: '0.8rem', flexShrink: 0 }}>→</div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
