@@ -141,10 +141,21 @@ export default function BonusAcademy() {
           </div>
         ))}
 
-        {/* 底部說明 */}
-        <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '12px', textAlign: 'center' }}>
-          <div style={{ color: '#a78bfa', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.3rem' }}>💡 想看完整版？</div>
-          <div style={{ color: '#64748b', fontSize: '0.8rem' }}>前往小舖購買電子書，解鎖全書所有組別＋榮譽證書</div>
+        {/* 底部 CTA */}
+        <div style={{ marginTop: '1rem', padding: '1.1rem', background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '14px' }}>
+          <div style={{ color: '#a78bfa', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.3rem', textAlign: 'center' }}>💡 想看完整版？</div>
+          <div style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '0.9rem', textAlign: 'center' }}>購買電子書取得解鎖碼，解鎖全書所有組別＋榮譽證書</div>
+          <div style={{ display: 'flex', gap: '0.6rem' }}>
+            <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+              style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.6rem', textDecoration: 'none', textAlign: 'center' }}>
+              轉帳購買 →
+            </a>
+            <button
+              onClick={() => alert('積分兌換即將整合，敬請期待～目前可至小舖查看積分餘額')}
+              style={{ flex: 1, background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.35)', color: '#fbbf24', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.6rem', cursor: 'pointer' }}>
+              🪙 魯魯積分兌換
+            </button>
+          </div>
         </div>
       </div>
     </div>

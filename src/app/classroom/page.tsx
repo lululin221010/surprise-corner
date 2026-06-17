@@ -9,10 +9,10 @@ import './classroom.css';
 const LIVE_ACADEMIES = [
   { icon: '🎁', title: '好康書院', desc: '各書院精選第一組，完全免費。心理學、股市……喜歡再去小舖買完整版。', href: '/classroom/bonus' },
   { icon: '📈', title: '股市書院', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
+  { icon: '🧠', title: '心理學書院', desc: '6大學系 28本，每本第一組永久免費。讀懂自己，讀懂人。購買電子書後輸入解鎖碼，解鎖整個學系。', href: '/classroom/psychology' },
 ];
 
 const COMING_TOPICS = [
-  { icon: '🧠', title: '心理學書院', desc: '每篇5分鐘，讀懂一個心理學概念。依附、防禦、認知偏誤……從日常角度出發，不燒腦。' },
   { icon: '💰', title: '理財書院', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
   { icon: '🤖', title: 'AI工具書院', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
   { icon: '✍️', title: '創作書院', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
