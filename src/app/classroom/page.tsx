@@ -8,6 +8,7 @@ import './classroom.css';
 
 const LIVE_ACADEMIES = [
   { icon: '📈', title: '股市書院', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
+  { icon: '🎁', title: '好康書院', desc: '各書院精選第一組，完全免費。心理學、股市……喜歡再去小舖買完整版。', href: '/classroom/bonus' },
 ];
 
 const COMING_TOPICS = [
