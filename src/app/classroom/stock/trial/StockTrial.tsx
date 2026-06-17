@@ -9,16 +9,17 @@ import type { Lesson } from '../courses';
 import AcademyLesson from '../AcademyLesson';
 import '../../../classroom/classroom.css';
 
-function buildTrialLessons() {
+function buildTrialGroups() {
   const [basic, advanced, master] = courses;
   return [
-    ...basic.lessons.slice(0, 3).map(l => ({ ...l, id: `trial-b-${l.id}` })),
-    ...advanced.lessons.slice(0, 2).map(l => ({ ...l, id: `trial-a-${l.id}` })),
-    ...master.lessons.slice(0, 1).map(l => ({ ...l, id: `trial-m-${l.id}` })),
+    { label: '📈 入門', lessons: basic.lessons.slice(0, 3).map(l => ({ ...l, id: `trial-b-${l.id}` })) },
+    { label: '📊 進階', lessons: advanced.lessons.slice(0, 2).map(l => ({ ...l, id: `trial-a-${l.id}` })) },
+    { label: '🏆 高階', lessons: master.lessons.slice(0, 1).map(l => ({ ...l, id: `trial-m-${l.id}` })) },
   ];
 }
 
-const TRIAL_LESSONS = buildTrialLessons();
+const TRIAL_GROUPS = buildTrialGroups();
+const TRIAL_LESSONS = TRIAL_GROUPS.flatMap(g => g.lessons);
 
 // ── 全部完成後的最終頁 ─────────────────────────────────────
 function AllDonePage({ onBack }: { onBack: () => void }) {
@@ -124,37 +125,48 @@ export default function StockTrial() {
           入門 3 堂 × 進階 2 堂 × 高階 1 堂，免費體驗完整學習路徑。
         </p>
 
-        {/* 課堂列表 */}
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {TRIAL_LESSONS.map((lesson, i) => {
-            const done = completedLessons.has(lesson.id);
-            return (
-              <button
-                key={lesson.id}
-                onClick={() => setActiveLesson(lesson)}
-                className={`course-list-item${done ? ' done' : ''}`}
-              >
-                <div style={{
-                  width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0,
-                  background: done ? '#dcfce7' : '#ede9fe',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: done ? '#15803d' : '#7c3aed', fontSize: '0.78rem', fontWeight: 700,
-                }}>
-                  {done ? '✓' : i + 1}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>
-                    {lesson.emoji} {lesson.title}
-                  </div>
-                  <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {lesson.duration}</div>
-                </div>
-                <div style={{ color: done ? '#15803d' : '#a78bfa', fontSize: '0.8rem' }}>
-                  {done ? '✓' : '→'}
-                </div>
-              </button>
-            );
-          })}
-        </div>
+        {/* 課堂列表（依書院分組） */}
+        {(() => {
+          let globalIdx = 0;
+          return TRIAL_GROUPS.map(group => (
+            <div key={group.label} style={{ marginBottom: '0.8rem' }}>
+              <div style={{ color: '#a78bfa', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', margin: '0 0 0.4rem 0.2rem' }}>
+                {group.label}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {group.lessons.map(lesson => {
+                  const i = globalIdx++;
+                  const done = completedLessons.has(lesson.id);
+                  return (
+                    <button
+                      key={lesson.id}
+                      onClick={() => setActiveLesson(lesson)}
+                      className={`course-list-item${done ? ' done' : ''}`}
+                    >
+                      <div style={{
+                        width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0,
+                        background: done ? '#dcfce7' : '#ede9fe',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: done ? '#15803d' : '#7c3aed', fontSize: '0.78rem', fontWeight: 700,
+                      }}>
+                        {done ? '✓' : i + 1}
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>
+                          {lesson.emoji} {lesson.title}
+                        </div>
+                        <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {lesson.duration}</div>
+                      </div>
+                      <div style={{ color: done ? '#15803d' : '#a78bfa', fontSize: '0.8rem' }}>
+                        {done ? '✓' : '→'}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ));
+        })()}
 
         {/* 全完成：顯示領證書按鈕；未完成：顯示一般 CTA */}
         {allDone ? (
