@@ -1,6 +1,7 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/trial/StockTrial.tsx
-// 股市書院試讀本（放在好康書院）：入門3堂 + 進階2堂 + 高階1堂
+// 股市書院試讀本：入門3堂 + 進階2堂 + 高階1堂
+// 每堂完成 → 顯示該書院目錄 + 好康體驗證書
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -9,91 +10,81 @@ import type { Lesson } from '../courses';
 import AcademyLesson from '../AcademyLesson';
 import '../../../classroom/classroom.css';
 
+// ── 靜態資料 ─────────────────────────────────────────────
+
 function buildTrialGroups() {
   const [basic, advanced, master] = courses;
   return [
-    { label: '📈 入門', lessons: basic.lessons.slice(0, 3).map(l => ({ ...l, id: `trial-b-${l.id}` })) },
-    { label: '📊 進階', lessons: advanced.lessons.slice(0, 2).map(l => ({ ...l, id: `trial-a-${l.id}` })) },
-    { label: '🏆 高階', lessons: master.lessons.slice(0, 1).map(l => ({ ...l, id: `trial-m-${l.id}` })) },
+    { key: 'basic',    label: '📈 入門', lessons: basic.lessons.slice(0, 3).map(l => ({ ...l, id: `trial-b-${l.id}` })) },
+    { key: 'advanced', label: '📊 進階', lessons: advanced.lessons.slice(0, 2).map(l => ({ ...l, id: `trial-a-${l.id}` })) },
+    { key: 'master',   label: '🏆 高階', lessons: master.lessons.slice(0, 1).map(l => ({ ...l, id: `trial-m-${l.id}` })) },
   ];
 }
 
 const TRIAL_GROUPS = buildTrialGroups();
 const TRIAL_LESSONS = TRIAL_GROUPS.flatMap(g => g.lessons);
 
-// 完整課堂目錄（試讀的標 ✅，其餘列名）
-const FULL_CATALOG = [
-  {
-    label: '📈 股市入門', price: 'NT$249',
-    lessons: courses[0].lessons.map((l, i) => ({ title: l.title, isTrial: i < 3 })),
-  },
-  {
-    label: '📊 股市進階', price: 'NT$349',
-    lessons: courses[1].lessons.map((l, i) => ({ title: l.title, isTrial: i < 2 })),
-  },
-  {
-    label: '🏆 股市高階', price: 'NT$449',
-    lessons: courses[2].lessons.map((l, i) => ({ title: l.title, isTrial: i < 1 })),
-  },
-];
+const CATALOG_BY_KEY = {
+  basic:    { label: '📈 股市入門', price: 'NT$249', lessons: courses[0].lessons.map((l, i) => ({ title: l.title, isTrial: i < 3 })) },
+  advanced: { label: '📊 股市進階', price: 'NT$349', lessons: courses[1].lessons.map((l, i) => ({ title: l.title, isTrial: i < 2 })) },
+  master:   { label: '🏆 股市高階', price: 'NT$449', lessons: courses[2].lessons.map((l, i) => ({ title: l.title, isTrial: i < 1 })) },
+};
 
-// ── 全部完成後的最終頁 ─────────────────────────────────────
-function AllDonePage({ onBack }: { onBack: () => void }) {
+type CatalogKey = keyof typeof CATALOG_BY_KEY;
+
+function lessonToCatalogKey(lessonId: string): CatalogKey {
+  if (lessonId.startsWith('trial-b-')) return 'basic';
+  if (lessonId.startsWith('trial-a-')) return 'advanced';
+  return 'master';
+}
+
+// ── 單堂完成頁 ────────────────────────────────────────────
+
+function LessonDonePage({ catalogKey, onContinue }: { catalogKey: CatalogKey; onContinue: () => void }) {
+  const catalog = CATALOG_BY_KEY[catalogKey];
   return (
     <div className="classroom-content">
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '1rem' }}>
 
-        {/* 完整課程目錄 — 在證書前 */}
+        {/* 課程目錄 */}
         <div style={{ marginBottom: '1.4rem' }}>
-          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.8rem' }}>
-            📖 股市書院完整課程目錄
+          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.5rem' }}>
+            📖 {catalog.label} 完整目錄
+            <span style={{ color: '#9ca3af', fontWeight: 400, fontSize: '0.78rem', marginLeft: '0.5rem' }}>{catalog.price}</span>
           </div>
-          {FULL_CATALOG.map(course => (
-            <div key={course.label} style={{ marginBottom: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                <span style={{ color: '#374151', fontWeight: 700, fontSize: '0.85rem' }}>{course.label}</span>
-                <span style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{course.price}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+            {catalog.lessons.map((l, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: l.isTrial ? 'rgba(124,58,237,0.08)' : 'transparent' }}>
+                <span style={{ color: l.isTrial ? '#a78bfa' : '#d1d5db', fontSize: '0.7rem', flexShrink: 0, width: '1.4rem' }}>
+                  {l.isTrial ? '✅' : `${i + 1}.`}
+                </span>
+                <span style={{ color: l.isTrial ? '#374151' : '#9ca3af', fontSize: '0.8rem' }}>{l.title}</span>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                {course.lessons.map((l, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: l.isTrial ? 'rgba(124,58,237,0.08)' : 'transparent' }}>
-                    <span style={{ color: l.isTrial ? '#a78bfa' : '#d1d5db', fontSize: '0.7rem', flexShrink: 0, width: '1.2rem' }}>
-                      {l.isTrial ? '✅' : `${i + 1}.`}
-                    </span>
-                    <span style={{ color: l.isTrial ? '#4b5563' : '#9ca3af', fontSize: '0.8rem' }}>{l.title}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-          <div style={{ padding: '0.55rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#6b7280', fontSize: '0.78rem', marginTop: '0.5rem' }}>
+            ))}
+          </div>
+          <div style={{ marginTop: '0.6rem', padding: '0.5rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#6b7280', fontSize: '0.78rem' }}>
             ✨ 以上精彩內容，前往小舖解鎖
           </div>
         </div>
 
         {/* 好康體驗證書 */}
-        <div style={{ background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '16px', padding: '1.4rem', marginBottom: '1.4rem', textAlign: 'center' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🎖️</div>
-          <div style={{ color: '#92400e', fontWeight: 800, fontSize: '1.1rem', marginBottom: '0.3rem' }}>好康體驗證書</div>
-          <div style={{ color: '#78350f', fontSize: '0.82rem', lineHeight: 1.7 }}>
-            恭喜完成股市書院試讀本全 6 堂！<br />
-            <span style={{ color: '#a16207', fontSize: '0.72rem' }}>可收藏紀念，無折抵功能</span>
+        <div style={{ background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '16px', padding: '1.2rem', marginBottom: '1.2rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🎖️</div>
+          <div style={{ color: '#92400e', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>好康體驗證書</div>
+          <div style={{ color: '#78350f', fontSize: '0.78rem', lineHeight: 1.6 }}>
+            本堂完成！可收藏紀念，無折抵功能
           </div>
         </div>
 
         {/* 購買按鈕 */}
-        <a
-          href="https://still-time-corner.vercel.app/digital"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '1rem', borderRadius: '30px', padding: '0.85rem', textDecoration: 'none', textAlign: 'center', marginBottom: '0.8rem' }}
-        >
+        <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+          style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', borderRadius: '30px', padding: '0.75rem', textDecoration: 'none', textAlign: 'center', marginBottom: '0.8rem' }}>
           前往小舖購買完整版 →
         </a>
 
         <div style={{ textAlign: 'center' }}>
-          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#9ca3af', fontSize: '0.85rem', cursor: 'pointer' }}>
-            ← 回好康書院繼續逛
+          <button onClick={onContinue} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+            繼續下一堂 →
           </button>
         </div>
       </div>
@@ -102,36 +93,33 @@ function AllDonePage({ onBack }: { onBack: () => void }) {
 }
 
 // ── 主元件 ────────────────────────────────────────────────
+
 const STORAGE_KEY = 'sc_stock_trial_done';
 
 export default function StockTrial() {
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
+  const [doneCatalogKey, setDoneCatalogKey] = useState<CatalogKey | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(() => {
     if (typeof window === 'undefined') return new Set();
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return new Set(saved);
-    } catch { return new Set(); }
-  });
-  const [showAllDone, setShowAllDone] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return (saved as string[]).length >= TRIAL_LESSONS.length;
-    } catch { return false; }
+    try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')); }
+    catch { return new Set(); }
   });
 
   function handleComplete() {
     if (!activeLesson) return;
     const next = new Set(completedLessons).add(activeLesson.id);
     setCompletedLessons(next);
-    setActiveLesson(null);
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
-    if (next.size >= TRIAL_LESSONS.length) setShowAllDone(true);
+    setDoneCatalogKey(lessonToCatalogKey(activeLesson.id));
+    setActiveLesson(null);
   }
 
-  if (showAllDone) return <AllDonePage onBack={() => setShowAllDone(false)} />;
+  // 單堂完成頁
+  if (doneCatalogKey) {
+    return <LessonDonePage catalogKey={doneCatalogKey} onContinue={() => setDoneCatalogKey(null)} />;
+  }
 
+  // 上課中
   if (activeLesson) {
     return (
       <AcademyLesson
@@ -142,8 +130,6 @@ export default function StockTrial() {
       />
     );
   }
-
-  const allDone = completedLessons.size >= TRIAL_LESSONS.length;
 
   return (
     <div className="classroom-content">
@@ -168,7 +154,7 @@ export default function StockTrial() {
         {(() => {
           let globalIdx = 0;
           return TRIAL_GROUPS.map(group => (
-            <div key={group.label} style={{ marginBottom: '0.8rem' }}>
+            <div key={group.key} style={{ marginBottom: '0.8rem' }}>
               <div style={{ color: '#a78bfa', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', margin: '0 0 0.4rem 0.2rem' }}>
                 {group.label}
               </div>
@@ -177,28 +163,16 @@ export default function StockTrial() {
                   const i = globalIdx++;
                   const done = completedLessons.has(lesson.id);
                   return (
-                    <button
-                      key={lesson.id}
-                      onClick={() => setActiveLesson(lesson)}
-                      className={`course-list-item${done ? ' done' : ''}`}
-                    >
-                      <div style={{
-                        width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0,
-                        background: done ? '#dcfce7' : '#ede9fe',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: done ? '#15803d' : '#7c3aed', fontSize: '0.78rem', fontWeight: 700,
-                      }}>
+                    <button key={lesson.id} onClick={() => setActiveLesson(lesson)}
+                      className={`course-list-item${done ? ' done' : ''}`}>
+                      <div style={{ width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0, background: done ? '#dcfce7' : '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', color: done ? '#15803d' : '#7c3aed', fontSize: '0.78rem', fontWeight: 700 }}>
                         {done ? '✓' : i + 1}
                       </div>
                       <div style={{ flex: 1 }}>
-                        <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>
-                          {lesson.emoji} {lesson.title}
-                        </div>
+                        <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>{lesson.emoji} {lesson.title}</div>
                         <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {lesson.duration}</div>
                       </div>
-                      <div style={{ color: done ? '#15803d' : '#a78bfa', fontSize: '0.8rem' }}>
-                        {done ? '✓' : '→'}
-                      </div>
+                      <div style={{ color: done ? '#15803d' : '#a78bfa', fontSize: '0.8rem' }}>{done ? '✓' : '→'}</div>
                     </button>
                   );
                 })}
@@ -207,38 +181,15 @@ export default function StockTrial() {
           ));
         })()}
 
-        {/* 全完成：顯示領證書按鈕；未完成：顯示一般 CTA */}
-        {allDone ? (
-          <div style={{ marginTop: '1.5rem', padding: '1.2rem', background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '14px', textAlign: 'center' }}>
-            <div style={{ fontSize: '1.6rem', marginBottom: '0.4rem' }}>🎖️</div>
-            <div style={{ color: '#92400e', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.8rem' }}>
-              6 堂全部完成！領取好康體驗證書
-            </div>
-            <button
-              onClick={() => setShowAllDone(true)}
-              style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#fff', fontWeight: 700, fontSize: '0.9rem', border: 'none', borderRadius: '30px', padding: '0.6rem 1.8rem', cursor: 'pointer' }}
-            >
-              領取證書 →
-            </button>
-          </div>
-        ) : (
-          <div style={{ marginTop: '1.5rem', padding: '1.2rem', background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '14px', textAlign: 'center' }}>
-            <div style={{ color: '#7c3aed', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-              想繼續學下去？
-            </div>
-            <div style={{ color: '#6b7280', fontSize: '0.82rem', marginBottom: '1rem' }}>
-              購買電子書即可解鎖全部課堂，入門 NT$249 起
-            </div>
-            <a
-              href="https://still-time-corner.vercel.app/digital"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'inline-block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.9rem', padding: '0.6rem 1.8rem', borderRadius: '30px', textDecoration: 'none' }}
-            >
-              前往小舖購買 →
-            </a>
-          </div>
-        )}
+        {/* 底部 CTA */}
+        <div style={{ marginTop: '1.5rem', padding: '1.2rem', background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '14px', textAlign: 'center' }}>
+          <div style={{ color: '#7c3aed', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.4rem' }}>想繼續學下去？</div>
+          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginBottom: '1rem' }}>購買電子書即可解鎖全部課堂，入門 NT$249 起</div>
+          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+            style={{ display: 'inline-block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.9rem', padding: '0.6rem 1.8rem', borderRadius: '30px', textDecoration: 'none' }}>
+            前往小舖購買 →
+          </a>
+        </div>
       </div>
     </div>
   );
