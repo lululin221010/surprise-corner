@@ -96,8 +96,9 @@ export default function Academy() {
         <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.description}</p>
 
         {/* 未解鎖時的 inline 解鎖區塊 */}
-        {activeCourse.id !== 'stock-basics' && !unlockedCourses.has(
-          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced' : 'ss-stock-master'
+        {activeCourse.id !== 'stock-trial' && !unlockedCourses.has(
+          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
+          : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro'
         ) && (
           <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', padding: '1rem', marginBottom: '1.2rem' }}>
             <div style={{ color: '#b45309', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
@@ -123,18 +124,21 @@ export default function Academy() {
               <a
                 href={activeCourse.id === 'stock-master'
                   ? 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa'
-                  : 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9'}
+                  : activeCourse.id === 'stock-advanced'
+                  ? 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9'
+                  : 'https://still-time-corner.vercel.app/digital/6a2965ef6a2fdbc340cab167'}
                 target="_blank" rel="noopener noreferrer"
                 style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
-                轉帳購買{activeCourse.id === 'stock-master' ? '（NT$449）' : '（NT$349）'} →
+                轉帳購買{activeCourse.id === 'stock-master' ? '（NT$449）' : activeCourse.id === 'stock-advanced' ? '（NT$349）' : '（NT$249）'} →
               </a>
             </div>
           </div>
         )}
 
         {/* 已解鎖提示 */}
-        {activeCourse.id !== 'stock-basics' && unlockedCourses.has(
-          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced' : 'ss-stock-master'
+        {activeCourse.id !== 'stock-trial' && unlockedCourses.has(
+          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
+          : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro'
         ) && (
           <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '10px', padding: '0.5rem 0.8rem', marginBottom: '1.2rem', color: '#16a34a', fontSize: '0.8rem' }}>
             ✅ 已解鎖，全部課程開放閱讀
@@ -144,7 +148,7 @@ export default function Academy() {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {activeCourse.lessons.map((lesson, i) => {
             const done = completedLessons.has(lesson.id);
-            const isFree = activeCourse.id === 'stock-basics' || activeCourse.id === 'stock-trial';
+            const isFree = activeCourse.id === 'stock-trial';
             const courseUnlockKey = activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
               : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
             const locked = !isFree && !unlockedCourses.has(courseUnlockKey);
@@ -204,7 +208,7 @@ export default function Academy() {
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
         {courses.map(course => {
-          const isFree = course.id === 'stock-basics';
+          const isFree = false;
           const unlockKey = course.id === 'stock-advanced' ? 'ss-stock-advanced'
             : course.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
           const isUnlocked = isFree || unlockedCourses.has(unlockKey);
