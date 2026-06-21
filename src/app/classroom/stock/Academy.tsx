@@ -3,6 +3,7 @@
 // 股市書院主介面 — 課程列表 + 課程進入點
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import courses from './courses';
 import type { Course, Lesson } from './courses';
@@ -26,6 +27,9 @@ function buildTrialCourse(allCourses: Course[]): Course {
 }
 
 export default function Academy() {
+  const searchParams = useSearchParams();
+  const isPreview = searchParams.get('preview') === '1';
+
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
@@ -36,6 +40,11 @@ export default function Academy() {
     const keys = ['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master'];
     return new Set(keys.filter(k => localStorage.getItem(`sc_stock_unlock_${k}`) === 'true'));
   });
+
+  // preview=1 時視同全解鎖
+  const effectiveUnlocked = isPreview
+    ? new Set(['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master'])
+    : unlockedCourses;
 
   async function handleVerifyCode() {
     const code = unlockCode.trim().toUpperCase();
@@ -96,7 +105,7 @@ export default function Academy() {
         <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.description}</p>
 
         {/* 未解鎖時的 inline 解鎖區塊 */}
-        {activeCourse.id !== 'stock-trial' && !unlockedCourses.has(
+        {activeCourse.id !== 'stock-trial' && !effectiveUnlocked.has(
           activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
           : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro'
         ) && (
@@ -136,7 +145,7 @@ export default function Academy() {
         )}
 
         {/* 已解鎖提示 */}
-        {activeCourse.id !== 'stock-trial' && unlockedCourses.has(
+        {activeCourse.id !== 'stock-trial' && effectiveUnlocked.has(
           activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
           : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro'
         ) && (
@@ -151,7 +160,7 @@ export default function Academy() {
             const isFree = activeCourse.id === 'stock-trial';
             const courseUnlockKey = activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
               : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
-            const locked = !isFree && !unlockedCourses.has(courseUnlockKey);
+            const locked = !isFree && !effectiveUnlocked.has(courseUnlockKey);
             return (
               <button
                 key={lesson.id}
@@ -211,7 +220,7 @@ export default function Academy() {
           const isFree = false;
           const unlockKey = course.id === 'stock-advanced' ? 'ss-stock-advanced'
             : course.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
-          const isUnlocked = isFree || unlockedCourses.has(unlockKey);
+          const isUnlocked = isFree || effectiveUnlocked.has(unlockKey);
           return (
             <button
               key={course.id}
