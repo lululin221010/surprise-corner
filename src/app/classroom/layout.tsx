@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { PreviewProvider } from './PreviewContext';
 
 export const metadata: Metadata = {
   title: { template: '%s | Surprise Corner', default: '驚喜學院 | Surprise Corner' },
@@ -18,7 +20,9 @@ export const metadata: Metadata = {
 export default function ClassroomLayout({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ minHeight: '100vh', background: '#f5f3ff', color: '#1e1b4b' }}>
-      {children}
+      <Suspense>
+        <PreviewProvider>{children}</PreviewProvider>
+      </Suspense>
     </div>
   );
 }

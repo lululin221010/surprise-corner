@@ -5,8 +5,8 @@
 // 架構：有效碼 OR 積分足夠（積分側日後補上，現在只做碼驗證）
 
 import { useState, useCallback } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { usePreview } from '../PreviewContext';
 import { PSYCH_SERIES } from './courses-data';
 import type { PsychSeries, PsychBook, PsychLesson } from './courses-data';
 import PsychGroupLesson from './PsychGroupLesson';
@@ -204,8 +204,7 @@ type ViewState =
   | { t: 'cert'; bookTitle: string; backSeries: PsychSeries; backBook: PsychBook };
 
 export default function PsychAcademy() {
-  const searchParams = useSearchParams();
-  const isPreview = searchParams.get('preview') === '1';
+  const isPreview = usePreview();
 
   const [view, setView] = useState<ViewState>({ t: 'series-list' });
   const [unlocked, setUnlocked] = useState<Set<string>>(() => loadSet(UNLOCK_KEY));

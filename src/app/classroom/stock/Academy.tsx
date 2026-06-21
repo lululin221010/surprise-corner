@@ -3,8 +3,8 @@
 // 股市書院主介面 — 課程列表 + 課程進入點
 
 import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { usePreview } from '../PreviewContext';
 import courses from './courses';
 import type { Course, Lesson } from './courses';
 import AcademyLesson from './AcademyLesson';
@@ -27,8 +27,7 @@ function buildTrialCourse(allCourses: Course[]): Course {
 }
 
 export default function Academy() {
-  const searchParams = useSearchParams();
-  const isPreview = searchParams.get('preview') === '1';
+  const isPreview = usePreview();
 
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
