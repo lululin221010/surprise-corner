@@ -310,6 +310,8 @@ export default function PsychAcademy() {
 
           {/* 麵包屑 */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.2rem', flexWrap: 'wrap' }}>
+            <Link href="/classroom" style={{ color: '#7c3aed', fontSize: '0.8rem', textDecoration: 'none' }}>驚喜學院</Link>
+            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
             <button onClick={() => setView({ t: 'series-list' })} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>心理學書院</button>
             <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
             <button onClick={() => setView({ t: 'book-list', series })} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>{series.emoji} {series.label}</button>
@@ -408,7 +410,9 @@ export default function PsychAcademy() {
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
 
           {/* 麵包屑 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.2rem', flexWrap: 'wrap' }}>
+            <Link href="/classroom" style={{ color: '#7c3aed', fontSize: '0.8rem', textDecoration: 'none' }}>驚喜學院</Link>
+            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
             <button onClick={() => setView({ t: 'series-list' })} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>心理學書院</button>
             <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
             <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{series.emoji} {series.label}</span>

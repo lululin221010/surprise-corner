@@ -58,6 +58,11 @@ export default function BonusAcademy() {
     <div className="classroom-content">
       <div style={{ maxWidth: 680, margin: '0 auto' }}>
 
+        {/* 麵包屑 */}
+        <div style={{ marginBottom: '0.8rem' }}>
+          <Link href="/classroom" style={{ color: '#7c3aed', fontSize: '0.8rem', textDecoration: 'none' }}>← 驚喜學院</Link>
+        </div>
+
         {/* 標題 */}
         <div style={{ marginBottom: '1.8rem' }}>
           <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>🎁</div>
