@@ -1,4 +1,5 @@
 // 📄 路徑：src/app/classroom/psychology/page.tsx
+import { Suspense } from 'react';
 import PsychAcademy from './PsychAcademy';
 
 export const metadata = {
@@ -7,5 +8,9 @@ export const metadata = {
 };
 
 export default function PsychologyPage() {
-  return <PsychAcademy />;
+  return (
+    <Suspense>
+      <PsychAcademy />
+    </Suspense>
+  );
 }

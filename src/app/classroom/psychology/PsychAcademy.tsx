@@ -5,6 +5,7 @@
 // 架構：有效碼 OR 積分足夠（積分側日後補上，現在只做碼驗證）
 
 import { useState, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { PSYCH_SERIES } from './courses-data';
 import type { PsychSeries, PsychBook, PsychLesson } from './courses-data';
@@ -203,6 +204,9 @@ type ViewState =
   | { t: 'cert'; bookTitle: string; backSeries: PsychSeries; backBook: PsychBook };
 
 export default function PsychAcademy() {
+  const searchParams = useSearchParams();
+  const isPreview = searchParams.get('preview') === '1';
+
   const [view, setView] = useState<ViewState>({ t: 'series-list' });
   const [unlocked, setUnlocked] = useState<Set<string>>(() => loadSet(UNLOCK_KEY));
   const [done, setDone] = useState<Set<string>>(() => loadSet(DONE_KEY));
@@ -215,7 +219,8 @@ export default function PsychAcademy() {
   const [verifying, setVerifying] = useState(false);
   const [pointsToast, setPointsToast] = useState(false);
 
-  const isUnlocked = useCallback((seriesId: string) => unlocked.has(seriesId), [unlocked]);
+  // preview=1 時視同全解鎖
+  const isUnlocked = useCallback((seriesId: string) => isPreview || unlocked.has(seriesId), [unlocked, isPreview]);
   const isDone = useCallback((lessonId: string) => done.has(lessonId), [done]);
 
   // 驗證並解鎖學系
