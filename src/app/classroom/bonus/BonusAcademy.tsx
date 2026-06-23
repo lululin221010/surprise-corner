@@ -73,8 +73,8 @@ export default function BonusAcademy() {
         {/* 標題 */}
         <div style={{ marginBottom: '1.8rem' }}>
           <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>🎁</div>
-          <h1 style={{ color: '#fff', fontSize: '1.6rem', fontWeight: 800, margin: 0 }}>好康書院</h1>
-          <p style={{ color: '#cbd5e1', fontSize: '0.95rem', marginTop: '0.5rem' }}>
+          <h1 style={{ color: '#1e1b4b', fontSize: '1.6rem', fontWeight: 800, margin: 0 }}>好康書院</h1>
+          <p style={{ color: '#4b5563', fontSize: '0.95rem', marginTop: '0.5rem' }}>
             各書院精選第一組，完全免費。喜歡就去小舖買完整版。
           </p>
         </div>
@@ -85,9 +85,9 @@ export default function BonusAcademy() {
             {/* 書院區塊標題 */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem' }}>
               <span style={{ fontSize: '1.2rem' }}>{section.emoji}</span>
-              <span style={{ color: '#f1f5f9', fontWeight: 700, fontSize: '1.05rem' }}>{section.label}</span>
+              <span style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '1.05rem' }}>{section.label}</span>
               {section.comingSoon && (
-                <span style={{ background: 'rgba(100,116,139,0.3)', color: '#94a3b8', fontSize: '0.75rem', padding: '0.15rem 0.5rem', borderRadius: '10px', border: '1px solid rgba(100,116,139,0.4)' }}>
+                <span style={{ background: '#f3f4f6', color: '#9ca3af', fontSize: '0.75rem', padding: '0.15rem 0.5rem', borderRadius: '10px', border: '1px solid #e5e7eb' }}>
                   即將開放
                 </span>
               )}
@@ -95,24 +95,24 @@ export default function BonusAcademy() {
 
             {section.id === 'stock' ? (
               <Link href="/classroom/stock/trial" style={{ textDecoration: 'none' }}>
-                <div style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
+                <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
                   <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: '0.95rem' }}>股市書院試讀本</div>
-                    <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>股市書院試讀本</div>
+                    <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
                   </div>
-                  <div style={{ color: '#a78bfa', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
+                  <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
                 </div>
               </Link>
             ) : section.id === 'ai' ? (
               <Link href="/classroom/bonus/ai-intro-1" style={{ textDecoration: 'none' }}>
-                <div style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
+                <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
                   <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: '0.95rem' }}>AI書院・系列1試讀本</div>
-                    <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>AI書院・系列1試讀本</div>
+                    <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
                   </div>
-                  <div style={{ color: '#a78bfa', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
+                  <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
                 </div>
               </Link>
             ) : (
@@ -120,14 +120,14 @@ export default function BonusAcademy() {
                 {/* 心理學學系篩選 */}
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
                   <button onClick={() => setPsychFilter('all')}
-                    style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: psychFilter === 'all' ? 'rgba(124,58,237,0.35)' : 'rgba(255,255,255,0.08)', border: psychFilter === 'all' ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.15)', color: psychFilter === 'all' ? '#c4b5fd' : '#cbd5e1' }}>
+                    style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: psychFilter === 'all' ? '#ede9fe' : '#f3f4f6', border: psychFilter === 'all' ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: psychFilter === 'all' ? '#5b21b6' : '#374151' }}>
                     全部 {FREE_LESSONS.length}
                   </button>
                   {psychSeries.map(s => {
                     const count = FREE_LESSONS.filter(f => f.seriesId === s.id).length;
                     return (
                       <button key={s.id} onClick={() => setPsychFilter(s.id)}
-                        style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: psychFilter === s.id ? 'rgba(124,58,237,0.35)' : 'rgba(255,255,255,0.08)', border: psychFilter === s.id ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.15)', color: psychFilter === s.id ? '#c4b5fd' : '#cbd5e1' }}>
+                        style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: psychFilter === s.id ? '#ede9fe' : '#f3f4f6', border: psychFilter === s.id ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: psychFilter === s.id ? '#5b21b6' : '#374151' }}>
                         {s.emoji} {s.label} {count}
                       </button>
                     );
@@ -145,17 +145,17 @@ export default function BonusAcademy() {
                           const allGroupTitles = fullBook ? fullBook.lessons.map(l => l.title) : [];
                           setActive({ lesson: item.lesson, bookTitle: item.bookTitle, allGroupTitles });
                         }}
-                        style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '12px', padding: '0.9rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer', transition: 'all 0.15s' }}>
+                        style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.9rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer', transition: 'all 0.15s' }}>
                         <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>{item.seriesEmoji}</div>
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: '0.95rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                             {item.bookTitle}
                           </div>
-                          <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '0.2rem' }}>
+                          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>
                             {item.series} · {item.lesson.slides.length} 頁 · 免費
                           </div>
                         </div>
-                        <div style={{ color: '#a78bfa', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
+                        <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
                       </div>
                     ))}
                 </div>
@@ -165,9 +165,9 @@ export default function BonusAcademy() {
         ))}
 
         {/* 底部 CTA */}
-        <div style={{ marginTop: '1rem', padding: '1.2rem', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: '14px' }}>
-          <div style={{ color: '#c4b5fd', fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.3rem', textAlign: 'center' }}>💡 想看完整版？</div>
-          <div style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.9rem', textAlign: 'center' }}>購買電子書取得解鎖碼，解鎖全書所有組別＋榮譽證書</div>
+        <div style={{ marginTop: '1rem', padding: '1.2rem', background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '14px' }}>
+          <div style={{ color: '#5b21b6', fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.3rem', textAlign: 'center' }}>💡 想看完整版？</div>
+          <div style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '0.9rem', textAlign: 'center' }}>購買電子書取得解鎖碼，解鎖全書所有組別＋榮譽證書</div>
           <div style={{ display: 'flex', gap: '0.6rem' }}>
             <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.6rem', textDecoration: 'none', textAlign: 'center' }}>
