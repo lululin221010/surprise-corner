@@ -381,7 +381,7 @@ function LessonView({ lesson, onComplete, onBack }: { lesson: AiLesson; onComple
               </div>
             </>
           ) : (
-            <QuizPanel quiz={lesson.quizzes[quizIdx]} onPass={handleQuizPass} />
+            <QuizPanel key={quizIdx} quiz={lesson.quizzes[quizIdx]} onPass={handleQuizPass} />
           )}
         </div>
 
