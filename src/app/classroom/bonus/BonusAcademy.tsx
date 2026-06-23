@@ -105,16 +105,30 @@ export default function BonusAcademy() {
                 </div>
               </Link>
             ) : section.id === 'ai' ? (
-              <Link href="/classroom/bonus/ai-intro-1" style={{ textDecoration: 'none' }}>
-                <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
-                  <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>AI書院・系列1試讀本</div>
-                    <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
-                  </div>
-                  <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
-                </div>
-              </Link>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {([
+                  { n: 1, title: 'AI基礎學', emoji: '📖' },
+                  { n: 2, title: 'AI解剖學', emoji: '🔬' },
+                  { n: 3, title: 'AI溝通學', emoji: '💬' },
+                  { n: 4, title: 'AI思考力', emoji: '🤔' },
+                  { n: 5, title: 'AI共存學', emoji: '🤝' },
+                  { n: 6, title: 'AI心理學', emoji: '🧬' },
+                  { n: 7, title: 'AI實作學', emoji: '🛠️' },
+                  { n: 8, title: 'AI局勢學', emoji: '🛡️' },
+                  { n: 9, title: 'AI機器人學', emoji: '🤖' },
+                ] as { n: number; title: string; emoji: string }[]).map(({ n, title, emoji }) => (
+                  <Link key={n} href={`/classroom/bonus/ai-intro-${n}`} style={{ textDecoration: 'none' }}>
+                    <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
+                      <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{emoji}</div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem' }}>系列{n}・{title}試讀本</div>
+                        <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.1rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+                      </div>
+                      <div style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>→</div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             ) : (
               <>
                 {/* 心理學學系篩選 */}

@@ -7,14 +7,14 @@ import ShareButtons from '@/components/ShareButtons';
 import './classroom.css';
 
 const LIVE_ACADEMIES = [
-  { icon: '🎁', title: '好康書院', desc: '各書院精選第一組，完全免費。心理學、股市……喜歡再去小舖買完整版。', href: '/classroom/bonus' },
+  { icon: '🎁', title: '好康書院', desc: '各書院精選第一組，完全免費。心理學、股市、AI……喜歡再去小舖買完整版。', href: '/classroom/bonus' },
   { icon: '📈', title: '股市書院', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
   { icon: '🧠', title: '心理學書院', desc: '6大學系 28本，每本第一組永久免費。讀懂自己，讀懂人。購買電子書後輸入解鎖碼，解鎖整個學系。', href: '/classroom/psychology' },
+  { icon: '🤖', title: 'AI書院', desc: '9大系列 54堂免費試讀：解剖學、溝通學、思考力、共存學……從AI原理到實作，全面理解AI時代。', href: '/classroom/bonus' },
 ];
 
 const COMING_TOPICS = [
   { icon: '💰', title: '理財書院', desc: '存錢、記帳、保險、ETF……從日常理財到長期規劃，一步一步來。' },
-  { icon: '🤖', title: 'AI書院', desc: '哪些 AI 工具值得用？怎麼下 prompt？實用教學，不廢話，直接上手。' },
   { icon: '✍️', title: '創作書院', desc: '如何開始寫作？怎麼克服空白頁恐懼？陪你從第一句話開始。' },
   { icon: '🔬', title: '科學書院', desc: '量子力學、相對論、演化論……用你看得懂的語言，講清楚那些聽起來很難的科學。' },
   { icon: '🌍', title: '人文書院', desc: '歷史、哲學、社會學……幫你建立思考框架，看懂這個世界為什麼是這樣。' },
