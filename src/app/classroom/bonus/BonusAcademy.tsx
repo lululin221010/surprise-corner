@@ -24,6 +24,13 @@ const ACADEMY_SECTIONS = [
     items: [] as { lesson: PsychLesson; bookTitle: string; subtitle: string }[],
   },
   {
+    id: 'ai',
+    label: 'AI書院好康',
+    emoji: '🤖',
+    comingSoon: false,
+    items: [] as { lesson: PsychLesson; bookTitle: string; subtitle: string }[],
+  },
+  {
     id: 'psychology',
     label: '心理學書院好康',
     emoji: '🧠',
@@ -92,6 +99,17 @@ export default function BonusAcademy() {
                   <div style={{ fontSize: '1.3rem', flexShrink: 0 }}>🎁</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.9rem' }}>股市書院試讀本</div>
+                    <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.1rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+                  </div>
+                  <div style={{ color: '#7c3aed', fontSize: '0.8rem', fontWeight: 600, flexShrink: 0 }}>開始 →</div>
+                </div>
+              </Link>
+            ) : section.id === 'ai' ? (
+              <Link href="/classroom/bonus/ai-intro-1" style={{ textDecoration: 'none' }}>
+                <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
+                  <div style={{ fontSize: '1.3rem', flexShrink: 0 }}>🎁</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.9rem' }}>AI書院・系列1試讀本</div>
                     <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.1rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
                   </div>
                   <div style={{ color: '#7c3aed', fontSize: '0.8rem', fontWeight: 600, flexShrink: 0 }}>開始 →</div>
