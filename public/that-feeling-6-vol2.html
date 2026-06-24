@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>那個實驗從來沒有結論｜科學邊界 Vol.2｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+  --sb-bg: #0a1a20;
+  --sb-text: #b8d0da;
+  --sb-accent: #4a8fa8;
+  --sb-muted: #4a6a78;
+  --sb-hover: rgba(74,143,168,0.12);
+  --sb-border: rgba(74,143,168,0.15);
+  --sidebar-width: 240px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Sidebar ─────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--sb-bg);
+  border-right: 1px solid var(--sb-border);
+  overflow-y: auto;
+  padding: 32px 20px 40px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-back {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--sb-muted);
+  text-decoration: none;
+  margin-bottom: 28px;
+  transition: color 0.2s;
+}
+.sb-back:hover { color: var(--sb-accent); }
+
+.sb-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--sb-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.sb-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sb-text);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.sb-subtitle {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  color: var(--sb-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.sb-divider {
+  height: 1px;
+  background: var(--sb-border);
+  margin-bottom: 20px;
+}
+
+.sb-toc-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--sb-muted);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.sb-toc a {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--sb-muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  line-height: 1.6;
+  margin-bottom: 2px;
+  transition: all 0.2s;
+}
+.sb-toc a:hover {
+  color: var(--sb-accent);
+  background: var(--sb-hover);
+}
+
+/* ── Main Content ────────────────────────────── */
+.main {
+  position: relative;
+  z-index: 1;
+  margin-left: var(--sidebar-width);
+  max-width: 720px;
+  padding: 60px 48px 100px;
+}
+
+.page-back { padding: 0 0 32px; }
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.book-header {
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 64px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 40px 0 16px;
+}
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 64px 0;
+}
+.chapter-divider::before, .chapter-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(74,143,168,0.3), transparent);
+}
+.chapter-divider span {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+}
+
+.series-nav {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 40px 24px 80px; }
+  .book-title { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺・系列六・Vol.2</div>
+  <div class="sb-title">《那個實驗從來沒有結論》</div>
+  <div class="sb-subtitle">科學史上被擱置、終止<br>與無法解釋的研究</div>
+  <div class="sb-divider"></div>
+  <div class="sb-toc-label">目錄</div>
+  <nav class="sb-toc">
+    <a href="#preface">前言　未完成不代表失敗</a>
+    <a href="#ch1">第一章　被終止的實驗去了哪裡</a>
+    <a href="#ch2">第二章　那些消失的數據</a>
+    <a href="#ch3">第三章　研究者死後的抽屜</a>
+    <a href="#ch4">第四章　機構不想要的結論</a>
+    <a href="#ch5">第五章　無法重複的那一次</a>
+    <a href="#ch6">第六章　還在等結論的實驗</a>
+    <a href="#afterword">後記　科學的邊界長什麼樣</a>
+  </nav>
+</aside>
+
+<!-- Main -->
+<div class="main">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 02</div>
+    <h1 class="book-title">那個實驗<br>從來沒有結論</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+  </div>
+
+  <div class="content">
+
+    <!-- 前言 -->
+    <h2 id="preface">前言　未完成不代表失敗，有時代表危險</h2>
+
+    <p>
+      1953年，史丹利・米勒（Stanley Miller）在芝加哥大學的實驗室裡，
+      用一瓶水、幾種氣體、和一道電火花，製造出了胺基酸。
+      生命的基本成分，在實驗室裡憑空出現了。
+    </p>
+    <p>
+      這個實驗有結論：生命的化學起源是可能的。
+      它被寫進教科書，被引用超過五千次，成為二十世紀最重要的實驗之一。
+    </p>
+    <p>
+      但米勒還做過另一個實驗。那個實驗的結果，在他去世後才被人從抽屜裡翻出來。
+      結果比任何人預期的都要複雜。複雜到沒有人知道該怎麼解釋它。
+      那個實驗，從來沒有正式發表過。
+    </p>
+    <p>
+      這本書要談的，就是這種事。
+    </p>
+    <p>
+      <strong>實驗沒有結論，不一定是因為失敗。</strong>
+      有時候是因為結果太奇怪，沒辦法放進現有的框架。
+      有時候是因為還沒來得及，人就不在了。
+      有時候，是因為有人不希望它有結論。
+    </p>
+
+    <div class="blockquote">
+      <p>「一個無法被重複的實驗結果，不代表它是假的。它只代表我們還不知道如何重複它。」</p>
+      <cite>—— 卡爾・波普爾（Karl Popper），《科學發現的邏輯》，1934</cite>
+    </div>
+
+    <p>
+      科學的教科書版本很乾淨：假說、實驗、結論、發表。
+      但真實的科學史是一片混亂：中途終止的計畫、消失的數據、
+      研究者死後才被找到的筆記本、機構否認曾經資助過的研究。
+    </p>
+    <p>
+      這本書帶你去看那片混亂裡，幾個沒有結論的房間。
+    </p>
+
+    <!-- 第一章 -->
+    <h2 id="ch1">第一章　被終止的實驗去了哪裡</h2>
+
+    <h3>史丹利・米勒抽屜裡的東西</h3>
+
+    <p>
+      2008年，米勒過世兩年後，他的學生傑弗里・巴達（Jeffrey Bada）
+      在整理老師的實驗室時，發現了幾個密封的玻璃試管。
+      試管上的標籤，寫的是1958年的日期。
+    </p>
+    <p>
+      那是米勒在原始實驗五年後做的後續研究。
+      他模擬的不是早期地球的大氣，而是火山噴發時的環境：
+      硫化氫、二氧化碳、高溫、高壓。
+    </p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：Bada et al.,《科學》期刊，2008年10月，Vol. 322, Issue 5900<br>
+      發現：米勒1958年實驗試管中含有22種胺基酸，遠超原始實驗的5種<br>
+      研究者說明：「這些樣本在密封狀態下保存了五十年，數據完整可信」
+    </div>
+
+    <p>
+      22種胺基酸。原始實驗只找到5種。
+      如果米勒當年發表了這個結果，生命起源的討論會往完全不同的方向走。
+    </p>
+    <p>
+      為什麼沒發表？巴達說，米勒自己也不確定這些結果代表什麼。
+      他不想在沒有把握的情況下發表。
+      所以他把試管放進抽屜，等到他想清楚了再說。
+      他沒有等到那一天。
+    </p>
+    <p>
+      這是一種無結論：<em>不是被壓制，是被擱置，然後時間到了。</em>
+    </p>
+
+    <h3>史丹佛監獄實驗的那個房間</h3>
+
+    <p>
+      1971年，菲利普・津巴多（Philip Zimbardo）在史丹佛大學進行了一個實驗：
+      把24個心理健康的大學生隨機分成「獄卒」和「囚犯」，
+      關進學校地下室模擬的監獄，預計進行兩週。
+    </p>
+    <p>
+      實驗在第六天就終止了。
+    </p>
+    <p>
+      終止的原因是：扮演獄卒的學生開始對囚犯施以心理虐待，
+      而扮演囚犯的學生出現了真實的心理崩潰。
+      津巴多本人也承認，他在實驗中已經忘記自己是研究者，
+      開始以「監獄長」的身份思考和行動。
+    </p>
+    <p>
+      這個實驗的「結論」是什麼？
+      教科書上說：環境決定行為，人在權力結構中會失去自我。
+      但津巴多在2018年接受重新審查時坦承：<em>實驗的設計有嚴重問題，
+      獄卒事先被告知可以「讓囚犯感到不舒服」。</em>
+      這不是自然發生的，這是被誘導出來的。
+    </p>
+    <p>
+      那麼，這個實驗的真正結論是什麼？
+      沒有人給過一個令所有人滿意的答案。
+      它被引用了幾十年，但它到底證明了什麼，
+      至今仍然是爭議。
+    </p>
+
+    <h3>終止本身就是一種數據</h3>
+
+    <p>
+      科學界有一個說法叫做「檔案抽屜問題」（file drawer problem）。
+      這個詞由心理學家羅伯特・羅森塔爾（Robert Rosenthal）
+      在1979年的論文中正式命名。它指的是一個結構性的偏差：
+      <em>有正面結論的研究被發表，沒有結論或負面結果的研究被放進抽屜。</em>
+    </p>
+    <p>
+      後果是什麼？我們看到的科學文獻，是現實的一個被篩選過的版本。
+      那些「沒用」的實驗、「失敗」的結果，悄悄地消失在各地的抽屜裡，
+      沒有人統計過有多少，也沒有人知道那裡面藏著什麼。
+    </p>
+
+    <div class="data-note">
+      <strong>研究估算</strong><br>
+      來源：Ioannidis, J.P.A.,《PLOS Medicine》，2005年，Vol. 2, Issue 8<br>
+      估計：在生醫領域，超過50%的已發表研究結果無法被獨立重複<br>
+      補充：2011年拜耳公司內部調查顯示，其測試的67個「已確立」藥物靶點中，只有約20-25%能被重複驗證
+    </div>
+
+    <p>
+      這不是少數人的問題，這是一個系統問題。
+      我們建立在「已發表研究」上的知識體系，
+      有一個我們幾乎從不談論的盲點：
+      那些從來沒有結論的實驗，可能比已發表的實驗多得多。
+    </p>
+    <p>
+      被終止的實驗去了哪裡？
+      大部分去了抽屜。少數去了歷史。
+      極少數，在幾十年後的某個下午，被人重新找到了。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第二章 -->
+    <h2 id="ch2">第二章　那些消失的數據</h2>
+
+    <h3>NASA 的磁帶失蹤案</h3>
+
+    <p>
+      1969年7月20日，人類第一次踏上月球。
+      阿波羅11號任務蒐集了大量的科學數據，
+      包括地震數據、太陽風粒子測量、以及月表的各種儀器讀值。
+      這些數據被記錄在磁帶上，送回地球，進入NASA的存檔系統。
+    </p>
+    <p>
+      然後它們消失了。
+    </p>
+    <p>
+      這不是比喻。2006年，當研究人員試圖重新分析原始月球地震數據時，
+      發現阿波羅11號至阿波羅14號任務的約700盒磁帶找不到了。
+      NASA展開了一場歷時多年的搜索。
+      部分磁帶最終被找到，有些在美國各地的倉庫，
+      有些在澳洲的一個電視廣播機構的庫房裡。
+    </p>
+
+    <div class="data-note">
+      <strong>事件紀錄</strong><br>
+      來源：Stephenson, C.R., et al.,《月球地震磁帶恢復報告》，NASA，2009年<br>
+      調查範圍：原始阿波羅地震實驗磁帶共約170,000盒<br>
+      狀態：部分磁帶被找回並成功數位化，但大量早期任務原始數據仍未完整追回<br>
+      背景：1970年代NASA面臨預算削減，存檔系統優先級降低，是數據散失的主因之一
+    </div>
+
+    <p>
+      問題是：消失的部分，裡面有什麼？
+      <em>我們不知道。那正是問題所在。</em>
+    </p>
+    <p>
+      沒有人是刻意讓數據消失的。
+      但「沒有惡意」不等於「沒有損失」。
+      幾十年的預算壓縮、人事更替、儲存技術迭代，
+      讓某些數據靜靜地從人類的知識版圖上抹去。
+      我們甚至沒有辦法量化這個損失，
+      因為我們不知道我們失去了什麼。
+    </p>
+
+    <h3>塔斯基吉梅毒研究的「完整數據」</h3>
+
+    <p>
+      1932年至1972年，美國公共衛生署在阿拉巴馬州塔斯基吉對399名黑人梅毒患者進行了一項研究。
+      這些患者被告知他們在接受治療，但實際上沒有。
+      研究人員在1947年青黴素已被確立為梅毒有效療法後，仍繼續讓患者不接受治療，以觀察梅毒的自然進程。
+    </p>
+    <p>
+      這個研究在1972年被吹哨者詹姆士・亨里克（James Heller）揭露後終止，
+      引發了巨大的社會衝擊，直接催生了1974年的美國《國家研究法》
+      和後來的機構審查委員會（IRB）制度。
+    </p>
+    <p>
+      但有一件事很少被提到：這項研究積累的「完整數據」，
+      包括患者的詳細病程記錄、家屬調查、以及後期的解剖數據，
+      至今仍是醫學研究的參考來源。
+    </p>
+
+    <div class="blockquote">
+      <p>「我們面對的問題不只是這些數據是否應該被使用，而是一旦數據存在，它是否會被使用——無論我們想不想。」</p>
+      <cite>—— 亞瑟・卡普蘭（Arthur Caplan），美國醫學倫理學家，2010年訪談</cite>
+    </div>
+
+    <p>
+      這是另一種形式的「無結論」：
+      研究確實有結果，結果也確實被記錄了，
+      但它的結論是什麼——我們應該怎麼對待它——
+      在倫理上，從來沒有一個乾淨的答案。
+    </p>
+    <p>
+      數據是存在的。怎麼用它，是個問題。
+      而這個問題，每隔幾年就會被重新提出一次，
+      每次提出，都沒有一個所有人都滿意的答案。
+    </p>
+
+    <h3>氣候研究的「原始數據」爭議</h3>
+
+    <p>
+      2009年11月，英國東安格利亞大學氣候研究中心（CRU）的電子郵件伺服器被駭，
+      超過1,000封電子郵件和3,000份文件被公開。
+      這個事件被稱為「氣候門」（Climategate）。
+    </p>
+    <p>
+      在公開的郵件裡，研究人員在內部討論中使用了一些被批評者解讀為「操弄數據」的語言。
+      其中最常被引用的一句話是，研究員菲爾・瓊斯（Phil Jones）在1999年寫道，
+      他使用了麥可・曼（Michael Mann）的「技巧」來「隱藏衰退」。
+    </p>
+    <p>
+      後來的多個獨立調查——包括英國議會、美國大氣科學國家研究委員會——
+      均認定這些研究的整體結論沒有問題，
+      「隱藏衰退」指的是一種在圖表展示上處理代理數據的標準技術，
+      不是造假。
+    </p>
+
+    <div class="data-note">
+      <strong>調查結果</strong><br>
+      來源：羅素爵士獨立氣候變化電子郵件審查報告，2010年7月<br>
+      結論：「研究人員的行動沒有違反科學誠信原則，但在開放性和與批評者的互動上有所不足」<br>
+      補充：菲爾・瓊斯在事件期間因壓力一度宣布辭職，後來撤回
+    </div>
+
+    <p>
+      但是——CRU在調查中承認，部分原始溫度站數據已經「遺失」，
+      因為當年數據整理時的慣例，是保留處理後的版本，丟棄原始版本。
+      <em>那些原始數據，永遠找不回來了。</em>
+    </p>
+    <p>
+      不是陰謀。不是造假。只是那個年代科學數據管理的普遍慣例，
+      導致了一個無法填補的空洞。
+      爭議沒有因為調查結束而結束，因為「原始數據在哪裡」這個問題，
+      永遠無法被回答了。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第三章 -->
+    <h2 id="ch3">第三章　研究者死後的抽屜</h2>
+
+    <h3>尼古拉・特斯拉的最後文件</h3>
+
+    <p>
+      1943年1月7日，尼古拉・特斯拉（Nikola Tesla）在紐約市的旅館房間裡獨自去世。
+      他死後，美國聯邦調查局（FBI）在幾天內就封存了他的文件和研究資料，
+      理由是「可能具有戰略重要性」。
+    </p>
+    <p>
+      特斯拉去世時，他已經是一個被主流科學界遺忘的孤獨老人，
+      他最後幾年宣稱自己在研究一種「死光武器」（death ray），
+      能夠從遠距離摧毀飛機。沒有人認真對待他。
+      但他死後，政府認真對待了他的文件。
+    </p>
+
+    <div class="data-note">
+      <strong>歷史紀錄</strong><br>
+      來源：FBI電子閱覽室（FOIA），特斯拉文件集，公開日期：2016年<br>
+      內容：FBI特斯拉文件於2016年依《資訊自由法》全部解密公開<br>
+      特殊說明：文件顯示FBI在特斯拉死後立即聯繫了美國外星財產保管局（OAP）來清點文件，部分文件被送往海軍研究實驗室評估
+    </div>
+
+    <p>
+      解密後，FBI文件顯示，研究人員在評估後的結論是：
+      特斯拉晚年的大部分研究「沒有立即的實用價值」。
+      文件裡的死光武器設計被評估為「不可行」。
+    </p>
+    <p>
+      但是——特斯拉的侄子薩瓦・科薩諾維奇（Sava Kosanovic）曾抱怨，
+      他在FBI介入之前去旅館清點叔叔的遺物時，發現有部分文件已經「不見了」。
+      他不知道那些文件是什麼，也不知道去了哪裡。
+      <em>這個說法從來沒有被正式調查過。</em>
+    </p>
+    <p>
+      特斯拉的故事不缺神話化，也不缺過度解讀。
+      但在神話和現實之間，有一個確實存在的空洞：
+      他去世時帶著多少未完成的工作，我們不完全知道。
+    </p>
+
+    <h3>漢斯・謝利的壓力研究筆記</h3>
+
+    <p>
+      匈牙利裔加拿大生理學家漢斯・謝利（Hans Selye）是「壓力」（stress）這個概念在生醫領域的奠基者。
+      他在1950年代至1980年代發表了超過1,700篇論文，定義了「一般適應症候群」（GAS），
+      是現代壓力生理學的基礎。
+    </p>
+    <p>
+      謝利在1982年去世，留下了大量未發表的研究筆記。
+      他的繼承者和機構繼續整理這些筆記，其中一部分在他去世後逐漸發表。
+    </p>
+    <p>
+      但在2012年，一組來自加拿大麥基爾大學的研究人員在分析謝利的早期研究記錄時發現：
+      謝利的部分早期壓力研究，
+      是在已知某些動物實驗結果的情況下進行的，
+      而這些前期知識沒有在論文中被充分說明。
+    </p>
+
+    <div class="blockquote">
+      <p>「謝利的研究方法論問題不影響壓力概念的整體框架，但它提醒我們，科學的建立從來不是一條筆直的線。」</p>
+      <cite>—— Fye, W. Bruce,《美國心臟學期刊》，2015年</cite>
+    </div>
+
+    <p>
+      謝利沒有機會回應這些分析了。他的筆記就在那裡，
+      但他的想法、他的決策過程、他為什麼那樣設計實驗，
+      沒有人能再問他了。
+    </p>
+    <p>
+      這是研究者死後的抽屜帶給後人的特殊困境：
+      文件在，但詮釋文件所需的那個人不在了。
+    </p>
+
+    <h3>亞歷山大・謝爾蓋耶維奇・福羅洛夫的最後實驗</h3>
+
+    <p>
+      俄羅斯物理學家亞歷山大・福羅洛夫（Alexander Frolov）
+      在他去世前幾年，持續在聖彼得堡進行一系列關於「扭矩場」（torsion field）的實驗。
+      扭矩場是蘇聯時期就開始被部分科學家研究的一個非常規概念，
+      理論上它是旋轉物體產生的一種超過光速傳遞信息的場。
+    </p>
+    <p>
+      主流物理學界通常不接受扭矩場理論，認為它沒有實驗支持，也違反已確立的物理原則。
+      但在蘇聯解體後的混亂期間，這類研究在沒有嚴格同行審查的環境裡持續進行。
+    </p>
+    <p>
+      福羅洛夫去世後，他的部分實驗記錄由俄羅斯研究人員整理出版，
+      但他的實驗從未被獨立機構重複過。
+      <em>沒有人能確認他看到的是什麼，也沒有人能確認他什麼都沒看到。</em>
+    </p>
+    <p>
+      這個案例代表了一種特別困難的無結論：
+      研究在科學主流之外進行，紀錄存在，但驗證缺席。
+      結論的有無，取決於你相信誰。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第四章 -->
+    <h2 id="ch4">第四章　機構不想要的結論</h2>
+
+    <h3>菸草公司的癌症研究</h3>
+
+    <p>
+      1953年，美國菸草研究委員會（TIRC）成立，
+      由美國各大菸草公司聯合出資，表面上是為了「客觀研究菸草與健康的關係」。
+      實際上，這個機構的核心目的是要播下懷疑的種子，
+      讓公眾對菸草與癌症關聯的科學共識產生困惑。
+    </p>
+    <p>
+      這一策略後來在1990年代的司法訴訟中被完整揭露。
+      菸草公司的內部文件顯示，他們的科學顧問早在1960年代就已確認
+      菸草與肺癌的因果關係，但這個結論被刻意不發表、不公開，
+      而資金被用於資助「尚無定論」的研究來干擾公眾視聽。
+    </p>
+
+    <div class="data-note">
+      <strong>法律紀錄</strong><br>
+      來源：美國司法部訴菸草公司案，1999年，最終判決：2006年8月<br>
+      法官葛拉迪斯・凱斯勒（Gladys Kessler）在判決書中認定：主要菸草公司「蓄意欺騙美國公眾關於菸草對健康的危害」<br>
+      規模：被迫公開的菸草業內部文件超過1,400萬頁，目前存入「菸草業文件圖書館」（UCSF，加州大學舊金山分校）
+    </div>
+
+    <p>
+      菸草的案例之所以重要，不只是因為它邪惡，
+      而是因為它<em>有效</em>。
+      用科學語言製造的「尚無定論」，
+      成功地讓人類在已有明確科學共識的情況下，繼續吸菸將近四十年。
+    </p>
+    <p>
+      那些被壓下去的研究去了哪裡？
+      它們沒有被銷毀，它們被放進了公司的保密文件夾，
+      直到法院命令公開才重見天日。
+      它們從來有結論，只是那個結論有一段時間屬於機密。
+    </p>
+
+    <h3>製藥公司的負面試驗結果</h3>
+
+    <p>
+      2008年，《新英格蘭醫學雜誌》發表了一篇由艾琳・透納（Erick Turner）領導的研究，
+      追蹤了美國食品藥品監督管理局（FDA）在1987年至2004年間審查的74項抗憂鬱藥臨床試驗。
+      這74項試驗共涉及12種抗憂鬱藥。
+    </p>
+    <p>
+      研究發現：在FDA收到的74項試驗中，
+      38項結果為正面，37項被發表；
+      36項結果為負面或不確定，其中33項沒有被發表。
+      被發表的那3項負面試驗，其中2項被「重新詮釋」為有積極意義。
+    </p>
+
+    <div class="data-note">
+      <strong>數據摘要</strong><br>
+      來源：Turner et al.,《新英格蘭醫學雜誌》，2008年1月，Vol. 358<br>
+      結論：若只看已發表文獻，94%的試驗顯示藥物有效；若計入全部試驗（包括未發表），有效率降至51%<br>
+      影響：這篇研究是推動「試驗結果登記制度」（trial registration）的重要依據之一
+    </div>
+
+    <p>
+      這不是少數藥廠的惡意，這是一個系統性問題。
+      負面結果不好發表，沒有期刊想收，
+      公司也沒有義務公開——
+      在強制登記制度推行之前，這是整個行業的普遍現象。
+    </p>
+    <p>
+      那些負面試驗的結論去了哪裡？
+      它們去了FDA的申請檔案。
+      普通人和醫生，都看不到。
+    </p>
+
+    <h3>蘇聯的基因科學壓制</h3>
+
+    <p>
+      1948年，蘇聯生物學家特羅菲姆・李森科（Trofim Lysenko）
+      在史達林支持下，讓蘇聯全面廢棄孟德爾遺傳學，
+      轉而推行他自己的「米丘林生物學」，
+      一套宣稱後天獲得性狀可以遺傳的偽科學體系。
+    </p>
+    <p>
+      在這之後的將近二十年，蘇聯各地進行現代遺傳學研究的科學家
+      被迫沉默、失業、或流放。
+      數百個遺傳學研究項目被關閉，
+      已完成的研究被撤稿，數據被封存。
+    </p>
+    <p>
+      1965年，李森科主義在赫魯雪夫下台後逐漸瓦解，
+      蘇聯遺傳學才開始恢復。
+      但那將近二十年的研究空白，以及那些被強迫終止的實驗，
+      <em>留下了一個永遠無法填補的缺口。</em>
+    </p>
+    <p>
+      那些科學家本來可以發現什麼？
+      沒有人知道。
+      那正是政治介入科學所造成的最難量化的損失。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第五章 -->
+    <h2 id="ch5">第五章　無法重複的那一次</h2>
+
+    <h3>多伊希的水記憶實驗</h3>
+
+    <p>
+      1988年，法國免疫學家賈克・班文尼斯特（Jacques Benveniste）
+      在《自然》期刊發表了一篇論文，
+      聲稱高度稀釋的抗體溶液（稀釋到幾乎沒有任何分子存在）
+      仍然能夠引發免疫細胞反應。
+      這個現象被稱為「水記憶」（water memory）。
+    </p>
+    <p>
+      這個結果如果成立，會從根本上顛覆分子生物學的基礎，
+      也會成為順勢療法的科學依據。
+      《自然》期刊破例刊登了這篇論文，但同時在文末加注：
+      期刊本身對結果有懷疑，要求作者接受獨立複驗。
+    </p>
+
+    <div class="data-note">
+      <strong>事件紀錄</strong><br>
+      來源：Davenas et al.,《自然》，1988年6月，Vol. 333<br>
+      複驗結果：《自然》特別委員會（包含魔術師詹姆斯・蘭迪 James Randi）於1988年進行現場複驗，未能重複原始結果<br>
+      後記：班文尼斯特後來失去了法國國家健康與醫學研究院（INSERM）的實驗室，但他在去世前仍堅持自己的研究方向
+    </div>
+
+    <p>
+      班文尼斯特的案例是科學史上最戲劇化的「無法重複」事件之一。
+      複驗委員會在現場見證了原始實驗，無法複現結果。
+      班文尼斯特的解釋是：複驗者的懷疑態度本身「干擾」了實驗。
+    </p>
+    <p>
+      這個說法讓科學界幾乎沒有辦法處理它，
+      因為如果懷疑本身是一個干擾變數，
+      那麼任何試圖重複這個實驗的努力都會被這個邏輯吸收——
+      懷疑者永遠複製不了，信者的結果又無法被驗證。
+      <em>這是一種完美的不可證偽結構。</em>
+    </p>
+
+    <h3>芝加哥高溫電漿的「異常讀值」</h3>
+
+    <p>
+      1989年3月，猶他大學化學家馬丁・弗萊施曼（Martin Fleischmann）
+      和史丹利・龐斯（Stanley Pons）宣布他們在室溫下實現了核融合，
+      也就是著名的「冷融合」（cold fusion）事件。
+    </p>
+    <p>
+      消息公布後，全世界數百個實驗室在幾個月內試圖重複這個結果。
+      大部分實驗室無法重複。少數實驗室聲稱他們得到了異常的熱量輸出，
+      但讀值不穩定，無法確認是核融合還是其他反應。
+    </p>
+    <p>
+      冷融合在1989年底已被主流科學界判定為不成立，
+      弗萊施曼和龐斯的職業生涯受到重創。
+      但事情還有後續：
+      2004年，美國能源部（DOE）對冷融合進行了重新評估，
+      結論是：雖然沒有令人信服的證據支持冷融合，
+      但部分異常的熱量讀值「尚未被完整解釋」。
+    </p>
+
+    <div class="blockquote">
+      <p>「我們不應該說冷融合不存在，我們只能說它目前沒有可重複的實驗基礎。這兩件事是不同的。」</p>
+      <cite>—— 美國能源部冷融合審查報告，2004年11月</cite>
+    </div>
+
+    <p>
+      冷融合沒有結論。
+      不是因為它已被證明是假的，
+      而是因為它的結果沒有辦法被穩定重複。
+      它活在一個「未被排除但未被確立」的灰色地帶，
+      仍然有一小群研究者在繼續研究它，
+      有些人稱之為「低能量核反應」（LENR）以避開「冷融合」這個名稱的污名。
+    </p>
+
+    <h3>重複性的邊界</h3>
+
+    <p>
+      科學以可重複性為基礎，這是每個入門教材都會說的。
+      但實際上，「重複」是一件比聽起來複雜得多的事。
+    </p>
+    <p>
+      2011年，拜耳公司的科學家在內部研究中試圖重複67個已發表的重要研究，
+      這些研究是他們藥物開發的基礎。
+      結果：只有約25%能被成功重複。
+    </p>
+    <p>
+      2015年，《科學》期刊發表了一個大型重複研究計畫「可重複性計畫：心理科學」的結果，
+      試圖重複100個已發表的心理學研究。
+      能夠成功重複的比例：大約39%。
+    </p>
+
+    <div class="data-note">
+      <strong>研究數據</strong><br>
+      來源：Open Science Collaboration,《科學》，2015年8月，Vol. 349<br>
+      範圍：100篇2008年發表於三大心理學期刊的研究<br>
+      結果：97%的原始研究有顯著結果；重複實驗中，36%有顯著結果；平均效應量降至原始的約50%<br>
+      補充：這個計畫直接推動了「預先登記研究」（preregistration）在心理學領域的推廣
+    </div>
+
+    <p>
+      這不是科學在崩潰。
+      這是科學在照鏡子——
+      誠實地看見自己的侷限。
+      大部分的「無法重複」不是因為原始研究是假的，
+      而是因為研究設計有局限、樣本太小、出版偏差、或是那個結果本來就只在特定條件下成立。
+    </p>
+    <p>
+      無法重複的那一次，也許是雜訊。
+      也許是信號太微弱。
+      也許，是我們還不知道的某種東西。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第六章 -->
+    <h2 id="ch6">第六章　還在等結論的實驗</h2>
+
+    <h3>SETI：等了六十年的那個信號</h3>
+
+    <p>
+      1960年，天文學家法蘭克・德雷克（Frank Drake）
+      在西維吉尼亞州的國家電波天文台，
+      用一台射電望遠鏡對著鯨魚座的兩顆星聆聽了幾個月，
+      看看有沒有來自地外文明的無線電信號。
+      這個計畫叫做「鯨魚座計畫」（Project Ozma）。
+    </p>
+    <p>
+      他什麼都沒有聽到。
+      或者說，他聽到的都只是背景雜訊。
+    </p>
+    <p>
+      但他沒有停下來。
+      從那時起，尋找地外智慧生命的努力——也就是SETI——
+      持續了超過六十年，使用了越來越靈敏的設備，
+      監聽了數以百萬計的頻道，
+      分析了數量驚人的數據，
+      <em>至今沒有任何被科學界確認的信號。</em>
+    </p>
+
+    <div class="data-note">
+      <strong>歷史事件</strong><br>
+      來源：「Wow!信號」，1977年8月15日，大耳朵望遠鏡（Big Ear），俄亥俄州立大學<br>
+      記錄：天文學家傑利・艾曼（Jerry Ehman）在分析電腦打印的數據時，在一個強烈異常信號旁寫下「Wow!」<br>
+      狀態：這個信號持續了完整的72秒（符合地外信號的預期模式），但在後來數十年的持續監測中，從未再次出現<br>
+      2016年更新：巴西天文學家安東尼奧・帕里斯（Antonio Paris）提出彗星氫雲解釋，但仍有爭議
+    </div>
+
+    <p>
+      Wow!信號至今沒有結論。
+      它可能是地外文明的信號。
+      它可能是彗星尾部氫雲的自然輻射。
+      它可能是地球自己的某個無線電干擾，在那個年代沒有被記錄到。
+    </p>
+    <p>
+      它最奇怪的特性是：它只出現了一次。
+      從來沒有被重複探測到。
+      沒有重複，就沒有結論。
+      SETI的研究人員仍然把1977年的那72秒當成最重要的參考點之一。
+    </p>
+
+    <h3>意識研究的邊界</h3>
+
+    <p>
+      神經科學家克里斯多夫・科赫（Christof Koch）在貝克曼神經影像研究所工作了二十多年，
+      試圖找到意識的神經對應物（neural correlates of consciousness，NCC），
+      也就是：當意識發生時，大腦裡具體發生了什麼。
+    </p>
+    <p>
+      他和已故的弗朗西斯・克里克（Francis Crick，DNA雙螺旋結構發現者之一）
+      在1990年代共同提出了一個工作假說：意識可能與大腦中特定的40Hz振盪活動有關。
+      這個假說推動了幾十年的研究，但目前仍然沒有一個被廣泛接受的結論。
+    </p>
+
+    <div class="blockquote">
+      <p>「我研究意識超過三十年，我比開始時更確信一件事：我們還沒有真正理解它是什麼。」</p>
+      <cite>—— 克里斯多夫・科赫（Christof Koch），2019年訪談，《自然》新聞</cite>
+    </div>
+
+    <p>
+      意識研究是一個特別難有結論的領域，
+      因為它面對的是所有科學問題中最根本的一個：
+      主觀體驗（subjective experience）怎麼從客觀的物質過程中產生？
+    </p>
+    <p>
+      哲學家大衛・查默斯（David Chalmers）在1995年把這個問題命名為「意識的困難問題」
+      （the hard problem of consciousness），
+      以區別於「容易問題」（比如大腦如何處理視覺信息）。
+      困難問題困難的地方在於：我們甚至沒有一個明確的框架來知道什麼樣的答案才算是「解決了」它。
+    </p>
+
+    <h3>長新冠研究的困境</h3>
+
+    <p>
+      2020年3月，第一批新冠患者在急性感染後數週甚至數月，
+      仍然出現持續的疲勞、認知障礙、呼吸困難等症狀。
+      這個現象後來被稱為「長新冠」（Long COVID）。
+    </p>
+    <p>
+      截至2024年，全球有超過數百個關於長新冠的研究正在進行，
+      已發表的論文數以千計，但核心問題——
+      長新冠的機制是什麼？如何治療？——
+      仍然沒有明確結論。
+    </p>
+
+    <div class="data-note">
+      <strong>研究狀態</strong><br>
+      來源：美國國家衛生研究院（NIH）RECOVER計畫，持續更新中<br>
+      規模：NIH於2021年撥款11.5億美元用於長新冠研究（RECOVER計畫）<br>
+      現況：多種機制假說並存，包括病毒持續存在、自體免疫反應、微血管損傷、腸道微生物群改變等，目前沒有任何單一機制被確立為主因<br>
+      2023年進展：部分試驗顯示某些抗病毒藥物可能減輕特定症狀，但大型隨機對照試驗仍在進行
+    </div>
+
+    <p>
+      長新冠的困境代表了一種當代科學常見的「進行中的無結論」：
+      有大量研究、大量數據、大量研究人員，
+      但結論還沒出來。
+      對正在受苦的數千萬患者來說，
+      「我們還在研究」這個答案是一個真實的狀態，
+      但也是一種折磨。
+    </p>
+    <p>
+      科學的誠實要求我們說：我們還不知道。
+      這不是失敗。但它確實讓很多人覺得等不起。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 後記 -->
+    <h2 id="afterword">後記　科學的邊界長什麼樣</h2>
+
+    <p>
+      這本書談的這些實驗，沒有一個是科學失敗的證明。
+      它們是科學<em>真實狀態</em>的樣本。
+    </p>
+    <p>
+      我們習慣把科學想像成一個乾淨的機器：
+      問題進去，答案出來。
+      每個實驗都有結論，每個結論都會推動下一個問題。
+      科學史是一條上升的線，知識在累積，謎題在被解開。
+    </p>
+    <p>
+      這個圖像不是假的。但它是不完整的。
+    </p>
+    <p>
+      真實的科學史裡，有米勒的試管在抽屜裡放了五十年，
+      有班文尼斯特的水記憶複驗會場上的緊張氣氛，
+      有NASA某個倉庫裡找不到的磁帶，
+      有那些把研究數據鎖進保密資料夾的菸草公司律師，
+      有1977年8月15日那72秒，
+      有那些研究長新冠的科學家告訴患者「我們還不知道」。
+    </p>
+    <p>
+      這些不是科學的汙點。它們是科學真正的邊界長相。
+    </p>
+    <p>
+      <strong>邊界不是牆。邊界是我們知道的事情結束、還不知道的事情開始的那條線。</strong>
+      有的邊界正在被推進。有的邊界推進得很慢。
+      有的邊界，目前還沒有人知道該怎麼前進。
+    </p>
+    <p>
+      人類花了幾個世紀，把地圖上的「此處有怪物」替換成了可航行的海域。
+      我們還沒替換完。
+    </p>
+
+    <div class="blockquote">
+      <p>「科學的最大成就，不是它知道的事情，而是它承認自己不知道的誠實。」</p>
+      <cite>—— 理查・費曼（Richard Feynman），「科學是什麼」，1966年加州技術學院演講</cite>
+    </div>
+
+    <p>
+      那些沒有結論的實驗，是知識地圖上還沒有標出的地方。
+      不是空白，是等待。
+    </p>
+    <p>
+      等待有時候很久。有時候久到研究者等不到就走了。
+      但那些密封的試管、消失的磁帶、無法重複的那一次，
+      有時候會在幾十年後某個你意料不到的時刻，
+      突然有人開了一個抽屜，
+      然後說：
+    </p>
+    <p>
+      <em>等等。這裡有些東西。</em>
+    </p>
+
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-6-vol1.html" class="snbook">Vol.1《儀器測到了，但科學家不敢說》</a>
+      <span class="snbook current">Vol.2《那個實驗從來沒有結論》</span>
+      <a href="/that-feeling-6-vol3.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <a href="/that-feeling-6-vol4.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <a href="/that-feeling-6-vol5.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <a href="/that-feeling-6-vol6.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

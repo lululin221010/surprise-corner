@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恐慌怎麼擴散｜那個感覺 系列五 Vol.4｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --sidebar-bg: #1a1525;
+    --sidebar-text: #e8e8f0;
+    --sidebar-accent: #7a4a9e;
+    --sidebar-hover: rgba(122,74,158,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-right: 1px solid var(--card-border);
+    z-index: 100;
+  }
+  .sb-back {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .sb-back:hover { color: var(--sidebar-accent); }
+  .sb-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 8px;
+  }
+  .sb-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--sidebar-text);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .sb-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+  .sb-divider {
+    border: none;
+    border-top: 1px solid var(--card-border);
+    margin-bottom: 20px;
+  }
+  .sb-toc-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 14px;
+  }
+  .sb-toc a {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+    line-height: 1.6;
+  }
+  .sb-toc a:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-accent);
+  }
+
+  .main {
+    margin-left: 240px;
+    max-width: 720px;
+    padding: 72px 48px 100px;
+  }
+
+  .book-meta {
+    text-align: center;
+    margin-bottom: 72px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 72px 0 32px;
+    color: var(--sidebar-text);
+    padding-top: 8px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .highlight-box {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 6px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .highlight-box strong {
+    color: var(--sidebar-text);
+    font-weight: 500;
+  }
+
+  .series-nav {
+    border-top: 1px solid var(--card-border);
+    margin-top: 80px;
+    padding-top: 48px;
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 860px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 48px 24px 72px; }
+  }
+  @media (max-width: 480px) {
+    .book-title { font-size: 1.8rem; }
+    .main { padding: 36px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺 · 系列五 · Vol.4</div>
+  <div class="sb-title">《恐慌怎麼擴散》</div>
+  <div class="sb-sub">集體歇斯底里的解剖：從舞蹈瘟疫到現代工廠事件</div>
+  <hr class="sb-divider">
+  <div class="sb-toc-label">目　　錄</div>
+  <nav class="sb-toc">
+    <a href="#preface" onclick="smoothScroll(event,'preface')">前言｜她只是開始跳舞</a>
+    <a href="#ch1" onclick="smoothScroll(event,'ch1')">第一章　集體歇斯底里是什麼</a>
+    <a href="#ch2" onclick="smoothScroll(event,'ch2')">第二章　史特拉斯堡，1518</a>
+    <a href="#ch3" onclick="smoothScroll(event,'ch3')">第三章　1962年的工廠昆蟲</a>
+    <a href="#ch4" onclick="smoothScroll(event,'ch4')">第四章　勒魯瓦的女孩們</a>
+    <a href="#ch5" onclick="smoothScroll(event,'ch5')">第五章　TikTok與抽動症</a>
+    <a href="#ch6" onclick="smoothScroll(event,'ch6')">第六章　恐慌的解藥</a>
+    <a href="#afterword" onclick="smoothScroll(event,'afterword')">後記｜症狀是真實的</a>
+  </nav>
+</aside>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.4</div>
+    <h1 class="book-title">恐慌怎麼擴散</h1>
+    <div class="book-subtitle">集體歇斯底里的解剖：從舞蹈瘟疫到現代工廠事件</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2 id="preface">前言　她只是開始跳舞</h2>
+
+  <p>1518年7月，法國史特拉斯堡。一個叫做特羅菲亞·布拉格特（Troffea）的女人走上街頭，開始跳舞。沒有音樂，沒有理由，就是跳。她跳了幾個小時，然後跳了一整天，然後繼續跳。</p>
+
+  <p>幾天之內，三十個人加入了她。再過幾天，那個數字到了一百人。到了八月，在同一條街道上，有大約四百個人在持續不間斷地跳舞，他們跳到腳上起水泡、骨折、衰竭，有些人跳到心臟病發死亡。</p>
+
+  <p>市議會被迫召開緊急會議討論這件事。他們諮詢了醫生，醫生的建議是：讓他們繼續跳，因為那是「過熱的血液」造成的，跳舞可以讓那些熱血排出去。市議會於是專門僱了樂手為那些舞者伴奏，徵用了兩個公共廣場和一個市場作為舞場，甚至搭建了臨時舞台。</p>
+
+  <p>這件事在歷史上有完整的記錄：市議會的決議、地方編年史的記載、醫生的備忘錄，還有布道者的講道稿。它不是傳說，是一件有文件記錄的歷史事件，有真實的行政回應和社會影響。</p>
+
+  <p>那些人為什麼跳舞，跳到死？</p>
+
+  <p>這本書不打算給你一個乾淨的答案，因為那個答案，五百年後的今天，還在爭論中。但我可以告訴你，這個問題的答案，和你今天生活的世界，距離比你以為的近很多。集體歇斯底里不是中世紀的怪談。它活在當代。它的形式換了，但它的機制沒有。</p>
+
+  <!-- 第一章 -->
+  <h2 id="ch1">第一章　集體歇斯底里是什麼</h2>
+
+  <p>先說清楚一個術語問題，因為「歇斯底里」這個詞在日常使用中已經被用爛了，它的意思在科學語境和日常語境裡差很遠。</p>
+
+  <p>在醫學和心理學的歷史上，「歇斯底里」（hysteria）這個詞有一段非常複雜的政治史，它長期被用來描述——通常是女性的——情緒化的、「非理性的」行為，這個用法帶有明顯的性別偏見和病理化傾向，已經被現代精神醫學基本放棄。</p>
+
+  <p>現代醫學對同類現象使用的術語是「群體心因性疾病」（Mass Psychogenic Illness，MPI），或者「功能性神經症狀」（Functional Neurological Disorder）。這個改名不只是政治正確的問題，它反映了對這類現象本質的理解的改變：它不是「假裝生病」，不是「沒有意志力」，而是一種真實的、有神經生理基礎的現象，只是它的觸發機制是心理和社會性的，而不是生物性的外部病原體。</p>
+
+  <div class="quote-block">
+    <p>社會心理學家羅伯特·巴索羅繆（Robert Bartholomew）和公衛研究者西蒙·韋斯利（Simon Wessely）在他們對群體心因性疾病的系統性回顧中，把MPI定義為：在一個群體中，由社會性觸發因素引發的、透過社會傳播機制擴散的、沒有對應的有機病因的症狀群。關鍵特徵包括：症狀在社交接觸中傳播，在群體隔離後消退，以及症狀模式反映了群體對「疾病應該長什麼樣」的期待，而不是已知疾病的臨床表現。</p>
+    <span class="quote-source">——Robert Bartholomew & Simon Wessely，〈Protean nature of mass sociogenic illness〉，2002年，《British Journal of Psychiatry》</span>
+  </div>
+
+  <p>注意那個定義的幾個要素：社會性觸發、透過社交接觸傳播、在隔離後消退。這不是一個人的心理問題被放大，而是一個系統性的社會過程，透過人與人之間的接觸和觀察傳遞症狀。</p>
+
+  <p>MPI有幾個必要條件。第一是「高壓情境」：那個群體必須處於某種持續的壓力下，讓神經系統保持在高度警覺的狀態。第二是「解釋框架」：群體必須共享某種對「為什麼這件事在發生」的解釋——那個解釋不需要是正確的，但它需要讓那個症狀在文化上「有意義」。第三是「社會傳播路徑」：症狀需要能夠從一個人傳遞到另一個人，通常透過視覺觀察和情感同步。</p>
+
+  <p>這三個條件在任何時代都可以成立。只是不同時代有不同的「解釋框架」和不同的「社會傳播路徑」——中世紀的解釋框架是宗教性的，現代的解釋框架是醫學性的；中世紀的傳播路徑是街道和廣場，現代的傳播路徑是社群媒體。但底層的神經機制，沒有改變。</p>
+
+  <div class="highlight-box">
+    <p><strong>MPI最重要的特徵，也是最常被誤解的一點是：那些症狀是真實的。</strong>那些工廠工人真的噁心想吐，那些高中女生真的在抽搐，那些舞者真的無法停下來。說那是「心因性的」，不是說那是假裝的，而是說那個症狀的起點是心理和社會性的，但一旦啟動，它的生理表現是完全真實的。</p>
+  </div>
+
+  <!-- 第二章 -->
+  <h2 id="ch2">第二章　史特拉斯堡，1518</h2>
+
+  <p>回到那個跳舞的城市，看看那三個條件是否成立。</p>
+
+  <p>1518年的史特拉斯堡，正在經歷什麼？歷史學家約翰·瓦勒（John Waller）在他2008年的著作《時間停止的一個月》（A Time to Dance, A Time to Die）中，對這個事件做了迄今最詳盡的歷史考證。他的研究顯示，1518年的史特拉斯堡正在面臨一個接一個的災難：嚴重的饑荒、梅毒的大規模流行、天花、痲瘋，以及一個接一個失敗的農業季節。城市底層的人口處於極度的身心壓力之下，而且那種壓力持續了好幾年，沒有出口。</p>
+
+  <div class="quote-block">
+    <p>瓦勒在《時間停止的一個月》中指出，1518年的史特拉斯堡平民面對的是一種特殊的宗教性絕望：他們相信自己被聖維托斯（St. Vitus）詛咒了——聖維托斯是當時民間信仰中與強迫性舞蹈相關的聖人。這個信仰提供了一個解釋框架：跳舞不是自己選擇的，是被詛咒的，而且有辦法透過朝聖獲得解除。這個框架讓「跳舞」這個行為在文化上有了意義，也讓它的傳播有了路徑。</p>
+    <span class="quote-source">——John Waller，《A Time to Dance, A Time to Die: The Extraordinary Story of the Dancing Plague of 1518》，2008年，Icon Books</span>
+  </div>
+
+  <p>高壓情境：成立。連年災荒、疾病、無望感，全部在場。</p>
+
+  <p>解釋框架：成立。聖維托斯的詛咒提供了一個文化上可接受的理由，讓「我無法控制地跳舞」這件事有了意義，也讓「看到別人跳舞然後自己也開始跳」這個傳播機制有了合理化的基礎。</p>
+
+  <p>社會傳播路徑：成立。中世紀的城市街道是高密度的社交空間，人們每天在同樣的街道、廣場、市場裡相遇。而且市議會的反應——僱樂手、開放廣場、搭舞台——在無意中大幅強化了那個傳播路徑。他們把個別的跳舞行為，變成了一個有觀眾、有儀式性的公共事件，而儀式性的公共事件，是社會傳播最有效的場域。</p>
+
+  <p>市議會的決策是那個時代的「根據現有知識做出的合理判斷」，但那個判斷在客觀上讓情況更糟。這在MPI的歷史裡是一個反覆出現的模式：那些試圖幫助的人，因為不理解傳播機制，往往在無意中加速了傳播。</p>
+
+  <p>這個模式，在五百年後的案例裡，還會繼續出現。</p>
+
+  <!-- 第三章 -->
+  <h2 id="ch3">第三章　1962年的工廠昆蟲</h2>
+
+  <p>1962年6月，美國南卡羅萊納州一家紡織廠。工人們開始出現症狀：噁心、頭暈、手臂和腿部出現紅疹、部分人昏厥。症狀從一個工人傳到另一個工人，最終有六十二人送醫。</p>
+
+  <p>工廠管理層和衛生部門展開調查。他們找到了一隻昆蟲——一種罕見的甲蟲——在工廠的布料堆裡。這隻昆蟲迅速被認定為罪魁禍首。工廠關閉消毒，衛生官員宣布問題已解決。</p>
+
+  <p>工廠重新開放後，症狀再次出現。</p>
+
+  <p>社會學家艾倫·克考夫（Alan Kerckhoff）和寇特·貝克（Kurt Back）在事件發生後立即進入工廠進行田野調查，他們的研究在1968年出版，書名是《六月病蟲》（The June Bug: A Study of Hysterical Contagion），是MPI研究史上最重要的案例研究之一。</p>
+
+  <div class="quote-block">
+    <p>克考夫和貝克的研究發現，症狀的傳播路徑和社交網絡的結構高度吻合：那些出現症狀的工人，和最早出現症狀的工人之間有直接的社交連結；那些在社交上較孤立的工人，即使在同樣的工作環境中，出現症狀的比例顯著較低。他們同時發現，那些在工廠中承受較高工作壓力、工時較長、對工作環境較不滿意的工人，更容易出現症狀。這兩個發現合在一起，讓他們得出結論：那個昆蟲提供了一個解釋框架，但真正的傳播媒介是社交網絡和累積的工作壓力。</p>
+    <span class="quote-source">——Alan Kerckhoff & Kurt Back，《The June Bug: A Study of Hysterical Contagion》，1968年，Appleton-Century-Crofts</span>
+  </div>
+
+  <p>那隻昆蟲是真實存在的。它在那個工廠裡被找到了。但後來的完整毒理學分析確認，那種甲蟲的分泌物不足以引起那些症狀，至少不足以在那麼多工人身上引起那麼大規模的反應。那隻昆蟲是一個觸發點，一個讓大家的恐懼有了具體對象的東西——但症狀本身的傳播，不是那隻昆蟲做的。</p>
+
+  <p>這個案例說明了MPI在現代社會裡的一個常見形態：有一個真實的、但被誇大了的環境威脅，加上一個高壓的工作情境，加上緊密的社交網絡，三個條件全部成立，然後症狀開始傳播。管理層和衛生單位關閉工廠消毒，這個動作——和史特拉斯堡的市議會僱樂手一樣——在客觀上是一個「確認威脅是真實的」的訊號，反而強化了工人的焦慮感。</p>
+
+  <p>工廠重新開放後症狀再次出現，不是因為那隻昆蟲還在，而是因為引發症狀的社會條件沒有任何改變。</p>
+
+  <!-- 第四章 -->
+  <h2 id="ch4">第四章　勒魯瓦的女孩們</h2>
+
+  <p>2011年10月，美國紐約州勒魯瓦（Le Roy）小鎮，一所高中。一個女學生開始出現抽搐症狀——不受控制的肢體抽動、發出聲音。幾週內，十幾個女學生相繼出現了幾乎相同的症狀。</p>
+
+  <p>這個事件引起了全國媒體的關注。家長們開始恐慌，要求調查。環境當局進行了土壤和水源的檢測，因為那個地區在幾十年前有工業污染的歷史。神經科醫師開始接診那些女孩。各種可能的原因被提出：重金屬污染、農藥殘留、疫苗副作用、甚至是PANDAS（一種與鏈球菌感染相關的神經性疾病）。</p>
+
+  <p>在經過廣泛的醫學和環境調查之後，紐約州衛生廳和參與診治的神經科醫師得出的結論是：那些症狀符合「轉化症」（Conversion Disorder）的診斷，也就是現代版的「功能性神經症狀」——心理和社會性壓力透過神經系統轉化為真實的身體症狀。那個地區的環境污染是真實存在的歷史問題，但和這次的症狀爆發沒有直接的因果關係。</p>
+
+  <div class="quote-block">
+    <p>參與診治的神經科醫師詹妮弗·麥克維加（Jennifer McVige）在接受媒體採訪時表示，那些女孩的症狀是真實的，她們不是在假裝，不是在故意吸引注意力。轉化症是一種有明確神經生理基礎的疾病，它的症狀——抽搐、聲音性抽動、肌肉痙攣——在神經學上是可測量的，只是它的觸發機制是心理性的而不是器質性的。媒體和家長對「這肯定是環境污染」的強烈堅持，反而讓那些女孩更難獲得有效的治療，因為她們的家人拒絕接受心理性的診斷。</p>
+    <span class="quote-source">——Jennifer McVige，接受《紐約時報》採訪，2012年1月</span>
+  </div>
+
+  <p>勒魯瓦事件有幾個特別值得關注的面向。</p>
+
+  <p>第一，症狀主要在女學生之間傳播，男學生極少受到影響。這和MPI研究中的一個長期觀察吻合：MPI在女性群體中的發生率明顯高於男性，而且通常在有緊密社交連結的女性群體中爆發。研究者對這個現象有不同的解釋——有些認為是荷爾蒙差異，有些認為是社會化對情緒表達方式的影響，有些認為是女性之間的社交連結通常比男性更緊密，讓傳播更有效。目前沒有一個被所有人接受的解釋。</p>
+
+  <p>第二，媒體的大規模報導，讓這件事從一個地方性的健康事件，變成了一個全國性的輿論事件。那些女孩的症狀影片在網路上廣泛傳播，隨後，其他地方開始出現類似症狀的報告。至少有幾個在其他地方出現類似症狀的案例，可以追溯到她們曾經看過勒魯瓦事件的影片。媒體報導本身，成為了傳播的媒介。</p>
+
+  <p>第三，當那些女孩的家人拒絕接受心理性的診斷，堅持尋找環境性的原因時，那些女孩的症狀持續更長的時間。這是MPI治療中一個困難的地方：有效的治療通常需要讓症狀者和她們的支持系統理解症狀的心理社會性機制，但「心因性」這個詞在很多人的理解中等於「不是真的」，引發強烈的抗拒。</p>
+
+  <!-- 第五章 -->
+  <h2 id="ch5">第五章　TikTok與抽動症</h2>
+
+  <p>2020到2021年，在新冠疫情封鎖期間，全球多個國家的兒童和青少年精神科醫師，幾乎同步觀察到一個奇特的現象：突然大量出現的、以前從未見過這些患者的青少年，帶著抽動症（Tourette syndrome-like tic disorders）的症狀前來就診。</p>
+
+  <p>這些青少年有幾個共同特徵：他們大多數是女性，年齡集中在14到17歲之間，症狀出現得非常突然（通常在幾天到幾週內），而且症狀的模式——特定的聲音性抽動、特定的肢體動作——在不同國家的患者之間高度相似。</p>
+
+  <p>那些相似的症狀，和幾個在TikTok上有數百萬訂閱者的YouTuber和TikTok創作者的內容高度吻合——那些創作者分享了他們自己的妥瑞氏症狀，影片獲得了極高的觀看次數。</p>
+
+  <div class="quote-block">
+    <p>德國波鴻大學（Ruhr University Bochum）的兒童神經科醫師克斯汀·穆勒-瓦爾（Kirsten Müller-Vahl）在2021年發表的研究中，分析了她的門診中突然出現的大量新型抽動症患者，她的結論是：這是一波「功能性抽動症」（Functional Tic-Like Behaviors，FTLB）的群發，傳播媒介是社群媒體。她的研究顯示，那些患者中有多人直接模仿了特定TikTok創作者的特定抽動行為，包括特定的詞彙（如「beans」「cucumber」）和特定的肢體動作模式，這些在真正的妥瑞氏症中是極不尋常的表現。</p>
+    <span class="quote-source">——Kirsten Müller-Vahl et al.，〈Stop that! It's not Tourette's but a new mass sociogenic illness on TikTok〉，2021年，《Brain》</span>
+  </div>
+
+  <p>這個案例是MPI在數位時代的新形態，它有幾個前所未有的特徵。</p>
+
+  <p>第一，傳播速度。以前的MPI需要面對面的社交接觸才能傳播，所以它的地理範圍通常是有限的——一個工廠、一個學校、一個村莊。TikTok的傳播速度讓一個影片在幾天內可以觸達幾百萬人，這讓「社交傳播路徑」的概念完全改變了規模。</p>
+
+  <p>第二，匿名性和自我強化。那些出現症狀的青少年，在社群媒體上找到了一個有大量「同伴」的社群，分享自己症狀的影片會獲得關注、理解和支持。這個正向強化機制，在無意中讓症狀更難消退。</p>
+
+  <p>第三，診斷的困難。因為功能性抽動症和真正的妥瑞氏症在臨床表現上有高度重疊，而且青少年患者本人通常無法分辨自己的症狀是「真的」還是「社會性的」（在神經生理的意義上，那個區別本來就很難劃定），這讓診斷和治療都變得更加複雜。</p>
+
+  <p>封鎖期間的隔離和焦慮，提供了完美的高壓情境。TikTok的算法，提供了前所未有效率的社會傳播路徑。妥瑞氏症創作者的影片，提供了一個現成的解釋框架——「這就是我的症狀，它有一個名字，很多人也有」。三個條件，在數位時代的版本，全部成立。</p>
+
+  <p>這不是說那些青少年的症狀是假的。那些症狀對她們造成了真實的困擾和生活影響。這是說，理解那些症狀的起源和傳播機制，是找到有效治療方法的前提。而那個前提，在「她只是在學TikTok」的粗糙理解和「一定是真的妥瑞氏症」的過度醫療化之間，需要非常細緻的中間地帶。</p>
+
+  <!-- 第六章 -->
+  <h2 id="ch6">第六章　恐慌的解藥</h2>
+
+  <p>如果你是那個工廠的管理者，那個學校的校長，或者那個城市的市長，你面對一個MPI事件，你應該怎麼做？</p>
+
+  <p>歷史上的案例給了幾個一致的教訓，這些教訓在不同時代、不同地點的MPI事件中反覆被驗證。</p>
+
+  <p>第一個教訓：隔離症狀者，減少觀察接觸。MPI透過視覺觀察傳播，讓症狀者繼續在公共視野中，會加速傳播。史特拉斯堡的市議會在廣場上搭舞台，讓跳舞變成了公共表演，這是讓傳播加速的最有效方式之一。在勒魯瓦，媒體的攝影機和影片的廣泛傳播，起到了同樣的效果。</p>
+
+  <p>第二個教訓：減少公開的確認性訊號。當官方（政府、學校、衛生機構）採取了明顯的緊急措施，這在無意中向群體發出了「威脅是真實而嚴重的」訊號，強化了焦慮感。一個平靜而清楚的溝通——「我們在調查，目前沒有發現嚴重的有機危險」——通常比大規模的緊急行動更有助於讓症狀消退。</p>
+
+  <div class="quote-block">
+    <p>公衛學者提莫西·瓊斯（Timothy Jones）在分析多個MPI事件的應對策略後，提出了一個「最小化原則」：在確認沒有真實的生物性威脅之後，最有效的介入方式是讓受影響的群體分開、減少媒體曝光、向症狀者提供個別的支持和解釋，而不是集體的公開應對。他的研究顯示，那些採用「最小化原則」的事件，平均在兩週內消退；那些採用公開緊急應對的事件，平均持續時間是前者的三到四倍。</p>
+    <span class="quote-source">——Timothy Jones et al.，〈Mass psychogenic illness attributed to toxic exposure at a high school〉，2000年，《New England Journal of Medicine》</span>
+  </div>
+
+  <p>第三個教訓：不要讓「心因性」成為羞辱。MPI最大的治療障礙，通常不是症狀本身，而是患者和家屬對「心因性」診斷的抗拒——因為在大多數人的理解中，「心因性」等於「是你自己想的」，等於「沒有真實的問題」，等於「你在假裝」。這個理解是錯的，但它普遍存在，而且當醫生用一種讓人感覺被否定的方式傳達這個診斷時，它會讓症狀者更難康復。</p>
+
+  <p>有效的溝通方式是：先確認症狀的真實性（「你的症狀是真實的，你的身體確實在經歷這些」），然後解釋機制（「這類症狀的起點是壓力和神經系統的反應方式，不是你選擇的，也不是你的錯」），然後提供治療方向（「這種症狀通常對特定的心理治療方法有非常好的反應」）。</p>
+
+  <p>第四個教訓：處理底層的壓力源。在所有的MPI案例裡，症狀是一個訊號，指向一個真實存在的、但被壓抑的壓力源。那個工廠的工人確實處於過度壓力下，那些高中女生確實面對著某些她們沒有辦法直接表達的困境，史特拉斯堡的平民確實正在被摧毀。症狀消退了，但如果底層的壓力源沒有被處理，它會以另一種形式回來。</p>
+
+  <!-- 後記 -->
+  <h2 id="afterword">後記　症狀是真實的</h2>
+
+  <p>這本書最後，我想回到那個最基本的點：症狀是真實的。</p>
+
+  <p>那個在1518年跳舞跳到骨折的女人，她的腳是真的在流血。那個1962年在工廠昏厥的工人，他是真的失去了意識。那個2011年在學校抽搐的高中女生，她真的無法控制自己的肢體。那個2020年在封鎖期間看了TikTok影片然後開始出現抽動症狀的青少年，她的症狀對她的生活造成了真實的影響。</p>
+
+  <p>說那些症狀是「心因性的」，不是在否認那些人的痛苦。它是在說，那個痛苦的根源，在我們通常去找的地方之外。</p>
+
+  <p>這個認識，有一個很重要的實際意義：如果你只去找那個根源之外的東西——那隻昆蟲，那個污染源，那個病毒——你永遠找不到讓症狀消退的方法，因為你在找一個不存在的答案。</p>
+
+  <p>但還有另一個意義，更靠近你自己的生活。</p>
+
+  <p>你生活在一個訊息高速傳播的時代，你每天接觸的內容，包括大量的關於疾病、危險、威脅的訊息。你的神經系統，和那些1518年的史特拉斯堡市民的神經系統，在基本架構上是一樣的——它對社會性訊號高度敏感，它在高壓情境下更容易受到周圍人的影響，它有把集體的焦慮轉化為個別的身體症狀的能力。</p>
+
+  <p>你不比那些跳舞的人更免疫。你只是活在一個讓那個機制以不同形式展現的時代。</p>
+
+  <p>了解這個機制，不是讓你對自己的症狀保持懷疑。是讓你多問一個問題：這個我感受到的，是我自己的感受，還是我從周圍的人和環境裡「學來的」感受？那個問題，有時候沒有清楚的答案。但問那個問題本身，就已經是一種保護。</p>
+
+  <p style="text-align:right; color: var(--label); font-family:'Noto Sans TC',sans-serif; font-size:13px; margin-top:48px;">盧林著｜有的沒的小舖出品</p>
+
+  <div class="series-nav">
+    <div class="snlabel">集體靈異 · 系列五</div>
+    <div class="snbooks">
+      <a href="/that-feeling-5-vol1.html" class="snbook">Vol.1《你們都看見了》</a>
+      <a href="/that-feeling-5-vol2.html" class="snbook">Vol.2《都市傳說解剖》</a>
+      <a href="/that-feeling-5-vol3.html" class="snbook">Vol.3《UFO與我們》</a>
+      <span class="snbook current">Vol.4《恐慌怎麼擴散》</span>
+      <a href="/that-feeling-5-vol5.html" class="snbook">Vol.5《邪教的邏輯》</a>
+      <a href="/that-feeling-5-vol6.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+    </div>
+    <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+  </div>
+
+</div><!-- .main -->
+
+<script>
+function smoothScroll(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>

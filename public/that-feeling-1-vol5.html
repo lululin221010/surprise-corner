@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你和你之間的距離｜那個感覺 系列一 Vol.5｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14; --text: #c0c0d8; --text-muted: #7070a0;
+    --accent: #7a4a9e; --accent-light: rgba(122,74,158,0.15); --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #5a5a8a;
+    --s1-accent: #7a4a9e; --s1-accent-light: rgba(122,74,158,0.12); --s1-accent-dim: rgba(122,74,158,0.35);
+    --sb-bg: #1a1525; --sb-text: #e8e8f0; --sb-hover: rgba(122,74,158,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; min-height: 100vh; }
+  .sidebar { position: fixed; top: 0; left: 0; width: 240px; height: 100vh; background: var(--sb-bg); overflow-y: auto; padding: 32px 24px; border-right: 1px solid rgba(122,74,158,0.15); z-index: 100; }
+  .sb-back { display: block; font-family: 'Noto Sans TC', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; margin-bottom: 28px; transition: color 0.2s; }
+  .sb-back:hover { color: var(--s1-accent); }
+  .sb-series { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--s1-accent); opacity: 0.75; margin-bottom: 8px; }
+  .sb-title { font-size: 15px; font-weight: 700; color: var(--sb-text); letter-spacing: 2px; margin-bottom: 6px; line-height: 1.5; }
+  .sb-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 12px; color: var(--text-muted); opacity: 0.7; margin-bottom: 24px; line-height: 1.7; }
+  .sb-divider { height: 1px; background: rgba(122,74,158,0.2); margin-bottom: 20px; }
+  .sb-toc-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 14px; }
+  .sb-toc a { display: block; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 6px 10px; border-radius: 2px; letter-spacing: 1px; line-height: 1.6; transition: background 0.2s, color 0.2s; margin-bottom: 2px; }
+  .sb-toc a:hover { background: var(--sb-hover); color: var(--sb-text); }
+  .main-content { margin-left: 240px; max-width: 720px; padding: 60px 48px; }
+  .book-meta { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  .series-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--s1-accent); opacity: 0.8; margin-bottom: 16px; }
+  .book-title { font-size: 2.4rem; font-weight: 500; letter-spacing: 4px; color: #e8e8f5; line-height: 1.4; margin-bottom: 12px; }
+  .book-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 20px; }
+  .author-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 12px; letter-spacing: 3px; color: var(--label); }
+  h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 3px; color: #e0e0f0; margin: 64px 0 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #c8c8e8; margin: 40px 0 18px; }
+  p { margin-bottom: 24px; text-align: justify; color: var(--text); }
+  strong { color: #e0e0f0; font-weight: 500; }
+  .quote-block { border-left: 2px solid var(--s1-accent-dim); padding: 20px 28px; margin: 36px 0; background: var(--s1-accent-light); }
+  .quote-block p { color: #d0d0e8; font-size: 15px; margin-bottom: 0; line-height: 2.2; }
+  .data-note { background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px 28px; margin: 32px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+  .data-note .note-label { font-size: 10px; letter-spacing: 4px; color: var(--label); margin-bottom: 10px; }
+  .series-nav { max-width: 720px; margin-left: 240px; padding: 40px 48px 60px; border-top: 1px solid rgba(122,74,158,0.1); }
+  .snlabel { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 20px; }
+  .snbooks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .snbook { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(122,74,158,0.2); color: var(--text-muted); text-decoration: none; letter-spacing: 1px; transition: border-color 0.2s, color 0.2s; }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current { border-color: var(--s1-accent-dim); color: #c0a0f0; background: var(--s1-accent-light); cursor: default; }
+  .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 860px) { .sidebar { display: none; } .main-content { margin-left: 0; padding: 40px 24px; } .series-nav { margin-left: 0; padding: 40px 24px 60px; } }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺 · 系列一 · Vol.5</div>
+  <div class="sb-title">《你和你之間的距離》</div>
+  <div class="sb-subtitle">催眠、解離狀態與意識層次</div>
+  <div class="sb-divider"></div>
+  <div class="sb-toc-label">目錄</div>
+  <nav class="sb-toc">
+    <a href="#preface" onclick="smoothTo(event,'preface')">前言　你以為你是一個完整的人</a>
+    <a href="#ch1" onclick="smoothTo(event,'ch1')">第一章　催眠不是你想的那樣</a>
+    <a href="#ch2" onclick="smoothTo(event,'ch2')">第二章　解離：意識從自己身上撤退</a>
+    <a href="#ch3" onclick="smoothTo(event,'ch3')">第三章　多重人格的真實面貌</a>
+    <a href="#ch4" onclick="smoothTo(event,'ch4')">第四章　催眠在醫療上的應用與爭議</a>
+    <a href="#ch5" onclick="smoothTo(event,'ch5')">第五章　冥想、出神與意識位移</a>
+    <a href="#ch6" onclick="smoothTo(event,'ch6')">第六章　你和你之間，有多遠</a>
+    <a href="#afterword" onclick="smoothTo(event,'afterword')">後記</a>
+  </nav>
+</aside>
+
+<div class="main-content">
+
+  <div class="book-meta">
+    <div class="series-tag">那個感覺 · 系列一 · VOL. 5</div>
+    <h1 class="book-title">你和你之間的距離</h1>
+    <div class="book-subtitle">催眠、解離狀態與意識層次</div>
+    <div class="author-tag">盧林著 · 有的沒的小舖出品</div>
+  </div>
+
+  <h2 id="preface">前言　你以為你是一個完整的人</h2>
+
+  <p>你以為你是一個完整的人。有一個固定的「你」，住在你的身體裡，掌管你的想法和行為，持續存在於時間裡。</p>
+
+  <p>這個感覺非常真實。但它很可能是錯的。</p>
+
+  <p>神經科學和心理學過去幾十年的研究，持續在侵蝕這個「完整自我」的概念。意識不是一個統一的整體，而是多個平行系統的即時協作結果。「你」不是一個固定的核心，而是一個動態的、隨時在重組的過程。在某些條件下——催眠、解離、強烈壓力、特定的靈修練習——這個過程的正常組織方式會被擾動，製造出那種「我不像我自己」或者「那個做了那件事的人不是我」的體驗。</p>
+
+  <p>這本書要探討的，就是你和你之間的那個距離。那個距離在催眠狀態裡有多遠，在解離的時候有多深，在你試圖用意識探索意識的時候會遇到什麼邊界。不是要嚇你。是要讓你對自己更好奇。</p>
+
+  <h2 id="ch1">第一章　催眠不是你想的那樣</h2>
+
+  <h3>你對催眠的印象來自哪裡</h3>
+
+  <p>你對催眠的印象，很可能來自電影、舞台表演、或者新聞裡的聳動報導。那些印象製造了一個非常特定的催眠形象：一個人把懷錶在你面前晃，你的眼睛逐漸失焦，然後你進入了一個完全被對方控制的狀態，做了各種你清醒時不會做的事情，醒來之後什麼都不記得。這個形象跟真實的催眠研究之間的距離，大概跟好萊塢的手術室跟真實的手術室差不多。</p>
+
+  <p>催眠是一個真實的心理現象，有超過一百五十年的科學研究歷史，在心理治療、疼痛管理、和意識研究上有有記錄的效果。但它的運作方式、能做到的事情、以及它對「自我控制」的影響，跟大眾印象裡的版本有根本性的差異。</p>
+
+  <h3>催眠狀態的實際樣子</h3>
+
+  <p>催眠狀態不是睡著。被催眠的人是清醒的、有意識的、可以說話的，而且在絕大多數情況下，他們知道自己在被催眠。催眠更接近的比喻，是一種高度專注的「吸收」狀態：注意力高度集中在催眠師提供的引導上，對外部刺激的注意力相應降低，但不是消失。</p>
+
+  <p>催眠的深度因人而異，差別巨大。人口中大約有10至15%是高催眠感受性的人，他們對催眠的反應非常強烈，可以在催眠狀態下經歷幻覺、遺忘、以及複雜的感知改變。另外10至15%對催眠幾乎沒有反應。其餘的大多數人在這兩個極端之間。</p>
+
+  <div class="data-note">
+    <div class="note-label">研究背景</div>
+    史丹佛大學的Ernest Hilgard在1960至70年代建立了一套系統性的催眠感受性測量工具（Stanford Hypnotic Susceptibility Scale），至今仍是催眠研究的標準工具之一。Hilgard的研究顯示，催眠感受性是一個相對穩定的個體特質，跟智力無關，跟吸收能力和想像力的豐富程度有較高的相關性。
+  </div>
+
+  <h3>催眠能控制你嗎</h3>
+
+  <p>研究顯示，催眠的指令只有在受試者「願意配合」的前提下才有效——如果催眠師要求受催眠者做他們強烈反對的事，大多數人仍然會拒絕。催眠增加了人對建議的接受性，但不能覆蓋核心的道德判斷和個人意志。你在催眠狀態裡，仍然是你——只是一個更願意接受引導、對某些體驗更開放的你。</p>
+
+  <h3>催眠的神經機制</h3>
+
+  <p>現代神經影像技術讓研究者可以觀察催眠狀態下大腦的活動模式。研究發現，催眠狀態下前額葉皮質的執行功能活動降低，而與注意力和感知相關的區域活動改變——這跟主觀上「思考變少、體驗變強」的描述是吻合的。</p>
+
+  <p>史丹佛大學David Spiegel的研究團隊在2016年使用功能性磁共振造影（fMRI）研究高催眠感受性者，發現他們的大腦在催眠狀態下展現出三個特定的變化：背側前扣帶皮質活動降低（減少了「自我監測」）、背外側前額葉皮質與島葉皮質的連接增強（強化了身體感知）、以及執行控制網絡與預設模式網絡之間的解耦合（讓「想的人」和「做的人」暫時分開）。這個第三個變化，跟催眠中「我知道我在做這件事但不覺得是我決定的」的主觀體驗直接對應。</p>
+
+  <h2 id="ch2">第二章　解離：意識從自己身上撤退</h2>
+
+  <h3>什麼是解離</h3>
+
+  <p>「解離」這個詞在心理學裡有一個技術性的定義：通常整合在一起的意識功能（感知、記憶、身份、行動）的中斷或分裂。簡單說，就是那些本來應該在一起運作的心理功能，暫時或持續地分開了。</p>
+
+  <p>解離不是罕見現象。最輕微的解離，你每天都在經歷：開車開到目的地卻不記得過程、讀書讀了半頁發現腦子不知道跑去哪裡了、在無聊的會議裡思緒完全不在現場。這些都是輕度的、日常的解離體驗。</p>
+
+  <p>在光譜的另一端，是那些嚴重影響生活功能的解離症狀：人格解體（感覺自己是自己的旁觀者，自己不像真實的）、現實解體（周遭環境感覺不真實，像夢境或舞台布景）、解離性失憶（對特定時期或事件的記憶完全空白）。這些症狀通常跟嚴重的心理創傷有關。</p>
+
+  <div class="data-note">
+    <div class="note-label">盛行率</div>
+    根據DSM-5（精神疾病診斷與統計手冊第五版），輕度解離症狀在一般人口中的終生盛行率估計約為10%，而嚴重影響功能的解離症則相對少見。但「解離體驗」（包括輕度的）在人口中的分布實際上是一個連續的光譜，沒有明確的「正常/異常」分界線。
+  </div>
+
+  <h3>創傷與解離的連結</h3>
+
+  <p>嚴重的解離症狀，在大多數案例裡跟重大的心理創傷有直接關係。這個連結有它的演化邏輯：在一個無法逃脫、也無法戰鬥的極端危險情境裡，意識的「撤退」——從那個正在發生的恐怖經歷裡解離出去——是一種保護機制。你的身體還在那裡，但「你」暫時不在了。</p>
+
+  <p>這個保護機制在當下可能救了你，但它的長期代價是那些被解離掉的記憶和感受，在之後以各種症狀的形式重新出現——閃回、噩夢、觸發性的情緒反應、以及各種形式的解離症狀。創傷後壓力症候群（PTSD）和解離症狀之間有非常高的共病率，就是這個機制的結果。</p>
+
+  <h3>人格解體的現象學</h3>
+
+  <p>人格解體（depersonalization）是解離症狀裡最常被描述的一種。它的主觀體驗是：感覺自己是自己的旁觀者，看著自己的身體從外部進行各種動作，但那個身體不像是自己的；情緒感覺很遠，像是隔著玻璃在看；行動是自動的，自己好像不是決定那些動作的人。</p>
+
+  <p>人格解體在台灣的靈異文化語言裡，往往被描述為「靈魂出竅」或「被附身」——這個體驗太真實、太不像正常意識狀態，以至於用世俗語言很難說清楚，靈異語言反而提供了一個現成的框架。這不是說那些靈異詮釋是對的，而是說那個體驗確實非常不尋常，不是隨便說說的。</p>
+
+  <h2 id="ch3">第三章　多重人格的真實面貌</h2>
+
+  <h3>解離性身份障礙：真實的，但被嚴重誤解的</h3>
+
+  <p>解離性身份障礙（DID，Dissociative Identity Disorder），舊稱多重人格障礙，是解離症狀中最複雜、也最常被誤解的一種。它的核心特徵是：在同一個人身上存在兩個或以上的「人格狀態」，這些人格狀態各自有不同的觀點、記憶、行為模式，有時候對彼此的存在不知情。</p>
+
+  <p>DID在流行文化裡被嚴重戲劇化了。電影和小說裡的多重人格往往呈現為一個人格完全不知道另一個人格在做什麼、各個人格之間有強烈的戲劇性衝突、某個人格可能做出暴力或犯罪行為。這個形象跟臨床實際的差距，跟之前談到的催眠誤解一樣大。</p>
+
+  <p>真實的DID患者，他們的症狀通常更加複雜、更加微妙、也更加痛苦——不是戲劇性的「換人」，而是時間的空白、行為的不一致、各種難以解釋的身體和心理症狀，以及承擔著這一切而沒有人相信的孤立感。</p>
+
+  <div class="data-note">
+    <div class="note-label">研究現狀</div>
+    DID的存在和發生機制，在精神醫學界至今仍有爭議。一方認為DID是對嚴重早期創傷的真實心理反應，有神經影像研究支持（不同人格狀態下大腦活動模式確實不同）；另一方認為DID是一種被醫療化強化的社會文化現象（某些治療師通過暗示製造出多重人格）。這個爭論尚未有定論，說明DID是一個複雜的心理現象，不適合用簡單的「真/假」二元來處理。
+  </div>
+
+  <h3>人格碎裂的保護邏輯</h3>
+
+  <p>主流的DID理論認為，多重人格的形成，是在兒童期面對嚴重且持續的創傷時，心理為了生存而採取的極端解離策略。一個無法逃脫創傷的兒童，可能把那個創傷「裝進」一個特定的人格狀態裡，讓其他的人格狀態繼續在沒有那個創傷的情況下運作。</p>
+
+  <p>這個策略的代價，是整個人格系統的碎裂。那些被隔離出去的創傷記憶和感受，在某些觸發條件下仍然會突破邊界，以閃回、情緒崩潰、或者「那個人格出來了」的形式出現。DID的治療目標，通常不是消滅那些人格，而是幫助各個人格狀態了解彼此的存在，最終達到某種程度的整合和協作。</p>
+
+  <h2 id="ch4">第四章　催眠在醫療上的應用與爭議</h2>
+
+  <h3>催眠在疼痛管理上的有效性</h3>
+
+  <p>催眠在醫療上最有記錄的應用之一，是疼痛管理。多項隨機對照試驗顯示，催眠可以顯著降低手術、化療、慢性疼痛患者的主觀疼痛感，效果在部分案例裡跟藥物相當，且沒有藥物的副作用。</p>
+
+  <p>比利時的研究者在過去十幾年積累了數百例使用催眠作為麻醉輔助（有時候是主要麻醉手段）的手術案例，主要應用於甲狀腺手術和乳房手術。這些案例的結果顯示，對高催眠感受性的患者，催眠麻醉可以在保持患者清醒溝通的情況下完成手術，術後恢復更快、副作用更少。</p>
+
+  <p>催眠的疼痛管理效果，在神經層面有對應的解釋：催眠狀態下，前扣帶皮質——參與痛覺「不舒服」感受（而非原始感覺訊號）的區域——活動降低。這說明催眠不是讓你「假裝不痛」，而是真實地改變了大腦處理疼痛信號的方式。</p>
+
+  <h3>催眠與記憶的危險地帶</h3>
+
+  <p>催眠在醫療和心理治療上最有爭議的應用，是「找回壓抑記憶」——特別是找回據稱被壓抑的童年創傷記憶。1980至90年代，北美出現了大量的「恢復記憶治療」（recovered memory therapy），治療師透過催眠幫助患者「找回」他們認為被壓抑的童年性虐待記憶。</p>
+
+  <p>這個做法引發了嚴重的法律和倫理問題。記憶研究者——包括之前提到的伊莉莎白・羅芙托斯——的研究顯示，催眠狀態下對記憶的暗示，可以讓人「記起」從未發生過的事情，而且被催眠者對這些假記憶的確信程度，跟真實記憶幾乎沒有差別。這讓大量基於催眠「恢復記憶」的指控，在法庭上面臨嚴峻的可信度挑戰。</p>
+
+  <div class="data-note">
+    <div class="note-label">「假記憶症候群」爭議</div>
+    1992年，美國成立了「假記憶症候群基金會」（False Memory Syndrome Foundation），由一批被子女指控（子女聲稱透過催眠恢復了被壓抑的性虐待記憶）的父母創立。這個機構引發了關於催眠、記憶可靠性、和兒童性虐待指控的大規模社會辯論。這場爭論至今沒有完全平息，它的遺產是：心理治療界對使用催眠「找回記憶」的做法變得更加謹慎，記憶研究的倫理和法律應用也得到了更多重視。
+  </div>
+
+  <h2 id="ch5">第五章　冥想、出神與刻意製造的意識位移</h2>
+
+  <h3>人類為什麼要刻意改變自己的意識狀態</h3>
+
+  <p>人類是唯一一種系統性地尋求改變自己意識狀態的物種。冥想、祈禱、斷食、舞蹈至出神、使用致幻植物——幾乎所有人類社會在歷史上都發展出了一套或多套刻意改變意識狀態的方法。這個普遍性說明，改變意識狀態不是邊緣行為，而是一個深層的人類需求。</p>
+
+  <p>那個需求是什麼？答案因文化和個人而異，但有幾個共同的主題：尋求與更大的存在（神明、宇宙、自然）的連結；暫時脫離日常自我的限制和壓力；獲取平常意識狀態下無法獲得的洞見或體驗；以及純粹的探索——想知道意識還可以長什麼樣子。</p>
+
+  <h3>冥想的科學：當你安靜地坐著，大腦在做什麼</h3>
+
+  <p>冥想研究在過去二十年經歷了爆炸性的成長，從邊緣研究領域變成了主流神經科學的一個重要分支。研究顯示，長期冥想實踐者的大腦結構和功能，跟沒有冥想習慣的人有可測量的差異：預設模式網絡（與「思維漫遊」和自我參照思維相關）的活動降低；島葉皮質（與身體感知和當下時刻意識相關）的灰質密度增加；以及注意力相關網絡的連接強化。</p>
+
+  <p>這些變化跟冥想的主觀效果——更少的「自動化思維」、更強的當下感知、更好的注意力——在機制上是對應的。冥想不只是讓你「感覺放鬆」，它在改變大腦的硬體配置。</p>
+
+  <h3>出神狀態與薩滿傳統</h3>
+
+  <p>「出神」（trance）是一類意識狀態的總稱，特徵是專注度極高、對外部刺激的反應降低、以及可能出現幻覺或異常感知。出神狀態可以透過冥想、節奏性的鼓聲和舞蹈、斷食、睡眠剝奪、或特定植物的使用來誘發。</p>
+
+  <p>世界各地的薩滿傳統，包括台灣原住民族的部分靈性實踐，都有系統性地進入出神狀態的方法和傳統。薩滿在出神狀態裡據稱能夠進入「靈界」、與靈魂溝通、或者獲取關於患者病情的資訊。從神經科學的角度，出神狀態確實是一個可測量的特殊意識狀態，跟日常清醒意識有可辨別的差異。但從那個狀態裡「帶回來」的東西是什麼，仍然是一個沒有被完整回答的問題。</p>
+
+  <div class="data-note">
+    <div class="note-label">神經人類學</div>
+    神經人類學者Michael Winkelman在研究薩滿意識狀態時，提出了「整合性意識狀態」（integrative mode of consciousness）的概念：薩滿的出神狀態，是一種讓大腦不同系統之間的整合程度比日常意識更高的狀態，讓薩滿能夠同時接取更多類型的資訊處理。這個框架不確認也不否認薩滿靈性體驗的超自然成分，但提供了一個神經層面的描述。
+  </div>
+
+  <h2 id="ch6">第六章　你和你之間，有多遠</h2>
+
+  <h3>自我的虛構性</h3>
+
+  <p>佛教哲學、西方現象學、以及當代神經科學，從三個完全不同的方向，得到了一個相似的結論：你所體驗到的那個統一的「自我」，是一個建構出來的東西，不是一個先天存在的實體。</p>
+
+  <p>佛教傳統說「無我」（anatta）——沒有一個固定的、獨立存在的自我，只有各種心理和物理過程的暫時聚合。笛卡爾說「我思故我在」，但現代哲學家質疑：那個「思」的主體是誰？你能在「思考」這個動作裡找到一個獨立於思考的「思考者」嗎？神經科學說，大腦製造「自我感」的方式，是持續地編輯和整合來自不同腦區的信號，製造出一個「統一代理者」的敘事——那個敘事是真實的，但它是一個由大腦製造的敘事，不是一個客觀存在的事實。</p>
+
+  <h3>催眠和解離告訴我們的事</h3>
+
+  <p>催眠和解離現象，從一個特別尖銳的角度，呈現了「自我」的建構性。在催眠狀態下，那個「我決定我的行動」的感覺可以被暫時削弱；在解離狀態下，「我」可以從正在發生的體驗裡撤退；在DID裡，同一個身體裡可以有多個「我」輪流出現。</p>
+
+  <p>這些現象說明，我們日常體驗中的「我」，不是一個不可分割的核心，而是一個動態的過程——它可以被特定條件擾動，可以在不同狀態下有不同的樣子，可以在極端情況下分裂成多個版本。這不應該讓你恐慌，這應該讓你好奇：如果「我」是一個過程，那這個過程可以是什麼樣子，它的邊界在哪裡，它能不能被有意識地探索和調整？</p>
+
+  <h3>你和你之間的距離，是可以穿越的</h3>
+
+  <p>催眠、冥想、解離的研究，從不同的方向說明了一件事：你和你之間，有一個距離。那個距離裡有大量的資訊、大量的心理過程、大量的你平常意識不到的「你」在運作著。</p>
+
+  <p>穿越那個距離——不一定要用催眠或極端的解離，而是透過冥想、心理治療、或者單純的內省——是一件值得做的事情。那個距離裡有你的習慣模式、你的防禦機制、你的被壓抑的需求，以及你可能還沒有遇到的自己的某些部分。</p>
+
+  <p>你和你之間有多遠？遠到足以讓你花一輩子去探索，不會探索完。</p>
+
+  <h2 id="afterword">後記　你還是你，只是你更大了</h2>
+
+  <p>讀完這本書，你對「你是誰」這個問題的答案，應該比讀之前更複雜了。這不是壞事。</p>
+
+  <p>「你是誰」這個問題，如果只有一個簡單的答案，那個答案大概是錯的。真實的你，是一個多層次的、動態的、有時候跟自己不一致的存在。催眠讓你看到注意力可以被引導；解離讓你看到意識可以撤退；多重人格讓你看到在極端壓力下，心理可以走得多遠。</p>
+
+  <p>這些不是別人的事情。這些是人類心理的可能性空間，你也在這個空間裡。你的日常生活或許不會遇到催眠師，你可能也沒有解離症狀，但你對「我」和「我的意識」的理解，會因為知道這些可能性而變得更豐富、更謙遜、也更有彈性。</p>
+
+  <p>你還是你。只是你現在知道，你比你以為的更大。</p>
+
+  <div style="margin-top:56px;padding-top:32px;border-top:1px solid rgba(122,74,158,0.15);font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--label);letter-spacing:2px;">
+    盧林著 · 有的沒的小舖出品
+  </div>
+
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">靈魂與意識系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-1-vol1-trial.html" class="snbook">Vol.1《你離開身體的那一刻》</a>
+    <a href="/that-feeling-1-vol2-trial.html" class="snbook">Vol.2《你不是你以為的你》</a>
+    <a href="/that-feeling-1-vol3-trial.html" class="snbook">Vol.3《睡著之後你去了哪裡》</a>
+    <a href="/that-feeling-1-vol4-trial.html" class="snbook">Vol.4《另一個人的記憶》</a>
+    <span class="snbook current">Vol.5《你和你之間的距離》</span>
+    <a href="/that-feeling-1-vol6-trial.html" class="snbook" style="opacity:0.4;pointer-events:none;">Vol.6《意識的邊界在哪裡》</a>
+  </div>
+  <a href="/that-feeling-1.html" class="back-link">← 返回靈魂與意識系列</a>
+</div>
+
+<script>
+function smoothTo(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>

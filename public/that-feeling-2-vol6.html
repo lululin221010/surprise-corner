@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>這塊土地上的聲音｜那個感覺 系列二 Vol.6｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14; --text: #c0c0d8; --text-muted: #7070a0;
+    --accent: #7a4a9e; --accent-light: rgba(122,74,158,0.15); --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e; --card-border: rgba(122,74,158,0.2); --label: #5a5a8a;
+    --tw-accent: #c0392b; --tw-accent-light: rgba(192,57,43,0.12); --tw-accent-dim: rgba(192,57,43,0.35);
+    --sb-bg: #1a1525; --sb-text: #e8e8f0; --sb-accent: #7a4a9e; --sb-hover: rgba(122,74,158,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; min-height: 100vh; }
+  .sidebar { position: fixed; top: 0; left: 0; width: 240px; height: 100vh; background: var(--sb-bg); overflow-y: auto; padding: 32px 24px; border-right: 1px solid rgba(122,74,158,0.15); z-index: 100; }
+  .sb-back { display: block; font-family: 'Noto Sans TC', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; margin-bottom: 28px; transition: color 0.2s; }
+  .sb-back:hover { color: var(--sb-accent); }
+  .sb-series { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--tw-accent); opacity: 0.75; margin-bottom: 8px; }
+  .sb-title { font-size: 15px; font-weight: 700; color: var(--sb-text); letter-spacing: 2px; margin-bottom: 6px; line-height: 1.5; }
+  .sb-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 12px; color: var(--text-muted); opacity: 0.7; margin-bottom: 24px; line-height: 1.7; }
+  .sb-divider { height: 1px; background: rgba(122,74,158,0.2); margin-bottom: 20px; }
+  .sb-toc-label { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 14px; }
+  .sb-toc a { display: block; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 6px 10px; border-radius: 2px; letter-spacing: 1px; line-height: 1.6; transition: background 0.2s, color 0.2s; margin-bottom: 2px; }
+  .sb-toc a:hover { background: var(--sb-hover); color: var(--sb-text); }
+  .main-content { margin-left: 240px; max-width: 720px; padding: 60px 48px; }
+  .book-meta { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  .series-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--tw-accent); opacity: 0.8; margin-bottom: 16px; }
+  .book-title { font-size: 2.4rem; font-weight: 500; letter-spacing: 4px; color: #e8e8f5; line-height: 1.4; margin-bottom: 12px; }
+  .book-subtitle { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 20px; }
+  .author-tag { font-family: 'Noto Sans TC', sans-serif; font-size: 12px; letter-spacing: 3px; color: var(--label); }
+  h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 3px; color: #e0e0f0; margin: 64px 0 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(122,74,158,0.15); }
+  h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #c8c8e8; margin: 40px 0 18px; }
+  p { margin-bottom: 24px; text-align: justify; color: var(--text); }
+  strong { color: #e0e0f0; font-weight: 500; }
+  .quote-block { border-left: 2px solid var(--tw-accent-dim); padding: 20px 28px; margin: 36px 0; background: var(--tw-accent-light); }
+  .quote-block p { color: #d0d0e8; font-size: 15px; margin-bottom: 0; line-height: 2.2; }
+  .data-note { background: var(--card-bg); border: 1px solid var(--card-border); padding: 20px 28px; margin: 32px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+  .data-note .note-label { font-size: 10px; letter-spacing: 4px; color: var(--label); margin-bottom: 10px; }
+  .series-nav { max-width: 720px; margin-left: 240px; padding: 40px 48px 60px; border-top: 1px solid rgba(122,74,158,0.1); }
+  .snlabel { font-family: 'Noto Sans TC', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--label); margin-bottom: 20px; }
+  .snbooks { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .snbook { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid rgba(122,74,158,0.2); color: var(--text-muted); text-decoration: none; letter-spacing: 1px; transition: border-color 0.2s, color 0.2s; }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--text); }
+  .snbook.current { border-color: var(--tw-accent-dim); color: #e88; background: var(--tw-accent-light); cursor: default; }
+  .back-link { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 860px) { .sidebar { display: none; } .main-content { margin-left: 0; padding: 40px 24px; } .series-nav { margin-left: 0; padding: 40px 24px 60px; } }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺 · 系列二 · Vol.6</div>
+  <div class="sb-title">《這塊土地上的聲音》</div>
+  <div class="sb-subtitle">台灣靈異事件的田野紀錄與歷史脈絡</div>
+  <div class="sb-divider"></div>
+  <div class="sb-toc-label">目錄</div>
+  <nav class="sb-toc">
+    <a href="#preface" onclick="smoothTo(event,'preface')">前言　這些事情發生過</a>
+    <a href="#ch1" onclick="smoothTo(event,'ch1')">第一章　什麼叫做有記錄</a>
+    <a href="#ch2" onclick="smoothTo(event,'ch2')">第二章　日治時期的靈異檔案</a>
+    <a href="#ch3" onclick="smoothTo(event,'ch3')">第三章　戰後的集體創傷與靈異</a>
+    <a href="#ch4" onclick="smoothTo(event,'ch4')">第四章　那些被記錄下來的事</a>
+    <a href="#ch5" onclick="smoothTo(event,'ch5')">第五章　原住民族的聲音</a>
+    <a href="#ch6" onclick="smoothTo(event,'ch6')">第六章　這塊土地還沒說完的事</a>
+    <a href="#afterword" onclick="smoothTo(event,'afterword')">後記</a>
+  </nav>
+</aside>
+
+<div class="main-content">
+
+  <div class="book-meta">
+    <div class="series-tag">那個感覺 · 系列二 · VOL. 6</div>
+    <h1 class="book-title">這塊土地上的聲音</h1>
+    <div class="book-subtitle">台灣靈異事件的田野紀錄與歷史脈絡</div>
+    <div class="author-tag">盧林著 · 有的沒的小舖出品</div>
+  </div>
+
+  <h2 id="preface">前言　這些事情發生過</h2>
+
+  <p>這本書跟這個系列前五本有一個根本的不同：前五本在談框架、談結構、談文化系統。這一本談的是具體的事件——有地點、有時間、有人名、有記錄的事情。</p>
+
+  <p>不是所有的事情都有完整的記錄。台灣的靈異事件有很大一部分只存在於口傳，或者存在於難以被正式引用的私人文件和地方志裡。這本書盡可能使用有文字記錄的案例，在沒有文字記錄的地方，會明確說明資料來源的性質和局限。</p>
+
+  <p>我不打算告訴你這些事件的解釋。有些有合理的非靈異解釋，有些沒有——至少目前沒有。我要做的是把這些事件說清楚，提供它們發生的歷史和地理脈絡，然後讓你自己決定怎麼想它們。這塊土地有它自己的聲音。這本書試圖把一部分那個聲音記錄下來。</p>
+
+  <h2 id="ch1">第一章　什麼叫做有記錄</h2>
+
+  <h3>田野調查的方法與限制</h3>
+
+  <p>「有記錄」這件事，在靈異研究的脈絡裡是一個比看起來更複雜的問題。什麼樣的記錄算數？口傳算不算？地方志的記載算不算？日治時期警察的調查報告算不算？</p>
+
+  <p>這本書採取的立場是：所有有跡可循的記錄都值得被認真對待，但不同類型的記錄有不同的認識論地位，需要被區分清楚。一個有五十名目擊者的事件，跟一個只有一個人的口述，可靠性不同。一個在事發當天被記錄下來的報告，跟一個三十年後的回憶，可靠性不同。這些差異不能被抹平。</p>
+
+  <p>台灣靈異事件的記錄，在歷史上有幾個主要的來源。最古老的是地方志和方志——清朝時期各地的行政記錄，其中包含了大量的民俗和異象記載，但這些記載往往簡短、脈絡不足，難以獨立評估。日治時期的總督府調查資料是另一個重要來源，其中關於台灣民間信仰和「迷信」的調查資料，雖然帶著殖民者的視角偏誤，卻是大量台灣民俗知識最早的系統性文字記錄。</p>
+
+  <div class="data-note">
+    <div class="note-label">史料說明</div>
+    日治時期台灣總督府在1915至1921年間進行的「舊慣調查」，是台灣民間信仰和地方習俗最重要的早期文字記錄之一。這份調查雖然帶有殖民政府管理「迷信」的目的，但其收集的資料範圍廣泛，包含了大量後來在口傳中失傳的地方知識。台灣研究者至今仍然大量引用這份調查的原始資料。
+  </div>
+
+  <h3>目擊報告的認識論問題</h3>
+
+  <p>人類的記憶是不可靠的，這是心理學裡最穩固的研究結論之一。伊莉莎白・羅芙托斯（Elizabeth Loftus）幾十年的研究顯示，目擊者的記憶容易被事後信息汙染、被語言框架影響、被情緒強化或扭曲。一個誠實的目擊者，仍然可能報告了一個跟實際發生的事情有很大出入的「事實」。</p>
+
+  <p>在評估台灣靈異事件的目擊報告時，這本書關注幾個品質指標：目擊者的人數、目擊者之間的獨立性、報告的時間性，以及報告的一致性。即使在這些指標都相對良好的案例裡，仍然存在一個根本的認識論問題：目擊者看到了某件事，但那件事是什麼，從目擊報告本身無法確定。這本書在呈現目擊案例時，會盡可能同時呈現可能的非靈異解釋，以及那些解釋的解釋力範圍。</p>
+
+  <h2 id="ch2">第二章　日治時期的靈異檔案</h2>
+
+  <h3>殖民政府眼中的台灣靈異</h3>
+
+  <p>日本在1895年取得台灣的統治權之後，對台灣民間的宗教和靈異文化採取了一種矛盾的態度：一方面視之為需要被「現代化」消除的迷信，另一方面又系統性地記錄和研究它，作為了解並管理台灣社會的工具。這個矛盾讓日治時期留下了台灣靈異文化最豐富的早期文字記錄，同時這些記錄又帶著殖民凝視的變形。</p>
+
+  <p>日治時期的警察制度讓地方監控非常密集。每個地方的警察派出所都需要定期報告轄區的社會動態，包括宗教活動和「迷信」事件。這些報告裡有大量關於乩童、問事、神蹟、以及各種異常現象的記錄，是從官方視角留下的基層台灣靈異文化紀錄。</p>
+
+  <div class="data-note">
+    <div class="note-label">檔案來源</div>
+    台灣歷史博物館和國史館台灣文獻館收藏了大量日治時期的行政檔案，其中包含地方警察的定期報告。這些報告的原件以日文書寫，部分已有中文譯本或研究者的摘要整理。民俗學者鈴木清一郎在日治時期出版的《台灣舊慣冠婚葬祭と年中行事》，是這個時期對台灣民俗記錄最系統的著作之一，至今仍被視為重要的史料。
+  </div>
+
+  <h3>1915年西來庵事件的靈異向度</h3>
+
+  <p>1915年的西來庵事件（又稱噍吧哖事件）是日治時期台灣規模最大的武裝抗日行動，領導者余清芳以宗教動員為核心手段，聲稱神明啟示、刀槍不入。事件失敗後，日本殖民政府對相關的宗教活動進行了嚴格鎮壓，但同時也留下了詳細的調查記錄，記錄了台灣宗教動員的機制。</p>
+
+  <p>這個事件在靈異文化的層面有幾個值得注意的面向。第一是神明啟示作為動員工具的效力：在當時的台灣農村社會，聲稱獲得神明授權的人，確實能夠獲得大量的追隨者和資源，說明靈異信仰在當時社會的組織力量是真實的。第二是刀槍不入信仰的功能：這個信仰讓追隨者在面對現代化武裝的情況下仍然願意行動，是一個極端案例，說明了靈異信仰在特定條件下可以覆蓋現實評估的程度。</p>
+
+  <h3>日本靈異文化的在台影響</h3>
+
+  <p>五十年的日本統治，讓日本的靈異文化在台灣留下了可見的印記。台灣某些地區的靈異傳說，帶著明顯的日本民俗元素；某些廟宇的神明配置，受到了神道信仰的影響；台灣對特定地點「有厲鬼」的描述方式，在視覺語言上跟日本的幽靈形象有相當程度的重疊。</p>
+
+  <p>這個影響的深度因地區而異。日本移民較多、或日本官員駐紮時間較長的地區，日本靈異文化的痕跡更深。而在日本統治力量相對薄弱的山地原住民族地區，本地的靈異信仰系統受到的影響則相對較小，維持了更完整的前殖民時期形式。</p>
+
+  <h2 id="ch3">第三章　戰後的集體創傷與靈異</h2>
+
+  <h3>二二八與靈異地景</h3>
+
+  <p>1947年的二二八事件，是台灣戰後歷史裡最重大的集體創傷之一。事件造成的死亡人數至今仍有爭議，各方估計從數千到數萬不等。大量的死亡在短時間內發生，很多死者沒有完整的喪葬、沒有公開的哀悼、在很長一段時間裡甚至沒有辦法被公開討論。</p>
+
+  <p>這種「沒有辦法被說出來的死亡」，在台灣靈異文化裡留下了非常特殊的痕跡。台灣各地有一些地點，跟二二八有歷史連結，同時也是靈異傳說特別密集的地方。這個重疊，是前面討論過的「靈異作為創傷記憶容器」機制的一個非常具體的歷史案例。</p>
+
+  <div class="data-note">
+    <div class="note-label">歷史記錄</div>
+    歷史學者陳儀深在對二二八事件的口述歷史研究中，記錄了大量倖存者和遇難者家屬的證詞。這些證詞裡，有相當比例的受訪者提到了跟遇難地點相關的靈異體驗或傳說，以及家屬為了安頓遇難者靈魂所進行的各種民間儀式。這些記錄說明，靈異文化在處理政治性暴力留下的集體創傷上，扮演了一個非正式但真實的心理角色。
+  </div>
+
+  <h3>白色恐怖時期的靈異沉積</h3>
+
+  <p>1949年至1987年的戒嚴時期，台灣發生了大量的政治迫害——逮捕、審判、處決、以及各種形式的政治暴力。這段歷史的死亡，跟二二八一樣，有很長一段時間無法被公開討論，死者的家屬必須在公共沉默裡承擔私人的哀慟。</p>
+
+  <p>馬場町（今台北市南機場公園一帶）在白色恐怖時期是重要的執行刑場之一，估計有數百名政治犯在此被處決。這個地點在解嚴後逐漸成為台灣靈異傳說的重要節點之一，相關的目擊報告和靈異傳說在1990年代後大量出現。</p>
+
+  <p>這個時間點的出現，不是偶然的。解嚴之後，台灣開始有更多空間公開討論白色恐怖的歷史，靈異傳說的出現正好在這個討論開放的時期爆發。壓抑的歷史記憶和靈異敘事之間的關係，在這裡展現得非常清晰：當歷史無法被正面說出來，它就從靈異傳說的側門進來。</p>
+
+  <h2 id="ch4">第四章　那些被記錄下來的事</h2>
+
+  <h3>有名字、有地點、有記錄的案例</h3>
+
+  <p>這一章收錄的，是在台灣有相對較好文字記錄的靈異事件。「相對較好」的標準是：有多個獨立來源的記錄、或者有官方文件的旁證、或者事件的某些面向可以被獨立驗證。</p>
+
+  <p>1956年，台灣中部某鄉鎮在施工過程中挖出大量無名屍骨，工程隨後接連發生意外，施工人員出現異常的集體生病現象。地方政府在居民強烈要求下，邀請宗教人士進行儀式處理，並在原地建立了一座有應公廟。儀式之後，工程事故的頻率顯著下降。</p>
+
+  <p>這個案例有幾個版本的記錄：地方政府的工程報告（記錄了意外事故的頻率）、地方廟宇的創廟文獻、以及地方耆老的口述訪談。三個來源在核心事實上是吻合的，雖然細節有出入。這個案例的「靈異」面向——無名骨骸引發了連串意外——無法被簡單地用非靈異原因解釋，但也無法被簡單地確認是靈異原因。儀式之後意外率下降，最可能的解釋是儀式讓施工人員的心理狀態穩定了，而不是靈異問題被「解決」了。但「最可能的解釋」不等於唯一的解釋。</p>
+
+  <div class="data-note">
+    <div class="note-label">方法論說明</div>
+    這一章所呈現的案例，在選擇上偏向有多來源記錄的事件，但這並不代表這些案例的靈異詮釋是被確認的。每個案例的呈現都會同時提供已知的事實，以及對那些事實的可能解釋範圍。讀者需要自行評估這些解釋的說服力，而不是依賴作者的判斷。
+  </div>
+
+  <h3>花蓮地區的長期異象記錄</h3>
+
+  <p>花蓮地區因為其特殊的地形——東部山脈與太平洋之間的狹長地帶、頻繁的地震活動、以及複雜的地質構造——有一個在台灣算是比較密集的「異常現象」記錄歷史。</p>
+
+  <p>1970年代到1990年代之間，花蓮地區有多件關於不明光源的記錄，目擊者包括漁民、農民和部分官員。這些記錄中，有幾件因為目擊人數較多（超過十人）、且目擊者在事前互不認識，被研究者認為相對值得認真對待。</p>
+
+  <p>對這些現象，研究者提出了幾種可能的解釋：地震前兆產生的電漿發光、海洋磷光被特殊大氣條件折射、以及軍事測試產生的光源。這些解釋各自能夠解釋部分案例的描述，但沒有一個能夠完整解釋所有案例的所有細節。這不是說那些案例因此「確認是超自然」，而是說解釋這些現象的工作仍然未完成。</p>
+
+  <h2 id="ch5">第五章　原住民族的聲音：不是靈異，是宇宙觀</h2>
+
+  <h3>一個重要的概念區分</h3>
+
+  <p>在談台灣原住民族的靈異相關信仰之前，需要先做一個重要的概念區分：把原住民族的靈性信仰稱為「靈異文化」，本身就是一個有問題的框架——它把一套完整的宇宙觀，用外來者的「非正常」視角來定義。</p>
+
+  <p>台灣原住民各族的靈性信仰，不是「相信有鬼」那麼簡單。它是一套關於人與自然、人與祖先、人與宇宙之間關係的完整知識體系，有自己的邏輯、有自己的倫理、有自己的實踐方法。把這套體系歸類為「靈異」，是用漢人或西方的二元論框架（自然/超自然）去切割一個本來不是這樣結構的知識系統。</p>
+
+  <p>這本書在這一章試圖做的，是在盡可能尊重這個概念差異的前提下，呈現台灣原住民族的靈性知識跟這個系列討論的其他靈異文化之間的關係和差異。</p>
+
+  <h3>祖靈信仰的不同形式</h3>
+
+  <p>台灣原住民各族幾乎都有祖靈信仰，但具體形式差異很大。排灣族的祖靈信仰跟貴族階層緊密連結，祖靈的力量在特定的器物（如百步蛇紋飾）裡被承載；泰雅族的祖靈概念跟gaga（祖訓和規範）不可分，違反gaga的行為會觸怒祖靈，帶來集體的不幸；阿美族的豐年祭，核心是對祖靈的邀請和告別。</p>
+
+  <p>這些信仰系統有一個共同點：祖靈不是「死後的鬼」，而是持續參與社群生活的存在。祖靈在重要的節點被請來，在儀式結束後被送走，跟社群的互動是有結構、有儀式、有倫理規範的。這跟漢人的「好兄弟」概念有形式上的類似，但在宇宙觀的基礎上是根本不同的。</p>
+
+  <div class="data-note">
+    <div class="note-label">田野研究</div>
+    民族學者移川子之藏和馬淵東一在日治時期對台灣原住民族進行的田野調查，留下了大量關於各族靈性信仰的早期文字記錄。這些記錄雖然帶著時代的偏見，但在資料的豐富程度上，至今仍然是重要的參考來源。當代的原住民族研究者，包括巴奈・母路等人，已經在重新從族人的視角詮釋和修正這些早期記錄。
+  </div>
+
+  <h3>當代原住民族的靈性復振</h3>
+
+  <p>台灣原住民族在解嚴後的文化復振運動裡，靈性信仰的恢復是一個重要的面向。很多在基督教化或現代化過程中中斷的傳統儀式，在近幾十年裡重新被族人整理、實踐、和傳承。</p>
+
+  <p>這個復振不是單純的「回到過去」，而是在當代脈絡裡重新理解和實踐傳統知識。它的意義不只是文化保存，更是一個政治行動：對殖民歷史中強迫原住民族放棄自身知識系統的抵抗和修復。</p>
+
+  <p>在這個脈絡裡，原住民族的靈性知識跟這本系列討論的其他靈異文化，有一個根本的政治差異：漢人的靈異文化是在主體社會裡自然演化的，原住民族的靈性文化是在殖民壓制下存活下來、正在修復的。對待這兩種文化，需要非常不同的倫理態度。</p>
+
+  <h2 id="ch6">第六章　這塊土地還沒說完的事</h2>
+
+  <h3>記錄的空缺</h3>
+
+  <p>台灣靈異文化的書面記錄，有幾個明顯的空缺。第一是原住民族的靈性知識，在殖民歷史和文字記錄主導的知識體制下，大量沒有被保存下來，或者被以錯誤的框架記錄。第二是女性的靈異經驗。傳統的記錄者和田野調查者以男性為主，女性的宗教體驗和靈異敘事在記錄裡嚴重不足。第三是那些發生在「不重要」地點的事件——不是大城市、不是知名地標，而是那些平凡村莊和平凡家庭裡的事情，幾乎沒有系統性的記錄。</p>
+
+  <p>這些空缺不是中性的。它們反映了記錄權力的分配——誰的聲音被認為值得被記錄，誰的經驗被認為需要被保存。填補這些空缺，是台灣靈異文化研究的重要未竟工作。</p>
+
+  <h3>口傳的脆弱性</h3>
+
+  <p>台灣靈異文化的大量內容，至今仍然只存在於口傳。那些知道故事的人，是活生生的人，他們會老、會死。當最後一個知道某個地方完整靈異傳說的耆老離開，那個傳說就只剩下它的碎片——如果連碎片都沒有人記錄，就什麼都不剩了。</p>
+
+  <p>台灣有幾個組織和個人，在努力做靈異口傳的記錄工作，包括各縣市的文化局的口述歷史計畫、部分大學的民俗研究計畫、以及少數個人田野工作者。但這些努力的規模，跟正在消失的口傳知識的速度相比，仍然遠遠不夠。</p>
+
+  <div class="quote-block">
+    <p>「一個老人的死亡，是一座圖書館的消失。」這句非洲諺語在台灣靈異文化的脈絡裡，有非常具體的意義。</p>
+  </div>
+
+  <h3>這塊土地繼續在說話</h3>
+
+  <p>台灣的靈異文化不是一個已經固定的系統——它在持續演化、持續生成新的故事、持續適應新的現實。社群媒體上的靈異敘事、城市更新帶來的新靈異地景、移工帶來的東南亞靈異文化元素——這些都是這個系統當下正在處理的新輸入。</p>
+
+  <p>這個持續演化說明了一件事：台灣人對靈異的需求，跟這個系列一開始提出的那些基本需求，沒有根本的改變。人們仍然需要一套方法來理解不可控的事情，仍然需要一個讓死亡可以被處理的框架，仍然需要一些在不確定裡可以抓住的東西。</p>
+
+  <p>這塊土地一直在說話。這個系列試圖幫你多聽懂一點它說的話——不是要你相信它，而是要你知道它在說什麼，以及為什麼說。</p>
+
+  <h2 id="afterword">後記　系列二的終點，也是起點</h2>
+
+  <p>你讀完了系列二，台灣在地，六本書。</p>
+
+  <p>如果你從第一本讀到這一本，你現在應該對台灣的靈異文化有了一個比較完整的圖像：地形和歷史決定了它的基礎形狀，廟宇系統提供了它的制度框架，都市傳說承載了它的集體記憶，喪葬文化處理了它面對死亡的需求，禁忌系統管理了它的日常焦慮，而這些有記錄的事件，是它具體發生的座標。</p>
+
+  <p>這個圖像不完整。任何六本書都不可能完整呈現一個活生生的文化系統。但我希望你現在有了足夠的工具，可以繼續自己去看、去問、去理解。</p>
+
+  <p>台灣這塊土地上的靈異，不是一個等待被解釋的謎，而是一個正在持續發生的、有血有肉的文化現象。它跟你的日常生活是相連的，不管你意識到沒有。認識它，不只是理解台灣，也是理解你自己作為一個在這塊土地上生活的人，你帶著什麼。</p>
+
+  <p>系列二到這裡結束。</p>
+
+  <div style="margin-top:56px;padding-top:32px;border-top:1px solid rgba(122,74,158,0.15);font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--label);letter-spacing:2px;">
+    盧林著 · 有的沒的小舖出品
+  </div>
+
+</div>
+
+<div class="series-nav">
+  <div class="snlabel">台灣在地系列</div>
+  <div class="snbooks">
+    <a href="/that-feeling-2-vol1-trial.html" class="snbook">Vol.1《這裡本來就不一樣》</a>
+    <a href="/that-feeling-2-vol2-trial.html" class="snbook">Vol.2《那些廟在說什麼》</a>
+    <a href="/that-feeling-2-vol3-trial.html" class="snbook">Vol.3《你家附近的鬼故事》</a>
+    <a href="/that-feeling-2-vol4-trial.html" class="snbook">Vol.4《死了要去哪》</a>
+    <a href="/that-feeling-2-vol5-trial.html" class="snbook">Vol.5《台灣人為什麼這麼怕》</a>
+    <span class="snbook current">Vol.6《這塊土地上的聲音》</span>
+  </div>
+  <a href="/that-feeling-2.html" class="back-link">← 返回台灣在地系列</a>
+</div>
+
+<script>
+function smoothTo(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>

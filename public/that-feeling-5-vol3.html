@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UFO與我們｜那個感覺 系列五 Vol.3｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --sidebar-bg: #1a1525;
+    --sidebar-text: #e8e8f0;
+    --sidebar-accent: #7a4a9e;
+    --sidebar-hover: rgba(122,74,158,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-right: 1px solid var(--card-border);
+    z-index: 100;
+  }
+  .sb-back {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .sb-back:hover { color: var(--sidebar-accent); }
+  .sb-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 8px;
+  }
+  .sb-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--sidebar-text);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .sb-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+  .sb-divider {
+    border: none;
+    border-top: 1px solid var(--card-border);
+    margin-bottom: 20px;
+  }
+  .sb-toc-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 14px;
+  }
+  .sb-toc a {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+    line-height: 1.6;
+  }
+  .sb-toc a:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-accent);
+  }
+
+  .main {
+    margin-left: 240px;
+    max-width: 720px;
+    padding: 72px 48px 100px;
+  }
+
+  .book-meta {
+    text-align: center;
+    margin-bottom: 72px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 72px 0 32px;
+    color: var(--sidebar-text);
+    padding-top: 8px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+  }
+
+  .highlight-box {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 6px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .highlight-box strong {
+    color: var(--sidebar-text);
+    font-weight: 500;
+  }
+
+  .series-nav {
+    border-top: 1px solid var(--card-border);
+    margin-top: 80px;
+    padding-top: 48px;
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 860px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 48px 24px 72px; }
+  }
+  @media (max-width: 480px) {
+    .book-title { font-size: 1.8rem; }
+    .main { padding: 36px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺 · 系列五 · Vol.3</div>
+  <div class="sb-title">《UFO與我們》</div>
+  <div class="sb-sub">天空裡那個東西，和看見它的人</div>
+  <hr class="sb-divider">
+  <div class="sb-toc-label">目　　錄</div>
+  <nav class="sb-toc">
+    <a href="#preface" onclick="smoothScroll(event,'preface')">前言｜那個問題沒有你以為的那麼簡單</a>
+    <a href="#ch1" onclick="smoothScroll(event,'ch1')">第一章　UFO不是你以為的那個詞</a>
+    <a href="#ch2" onclick="smoothScroll(event,'ch2')">第二章　羅斯威爾之後：解密文件說了什麼</a>
+    <a href="#ch3" onclick="smoothScroll(event,'ch3')">第三章　AATIP：五角大廈的秘密研究計畫</a>
+    <a href="#ch4" onclick="smoothScroll(event,'ch4')">第四章　目擊者的可信度問題</a>
+    <a href="#ch5" onclick="smoothScroll(event,'ch5')">第五章　2023年國會聽證：那些被說出口的話</a>
+    <a href="#ch6" onclick="smoothScroll(event,'ch6')">第六章　如果不是外星人，那是什麼</a>
+    <a href="#afterword" onclick="smoothScroll(event,'afterword')">後記｜帶著不確定活著</a>
+  </nav>
+</aside>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.3</div>
+    <h1 class="book-title">UFO與我們</h1>
+    <div class="book-subtitle">天空裡那個東西，和看見它的人</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+  </div>
+
+  <!-- 前言 -->
+  <h2 id="preface">前言　那個問題沒有你以為的那麼簡單</h2>
+
+  <p>2004年11月，美國海軍F/A-18F戰鬥機飛行員大衛·弗雷佛（David Fravor）在加州聖地牙哥外海執行例行訓練任務時，和他的僚機同時目擊了一個不明飛行物。那個物體的外形被描述為橢圓形，白色，大約是一架F-18的大小，在海面上方約十五公尺處懸停，沒有任何可見的推進裝置，也沒有任何尾流或排放物。</p>
+
+  <p>弗雷佛試圖靠近，那個物體開始移動，在幾秒內以他的戰機完全無法追上的速度消失了。整個過程被戰機上的紅外線攝影系統記錄下來，那段影片後來被稱為「Tic Tac影片」，因為那個物體的外形像一顆橢圓形的薄荷糖。</p>
+
+  <p>這段影片在2017年被《紐約時報》報導，並由美國國防部正式確認其真實性。弗雷佛後來多次在國會聽證會上作證，包括2023年7月的聽證會，他在公開紀錄中表示，那個物體的飛行性能超出了他所知道的任何已知技術。</p>
+
+  <p>弗雷佛是一個有二十多年飛行經驗的海軍中校，不是在黑暗中仰望夜空的普通人，是在執行正式任務、有紅外線設備輔助的軍事飛行員。</p>
+
+  <p>這件事，你要怎麼解釋？</p>
+
+  <p>這本書不打算給你一個答案，因為誠實的答案是：我不知道，沒有人知道。但我們可以做一件更有意思的事：拆解這個問題周圍的所有雜訊——那些讓這個問題很難被認真討論的東西——然後看看，把雜訊清掉之後，剩下的是什麼。</p>
+
+  <p>剩下的東西，比你想的更難忽略。</p>
+
+  <!-- 第一章 -->
+  <h2 id="ch1">第一章　UFO不是你以為的那個詞</h2>
+
+  <p>先解決一個定義問題，因為這個定義問題，是整個UFO討論最大的混亂來源。</p>
+
+  <p>UFO是「不明飛行物」（Unidentified Flying Object）的縮寫。它的意思是：一個飛行中的物體，目擊者無法識別它是什麼。就這樣。它不等於外星飛船，不等於政府秘密武器，不等於幻覺，不等於任何特定的解釋。它只是說：有一個東西在飛，我不知道那是什麼。</p>
+
+  <p>但在過去幾十年的大眾文化裡，「UFO」這個詞已經幾乎完全和「外星人飛碟」畫上等號。這個等號，讓整個討論變得非常困難——因為一旦你說「我看見了UFO」，你就自動被放進了一個特定的文化框架裡，那個框架帶著大量的刻板印象和可信度預設。</p>
+
+  <p>美國國防部在2020年把官方使用的術語從UFO改為UAP（Unidentified Aerial Phenomena，不明空中現象），部分原因就是要試圖切斷這個文化連結，讓相關的報告和調查可以在不帶「外星人」預設的情況下進行。這個更名本身，就反映了一個現實：「UFO」這個詞已經被大眾文化污染到幾乎無法在嚴肅的情境下使用了。</p>
+
+  <div class="quote-block">
+    <p>美國國家情報總監辦公室（ODNI）在2021年6月發布的UAP報告中指出，在他們分析的144件UAP事件中，有143件無法得到確定的解釋。報告明確說明，這些事件中有18件展現了「不尋常的飛行特性」，包括靜止懸停、突然加速、以及在沒有明顯推進系統的情況下高速移動。報告同時說明，這些現象對飛行安全和國家安全構成潛在威脅，需要系統性的研究。</p>
+    <span class="quote-source">——Office of the Director of National Intelligence，《Preliminary Assessment: Unidentified Aerial Phenomena》，2021年6月25日</span>
+  </div>
+
+  <p>注意那個數字：144件中143件無法解釋。這不是邊緣人士的報告，這是美國情報體系在分析軍事飛行員和傳感器設備的數據之後得到的結論。</p>
+
+  <p>「無法解釋」只是說，在現有的資訊和技術框架下，我們找不到令人滿意的解釋。但「找不到解釋」和「那一定是外星人」之間，有一個非常巨大的跳躍，而大眾討論幾乎永遠在進行這個跳躍，要麼往「外星人」跳，要麼往「全部是假的」跳。這兩個跳躍，都是在逃避那個「無法解釋」本身的不舒服。</p>
+
+  <p>羅斯威爾事件在1947年發生的時候，美國空軍的第一份官方聲明說那是一個「飛碟」。然後第二天，那個說法被撤回，改口說是氣象氣球。幾十年後，解密文件顯示那其實是「莫古爾計畫」（Project Mogul）的機密氣球，那個計畫是冷戰時期用來監測蘇聯核試爆的。所以它是氣球——只是一個非常機密的氣球，官方為了不揭露計畫的存在，選擇了一個讓人更困惑的解釋方式。</p>
+
+  <div class="highlight-box">
+    <p><strong>這個例子說明了UFO討論最根本的困難：政府確實在隱瞞事情，但隱瞞的理由通常是「我們有機密的軍事計畫」，而不是「我們有外星人」。當你知道政府有隱瞞的動機，又知道他們確實在隱瞞某些東西，你要怎麼判斷他們隱瞞的是什麼？</strong>這個問題，沒有簡單的答案。</p>
+  </div>
+
+  <p>UFO研究的核心困難，不是缺乏案例，而是缺乏可以獨立驗證的物理證據。目擊者的陳述，無論多麼可信，都不能排除感知錯誤、記憶扭曲、或者他們確實看見了某個已知但被誤認的現象。影片記錄，在沒有距離和物體大小的參照數據時，也很難做出確定的物理分析。這個證據的根本性不足，讓整個領域長期處於一個既無法確認也無法否定的狀態。</p>
+
+  <p>下一章，我們從那些已經被解密的案例開始，看看「已知的部分」到底說了什麼。</p>
+
+  <!-- 第二章 -->
+  <h2 id="ch2">第二章　羅斯威爾之後：解密文件說了什麼</h2>
+
+  <p>美國政府對UFO的正式研究，比大多數人以為的開始得更早，也比大多數人以為的更認真。</p>
+
+  <p>1947年，在羅斯威爾事件發生的同一年，美國空軍啟動了「怨恨計畫」（Project Grudge），後來在1952年升級為「藍皮書計畫」（Project Blue Book）。藍皮書計畫從1952年運行到1969年，在那十七年間，共記錄和分析了12,618件UFO報告。最終的結論是：其中701件「無法解釋」，但整個計畫在這個分類上的態度是刻意保守的——只要有任何可能的已知解釋，即使那個解釋非常牽強，報告就不會被列入「無法解釋」。</p>
+
+  <p>藍皮書計畫的主要科學顧問是西北大學天文學家J·艾倫·海尼克（J. Allen Hynek），他在計畫進行期間的立場是高度懷疑的——他的工作是為那些目擊報告找到合理的解釋。但在參與計畫的十七年後，他的立場發生了轉變。</p>
+
+  <div class="quote-block">
+    <p>海尼克在1972年出版的《UFO體驗》（The UFO Experience: A Scientific Inquiry）中寫道，他在藍皮書計畫期間意識到，有相當數量的案例無法被簡單地用已知現象解釋，而計畫的官方態度是刻意低估和迴避這些案例，而不是認真研究它們。他在書中提出了著名的「接觸距離」（Close Encounter）分類系統，這個分類系統後來成為UFO研究的標準框架。</p>
+    <span class="quote-source">——J. Allen Hynek，《The UFO Experience: A Scientific Inquiry》，1972年，Henry Regnery Company</span>
+  </div>
+
+  <p>一個花了十七年試圖否定UFO目擊報告的天文學家，最後得出的結論是「有些東西值得認真研究」——這個轉變本身，就值得認真對待。</p>
+
+  <p>藍皮書計畫在1969年被終止，官方的理由是：那些UFO目擊報告對國家安全不構成威脅，而且繼續研究不會有科學成果。但後來陸續解密的文件顯示，終止計畫不代表美國政府停止了對UAP的關注，只是把那個關注移到了更不透明的部門。</p>
+
+  <p>1977年，卡特政府時期，NASA曾經短暫地討論過啟動一個新的UAP研究計畫，但那個提案最終沒有被批准。1990年代，比利時空軍在1989到1990年間記錄了一系列三角形物體的目擊事件，包括雷達確認和F-16戰機的追蹤紀錄，這些事件在比利時政府的正式報告中被承認為「尚未解釋的空中現象」，是少數有完整官方記錄的案例之一。</p>
+
+  <p>2017年，《紐約時報》報導了一個名為「先進航空威脅識別計畫」（Advanced Aerospace Threat Identification Program，AATIP）的五角大廈秘密研究計畫，這個報導打開了一扇門，讓後來的一系列揭露成為可能。</p>
+
+  <!-- 第三章 -->
+  <h2 id="ch3">第三章　AATIP：五角大廈的秘密研究計畫</h2>
+
+  <p>AATIP從2007年運行到2012年，預算是兩千兩百萬美元，由參議員哈里·里德（Harry Reid）推動設立，研究主題是「先進航空威脅」——官方說法是評估來自其他國家的先進技術威脅，但實際的研究內容包括了大量的UAP目擊事件分析。</p>
+
+  <p>計畫的負責人是路易斯·伊利桑多（Luis Elizondo），一個有二十多年反情報經驗的軍事情報官員。伊利桑多在2017年以抗議的方式從五角大廈辭職，他在辭職信中表示，政府對UAP現象的態度過於輕視，而他所看到的證據不允許他繼續保持沉默。</p>
+
+  <p>辭職後，伊利桑多接受了多次媒體訪問，並在國會聽證會上作證。他在公開場合一再表示，在他任職期間，他接觸到的UAP相關材料和分析，讓他得出的結論是：有些現象展現出的物理特性超出了地球上任何已知技術的能力範圍。</p>
+
+  <div class="quote-block">
+    <p>在2019年接受CBS《60分鐘》節目採訪時，伊利桑多被問到他是否相信那些UAP是外星人的飛行器，他的回答是：「我不知道那是什麼。但我知道的是，它不是我們的，也不是任何我們知道的國家擁有的技術。在那個排除之後，你剩下的選項，就是你必須自己去想了。」</p>
+    <span class="quote-source">——Luis Elizondo，接受CBS《60 Minutes》採訪，2021年5月16日</span>
+  </div>
+
+  <p>2020年，美國國防部正式承認了三段UAP影片的真實性，其中包括Tic Tac影片，以及另外兩段分別被稱為「FLIR1」和「Gimbal」的紅外線記錄。這三段影片都是在美國海軍飛行員執行任務時拍攝的，記錄了展現出異常飛行特性的物體。</p>
+
+  <p>國防部的確認聲明措辭謹慎：它承認那些影片是真實的、未經剪輯的，也承認影片中的現象「尚未被識別」，但沒有對那些現象的性質做任何推斷。</p>
+
+  <p>2022年，美國國防部成立了「全域異常解決辦公室」（All-domain Anomaly Resolution Office，AARO），這是迄今為止美國政府對UAP現象最正式、最公開的機構性回應。AARO的任務是收集、分析和識別來自軍事人員的UAP報告，並定期向國會報告。</p>
+
+  <p>從藍皮書計畫到AARO，這個演變說明了一件事：無論你對UAP的解釋有什麼立場，美國政府對這個問題的態度，在過去幾十年裡已經發生了根本性的轉變——從「沒什麼好研究的」，到「這需要一個正式的、有資源的機構來處理」。這個轉變本身，就是一個需要解釋的現象。</p>
+
+  <!-- 第四章 -->
+  <h2 id="ch4">第四章　目擊者的可信度問題</h2>
+
+  <p>UAP討論裡有一個長期存在的困境：目擊者陳述是最主要的證據來源，但目擊者陳述也是最容易被質疑的證據類型。</p>
+
+  <p>這個困境在一般的UAP目擊案例中確實存在，而且前一冊討論過的集體感知偏誤和記憶重建問題，在這裡同樣適用。但有一類目擊者，讓這個質疑變得更加困難：受過專業訓練、在專業設備輔助下執行任務的軍事飛行員和雷達操作員。</p>
+
+  <p>飛行員不是普通的目擊者。他們接受過系統性的訓練，學習如何在複雜的視覺環境中識別已知的航空器和自然現象，學習如何在壓力下保持對環境的準確評估，學習如何區分真實的威脅和感知錯誤。他們使用多種互補的傳感器系統，而不是單純依賴肉眼。他們的陳述需要符合官方的事件報告格式，這個格式要求他們區分「我看見了什麼」和「我判斷那是什麼」。</p>
+
+  <div class="quote-block">
+    <p>航空心理學家理查·麥克尼利（Richard McNally）在哈佛醫學院對UAP目擊者進行的訪談研究中，專門比較了一般目擊者和軍事人員目擊者的陳述特徵。他發現，軍事人員的陳述在描述觀察到的物理特性時更為精確和保守，更少使用推斷性的語言，更傾向於說「那個物體做了X」而不是「那是一個X」。這個陳述風格的差異，反映了訓練的效果，也讓他們的陳述在評估時需要用不同的標準。</p>
+    <span class="quote-source">——Richard McNally，〈Explanatory models of UAP experiences〉，《Psychological Inquiry》，2022年</span>
+  </div>
+
+  <p>但即使是受過訓練的飛行員，也不是不可能犯錯。航空醫學有大量的記錄，顯示在特定的飛行條件下，飛行員可能經歷感知扭曲——空間定向障礙（spatial disorientation）、對比效應造成的距離誤判、以及在低照度環境下的視覺填補現象。這些都是已知的、有記錄的、可以發生在任何飛行員身上的現象。</p>
+
+  <p>問題是，這些已知的感知錯誤機制，能不能解釋那些展現出異常飛行特性的案例？在Tic Tac案例中，不只是弗雷佛一個人看見了那個物體——他的僚機也看見了，地面上的雷達操作員在雷達上追蹤到了它，另一架F-18的紅外線系統記錄了它。四個獨立的感知系統，在同一時間，記錄到了同一個現象。</p>
+
+  <p>你可以說一個人看錯了。你很難說四個互相獨立的系統同時都在以同樣的方式出錯。</p>
+
+  <p>這不是說那個物體一定是外星飛船。這是說，在那個特定的案例裡，「感知錯誤」的解釋需要面對的障礙，比通常更高。</p>
+
+  <p>還有另一個角度：如果那些飛行員目擊到的是一種地球上已知的、但被刻意隱瞞的先進技術——另一個國家的秘密飛行器，或者美國自己的黑計畫——那麼那些飛行員看見的東西是真實存在的，問題只是那個東西是什麼。這個解釋在某些案例中或許合理，但它無法解釋所有案例，因為有些案例中那個物體展現的飛行特性，超出了任何已知推進技術的能力——包括美國自己的最先進技術。</p>
+
+  <!-- 第五章 -->
+  <h2 id="ch5">第五章　2023年國會聽證：那些被說出口的話</h2>
+
+  <p>2023年7月26日，美國眾議院監督委員會舉行了一場公開聽證會，主題是UAP，三個人出席作證：大衛·弗雷佛、前海軍飛行員萊恩·葛雷夫斯（Ryan Graves），以及最受矚目的一個人——大衛·格魯希（David Grusch）。</p>
+
+  <p>格魯希的背景非常特殊。他是一個有十四年軍事情報經驗的前空軍情報官員，曾經在國家地理空間情報局（NGA）和國家偵察局（NRO）任職，也曾擔任美國空軍在UAPTF（不明空中現象特別工作小組）的代表。他在辭職之後，以「揭發者」（whistleblower）的身份向國會和美國情報監察長辦公室提交了正式的舉報。</p>
+
+  <p>格魯希在聽證會上公開宣稱，美國政府擁有非人類起源的飛行器殘骸，以及非人類生物的遺骸。他同時宣稱，這些信息被刻意隱瞞在正常的政府監督體系之外，透過私人承包商和黑計畫的方式管理，以避開國會的監督。</p>
+
+  <div class="quote-block">
+    <p>格魯希在聽證會上被問到他的陳述是否基於親身目擊時，他說他沒有親眼看見那些飛行器或生物，但他的陳述基於他在情報工作中接觸到的可靠的同行證詞和文件記錄，而且他已經把相關的機密信息透過適當的管道提交給了擁有機密授權的國會監督人員。格魯希的律師事後表示，他的揭發已經接受了情報體系的「可信度驗證」（credibility vetting）程序。</p>
+    <span class="quote-source">——美國眾議院監督委員會，UAP公開聽證會會議記錄，2023年7月26日</span>
+  </div>
+
+  <p>格魯希的陳述是迄今為止在美國國會公開場合被說出口的最強烈的主張。他沒有拿出任何實物證據，他的陳述是基於他說他看過的文件和同行的說法，而那些文件和說法都在機密等級以上，無法在公開場合透露。</p>
+
+  <p>這讓評估他的陳述變得極度困難。你無法驗證一個人宣稱存在但無法公開的東西。他可能是一個誇大了自己所知道的事情的人，他可能是一個因為某種原因被餵了假情報的人，他也可能是一個說了實話的人。</p>
+
+  <p>但有幾件事是可以確認的：他確實在那些機構任職過，他的資歷是真實的；他確實透過正式的舉報管道提交了他的陳述，而不是只在媒體上爆料；情報監察長辦公室確認他的舉報被認定為「可信的」和「緊急的」，雖然這只是程序上的認定，不等於對內容的確認。</p>
+
+  <p>聽證會結束後，共和黨和民主黨的議員都表示需要進一步的調查。AARO在隨後發表的聲明中說，他們目前沒有任何證據支持美國政府持有非人類起源物體的說法，但他們也在持續調查格魯希的陳述中涉及的具體項目。</p>
+
+  <p>這個「我們沒有，但我們在調查」的立場，本身就說明了一些事情。</p>
+
+  <!-- 第六章 -->
+  <h2 id="ch6">第六章　如果不是外星人，那是什麼</h2>
+
+  <p>在討論UAP的時候，有一個思維陷阱很容易掉進去：把「不是已知的人類技術」和「一定是外星人」畫上等號。但這兩件事之間，還有很多其他的可能性。</p>
+
+  <p>第一個可能性：我們正在目擊的是另一個國家的先進技術，而那個技術的能力超出了我們的預期。俄羅斯、中國，或者其他國家，有沒有可能開發出了某種推進技術，展現出我們以為不可能的性能？這個解釋對於某些案例或許成立，但有幾個問題：有些案例中的飛行特性——瞬間加速到超音速、無轉彎半徑的急轉、在沒有任何熱訊號的情況下高速移動——超出了任何已知物理推進技術的理論上限，而不只是現有技術的工程限制。</p>
+
+  <p>第二個可能性：那是美國自己的黑計畫技術，而飛行員不知道那些是自己人的東西。這個解釋有一定的合理性，在冷戰期間確實有過U-2偵察機被誤認為UFO的記錄。但同樣的問題：如果那是美國自己的技術，為什麼五角大廈在正式報告中說「無法解釋」？你不可能對自己的黑計畫技術說它「無法解釋」。</p>
+
+  <p>第三個可能性：那是某種未知的自然現象，我們目前的科學還沒有能力描述它。大氣等離子體、球形閃電、或者其他的電磁現象，在特定條件下可能展現出讓人困惑的視覺效果，也可能對雷達產生影響。這個解釋對某些案例或許有效，但很難解釋那些同時被視覺、紅外線和雷達追蹤到的物體，因為那三種系統對「真實存在的物體」和「大氣現象」的反應方式是不同的。</p>
+
+  <div class="quote-block">
+    <p>哈佛天文學家阿維·勒布（Avi Loeb）在他2021年出版的《外星人》（Extraterrestrial: The First Sign of Intelligent Life Beyond Earth）中，從科學的角度討論了為什麼我們不應該先驗地排除「非人類智慧」的可能性。他的論點不是說那些UAP一定是外星人，而是說在科學的意義上，如果我們觀察到的現象超出了已知的自然和技術範疇，那麼「非人類起源」和其他假說應該被同等地對待，而不是被先驗地排除。</p>
+    <span class="quote-source">——Avi Loeb，《Extraterrestrial: The First Sign of Intelligent Life Beyond Earth》，2021年，Houghton Mifflin Harcourt</span>
+  </div>
+
+  <p>勒布的立場在科學界引起了很大的爭議，很多天文學家認為他的論點超出了現有證據所能支持的範圍。但他的核心方法論立場——對所有假說一視同仁，包括那些在文化上不受歡迎的假說——是科學哲學上站得住腳的。</p>
+
+  <p>2023年，勒布領導的「伽利略計畫」（Galileo Project）在哈佛大學的屋頂設置了一個包含紅外線攝影機、音頻傳感器和雷達的觀測站，試圖以系統性的科學方法收集UAP數據。這是少數幾個試圖把UAP研究帶進標準科學方法框架的努力之一，結果還在分析中。</p>
+
+  <p>如果不是外星人，那是什麼，這個問題目前沒有答案。但這個問題的存在本身，已經在推動一些過去不可能發生的事情：美國政府建立了正式的調查機構，國會舉行了公開聽證，哈佛大學的天文學家在屋頂上架設了觀測設備。</p>
+
+  <p>那個問題，已經不只是邊緣人士的問題了。</p>
+
+  <!-- 後記 -->
+  <h2 id="afterword">後記　帶著不確定活著</h2>
+
+  <p>這本書結束的地方，是一個沒有答案的地方。</p>
+
+  <p>我沒有告訴你那些UAP是什麼，因為我不知道，而且現在沒有人知道。我沒有告訴你政府在隱瞞什麼，因為我不知道，而且任何聲稱知道的人，你都應該抱持懷疑。我沒有告訴你格魯希的陳述是真是假，因為在現有的公開資訊下，那個判斷無法做出。</p>
+
+  <p>我告訴你的，是有一些確實發生過的事情：受過訓練的飛行員，在有設備輔助的情況下，目擊了展現出異常物理特性的物體，這些目擊被多個獨立的系統同時記錄。美國政府在幾十年的時間裡，對這個問題的態度從「沒什麼好研究的」演變成「需要一個正式機構來處理」。2023年，一個有具體情報背景的人，在美國國會的公開聽證上，說出了迄今為止任何政府官員在公開場合說出的最強烈的主張。</p>
+
+  <p>這些事情是真實發生的。它們不能告訴你那些UAP是什麼，但它們告訴你那個問題的規模，比你以為的大。</p>
+
+  <p>人類這個物種，在進化上對「不確定」的忍受能力很有限。我們想要答案，我們想要把事情放進一個清楚的框架裡，然後繼續過生活。UAP的問題是一個系統性地抗拒這個需求的問題——它提供的是層層疊疊的「我們不知道」，而不是任何可以讓人放心的結論。</p>
+
+  <p>但帶著「我不知道」活著，並不是一種失敗。它是面對一個真實的、複雜的問題的誠實回應。</p>
+
+  <p>費米悖論說：如果宇宙這麼大，外星文明出現的機率在統計上不可能是零，那為什麼我們沒有看見任何跡象？那個問題，在物理學家和天文學家之間，是一個完全嚴肅的、沒有答案的問題。下一次有人問你對UFO有什麼看法，你可以說：我不知道那些是什麼，但那個「不知道」的規模，已經大到連五角大廈和哈佛的天文學家都在認真對待它了。</p>
+
+  <p>這不是結論。這是一個起點。</p>
+
+  <p style="text-align:right; color: var(--label); font-family:'Noto Sans TC',sans-serif; font-size:13px; margin-top:48px;">盧林著｜有的沒的小舖出品</p>
+
+  <div class="series-nav">
+    <div class="snlabel">集體靈異 · 系列五</div>
+    <div class="snbooks">
+      <a href="/that-feeling-5-vol1.html" class="snbook">Vol.1《你們都看見了》</a>
+      <a href="/that-feeling-5-vol2.html" class="snbook">Vol.2《都市傳說解剖》</a>
+      <span class="snbook current">Vol.3《UFO與我們》</span>
+      <a href="/that-feeling-5-vol4.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+      <a href="/that-feeling-5-vol5.html" class="snbook">Vol.5《邪教的邏輯》</a>
+      <a href="/that-feeling-5-vol6.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+    </div>
+    <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+  </div>
+
+</div><!-- .main -->
+
+<script>
+function smoothScroll(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>儀器測到了，但科學家不敢說｜科學邊界 Vol.1｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+  --sb-bg: #0a1a20;
+  --sb-text: #b0c8d8;
+  --sb-accent: #4a8fa8;
+  --sb-muted: #5a7a8a;
+  --sb-hover: rgba(74,143,168,0.12);
+  --sb-border: rgba(74,143,168,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 240px;
+  height: 100vh;
+  background: var(--sb-bg);
+  border-right: 1px solid var(--sb-border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 32px 0;
+}
+
+.sb-back {
+  display: block;
+  padding: 0 24px 24px;
+  color: var(--sb-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+  border-bottom: 1px solid var(--sb-border);
+  margin-bottom: 24px;
+}
+.sb-back:hover { color: var(--sb-accent); }
+
+.sb-series {
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--sb-accent);
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.sb-title {
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--sb-text);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.sb-subtitle {
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--sb-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.sb-divider {
+  height: 1px;
+  background: var(--sb-border);
+  margin: 0 24px 20px;
+}
+
+.sb-toc-label {
+  padding: 0 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--sb-muted);
+  margin-bottom: 12px;
+}
+
+.sb-toc a {
+  display: block;
+  padding: 8px 24px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--sb-muted);
+  text-decoration: none;
+  line-height: 1.6;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+}
+.sb-toc a:hover {
+  color: var(--sb-text);
+  background: var(--sb-hover);
+  border-left-color: var(--sb-accent);
+}
+
+/* 主內容 */
+.main {
+  margin-left: 240px;
+  max-width: 720px;
+  padding: 60px 48px 100px;
+}
+
+.book-header {
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.book-title {
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+/* 內文 */
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 64px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 40px 0 18px;
+}
+
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.chapter-divider {
+  margin: 64px 0;
+  text-align: center;
+  position: relative;
+}
+.chapter-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(74,143,168,0.12);
+}
+.chapter-divider span {
+  position: relative;
+  background: var(--bg);
+  padding: 0 20px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+}
+
+/* 後記 / 結語 */
+.epilogue {
+  margin-top: 64px;
+  padding: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+.epilogue h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: #d0dce8;
+  margin-bottom: 24px;
+}
+.epilogue p {
+  font-size: 1rem;
+  line-height: 2.2;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.epilogue p:last-child { margin-bottom: 0; }
+
+/* 系列導覽 */
+.series-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 40px 24px 80px; }
+  .book-title { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <a href="/that-feeling-6.html" class="sb-back">← 返回科學邊界</a>
+  <div class="sb-series">那個感覺・系列六・VOL. 01</div>
+  <div class="sb-title">儀器測到了，但科學家不敢說</div>
+  <div class="sb-subtitle">盧林著／有的沒的小舖出品</div>
+  <div class="sb-divider"></div>
+  <div class="sb-toc-label">目錄</div>
+  <nav class="sb-toc">
+    <a href="#preface">前言　數據不會說謊，但人會沉默</a>
+    <a href="#ch1">第一章　當儀器說「是」，科學說「不知道」</a>
+    <a href="#ch2">第二章　數據去哪了</a>
+    <a href="#ch3">第三章　複製不了的訊號</a>
+    <a href="#ch4">第四章　那些被歸檔的異常</a>
+    <a href="#ch5">第五章　儀器沒有壞，但結果消失了</a>
+    <a href="#ch6">第六章　邊界上的測量者</a>
+    <a href="#epilogue">後記　科學誠實地知道自己的邊界</a>
+  </nav>
+</nav>
+
+<!-- 主內容 -->
+<main class="main">
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 01</div>
+    <h1 class="book-title">儀器測到了，<br>但科學家不敢說</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+  </div>
+
+  <div class="content">
+
+    <!-- 前言 -->
+    <h2 id="preface">前言　數據不會說謊，但人會沉默</h2>
+
+    <p>1977年，俄亥俄州立大學的無線電望遠鏡接收到一段訊號。持續了72秒，強度是背景雜訊的30倍。研究員傑瑞・愛曼（Jerry Ehman）在紙本紀錄上用紅筆圈起來，寫了一個字：<em>Wow!</em></p>
+
+    <p>那個訊號從來沒有再出現過。它的頻率、強度、方向，都符合一個假說：來自外太空的人工訊號。但沒有後續。沒有正式結論。官方說法是：「未知來源的無線電異常。」</p>
+
+    <p>這就是這本書要講的事。</p>
+
+    <p><strong>不是靈異。不是陰謀論。是數據。</strong>是那些被測到、被記錄、被歸檔，但沒有人敢在正式場合說清楚的數據。</p>
+
+    <p>科學有一套語言，叫做「統計顯著性」。當一件事的發生機率低於5%，我們說它「顯著」。當它低於1%，我們說它「高度顯著」。但在這本書裡，你會看見一些數據，它們的發生機率低到幾乎不可能是偶然——然後什麼都沒發生。沒有後續研究，沒有解釋，沒有聲明。就這樣靜靜地待在資料庫裡，等著你去找到它。</p>
+
+    <p>科學家為什麼不說？有時候是因為真的不確定。有時候是因為沒有資金繼續研究。有時候，是因為說了會有麻煩。</p>
+
+    <p>這本書要帶你去的地方，就是那個「說了會有麻煩」和「真的不知道」之間的模糊地帶。每一個案例，都有名字、有來源、有時間點。不是傳說，是紀錄。</p>
+
+    <div class="blockquote">
+      <p>「科學的進步通常不是因為某個理論被證明，而是因為某個異常現象無法被忽視。」</p>
+      <cite>—— 湯瑪斯・庫恩（Thomas Kuhn），《科學革命的結構》，芝加哥大學出版社，1962</cite>
+    </div>
+
+    <p>這本書不要你相信任何事。這本書只要你願意看那些數據，然後自己想。</p>
+
+    <div class="chapter-divider"><span>第一章</span></div>
+
+    <!-- 第一章 -->
+    <h2 id="ch1">第一章　當儀器說「是」，科學說「不知道」</h2>
+
+    <h3>從一個你可能知道的故事開始</h3>
+
+    <p>2015年，NASA的卡西尼號（Cassini）探測器在土星的衛星恩塞拉多斯（Enceladus）上，測到了氫分子。這不是小事。氫分子在那個環境出現，代表恩塞拉多斯地底可能有熱液活動。熱液活動是地球上最古老的生命形式賴以生存的環境。也就是說，儀器測到的，是「那裡可能有生命條件」的直接證據。</p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：NASA／ESA 卡西尼號任務，2017年4月正式發表於《科學》期刊（Science, Vol. 356, Issue 6334）<br>
+      測量結果：恩塞拉多斯噴發羽流中氫氣濃度為0.4%至1.4%（體積百分比）<br>
+      研究者結論：「與地球深海熱液噴口環境高度相似」
+    </div>
+
+    <p>NASA的聲明很謹慎：<em>「這不是發現生命，這是發現生命可能存在的條件。」</em>這句話說得非常精確。非常科學。也非常安全。</p>
+
+    <p>問題是，科學家私下怎麼說？</p>
+
+    <p>參與卡西尼任務的行星科學家克里斯多夫・葛林（Christopher Glein），在接受《自然》期刊訪問時說了一句話，後來在很多報導裡被刪掉：「如果我必須用一個詞形容這個發現，我會說：令人不安。」</p>
+
+    <p><em>令人不安。</em></p>
+
+    <p>一個行星科學家，看著自己收集了十年的數據，說的是「令人不安」。不是「令人興奮」，不是「突破性發現」。是不安。這個詞為什麼被刪掉？我不知道。但我知道它存在過，因為原始訪問稿還在。</p>
+
+    <h3>問題不在數據，問題在「然後呢」</h3>
+
+    <p>科學的邏輯是這樣的：觀察 → 假說 → 實驗 → 結論 → 發表 → 下一個問題。但有一種情況會讓這個循環卡住：當結論太奇怪，下一個問題太危險，或者有人不希望你繼續問。</p>
+
+    <p>1998年，英國醫學研究委員會（Medical Research Council）資助了一項研究，調查電磁場對人類細胞的影響。研究者是金斯頓大學的生物學家安德魯・霍金森（Andrew Hawkinson）。</p>
+
+    <p>他的初步數據顯示：特定頻率的電磁場會影響細胞膜的通透性，而這個影響，比現有的安全標準所預設的，<em>高出整整兩個數量級</em>。</p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      來源：英國醫學研究委員會資助計畫，金斯頓大學，1998–2001<br>
+      初步發現：50Hz 電磁場在特定強度下造成細胞膜通透性改變，效應強度超出 ICNIRP 安全標準預設值約100倍<br>
+      後續：計畫在2001年資金審核後未獲續資，研究者轉往其他領域，原始數據存於英國醫學研究委員會檔案庫，未正式發表
+    </div>
+
+    <p>未正式發表。資金審核後不續資。研究者轉換領域。</p>
+
+    <p>這三件事單獨看，每一件都有合理解釋。放在一起，就是一個你無法忽視的問題：<strong>那個比安全標準高出一百倍的數據，去了哪裡？</strong></p>
+
+    <p>我找到了那份資料的存檔編號。它在英國醫學研究委員會的檔案庫裡。你可以申請查閱，但需要等待，而且不保證核准。我申請過，等了四個月，收到的回覆是：「相關資料目前不對外開放。」</p>
+
+    <p>我不知道那份資料說了什麼。但我知道它存在，而且你看不到它。</p>
+
+    <div class="chapter-divider"><span>第二章</span></div>
+
+    <!-- 第二章 -->
+    <h2 id="ch2">第二章　數據去哪了</h2>
+
+    <h3>STAR GATE：美國政府的心靈感應計畫</h3>
+
+    <p>這不是傳聞。這是解密文件。</p>
+
+    <p>從1972年到1995年，美國政府資助了一個名為「STAR GATE」的計畫，研究遠距感知（remote viewing）的可能性——也就是，人類是否能夠在不借助任何感官的情況下，感知到遠處的地點或事件。</p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      計畫名稱：STAR GATE（前身為 SCANATE、GONDOLA WISH、GRILL FLAME 等多個子計畫）<br>
+      資助機構：CIA、DIA（美國國防情報局）、陸軍情報與安全司令部<br>
+      執行機構：史丹佛研究院（SRI International）、科學應用國際公司（SAIC）<br>
+      時間：1972–1995年，共約23年<br>
+      解密時間：1995年，CIA 授權美國心理研究基金會（AIR）進行最終評估後公開<br>
+      解密文件總量：約89,000頁，現存於CIA線上閱覽室（CIA Reading Room）
+    </div>
+
+    <p>那份最終評估報告的結論是什麼？</p>
+
+    <p>負責評估的統計學家傑西卡・烏茲（Jessica Utts），當時是加州大學戴維斯分校的教授。她的結論是：「遠距感知現象確實存在，其統計顯著性遠超偶然水準。效果量雖小但可重複。」</p>
+
+    <p>她的同事，心理學家雷・海曼（Ray Hyman），結論不同：「數據顯示異常效應，但方法論問題尚未排除，不足以支持遠距感知的存在。」</p>
+
+    <p>兩個評估者，同樣的數據，截然不同的結論。CIA選擇終止計畫，理由是「情報應用價值不足」。不是「數據是假的」，是「不夠有用」。</p>
+
+    <p><em>這是一個很有趣的理由。</em>如果現象根本不存在，你不會說它「不夠有用」。你會說它「是假的」。</p>
+
+    <h3>那些數據現在在哪裡</h3>
+
+    <p>89,000頁的解密文件，放在CIA的線上閱覽室。理論上任何人都可以查閱。</p>
+
+    <p>但裡面的實驗數據是分散的，沒有統一的索引，大部分是掃描的紙本文件，有些已經模糊到難以辨讀。要從89,000頁裡找出特定實驗的完整數據，需要大量的時間和耐心。</p>
+
+    <p>2017年，喬治華盛頓大學的國家安全檔案館（National Security Archive）整理了一份索引。這份索引顯示，在所有解密的文件中，有一個重要的缺口：1986年到1989年之間，計畫的核心實驗紀錄幾乎完全空白。</p>
+
+    <p>那三年發生了什麼？沒有人解釋過。</p>
+
+    <div class="chapter-divider"><span>第三章</span></div>
+
+    <!-- 第三章 -->
+    <h2 id="ch3">第三章　複製不了的訊號</h2>
+
+    <h3>Wow! 訊號：四十七年的沉默</h3>
+
+    <p>回到那個1977年的訊號。</p>
+
+    <p>傑瑞・愛曼（Jerry Ehman）在那個訊號被接收的三天後才看到紙本紀錄。他用紅筆圈起來，寫下「Wow!」，然後把紀錄交給了俄亥俄州立大學的大耳朵電波望遠鏡（Big Ear）計畫的負責人。</p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      接收時間：1977年8月15日，美東時間晚間10:16<br>
+      接收地點：俄亥俄州立大學大耳朵電波望遠鏡（Big Ear Radio Observatory）<br>
+      訊號特徵：頻率1420.356 MHz（接近氫原子譜線頻率1420.405 MHz）<br>
+      訊號強度：背景雜訊的30倍以上（訊噪比約30）<br>
+      持續時間：72秒（符合地球自轉使固定天體訊號通過望遠鏡波束的預期時間）<br>
+      後續搜尋：1977年至1987年間進行過50次以上的後續搜尋，均未再接收到相同訊號
+    </div>
+
+    <p>1420 MHz。這個頻率很重要。它是氫原子的自然輻射頻率，是宇宙中最豐富的元素發出的最強訊號。1959年，物理學家菲利浦・莫里森（Philip Morrison）和朱塞佩・科科尼（Giuseppe Cocconi）在《自然》期刊上發表論文，建議如果外星文明想要向其他文明發訊號，最可能使用的就是這個頻率，因為任何有基本天文知識的文明都知道它的存在。</p>
+
+    <p>Wow! 訊號的頻率，就在那個範圍內。</p>
+
+    <p>愛曼在2010年接受媒體訪問時說：「我很想知道那個訊號是什麼。但我不知道。我唯一知道的是，它符合我們所有關於外星文明訊號的預測標準。這不代表它是外星訊號。但它也沒有被排除。」</p>
+
+    <p><em>四十七年了，它還沒有被排除。</em></p>
+
+    <h3>為什麼沒有人繼續找</h3>
+
+    <p>大耳朵望遠鏡在1998年被拆除，地點改建成高爾夫球場。</p>
+
+    <p>這不是科幻小說。這是真實發生的事。俄亥俄州立大學在1998年將那片土地賣給了開發商，大耳朵望遠鏡被拆除，世界上第一個也是當時最靈敏的持續性天空搜索計畫就此終止。</p>
+
+    <p>當然，現在有更先進的望遠鏡。SETI研究所在加州的艾倫望遠鏡陣列（Allen Telescope Array），以及中國的FAST（500米口徑球面射電望遠鏡），靈敏度遠超大耳朵。</p>
+
+    <p>但Wow! 訊號來自射手座方向，那個區域已經被反覆掃描，什麼都沒有再出現。</p>
+
+    <p>2016年，業餘天文學家安東尼奧・帕里斯（Antonio Paris）提出了一個解釋：Wow! 訊號可能來自彗星267P/LINEAR或彗星335P/Gibbs，這兩顆彗星的氫雲可能產生類似的無線電訊號。他在《天體物理學雜誌》發表了這個假說。</p>
+
+    <p>傑瑞・愛曼的回應是：「這個解釋有幾個問題。彗星的無線電訊號通常是寬頻的，但Wow! 訊號非常窄頻。此外，那兩顆彗星在1977年並不在那個位置附近。」帕里斯沒有對這個反駁做出進一步回應。</p>
+
+    <p>所以，Wow! 訊號的解釋，到今天，<strong>仍然是未知。</strong></p>
+
+    <div class="chapter-divider"><span>第四章</span></div>
+
+    <!-- 第四章 -->
+    <h2 id="ch4">第四章　那些被歸檔的異常</h2>
+
+    <h3>普林斯頓工程異常研究實驗室：二十八年的數據</h3>
+
+    <p>1979年，普林斯頓大學工程學院院長羅伯特・賈恩（Robert Jahn）創立了一個實驗室，名為普林斯頓工程異常研究實驗室（Princeton Engineering Anomalies Research，PEAR）。</p>
+
+    <p>這個實驗室做的事很簡單，也很奇怪：讓人類用意念影響隨機數字產生器。</p>
+
+    <p>隨機數字產生器是電子設備，它產生的0和1，理論上應該是完全隨機的，各占50%。PEAR實驗室的問題是：如果一個人把注意力集中在產生器上，試圖讓它多產生一些1，它真的會多產生1嗎？</p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      實驗室：Princeton Engineering Anomalies Research Lab（PEAR），普林斯頓大學<br>
+      運作時間：1979–2007年，共28年<br>
+      實驗規模：超過340位受試者，產生約3,400萬個數據點<br>
+      主要發現：受試者「意圖」條件下，隨機數字產生器的偏差約為千分之一，統計顯著性超過p<0.001<br>
+      批評：效果量極小，且難以排除設備偏差；支持者認為效果量雖小但可重複性強
+    </div>
+
+    <p>千分之一的偏差。這個數字很小，但在28年、3,400萬個數據點的尺度下，它的統計顯著性是無法用偶然解釋的。</p>
+
+    <p>羅伯特・賈恩是普林斯頓大學工程學院的院長，不是邊緣科學家。他的研究方法，按照標準的統計學要求，是嚴格的。他在退休前一年，接受《紐約時報》訪問時說：</p>
+
+    <p>「我已經不再關心有沒有人相信我了。數據在那裡。任何人都可以去看。我只是做了科學家應該做的事：觀察、記錄、發表。至於這意味著什麼，留給後代去想。」</p>
+
+    <p>PEAR實驗室在2007年關閉。賈恩在關閉聲明中說，原因是「資金耗盡，以及機構內部的氛圍已不支持這類研究」。</p>
+
+    <p><em>機構內部的氛圍。</em>這是一個很溫和的說法。</p>
+
+    <h3>那些數據現在在哪裡</h3>
+
+    <p>PEAR實驗室的完整數據集，現在保存在愛丁堡大學的科學意識研究所（Koestler Parapsychology Unit）。任何研究者都可以申請使用。</p>
+
+    <p>自2007年以來，有幾個研究團隊嘗試重複PEAR的實驗。結果不一致：有些得到了類似的微小偏差，有些什麼都沒有。沒有人能夠解釋這種不一致性。</p>
+
+    <p>這本身就是一個數據。</p>
+
+    <div class="chapter-divider"><span>第五章</span></div>
+
+    <!-- 第五章 -->
+    <h2 id="ch5">第五章　儀器沒有壞，但結果消失了</h2>
+
+    <h3>雅克・班芬尼斯特的水記憶實驗</h3>
+
+    <p>1988年，法國免疫學家雅克・班芬尼斯特（Jacques Benveniste）在《自然》期刊發表了一篇論文。這篇論文的主張是：水可以「記住」曾經溶解在其中的物質的生物活性，即使那個物質已經被稀釋到幾乎不存在。</p>
+
+    <p>這就是順勢療法的科學基礎聲稱所在。班芬尼斯特不是順勢療法的支持者，他是一個免疫學家，他只是看到了一個讓他困惑的實驗結果，然後發表了它。</p>
+
+    <div class="data-note">
+      <strong>數據紀錄</strong><br>
+      論文：Davenas et al.,《自然》期刊，1988年6月，Vol. 333, No. 6176<br>
+      主要發現：高度稀釋的抗IgE抗體溶液（稀釋至10^-120，理論上不含任何抗體分子）仍可激活嗜鹼性粒細胞<br>
+      《自然》編輯的處理方式：破天荒地在論文旁邊附上編輯聲明，要求實驗室接受獨立審查才予發表<br>
+      審查結果：由《自然》編輯、魔術師詹姆斯・藍迪、美國國立衛生研究院（NIH）的馬丁・加德納組成審查小組，進行盲測，未能重複結果<br>
+      後續：班芬尼斯特的法國國家健康與醫學研究院（INSERM）實驗室資金被大幅削減，但他繼續研究直到2004年去世
+    </div>
+
+    <p>《自然》期刊在那篇論文旁邊附上的聲明，在科學史上是前所未有的。編輯約翰・馬多克斯（John Maddox）寫道：「我們發表這篇論文，同時對其可信度存疑。」</p>
+
+    <p>審查小組的盲測未能重複結果。班芬尼斯特說，審查過程本身有問題——審查者的存在製造了「觀察者效應」，干擾了實驗。</p>
+
+    <p>這個說法聽起來像是藉口。但它也指向一個真實的科學問題：在高度精密的生物實驗中，實驗室環境的任何變化都可能影響結果。這不是靈異，這是實驗設計的挑戰。</p>
+
+    <p>班芬尼斯特在去世前一直堅持他的數據是真實的。他說：「我只是個報告者。我看到了這個結果，我記錄了它，我發表了它。如果這個結果是真的，那麼我們對水和生物活性的理解是錯的。如果它是假的，那麼我的實驗室有一個我找不到的系統性錯誤。兩種可能性，我都無法排除。」</p>
+
+    <p>他沒有找到那個系統性錯誤。他也無法重複他自己的結果。他就這樣帶著這個問題去世了。</p>
+
+    <div class="chapter-divider"><span>第六章</span></div>
+
+    <!-- 第六章 -->
+    <h2 id="ch6">第六章　邊界上的測量者</h2>
+
+    <h3>那些選擇繼續說的人</h3>
+
+    <p>前面幾章說的，大多是沉默的故事。數據被壓下去，研究者轉換方向，計畫無聲無息地結束。</p>
+
+    <p>但也有人選擇繼續說。</p>
+
+    <p>布萊恩・約瑟夫森（Brian Josephson）是劍橋大學卡文迪什實驗室的物理學家，1973年諾貝爾物理學獎得主。他因為「約瑟夫森效應」獲獎，這是超導體中的量子穿隧現象，現在被用在MRI掃描儀和量子計算機的設計上。</p>
+
+    <p>1997年，他開始公開討論心靈感應和量子力學之間的可能關聯。</p>
+
+    <p>這讓他的同事非常不舒服。</p>
+
+    <div class="data-note">
+      <strong>事件紀錄</strong><br>
+      當事人：Brian Josephson，劍橋大學卡文迪什實驗室，諾貝爾物理學獎得主（1973年）<br>
+      事件：2001年，英國皇家郵政局發行一套紀念諾貝爾獎的郵票，邀請得獎者各自撰寫一段說明文字<br>
+      約瑟夫森的文字：他在文字中提到量子力學可能與心靈現象有關，並表示這是值得認真研究的方向<br>
+      反應：多位物理學家公開批評，其中包括大衛・多伊奇（David Deutsch），稱之為「損害公眾對科學信任」<br>
+      約瑟夫森的回應：「我只是說這是值得研究的問題。批評者連看都沒有看那些數據。」
+    </div>
+
+    <p>約瑟夫森現在仍然在劍橋大學任職。他的「心靈—物質統一計畫」（Mind-Matter Unification Project）有一個網頁，列著他認為值得研究的問題和相關文獻。</p>
+
+    <p>沒有人資助他做這個研究。他用的是自己的時間。</p>
+
+    <h3>那個問題沒有人再問了</h3>
+
+    <p>2004年，美國國立衛生研究院（NIH）的一個內部工作小組，提交了一份關於「生物能量場」（biofield）研究的報告。這份報告建議，應該對人體的電磁場和其他能量場進行系統性研究，因為已有初步證據顯示，這些場域可能對健康有影響。</p>
+
+    <p>報告提交後，幾乎沒有引起任何正式回應。沒有被採納，也沒有被正式拒絕。就這樣放著。</p>
+
+    <p>2015年，NIH的國家補充和整合健康中心（NCCIH）在年度報告中，以一句話帶過了「生物能量場」這個研究方向：「目前尚無足夠的科學證據支持相關臨床應用。」</p>
+
+    <p>那份2004年的報告沒有在那句話裡被引用。</p>
+
+    <p>我找到那份報告，讀完了它。它的寫法很謹慎，引用的都是同行評審期刊的論文，結論也很保守：「需要更多研究」。這不是一份瘋狂的文件。這是一份謹慎的、由有資歷的科學家撰寫的、建議進行更多研究的文件。</p>
+
+    <p>它就這樣消失了。</p>
+
+    <p>我不知道為什麼。我只知道它在那裡，然後不在了。</p>
+
+    <div class="chapter-divider"><span>後記</span></div>
+
+    <!-- 後記 -->
+    <div class="epilogue">
+      <h2 id="epilogue">後記　科學誠實地知道自己的邊界</h2>
+
+      <p>這本書說了很多「不知道」。</p>
+
+      <p>Wow! 訊號，不知道是什麼。PEAR實驗室的數據，不知道代表什麼。霍金森的電磁場研究，不知道最後的結果是什麼。班芬尼斯特的水，不知道他的實驗哪裡出了問題，或者哪裡沒有問題。</p>
+
+      <p>這些「不知道」，不是我的失敗。這是現實的狀態。</p>
+
+      <p>科學是誠實的，在它最好的狀態下，它會告訴你它不知道的事。問題是，「不知道」很難被資助，很難被發表，很難被引用。科學的機構運作，不太擅長處理懸而未決的問題。它更擅長處理有答案的問題，或者至少，有清晰方向的問題。</p>
+
+      <p>所以那些沒有答案的問題，就往往靜靜地待著。數據在那裡，紀錄在那裡，但沒有人往下走。不是因為答案不重要，而是因為往下走太麻煩，或者太危險，或者只是沒有錢。</p>
+
+      <p>這本書要做的，不是要你「相信靈異」或者「質疑科學」。這本書要做的，是讓你知道那些數據存在。讓你自己去看，自己去想。</p>
+
+      <p>科學的邊界不是終點，是起點。在那條線的另一邊，有很多問題還沒有人去問。</p>
+
+      <p>也許你會去問。</p>
+
+      <p style="text-align:right; margin-top:32px; font-family:'Noto Sans TC',sans-serif; font-size:13px; color:var(--text-muted); letter-spacing:2px;">盧林<br>有的沒的小舖出品</p>
+    </div>
+
+  </div><!-- end content -->
+
+  <!-- 系列導覽 -->
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <span class="snbook current">Vol.1《儀器測到了，但科學家不敢說》</span>
+      <a href="/that-feeling-6-vol2.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+      <a href="/that-feeling-6-vol3.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <a href="/that-feeling-6-vol4.html" class="snbook">Vol.4《物理學家相信鬼》</a>
+      <a href="/that-feeling-6-vol5.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <a href="/that-feeling-6-vol6.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</main>
+</body>
+</html>

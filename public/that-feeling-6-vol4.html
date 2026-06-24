@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理學家相信鬼｜科學邊界 Vol.4｜盧林著</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0e0e14;
+  --text: #c0c0d8;
+  --text-muted: #7070a0;
+  --accent: #4a8fa8;
+  --accent-light: rgba(74,143,168,0.15);
+  --accent-dim: rgba(74,143,168,0.4);
+  --card-bg: #14141e;
+  --card-border: rgba(74,143,168,0.2);
+  --label: #5a5a8a;
+  --sb-bg: #0a1a20;
+  --sb-text: #b8d0da;
+  --sb-accent: #4a8fa8;
+  --sb-muted: #4a6a78;
+  --sb-hover: rgba(74,143,168,0.12);
+  --sb-border: rgba(74,143,168,0.15);
+  --sidebar-width: 240px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  line-height: 2;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(74,143,168,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 85% 80%, rgba(74,143,168,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Sidebar ─────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--sb-bg);
+  border-right: 1px solid var(--sb-border);
+  overflow-y: auto;
+  padding: 32px 20px 40px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-back {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--sb-muted);
+  text-decoration: none;
+  margin-bottom: 28px;
+  transition: color 0.2s;
+}
+.sb-back:hover { color: var(--sb-accent); }
+
+.sb-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--sb-muted);
+  margin-bottom: 8px;
+}
+
+.sb-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sb-text);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.sb-subtitle {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  color: var(--sb-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.sb-divider {
+  height: 1px;
+  background: var(--sb-border);
+  margin-bottom: 20px;
+}
+
+.sb-toc-label {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--sb-muted);
+  margin-bottom: 12px;
+}
+
+.sb-toc a {
+  display: block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  color: var(--sb-muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  line-height: 1.6;
+  margin-bottom: 2px;
+  transition: all 0.2s;
+}
+.sb-toc a:hover {
+  color: var(--sb-accent);
+  background: var(--sb-hover);
+}
+
+/* ── Main Content ────────────────────────────── */
+.main {
+  position: relative;
+  z-index: 1;
+  margin-left: var(--sidebar-width);
+  max-width: 720px;
+  padding: 60px 48px 100px;
+}
+
+.page-back { padding: 0 0 32px; }
+.page-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color 0.2s;
+}
+.page-back a:hover { color: var(--accent); }
+
+.book-header {
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(74,143,168,0.12);
+  margin-bottom: 56px;
+}
+.book-series {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+.book-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  color: #d8e4f0;
+  margin-bottom: 12px;
+}
+.book-author {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+.content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dce8;
+  margin: 64px 0 28px;
+  line-height: 1.6;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 40px 0 16px;
+}
+.content p {
+  margin-bottom: 24px;
+  text-align: justify;
+  color: var(--text);
+}
+.content em { font-style: normal; color: #a0c8d8; }
+.content strong { font-weight: 500; color: #d0dce8; }
+
+.blockquote {
+  margin: 36px 0;
+  padding: 20px 28px;
+  border-left: 2px solid var(--accent-dim);
+  background: var(--accent-light);
+  border-radius: 0 6px 6px 0;
+}
+.blockquote p {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #b0c8d8;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.blockquote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 1px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.data-note {
+  margin: 32px 0;
+  padding: 18px 24px;
+  background: rgba(74,143,168,0.06);
+  border: 1px solid rgba(74,143,168,0.15);
+  border-radius: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.data-note strong { color: var(--accent); font-weight: 500; }
+
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 64px 0;
+}
+.chapter-divider::before, .chapter-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(74,143,168,0.3), transparent);
+}
+.chapter-divider span {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--label);
+}
+
+.series-nav {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,143,168,0.12);
+  text-align: center;
+}
+.snlabel {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--label);
+  margin-bottom: 16px;
+}
+.snbooks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.snbook {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(74,143,168,0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+.snbook.current {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-light);
+}
+.back-link {
+  display: inline-block;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 40px 24px 80px; }
+  .book-title { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺・系列六・Vol.4</div>
+  <div class="sb-title">《物理學家相信鬼》</div>
+  <div class="sb-subtitle">量子力學說的那些話<br>聽起來像靈媒說的</div>
+  <div class="sb-divider"></div>
+  <div class="sb-toc-label">目錄</div>
+  <nav class="sb-toc">
+    <a href="#preface">前言　量子力學打開了一道縫</a>
+    <a href="#ch1">第一章　觀測者改變了什麼</a>
+    <a href="#ch2">第二章　糾纏：距離不存在</a>
+    <a href="#ch3">第三章　那些認真做過靈異研究的物理學家</a>
+    <a href="#ch4">第四章　普林斯頓的那個實驗室</a>
+    <a href="#ch5">第五章　物理學的邊界語言</a>
+    <a href="#ch6">第六章　為什麼這不代表鬼是真的</a>
+    <a href="#afterword">後記　科學語言的極限</a>
+  </nav>
+</aside>
+
+<!-- Main -->
+<div class="main">
+
+  <div class="page-back">
+    <a href="/that-feeling-6.html">← 返回科學邊界系列</a>
+  </div>
+
+  <div class="book-header">
+    <div class="book-series">那個感覺・系列六・VOL. 04</div>
+    <h1 class="book-title">物理學家<br>相信鬼</h1>
+    <div class="book-author">盧林著／有的沒的小舖出品</div>
+  </div>
+
+  <div class="content">
+
+    <!-- 前言 -->
+    <h2 id="preface">前言　量子力學打開了一道縫</h2>
+
+    <p>
+      1935年，愛因斯坦和他的兩位同事博里斯・波多爾斯基（Boris Podolsky）
+      與納森・羅森（Nathan Rosen），發表了一篇論文。
+      他們的本意是要證明量子力學是錯的。
+    </p>
+    <p>
+      論文的核心論點是：如果量子力學是對的，那麼兩個相距遙遠的粒子
+      可以瞬間互相影響，不需要任何訊號傳遞。
+      這違反了相對論，也違反了任何關於「現實」的常識。
+      愛因斯坦稱之為「鬼魅般的超距作用」（spooky action at a distance），
+      並認為這個荒謬的結論說明量子力學必然是不完整的。
+    </p>
+    <p>
+      後來的實驗證明：量子力學是對的。<br>
+      那個「鬼魅般的超距作用」，是真實存在的物理現象。
+    </p>
+    <p>
+      <strong>物理學家用「鬼魅」這個詞，不是比喻。是描述。</strong>
+    </p>
+
+    <div class="blockquote">
+      <p>「任何人說他理解量子力學，就說明他不理解量子力學。」</p>
+      <cite>—— 理查・費曼（Richard Feynman），加州理工學院演講，1964</cite>
+    </div>
+
+    <p>
+      這本書不是要把量子力學神秘化。
+      量子力學是有嚴格數學基礎的物理理論，它的預測精確到小數點後十位。
+    </p>
+    <p>
+      但量子力學有一個問題它自己解決不了：<em>它描述的現實，
+      和我們日常感知的現實之間，有一道無法用現有理論跨越的鴻溝。</em>
+      在那道鴻溝裡，物理學家說了一些話，
+      如果你不知道那是物理學家說的，你會以為是靈媒說的。
+    </p>
+
+    <!-- 第一章 -->
+    <h2 id="ch1">第一章　觀測者改變了什麼</h2>
+
+    <h3>雙縫實驗：現實在被看見之前是什麼</h3>
+
+    <p>
+      雙縫實驗是物理學史上被重複最多次的實驗之一。
+      結果從來沒有改變過。
+    </p>
+    <p>
+      實驗的設置很簡單：一道有兩條縫的隔板，
+      一個發射粒子（電子、光子、甚至大分子）的裝置，
+      一面偵測器。
+    </p>
+    <p>
+      當你不觀測粒子從哪條縫通過時，它表現得像波，
+      在偵測器上形成干涉條紋，彷彿同時通過了兩條縫。
+    </p>
+    <p>
+      當你設置偵測器去觀測它從哪條縫通過時，
+      干涉條紋消失了。粒子變成粒子，乖乖地從一條縫過去。
+    </p>
+
+    <div class="data-note">
+      <strong>實驗紀錄</strong><br>
+      最具代表性版本：日立公司研究員外村彰（Akira Tonomura）團隊，1989年<br>
+      發表於：《美國物理期刊》（American Journal of Physics），Vol. 57, No. 2<br>
+      方法：以單個電子逐一發射，確認干涉條紋非粒子間交互作用所致<br>
+      結論：干涉現象發生在單一粒子層面，觀測行為本身改變粒子行為
+    </div>
+
+    <p>
+      「觀測行為本身改變粒子行為。」
+    </p>
+    <p>
+      這句話的含義讓物理學家爭論了將近一百年。
+      <em>是偵測器的物理干擾改變了粒子？還是「被知道」這件事本身就有影響？</em>
+    </p>
+    <p>
+      丹麥物理學家尼爾斯・波耳（Niels Bohr）的哥本哈根詮釋說：
+      在被觀測之前，粒子沒有確定的位置，它同時存在於所有可能的狀態。
+      觀測的行為，讓它「選擇」了一個狀態。
+    </p>
+    <p>
+      愛因斯坦聽到這個解釋，問了一個著名的問題：
+      「月亮在沒有人看它的時候，還存在嗎？」
+    </p>
+    <p>
+      波耳的回答是：「你沒有辦法問那個問題，因為你沒有辦法在不觀測的情況下知道答案。」
+    </p>
+
+    <h3>多重宇宙不是科幻，是物理學的正式提案</h3>
+
+    <p>
+      1957年，普林斯頓大學的物理學博士生休・艾弗雷特三世（Hugh Everett III）
+      在他的博士論文裡提出了一個解法：
+      觀測不是讓粒子「選擇」一個狀態，而是讓宇宙分裂成兩個，
+      每個狀態各自在一個宇宙裡發生。
+    </p>
+    <p>
+      這就是「多世界詮釋」（Many-worlds interpretation）。
+      每一次量子事件，宇宙就分叉。
+      此刻，有無數個平行的你，正在做著不同的選擇，活在不同的宇宙裡。
+    </p>
+    <p>
+      艾弗雷特的論文在當時幾乎被忽視。他後來離開了學術界。
+      但這個理論沒有消失。今天，它是量子力學詮釋中最被認真討論的版本之一，
+      支持者包括多位諾貝爾物理學獎得主。
+    </p>
+
+    <h3>觀測者的身份問題</h3>
+
+    <p>
+      哥本哈根詮釋留下了一個讓物理學家頭痛了幾十年的問題：
+      觀測者必須是有意識的人類嗎？
+      還是任何物理測量儀器都算？
+      一隻貓算嗎？一個細菌算嗎？
+    </p>
+    <p>
+      薛丁格的貓，就是在挖苦這個問題。
+      1935年，奧地利物理學家埃爾溫・薛丁格（Erwin Schrödinger）
+      設計了一個思想實驗：
+      把一隻貓、一個放射性原子、一瓶毒藥關在一個密閉的盒子裡。
+      如果原子衰變，毒藥釋放，貓死；如果不衰變，貓活。
+    </p>
+    <p>
+      在盒子打開之前，根據量子力學，原子同時處於「已衰變」和「未衰變」兩種狀態。
+      那麼貓呢？它同時是活的和死的嗎？
+    </p>
+    <p>
+      薛丁格的本意是嘲諷——他認為這個結論太荒謬，說明量子力學用到宏觀物體上是有問題的。
+      但物理學界沒有因此輕鬆。
+      這個問題到今天仍然是量子力學基礎的核心爭議：
+      <em>量子疊加態在什麼條件下「坍縮」成確定狀態？觀測者的意識是否參與其中？</em>
+    </p>
+
+    <div class="data-note">
+      <strong>研究現狀</strong><br>
+      來源：Zurek, W.H.,〈量子退相干與現實的古典性出現〉，《物理評論》，2003年<br>
+      主流解釋：「退相干理論」（Decoherence theory）認為，量子疊加態因與環境的交互作用而消失，不需要有意識的觀測者<br>
+      未解問題：退相干解釋了為什麼宏觀世界看起來是古典的，但仍未解決「為何只有一個結果被觀測到」的根本問題
+    </div>
+
+    <p>
+      退相干理論是目前主流物理學界接受度最高的解釋框架，
+      但它並沒有終結爭論。
+      「量子測量問題」（quantum measurement problem）至今仍是物理學哲學中最活躍的爭議領域。
+    </p>
+    <p>
+      一個量子力學教科書解決不了的問題，
+      在2025年仍然沒有被解決。
+      這不是因為物理學家不夠努力，
+      而是因為問題本身可能觸及了現實的某個更深的層次——
+      一個我們的語言和概念還沒有準備好描述的地方。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第二章 -->
+    <h2 id="ch2">第二章　糾纏：距離不存在</h2>
+
+    <h3>貝爾不等式與1964年的那個賭注</h3>
+
+    <p>
+      1964年，北愛爾蘭物理學家約翰・貝爾（John Bell）
+      設計了一個思想實驗，想要一勞永逸地解決愛因斯坦和波耳之間的爭議。
+    </p>
+    <p>
+      他推導出了一組數學不等式，稱為「貝爾不等式」。
+      核心意思是：如果愛因斯坦是對的，現實是「局域實在的」
+      （也就是說，物體在被測量之前就有確定的屬性，且影響不能超光速傳遞），
+      那麼某些實驗的測量結果的相關性，不能超過一個特定的數值上限。
+    </p>
+    <p>
+      如果這個上限被突破了，愛因斯坦就錯了。
+    </p>
+
+    <div class="data-note">
+      <strong>實驗驗證歷程</strong><br>
+      1972年：克勞澤（Clauser）和弗里德曼（Freedman），加州大學柏克萊分校，首次實驗性違反貝爾不等式<br>
+      1982年：阿斯佩（Alain Aspect），巴黎第十一大學，更嚴格的實驗，進一步確認量子糾纏的非局域性<br>
+      2015年：荷蘭代爾夫特理工大學，「無漏洞貝爾測試」（loophole-free Bell test），同時關閉此前所有可能的實驗漏洞<br>
+      2022年：阿斯佩等三人因量子糾纏實驗工作獲頒諾貝爾物理學獎
+    </div>
+
+    <p>
+      結果：貝爾不等式被違反了。
+      在多個無法被各種「隱藏變數」理論解釋的實驗中，
+      量子糾纏的相關性超過了愛因斯坦的「局域實在論」允許的上限。
+    </p>
+    <p>
+      這意味著什麼？
+      它意味著，兩個曾經交互作用過的粒子，
+      無論之後相距多遠，對其中一個的測量，會瞬間影響另一個的狀態。
+      不需要時間。不受距離限制。
+    </p>
+    <p>
+      愛因斯坦用「鬼魅般的超距作用」來描述他認為不可能存在的東西。
+      <em>它存在。</em>
+    </p>
+
+    <h3>糾纏的現實含義</h3>
+
+    <p>
+      量子糾纏不能被用來傳遞信息——這一點必須說清楚，
+      以免有人把它過度解讀為某種超光速通訊的依據。
+      糾纏粒子的測量結果是隨機的，你無法控制你會得到什麼結果，
+      因此無法用它來傳遞有意義的訊息。
+    </p>
+    <p>
+      但它的存在，從根本上改變了我們對「分離」這個概念的理解。
+    </p>
+    <p>
+      物理學家大衛・玻姆（David Bohm）在1952年提出了一個替代詮釋，
+      叫做「隱變數理論」（Pilot Wave Theory）。
+      在這個框架裡，宇宙中所有的粒子，
+      都被一個滲透全宇宙的「量子勢場」（quantum potential）連結在一起。
+      宇宙在更深的層次上，是一個不可分割的整體。
+    </p>
+
+    <div class="blockquote">
+      <p>「在量子勢的框架下，宇宙不是由獨立粒子組成的集合，而是一個隱含秩序（implicate order）的展開，每個部分都包含著整體的信息。」</p>
+      <cite>—— 大衛・玻姆（David Bohm），《整體性與隱含秩序》（Wholeness and the Implicate Order），1980</cite>
+    </div>
+
+    <p>
+      「每個部分都包含著整體的信息。」
+    </p>
+    <p>
+      如果你在某些靈性傳統或神秘學文本裡看過類似的說法，
+      你沒有想錯——這個概念和許多古老的整體論哲學在語言上有驚人的相似性。
+    </p>
+    <p>
+      玻姆不是在引用靈性文本，他是在推導物理學方程式。
+      但他自己也注意到了這種相似性，
+      並在晚年與哲學家克里希那穆提（Jiddu Krishnamurti）進行了長達數十年的對話，
+      探討物理學與意識的關係。
+      這些對話被記錄成書，至今仍在印行。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第三章 -->
+    <h2 id="ch3">第三章　那些認真做過靈異研究的物理學家</h2>
+
+    <h3>威廉・克魯克斯與通靈媒介</h3>
+
+    <p>
+      威廉・克魯克斯（William Crookes）是19世紀英國最重要的科學家之一。
+      他發現了化學元素鉈，發明了克魯克斯管（陰極射線管的前身，也是X射線研究的基礎），
+      1913年獲封爵士，曾擔任英國皇家學會主席。
+    </p>
+    <p>
+      他也花了幾年時間，認真研究通靈媒介弗羅倫絲・庫克（Florence Cook）。
+    </p>
+    <p>
+      1870年代，克魯克斯以科學研究的方式設計了一系列實驗，
+      試圖在控制條件下驗證庫克所聲稱的「物質化現象」。
+      他在實驗報告中表示，他觀察到了無法以詐術解釋的現象。
+    </p>
+
+    <div class="data-note">
+      <strong>歷史紀錄</strong><br>
+      來源：Crookes, W.,〈靈異研究的研究〉（Researches in the Phenomena of Spiritualism），1874年<br>
+      背景：弗羅倫絲・庫克聲稱可以「物質化」靈魂，克魯克斯為此進行了多次控制實驗<br>
+      爭議：後來有研究者認為克魯克斯與庫克之間有私人情感關係，影響了其客觀性；部分靈媒研究者則認為他的觀察紀錄仍具參考價值<br>
+      他的科學成就：無論靈異研究評價如何，克魯克斯在化學和物理學上的貢獻從未受到質疑
+    </div>
+
+    <p>
+      克魯克斯的靈異研究在科學界受到強烈批評，
+      許多同行認為他被詐騙了，或者被個人情感蒙蔽了判斷。
+      今天，他的靈媒研究在主流科學史中幾乎不被提及，
+      被當作一個傑出科學家的著名失誤。
+    </p>
+    <p>
+      但有一件事是確定的：他做了實驗，寫了報告，公開了方法，
+      接受了批評。
+      他沒有把這些研究藏起來，他把它們和他的其他研究一樣公開發表。
+      <em>這是科學的方式。得到的結論對不對是另一回事，
+      但他用的是科學的語言和程序。</em>
+    </p>
+
+    <h3>布萊恩・約瑟夫森與劍橋的那個辦公室</h3>
+
+    <p>
+      布萊恩・約瑟夫森（Brian Josephson）是劍橋大學的物理學教授，
+      1973年諾貝爾物理學獎得主。
+      他因為發現「約瑟夫森效應」而獲獎，
+      這個發現是現代超導體技術的基礎之一。
+    </p>
+    <p>
+      他也公開表示，他相信心靈感應是真實的，
+      並且認為量子力學可能提供了理解它的框架。
+    </p>
+    <p>
+      2001年，英國皇家郵政發行了一套慶祝諾貝爾獎百年的郵票。
+      郵票背面附了一張書面說明，由各獎項的代表人物撰文介紹各自的研究領域。
+      約瑟夫森撰寫物理學部分，他在文中提到量子力學可能最終解釋「心靈現象」。
+    </p>
+
+    <div class="data-note">
+      <strong>事件紀錄</strong><br>
+      來源：英國皇家郵政百年諾貝爾獎郵票套裝，2001年10月<br>
+      約瑟夫森文字：提及「量子力學和心靈現象的可能連結，尚待研究」<br>
+      反應：多名英國皇家學會成員公開批評，皇家郵政收到大量投訴，媒體廣泛報導<br>
+      約瑟夫森回應：他表示批評者沒有仔細閱讀他的文字，他的說法是謹慎的，不是宣稱心靈感應已被證明
+    </div>
+
+    <p>
+      約瑟夫森的立場引發了軒然大波。
+      這件事的有趣之處不在於他說了什麼，
+      而在於一個諾貝爾物理學獎得主公開表達這樣的立場，
+      卻沒有被科學界以任何正式方式「反駁」——
+      只是被「冷處理」和嘲諷。
+    </p>
+    <p>
+      他今年已近九十歲，仍然在劍橋工作，
+      仍然公開談論量子力學與心靈現象的關係，
+      仍然是一個諾貝爾物理學獎得主。
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第四章 -->
+    <h2 id="ch4">第四章　普林斯頓的那個實驗室</h2>
+
+    <h3>PEAR 實驗室的二十八年</h3>
+
+    <p>
+      1979年，普林斯頓大學工程學院院長羅伯特・詹恩（Robert Jahn）
+      在校園裡建立了一個實驗室，叫做「普林斯頓工程異常研究實驗室」
+      （Princeton Engineering Anomalies Research，PEAR）。
+    </p>
+    <p>
+      這個實驗室的核心研究問題是：
+      人類的意圖（intention）能否對物理隨機過程產生可測量的影響？
+    </p>
+    <p>
+      他們使用的主要工具是「隨機事件產生器」（REG）——
+      一種產生隨機0和1序列的電子裝置，
+      在理論上應該完全不受外部影響。
+    </p>
+    <p>
+      研究設計是這樣的：受試者坐在REG前，
+      試著用意念讓機器產生更多的1（或更多的0），
+      但不接觸機器。
+      研究者記錄數據，和純粹隨機的理論值比較。
+    </p>
+
+    <div class="data-note">
+      <strong>研究紀錄</strong><br>
+      來源：Jahn, R. & Dunne, B.,《意識的邊界》（Margins of Reality），1987年；多篇期刊論文<br>
+      研究規模：1979年至2007年，超過340萬個實驗試次（trials），數百名受試者<br>
+      聲稱結果：累積數據顯示受試者的意圖方向與REG輸出之間存在微小但統計上顯著的相關性，效應量約為萬分之一<br>
+      批評：多位統計學家和物理學家指出分析方法存在問題，其他實驗室的重複實驗結果不一致
+    </div>
+
+    <p>
+      PEAR實驗室在二十八年間積累了龐大的數據，
+      並在多個學術期刊發表了研究結果。
+      然而，它的研究方法和統計分析始終受到嚴格批評，
+      而獨立重複實驗的結果也未能一致地確認其發現。
+    </p>
+    <p>
+      2007年，詹恩和他的長期研究夥伴布蘭達・鄧恩（Brenda Dunne）
+      宣布PEAR實驗室關閉。詹恩在接受採訪時說：
+      「我們已經建立了足夠的數據庫，問題不再是數據，
+      而是主流科學是否願意認真對待這個問題。」
+    </p>
+    <p>
+      這句話可以被解讀為驕傲，也可以被解讀為無奈。
+      或許兩者都是。
+    </p>
+
+    <h3>詹恩是一個認真的科學家</h3>
+
+    <p>
+      無論你怎麼評價PEAR的研究結論，
+      詹恩不是一個邊緣人物，也不是一個輕率的人。
+    </p>
+    <p>
+      在建立PEAR實驗室之前，他是普林斯頓大學工程學院院長，
+      研究噴射推進和太空推進技術，曾擔任NASA顧問。
+      他在航太領域的學術聲望是無可質疑的。
+    </p>
+    <p>
+      一個在這樣位置上的人，決定花二十八年研究一個會危及自己學術聲譽的課題，
+      這件事本身值得注意。不是因為它「證明了什麼」，
+      而是因為它說明了：
+      <em>這個問題，在某些認真的人眼裡，是一個值得用最嚴格的科學方法去探索的問題。</em>
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第五章 -->
+    <h2 id="ch5">第五章　物理學的邊界語言</h2>
+
+    <h3>當物理學家說「非局域性」</h3>
+
+    <p>
+      讓我們回到量子力學的核心概念，
+      看看它的語言在日常直覺之外走了多遠。
+    </p>
+    <p>
+      「非局域性」（non-locality）：一個系統的狀態不能僅由其局部性質描述，
+      它與遠方系統之間存在無法用任何局域理論解釋的相關性。
+    </p>
+    <p>
+      「疊加態」（superposition）：一個量子系統在被測量之前，
+      同時存在於多個相互排斥的狀態中。
+    </p>
+    <p>
+      「波函數坍縮」（wavefunction collapse）：測量行為讓疊加態「選擇」一個確定狀態，
+      但「選擇」的機制是什麼，目前沒有被所有人接受的解釋。
+    </p>
+    <p>
+      「隱含秩序」（implicate order）：玻姆的概念，
+      認為可見的現實（展顯秩序）是一個更深層次的隱含整體的表面展開，
+      每個局部都包含整體的信息。
+    </p>
+
+    <div class="blockquote">
+      <p>「如果量子力學告訴我們任何事情，那就是：現實比我們日常語言能描述的，要奇怪得多。」</p>
+      <cite>—— 尼爾斯・波耳（Niels Bohr），引自亞伯拉罕・佩伊斯（Abraham Pais）《尼爾斯・波耳的科學與生命》，1991</cite>
+    </div>
+
+    <p>
+      這些概念不是隱喻。它們是精確的物理學術語，有嚴格的數學定義。
+      但當它們被翻譯成日常語言時，聽起來像是從另一個世界來的。
+    </p>
+    <p>
+      「距離不存在」——這是量子糾纏的物理含義。
+      「觀察者創造現實」——這是哥本哈根詮釋的一種（過度簡化的）表述。
+      「一切萬有」——這是玻姆隱含秩序的通俗說法。
+    </p>
+    <p>
+      這些話，在靈性傳統和神秘學文本裡同樣存在。
+      <em>語言的相似性不代表概念的等同，但它確實說明了某種耐人尋味的平行。</em>
+    </p>
+
+    <h3>費曼的誠實</h3>
+
+    <p>
+      理查・費曼是20世紀最偉大的物理學家之一，
+      以語言清晰、拒絕胡說八道著稱。
+      他在量子電動力學上的貢獻讓他獲得了諾貝爾物理學獎。
+    </p>
+    <p>
+      他對量子力學的態度，是科學誠實的一個好範本。
+    </p>
+    <p>
+      他說：「我想我可以安全地說，沒有人理解量子力學。」
+      他說這句話不是在貶低量子力學，而是在說：
+      量子力學的計算方法非常成功，但它描述的現實的本質是什麼，
+      目前沒有人能說清楚。
+    </p>
+    <p>
+      費曼的建議是「不要問它怎麼可能，只管計算」。
+      這是一個工程師的態度：把它用好，不要問太多。
+    </p>
+    <p>
+      但有些物理學家不滿足於此。
+      他們想知道背後是什麼。
+      在那個「背後」，到今天仍然是黑暗的。
+    </p>
+
+    <div class="data-note">
+      <strong>量子力學詮釋現況</strong><br>
+      來源：Schlosshauer et al.,〈量子力學詮釋的現狀：物理學家調查〉，《物理學研究》，2013年<br>
+      調查對象：2011年量子物理學基礎研討會的33名物理學家<br>
+      哥本哈根詮釋：42%<br>
+      資訊論詮釋：24%<br>
+      多世界詮釋：18%<br>
+      「沒有偏好」：6%<br>
+      結論：量子力學的詮釋問題在物理學界仍無共識
+    </div>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 第六章 -->
+    <h2 id="ch6">第六章　為什麼這不代表鬼是真的</h2>
+
+    <h3>從量子力學到鬼魂的距離</h3>
+
+    <p>
+      這本書談了很多量子力學裡奇怪的事，
+      也談了一些認真研究靈異現象的物理學家。
+      現在必須說清楚一件事：
+    </p>
+    <p>
+      <strong>量子力學的非局域性和觀測者效應，不能直接支持鬼魂、心靈感應或超自然現象的存在。</strong>
+    </p>
+    <p>
+      這兩者之間的距離，比許多人以為的要大得多。
+    </p>
+    <p>
+      量子效應發生在亞原子尺度。
+      量子糾纏和疊加態的特性，在宏觀世界因為「退相干」而消失。
+      你的大腦、你的身體、房間裡的空氣——這些都是宏觀物體，
+      它們的行為由古典物理學描述，不是量子力學。
+    </p>
+    <p>
+      直接從「粒子可以非局域地相關」跳到「人死後靈魂可以飄來飄去」，
+      中間缺少的不是一個小步驟，而是整個解釋框架。
+    </p>
+
+    <h3>量子神秘主義的問題</h3>
+
+    <p>
+      「量子神秘主義」（quantum mysticism）是一個批評性術語，
+      指的是把量子力學的概念過度延伸、錯誤類比，
+      用來支持各種靈性或超自然主張的做法。
+    </p>
+    <p>
+      這個現象從1970年代就存在。
+      1975年出版的《物理學之道》（The Tao of Physics）和
+      1979年的《跳舞的武力》（The Dancing Wu Li Masters），
+      都試圖把量子力學與東方哲學和神秘主義連結起來，
+      引發了巨大的文化影響，也引發了許多物理學家的批評。
+    </p>
+
+    <div class="data-note">
+      <strong>相關著作</strong><br>
+      卡普拉（Fritjof Capra），《物理學之道》（The Tao of Physics），1975年，Shambhala出版<br>
+      朱克夫（Gary Zukav），《跳舞的武力》（The Dancing Wu Li Masters），1979年，Morrow出版<br>
+      批評代表：史蒂芬・溫伯格（Steven Weinberg，諾貝爾物理學獎得主），曾多次在著作和訪問中批評量子神秘主義混淆了物理學的技術含義與日常語言的比喻用法
+    </div>
+
+    <p>
+      物理學家史蒂芬・溫伯格（Steven Weinberg）在他的著作中直接批評了這類做法。
+      他的立場是：量子力學的數學形式主義是成功的，
+      但從它跳到任何關於意識或靈性的結論，都是非法的推論。
+    </p>
+    <p>
+      這個批評是有道理的。
+    </p>
+    <p>
+      但問題也是真實的：
+      量子力學描述的現實，和我們直覺感知的現實，確實存在鴻溝。
+      那道鴻溝裡到底有什麼，物理學家自己也還在爭論。
+      用靈性語言去填滿那道鴻溝，是一種捷徑。
+      但那道鴻溝本身是真實的。
+    </p>
+
+    <h3>誠實的位置</h3>
+
+    <p>
+      所以，物理學家「相信鬼」嗎？
+    </p>
+    <p>
+      大多數物理學家不相信民間意義上的「鬼」——
+      就是那種穿著白衣、在走廊飄蕩、製造恐嚇的靈魂。
+    </p>
+    <p>
+      但有一些物理學家，在考慮量子力學的詮釋問題時，
+      會使用到一些概念——意識的基礎性、非局域的連結、信息的守恆——
+      這些概念在哲學上不排除某種更廣義的「持續性」的可能。
+    </p>
+    <p>
+      這不是一樣的事。但它也不是完全無關的事。
+      <em>它是科學誠實在邊界地帶的樣子：
+      承認我們知道的，承認我們不知道的，不用任何一方來填滿另一方。</em>
+    </p>
+
+    <div class="chapter-divider"><span>◈</span></div>
+
+    <!-- 後記 -->
+    <h2 id="afterword">後記　科學語言的極限</h2>
+
+    <p>
+      這本書的書名是《物理學家相信鬼》。
+      這個書名是挑釁，也是問題。
+    </p>
+    <p>
+      物理學家相信的，不是民間故事裡的鬼。
+      他們相信——或者說，他們的方程式暗示——
+      現實比我們能感知的更深、更奇怪、更不「分離」。
+    </p>
+    <p>
+      愛因斯坦用「鬼魅般的超距作用」來描述他認為不可能的事。
+      後來的實驗證明那個「鬼魅」是真的。
+      他選擇的這個詞，不是隨意的。
+      他是在說：這個現象，超出了我認為「真實」的範圍。
+    </p>
+
+    <div class="blockquote">
+      <p>「如果你不對量子力學感到震驚，你就沒有理解它。」</p>
+      <cite>—— 尼爾斯・波耳（Niels Bohr），引用廣泛，原始出處不確定</cite>
+    </div>
+
+    <p>
+      物理學的語言走到了它的邊界。
+      在邊界那邊，它遞給了你一些詞：
+      非局域性、整體性、觀測者、信息。
+    </p>
+    <p>
+      這些詞不等於鬼。但它們也不是普通的詞。
+    </p>
+    <p>
+      我們用「鬼魅」來命名那些超出我們理解範圍的東西。
+      物理學走到邊界，也使用了同一個詞。
+    </p>
+    <p>
+      也許那只是語言的巧合。
+      也許不是。
+    </p>
+    <p>
+      <em>我們還不知道。這才是誠實的答案。</em>
+    </p>
+
+  </div>
+
+  <div class="series-nav">
+    <div class="snlabel">科學邊界系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-6-vol1.html" class="snbook">Vol.1《儀器測到了，但科學家不敢說》</a>
+      <a href="/that-feeling-6-vol2.html" class="snbook">Vol.2《那個實驗從來沒有結論》</a>
+      <a href="/that-feeling-6-vol3.html" class="snbook">Vol.3《你的大腦在你死後還在運作》</a>
+      <span class="snbook current">Vol.4《物理學家相信鬼》</span>
+      <a href="/that-feeling-6-vol5.html" class="snbook">Vol.5《地球上有個地方科學解釋不了》</a>
+      <a href="/that-feeling-6-vol6.html" class="snbook">Vol.6《他們研究這個，然後不說話了》</a>
+    </div>
+    <a href="/that-feeling-6.html" class="back-link">← 返回科學邊界系列</a>
+  </div>
+
+</div>
+</body>
+</html>

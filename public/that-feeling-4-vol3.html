@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>與死者同在｜那個感覺 系列四 Vol.3｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --sidebar-bg: #1a1525;
+    --sidebar-text: #e8e8f0;
+    --sidebar-accent: #7a4a9e;
+    --sidebar-hover: rgba(122,74,158,0.15);
+    --sidebar-border: rgba(122,74,158,0.2);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 28px 0;
+  }
+  .sb-back {
+    display: block;
+    padding: 0 22px 20px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    border-bottom: 1px solid var(--sidebar-border);
+    margin-bottom: 20px;
+    transition: color 0.2s;
+  }
+  .sb-back:hover { color: var(--sidebar-accent); }
+  .sb-series {
+    padding: 0 22px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 6px;
+  }
+  .sb-title {
+    padding: 0 22px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--sidebar-text);
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .sb-sub {
+    padding: 0 22px 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.7;
+    border-bottom: 1px solid var(--sidebar-border);
+    margin-bottom: 20px;
+  }
+  .sb-toc-label {
+    padding: 0 22px 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+  }
+  .sb-toc a {
+    display: block;
+    padding: 8px 22px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    line-height: 1.5;
+  }
+  .sb-toc a:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-accent);
+    padding-left: 26px;
+  }
+  .main {
+    margin-left: 240px;
+    max-width: 720px;
+    padding: 60px 48px 100px;
+  }
+  .book-meta {
+    margin-bottom: 52px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .series-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 16px;
+  }
+  h1.book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 64px;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+  .note-box {
+    margin: 36px 0;
+    padding: 22px 26px;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    background: var(--card-bg);
+  }
+  .note-box p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+  .note-box strong { color: var(--text); font-weight: 500; }
+  .series-nav {
+    margin-top: 80px;
+    padding: 36px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .snbook:hover { border-color: var(--accent-dim); color: var(--accent); }
+  .snbook.current {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+  .back-link {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 40px 24px 80px; }
+    h1.book-title { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <a href="/that-feeling-4.html" class="sb-back">← 返回死亡與不死</a>
+  <div class="sb-series">那個感覺　系列四　Vol.3</div>
+  <div class="sb-title">《與死者同在》</div>
+  <div class="sb-sub">靈媒研究史與受控實驗</div>
+  <div class="sb-toc-label">目　錄</div>
+  <nav class="sb-toc">
+    <a href="#preface" onclick="document.querySelector('#preface').scrollIntoView({behavior:'smooth'});return false;">前言　靈媒不是你想的那種問題</a>
+    <a href="#ch1" onclick="document.querySelector('#ch1').scrollIntoView({behavior:'smooth'});return false;">第一章　十九世紀的通靈桌與科學家的介入</a>
+    <a href="#ch2" onclick="document.querySelector('#ch2').scrollIntoView({behavior:'smooth'});return false;">第二章　冷讀術與巴納姆效應</a>
+    <a href="#ch3" onclick="document.querySelector('#ch3').scrollIntoView({behavior:'smooth'});return false;">第三章　受控實驗室裡的靈媒</a>
+    <a href="#ch4" onclick="document.querySelector('#ch4').scrollIntoView({behavior:'smooth'});return false;">第四章　蓋瑞·施瓦茲的亞利桑那實驗</a>
+    <a href="#ch5" onclick="document.querySelector('#ch5').scrollIntoView({behavior:'smooth'});return false;">第五章　那些沒辦法輕易解釋的案例</a>
+    <a href="#ch6" onclick="document.querySelector('#ch6').scrollIntoView({behavior:'smooth'});return false;">第六章　為什麼這個問題這麼難有答案</a>
+    <a href="#epilogue" onclick="document.querySelector('#epilogue').scrollIntoView({behavior:'smooth'});return false;">後記　和死去的人說話意味著什麼</a>
+  </nav>
+</nav>
+
+<div class="main">
+
+  <div class="book-meta">
+    <div class="series-label">那個感覺　系列四　Vol.3</div>
+    <h1 class="book-title">與死者同在</h1>
+    <div class="author">盧林著｜有的沒的小舖出品</div>
+  </div>
+
+  <h2 id="preface">前言　靈媒不是你想的那種問題</h2>
+
+  <p>如果你聽到「靈媒」這個詞，你可能想到的是兩種東西：電視上的表演者，用模糊的語言和套話讓觀眾感動落淚；或是收費昂貴的神棍，專門盯著剛失去親人、判斷力暫時下降的人。</p>
+
+  <p>這兩種東西都存在，而且都有詳盡的紀錄。詹姆斯·蘭迪（James Randi）——一位職業魔術師出身的懷疑論者——花了他職業生涯的大部分時間拆解靈媒的把戲。他的「一百萬美元挑戰」（James Randi Educational Foundation's Million Dollar Challenge）從1964年開始，至2015年結束，邀請任何人在受控條件下展示超自然能力，以贏取百萬美元獎金。沒有人成功過。</p>
+
+  <p>但這本書不是要討論騙局。騙局的部分已經被充分記錄了，而且蘭迪比任何人都做得更徹底。</p>
+
+  <p>這本書要討論的是另一個問題：在那些被系統性排除了明顯欺騙可能性的受控條件下，所謂的「靈媒現象」裡有沒有任何東西是目前已知的心理學或物理學無法解釋的？</p>
+
+  <p>這個問題的答案，比「靈媒是騙子」和「靈媒是真的」都更複雜，也更有趣。因為當你真正看進去，你會發現那裡既有讓人徹底幻滅的人類弱點，也有少數幾個即使懷疑論者都沒有辦法乾淨解釋掉的案例。</p>
+
+  <p>兩者都值得被正視。</p>
+
+  <h2 id="ch1">第一章　十九世紀的通靈桌與科學家的介入</h2>
+
+  <h3>靈性主義運動的誕生</h3>
+
+  <p>1848年3月，美國紐約州海德斯維爾（Hydesville），凱特和瑪格麗特·福克斯（Kate and Maggie Fox）兩姐妹宣稱她們能夠與一個在屋裡發出神祕敲擊聲的「靈」溝通。她們的家人和鄰居來見證，發現那些敲擊聲似乎在回應問題——一次代表「是」，兩次代表「否」，或者用次數對應字母表中的字母。消息傳開，吸引了大批訪客，最終演變成19世紀最大的宗教社會現象之一：靈性主義運動（Spiritualism）。</p>
+
+  <p>到1850年代，美國和英國有數以百萬計的人相信人死後靈魂繼續存在，並且可以透過靈媒與生者溝通。這不是窮苦人的迷信，而是橫跨社會階層的現象。美國第一夫人瑪麗·托德·林肯（Mary Todd Lincoln）在白宮舉辦過降靈會；英國作家亞瑟·柯南·道爾（Arthur Conan Doyle，也就是福爾摩斯的創作者）是靈性主義的熱烈支持者，出版了多本關於靈媒現象的著作；作家維克多·雨果（Victor Hugo）也曾參與降靈會實驗。</p>
+
+  <p>科學家沒有置身事外。1882年，英國的一群科學家和哲學家成立了「心靈研究學會」（Society for Psychical Research，SPR），以系統性的科學方法研究靈性現象。創始成員包括劍橋哲學家亨利·席威克（Henry Sidgwick）、物理學家威廉·巴雷特（William Barrett），以及後來加入的物理學家威廉·克魯克斯（William Crookes，真空管的發現者之一）和心理學家威廉·詹姆斯（William James，現代心理學的奠基人之一）。這些人不是信徒，他們是科學家，認為這個社會現象規模大到值得嚴肅調查。</p>
+
+  <h3>丹尼爾·鄧格拉斯·洪姆：讓科學家困惑的靈媒</h3>
+
+  <p>在19世紀所有的靈媒中，最讓認真的調查者感到困惑的是丹尼爾·鄧格拉斯·洪姆（Daniel Dunglas Home，1833-1886）。洪姆和大多數靈媒有幾個關鍵性的不同：他從不收費，從不在黑暗或密封的環境裡工作（這消除了很多靈媒慣用的手法所需要的遮掩條件），而且在長達二十多年的公開活動裡，從未被確切抓到詐騙。</p>
+
+  <p>威廉·克魯克斯在1870年至1873年間對洪姆進行了一系列受控實驗，部分實驗在自己家中的實驗室進行。克魯克斯記錄了各種他無法用已知物理機制解釋的現象，包括物體在沒有任何人接觸的情況下移動、一把風琴在無人操作的情況下演奏、以及洪姆本人顯然從地面升起的目擊報告。</p>
+
+  <p>克魯克斯在1874年向英國皇家學會提交了他的研究報告，結論是這些現象是真實的，需要一個新的科學解釋。皇家學會拒絕發表這份報告，認為克魯克斯被欺騙了。克魯克斯拒絕撤回，他說：「我沒有說這是不可能的。我說的是，我在我自己的實驗室裡觀察到了這些現象，而且我不知道它們是怎麼發生的。」</p>
+
+  <p>洪姆從來沒有在任何明確的狀況下被揭穿。懷疑論者說克魯克斯的控制不夠嚴格，或者克魯克斯本人被洪姆的個人魅力影響了判斷。支持者說這是有文字記錄的最難以解釋的「物理靈媒」案例之一。唯一確定的是：沒有人曾經複製過洪姆宣稱能做到的事，而他的身後也沒有任何確定的「騙局機制」被發現。</p>
+
+  <h3>派珀夫人與威廉·詹姆斯</h3>
+
+  <p>如果說洪姆是19世紀最難評估的物理靈媒，那麼萊諾拉·派珀（Leonora Piper）夫人就是最讓研究者困惑的「心靈靈媒」——也就是透過語言或書寫傳達訊息，而非製造物理現象的靈媒。</p>
+
+  <p>心理學家威廉·詹姆斯在1885年首次接觸派珀夫人，是應妻子的要求，並且帶著強烈的懷疑態度。在第一次會面裡，派珀夫人透過「靈魂控制」（trance state，入定狀態）提供了若干關於詹姆斯家族成員的細節，而這些細節詹姆斯確信她沒有任何途徑事先得知。</p>
+
+  <p>詹姆斯在接下來的兩年裡，系統性地安排了一系列測試，盡一切努力切斷派珀夫人事先獲得受試者信息的可能性：讓陌生人以假名拜訪，事先不告訴她任何人的身份，有時候讓她在不知情的情況下接受調查。在這些條件下，派珀夫人仍然多次提供了她無法事先知道的準確細節。</p>
+
+  <p>詹姆斯在一封信裡說了一句後來被廣泛引用的話：「為了推翻所有烏鴉都是黑色這個定律，只需要一隻白烏鴉。對我來說，派珀夫人就是那隻白烏鴉。我並不是說她能夠與死者溝通，我是說她展示了某種目前科學無法解釋的東西。」</p>
+
+  <p>後來，英國心靈研究學會把派珀夫人帶到英國進行長期研究，包括讓她在陌生的環境中與她完全不認識的人工作，同時雇用私家偵探跟蹤她以確保她沒有事先收集信息。在這些條件下進行的研究，持續了十多年，研究報告長達數千頁。</p>
+
+  <p>研究者們在最後達成了一個非常小心的結論：派珀夫人展示的信息準確率，超出了隨機猜測、冷讀術或事先收集信息所能解釋的範圍。但他們無法斷定這些信息的來源是什麼。</p>
+
+  <h2 id="ch2">第二章　冷讀術與巴納姆效應</h2>
+
+  <h3>「冷讀術」是什麼</h3>
+
+  <p>在深入討論受控靈媒實驗之前，必須先誠實地面對懷疑論者提供的解釋，因為這些解釋在大多數情況下是正確的。</p>
+
+  <p>「冷讀術」（cold reading）是一套讓人看起來像是掌握了你的私密信息的技術，實際上完全不需要任何超自然能力。它的核心是統計概率、觀察技巧和模糊語言的組合。</p>
+
+  <p>典型的冷讀術包括：使用「巴納姆陳述」（Barnum statements）——那些幾乎對所有人都成立的說法，例如「你有時候很自信，但在某些情況下你也會懷疑自己」；根據受試者的外貌、衣著、年齡、口音快速做出推斷；使用高基率事件，例如在一定年齡的女性中，有一個親近的已逝女性親屬（祖母、母親）的概率非常高；以及最重要的——讓受試者自己提供信息，然後把那些信息反饋給他們，讓他們覺得靈媒「知道」。</p>
+
+  <p>一個訓練有素的冷讀者，在沒有任何事先信息的情況下，可以讓七成以上的受試者相信他確實知道他們的私密信息。這不是魔法，這是統計和心理學。</p>
+
+  <h3>「熱讀術」：事先調查</h3>
+
+  <p>比冷讀術更直接的手法是「熱讀術」（hot reading）：在和受試者見面之前，透過各種途徑收集關於他們的信息，然後在「靈媒」環節裡把那些信息作為「通靈得到的訊息」呈現出來。</p>
+
+  <p>在社交媒體和網路搜尋普及之前，這需要更多準備工作，但並非不可能。會場的工作人員可以收集訪客的談話，要求受試者在等候時填寫表格，或者安排同夥在入場前和訪客閒聊。</p>
+
+  <p>2014年，澳洲懷疑論者、電台主持人卡爾·克勞斯（Karl Kruszelnicki）和魔術師里奇·哈洛（Richard Saunders）對知名澳洲「靈媒」（和電視名人）敦尼·科利（Doris Collins）進行了一個隱蔽測試，讓受試者以假名進入，事先不提供任何個人信息。在沒有熱讀術可用的條件下，科利的表現和純隨機猜測沒有統計上的差異。</p>
+
+  <p>詹姆斯·蘭迪在1988年的「斯坦頓計畫」（Project Alpha）中，安排了兩名受過訓練的魔術師偽裝成擁有超自然能力的受試者，在嚴肅的超心理學實驗室接受測試。兩人都通過了測試，直到蘭迪公開揭露這件事。這個計畫的目的是顯示，研究超自然現象的科學家，在沒有受過偵測欺騙的專業訓練的情況下，很容易被欺騙。</p>
+
+  <h3>巴納姆效應的力量</h3>
+
+  <p>心理學家伯特倫·福瑞爾（Bertram Forer）在1948年做了一個經典實驗。他給他的心理學學生做了一個人格測試，然後給每個人一份「個人化」的測試結果，要求他們評估這份結果有多準確。學生們平均打出了4.26分（滿分5分），認為描述非常準確。</p>
+
+  <p>但福瑞爾給每個人的其實是同一份描述，完全相同的一段話，從占星雜誌上拼湊而來。這段話充滿了巴納姆陳述：「你渴望被他人喜歡和崇拜，但對自己批評很嚴格。你有很多尚未發揮的潛能。雖然你有一些人格上的弱點，但你通常能夠彌補它們……」</p>
+
+  <p>這個實驗後來被稱為「福瑞爾效應」或「巴納姆效應」，它說明了一個不舒服的事實：人們非常願意把模糊的、概率上幾乎對所有人都成立的陳述，解讀為專門針對自己的精準描述。</p>
+
+  <p>這是靈媒（以及占星師、手相師等）工作的心理基礎。即使沒有任何超自然元素，只要你使用足夠模糊和普遍的語言，加上足夠的自信和同理心，大多數人會感覺「你說的完全是我的情況」。</p>
+
+  <h3>為什麼人們容易被靈媒打動</h3>
+
+  <p>悲傷讓人脆弱。失去親人的人，在深層的情感需求上是非常開放的——他們需要相信那個人還在某個地方，需要感覺仍然和他們有連結，需要聽到「一切都好」。這種需求不是弱點，而是人類對失去的正常反應。</p>
+
+  <p>但它確實讓人更容易把模糊的、概率上合理的陳述解讀為準確的信息。當一個「靈媒」說「我感覺到一個年長的男性，他和你的關係很密切，他離去之前受了很多苦」，大多數四十歲以上的成年人都能從自己的生命裡找到這個描述可以對應的人。然後他們把這個對應關係解讀為靈媒真的「知道」。</p>
+
+  <p>神經科學家克里斯·弗里思（Chris Frith）在他關於大腦如何建構現實的研究裡說，人類大腦天生是一個「意義製造機」。它會主動在噪音中找到模式，在巧合裡找到意義，在隨機信息裡找到針對自己的信息。這個傾向在正常情況下是有功能的，但在悲傷和渴望的狀態下，它可能讓人極度容易被善用語言的表演者影響。</p>
+
+  <h2 id="ch3">第三章　受控實驗室裡的靈媒</h2>
+
+  <h3>排除欺騙後，還剩下什麼</h3>
+
+  <p>如果大多數靈媒現象可以用冷讀術、熱讀術和巴納姆效應解釋，那麼「受控實驗」的目的就是：在排除了這些可能性之後，看看還剩下什麼。</p>
+
+  <p>嚴格的受控靈媒實驗的設計，必須做到以下幾點：受試者（靈媒）和被讀者（sitter）在物理上隔離，不能有任何視覺或聽覺接觸；被讀者的身份和個人信息對靈媒完全保密；靈媒提供的陳述被記錄，然後由不知情的評估者（對哪些陳述對應哪個被讀者不知情）進行打分；用統計方法比較靈媒的陳述和隨機基線的差異。</p>
+
+  <p>在20世紀，有幾個嚴肅的研究機構進行了這種設計的實驗。結果很複雜——大多數宣稱有靈媒能力的人，在嚴格控制下的表現和隨機猜測沒有差異。但有少數幾個人，在多次重複的嚴格測試裡，持續顯示出超出隨機基線的準確率。</p>
+
+  <h3>超心理學的建立與困境</h3>
+
+  <p>1927年，杜克大學心理學家約瑟夫·班克斯·萊茵（J.B. Rhine）建立了第一個學術性的超心理學（parapsychology）實驗室。萊茵使用「澤納卡片」（Zener cards）——印有簡單圖形（星形、圓形、波浪、十字、方形）的標準化卡片——測試受試者猜測研究者手持卡片的能力。</p>
+
+  <p>萊茵宣稱找到了若干「心靈感應」的統計證據，出版了《心靈感應：超感知覺》（Extra-Sensory Perception，1934），在學術圈和公眾之間都引發了巨大迴響。但後來的調查發現，萊茵的實驗設計有嚴重的方法論問題：包括實驗者可能無意識地給受試者視覺暗示，以及數據記錄和分析上的不規範。萊茵本人後來也承認，他在生涯早期沒有足夠嚴格地排除欺騙的可能性。</p>
+
+  <p>「複製危機」（replication crisis）是超心理學最大的問題。在科學上，一個效應要被接受，必須能夠在不同的實驗室、由不同的研究者，用相同的方法複製出來。超心理學的許多「陽性結果」——也就是顯示超自然效應的結果——有一個系統性的特點：它們往往在原始研究者的實驗室裡能夠複製，但在獨立的第三方實驗室裡失敗了。</p>
+
+  <p>這不一定意味著欺騙，也可能是統計偏差（只發表陽性結果，而負面結果進了抽屜，這在所有科學領域都是問題，但在超心理學裡尤為嚴重）、實驗者效應（研究者的期望無意識地影響了結果），或者所謂的「旁觀者效應」（skeptics don't see the effect）。</p>
+
+  <h2 id="ch4">第四章　蓋瑞·施瓦茲的亞利桑那實驗</h2>
+
+  <h3>哈佛訓練的心理學家走進靈媒領域</h3>
+
+  <p>蓋瑞·施瓦茲（Gary Schwartz）是一個不尋常的人物。他在哈佛大學取得心理學博士，在耶魯大學擔任心理學和精神病學教授，在1988年轉至亞利桑那大學，後來成立了「心意靈魂與健康實驗室」（Laboratory for Advances in Consciousness and Health，LACH）。</p>
+
+  <p>他對靈媒研究的興趣來自一個個人原因：他的岳父在1990年代過世，他的妻子琳達·羅賓斯（Linda Russek）相信她能夠感覺到父親的存在。施瓦茲最初對此持懷疑態度，但他決定用他的研究背景來測試這個問題，而不是直接否定它。</p>
+
+  <p>從1999年開始，施瓦茲進行了一系列針對知名靈媒的受控實驗，結果在2002年出版的《靈魂假說》（The Afterlife Experiments）中報告。他的受試者包括美國知名的靈媒約翰·愛德華（John Edward）、梅迪亞·多諾霍（Suzane Northrop）、以及另外幾位在美國有相當知名度的靈媒。</p>
+
+  <h3>實驗設計與結果</h3>
+
+  <p>施瓦茲實驗的核心設計是「隔離條件」：靈媒和被讀者在不同的房間，透過電話或視頻連線進行，靈媒事先不知道被讀者的任何個人信息，被讀者在整個過程中只能回答「是」或「否」，以防止無意間洩露信息。</p>
+
+  <p>施瓦茲的評分系統要求被讀者在事後對靈媒的每一個陳述打分，然後把這些分數和一個「對照組陳述」（由另一個不知情的人針對同一個被讀者生成的陳述）的分數進行比較。</p>
+
+  <p>他報告的結果是：在最嚴格的「雙盲」條件下，幾位靈媒的準確率仍然顯著超過對照組，其中最高的準確率達到83%，遠超過隨機猜測的36%基線。</p>
+
+  <p>這個結果引發了強烈的批評，主要來自懷疑論者雷·海曼（Ray Hyman）——一位研究欺騙和魔術多年的心理學家。海曼指出了施瓦茲實驗設計的幾個漏洞：被讀者即使只能說「是」或「否」，其回應方式本身（語氣、遲疑程度、「是」的速度）仍可能給靈媒提供反饋信號；實驗者本人（施瓦茲）對靈媒的成功投入了個人的情感，可能在設計和分析上產生偏差；某些陳述的「準確」判斷是主觀的，可能被被讀者高估。</p>
+
+  <p>施瓦茲和海曼在此後數年間進行了大量公開辯論，雙方都讓步了一部分，也堅持了一部分。最終的狀態是：施瓦茲的實驗不能被視為靈媒能力存在的確定證據，但也不能說它完全沒有顯示任何超出已知解釋的東西。</p>
+
+  <h3>「超感知」靈媒的問題</h3>
+
+  <p>在施瓦茲實驗中表現最突出的靈媒之一是約翰·愛德華。愛德華在2000年代主持了一個名為《與死者溝通》（Crossing Over with John Edward）的電視節目，吸引了大量觀眾。</p>
+
+  <p>2001年，美國電視節目《南方公園》（South Park）製作了一集惡搞愛德華的內容，稱他為「美國最大的騙子」。愛德華的律師威脅要提告，最終沒有採取法律行動。</p>
+
+  <p>在一個隱蔽拍攝的節目裡，記者發現愛德華的電視節目在剪輯上存在嚴重問題：他實際上在攝製現場說的很多話沒有出現在節目裡，而那些很準確的時刻，常常是在多次嘗試之後的「第N次」才出現的。電視節目的剪輯讓他看起來比實際的情況準確得多。</p>
+
+  <p>但施瓦茲的測試是在受控條件下進行的，不是電視節目。在那些條件下，愛德華的表現仍然超出了對照基線。海曼說實驗設計還不夠嚴格；施瓦茲說它已經足夠嚴格了。這個爭論沒有解決。</p>
+
+  <h2 id="ch5">第五章　那些沒辦法輕易解釋的案例</h2>
+
+  <h3>克羅斯–科里根「代理人實驗」</h3>
+
+  <p>在靈媒研究史上，有若干案例具有不尋常的特性，讓即使認真的懷疑論者也難以用標準解釋完全消化。</p>
+
+  <p>其中一個是1921年在英國心靈研究學會記錄的「克羅斯–科里根案例」（Cross–Correspondences）。這個案例持續了將近三十年，涉及多個完全不認識彼此的自動書寫靈媒，分佈在英國和印度。她們各自書寫了看似沒有意義的文字片段，但當這些片段被收集起來，拼在一起形成了完整的古典文學引用和隱喻，而且這些片段彼此的對應方式表明每個人只有整體信息的一部分。</p>
+
+  <p>研究者的問題是：如果這只是自我欺騙或隨機書寫，為什麼不同的、互不相識的人，在不同的國家，會無意識地書寫出彼此互補的片段？這不是不可能，但要解釋為什麼偶然性能在三十年內持續產生這種結果，需要一個非常複雜的隨機假說。</p>
+
+  <h3>皮珀夫人的「雪迪案例」</h3>
+
+  <p>在派珀夫人（Leonora Piper）長達三十年的被研究生涯裡，最讓研究者難以解釋的是所謂的「雪迪案例」（Shady Hill case）。</p>
+
+  <p>1906年，一位名為喬治·佩頓（George Pelham，研究者為保護其隱私使用的假名，真名為George Pellew）的年輕律師和作家意外過世，享年32歲。他曾以懷疑的態度見過派珀夫人一次，並在見面後不久過世。他過世後，一個宣稱是他的「控制靈」（control）開始在派珀夫人的降神會上出現。</p>
+
+  <p>在接下來幾年裡，一百五十名受試者以隱藏身份參加了派珀夫人的降神會。其中三十名是生前認識喬治·佩頓的人，其餘一百二十名是陌生人。「佩頓控制靈」準確地認出了三十名生前友人中的二十九名，並且對他們展示了只有這些友人才能識別的個人化知識。它沒有認出任何一個陌生人。</p>
+
+  <p>研究者理查·霍奇森（Richard Hodgson）在一份長達兩百頁的報告裡記錄了這個案例，他的結論是：這個案例超出了他所能用任何已知的欺騙機制解釋的範圍。他因此從一個懷疑論者轉變為謹慎的相信者——他相信某種他無法解釋的現象在發生，但他也承認他不知道那個現象的本質是什麼。</p>
+
+  <h3>埃韋納里爾特的「代理人盲測」</h3>
+
+  <p>艾米莉·凱吉（Emily Kelly）和同事在2010年代在維吉尼亞大學進行了一個設計更嚴格的靈媒測試，稱為「代理人盲測」（proxy sitter）研究。</p>
+
+  <p>這個設計的特點是：靈媒完全不接觸「被讀者」，而是接觸一個「代理人」——一個對死亡親屬一無所知的陌生人。靈媒對代理人提供的陳述，然後被傳遞給真正的被讀者進行評分。這個設計排除了靈媒從被讀者的反應、外貌、語氣中獲得任何信息的可能性。</p>
+
+  <p>在這個嚴格條件下，大多數受試靈媒的表現和隨機猜測沒有差異。但有一個靈媒（在研究報告裡被稱為「靈媒1」）的表現持續超出基線，在三次重複測試裡都是如此。</p>
+
+  <p>這是一個小樣本的初步研究，不能被視為最終結論。但它的方法設計比大多數早期研究更嚴格，而它的陽性結果——即使只來自一個受試者——也讓研究者認為有必要繼續進行更大規模的研究。</p>
+
+  <h2 id="ch6">第六章　為什麼這個問題這麼難有答案</h2>
+
+  <h3>兩個誠實的問題</h3>
+
+  <p>在這本書結束之前，我想提出兩個誠實的問題，它們指向了這個研究領域的根本困境。</p>
+
+  <p>第一個問題：如果靈媒現象是真實的，為什麼它這麼難以在受控條件下複製？</p>
+
+  <p>這個問題對相信者來說是最困難的。大多數宣稱能與死者溝通的人，在嚴格的實驗室條件下表現得和隨機猜測一樣。如果真的有某種超自然信息管道在運作，為什麼換一個環境、加上測量儀器，它就消失了？</p>
+
+  <p>支持者的回答是：意識現象可能對「觀測者效應」非常敏感，也就是強烈的懷疑態度可能干擾現象的發生。這個解釋在物理學裡有某種類比（量子力學的測量問題），但把它應用到靈媒現象上，是一個非常大的跳躍，而且它讓這個假說在原則上無法被反駁——你永遠可以說「實驗失敗是因為懷疑論者干擾了它」。</p>
+
+  <p>第二個問題：如果靈媒現象是假的，為什麼那些最嚴格設計的實驗（如維吉尼亞大學的代理人盲測），仍然在個別靈媒身上找到了超出基線的陽性結果？</p>
+
+  <p>這個問題對懷疑論者來說同樣困難。標準的回答是「統計偶然」和「未被發現的方法論漏洞」。但當同一個靈媒在三次重複測試裡都超出基線，「統計偶然」的解釋需要相信一個很低概率的事件連續發生了三次。而「未被發現的漏洞」則需要具體說明那個漏洞是什麼，而不只是主張它一定存在。</p>
+
+  <h3>「超心理學」的真實問題</h3>
+
+  <p>超心理學作為一個研究領域的最大問題，不是它的研究者不夠認真——有些研究者非常認真，受過很好的學術訓練。問題在於它研究的是一種「按需求不出現」的現象。</p>
+
+  <p>在物理學裡，如果你有一個效應，你可以在任何地方、用任何設備重現它。電子的質量不會因為誰在測量而改變。但超心理學的效應在某些實驗室出現，在其他實驗室消失；在某些靈媒身上出現，在其他人身上不出現；在某些條件下出現，在嚴格控制下消失。</p>
+
+  <p>這種「不穩定性」是科學最難處理的情況之一。它可能意味著這個效應是真實的但本質上不穩定，也可能意味著在看起來「有效果」的情況下，有一個我們還沒有找到的混淆變數在起作用。</p>
+
+  <p>在沒有更好的理論框架來預測這個效應什麼時候會出現、什麼時候不會之前，超心理學研究只能繼續積累數據，希望某個模式最終會浮現出來。這是一個漫長而令人沮喪的過程，而它的中間狀態——大量的不確定性——對於習慣了更整齊答案的人來說，是一種很難接受的狀態。</p>
+
+  <h3>信息的來源問題</h3>
+
+  <p>即使假設某些靈媒確實展示了超出已知解釋的信息準確率，還有一個問題是：這些信息從哪裡來？</p>
+
+  <p>「與死者溝通」只是一個可能的解釋。其他可能性包括：某種形式的「延展心靈」（extended mind）或非局域感知，也就是靈媒通過某種尚未被物理學解釋的機制，獲得了被讀者的記憶或情感殘留；某種「滲透」，也就是靈媒無意識地從被讀者的細微反應中讀取了信息（即使那些反應在研究者看來微不足道）；或者是靈媒本人的超強記憶和模式識別能力，讓他們在看似隨機的情況下提取了概率上更高的信息。</p>
+
+  <p>這些解釋都不能被完全排除，而它們和「與死者溝通」一樣，都缺乏已知的物理機制。換言之，我們可能面對的不只是一個超自然假說，而是幾個同樣難以解釋的假說，在競爭解釋同一組數據。</p>
+
+  <h2 id="epilogue">後記　和死去的人說話意味著什麼</h2>
+
+  <p>寫這本書的過程裡，我一直想著那些找靈媒的人。</p>
+
+  <p>不是那些好奇的人，不是研究者，而是那些真正失去了某人，然後去找靈媒的人。他們想要什麼？</p>
+
+  <p>他們想要確認那個人還在。他們想要說一句沒說完的話。他們想要聽到「你沒有必要那麼自責」，或者「我知道你盡力了」，或者「我很好，你可以繼續生活了」。他們想要一個告別的機會，一個他們沒有機會好好進行的告別。</p>
+
+  <p>無論靈媒現象的機制是什麼，這個需求是真實的，而且深刻到讓人心疼。</p>
+
+  <p>問題是，這個真實的需求，讓人極度容易被操弄。一個真誠的靈媒（如果存在的話）和一個欺騙者，對於一個失去親人的人說話的方式可能幾乎完全相同。而在心理脆弱的狀態下，你幾乎無法區分它們。</p>
+
+  <p>我沒有辦法告訴你靈媒是真的還是假的。坦白說，沒有人有足夠的證據告訴你這件事。但我可以告訴你：那個需求是真實的，那個對告別的渴望是真實的，而且那個渴望值得被用不需要靈媒的方式認真對待——通過哀傷、通過說出那句沒說完的話、通過讓那個人在你的記憶裡繼續活著。</p>
+
+  <p>如果除此之外還有什麼，我們目前還不知道。</p>
+
+  <div class="series-nav">
+    <div class="snlabel">死亡與不死　系列</div>
+    <div class="snbooks">
+      <a href="/that-feeling-4-vol1.html" class="snbook">Vol.1《你為什麼怕死》</a>
+      <a href="/that-feeling-4-vol2.html" class="snbook">Vol.2《瀕死之後》</a>
+      <span class="snbook current">Vol.3《與死者同在》</span>
+      <a href="/that-feeling-4-vol4.html" class="snbook">Vol.4《轉世的案例》</a>
+      <a href="/that-feeling-4-vol5.html" class="snbook">Vol.5《不死的執念》</a>
+      <a href="/that-feeling-4-vol6.html" class="snbook">Vol.6《好好告別》</a>
+    </div>
+    <a href="/that-feeling-4.html" class="back-link">← 返回死亡與不死系列</a>
+  </div>
+
+</div>
+</body>
+</html>

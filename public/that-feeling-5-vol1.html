@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你們都看見了｜那個感覺 系列五 Vol.1｜盧林著</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e14;
+    --text: #c0c0d8;
+    --text-muted: #7070a0;
+    --accent: #7a4a9e;
+    --accent-light: rgba(122,74,158,0.15);
+    --accent-dim: rgba(122,74,158,0.4);
+    --card-bg: #14141e;
+    --card-border: rgba(122,74,158,0.2);
+    --label: #5a5a8a;
+    --sidebar-bg: #1a1525;
+    --sidebar-text: #e8e8f0;
+    --sidebar-accent: #7a4a9e;
+    --sidebar-hover: rgba(122,74,158,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 2;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-right: 1px solid var(--card-border);
+    z-index: 100;
+  }
+  .sb-back {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .sb-back:hover { color: var(--sidebar-accent); }
+  .sb-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--label);
+    margin-bottom: 8px;
+  }
+  .sb-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--sidebar-text);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .sb-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+  .sb-divider {
+    border: none;
+    border-top: 1px solid var(--card-border);
+    margin-bottom: 20px;
+  }
+  .sb-toc-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 14px;
+  }
+  .sb-toc a {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+    line-height: 1.6;
+  }
+  .sb-toc a:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-accent);
+  }
+
+  /* ── 主內容 ── */
+  .main {
+    margin-left: 240px;
+    max-width: 720px;
+    padding: 72px 48px 100px;
+  }
+
+  /* ── 書名頭部 ── */
+  .book-meta {
+    text-align: center;
+    margin-bottom: 72px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .book-series {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .book-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .book-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .book-author {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    color: var(--label);
+    letter-spacing: 2px;
+  }
+
+  /* ── 內文 ── */
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 72px 0 32px;
+    color: var(--sidebar-text);
+    padding-top: 8px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    text-align: justify;
+    color: var(--text);
+  }
+
+  .quote-block {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border-left: 3px solid var(--accent-dim);
+    background: var(--card-bg);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.9;
+  }
+  .quote-block p:last-child { margin-bottom: 0; }
+  .quote-source {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--label);
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .highlight-box {
+    margin: 40px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 6px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+  }
+  .highlight-box strong {
+    color: var(--sidebar-text);
+    font-weight: 500;
+  }
+
+  /* ── 系列導覽 ── */
+  .series-nav {
+    border-top: 1px solid var(--card-border);
+    margin-top: 80px;
+    padding-top: 48px;
+    text-align: center;
+  }
+  .snlabel {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--label);
+    margin-bottom: 20px;
+  }
+  .snbooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .snbook {
+    padding: 6px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .snbook:hover { color: var(--accent); border-color: var(--accent-dim); }
+  .snbook.current {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-light);
+  }
+  .back-link {
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* ── RWD ── */
+  @media (max-width: 860px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 48px 24px 72px; }
+  }
+  @media (max-width: 480px) {
+    .book-title { font-size: 1.8rem; }
+    .main { padding: 36px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ Sidebar ══ -->
+<aside class="sidebar">
+  <a href="/ebooks" class="sb-back">← 返回電子書</a>
+  <div class="sb-series">那個感覺 · 系列五 · Vol.1</div>
+  <div class="sb-title">《你們都看見了》</div>
+  <div class="sb-sub">集體目擊、共同幻覺，與那些同時出現在百人眼中的東西</div>
+  <hr class="sb-divider">
+  <div class="sb-toc-label">目　　錄</div>
+  <nav class="sb-toc">
+    <a href="#preface" onclick="smoothScroll(event, 'preface')">前言｜一百個人不會全部說謊</a>
+    <a href="#ch1" onclick="smoothScroll(event, 'ch1')">第一章　一百個目擊者不會全錯</a>
+    <a href="#ch2" onclick="smoothScroll(event, 'ch2')">第二章　你的眼睛在說什麼</a>
+    <a href="#ch3" onclick="smoothScroll(event, 'ch3')">第三章　鳳凰城那個夜晚</a>
+    <a href="#ch4" onclick="smoothScroll(event, 'ch4')">第四章　法蒂瑪的太陽</a>
+    <a href="#ch5" onclick="smoothScroll(event, 'ch5')">第五章　阿里爾的孩子們</a>
+    <a href="#ch6" onclick="smoothScroll(event, 'ch6')">第六章　共同幻覺的邊界</a>
+    <a href="#afterword" onclick="smoothScroll(event, 'afterword')">後記｜你也是目擊者</a>
+  </nav>
+</aside>
+
+<!-- ══ 主內容 ══ -->
+<div class="main">
+
+  <div class="book-meta">
+    <div class="book-series">那個感覺 · 系列五 · Vol.1</div>
+    <h1 class="book-title">你們都看見了</h1>
+    <div class="book-subtitle">集體目擊、共同幻覺，與那些同時出現在百人眼中的東西</div>
+    <div class="book-author">盧林著｜有的沒的小舖出品</div>
+  </div>
+
+  <!-- ══ 前言 ══ -->
+  <h2 id="preface">前言　一百個人不會全部說謊</h2>
+
+  <p>1997年3月13日晚上，美國亞利桑那州鳳凰城的天空出現了一排燈光。不是一個點，是一個巨大的V字形排列，從北向南緩緩移動，靜默無聲。目擊者超過一萬人，包括當時的亞利桑那州長菲菲·賽門頓（Fife Symington）。</p>
+
+  <p>那些燈光停在那裡的時間足夠長，讓人們有時間打電話叫鄰居出來看，有時間架起攝影機，有時間站在街上仰望，確認自己沒有在做夢。</p>
+
+  <p>這個事件後來被稱為「鳳凰城之光」（Phoenix Lights），是美國歷史上規模最大的集體UFO目擊事件之一。美國軍方後來的解釋是：那是A-10戰機在演習時投放的照明彈。但許多目擊者否認這個解釋——照明彈會掉落，那個東西沒有。照明彈不會保持完美的V字形排列移動整整一小時以上。</p>
+
+  <p>問題不在於那個東西是什麼。問題在於：一萬個人同時看見了同一個東西。然後他們描述的內容高度一致。然後其中一個還是州長。</p>
+
+  <p>你要怎麼解釋這件事？</p>
+
+  <p>這本書要討論的，就是這類事情的核心問題：當一群人——十個、一百個、一萬個——同時宣稱他們看見了同一件事，這件事的真實性是不是因此增加了？我們的直覺說「是」。但我們的直覺在這裡可能大錯特錯。</p>
+
+  <p>不是因為那些人在撒謊。恰恰相反——他們很可能都在說實話。問題是：說實話和看見了真實存在的東西，是兩回事。</p>
+
+  <p>這本書會帶你看幾個案例，然後試著拆解一個問題：「我們都看見了」這句話，到底能證明什麼，又不能證明什麼。答案比你想的複雜。而且，在最後，你可能會發現這個問題和你的距離，比你以為的近得多。</p>
+
+  <!-- ══ 第一章 ══ -->
+  <h2 id="ch1">第一章　一百個目擊者不會全錯</h2>
+
+  <p>先說一個你可能以為很清楚、但其實一點都不清楚的問題：為什麼人數多，可信度就高？</p>
+
+  <p>這個邏輯在法庭上叫做「證人數量」，在日常生活裡叫做「大家都這樣說」，在社群媒體上叫做「轉發了三萬次」。我們用這個邏輯來判斷事情，幾乎是本能的。</p>
+
+  <p>但它成立的前提是：那些人的判斷彼此獨立。</p>
+
+  <p>如果十個人各自在不同地點、不同時間、互不認識，然後描述了一致的事情，那確實值得認真對待。但如果十個人是站在同一個街角，互相看著彼此的反應，然後說他們看到了同一件事——這和一個人說沒有本質的差別，只是那個誤差被放大了十倍。</p>
+
+  <p>心理學把這個現象叫做「社會認知偏誤」（social cognition bias）的一種形式，更通俗的說法是：人的感知，會被周圍的人影響。</p>
+
+  <div class="quote-block">
+    <p>社會心理學家所羅門·阿希（Solomon Asch）在1950年代做了一系列線段判斷實驗。他請受試者判斷哪條線和標準線等長——這個判斷在視覺上非常清楚，幾乎不可能出錯。但當房間裡其他人（實際上是阿希安排的助手）都選了錯誤的答案，有75%的受試者在至少一題中跟著選了錯的。</p>
+    <span class="quote-source">——Solomon Asch，〈Studies of independence and conformity〉，1956年，《Psychological Monographs》</span>
+  </div>
+
+  <p>注意，那不是模糊的題目。那是視覺上很清楚的線段長短比較。但當別人都說「C」，很多人就說了「C」，即使他們的眼睛告訴他們是「B」。</p>
+
+  <p>現在想像那個題目不是線段，而是夜空中一個移動的光點。</p>
+
+  <p>1994年9月16日，辛巴威哈拉雷郊區的阿里爾小學（Ariel School）。早上的下課時間，六十二個學生聲稱在操場旁的樹叢邊看見了一個銀色碟形物體降落，然後有生物從裡面走出來。那些孩子的年齡從六歲到十二歲，他們的描述——那個生物的外形、眼睛、行為——高度一致。哈佛大學精神科醫師約翰·麥克（John Mack）後來親赴辛巴威訪問這些孩子，他在研究紀錄裡寫道，孩子們的陳述展現出他無法以正常創傷後反應或集體說謊來解釋的一致性和情緒強度。</p>
+
+  <p>六十二個孩子，一致的描述，一個哈佛醫生說他找不到撒謊的跡象。</p>
+
+  <p>但這裡有一個問題：六十二個孩子是在同一個操場上，同一時間，看著同一個方向，互相看著彼此的反應——然後說出了一致的故事。他們有沒有可能，是在彼此的影響下，建構出了一個共同的感知？</p>
+
+  <p>這個問題不是在說他們說謊。這個問題是在問：人的感知，有多少是自己的？</p>
+
+  <p>答案可能讓你不舒服：比你以為的少很多。</p>
+
+  <p>神經科學家有一個說法，感知不是「接收」，而是「預測」。你的大腦在你看見任何東西之前，就已經在預測你即將看見什麼了。視網膜傳進大腦的原始訊號，是模糊的、片段的、充滿雜訊的——你的大腦會用過去的經驗和當下的情境，去填補那些空白，然後呈現給你一個「完整的」畫面。</p>
+
+  <p>這個填補的過程，會受到情境的影響。當你在一個「可能有東西」的情境裡——因為周圍的人都在抬頭看，因為氣氛是緊張的，因為你剛剛聽到了奇怪的聲音——你的大腦填補空白的方式，就會往「有東西」的方向偏移。</p>
+
+  <div class="highlight-box">
+    <p><strong>重點不是那些人在說謊，而是他們說的「我看見了」，和我們以為的那個意思，根本就不是同一件事。</strong>「我看見了」不等於「那個東西客觀存在」。它的意思是：「我的大腦，在那個情境下，生成了那個畫面。」</p>
+  </div>
+
+  <p>這個區別，是理解集體目擊事件最重要的一把鑰匙。</p>
+
+  <p>但光說「大腦會預測」還不夠。你還需要理解，為什麼大腦的預測，在人群裡會變得特別不可靠。這就是下一章要討論的：你的大腦，天生就設計成要向別人的判斷靠攏。不是軟弱，不是盲從，是演化出來的生存機制。</p>
+
+  <!-- ══ 第二章 ══ -->
+  <h2 id="ch2">第二章　你的眼睛在說什麼</h2>
+
+  <p>人類是社會性動物，這句話你聽過很多次，但它的意思比你以為的更深。</p>
+
+  <p>「社會性」不只是說人類喜歡在一起。它說的是：人類的大腦，在演化的過程中，把「跟隨群體判斷」這件事，編碼成了一種基本的生存策略。</p>
+
+  <p>想像你是一個生活在非洲草原的人類祖先。你一個人站在草叢前，看見草動了。你的判斷是：可能是風，也可能是獅子。你不確定。但這時旁邊的人開始跑了。你的最佳策略是什麼？</p>
+
+  <p>等你確認是不是真的有獅子再跑，還是先跟著跑？</p>
+
+  <p>先跟著跑。因為如果你等待確認，而那真的是獅子，你就死了。如果你跟著跑，而那只是風，代價是你浪費了一點體力。不對稱的代價，導致不對稱的策略：在不確定的情況下，跟隨群體是最安全的選擇。</p>
+
+  <p>這個邏輯在幾百萬年的演化裡被強化，最後變成了我們現在的大腦。我們的大腦天生就對「別人在看什麼」非常敏感，天生就有跟著別人注意力走的傾向，天生就在不確定的時候往群體判斷靠攏。</p>
+
+  <p>神經科學上，這個機制有幾個具體的基礎。其中一個是鏡像神經元（mirror neurons）。1990年代，義大利神經科學家賈科莫·里佐拉蒂（Giacomo Rizzolatti）在帕馬大學研究猴子的運動皮層時，意外發現了一類神經元：當猴子自己做某個動作，這些神經元會活化；但當猴子只是看著另一隻猴子做同樣的動作，同樣的神經元也會活化。</p>
+
+  <div class="quote-block">
+    <p>後續在人類身上的研究顯示，鏡像神經元不只參與動作模仿，也參與情緒和感知的同步。當你看著另一個人表現出恐懼，你自己腦中負責處理恐懼的區域也會輕微活化。你不只是「理解」他的恐懼，你的大腦在某種程度上，是在「體驗」那個恐懼的一個低解析度版本。</p>
+    <span class="quote-source">——Giacomo Rizzolatti & Laila Craighero，〈The Mirror-Neuron System〉，2004年，《Annual Review of Neuroscience》</span>
+  </div>
+
+  <p>這解釋了為什麼在一個緊張的氛圍裡，你自己也會開始緊張，即使你不知道緊張的原因是什麼。這也解釋了為什麼在一個「大家都在看同一個地方」的情境裡，你很難不看那個地方，而且你看的時候，帶著的是那個情境的情緒濾鏡。</p>
+
+  <p>另一個機制是「社會訊息處理」（social information processing）。人類的大腦會持續評估周圍人的行為，把它當作關於環境的訊息來源。心理學家稱之為「資訊型從眾」（informational conformity）：你跟隨別人，不是因為你害怕被孤立，而是因為你真的認為別人可能知道你不知道的事。</p>
+
+  <p>密西根大學心理學家布萊恩·路卡斯（Brian Lucas）和克里斯多福·卡本（Christopher Karpen）在2011年的研究中，讓受試者在判斷不確定事物時先看到別人的判斷，結果顯示，即使受試者被明確告知別人的判斷是隨機生成的，他們還是會受到那個「隨機判斷」的影響，往那個方向調整自己的回答。</p>
+
+  <p>你的大腦，真的很難拒絕別人的判斷。</p>
+
+  <p>現在把這個放回集體目擊的情境裡。一群人站在同一個地方，看著同一個方向。有人說「你看那個！」，所有人開始看。看的過程中，有人說「那個東西在動！」，大腦開始搜尋「動的東西」，而且更可能把模糊的視覺訊號解讀成「在動」。有人說「那個形狀！」，大腦開始搜尋那個形狀，而且更可能把模糊的輪廓解讀成那個形狀。</p>
+
+  <p>這不是說那些人在說謊，也不是說那個東西不存在。這是說，在那個情境下，每一個人的感知，都被其他所有人的感知同時影響著。那個「集體目擊」的結果，不是一百個獨立觀察者的加總，而是一百個互相影響的大腦，在一個特定的社會情境下，共同生成的一個故事。</p>
+
+  <p>這也說明了為什麼目擊者的陳述在事後通常高度一致：不是因為他們都看見了同樣的東西，而是因為他們在看的過程中，已經在彼此對齊了。</p>
+
+  <p>以及，在事件發生之後，他們還會繼續互相對齊。這叫做「集體記憶形成」（collective memory formation），下一章我們會透過鳳凰城之光的案例，看看這個過程是如何運作的。</p>
+
+  <!-- ══ 第三章 ══ -->
+  <h2 id="ch3">第三章　鳳凰城那個夜晚</h2>
+
+  <p>鳳凰城之光不是一個事件，是兩個事件，被合併成了一個傳說。</p>
+
+  <p>1997年3月13日晚上，亞利桑那州確實發生了兩件分開的事情，在後來的討論中被混在一起，造成了很多混亂，也造成了很多看起來無法解釋的「矛盾」。</p>
+
+  <p>第一件事發生在晚上8點15分到8點45分之間，從內華達州南部到圖森（Tucson）的一條長廊上，有目擊者報告看見一個巨大的V形或三角形物體從天空緩慢飛過，靜默無聲。這些目擊報告來自地理上分散的不同地點，包括亨德森（Henderson，內華達）、金曼（Kingman）、鳳凰城郊區、圖森——跨越大約480公里。這個報告確實難以用已知的地方性事件解釋。</p>
+
+  <p>第二件事發生在晚上10點前後，只在鳳凰城市區南側的埃斯特雷亞山（Estrella Mountain）一帶被目擊：一排固定的橙黃色光點，排成一條線，在山頂附近靜止一段時間後逐漸消失。這個現象後來被確認是美國國民警衛隊第104戰鬥機中隊在巴里·戈德華特訓練場（Barry M. Goldwater Range）進行夜間演習時投放的LUU-2B/B照明彈。</p>
+
+  <p>第一個事件到今天沒有官方的確切解釋。第二個事件有解釋，但因為它發生在同一個夜晚、同一個城市，很多目擊者把它和第一個事件的記憶混合在一起，形成了一個比兩個事件的總和都更壯觀的「記憶版本」。</p>
+
+  <div class="quote-block">
+    <p>認知心理學家伊莉莎白·洛夫特斯（Elizabeth Loftus）在數十年的研究中記錄了「記憶污染」（memory contamination）的現象：人們在事件發生後接觸到的新訊息，會被整合進他們對事件的記憶裡，取代原本的記憶，而且他們完全不知道這件事發生了。洛夫特斯在1974年的實驗中，讓受試者看一段車禍影片，然後問不同組的受試者車子「撞碎」時的速度，或車子「碰撞」時的速度——用詞不同，受試者估計的車速就不同，而且一週後，被問「撞碎」的那組，更可能「記得」影片中有玻璃碎片，即使影片裡根本沒有。</p>
+    <span class="quote-source">——Elizabeth Loftus & John Palmer，〈Reconstruction of automobile destruction〉，1974年，《Journal of Verbal Learning and Verbal Behavior》</span>
+  </div>
+
+  <p>鳳凰城之光在事後幾個月到幾年間，在媒體上被大量討論。每一次討論都會生成新的描述，這些描述又會被那些目擊者接觸到，然後整合進他們的記憶裡。一個當初只是看見「幾個光點」的目擊者，可能在幾年後記得的是「一個巨大的飛碟，在我頭頂上方幾百公尺慢速飛過」。</p>
+
+  <p>這不是說他在說謊。這是記憶在運作的方式：記憶不是錄影，它是每次回憶時重新建構的故事，而且每一次重建，都有機會把新的訊息編進去。</p>
+
+  <p>這也解釋了為什麼集體目擊事件的目擊者陳述，往往在時間越長之後越是一致，越是生動，越是壯觀。不是因為他們的記憶越來越清晰，恰恰相反——是因為他們的記憶在那段時間裡，透過互相交流和接觸媒體報導，越來越往同一個方向收斂了。</p>
+
+  <p>亞利桑那州長賽門頓在事件發生的隔天，在一場記者會上公開嘲笑那些目擊者，說那是「凡人的來訪」（visitation from a foreign body），並安排助手穿著外星人服裝上台搞笑。他後來在2007年接受媒體訪問時承認，他當初其實也在城市的另一頭看見了那個東西，他嘲笑那些目擊者，是因為他認為身為州長，他有責任讓公眾保持冷靜。</p>
+
+  <p>他看見了。他知道他看見了。他選擇嘲笑別人，因為他不知道該怎麼面對那個自己也看見的東西。</p>
+
+  <p>這件事本身，比天空裡的光，更讓人想繼續看下去。</p>
+
+  <!-- ══ 第四章 ══ -->
+  <h2 id="ch4">第四章　法蒂瑪的太陽</h2>
+
+  <p>1917年10月13日，葡萄牙法蒂瑪（Fátima）。一個泥土廣場上，站著大約七萬人，他們是來見證一個早就被預告的「奇蹟」的。</p>
+
+  <p>三個牧羊人的小孩——露西亞（Lúcia Santos）、方濟各（Francisco Marto）和雅辛達（Jacinta Marto）——從1917年5月起，每個月在同一個地點宣稱看見了「聖母瑪利亞的顯現」，並說聖母告訴他們，10月13日會有一個奇蹟發生，讓所有人相信。</p>
+
+  <p>消息傳開，七萬人來了。然後，根據幾乎所有在場者的陳述，發生了以下的事：</p>
+
+  <p>雲散了，太陽出現了。然後太陽開始旋轉，像一個車輪，噴射出不同顏色的光芒，把周圍的雲彩染成紅、橙、黃、藍、紫各種顏色。這持續了大約十分鐘，然後太陽「衝向地面」，一路俯衝，讓所有人覺得世界末日到了，然後又退回到天空中。</p>
+
+  <p>七萬人目擊，許多人是以懷疑的態度前來的記者和知識分子，事後都說他們看見了那個景象。包括當時在場的葡萄牙日報《世紀》（O Século）的記者，他在隔天的報導中寫了他所目擊的景象。</p>
+
+  <p>這個事件，梵蒂岡在1930年正式認定為「值得相信的奇蹟」。</p>
+
+  <p>現在來看幾個不那麼被強調的細節。</p>
+
+  <p>第一，那七萬人是在那個廣場上站了幾個小時，在濕冷的秋天，等待一個被預告的「奇蹟」。等待本身，已經創造了一個強烈的期待情境，一個讓感知特別容易受到影響的狀態。</p>
+
+  <p>第二，所有目擊者的陳述都說看見了「太陽旋轉」，但遠離那個廣場的地方，沒有任何天文台記錄到太陽的任何異常運動。如果太陽真的在旋轉，物理上它會對整個地球的觀測者都可見，不會只有這一個廣場的人看見。</p>
+
+  <p>第三，天文學家和氣象學家後來提出了幾個可能的自然解釋：久視太陽後造成的視網膜疲勞，加上眼球的不自主微震動（眼球震顫，nystagmus），確實可以讓人產生太陽在旋轉的視覺效果。那天的氣象條件——大雨後雲散，有薄雲折射陽光——也可能製造出光芒四射的視覺效果。</p>
+
+  <div class="quote-block">
+    <p>心理學家荷西·倫葛（José Pereira）和史丹利·克里普納（Stanley Krippner）在分析法蒂瑪目擊事件的陳述時指出：七萬人在強烈的集體期待情境下，加上幾個小時的等待和情緒激動，已經構成了集體視覺誤判的所有必要條件。這不能排除那些人真的看見了某種視覺現象，但那個現象是什麼，和陳述的內容之間的距離，在現有證據下無法確定。</p>
+    <span class="quote-source">——Stanley Krippner & Joseph Ferreira，〈Visions and Visitations〉，收錄於《Varieties of Anomalous Experience》，2000年，American Psychological Association</span>
+  </div>
+
+  <p>值得注意的是，法蒂瑪事件中有些人在廣場上什麼都沒看見，但這些人後來的陳述很少被討論。沒有親眼看見奇蹟的人，不會被記者採訪，不會被研究者記錄，不會被後人引用。我們最後看見的，是一個選擇性的樣本——只有那些「看見了」的人。</p>
+
+  <p>這個選擇性偏差，在幾乎所有的集體目擊案例中都存在。「什麼都沒看見」的人，從來都不是故事的主角。</p>
+
+  <!-- ══ 第五章 ══ -->
+  <h2 id="ch5">第五章　阿里爾的孩子們</h2>
+
+  <p>回到辛巴威，1994年，阿里爾小學。</p>
+
+  <p>這個案例之所以讓人難以用標準的「集體幻覺」來解釋，有幾個原因。孩子們的年齡跨度很大，從六歲到十二歲，理論上不同年齡的孩子對故事的細節記憶能力差異很大，但他們的描述驚人地一致。多位成人訪問者——包括哈佛的約翰·麥克、BBC的記者、當地的研究者——在事後分別訪問這些孩子，都說他們的陳述沒有表現出刻意說謊的跡象。</p>
+
+  <p>那麼，這件事的解釋是什麼？</p>
+
+  <p>先說我們知道的事實：那天下課，孩子們在沒有成人監督的情況下，在操場上玩耍。某個孩子開始說他看見了什麼。其他孩子轉過頭，在那個方向看。接下來的事情，是在一個非常短的時間內，在一群沒有批判性思考能力完全發展的孩子之間，發生的。</p>
+
+  <p>兒童心理學有大量的研究記錄了一個現象：孩子比成人更容易受到暗示，也更容易在集體情境下形成共同的「記憶」，即使那個記憶對應的事件從未發生。這不是說孩子比較笨，而是說孩子的記憶系統還在發展中，「真實發生的事」和「被告知發生的事」之間的邊界，對孩子來說比對成人更模糊。</p>
+
+  <div class="quote-block">
+    <p>斯蒂芬·賽西（Stephen Ceci）和瑪格麗特·布魯克（Maggie Bruck）在1990年代對兒童目擊證詞的系列研究中，記錄了大量案例：當成人一再問孩子某件事有沒有發生，孩子很快就開始「記得」那件事發生了，而且他們的描述越來越生動、越來越具體，但那些描述的細節，都是孩子從問話的框架和周圍人的反應中學到的，不是來自真實的記憶。</p>
+    <span class="quote-source">——Stephen Ceci & Maggie Bruck，《Jeopardy in the Courtroom: A Scientific Analysis of Children's Testimony》，1995年，American Psychological Association</span>
+  </div>
+
+  <p>阿里爾的孩子們在事件發生後，接受了多輪訪問，每一輪訪問都是一次強化和細化記憶的機會。訪問者帶著「我相信你們」的態度而來，這個態度本身，對孩子來說就是一個強烈的暗示：你們看見的是真實的，而且值得記得。</p>
+
+  <p>但說到這裡，我要停下來說一件事：以上的分析，不等於那件事沒有發生。</p>
+
+  <p>我們不知道那天那些孩子在操場上看見了什麼。我們能說的，是：在現有的知識框架下，我們有一些工具可以解釋為什麼孩子們的陳述會如此一致，而不需要假設他們看見了一個不明飛行物。但「不需要假設」不等於「排除」。</p>
+
+  <p>那個操場上發生了什麼，沒有人知道。那三十年前的辛巴威，沒有監視器，沒有成人目擊者，沒有任何物理證據被保留下來。</p>
+
+  <p>這件事讓我著迷的地方，不是「那個UFO是不是真的」，而是：這個世界上有很多事情，我們有理由不相信，但我們也沒有理由確定它沒有發生。那個中間地帶，比我們想像的寬廣。</p>
+
+  <!-- ══ 第六章 ══ -->
+  <h2 id="ch6">第六章　共同幻覺的邊界</h2>
+
+  <p>「共同幻覺」（shared hallucination）這個概念在通俗討論中很常見，但在嚴格的神經科學意義上，它幾乎是不可能的。</p>
+
+  <p>幻覺是一個神經系統在沒有外部刺激的情況下，自發生成的感知——它是完全個人化的，因為它來自特定的那個大腦的特定狀態。兩個大腦同時產生完全相同的幻覺，需要那兩個大腦在同一時間處於完全相同的神經狀態，這在理論上幾乎不可能自然發生。</p>
+
+  <p>所以，集體目擊事件不能用「他們都在幻覺」來解釋。那麼，它到底是什麼？</p>
+
+  <p>神經科學家和心理學家現在傾向於用幾個層次的機制來解釋集體目擊現象，而不是用單一的解釋。</p>
+
+  <p>第一個層次是「模糊刺激的社會性詮釋」。存在一個真實的、模糊的外部刺激——可能是大氣光學現象、飛機、燈光、動物，任何東西——它在視覺上是模糊的，可以被解讀成很多東西。在一個社會性情境下，人們互相影響，把那個模糊的刺激詮釋成同一個東西。</p>
+
+  <p>第二個層次是「情緒性感知增強」。恐懼、興奮、期待，都會改變感知的靈敏度。在一個情緒高度激動的群體情境下，感官系統對刺激的反應會被放大，細節被填補的方式也會偏向戲劇化的版本。</p>
+
+  <p>第三個層次是「事後記憶重建」。事件發生之後，透過討論、媒體報導、和他人分享，那個原本模糊的記憶被反覆重建，每一次重建都更鮮明、更一致、更壯觀。</p>
+
+  <div class="highlight-box">
+    <p><strong>這三個層次加在一起，可以解釋大多數集體目擊事件的「一致性」，而不需要假設一個外部的超自然原因。但它不能解釋所有的集體目擊事件。</strong>鳳凰城之光的第一個事件——那個跨越四百八十公里、被分散的目擊者報告的V形物體——超出了這個框架的解釋範圍。那不是站在同一個廣場上互相影響的人群，而是在幾個小時內，在互不相識的不同地點，描述了一個類似的東西。</p>
+  </div>
+
+  <p>麻省理工學院的大氣科學家詹姆斯·波拉克（James Pollack）在研究鳳凰城之光時，提出了一個假說：那可能是一種稱為「僚機編隊飛行」（formation flight）的私人飛機群，在夜間的特定大氣條件下，視覺上呈現出V形的印象。但這個假說從未被驗證，也沒有找到對應的飛機記錄。</p>
+
+  <p>有些東西我們就是不知道。</p>
+
+  <p>這是這本書想讓你接受的一件事：「我不知道」和「那一定是超自然的」之間，是一個巨大的空白，而我們這個物種天生不擅長在那個空白裡待著。我們想要答案，所以我們會選擇一個——要麼是「那是真的」，要麼是「那全是假的」。但現實世界不那麼配合。</p>
+
+  <p>集體目擊事件最誠實的結論，通常是：有什麼事情發生了，那些人真的有某種感知經歷，但那個感知經歷的內容，和它對應的物理現實之間的距離，有多遠，我們不知道。</p>
+
+  <p>這個「不知道」，是科學的邊界，不是它的失敗。</p>
+
+  <!-- ══ 後記 ══ -->
+  <h2 id="afterword">後記　你也是目擊者</h2>
+
+  <p>這本書的最後，我想說一件讓人有點不舒服的事。</p>
+
+  <p>你讀完了六章，你現在知道了：集體感知容易被社會情境影響，記憶會被事後訊息污染，大腦天生傾向跟隨群體判斷，在情緒激動的氛圍下感知會被放大。你可能因此覺得那些目擊者「很好解釋」，覺得你自己如果在場，應該不會那樣。</p>
+
+  <p>但這就是這本書要說的最後一件事：你會。</p>
+
+  <p>不是因為你比較笨，或者比較容易受騙。是因為那些機制是人類大腦的基本設計。阿希實驗裡，那些跟著選了錯誤答案的人，是正常的大學生，不是特別沒有判斷力的人。他們只是在面對群體壓力時，做出了大腦演化出來的預設反應。</p>
+
+  <p>你每天都是某種意義上的「目擊者」。你在政治事件、社會爭議、流行病、突發新聞裡的感知和判斷，都在受到你周圍的人影響，受到你接觸的媒體影響，受到你的期待和情緒狀態影響。那些影響不像夜空中的UFO那麼戲劇化，所以你沒有意識到它正在發生。</p>
+
+  <p>那些站在鳳凰城街頭仰頭看天空的人，那些在法蒂瑪泥地上等待奇蹟的七萬人，那些阿里爾操場上六十二個孩子——他們和你的差別，不是他們的大腦比你差，而是他們所在的情境，讓那個大腦的某些機制更明顯地展示了自己。</p>
+
+  <p>如果你明天站在一個廣場上，周圍的人開始說他們看見了什麼，開始指向天空，開始表現出驚恐或興奮——你不確定你會不會看見同樣的東西。你真的不確定。</p>
+
+  <p>這不是失敗。這是人類。</p>
+
+  <p>下一冊，我們要去解剖都市傳說：那些從口耳相傳演變成集體信仰的故事，它們是怎麼誕生的，為什麼會傳播，以及它們告訴了我們什麼關於我們自己的事，那些我們不太願意直接說出口的事。</p>
+
+  <p style="text-align:right; color: var(--label); font-family:'Noto Sans TC',sans-serif; font-size:13px; margin-top:48px;">盧林著｜有的沒的小舖出品</p>
+
+  <!-- 系列導覽 -->
+  <div class="series-nav">
+    <div class="snlabel">集體靈異 · 系列五</div>
+    <div class="snbooks">
+      <span class="snbook current">Vol.1《你們都看見了》</span>
+      <a href="/that-feeling-5-vol2.html" class="snbook">Vol.2《都市傳說解剖》</a>
+      <a href="/that-feeling-5-vol3.html" class="snbook">Vol.3《UFO與我們》</a>
+      <a href="/that-feeling-5-vol4.html" class="snbook">Vol.4《恐慌怎麼擴散》</a>
+      <a href="/that-feeling-5-vol5.html" class="snbook">Vol.5《邪教的邏輯》</a>
+      <a href="/that-feeling-5-vol6.html" class="snbook">Vol.6《你記錯了，我們一起記錯了》</a>
+    </div>
+    <a href="/that-feeling-5.html" class="back-link">← 返回集體靈異</a>
+  </div>
+
+</div><!-- .main -->
+
+<script>
+function smoothScroll(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
