@@ -4,8 +4,10 @@
 import Navbar from '@/components/Navbar';
 import PwaUpdateBanner from '@/components/PwaUpdateBanner';
 import DonateButton from '@/components/DonateButton';
+import { OwnerProvider } from '@/components/OwnerProvider';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Suspense } from 'react';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -84,8 +86,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}} />
       </head>
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <Suspense>
+          <OwnerProvider>
+            <Navbar />
+            {children}
 
         {/* ✅ 全站 Footer */}
         <footer style={{
@@ -119,7 +123,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             本網站使用 AI 輔助開發與內容生成
           </p>
         </footer>
-         <PwaUpdateBanner />
+           <PwaUpdateBanner />
+          </OwnerProvider>
+        </Suspense>
       </body>
     </html>
   );
