@@ -141,6 +141,6 @@ export function renderAiAnatomyChart(chart: SlideChart): React.ReactNode {
     case 'transformer-block': return <TransformerBlockChart />;
     case 'attention-map':     return <AttentionMapChart />;
     case 'distillation-flow': return <DistillationFlowChart />;
-    default:                  return renderS1Chart(chart);
+    default:                  return renderS1Chart(chart as any);
   }
 }
