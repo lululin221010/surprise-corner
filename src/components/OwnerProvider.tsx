@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 const COOKIE_NAME = 'sc_owner_v1';
+const OWNER_SECRET = '19730113';
 const ST_API = 'https://still-time-corner.vercel.app/api/subscription/activate';
 
 const OwnerContext = createContext(false);
@@ -28,6 +29,13 @@ export function OwnerProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // 先查 cookie（清快取不影響）
     if (getCookie(COOKIE_NAME) === '1') {
+      setIsOwner(true);
+      return;
+    }
+
+    // ?owner=19730113 直接後門（隨時可恢復）
+    if (searchParams.get('owner') === OWNER_SECRET) {
+      setOwnerCookie();
       setIsOwner(true);
       return;
     }
