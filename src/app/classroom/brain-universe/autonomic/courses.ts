@@ -6,6 +6,7 @@ export interface AutonomicSlide {
   title: string;
   content: string;
   visual: string;
+  lulu?: string;
 }
 
 export interface AutonomicQuiz {

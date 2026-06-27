@@ -75,8 +75,8 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
             <span>🧬 {lesson.title}</span>
             <span>測驗 {quizIndex + 1} / {lesson.quizzes.length}</span>
           </div>
-          <div style={{ height: '4px', borderRadius: '2px', background: '#e0e7ff', overflow: 'hidden' }}>
-            <div style={{ height: '100%', background: '#6366f1', width: `${progress}%`, transition: 'width 0.3s' }} />
+          <div className="prog-wrap">
+            <div className="prog-fill" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
@@ -140,8 +140,8 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
   }
 
   return (
-    <div className="classroom-content">
-      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#6366f1', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '1rem', padding: 0 }}>
+    <div className="classroom-content theme-brain">
+      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#6eb5c4', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '1rem', padding: 0 }}>
         ← 返回課程列表
       </button>
 
@@ -150,32 +150,42 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
           <span>🧬 {lesson.subtitle}</span>
           <span>{slideIndex + 1} / {lesson.slides.length}</span>
         </div>
-        <div style={{ height: '4px', borderRadius: '2px', background: '#e0e7ff', overflow: 'hidden' }}>
-          <div style={{ height: '100%', background: '#6366f1', width: `${progress}%`, transition: 'width 0.3s' }} />
+        <div className="prog-wrap">
+          <div className="prog-fill" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
-      <h2 style={{ color: '#1e1b4b', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.8rem' }}>{slide.title}</h2>
-
-      <div
-        style={{ width: '100%', marginBottom: '1rem', borderRadius: '10px', overflow: 'hidden' }}
-        dangerouslySetInnerHTML={{ __html: slide.visual }}
-      />
-
-      <div style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', marginBottom: '1.2rem', fontSize: '0.88rem', color: '#374151', lineHeight: 1.7, whiteSpace: 'pre-line' }}>
-        {slide.content}
+      <div className="slide-shell" style={{ marginBottom: '1.2rem' }}>
+        <div className="slide-card">
+          <div className="slide-eyebrow">
+            <span className="slide-num-badge">SLIDE {String(slideIndex + 1).padStart(2, '0')} · {lesson.slides.length}</span>
+          </div>
+          <h2 className="slide-title">{slide.title}</h2>
+          <div
+            style={{ width: '100%', marginBottom: '1rem', borderRadius: '10px', overflow: 'hidden' }}
+            dangerouslySetInnerHTML={{ __html: slide.visual }}
+          />
+          <div className="slide-body" style={{ whiteSpace: 'pre-line' }}>
+            {slide.content}
+          </div>
+        </div>
+        {(slide as any).lulu && (
+          <div className="lulu-strip">
+            <span style={{ fontSize: '20px', flexShrink: 0 }}>🐱</span>
+            <span className="lulu-strip-text">魯魯說：{(slide as any).lulu}</span>
+          </div>
+        )}
       </div>
 
-      <div style={{ display: 'flex', gap: '0.6rem' }}>
+      <div className="slide-nav-wrap" style={{ display: 'flex', gap: '0.6rem' }}>
         {slideIndex > 0 && (
-          <button
-            onClick={() => setSlideIndex(i => i - 1)}
-            style={{ flex: 1, background: '#f1f5f9', color: '#475569', border: 'none', borderRadius: '30px', padding: '0.7rem', fontSize: '0.9rem', cursor: 'pointer' }}
-          >
+          <button className="btn-prev" onClick={() => setSlideIndex(i => i - 1)}>
             ← 上一頁
           </button>
         )}
         <button
+          className="btn-next"
+          style={{ flex: 1 }}
           onClick={() => {
             if (slideIndex < lesson.slides.length - 1) {
               setSlideIndex(i => i + 1);
@@ -183,10 +193,15 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
               setShowQuiz(true);
             }
           }}
-          style={{ flex: 1, background: '#6366f1', color: '#fff', border: 'none', borderRadius: '30px', padding: '0.7rem', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
         >
           {slideIndex < lesson.slides.length - 1 ? '下一頁 →' : '進入測驗 →'}
         </button>
+      </div>
+
+      <div className="slide-dots">
+        {lesson.slides.map((_, i) => (
+          <span key={i} className={`slide-dot${i === slideIndex ? ' active' : ''}`} />
+        ))}
       </div>
     </div>
   );

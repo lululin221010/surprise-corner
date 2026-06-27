@@ -180,7 +180,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
   }
 
   return (
-    <div className="classroom-content">
+    <div className="classroom-content theme-finance">
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
         {/* Toast */}
@@ -197,20 +197,15 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
         )}
 
         {/* 頂部導航 */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-          <button
-            onClick={onBack}
-            style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.85rem', cursor: 'pointer' }}
-          >
+        <div className="slide-topbar">
+          <button className="slide-topbar-back" onClick={onBack}>
             ← 返回課程列表
           </button>
-          <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
-            {lesson.emoji} {lesson.title}
-          </div>
+          <span className="slide-topbar-title">{lesson.emoji} {lesson.title}</span>
         </div>
 
         {/* 進度條 */}
-        <div className="prog-wrap" style={{ marginBottom: '1.5rem' }}>
+        <div className="prog-wrap">
           <div className="prog-fill" style={{ width: `${progress}%` }} />
         </div>
 
@@ -242,23 +237,33 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
         ) : (
           <div>
             {/* 講義卡片 */}
-            <div className="slide-card" style={{ marginBottom: '1.2rem' }}>
-              <h2 className="slide-title">{slide.title}</h2>
-              <p className="slide-body">{slide.body}</p>
-              {slide.chart && (
-                <div className="slide-chart-wrap">
-                  {renderChart(slide.chart)}
+            <div className="slide-shell">
+              <div className="slide-card">
+                <div className="slide-eyebrow">
+                  <span className="slide-num-badge">SLIDE {String(slideIndex + 1).padStart(2, '0')}</span>
+                </div>
+                <h2 className="slide-title">{slide.title}</h2>
+                <p className="slide-body">{slide.body}</p>
+                {slide.chart && (
+                  <div className="slide-chart-wrap">
+                    {renderChart(slide.chart)}
+                  </div>
+                )}
+              </div>
+              {slide.lulu && (
+                <div className="lulu-strip">
+                  <span style={{ fontSize: '20px', flexShrink: 0 }}>🐱</span>
+                  <span className="lulu-strip-text">魯魯說：{slide.lulu}</span>
                 </div>
               )}
             </div>
 
             {/* 翻頁 + 書籤 */}
-            <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
+            <div className="slide-nav-wrap" style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
               <button
                 className="btn-prev"
                 onClick={() => setSlideIndex(i => Math.max(0, i - 1))}
                 disabled={slideIndex === 0}
-                style={{ flex: '0 0 auto' }}
               >
                 ← 上一頁
               </button>
@@ -294,9 +299,14 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
               </button>
             </div>
 
-            {/* 頁碼 */}
-            <div style={{ textAlign: 'center', marginTop: '0.8rem', color: '#94a3b8', fontSize: '0.78rem' }}>
-              {slideIndex + 1} / {lesson.slides.length}
+            {/* 圓點頁碼 */}
+            <div className="slide-dots">
+              {lesson.slides.map((_, i) => (
+                <span
+                  key={i}
+                  className={`slide-dot${i === slideIndex ? ' active' : ''}`}
+                />
+              ))}
             </div>
           </div>
         )}
