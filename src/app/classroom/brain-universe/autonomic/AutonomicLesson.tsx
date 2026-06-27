@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { AutonomicLesson } from './courses';
 import '../../classroom.css';
 
@@ -107,9 +108,17 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
 
         {isAnswered && (
           <>
-            <div style={{ background: isCorrect ? '#f0fdf4' : '#fef2f2', border: `1px solid ${isCorrect ? '#86efac' : '#fca5a5'}`, borderRadius: '10px', padding: '1rem', marginBottom: '1rem', fontSize: '0.88rem', color: '#374151' }}>
-              <strong>{isCorrect ? '✅ 正確！' : '❌ 再想想看'}</strong>
-              <p style={{ margin: '0.5rem 0 0' }}>{quiz.explanation}</p>
+            <div style={{ background: isCorrect ? '#f0fdf4' : '#fef2f2', border: `1px solid ${isCorrect ? '#86efac' : '#fca5a5'}`, borderRadius: '10px', padding: '1rem', marginBottom: '1rem', fontSize: '0.88rem', color: '#374151', display: 'flex', gap: '0.8rem', alignItems: 'flex-start' }}>
+              <Image
+                src={isCorrect ? '/images/lulu-expressions/魯魯_表情_高興.png' : '/images/lulu-expressions/魯魯_表情_沮喪.png'}
+                alt={isCorrect ? '魯魯高興' : '魯魯沮喪'}
+                width={70} height={70}
+                style={{ borderRadius: '8px', flexShrink: 0, objectFit: 'cover' }}
+              />
+              <div>
+                <strong>{isCorrect ? '✅ 正確！' : '❌ 再想想看'}</strong>
+                <p style={{ margin: '0.5rem 0 0' }}>{quiz.explanation}</p>
+              </div>
             </div>
             <button
               onClick={() => {
