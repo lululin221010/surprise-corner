@@ -72,10 +72,16 @@ function lessonToGroupKey(lesson: AiLesson) {
 
 // ── 測驗 ──────────────────────────────────────────────────
 
-function QuizPanel({ quiz, onPass }: { quiz: AiQuiz; onPass: () => void }) {
+function QuizPanel({ quiz, onPass, onBackToCourse }: { quiz: AiQuiz; onPass: () => void; onBackToCourse: () => void }) {
   const [selected, setSelected] = useState<number | null>(null);
+  const [retried, setRetried] = useState(false);
   const answered = selected !== null;
   const correct = selected === quiz.answerIndex;
+
+  function handleRetry() {
+    setSelected(null);
+    setRetried(true);
+  }
 
   return (
     <div style={{ padding: '1rem 0' }}>
@@ -97,15 +103,31 @@ function QuizPanel({ quiz, onPass }: { quiz: AiQuiz; onPass: () => void }) {
         })}
       </div>
       {answered && (
-        <div style={{ background: correct ? '#f0fdf4' : '#fef2f2', border: `1px solid ${correct ? '#86efac' : '#fca5a5'}`, borderRadius: '10px', padding: '0.75rem', marginBottom: '0.9rem', fontSize: '0.82rem', color: '#374151', lineHeight: 1.6 }}>
-          {correct ? '✅ 答對了！' : '❌ 再想想——'} {quiz.explanation}
-        </div>
-      )}
-      {answered && (
-        <button onClick={onPass}
-          style={{ width: '100%', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.9rem', border: 'none', borderRadius: '30px', padding: '0.65rem', cursor: 'pointer' }}>
-          繼續 →
-        </button>
+        <>
+          {/* 魯魯回饋圖 */}
+          <div style={{ textAlign: 'center', marginBottom: '0.6rem' }}>
+            <span style={{ fontSize: '2.5rem' }}>{correct ? '😺' : '😿'}</span>
+          </div>
+          <div style={{ background: correct ? '#f0fdf4' : '#fef2f2', border: `1px solid ${correct ? '#86efac' : '#fca5a5'}`, borderRadius: '10px', padding: '0.75rem', marginBottom: '0.9rem', fontSize: '0.82rem', color: '#374151', lineHeight: 1.6 }}>
+            {correct ? '✅ 答對了！' : '❌ 再想想——'} {quiz.explanation}
+          </div>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            {!correct && (
+              <button onClick={handleRetry}
+                style={{ flex: 1, background: '#f3f4f6', border: '1px solid #e5e7eb', color: '#374151', fontWeight: 600, fontSize: '0.85rem', borderRadius: '30px', padding: '0.6rem', cursor: 'pointer' }}>
+                🔄 重新作答
+              </button>
+            )}
+            <button onClick={onBackToCourse}
+              style={{ flex: 1, background: '#ede9fe', border: 'none', color: '#5b21b6', fontWeight: 600, fontSize: '0.85rem', borderRadius: '30px', padding: '0.6rem', cursor: 'pointer' }}>
+              ← 回課程列表
+            </button>
+            <button onClick={onPass}
+              style={{ flex: correct ? 2 : 1, background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.85rem', border: 'none', borderRadius: '30px', padding: '0.6rem', cursor: 'pointer' }}>
+              繼續 →
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
@@ -156,14 +178,17 @@ function LessonView({ lesson, onComplete, onBack }: { lesson: AiLesson; onComple
               </div>
             </>
           ) : (
-            <QuizPanel key={quizIdx} quiz={lesson.quizzes[quizIdx]} onPass={() => {
-              if (quizIdx < lesson.quizzes.length - 1) setQuizIdx(q => q + 1);
-              else onComplete();
-            }} />
+            <QuizPanel key={quizIdx} quiz={lesson.quizzes[quizIdx]}
+              onPass={() => {
+                if (quizIdx < lesson.quizzes.length - 1) setQuizIdx(q => q + 1);
+                else onComplete();
+              }}
+              onBackToCourse={onBack}
+            />
           )}
         </div>
         <div style={{ color: '#94a3b8', fontSize: '0.73rem', textAlign: 'center', marginTop: '0.8rem' }}>
-          {tierLabel(lesson.tier)} · {lesson.duration} · 免費試讀
+          {tierLabel(lesson.tier)} · {lesson.slides.length} 頁 + {lesson.quizzes.length} 題測驗 · 免費試讀
         </div>
       </div>
     </div>
@@ -199,7 +224,7 @@ function LessonDonePage({ groupKey, meta, onContinue }: { groupKey: string; meta
         <div style={{ background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '16px', padding: '1.2rem', marginBottom: '1.2rem', textAlign: 'center' }}>
           <div style={{ fontSize: '1.8rem', marginBottom: '0.3rem' }}>🎖️</div>
           <div style={{ color: '#92400e', fontWeight: 800, fontSize: '1rem', marginBottom: '0.2rem' }}>好康體驗證書</div>
-          <div style={{ color: '#78350f', fontSize: '0.78rem', lineHeight: 1.6 }}>本堂完成！可收藏紀念，無折抵功能</div>
+          <div style={{ color: '#78350f', fontSize: '0.78rem', lineHeight: 1.6 }}>本堂完成！可收藏紀念 🎖️</div>
         </div>
         <a href={`https://still-time-corner.vercel.app${meta.storePath}`} target="_blank" rel="noopener noreferrer"
           style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', borderRadius: '30px', padding: '0.75rem', textDecoration: 'none', textAlign: 'center', marginBottom: '0.8rem' }}>
@@ -294,7 +319,7 @@ export default function AiTrialPage({ meta, lessons, storageKey, bonusLabel }: P
                       </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>{lesson.emoji} {lesson.title}</div>
-                        <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {lesson.duration}</div>
+                        <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{lesson.slides.length} 頁 + {lesson.quizzes.length} 題</div>
                       </div>
                       <div style={{ color: done ? '#15803d' : '#a78bfa', fontSize: '0.8rem' }}>{done ? '✓' : '→'}</div>
                     </button>

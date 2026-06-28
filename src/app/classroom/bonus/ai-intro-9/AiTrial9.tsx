@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/bonus/ai-intro-9/AiTrial9.tsx
 // AI書院系列9試讀本：機器人學 — 入門3堂 + 進階2堂 + 高階1堂
 

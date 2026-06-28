@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/bonus/ai-intro-6/AiTrial6.tsx
 // AI書院系列6試讀本：心理學 — 入門3堂 + 進階2堂 + 高階1堂
 

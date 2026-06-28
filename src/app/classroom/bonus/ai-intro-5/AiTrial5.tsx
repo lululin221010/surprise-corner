@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/bonus/ai-intro-5/AiTrial5.tsx
 // AI書院系列5試讀本：共存學 — 入門3堂 + 進階2堂 + 高階1堂
 

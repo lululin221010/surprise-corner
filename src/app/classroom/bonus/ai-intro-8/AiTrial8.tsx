@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/bonus/ai-intro-8/AiTrial8.tsx
 // AI書院系列8試讀本：局勢學（安全） — 入門3堂 + 進階2堂 + 高階1堂
 

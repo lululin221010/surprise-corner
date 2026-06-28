@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/bonus/ai-intro-3/AiTrial3.tsx
 // AI書院系列3試讀本：溝通學 — 入門3堂 + 進階2堂 + 高階1堂
 
