@@ -20,9 +20,10 @@ interface Props {
   onComplete: () => void;
   onBack: () => void;
   isFree?: boolean;
+  isLastLesson?: boolean;
 }
 
-export default function AcademyLesson({ lesson, onComplete, onBack, isFree = false }: Props) {
+export default function AcademyLesson({ lesson, onComplete, onBack, isFree = false, isLastLesson = false }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
@@ -85,7 +86,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
           key={quizIndex}
           quiz={quiz}
           certInfo={{ lessonId: lesson.id, lessonTitle: lesson.title, quizIndex }}
-          isLast={quizIndex === lesson.quizzes.length - 1}
+          isLast={quizIndex === lesson.quizzes.length - 1 && isLastLesson}
           isFree={isFree}
           onPass={handleQuizPass}
           onRetry={handleRetry}

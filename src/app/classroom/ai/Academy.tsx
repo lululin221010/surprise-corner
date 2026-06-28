@@ -93,12 +93,14 @@ export default function Academy() {
   // 上課中
   if (activeLesson && activeCourse) {
     const isFree = activeCourse.id === 'ai-trial';
+    const isLastLesson = activeLesson.id === activeCourse.lessons[activeCourse.lessons.length - 1]?.id;
     return (
       <AcademyLesson
         lesson={activeLesson}
         onComplete={handleLessonComplete}
         onBack={() => setActiveLesson(null)}
         isFree={isFree}
+        isLastLesson={isLastLesson}
       />
     );
   }
