@@ -51,9 +51,22 @@ const ACADEMY_SECTIONS = [
   // 未來：AI書院、理財書院...
 ];
 
+const AI_SERIES = [
+  { n: 1, title: 'AI基礎學', emoji: '📖' },
+  { n: 2, title: 'AI解剖學', emoji: '🔬' },
+  { n: 3, title: 'AI溝通學', emoji: '💬' },
+  { n: 4, title: 'AI思考力', emoji: '🤔' },
+  { n: 5, title: 'AI共存學', emoji: '🤝' },
+  { n: 6, title: 'AI心理學', emoji: '🧬' },
+  { n: 7, title: 'AI實作學', emoji: '🛠️' },
+  { n: 8, title: 'AI局勢學', emoji: '🛡️' },
+  { n: 9, title: 'AI機器人學', emoji: '🤖' },
+];
+
 export default function BonusAcademy() {
   const [active, setActive] = useState<ActiveItem | null>(null);
   const [psychFilter, setPsychFilter] = useState<string>('all');
+  const [aiFilter, setAiFilter] = useState<string>('1');
 
   if (active) {
     return (
@@ -123,30 +136,36 @@ export default function BonusAcademy() {
                 </div>
               </Link>
             ) : section.id === 'ai' ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                {([
-                  { n: 1, title: 'AI基礎學', emoji: '📖' },
-                  { n: 2, title: 'AI解剖學', emoji: '🔬' },
-                  { n: 3, title: 'AI溝通學', emoji: '💬' },
-                  { n: 4, title: 'AI思考力', emoji: '🤔' },
-                  { n: 5, title: 'AI共存學', emoji: '🤝' },
-                  { n: 6, title: 'AI心理學', emoji: '🧬' },
-                  { n: 7, title: 'AI實作學', emoji: '🛠️' },
-                  { n: 8, title: 'AI局勢學', emoji: '🛡️' },
-                  { n: 9, title: 'AI機器人學', emoji: '🤖' },
-                ] as { n: number; title: string; emoji: string }[]).map(({ n, title, emoji }) => (
-                  <Link key={n} href={`/classroom/bonus/ai-intro-${n}`} style={{ textDecoration: 'none' }}>
-                    <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
-                      <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{emoji}</div>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem' }}>系列{n}・{title}試讀本</div>
-                        <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.1rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+              <>
+                {/* AI 系列 tab */}
+                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
+                  <button onClick={() => setAiFilter('all')}
+                    style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: aiFilter === 'all' ? '#ede9fe' : '#f3f4f6', border: aiFilter === 'all' ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: aiFilter === 'all' ? '#5b21b6' : '#374151' }}>
+                    全部 {AI_SERIES.length}
+                  </button>
+                  {AI_SERIES.map(s => (
+                    <button key={s.n} onClick={() => setAiFilter(String(s.n))}
+                      style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: aiFilter === String(s.n) ? '#ede9fe' : '#f3f4f6', border: aiFilter === String(s.n) ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: aiFilter === String(s.n) ? '#5b21b6' : '#374151' }}>
+                      {s.emoji} {s.title}
+                    </button>
+                  ))}
+                </div>
+                {/* AI 系列列表 */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  {AI_SERIES.filter(s => aiFilter === 'all' || aiFilter === String(s.n)).map(({ n, title, emoji }) => (
+                    <Link key={n} href={`/classroom/bonus/ai-intro-${n}`} style={{ textDecoration: 'none' }}>
+                      <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
+                        <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{emoji}</div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem' }}>系列{n}・{title}試讀本</div>
+                          <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.1rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂</div>
+                        </div>
+                        <div style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>→</div>
                       </div>
-                      <div style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>→</div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                    </Link>
+                  ))}
+                </div>
+              </>
             ) : (
               <>
                 {/* 心理學學系篩選 */}
@@ -203,13 +222,8 @@ export default function BonusAcademy() {
           <div style={{ display: 'flex', gap: '0.6rem' }}>
             <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.6rem', textDecoration: 'none', textAlign: 'center' }}>
-              轉帳購買 →
+              前往小舖購買 →
             </a>
-            <button
-              onClick={() => alert('積分兌換即將整合，敬請期待～目前可至小舖查看積分餘額')}
-              style={{ flex: 1, background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.35)', color: '#fbbf24', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.6rem', cursor: 'pointer' }}>
-              🪙 魯魯積分兌換
-            </button>
           </div>
         </div>
       </div>
