@@ -66,10 +66,12 @@ const AI_SERIES = [
 export default function BonusAcademy() {
   const [active, setActive] = useState<ActiveItem | null>(null);
   const [psychFilter, setPsychFilter] = useState<string>(PSYCH_SERIES[0].id);
+  const [mounted, setMounted] = useState(false);
   // 在 client 端才隨機選一個學系（避免 SSR hydration mismatch）
   useEffect(() => {
     const ids = PSYCH_SERIES.map(s => s.id);
     setPsychFilter(ids[Math.floor(Math.random() * ids.length)]);
+    setMounted(true);
   }, []);
   const [aiFilter, setAiFilter] = useState<string>('1-3');
 
@@ -180,7 +182,8 @@ export default function BonusAcademy() {
               </>
             ) : (
               <>
-                {/* 心理學學系篩選 */}
+                {/* 心理學學系篩選 — 等 client mount 才渲染，避免 SSR hydration mismatch */}
+                {mounted && (
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
                   <button onClick={() => setPsychFilter('all')}
                     style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: psychFilter === 'all' ? '#ede9fe' : '#f3f4f6', border: psychFilter === 'all' ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: psychFilter === 'all' ? '#5b21b6' : '#374151' }}>
@@ -196,6 +199,7 @@ export default function BonusAcademy() {
                     );
                   })}
                 </div>
+                )}
 
                 {/* 課程列表 */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
