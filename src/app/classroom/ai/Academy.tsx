@@ -215,7 +215,7 @@ export default function Academy() {
           🤖 AI書院
         </h1>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>
-          9大系列・26冊，從AI原理到實作。不需技術背景，每堂5分鐘，一次弄懂一個AI概念。
+          從AI原理到實作，不需技術背景。系列1解剖學已上線，更多系列陸續開課。
         </p>
       </div>
 
