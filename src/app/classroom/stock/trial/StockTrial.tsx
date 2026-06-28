@@ -1,6 +1,6 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/trial/StockTrial.tsx
-// 股市書院試讀本：入門3堂 + 進階2堂 + 高階1堂
+// 理財書院 台股系列試讀本：入門3堂 + 進階2堂 + 高階1堂
 // 每堂完成 → 顯示該書院目錄 + 好康體驗證書
 
 import { useState } from 'react';
@@ -140,11 +140,11 @@ export default function StockTrial() {
           <span style={{ margin: '0 0.4rem' }}>›</span>
           <Link href="/classroom/bonus" className="classroom-back" style={{ fontSize: '12px' }}>好康書院</Link>
           <span style={{ margin: '0 0.4rem' }}>›</span>
-          <span>股市書院試讀本</span>
+          <span>理財書院 台股系列試讀本</span>
         </div>
 
         <h2 style={{ color: '#1e1b4b', fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.3rem' }}>
-          🎁 股市書院試讀本
+          🎁 理財書院 台股系列試讀本
         </h2>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
           入門 3 堂 × 進階 2 堂 × 高階 1 堂，免費體驗完整學習路徑。

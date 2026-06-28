@@ -262,7 +262,7 @@ export default function MyCertsPage() {
               <div style={{ textAlign: 'center', padding: '1.5rem', color: '#9ca3af', fontSize: '0.88rem' }}>
                 尚未完成任何課程<br />
                 <Link href="/classroom/stock" style={{ color: '#7c3aed', fontSize: '0.82rem' }}>
-                  前往股市書院開始上課 →
+                  前往理財書院 › 台股系列開始上課 →
                 </Link>
               </div>
             )}

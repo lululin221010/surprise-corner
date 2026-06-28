@@ -18,7 +18,7 @@ interface ActiveItem {
 const ACADEMY_SECTIONS = [
   {
     id: 'stock',
-    label: '股市書院好康',
+    label: '理財書院好康-台股系列',
     emoji: '📈',
     comingSoon: false,
     items: [] as { lesson: PsychLesson; bookTitle: string; subtitle: string }[],
@@ -105,7 +105,7 @@ export default function BonusAcademy() {
                 <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
                   <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>股市書院試讀本</div>
+                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>理財書院 台股系列試讀本</div>
                     <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
                   </div>
                   <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
