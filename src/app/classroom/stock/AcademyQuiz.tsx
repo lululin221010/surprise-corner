@@ -180,7 +180,7 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, on
             </div>
             <div style={{ color: '#374151', fontSize: '0.78rem', lineHeight: 1.6, marginBottom: '0.8rem' }}>
               恭喜完成本堂全部測驗！<br />
-              <span style={{ color: '#6366f1' }}>憑此證書至有的沒的小舖兌換專屬福利</span>
+              <span style={{ color: '#6366f1' }}>收藏這張證書，記錄你的學習足跡</span>
             </div>
 
             {/* Email 儲存區塊 */}

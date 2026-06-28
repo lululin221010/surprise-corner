@@ -73,11 +73,13 @@ export default function Academy() {
 
   // 上課中 — 交給 AcademyLesson 自己管背景
   if (activeLesson && activeCourse) {
+    const isLastLesson = activeLesson.id === activeCourse.lessons[activeCourse.lessons.length - 1]?.id;
     return (
       <AcademyLesson
         lesson={activeLesson}
         onComplete={handleLessonComplete}
         onBack={() => setActiveLesson(null)}
+        isLastLesson={isLastLesson}
       />
     );
   }
