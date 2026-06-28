@@ -65,8 +65,11 @@ const AI_SERIES = [
 
 export default function BonusAcademy() {
   const [active, setActive] = useState<ActiveItem | null>(null);
-  const [psychFilter, setPsychFilter] = useState<string>('all');
-  const [aiFilter, setAiFilter] = useState<string>('1');
+  const [psychFilter, setPsychFilter] = useState<string>(() => {
+    const ids = PSYCH_SERIES.map(s => s.id);
+    return ids[Math.floor(Math.random() * ids.length)];
+  });
+  const [aiFilter, setAiFilter] = useState<string>('1-3');
 
   if (active) {
     return (
@@ -137,22 +140,29 @@ export default function BonusAcademy() {
               </Link>
             ) : section.id === 'ai' ? (
               <>
-                {/* AI 系列 tab */}
+                {/* AI 系列分組 tab */}
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
-                  <button onClick={() => setAiFilter('all')}
-                    style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: aiFilter === 'all' ? '#ede9fe' : '#f3f4f6', border: aiFilter === 'all' ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: aiFilter === 'all' ? '#5b21b6' : '#374151' }}>
-                    全部 {AI_SERIES.length}
-                  </button>
-                  {AI_SERIES.map(s => (
-                    <button key={s.n} onClick={() => setAiFilter(String(s.n))}
-                      style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: aiFilter === String(s.n) ? '#ede9fe' : '#f3f4f6', border: aiFilter === String(s.n) ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: aiFilter === String(s.n) ? '#5b21b6' : '#374151' }}>
-                      {s.emoji} {s.title}
+                  {[
+                    { key: 'all',  label: '全部 9' },
+                    { key: '1-3',  label: '系列 1–3' },
+                    { key: '4-6',  label: '系列 4–6' },
+                    { key: '7-9',  label: '系列 7–9' },
+                  ].map(tab => (
+                    <button key={tab.key} onClick={() => setAiFilter(tab.key)}
+                      style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: aiFilter === tab.key ? '#ede9fe' : '#f3f4f6', border: aiFilter === tab.key ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: aiFilter === tab.key ? '#5b21b6' : '#374151' }}>
+                      {tab.label}
                     </button>
                   ))}
                 </div>
                 {/* AI 系列列表 */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                  {AI_SERIES.filter(s => aiFilter === 'all' || aiFilter === String(s.n)).map(({ n, title, emoji }) => (
+                  {AI_SERIES.filter(s => {
+                    if (aiFilter === 'all') return true;
+                    if (aiFilter === '1-3') return s.n <= 3;
+                    if (aiFilter === '4-6') return s.n >= 4 && s.n <= 6;
+                    if (aiFilter === '7-9') return s.n >= 7;
+                    return true;
+                  }).map(({ n, title, emoji }) => (
                     <Link key={n} href={`/classroom/bonus/ai-intro-${n}`} style={{ textDecoration: 'none' }}>
                       <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
                         <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{emoji}</div>
