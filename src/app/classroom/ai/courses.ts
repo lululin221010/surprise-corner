@@ -1,4 +1,4 @@
-// 📄 路徑：src/app/classroom/ai/courses.ts
+﻿// 📄 路徑：src/app/classroom/ai/courses.ts
 
 export interface SlideChart {
   type:
@@ -60,7 +60,7 @@ export interface Course {
 // ===== S1 入門課程 =====
 export const aiIntroCourse: Course = {
   id: 'ai-intro',
-  title: 'AI入門',
+  title: '解剖學入門',
   description: '15堂帶你從AI歷史走到完整運作全貌，不需要任何技術背景。',
   emoji: '🕰️',
   lessons: [
@@ -1370,7 +1370,7 @@ AI不是憑空生出偏見，它是一個「鏡子」，反映出餵給它的資
 // ===== S1 進階課程 =====
 export const aiAdvancedCourse: Course = {
   id: 'ai-advanced',
-  title: 'AI進階',
+  title: '解剖學進階',
   description: '11堂深入訓練機制、對齊技術與模型能力的核心原理。',
   emoji: '⚙️',
   lessons: [
@@ -2415,7 +2415,7 @@ Prompt越清楚、越有脈絡，AI猜測的方向就越精確；Prompt越模糊
 // ===== S1 高階課程 =====
 export const aiMasterCourse: Course = {
   id: 'ai-master',
-  title: 'AI高階',
+  title: '解剖學高階',
   description: '9堂帶你看懂AI產業生態、商業模式與未來趨勢。',
   emoji: '🚀',
   lessons: [
