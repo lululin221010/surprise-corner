@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/stock/trial/StockTrial.tsx
 // 理財書院 台股系列試讀本：入門3堂 + 進階2堂 + 高階1堂
 // 每堂完成 → 顯示該書院目錄 + 好康體驗證書
@@ -170,7 +170,7 @@ export default function StockTrial() {
                       </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>{lesson.emoji} {lesson.title}</div>
-                        <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>⏱ {lesson.duration}</div>
+                        <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>{lesson.slides.length} 頁 + {lesson.quizzes.length} 題</div>
                       </div>
                       <div style={{ color: done ? '#15803d' : '#a78bfa', fontSize: '0.8rem' }}>{done ? '✓' : '→'}</div>
                     </button>

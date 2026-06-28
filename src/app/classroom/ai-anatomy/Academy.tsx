@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 // 📄 路徑：src/app/classroom/ai-anatomy/Academy.tsx
 
 import { useState } from 'react';
@@ -177,7 +177,7 @@ export default function Academy() {
                     {lesson.emoji} {lesson.title}
                   </div>
                   <div style={{ color: '#9ca3af', fontSize: '0.75rem' }}>
-                    {locked ? '🔒 付費解鎖' : `⏱ ${lesson.duration}`}
+                    {locked ? '🔒 付費解鎖' : `${lesson.slides.length} 頁 + ${lesson.quizzes.length} 題`}
                   </div>
                 </div>
                 <div style={{ color: locked ? '#d1d5db' : '#0891b2', fontSize: '0.8rem' }}>→</div>
