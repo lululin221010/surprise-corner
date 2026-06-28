@@ -2,6 +2,7 @@
 // 📄 路徑：src/app/classroom/ai/AcademyLesson.tsx
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import type { Lesson, SlideChart } from './courses';
 import AcademyQuiz from './AcademyQuiz';
 import '../classroom.css';
@@ -10,6 +11,14 @@ import {
   getCurrentEmail, awardLessonBonus, getAccount,
   type UserAccount,
 } from '../coins';
+
+const LESSON_CARDS: Record<string, { src: string; alt: string }[]> = {
+  'ai-intro-lesson-2':    [{ src: '/images/lulu-cards/魯魯_知識卡_AI在猜字.png',       alt: 'AI在猜字知識卡' }],
+  'ai-intro-lesson-3':    [{ src: '/images/lulu-cards/魯魯_知識卡_Token是什麼.png',     alt: 'Token是什麼知識卡' }],
+  'ai-intro-lesson-4':    [{ src: '/images/lulu-cards/魯魯_知識卡_AI訓練是什麼.png',   alt: 'AI訓練是什麼知識卡' }],
+  'ai-intro-lesson-6':    [{ src: '/images/lulu-cards/魯魯_知識卡_AI為什麼說錯話.png', alt: 'AI為什麼說錯話知識卡' }],
+  'ai-advanced-lesson-2': [{ src: '/images/lulu-cards/魯魯_知識卡_上下文視窗.png',     alt: '上下文視窗知識卡' }],
+};
 
 function renderChart(chart: SlideChart) {
   return renderAiChart(chart);
@@ -67,19 +76,31 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
     }
   }
 
-  // 本堂完成畫面
+  // 本堂完成畫面（有知識卡先秀卡）
   if (lessonDone) {
+    const cards = LESSON_CARDS[lesson.id] ?? [];
     return (
       <div className="classroom-content">
-        <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', paddingTop: '3rem' }}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>✅</div>
-          <h2 style={{ color: '#1e1b4b', fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-            {lesson.emoji} {lesson.title}
+        <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', paddingTop: '2rem' }}>
+          <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🎉</div>
+          <h2 style={{ color: '#1e1b4b', fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.25rem' }}>
+            {lesson.emoji} {lesson.title} 完課！
           </h2>
-          <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '2rem' }}>本堂完成！</p>
+          {cards.length > 0 && (
+            <>
+              <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.2rem' }}>
+                手機長按 / 電腦右鍵，儲存知識卡帶走
+              </p>
+              {cards.map(card => (
+                <div key={card.src} style={{ marginBottom: '1rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+                  <Image src={card.src} alt={card.alt} width={560} height={560} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                </div>
+              ))}
+            </>
+          )}
           <button
             onClick={onComplete}
-            style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', marginBottom: '0.8rem' }}
+            style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', marginBottom: '0.8rem', marginTop: '1rem' }}
           >
             繼續下一堂 →
           </button>
