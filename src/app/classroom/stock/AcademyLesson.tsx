@@ -76,6 +76,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
   const [showLessonCard, setShowLessonCard] = useState(false);
+  const [lessonDone, setLessonDone] = useState(false);
   const [email, setEmailState] = useState('');
   const [account, setAccount] = useState<UserAccount | null>(null);
   const [toastMsg, setToastMsg] = useState('');
@@ -139,12 +140,38 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
       if (LESSON_CARDS[lesson.id]) {
         setShowLessonCard(true);
       } else {
-        onComplete();
+        setLessonDone(true);
       }
     }
   }
 
   const bookmarkCount = account?.inventory?.bookmark ?? 0;
+
+  if (lessonDone) {
+    return (
+      <div className="classroom-content">
+        <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', paddingTop: '3rem' }}>
+          <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>✅</div>
+          <h2 style={{ color: '#1e1b4b', fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.5rem' }}>
+            {lesson.emoji} {lesson.title}
+          </h2>
+          <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '2rem' }}>本堂完成！</p>
+          <button
+            onClick={onComplete}
+            style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', marginBottom: '0.8rem' }}
+          >
+            繼續下一堂 →
+          </button>
+          <button
+            onClick={onBack}
+            style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.88rem', cursor: 'pointer' }}
+          >
+            ← 回課程列表
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (showLessonCard) {
     const cards = LESSON_CARDS[lesson.id] ?? [];

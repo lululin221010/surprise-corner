@@ -53,6 +53,8 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
     setQuizIndex(0);
   }
 
+  const [lessonDone, setLessonDone] = useState(false);
+
   function handleQuizPass() {
     if (quizIndex < lesson.quizzes.length - 1) {
       setQuizIndex(i => i + 1);
@@ -61,8 +63,35 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
         const { awarded, totalCoins } = awardLessonBonus(email, lesson.id);
         if (awarded) showToast(`🎉 完課 bonus！+2 🪙 累積 ${totalCoins} 金幣`);
       }
-      onComplete();
+      setLessonDone(true);
     }
+  }
+
+  // 本堂完成畫面
+  if (lessonDone) {
+    return (
+      <div className="classroom-content">
+        <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', paddingTop: '3rem' }}>
+          <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>✅</div>
+          <h2 style={{ color: '#1e1b4b', fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.5rem' }}>
+            {lesson.emoji} {lesson.title}
+          </h2>
+          <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '2rem' }}>本堂完成！</p>
+          <button
+            onClick={onComplete}
+            style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', marginBottom: '0.8rem' }}
+          >
+            繼續下一堂 →
+          </button>
+          <button
+            onClick={onBack}
+            style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.88rem', cursor: 'pointer' }}
+          >
+            ← 回課程列表
+          </button>
+        </div>
+      </div>
+    );
   }
 
   // 測驗中
