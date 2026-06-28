@@ -318,7 +318,7 @@ function QuizPanel({ quiz, onPass, onBackToCourse }: { quiz: Quiz; onPass: () =>
       {answered && (
         <>
           <div style={{ textAlign: 'center', marginBottom: '0.6rem' }}>
-            <span style={{ fontSize: '2.5rem' }}>{correct ? '😺' : '😿'}</span>
+            <img src={correct ? '/images/lulu-expressions/魯魯_表情_高興.png' : '/images/lulu-expressions/魯魯_表情_沮喪.png'} alt={correct ? '魯魯好開心' : '魯魯有點難過'} style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
           </div>
           <div style={{ background: correct ? '#f0fdf4' : '#fef2f2', border: `1px solid ${correct ? '#86efac' : '#fca5a5'}`, borderRadius: '10px', padding: '0.75rem', marginBottom: '0.9rem', fontSize: '0.82rem', color: '#374151', lineHeight: 1.6 }}>
             {correct ? '✅ 答對了！' : '❌ 再想想——'} {quiz.explanation}
