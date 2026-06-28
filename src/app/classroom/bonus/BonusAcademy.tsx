@@ -1,7 +1,7 @@
 'use client';
 // 📄 路徑：src/app/classroom/bonus/BonusAcademy.tsx
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PSYCH_SERIES, FREE_LESSONS } from '../psychology/courses-data';
 import type { PsychLesson } from '../psychology/courses-data';
@@ -65,10 +65,12 @@ const AI_SERIES = [
 
 export default function BonusAcademy() {
   const [active, setActive] = useState<ActiveItem | null>(null);
-  const [psychFilter, setPsychFilter] = useState<string>(() => {
+  const [psychFilter, setPsychFilter] = useState<string>(PSYCH_SERIES[0].id);
+  // 在 client 端才隨機選一個學系（避免 SSR hydration mismatch）
+  useEffect(() => {
     const ids = PSYCH_SERIES.map(s => s.id);
-    return ids[Math.floor(Math.random() * ids.length)];
-  });
+    setPsychFilter(ids[Math.floor(Math.random() * ids.length)]);
+  }, []);
   const [aiFilter, setAiFilter] = useState<string>('1-3');
 
   if (active) {
