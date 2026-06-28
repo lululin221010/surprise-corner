@@ -10,7 +10,7 @@ const LIVE_ACADEMIES = [
   { icon: '🎁', title: '好康書院', desc: '各書院精選第一組，完全免費。心理學、股市、AI……喜歡再去小舖買完整版。', href: '/classroom/bonus' },
   { icon: '💰', title: '理財書院 > 台股系列', desc: 'K線怎麼看？法人籌碼是什麼？用最白話的方式，帶你看懂股市的基本語言。', href: '/classroom/stock' },
   { icon: '🧠', title: '心理學書院', desc: '6大學系 28本，每本第一組永久免費。讀懂自己，讀懂人。購買電子書後輸入解鎖碼，解鎖整個學系。', href: '/classroom/psychology' },
-  { icon: '🤖', title: 'AI書院', desc: '9大系列 54堂免費試讀：解剖學、溝通學、思考力、共存學……從AI原理到實作，全面理解AI時代。', href: '/classroom/ai' },
+  { icon: '🤖', title: 'AI書院', desc: '9大系列：解剖學、溝通學、思考力、共存學……從AI原理到實作，全面理解AI時代。', href: '/classroom/ai' },
   { icon: '🧬', title: '腦中宇宙書院', desc: '自律神經學系 7冊系列・從了解症狀到找回平衡。每冊第一堂免費試讀，買電子書解鎖完整10堂。', href: '/classroom/brain-universe/autonomic' },
 ];
 
