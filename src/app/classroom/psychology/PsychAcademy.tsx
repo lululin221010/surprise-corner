@@ -384,14 +384,14 @@ export default function PsychAcademy() {
                   onClick={() => accessible && setView({ t: 'lesson', series, book, lesson })}
                   style={{ background: completed ? 'rgba(34,197,94,0.06)' : 'rgba(255,255,255,0.04)', border: `1px solid ${completed ? 'rgba(34,197,94,0.2)' : accessible ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)'}`, borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: accessible ? 'pointer' : 'default', opacity: accessible ? 1 : 0.5 }}>
                   <div style={{ fontSize: '1.3rem', flexShrink: 0 }}>
-                    {completed ? '✅' : lesson.isFree ? '🆓' : seriesUnlocked ? lesson.emoji : '🔒'}
+                    {completed ? '✅' : lesson.emoji}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.9rem' }}>
                       第{idx + 1}組：{lesson.title}
                     </div>
                     <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.1rem' }}>
-                      {lesson.slides.length} 頁 · {lesson.isFree ? '免費體驗' : seriesUnlocked ? '已解鎖' : '需解鎖'}
+                      {lesson.slides.length} 頁
                     </div>
                   </div>
                   {accessible && <div style={{ color: '#7c3aed', fontSize: '0.8rem' }}>→</div>}
@@ -425,13 +425,9 @@ export default function PsychAcademy() {
           <div style={{ marginBottom: '1.4rem' }}>
             <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>{series.emoji}</div>
             <h2 style={{ color: '#fff', fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.4rem' }}>{series.label}</h2>
-            {seriesUnlocked ? (
+            {seriesUnlocked && (
               <div style={{ display: 'inline-block', background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#86efac', fontSize: '0.78rem', padding: '0.2rem 0.7rem', borderRadius: '20px' }}>
                 ✅ 已解鎖全系
-              </div>
-            ) : (
-              <div style={{ display: 'inline-block', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24', fontSize: '0.78rem', padding: '0.2rem 0.7rem', borderRadius: '20px' }}>
-                🆓 每本第一組免費體驗
               </div>
             )}
           </div>
@@ -499,7 +495,7 @@ export default function PsychAcademy() {
                   <div style={{ flex: 1 }}>
                     <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.2rem' }}>{book.title}</div>
                     <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
-                      {completedCount > 0 ? `${completedCount}/${totalGroups} 組已完成` : `${totalGroups} 組 · 第一組免費`}
+                      {completedCount > 0 ? `${completedCount}/${totalGroups} 組已完成` : `${totalGroups} 組`}
                     </div>
                   </div>
                   <div style={{ color: completedCount === totalGroups ? '#86efac' : '#7c3aed', fontSize: '0.8rem' }}>
@@ -531,7 +527,7 @@ export default function PsychAcademy() {
           <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>🧠</div>
           <h1 style={{ color: '#fff', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.4rem' }}>心理學書院</h1>
           <p style={{ color: '#94a3b8', fontSize: '0.88rem', margin: 0 }}>
-            6大學系 · 28本 · 每本第一組永久免費體驗。購買電子書取得解鎖碼，解鎖整個學系的完整課程。
+            6大學系 · 28本 · 購買電子書取得解鎖碼，解鎖整個學系的完整課程。
           </p>
         </div>
 
@@ -564,14 +560,12 @@ export default function PsychAcademy() {
                 <div style={{ flex: 1 }}>
                   <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.98rem', marginBottom: '0.2rem' }}>{series.label}</div>
                   <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
-                    {totalBooks} 本 · {seriesUnlocked ? `${completedBooks}/${totalBooks} 本已完課` : '每本第一組免費'}
+                    {totalBooks} 本 · {seriesUnlocked ? `${completedBooks}/${totalBooks} 本已完課` : `${totalBooks} 本`}
                   </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem', flexShrink: 0 }}>
-                  {seriesUnlocked ? (
+                  {seriesUnlocked && (
                     <span style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#86efac', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>已解鎖</span>
-                  ) : (
-                    <span style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.3)', color: '#a78bfa', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>🆓 試讀</span>
                   )}
                   <span style={{ color: '#7c3aed', fontSize: '0.8rem' }}>→</span>
                 </div>
