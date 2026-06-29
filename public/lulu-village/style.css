@@ -41,14 +41,14 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .resource-icon.wood { background: #9b6237; }
 .resource-icon.food { background: #de8d52; }
 .resource-icon.stone { background: #7d8a96; }
-.village-wrap { position: relative; overflow: hidden; border: 4px solid #876f4b; border-radius: 8px; background: var(--sky); box-shadow: var(--shadow); }
+.village-wrap { position: relative; overflow-x: auto; overflow-y: hidden; border: 4px solid #876f4b; border-radius: 8px; background: var(--sky); box-shadow: var(--shadow); -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
 .restore-meter { position: absolute; top: 12px; right: 12px; z-index: 6; display: grid; grid-template-columns: auto auto; gap: 5px 8px; align-items: center; min-width: 190px; padding: 9px 10px; border: 2px solid rgba(125,104,72,.32); border-radius: 8px; background: rgba(255,250,240,.9); box-shadow: 0 8px 18px rgba(65,55,38,.12); font-size: .82rem; font-weight: 900; }
 .restore-meter strong { justify-self: end; color: #4d7f45; }
 .restore-meter i { grid-column: 1/3; display: block; height: 10px; overflow: hidden; border-radius: 999px; background: rgba(91,80,58,.18); }
 .restore-meter b { display: block; width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#ffcf67,#75bb67); transition: width 420ms ease; }
 .village-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 3px rgba(255,250,240,.5),inset 0 -24px 40px rgba(86,79,55,.12); }
 .sky { position: absolute; inset: 0 0 auto; height: 42%; background: radial-gradient(circle at 11% 21%,#fff0a6 0 34px,#ffd36d 35px 42px,transparent 43px),linear-gradient(180deg,var(--sky),#d8f1de 86%); }
-.village { position: relative; height: min(72vh,620px); min-height: 530px; overflow: hidden; background: radial-gradient(ellipse at 48% 54%,rgba(255,250,220,.36) 0 16%,transparent 32%),linear-gradient(168deg,transparent 0 35%,#b7d98d 35% 62%,#82b86f 62% 100%); }
+.village { position: relative; height: min(72vh,620px); min-height: 530px; min-width: 900px; overflow: hidden; background: radial-gradient(ellipse at 48% 54%,rgba(255,250,220,.36) 0 16%,transparent 32%),linear-gradient(168deg,transparent 0 35%,#b7d98d 35% 62%,#82b86f 62% 100%); }
 .village.restore-0 { filter: saturate(.82); }
 .village.restore-2,.village.restore-3 { filter: saturate(1.05) brightness(1.03); }
 .village.restore-4,.village.restore-5 { filter: saturate(1.14) brightness(1.07); }
