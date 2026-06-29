@@ -131,22 +131,27 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .share-card blockquote { padding: 14px; border: 2px solid rgba(125,104,72,.28); border-radius: 8px; background: rgba(255,250,240,.9); font-weight: 900; }
 @keyframes breathe { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 @keyframes pop { 0% { transform: scale(.86); } 70% { transform: scale(1.08); } 100% { transform: scale(1); } }
+/* 手機版建築區 */
+.mobile-build { display: none; }
+.mobile-gather { display: flex; gap: 8px; margin-bottom: 10px; }
+.mgather { flex: 1; min-height: 56px; border: 2px solid rgba(125,104,72,.4); border-radius: 10px; background: #fffaf0; font-size: 1rem; font-weight: 900; box-shadow: 0 5px 0 rgba(80,67,43,.14); }
+.mgather:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(80,67,43,.14); }
+.mgather.wood { background: linear-gradient(180deg,#c4844a,#9a6339); color:#fff; border-color:#7a4d28; }
+.mgather.food { background: linear-gradient(180deg,#8ecf7a,#5fa350); color:#fff; border-color:#3d7a30; }
+.mgather.stone { background: linear-gradient(180deg,#a0adb8,#7d8a96); color:#fff; border-color:#5a6872; }
+.mobile-plots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mplot { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 72px; padding: 10px 8px; border: 2px dashed rgba(98,84,61,.45); border-radius: 10px; background: linear-gradient(180deg,rgba(255,250,240,.9),rgba(245,221,169,.7)); font-size: 1.05rem; font-weight: 900; box-shadow: 0 5px 0 rgba(80,67,43,.12); }
+.mplot small { font-size: .78rem; color: var(--muted); font-weight: 400; }
+.mplot:active { transform: translateY(3px); }
+.mplot.done { border-style: solid; border-color: rgba(96,121,65,.6); background: linear-gradient(180deg,#efffdc,#d5f0b0); }
+
 @media (max-width:760px) {
   .game-shell { padding: 10px; }
   .topbar,.panel { display: grid; grid-template-columns: 1fr; }
-  .resources { width: 100%; }
-  .resource { flex: 1; justify-content: center; padding-inline: 8px; }
-  .village { height: 64vh; min-height: 500px; }
-  .plot { width: 96px; height: 80px; }
-  .building-icon { width: 50px; height: 38px; }
-  .pile { width: 62px; height: 54px; }
-  .lulu { width: 92px; transform: translateX(-50%) scale(.9); }
-  .plot-home { left: 7%; }
-  .plot-kitchen { left: 34%; }
-  .plot-greenhouse { right: 5%; }
-  .plot-garden { left: 20%; }
-  .plot-bed { right: 24%; }
-  .build-list { grid-template-columns: repeat(2,1fr); }
+  .resources { display: none; }
+  .village-wrap { display: none; }
+  .mobile-build { display: block; }
+  .build-list { display: none; }
   .actions { justify-content: stretch; }
   .actions button { flex: 1 1 110px; }
 }

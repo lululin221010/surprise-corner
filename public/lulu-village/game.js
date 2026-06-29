@@ -93,12 +93,13 @@ function render() {
   renderVillageStage();
   Object.keys(buildings).forEach((id) => {
     const built = state.built.includes(id);
-    const plot = document.querySelector(`[data-building="${id}"]`);
+    document.querySelectorAll(`[data-building="${id}"]`).forEach((el) => {
+      el.classList.toggle("built", built);
+      el.classList.toggle("done", built);
+      el.disabled = built;
+    });
     const card = document.querySelector(`[data-card="${id}"]`);
-    plot.classList.toggle("built", built);
-    card.classList.toggle("done", built);
-    plot.disabled = built;
-    plot.title = built ? `${buildings[id].name}已完成` : costLabel(buildings[id].cost);
+    if (card) card.classList.toggle("done", built);
   });
 }
 
@@ -189,6 +190,14 @@ document.querySelectorAll("[data-gather]").forEach((button) => {
   button.addEventListener("click", () => gather(button.dataset.gather, button));
 });
 document.querySelectorAll("[data-building]").forEach((button) => {
+  button.addEventListener("click", () => build(button.dataset.building));
+});
+
+// 手機版按鈕
+document.querySelectorAll(".mgather").forEach((button) => {
+  button.addEventListener("click", () => gather(button.dataset.gather, button));
+});
+document.querySelectorAll(".mplot").forEach((button) => {
   button.addEventListener("click", () => build(button.dataset.building));
 });
 document.querySelector("#nextHint").addEventListener("click", showNextHint);
