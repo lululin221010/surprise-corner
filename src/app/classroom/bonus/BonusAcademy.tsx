@@ -104,6 +104,9 @@ export default function BonusAcademy() {
           <p style={{ color: '#4b5563', fontSize: '0.95rem', marginTop: '0.5rem' }}>
             各書院精選第一組，完全免費。喜歡就去小舖買完整版。
           </p>
+          <p style={{ color: '#6b7280', fontSize: '0.85rem', marginTop: '0.3rem' }}>
+            這裡集合了各書院的免費試讀精選，找到你感興趣的，直接開始。
+          </p>
         </div>
 
         {ACADEMY_SECTIONS.map(section => (
@@ -148,9 +151,9 @@ export default function BonusAcademy() {
                 <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
                   {[
                     { key: 'all',  label: '全部 9' },
-                    { key: '1-3',  label: '系列 1–3' },
-                    { key: '4-6',  label: '系列 4–6' },
-                    { key: '7-9',  label: '系列 7–9' },
+                    { key: '1-3',  label: '搞懂AI' },
+                    { key: '4-6',  label: '人工智慧與人' },
+                    { key: '7-9',  label: '玩真的' },
                   ].map(tab => (
                     <button key={tab.key} onClick={() => setAiFilter(tab.key)}
                       style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: aiFilter === tab.key ? '#ede9fe' : '#f3f4f6', border: aiFilter === tab.key ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: aiFilter === tab.key ? '#5b21b6' : '#374151' }}>
