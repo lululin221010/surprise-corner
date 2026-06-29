@@ -76,14 +76,14 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .restore-3 .ruin,.restore-4 .ruin,.restore-5 .ruin { opacity: .38; }
 .restore-5 .ruin { opacity: .18; }
 .pile,.plot,.lulu { position: absolute; z-index: 3; }
-.pile { display: grid; place-items: center; width: 96px; height: 82px; border: 3px solid rgba(255,250,240,.72); color: #fff; font-weight: 900; box-shadow: var(--small-shadow); transition: transform 120ms ease,filter 120ms ease; }
+.pile { display: grid; place-items: center; width: 76px; height: 64px; border: 3px solid rgba(255,250,240,.72); color: #fff; font-weight: 900; box-shadow: var(--small-shadow); transition: transform 120ms ease,filter 120ms ease; padding: 16px; margin: -16px; }
 .pile:hover,.plot:hover { filter: brightness(1.05); }
 .pile:active,.plot:active { transform: translateY(3px) scale(.98); }
-.pile span { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,.16); font-size: 1.2rem; }
+.pile span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(0,0,0,.16); }
 .wood-pile { left: 7%; top: 49%; border-radius: 36% 52% 42% 48%; background: linear-gradient(90deg,transparent 0 18%,rgba(255,255,255,.12) 18% 21%,transparent 21%),#9a6339; }
 .food-pile { right: 8%; top: 45%; border-radius: 52% 40% 50% 42%; background: radial-gradient(circle at 32% 24%,#ffd46b 0 8px,transparent 9px),var(--leaf); }
 .stone-pile { right: 18%; bottom: 13%; border-radius: 50% 40% 44% 48%; background: radial-gradient(circle at 32% 32%,rgba(255,255,255,.28) 0 7px,transparent 8px),var(--stone); }
-.plot { display: grid; place-items: center; width: 138px; height: 112px; padding: 10px; border: 3px dashed rgba(98,84,61,.45); border-radius: 8px; background: linear-gradient(180deg,rgba(255,250,240,.78),rgba(245,221,169,.66)); box-shadow: var(--small-shadow); transition: transform 140ms ease,background 180ms ease,border-color 180ms ease; }
+.plot { display: grid; place-items: center; width: 122px; height: 96px; padding: 8px; border: 3px dashed rgba(98,84,61,.45); border-radius: 8px; background: linear-gradient(180deg,rgba(255,250,240,.78),rgba(245,221,169,.66)); box-shadow: var(--small-shadow); transition: transform 140ms ease,background 180ms ease,border-color 180ms ease; }
 .plot::before { content: ""; position: absolute; inset: auto 12px 9px; height: 9px; border-radius: 50%; background: rgba(69,58,43,.16); }
 .plot.built { border-style: solid; border-color: rgba(96,121,65,.55); background: linear-gradient(180deg,#fff7d8,#f5e2aa); animation: pop 360ms ease; }
 .plot-home { left: 11%; bottom: 23%; }
@@ -137,9 +137,9 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
   .resources { width: 100%; }
   .resource { flex: 1; justify-content: center; padding-inline: 8px; }
   .village { height: 64vh; min-height: 500px; }
-  .plot { width: 118px; height: 100px; }
-  .building-icon { width: 60px; height: 46px; }
-  .pile { width: 82px; height: 70px; }
+  .plot { width: 96px; height: 80px; }
+  .building-icon { width: 50px; height: 38px; }
+  .pile { width: 62px; height: 54px; }
   .lulu { width: 92px; transform: translateX(-50%) scale(.9); }
   .plot-home { left: 7%; }
   .plot-kitchen { left: 34%; }
