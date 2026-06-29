@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>魯魯末日村 · 驚喜角落</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="topbar" aria-label="村莊狀態">
+        <div>
+          <p class="eyebrow">第 <span id="dayCount">1</span> 天 · <span id="phaseName">廢墟期</span></p>
+          <h1>魯魯末日村</h1>
+        </div>
+        <div class="resources" aria-label="資源">
+          <button class="resource" data-resource="wood" type="button" aria-label="木頭">
+            <span class="resource-icon wood">木</span>
+            <strong id="woodCount">0</strong>
+          </button>
+          <button class="resource" data-resource="food" type="button" aria-label="食物">
+            <span class="resource-icon food">食</span>
+            <strong id="foodCount">0</strong>
+          </button>
+          <button class="resource" data-resource="stone" type="button" aria-label="石頭">
+            <span class="resource-icon stone">石</span>
+            <strong id="stoneCount">0</strong>
+          </button>
+        </div>
+      </section>
+
+      <section class="village-wrap" aria-label="村莊地圖">
+        <div class="restore-meter" aria-label="復興進度">
+          <span>村莊復興</span>
+          <strong id="restorePercent">0%</strong>
+          <i><b id="restoreFill"></b></i>
+        </div>
+        <div class="sky"></div>
+        <div class="village" id="village">
+          <span class="cloud cloud-a"></span>
+          <span class="cloud cloud-b"></span>
+          <span class="ruin ruin-a"></span>
+          <span class="ruin ruin-b"></span>
+          <span class="path"></span>
+          <span class="sprout sprout-a"></span>
+          <span class="sprout sprout-b"></span>
+          <span class="sprout sprout-c"></span>
+          <span class="lamp lamp-a"></span>
+          <span class="lamp lamp-b"></span>
+          <button class="gather pile wood-pile" data-gather="wood" type="button" aria-label="收集木頭">
+            <span>木</span>
+          </button>
+          <button class="gather pile food-pile" data-gather="food" type="button" aria-label="收集食物">
+            <span>食</span>
+          </button>
+          <button class="gather pile stone-pile" data-gather="stone" type="button" aria-label="收集石頭">
+            <span>石</span>
+          </button>
+          <button class="plot plot-home" data-building="home" type="button" aria-label="小屋">
+            <span class="building-icon"></span>
+            <span class="plot-label">小屋</span>
+          </button>
+          <button class="plot plot-kitchen" data-building="kitchen" type="button" aria-label="廚房">
+            <span class="building-icon"></span>
+            <span class="plot-label">廚房</span>
+          </button>
+          <button class="plot plot-greenhouse" data-building="greenhouse" type="button" aria-label="溫室">
+            <span class="building-icon"></span>
+            <span class="plot-label">溫室</span>
+          </button>
+          <button class="plot plot-garden" data-building="garden" type="button" aria-label="花圃">
+            <span class="building-icon"></span>
+            <span class="plot-label">花圃</span>
+          </button>
+          <button class="plot plot-bed" data-building="bed" type="button" aria-label="魯魯貓窩">
+            <span class="building-icon"></span>
+            <span class="plot-label">貓窩</span>
+          </button>
+          <div class="lulu" id="lulu" aria-label="魯魯">
+            <img class="lulu-photo" src="assets/lulu.jpg" alt="魯魯" />
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="speech" id="speech">你終於回來了，我才沒有等你喔。</div>
+        <div class="actions">
+          <button class="primary" id="nextHint" type="button">看下一個目標</button>
+          <button id="shareCard" type="button">產生分享卡</button>
+          <button id="resetGame" type="button">重置</button>
+        </div>
+      </section>
+
+      <section class="build-list" aria-label="建築清單">
+        <article class="build-card" data-card="home">
+          <h2>小屋</h2>
+          <p>木頭 8、石頭 4</p>
+        </article>
+        <article class="build-card" data-card="kitchen">
+          <h2>廚房</h2>
+          <p>木頭 10、食物 6、石頭 5</p>
+        </article>
+        <article class="build-card" data-card="greenhouse">
+          <h2>溫室</h2>
+          <p>木頭 12、食物 10、石頭 6</p>
+        </article>
+        <article class="build-card" data-card="garden">
+          <h2>花圃</h2>
+          <p>食物 8、石頭 3</p>
+        </article>
+        <article class="build-card" data-card="bed">
+          <h2>魯魯貓窩</h2>
+          <p>木頭 6、食物 6</p>
+        </article>
+      </section>
+
+      <dialog id="shareDialog">
+        <div class="share-card" id="sharePreview">
+          <p>魯魯末日村 第 <span id="shareDay">1</span> 天</p>
+          <h2 id="shareTitle">廢墟正在變成家</h2>
+          <div class="share-scene">
+            <span>木</span><span>食</span><span>石</span>
+          </div>
+          <blockquote id="shareQuote">好啦，我們來蓋個家。</blockquote>
+        </div>
+        <form method="dialog">
+          <button type="submit">關閉</button>
+        </form>
+      </dialog>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
