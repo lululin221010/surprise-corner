@@ -194,6 +194,97 @@ function FreeDonePage({
   );
 }
 
+// ── 鎖定預覽頁（訪客點到付費組別）────────────────────────
+function LockedPreviewPage({
+  bookTitle, lesson, seriesLabel, seriesId,
+  onUnlock, onBack,
+}: {
+  bookTitle: string;
+  lesson: PsychLesson;
+  seriesLabel: string;
+  seriesId: string;
+  onUnlock: (code: string) => Promise<boolean>;
+  onBack: () => void;
+}) {
+  const [codeInput, setCodeInput] = useState('');
+  const [error, setError] = useState('');
+  const [verifying, setVerifying] = useState(false);
+
+  async function handleUnlock() {
+    if (!codeInput.trim()) { setError('請輸入解鎖碼'); return; }
+    setVerifying(true);
+    setError('');
+    const ok = await onUnlock(codeInput);
+    setVerifying(false);
+    if (!ok) setError('解鎖碼不正確，請確認後再試');
+  }
+
+  return (
+    <div className="classroom-content">
+      <div style={{ maxWidth: 560, margin: '0 auto', padding: '1rem' }}>
+
+        {/* 預覽卡 */}
+        <div style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '16px', padding: '1.4rem', marginBottom: '1.4rem' }}>
+          <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginBottom: '0.4rem' }}>
+            《{bookTitle}》第{lesson.groupNum}組
+          </div>
+          <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.6rem' }}>
+            {lesson.emoji} {lesson.title}
+          </div>
+          {lesson.slides[0] && (
+            <div style={{ color: '#64748b', fontSize: '0.82rem', lineHeight: 1.6, borderLeft: '2px solid rgba(124,58,237,0.3)', paddingLeft: '0.8rem' }}>
+              第一頁：{lesson.slides[0].title}…
+            </div>
+          )}
+        </div>
+
+        {/* 好康書院 CTA */}
+        <Link href="/classroom/bonus"
+          style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: '12px', padding: '1rem 1.1rem', textDecoration: 'none', marginBottom: '1rem' }}>
+          <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ color: '#a78bfa', fontWeight: 700, fontSize: '0.92rem' }}>先去好康書院試讀</div>
+            <div style={{ color: '#64748b', fontSize: '0.78rem', marginTop: '0.15rem' }}>免費精選體驗，找到感覺再購買</div>
+          </div>
+          <div style={{ color: '#7c3aed', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>→</div>
+        </Link>
+
+        {/* 解鎖碼輸入 */}
+        <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.25)', borderRadius: '12px', padding: '1rem', marginBottom: '0.8rem' }}>
+          <div style={{ color: '#fbbf24', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.6rem' }}>
+            🔑 已購買？輸入解鎖碼直接閱讀
+          </div>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <input
+              type="text"
+              value={codeInput}
+              onChange={e => { setCodeInput(e.target.value); setError(''); }}
+              placeholder="PSYCH-XXXX-XXXX"
+              style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', borderRadius: '8px', border: error ? '1px solid #ef4444' : '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.04)', color: '#e2e8f0', outline: 'none' }}
+              onKeyDown={e => e.key === 'Enter' && handleUnlock()}
+            />
+            <button onClick={handleUnlock} disabled={verifying}
+              style={{ padding: '8px 14px', background: '#f59e0b', color: '#1c1917', border: 'none', borderRadius: '8px', fontSize: '0.82rem', cursor: verifying ? 'default' : 'pointer', fontWeight: 700, whiteSpace: 'nowrap' }}>
+              {verifying ? '驗證中…' : '解鎖'}
+            </button>
+          </div>
+          {error && <p style={{ color: '#f87171', fontSize: '0.75rem', marginTop: '4px', marginBottom: 0 }}>{error}</p>}
+          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+            style={{ display: 'block', textAlign: 'center', color: '#a78bfa', fontSize: '0.78rem', marginTop: '0.7rem', textDecoration: 'underline' }}>
+            還沒購買？前往小舖 →
+          </a>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '0.85rem', cursor: 'pointer' }}>
+            ← 回書本
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── 主元件 ───────────────────────────────────────────────
 type ViewState =
   | { t: 'series-list' }
@@ -201,6 +292,7 @@ type ViewState =
   | { t: 'group-list'; series: PsychSeries; book: PsychBook }
   | { t: 'lesson'; series: PsychSeries; book: PsychBook; lesson: PsychLesson }
   | { t: 'free-done'; series: PsychSeries; book: PsychBook }
+  | { t: 'locked-preview'; series: PsychSeries; book: PsychBook; lesson: PsychLesson }
   | { t: 'cert'; bookTitle: string; backSeries: PsychSeries; backBook: PsychBook };
 
 export default function PsychAcademy() {
@@ -266,6 +358,25 @@ export default function PsychAcademy() {
       <PsychGroupLesson
         lesson={lesson}
         onComplete={onLessonComplete}
+        onBack={() => setView({ t: 'group-list', series, book })}
+      />
+    );
+  }
+
+  // 鎖定預覽頁（訪客點到付費組別）
+  if (view.t === 'locked-preview') {
+    const { series, book, lesson } = view;
+    return (
+      <LockedPreviewPage
+        bookTitle={book.title}
+        lesson={lesson}
+        seriesLabel={series.label}
+        seriesId={series.id}
+        onUnlock={async (code) => {
+          const ok = await handleUnlock(series.id, code);
+          if (ok) setView({ t: 'lesson', series, book, lesson });
+          return ok;
+        }}
         onBack={() => setView({ t: 'group-list', series, book })}
       />
     );
@@ -381,8 +492,11 @@ export default function PsychAcademy() {
               const completed = isDone(lesson.id);
               return (
                 <div key={lesson.id}
-                  onClick={() => accessible && setView({ t: 'lesson', series, book, lesson })}
-                  style={{ background: completed ? 'rgba(34,197,94,0.06)' : 'rgba(255,255,255,0.04)', border: `1px solid ${completed ? 'rgba(34,197,94,0.2)' : accessible ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)'}`, borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: accessible ? 'pointer' : 'default', opacity: accessible ? 1 : 0.5 }}>
+                  onClick={() => {
+                    if (accessible) setView({ t: 'lesson', series, book, lesson });
+                    else setView({ t: 'locked-preview', series, book, lesson });
+                  }}
+                  style={{ background: completed ? 'rgba(34,197,94,0.06)' : 'rgba(255,255,255,0.04)', border: `1px solid ${completed ? 'rgba(34,197,94,0.2)' : 'rgba(255,255,255,0.08)'}`, borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
                   <div style={{ fontSize: '1.3rem', flexShrink: 0 }}>
                     {completed ? '✅' : lesson.emoji}
                   </div>
