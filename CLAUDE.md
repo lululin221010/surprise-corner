@@ -19,6 +19,11 @@
 - `academy-master-plan-v7_lulu_20260629.html` — 全書院架構（含SD贈課整合）
 - `sd-strategy-decisions_lulu_20260629.html` — SD三層定位/贈課方案/廣告方向
 
+**存檔規則：**
+- 新版本**不覆蓋舊檔**，檔名加日期區分（e.g. `academy-master-plan-v8_lulu_20260715.html`）
+- 每月底 CC 協助整合：確認最新版後，舊版本可另存封存或刪除
+- CC 每次讀檔後更新「目前最新規劃文件」清單
+
 ---
 
 ## ⚡ 新 Session 必讀（30秒掌握全局）
