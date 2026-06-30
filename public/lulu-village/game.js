@@ -286,8 +286,9 @@ function renderQuiz() {
     const id = quizState.buildId;
     const b = buildings[id];
     const prog = state.progress[id] || 0;
+    const left = b.steps - prog;
     document.querySelector("#quizBuildHint").textContent =
-      `🔨 蓋${b.name}：${prog} ／ ${b.steps} 步`;
+      `🔨 ${b.name}：已完成 ${prog} 步，還差 ${left} 步蓋好！`;
   }
 }
 
