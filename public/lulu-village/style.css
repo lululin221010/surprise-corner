@@ -228,6 +228,21 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .tribal-card .cele-quote { color:#c8b080; font-style:italic; font-size:.88rem; }
 .tribal-card .tutorial-start-btn { background:linear-gradient(180deg,#e8a020,#c47010); box-shadow:0 5px 0 #8a4a00; }
 .tribal-card .cele-stats span { background:rgba(255,220,100,.15); color:#f5e0a0; }
+/* 選貓命名 */
+.cat-select-card { background:#fffaf0; border-radius:24px; padding:28px 22px; max-width:420px; width:94%; box-shadow:0 24px 80px rgba(0,0,0,.3); display:flex; flex-direction:column; gap:16px; text-align:center; }
+.cat-select-card h2 { margin:0; font-size:1.3rem; }
+.cat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.cat-opt { background:#f5f0e8; border:3px solid transparent; border-radius:14px; padding:10px 6px; font-size:1.8rem; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; transition:border-color .15s, transform .1s; }
+.cat-opt span { font-size:.65rem; font-weight:900; color:#7a6040; }
+.cat-opt:hover { transform:scale(1.08); }
+.cat-opt.selected { border-color:#e86f5b; background:#fff0ec; }
+.cat-name-row { display:flex; align-items:center; gap:10px; justify-content:center; }
+.cat-name-row label { font-weight:900; font-size:.9rem; color:#5a4020; white-space:nowrap; }
+.cat-name-row input { flex:1; max-width:160px; padding:8px 12px; border:2px solid #d0c0a0; border-radius:10px; font-size:1rem; font-weight:700; }
+.cat-preview { font-size:1.5rem; letter-spacing:4px; min-height:2rem; color:#7a6040; font-weight:900; }
+/* 玩家貓 */
+.player-villager { position:absolute; font-size:1.8rem; z-index:6; cursor:pointer; user-select:none; filter:drop-shadow(0 3px 4px rgba(0,0,0,.25)); bottom:42%; animation:walkA 12s linear infinite; animation-delay:-2s; }
+.player-villager::after { content:attr(data-name); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:#e86f5b; color:#fff; font-size:.6rem; font-weight:900; padding:2px 7px; border-radius:8px; white-space:nowrap; }
 /* 貓村民 */
 .villager { position:absolute; font-size:1.6rem; z-index:5; cursor:default; user-select:none; filter:drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
 .villager::after { content:attr(data-name); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); color:#fff; font-size:.55rem; font-weight:700; padding:2px 6px; border-radius:8px; white-space:nowrap; opacity:0; transition:opacity .2s; pointer-events:none; }

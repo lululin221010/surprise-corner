@@ -23,6 +23,30 @@
       <!-- 說明按鈕 -->
       <button id="helpBtn" type="button" class="help-btn" title="玩法說明">？</button>
 
+      <!-- 選貓命名 -->
+      <div id="catSelectOverlay" class="celebration-overlay" style="display:none">
+        <div class="cat-select-card">
+          <h2>🐾 選一隻貓代表你！</h2>
+          <p class="cele-sub">這是你在魯魯村的分身</p>
+          <div class="cat-grid" id="catGrid">
+            <button class="cat-opt" data-cat="🐱" type="button">🐱<span>橘貓</span></button>
+            <button class="cat-opt" data-cat="🐈‍⬛" type="button">🐈‍⬛<span>黑貓</span></button>
+            <button class="cat-opt" data-cat="🐈" type="button">🐈<span>白貓</span></button>
+            <button class="cat-opt" data-cat="😸" type="button">😸<span>開心貓</span></button>
+            <button class="cat-opt" data-cat="😻" type="button">😻<span>星星眼</span></button>
+            <button class="cat-opt" data-cat="🙀" type="button">🙀<span>大驚貓</span></button>
+            <button class="cat-opt" data-cat="😽" type="button">😽<span>愛心貓</span></button>
+            <button class="cat-opt" data-cat="😾" type="button">😾<span>臭臉貓</span></button>
+          </div>
+          <div class="cat-name-row">
+            <label>你的貓名：</label>
+            <input id="catNameInput" type="text" maxlength="8" placeholder="例：阿喵、小橘⋯" />
+          </div>
+          <div id="catPreview" class="cat-preview">選一隻貓再輸入名字 ↑</div>
+          <button id="catSelectConfirm" type="button" class="tutorial-start-btn" disabled>進村！🏡</button>
+        </div>
+      </div>
+
       <!-- 教學說明覆蓋層 -->
       <div id="tutorialOverlay" class="tutorial-overlay" style="display:none">
         <div class="tutorial-card">

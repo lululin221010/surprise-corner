@@ -26,6 +26,58 @@ function defaultState() {
   };
 }
 
+// 玩家貓設定
+const PLAYER_CAT_KEY = "lulu-village-player-cat";
+function getPlayerCat() {
+  try { return JSON.parse(localStorage.getItem(PLAYER_CAT_KEY)); } catch { return null; }
+}
+function savePlayerCat(emoji, name) {
+  localStorage.setItem(PLAYER_CAT_KEY, JSON.stringify({ emoji, name }));
+}
+function renderPlayerVillager() {
+  const p = getPlayerCat();
+  document.querySelector("#playerVillager")?.remove();
+  if (!p) return;
+  const el = document.createElement("div");
+  el.id = "playerVillager";
+  el.className = "player-villager";
+  el.setAttribute("data-name", p.name + "（你）");
+  el.textContent = p.emoji;
+  el.title = p.name;
+  document.querySelector("#village").appendChild(el);
+}
+
+// 選貓介面
+const catSelectOverlay = document.querySelector("#catSelectOverlay");
+let selectedCat = "";
+document.querySelectorAll(".cat-opt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".cat-opt").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedCat = btn.dataset.cat;
+    updateCatPreview();
+  });
+});
+document.querySelector("#catNameInput").addEventListener("input", updateCatPreview);
+function updateCatPreview() {
+  const name = document.querySelector("#catNameInput").value.trim();
+  const ok = selectedCat && name;
+  document.querySelector("#catSelectConfirm").disabled = !ok;
+  document.querySelector("#catPreview").textContent = ok ? `${selectedCat} ${name}` : "選一隻貓再輸入名字 ↑";
+}
+document.querySelector("#catSelectConfirm").addEventListener("click", () => {
+  const name = document.querySelector("#catNameInput").value.trim();
+  if (!selectedCat || !name) return;
+  savePlayerCat(selectedCat, name);
+  catSelectOverlay.style.display = "none";
+  renderPlayerVillager();
+  setSpeech(`歡迎 ${name} 加入魯魯村！`);
+  // 若是第一次，接著顯示教學
+  if (!localStorage.getItem(TUTORIAL_KEY)) {
+    setTimeout(() => { tutorialOverlay.style.display = "flex"; }, 800);
+  }
+});
+
 // 魯魯幣
 const COIN_KEY = "lulu-village-coin";
 function getLuluCoin() {
@@ -462,9 +514,13 @@ document.querySelector("#resetGame").addEventListener("click", () => {
 // 教學說明
 const tutorialOverlay = document.querySelector("#tutorialOverlay");
 const TUTORIAL_KEY = "lulu-village-tutorial-seen";
-if (!localStorage.getItem(TUTORIAL_KEY)) {
+// 第一次進村：先選貓，選完才教學
+if (!getPlayerCat()) {
+  catSelectOverlay.style.display = "flex";
+} else if (!localStorage.getItem(TUTORIAL_KEY)) {
   tutorialOverlay.style.display = "flex";
 }
+renderPlayerVillager();
 document.querySelector("#tutorialClose").addEventListener("click", () => {
   tutorialOverlay.style.display = "none";
   localStorage.setItem(TUTORIAL_KEY, "1");
