@@ -248,10 +248,10 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .villager::after { content:attr(data-name); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); color:#fff; font-size:.55rem; font-weight:700; padding:2px 6px; border-radius:8px; white-space:nowrap; opacity:0; transition:opacity .2s; pointer-events:none; }
 .villager:hover::after { opacity:1; }
 /* 貓村民：各自在不同區域漫步 */
-.v1 { animation: wander1 18s ease-in-out infinite; }
-.v2 { animation: wander2 22s ease-in-out infinite; animation-delay:-8s; }
-.v3 { animation: wander3 26s ease-in-out infinite; animation-delay:-14s; font-size:1.3rem; }
-.v4 { animation: wander4 20s ease-in-out infinite; animation-delay:-5s; font-size:1.2rem; }
+.v1 { animation: wander1 12s linear infinite; }
+.v2 { animation: wander2 15s linear infinite; animation-delay:-6s; }
+.v3 { animation: wander3 18s linear infinite; animation-delay:-10s; font-size:1.3rem; }
+.v4 { animation: wander4 14s linear infinite; animation-delay:-4s; font-size:1.2rem; }
 @keyframes wander1 {
   0%   { left:5%;  bottom:22%; transform:scaleX(1); }
   25%  { left:30%; bottom:28%; transform:scaleX(1); }
