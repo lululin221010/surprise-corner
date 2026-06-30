@@ -147,10 +147,35 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 
 @media (max-width:760px) {
   .game-shell { padding: 10px; }
-  .topbar,.panel { display: grid; grid-template-columns: 1fr; }
+  .topbar { display: grid; grid-template-columns: 1fr; }
+  .panel { display: grid; grid-template-columns: 1fr; }
   .resources { display: none; }
-  .village-wrap { display: none; }
-  .mobile-build { display: block; }
+
+  /* 地圖縮小顯示，不隱藏 */
+  .village-wrap { overflow: hidden; }
+  .village { height: 220px; min-height: 220px; min-width: unset; }
+  .restore-meter { top: 6px; right: 6px; min-width: 130px; font-size: .72rem; padding: 6px 8px; }
+  .cloud { display: none; }
+  .ruin { width: 52px; height: 36px; }
+  .lulu { width: 72px; height: 80px; bottom: 28%; }
+  .lulu-photo { width: 64px; height: 64px; }
+  .lulu::after { font-size: .65rem; padding: 2px 6px; }
+  .plot { width: 80px; height: 68px; padding: 5px; }
+  .plot-label { font-size: .8rem; padding: 2px 6px; }
+  .building-icon { width: 38px; height: 30px; font-size: .75rem; }
+  .pile { width: 58px; height: 50px; }
+  .pile span { width: 30px; height: 30px; font-size: .8rem; }
+  .plot-home { left: 4%; bottom: 20%; }
+  .plot-kitchen { left: 30%; bottom: 14%; }
+  .plot-greenhouse { right: 4%; bottom: 26%; }
+  .plot-garden { left: 22%; top: 36%; }
+  .plot-bed { right: 26%; top: 30%; }
+  .wood-pile { left: 3%; top: 52%; }
+  .food-pile { right: 4%; top: 48%; }
+  .stone-pile { right: 14%; bottom: 10%; }
+
+  /* 手機收集+建築按鈕 */
+  .mobile-build { display: block; margin-top: 8px; }
   .build-list { display: none; }
   .actions { justify-content: stretch; }
   .actions button { flex: 1 1 110px; }
