@@ -380,6 +380,20 @@ document.querySelector("#resetGame").addEventListener("click", () => {
 });
 document.querySelector("#quizSkip").addEventListener("click", skipQuestion);
 
+// 教學說明
+const tutorialOverlay = document.querySelector("#tutorialOverlay");
+const TUTORIAL_KEY = "lulu-village-tutorial-seen";
+if (!localStorage.getItem(TUTORIAL_KEY)) {
+  tutorialOverlay.style.display = "flex";
+}
+document.querySelector("#tutorialClose").addEventListener("click", () => {
+  tutorialOverlay.style.display = "none";
+  localStorage.setItem(TUTORIAL_KEY, "1");
+});
+document.querySelector("#helpBtn").addEventListener("click", () => {
+  tutorialOverlay.style.display = "flex";
+});
+
 render();
 
 // 作弊：點魯魯5下

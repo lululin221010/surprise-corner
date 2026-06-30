@@ -160,6 +160,22 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .mplot:active { transform: translateY(3px); }
 .mplot.done { border-style: solid; border-color: rgba(96,121,65,.6); background: linear-gradient(180deg,#efffdc,#d5f0b0); }
 
+/* === 說明按鈕 === */
+.help-btn { position: fixed; top: 16px; right: 16px; z-index: 8000; width: 40px; height: 40px; border: 2px solid rgba(125,104,72,.5); border-radius: 50%; background: rgba(255,250,240,.95); color: #3d3428; font-size: 1.1rem; font-weight: 900; box-shadow: 0 4px 12px rgba(65,55,38,.18); }
+.help-btn:hover { background: var(--sun); }
+
+/* === 教學說明覆蓋層 === */
+.tutorial-overlay { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: rgba(38,50,56,.55); }
+.tutorial-card { width: min(92vw, 420px); padding: 28px 24px 22px; border: 3px solid rgba(125,104,72,.3); border-radius: 16px; background: #fffaf0; box-shadow: 0 24px 48px rgba(65,55,38,.3); text-align: center; }
+.tutorial-lulu { font-size: 3rem; margin-bottom: 6px; }
+.tutorial-card h2 { margin: 0 0 18px; font-size: 1.3rem; color: #3d3428; }
+.tutorial-steps { list-style: none; margin: 0 0 16px; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 10px; }
+.tutorial-steps li { display: flex; align-items: flex-start; gap: 10px; font-size: .97rem; font-weight: 900; line-height: 1.4; }
+.t-icon { font-size: 1.2rem; flex-shrink: 0; }
+.tutorial-tip { margin: 0 0 20px; padding: 10px 12px; border-radius: 8px; background: #efffdc; font-size: .84rem; font-weight: 900; color: #4d7f45; }
+.tutorial-start-btn { width: 100%; min-height: 50px; border: 0; border-radius: 10px; background: linear-gradient(180deg,#ff927d,#e86f5b); color: #fff; font-size: 1.1rem; font-weight: 900; box-shadow: 0 5px 0 #b55243; }
+.tutorial-start-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b55243; }
+
 /* === 答題覆蓋層 === */
 .quiz-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(38,50,56,.52); }
 .quiz-card { padding: 22px 20px 20px; }

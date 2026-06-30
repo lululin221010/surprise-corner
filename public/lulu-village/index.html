@@ -29,6 +29,26 @@
         </div>
       </section>
 
+      <!-- 說明按鈕 -->
+      <button id="helpBtn" type="button" class="help-btn" title="玩法說明">？</button>
+
+      <!-- 教學說明覆蓋層 -->
+      <div id="tutorialOverlay" class="tutorial-overlay" style="display:none">
+        <div class="tutorial-card">
+          <div class="tutorial-lulu">🐱</div>
+          <h2>歡迎來到魯魯末日村！</h2>
+          <ul class="tutorial-steps">
+            <li><span class="t-icon">🔨</span><span>點地圖上的建築地塊，回答問題</span></li>
+            <li><span class="t-icon">✅</span><span>答對一題，建築就長出一步</span></li>
+            <li><span class="t-icon">❌</span><span>答錯3次沒關係，去問爸媽或老師！</span></li>
+            <li><span class="t-icon">🪵</span><span>點木頭／食物／石頭收集資源，可用來跳過難題</span></li>
+            <li><span class="t-icon">🏠</span><span>把所有建築蓋完，村莊就復興了！</span></li>
+          </ul>
+          <p class="tutorial-tip">💡 建築步驟：貓窩15步 → 花圃20步 → 廚房25步 → 溫室30步 → 小屋35步</p>
+          <button id="tutorialClose" type="button" class="tutorial-start-btn">開始蓋村！🏗️</button>
+        </div>
+      </div>
+
       <section class="village-wrap" aria-label="村莊地圖">
         <div class="restore-meter" aria-label="復興進度">
           <span>村莊復興</span>
