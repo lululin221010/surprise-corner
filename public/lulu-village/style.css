@@ -258,20 +258,21 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .tutorial-start-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b55243; }
 
 /* === 答題覆蓋層 === */
-.quiz-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(38,50,56,.52); }
-.quiz-card { padding: 22px 20px 20px; }
+.quiz-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(20,30,20,.65); backdrop-filter: blur(3px); }
+.quiz-card { width: min(94vw, 420px); padding: 24px 22px 20px; border-radius: 18px; background: #fffdf5; border: 3px solid #c4a76a; box-shadow: 0 24px 48px rgba(0,0,0,.35), 0 0 0 6px rgba(255,240,180,.3); }
 .quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.quiz-subject { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--sun); color: #3d3428; font-size: .88rem; font-weight: 900; }
-.quiz-attempts-badge { font-size: .82rem; color: var(--muted); font-weight: 900; }
-.quiz-question { margin: 0 0 18px; font-size: 1.22rem; font-weight: 900; line-height: 1.5; color: #2d3431; }
+.quiz-subject { display: inline-block; padding: 5px 14px; border-radius: 999px; background: #ffca28; color: #3d2800; font-size: .9rem; font-weight: 900; box-shadow: 0 3px 0 #c49000; }
+.quiz-attempts-badge { font-size: .82rem; color: #7a5c30; font-weight: 900; background: #fff0cc; padding: 4px 10px; border-radius: 999px; border: 1.5px solid #e8c870; }
+.quiz-question { margin: 0 0 18px; font-size: 1.25rem; font-weight: 900; line-height: 1.55; color: #1a1a1a; }
 .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.quiz-options button { min-height: 54px; padding: 10px 12px; border: 2px solid rgba(125,104,72,.3); border-radius: 10px; background: rgba(255,250,240,.9); font-size: 1rem; font-weight: 900; text-align: left; box-shadow: 0 4px 0 rgba(80,67,43,.12); transition: background 160ms, transform 120ms; }
-.quiz-options button:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(80,67,43,.12); }
-.quiz-options button.correct { background: #d4f5c0; border-color: #5fa350; }
-.quiz-options button.wrong { background: #ffd6d0; border-color: #c94f35; }
-.quiz-build-hint { margin: 0 0 10px; font-size: .88rem; font-weight: 900; color: #5a7a40; background: #efffdc; padding: 6px 10px; border-radius: 6px; }
-.quiz-feedback { min-height: 28px; margin: 14px 0 0; font-size: 1rem; font-weight: 900; text-align: center; color: var(--coral); }
-.quiz-skip-btn { width: 100%; margin-top: 10px; min-height: 42px; padding: 8px; border: 2px dashed rgba(125,104,72,.4); border-radius: 8px; background: rgba(255,250,240,.7); font-size: .88rem; font-weight: 900; color: var(--muted); }
+.quiz-options button { min-height: 58px; padding: 10px 14px; border: 2.5px solid #c4a76a; border-radius: 12px; background: #fff8e8; font-size: 1rem; font-weight: 900; color: #1a1a1a; text-align: left; box-shadow: 0 5px 0 #b08840; transition: background 140ms, transform 100ms; }
+.quiz-options button:hover { background: #fff0c0; }
+.quiz-options button:active { transform: translateY(3px); box-shadow: 0 2px 0 #b08840; }
+.quiz-options button.correct { background: #c8f5a8; border-color: #4a9a38; color: #1a4010; box-shadow: 0 5px 0 #3a7a28; }
+.quiz-options button.wrong { background: #ffd0c8; border-color: #c43828; color: #5a1010; box-shadow: 0 5px 0 #a02818; }
+.quiz-build-hint { margin: 0 0 12px; font-size: .9rem; font-weight: 900; color: #2d5a20; background: #dcf5c0; padding: 7px 12px; border-radius: 8px; border-left: 4px solid #5fa350; }
+.quiz-feedback { min-height: 28px; margin: 14px 0 0; font-size: 1rem; font-weight: 900; text-align: center; color: #c43828; }
+.quiz-skip-btn { width: 100%; margin-top: 10px; min-height: 42px; padding: 8px; border: 2px dashed #c4a76a; border-radius: 8px; background: #fff8e8; font-size: .88rem; font-weight: 900; color: #7a5c30; }
 .quiz-skip-btn:disabled { opacity: .4; cursor: not-allowed; }
 
 @media (max-width:760px) {
