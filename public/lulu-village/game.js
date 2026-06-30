@@ -256,7 +256,7 @@ const QUESTIONS = [
 ];
 
 const quizState = { q: null, attempts: 0, type: null, target: null };
-const quizDialog = document.querySelector("#quizDialog");
+const quizOverlay = document.querySelector("#quizOverlay");
 
 function showQuiz(type, target) {
   quizState.type = type;
@@ -264,7 +264,7 @@ function showQuiz(type, target) {
   quizState.attempts = 0;
   quizState.q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
   renderQuiz();
-  quizDialog.showModal();
+  quizOverlay.style.display = "flex";
 }
 
 function renderQuiz() {
@@ -292,7 +292,7 @@ function handleAnswer(i, btn) {
     fb.textContent = "✅ 答對了！資源 +3";
     document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
     setTimeout(() => {
-      quizDialog.close();
+      quizOverlay.style.display = "none";
       gather(quizState.type, quizState.target);
       gather(quizState.type, quizState.target);
       gather(quizState.type, quizState.target);
@@ -306,7 +306,7 @@ function handleAnswer(i, btn) {
       fb.style.color = "#c94f35";
       fb.textContent = "💬 沒關係，去問爸媽或老師！";
       document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
-      setTimeout(() => quizDialog.close(), 1800);
+      setTimeout(() => { quizOverlay.style.display = "none"; }, 1800);
     } else {
       fb.style.color = "#c94f35";
       fb.textContent = `❌ 再想想，還有 ${left} 次機會`;
