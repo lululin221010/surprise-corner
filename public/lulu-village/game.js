@@ -391,7 +391,8 @@ document.querySelector("#tutorialClose").addEventListener("click", () => {
   localStorage.setItem(TUTORIAL_KEY, "1");
 });
 document.querySelector("#helpBtn").addEventListener("click", () => {
-  tutorialOverlay.style.display = "flex";
+  const isOpen = tutorialOverlay.style.display !== "none";
+  tutorialOverlay.style.display = isOpen ? "none" : "flex";
 });
 
 render();
