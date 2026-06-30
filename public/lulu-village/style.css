@@ -41,6 +41,10 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .resource-icon.wood { background: #9b6237; }
 .resource-icon.food { background: #de8d52; }
 .resource-icon.stone { background: #7d8a96; }
+.lulu-coin-badge { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border: 2px solid rgba(125,104,72,.3); border-radius: 999px; background: rgba(255,244,181,.9); font-weight: 900; box-shadow: 0 4px 0 rgba(80,67,43,.12); }
+.coin-icon { font-size: 1.2rem; }
+#luluCoin { font-size: 1.1rem; color: #7a4d10; }
+.coin-unit { font-size: .8rem; color: #9a6830; }
 .village-wrap { position: relative; overflow-x: auto; overflow-y: hidden; border: 4px solid #876f4b; border-radius: 8px; background: var(--sky); box-shadow: var(--shadow); -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
 .restore-meter { position: absolute; top: 12px; right: 12px; z-index: 6; display: grid; grid-template-columns: auto auto; gap: 5px 8px; align-items: center; min-width: 190px; padding: 9px 10px; border: 2px solid rgba(125,104,72,.32); border-radius: 8px; background: rgba(255,250,240,.9); box-shadow: 0 8px 18px rgba(65,55,38,.12); font-size: .82rem; font-weight: 900; }
 .restore-meter strong { justify-self: end; color: #4d7f45; }

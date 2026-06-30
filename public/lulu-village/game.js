@@ -26,6 +26,18 @@ function defaultState() {
   };
 }
 
+// 魯魯幣
+const COIN_KEY = "lulu-village-coin";
+function getLuluCoin() {
+  const c = localStorage.getItem(COIN_KEY);
+  if (!c) { localStorage.setItem(COIN_KEY, "100000"); return 100000; }
+  return parseInt(c);
+}
+function renderCoin() {
+  const el = document.querySelector("#luluCoin");
+  if (el) el.textContent = getLuluCoin().toLocaleString();
+}
+
 const state = loadState();
 
 function loadState() {
@@ -51,6 +63,7 @@ function setSpeech(text) {
 
 function render() {
   document.querySelector("#dayCount").textContent = state.day;
+  renderCoin();
   renderVillageStage();
 
   Object.keys(buildings).forEach((id) => {
