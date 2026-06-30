@@ -244,6 +244,21 @@ function completeBuildStep(id) {
     render();
     setSpeech(b.done);
     setTimeout(updateIdleSpeech, 3000);
+    // 新居落成
+    if (id === "home") {
+      setTimeout(() => {
+        document.querySelector("#housewarmingOverlay").style.display = "flex";
+      }, 1200);
+    }
+    // 全村復興
+    if (state.built.length === Object.keys(buildings).length) {
+      setTimeout(() => {
+        const fund = getFund();
+        document.querySelector("#celebStats").innerHTML =
+          `<span>🏠 5棟完工</span><span>🪙 魯魯幣 ${getLuluCoin().toLocaleString()}</span><span>🏛️ 公共基金 ${fund.toLocaleString()}</span>`;
+        document.querySelector("#villageCompleteOverlay").style.display = "flex";
+      }, 2500);
+    }
     document.querySelector("#lulu").animate(
       [{ transform: "translateX(-50%) rotate(0deg)" },
        { transform: "translateX(-50%) rotate(-8deg)" },
@@ -457,6 +472,13 @@ document.querySelector("#tutorialClose").addEventListener("click", () => {
 document.querySelector("#helpBtn").addEventListener("click", () => {
   const isOpen = tutorialOverlay.style.display !== "none";
   tutorialOverlay.style.display = isOpen ? "none" : "flex";
+});
+
+document.querySelector("#housewarmingClose").addEventListener("click", () => {
+  document.querySelector("#housewarmingOverlay").style.display = "none";
+});
+document.querySelector("#villageCompleteClose").addEventListener("click", () => {
+  document.querySelector("#villageCompleteOverlay").style.display = "none";
 });
 
 render();
