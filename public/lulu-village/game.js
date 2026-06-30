@@ -90,6 +90,13 @@ function render() {
   document.querySelector("#woodCount").textContent = state.resources.wood;
   document.querySelector("#foodCount").textContent = state.resources.food;
   document.querySelector("#stoneCount").textContent = state.resources.stone;
+  // 地圖上的資源堆顯示數量
+  const woodPile = document.querySelector(".wood-pile span");
+  const foodPile = document.querySelector(".food-pile span");
+  const stonePile = document.querySelector(".stone-pile span");
+  if (woodPile) woodPile.textContent = `木${state.resources.wood}`;
+  if (foodPile) foodPile.textContent = `食${state.resources.food}`;
+  if (stonePile) stonePile.textContent = `石${state.resources.stone}`;
   renderVillageStage();
   Object.keys(buildings).forEach((id) => {
     const built = state.built.includes(id);
