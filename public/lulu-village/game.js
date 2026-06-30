@@ -462,19 +462,9 @@ document.querySelector("#helpBtn").addEventListener("click", () => {
 render();
 updateIdleSpeech();
 
-// 作弊：點魯魯5下
-let luluTaps = 0;
+// 點魯魯：魯魯說話
 document.querySelector("#lulu").addEventListener("click", () => {
-  luluTaps++;
-  if (luluTaps >= 5) {
-    luluTaps = 0;
-    state.resources.wood += 10;
-    state.resources.food += 10;
-    state.resources.stone += 10;
-    saveState();
-    render();
-    setSpeech("⋯魯魯假裝不知道你剛才做了什麼。（跳過券+30）");
-  }
+  updateIdleSpeech();
 });
 
 const style = document.createElement("style");
