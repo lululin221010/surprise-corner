@@ -83,28 +83,136 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .wood-pile { left: 7%; top: 49%; border-radius: 36% 52% 42% 48%; background: linear-gradient(90deg,transparent 0 18%,rgba(255,255,255,.12) 18% 21%,transparent 21%),#9a6339; }
 .food-pile { right: 8%; top: 45%; border-radius: 52% 40% 50% 42%; background: radial-gradient(circle at 32% 24%,#ffd46b 0 8px,transparent 9px),var(--leaf); }
 .stone-pile { right: 18%; bottom: 13%; border-radius: 50% 40% 44% 48%; background: radial-gradient(circle at 32% 32%,rgba(255,255,255,.28) 0 7px,transparent 8px),var(--stone); }
-.plot { display: grid; place-items: center; width: 122px; height: 96px; padding: 8px; border: 3px dashed rgba(98,84,61,.45); border-radius: 8px; background: linear-gradient(180deg,rgba(255,250,240,.78),rgba(245,221,169,.66)); box-shadow: var(--small-shadow); transition: transform 140ms ease,background 180ms ease,border-color 180ms ease; }
-.plot::before { content: ""; position: absolute; inset: auto 12px 9px; height: 9px; border-radius: 50%; background: rgba(69,58,43,.16); }
-.plot.built { border-style: solid; border-color: rgba(96,121,65,.55); background: linear-gradient(180deg,#fff7d8,#f5e2aa); animation: pop 360ms ease; }
-.plot-home { left: 11%; bottom: 23%; }
-.plot-kitchen { left: 35%; bottom: 17%; }
-.plot-greenhouse { right: 8%; bottom: 30%; }
-.plot-garden { left: 25%; top: 39%; }
-.plot-bed { right: 31%; top: 34%; }
-.building-icon { position: relative; display: grid; place-items: center; width: 62px; height: 48px; border-radius: 8px; background: rgba(95,82,60,.16); color: rgba(65,55,38,.72); font-weight: 900; }
-.building-icon::before { content: "+"; font-size: 1.5rem; }
-.plot-label { position: relative; z-index: 1; padding: 4px 10px; border-radius: 999px; background: rgba(255,250,240,.78); font-size: 1rem; font-weight: 900; }
-.plot[data-building="home"].built .building-icon { background: #f1bd69; clip-path: polygon(50% 0,100% 32%,92% 100%,8% 100%,0 32%); }
-.plot[data-building="home"].built .building-icon::before { content: "屋"; }
-.plot[data-building="kitchen"].built .building-icon { background: #d96f55; border-radius: 8px 8px 18px 18px; }
-.plot[data-building="kitchen"].built .building-icon::before { content: "鍋"; }
-.plot[data-building="greenhouse"].built .building-icon { border: 4px solid #5fa35d; border-bottom-width: 8px; background: rgba(183,230,180,.75); border-radius: 50% 50% 8px 8px; }
-.plot[data-building="greenhouse"].built .building-icon::before { content: "芽"; }
-.plot[data-building="garden"].built .building-icon { background: radial-gradient(circle at 28% 45%,#ffb0a3 0 8px,transparent 9px),radial-gradient(circle at 50% 30%,#ffd46b 0 8px,transparent 9px),radial-gradient(circle at 68% 48%,#f08da4 0 8px,transparent 9px),#76b96d; }
+/* 空地：只有淡淡虛線，不是白卡 */
+.plot { display: grid; place-items: center; width: 100px; height: 84px; padding: 6px; border: 2px dashed rgba(98,84,61,.28); border-radius: 6px; background: transparent; box-shadow: none; transition: transform 140ms ease,filter 120ms ease; overflow: visible; }
+.plot::before { display: none; }
+.plot:not(.built):hover { background: rgba(255,250,240,.22); }
+/* 蓋好後完全透明，建築直接長在草地上 */
+.plot.built { border: none; background: transparent; animation: pop 360ms ease; overflow: visible; }
+.plot-home { left: 9%; bottom: 20%; }
+.plot-kitchen { left: 34%; bottom: 13%; }
+.plot-greenhouse { right: 7%; bottom: 27%; }
+.plot-garden { left: 23%; top: 36%; }
+.plot-bed { right: 29%; top: 31%; }
+
+/* 未蓋好：小加號標記 */
+.building-icon { position: relative; display: grid; place-items: center; width: 40px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.45); color: rgba(65,55,38,.55); font-weight: 900; border: 2px dashed rgba(98,84,61,.3); }
+.building-icon::before { content: "+"; font-size: 1.4rem; }
+.plot-label { position: relative; z-index: 1; padding: 2px 8px; border-radius: 999px; background: rgba(255,250,240,.82); font-size: .85rem; font-weight: 900; }
+
+/* === 蓋好後的真實建築形狀 === */
+.plot.built .building-icon { border: none; overflow: visible; }
+
+/* 🏠 小屋：紅屋頂 + 黃牆 + 窗 */
+.plot[data-building="home"].built .building-icon {
+  width: 72px; height: 46px;
+  background: #e8c56a;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+}
+.plot[data-building="home"].built .building-icon::before {
+  content: "";
+  position: absolute; top: -26px; left: -10px;
+  width: 0; height: 0;
+  border-left: 46px solid transparent;
+  border-right: 46px solid transparent;
+  border-bottom: 28px solid #c94f35;
+  filter: drop-shadow(0 -2px 0 #a03828);
+}
+.plot[data-building="home"].built .building-icon::after {
+  content: "";
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 18px; height: 16px;
+  background: #aee1ec;
+  border: 2px solid #7a6040;
+  border-radius: 2px;
+}
+
+/* 🍳 廚房：橙牆 + 磚紅煙囪 + 煙 */
+.plot[data-building="kitchen"].built .building-icon {
+  width: 68px; height: 50px;
+  background: #d4764a;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+}
+.plot[data-building="kitchen"].built .building-icon::before {
+  content: "";
+  position: absolute; top: -32px; right: 10px;
+  width: 14px; height: 34px;
+  background: #8b4c2c;
+  border-radius: 2px 2px 0 0;
+  box-shadow: inset -3px 0 0 rgba(0,0,0,.15);
+}
+.plot[data-building="kitchen"].built .building-icon::after {
+  content: "〰";
+  position: absolute; top: -52px; right: 2px;
+  font-size: .9rem; color: rgba(200,200,200,.8);
+  animation: float 2s ease-in-out infinite;
+}
+
+/* 🌿 溫室：玻璃圓頂 + 底座 + 花 */
+.plot[data-building="greenhouse"].built .building-icon {
+  width: 72px; height: 44px;
+  background: rgba(180,232,176,.55);
+  border: 3px solid #5fa35d;
+  border-bottom-width: 6px;
+  border-radius: 50% 50% 6px 6px;
+  box-shadow: 0 6px 0 rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.4);
+}
+.plot[data-building="greenhouse"].built .building-icon::before {
+  content: "🌱";
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  font-size: 1.1rem;
+}
+.plot[data-building="greenhouse"].built .building-icon::after {
+  content: "";
+  position: absolute; top: 6px; left: 12px;
+  width: 18px; height: 24px;
+  background: rgba(255,255,255,.25);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+/* 🌸 花圃：草地 + 滿版花朵 */
+.plot[data-building="garden"].built .building-icon {
+  width: 80px; height: 52px;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 18% 45%, #ff8fa8 0 8px, transparent 9px),
+    radial-gradient(circle at 45% 28%, #ffd46b 0 8px, transparent 9px),
+    radial-gradient(circle at 72% 48%, #ff6e9c 0 8px, transparent 9px),
+    radial-gradient(circle at 30% 72%, #ffb0d0 0 7px, transparent 8px),
+    radial-gradient(circle at 62% 72%, #ffd46b 0 7px, transparent 8px),
+    #7ec86a;
+  box-shadow: 0 6px 0 rgba(0,0,0,.1);
+}
 .plot[data-building="garden"].built .building-icon::before { content: ""; }
-.plot[data-building="bed"].built .building-icon { background: #f1a24f; border-radius: 50% 50% 42% 42%; }
-.plot[data-building="bed"].built .building-icon::before { content: "窩"; }
-.plot.built .building-icon { color: #3f3320; box-shadow: inset 0 -8px 0 rgba(0,0,0,.12); }
+
+/* 🐱 貓窩：橙色圓頂 + 拱門入口 + 貓耳 */
+.plot[data-building="bed"].built .building-icon {
+  width: 66px; height: 50px;
+  background: #f0a840;
+  border-radius: 50% 50% 4px 4px;
+  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+}
+.plot[data-building="bed"].built .building-icon::before {
+  content: "";
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 24px; height: 26px;
+  background: #2e1f0e;
+  border-radius: 50% 50% 0 0;
+}
+.plot[data-building="bed"].built .building-icon::after {
+  content: "";
+  position: absolute; top: -14px; left: 8px;
+  width: 0; height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 16px solid #f0a840;
+  filter: drop-shadow(28px 0 0 #f0a840);
+}
+
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 .lulu { left: 50%; bottom: 30%; width: 118px; height: 128px; transform: translateX(-50%); }
 .lulu::before { content: ""; position: absolute; left: 50%; top: 8px; width: 106px; height: 106px; border-radius: 50%; background: radial-gradient(circle,rgba(255,244,181,.82),rgba(255,244,181,0)); transform: translateX(-50%); }
 .lulu::after { content: "村長"; position: absolute; left: 50%; bottom: 0; display: block; width: max-content; padding: 4px 9px; border: 2px solid rgba(125,104,72,.32); border-radius: 999px; background: rgba(255,250,240,.86); font-size: .76rem; font-weight: 900; transform: translateX(-50%); }
