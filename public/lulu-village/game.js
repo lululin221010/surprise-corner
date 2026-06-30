@@ -124,6 +124,21 @@ function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
+const IDLE_SPEECHES = {
+  0:  [ "你終於回來了，我才沒有等你喔。", "村莊很荒涼，但魯魯不怕。", "點一棟建築開始答題吧！" ],
+  1:  [ "有一點點進展了！魯魯很欣慰。", "繼續！每答對一題建築就長高一點。", "你還不賴嘛，繼續蓋！" ],
+  2:  [ "兩棟完成了，村莊開始有點感覺！", "魯魯聞到廚房的香味了嗎？", "你的手好快，繼續蓋！" ],
+  3:  [ "三棟了！村莊越來越熱鬧。", "魯魯決定不再叫這裡廢墟了。", "一半了！你比魯魯想像的更努力。" ],
+  4:  [ "只差最後一棟！魯魯有點激動。", "加油！村莊快要復興了！", "你快做到了！魯魯在這裡等你。" ],
+  5:  [ "村莊復興了！魯魯哭了，但不承認。", "你做到了，這裡是我們的家。", "謝謝你把村莊蓋好，魯魯愛你。" ],
+};
+
+function updateIdleSpeech() {
+  const builtCount = state.built.length;
+  const lines = IDLE_SPEECHES[builtCount] || IDLE_SPEECHES[0];
+  setSpeech(lines[Math.floor(Math.random() * lines.length)]);
+}
+
 function setSpeech(text) {
   const speech = document.querySelector("#speech");
   speech.textContent = text;
@@ -228,6 +243,7 @@ function completeBuildStep(id) {
     saveState();
     render();
     setSpeech(b.done);
+    setTimeout(updateIdleSpeech, 3000);
     document.querySelector("#lulu").animate(
       [{ transform: "translateX(-50%) rotate(0deg)" },
        { transform: "translateX(-50%) rotate(-8deg)" },
@@ -444,6 +460,7 @@ document.querySelector("#helpBtn").addEventListener("click", () => {
 });
 
 render();
+updateIdleSpeech();
 
 // 作弊：點魯魯5下
 let luluTaps = 0;
