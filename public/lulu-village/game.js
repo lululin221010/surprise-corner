@@ -38,6 +38,68 @@ function renderCoin() {
   if (el) el.textContent = getLuluCoin().toLocaleString();
 }
 
+// 公共基金
+const FUND_KEY = "lulu-village-public-fund";
+const FUND_MILESTONES = [
+  { id: "park",    name: "公園",   amount: 10000,  emoji: "🌳" },
+  { id: "library", name: "圖書館", amount: 30000,  emoji: "📚" },
+  { id: "school",  name: "學校",   amount: 60000,  emoji: "🏫" },
+  { id: "clinic",  name: "診所",   amount: 100000, emoji: "🏥" },
+];
+function getFund() { return parseInt(localStorage.getItem(FUND_KEY) || "0"); }
+function setFund(v) { localStorage.setItem(FUND_KEY, String(v)); }
+function renderFund() {
+  const fund = getFund();
+  document.querySelector("#pfAmount").textContent = fund.toLocaleString();
+  const next = FUND_MILESTONES.find(m => fund < m.amount);
+  if (next) {
+    document.querySelector("#pfNextBuilding").textContent = next.emoji + " " + next.name;
+    document.querySelector("#pfLeft").textContent = (next.amount - fund).toLocaleString();
+  } else {
+    document.querySelector("#pfNextBuilding").textContent = "全部完成！";
+    document.querySelector("#pfLeft").textContent = "0";
+  }
+  FUND_MILESTONES.forEach(m => {
+    const el = document.querySelector(`#dm-${m.id}`);
+    if (el) el.classList.toggle("unlocked", fund >= m.amount);
+  });
+}
+
+// 捐款介面
+const donateOverlay = document.querySelector("#donateOverlay");
+document.querySelector("#donateBtn").addEventListener("click", () => {
+  document.querySelector("#donateCurrentCoin").textContent = getLuluCoin().toLocaleString();
+  document.querySelector("#donateAmount").value = "";
+  document.querySelector("#donateFeedback").textContent = "";
+  renderFund();
+  donateOverlay.style.display = "flex";
+});
+document.querySelector("#donateClose").addEventListener("click", () => {
+  donateOverlay.style.display = "none";
+});
+document.querySelector("#donateConfirm").addEventListener("click", () => {
+  const amt = parseInt(document.querySelector("#donateAmount").value);
+  const coin = getLuluCoin();
+  const fb = document.querySelector("#donateFeedback");
+  if (!amt || amt <= 0) { fb.style.color = "#c0392b"; fb.textContent = "請輸入捐款金額！"; return; }
+  if (amt > coin) { fb.style.color = "#c0392b"; fb.textContent = "魯魯幣不夠啦！"; return; }
+  localStorage.setItem(COIN_KEY, String(coin - amt));
+  setFund(getFund() + amt);
+  renderCoin();
+  renderFund();
+  document.querySelector("#donateCurrentCoin").textContent = getLuluCoin().toLocaleString();
+  document.querySelector("#donateAmount").value = "";
+  const unlocked = FUND_MILESTONES.find(m => getFund() >= m.amount && (getFund() - amt) < m.amount);
+  if (unlocked) {
+    fb.style.color = "#2d6020";
+    fb.textContent = `🎉 ${unlocked.emoji} ${unlocked.name}蓋好了！全村共享！`;
+    setSpeech(`村莊的${unlocked.name}蓋好了！大家一起來！`);
+  } else {
+    fb.style.color = "#2d6020";
+    fb.textContent = `✅ 捐出 ${amt.toLocaleString()} 魯魯幣，謝謝你！`;
+  }
+});
+
 const state = loadState();
 
 function loadState() {
@@ -64,6 +126,7 @@ function setSpeech(text) {
 function render() {
   document.querySelector("#dayCount").textContent = state.day;
   renderCoin();
+  renderFund();
   renderVillageStage();
 
   Object.keys(buildings).forEach((id) => {

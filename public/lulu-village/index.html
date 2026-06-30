@@ -91,10 +91,39 @@
       <section class="panel">
         <div class="actions">
           <button class="primary" id="nextHint" type="button">看下一個目標</button>
+          <button id="donateBtn" type="button">❤️ 愛心捐款</button>
           <button id="shareCard" type="button">產生分享卡</button>
           <button id="resetGame" type="button">破產重建</button>
         </div>
       </section>
+
+      <!-- 公共基金進度 -->
+      <div class="public-fund-bar">
+        <span class="pf-label">🏛️ 公共基金</span>
+        <span id="pfAmount">0</span> 魯魯幣
+        <span class="pf-next">→ 下一棟：<b id="pfNextBuilding">公園</b>（還差 <b id="pfLeft">10,000</b>）</span>
+      </div>
+
+      <!-- 捐款覆蓋層 -->
+      <div id="donateOverlay" class="donate-overlay" style="display:none">
+        <div class="donate-card">
+          <h2>❤️ 愛心捐款</h2>
+          <p class="donate-desc">捐出魯魯幣蓋村莊公共建築，全村共享！</p>
+          <div class="donate-milestones">
+            <div class="dm" id="dm-park">🌳 公園<span>10,000</span></div>
+            <div class="dm" id="dm-library">📚 圖書館<span>30,000</span></div>
+            <div class="dm" id="dm-school">🏫 學校<span>60,000</span></div>
+            <div class="dm" id="dm-clinic">🏥 診所<span>100,000</span></div>
+          </div>
+          <p class="donate-balance">你現有：<b id="donateCurrentCoin"></b> 魯魯幣</p>
+          <div class="donate-input-row">
+            <input id="donateAmount" type="number" min="1" placeholder="輸入捐款金額" />
+            <button id="donateConfirm" type="button">捐出</button>
+          </div>
+          <p class="donate-feedback" id="donateFeedback"></p>
+          <button id="donateClose" type="button" class="donate-close-btn">關閉</button>
+        </div>
+      </div>
 
       <!-- 手機版建築按鈕（桌機隱藏） -->
       <section class="mobile-build" aria-label="建築（手機版）">
