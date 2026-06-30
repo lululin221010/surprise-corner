@@ -346,11 +346,14 @@ document.querySelectorAll(".mplot").forEach((button) => {
 document.querySelector("#nextHint").addEventListener("click", showNextHint);
 document.querySelector("#shareCard").addEventListener("click", showShareCard);
 document.querySelector("#resetGame").addEventListener("click", () => {
+  if (!confirm("確定要破產重建嗎？建築進度歸零，但魯魯幣不變。")) return;
+  const coin = localStorage.getItem(COIN_KEY); // 保留魯魯幣
   localStorage.removeItem(STORAGE_KEY);
   Object.assign(state, defaultState());
   saveState();
+  if (coin) localStorage.setItem(COIN_KEY, coin); // 還原魯魯幣
   render();
-  setSpeech("村莊重置好了。魯魯假裝這一切都在計畫內。");
+  setSpeech("破產了也沒關係，魯魯幣還在，重新蓋過！");
 });
 // 教學說明
 const tutorialOverlay = document.querySelector("#tutorialOverlay");
