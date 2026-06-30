@@ -133,7 +133,7 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 @keyframes pop { 0% { transform: scale(.86); } 70% { transform: scale(1.08); } 100% { transform: scale(1); } }
 /* 手機版建築區 */
 .mobile-build { display: none; }
-.mobile-gather { display: flex; gap: 8px; margin-bottom: 10px; }
+.mobile-gather { display: none; gap: 8px; margin: 8px 0; }
 .mgather { flex: 1; min-height: 56px; border: 2px solid rgba(125,104,72,.4); border-radius: 10px; background: #fffaf0; font-size: 1rem; font-weight: 900; box-shadow: 0 5px 0 rgba(80,67,43,.14); }
 .mgather:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(80,67,43,.14); }
 .mgather.wood { background: linear-gradient(180deg,#c4844a,#9a6339); color:#fff; border-color:#7a4d28; }
@@ -151,10 +151,12 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
   .panel { display: grid; grid-template-columns: 1fr; }
   .resources { display: none; }
 
-  /* 地圖縮小顯示，不隱藏 */
+  /* 地圖放大顯示 */
   .village-wrap { overflow: hidden; }
-  .village { height: 220px; min-height: 220px; min-width: unset; }
+  .village { height: 340px; min-height: 340px; min-width: unset; }
   .restore-meter { top: 6px; right: 6px; min-width: 130px; font-size: .72rem; padding: 6px 8px; }
+  /* 收集按鈕顯示在地圖下方 */
+  .mobile-gather { display: flex; }
   .cloud { display: none; }
   .ruin { width: 52px; height: 36px; }
   .lulu { width: 72px; height: 80px; bottom: 28%; }
