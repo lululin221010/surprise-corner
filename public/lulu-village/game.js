@@ -380,7 +380,7 @@ const QUESTIONS = [
   { s:"🌌 天文", q:"太陽系最大的行星是？", o:["土星","火星","木星","天王星"], a:2 },
   { s:"🌌 天文", q:"地球繞太陽一圈要多久？", o:["一個月","一週","一天","一年"], a:3 },
   { s:"🌌 天文", q:"月亮繞地球一圈約要多久？", o:["一年","一天","一個月","一週"], a:2 },
-  { s:"🌌 天文", q:"太陽系有幾顆行星？", o:["9","6","10","8"], a:3 },
+  { s:"🌌 天文", q:"太陽系有幾顆行星？（2006年後的答案）", o:["9","6","10","8"], a:3, note:"爸媽那年代學的是9大行星！2006年冥王星被降為「矮行星」，所以現在是8顆。" },
   { s:"🌌 天文", q:"北極星指向哪個方向？", o:["南","東","西","北"], a:3 },
   { s:"🌌 天文", q:"最靠近太陽的行星是？", o:["金星","地球","火星","水星"], a:3 },
   { s:"🌌 天文", q:"地球是太陽系第幾顆行星？", o:["第一","第二","第四","第三"], a:3 },
@@ -466,13 +466,14 @@ function handleAnswer(i, btn) {
     quizState.attempts++;
     const left = 3 - quizState.attempts;
     document.querySelector("#quizAttemptsLeft").textContent = left;
+    const note = quizState.q.note ? `　📖 ${quizState.q.note}` : "";
     if (left <= 0) {
       fb.style.color = "#c94f35";
-      fb.textContent = "💬 沒關係，去問爸媽或老師！";
-      setTimeout(() => { quizOverlay.style.display = "none"; }, 1800);
+      fb.textContent = "💬 沒關係，去問爸媽或老師！" + note;
+      setTimeout(() => { quizOverlay.style.display = "none"; }, 2800);
     } else {
       fb.style.color = "#c94f35";
-      fb.textContent = `❌ 再想想，還有 ${left} 次機會`;
+      fb.textContent = `❌ 再想想，還有 ${left} 次機會` + note;
       document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = false);
       btn.disabled = true;
     }
