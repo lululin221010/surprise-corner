@@ -701,6 +701,20 @@ document.querySelector("#helpBtn").addEventListener("click", () => {
   tutorialOverlay.style.display = isOpen ? "none" : "flex";
 });
 
+document.querySelector("#reportBtn").addEventListener("click", () => {
+  const q = quizState.q;
+  if (!q) return;
+  const reports = JSON.parse(localStorage.getItem("lulu-village-reports") || "[]");
+  const already = reports.find(r => r.q === q.q);
+  if (already) { alert("已經回報過這題了，謝謝！"); return; }
+  reports.push({ s: q.s, q: q.q, o: q.o, a: q.a, time: new Date().toISOString() });
+  localStorage.setItem("lulu-village-reports", JSON.stringify(reports));
+  const btn = document.querySelector("#reportBtn");
+  btn.textContent = "✅ 已回報，謝謝！";
+  btn.disabled = true;
+  setTimeout(() => { btn.textContent = "⚠️ 這題答案怪怪的"; btn.disabled = false; }, 3000);
+});
+
 document.querySelector("#housewarmingClose").addEventListener("click", () => {
   document.querySelector("#housewarmingOverlay").style.display = "none";
 });
