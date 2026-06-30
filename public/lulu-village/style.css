@@ -173,7 +173,11 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .tutorial-steps li { display: flex; align-items: flex-start; gap: 10px; font-size: .97rem; font-weight: 900; line-height: 1.4; }
 .t-icon { font-size: 1.2rem; flex-shrink: 0; }
 .tutorial-tip { margin: 0 0 20px; padding: 10px 12px; border-radius: 8px; background: #efffdc; font-size: .84rem; font-weight: 900; color: #4d7f45; }
+.tutorial-land-note { margin: 0 0 16px; padding: 10px 14px; border: 2px dashed rgba(125,104,72,.4); border-radius: 8px; background: rgba(255,244,181,.5); font-size: .9rem; font-weight: 900; color: #7a6040; line-height: 1.6; }
 .tutorial-start-btn { width: 100%; min-height: 50px; border: 0; border-radius: 10px; background: linear-gradient(180deg,#ff927d,#e86f5b); color: #fff; font-size: 1.1rem; font-weight: 900; box-shadow: 0 5px 0 #b55243; }
+/* 地圖告示牌 */
+.land-sign { position: absolute; left: 50%; bottom: 18%; z-index: 4; transform: translateX(38px); background: #fffaf0; border: 2px solid #876f4b; border-radius: 6px; padding: 4px 8px; font-size: .72rem; font-weight: 900; color: #5a4020; white-space: nowrap; box-shadow: 0 3px 0 rgba(80,67,43,.18); }
+.land-sign::before { content: ""; position: absolute; left: -8px; top: 50%; width: 8px; height: 2px; background: #876f4b; transform: translateY(-50%); }
 .tutorial-start-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b55243; }
 
 /* === 答題覆蓋層 === */
