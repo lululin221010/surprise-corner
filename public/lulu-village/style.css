@@ -241,53 +241,17 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .cat-name-row input { flex:1; max-width:160px; padding:8px 12px; border:2px solid #d0c0a0; border-radius:10px; font-size:1rem; font-weight:700; }
 .cat-preview { font-size:1.5rem; letter-spacing:4px; min-height:2rem; color:#7a6040; font-weight:900; }
 /* 玩家貓 */
-.player-villager { position:absolute; font-size:1.8rem; z-index:6; cursor:pointer; user-select:none; filter:drop-shadow(0 3px 4px rgba(0,0,0,.25)); animation:wander1 12s linear infinite; animation-delay:-7s; }
+.player-villager { position:absolute; font-size:1.8rem; z-index:6; cursor:pointer; user-select:none; filter:drop-shadow(0 3px 4px rgba(0,0,0,.25)); }
 .player-villager::after { content:attr(data-name); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:#e86f5b; color:#fff; font-size:.6rem; font-weight:900; padding:2px 7px; border-radius:8px; white-space:nowrap; }
 /* 貓村民 */
 .villager { position:absolute; font-size:1.6rem; z-index:5; cursor:default; user-select:none; filter:drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
 .villager::after { content:attr(data-name); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); color:#fff; font-size:.55rem; font-weight:700; padding:2px 6px; border-radius:8px; white-space:nowrap; opacity:0; transition:opacity .2s; pointer-events:none; }
 .villager:hover::after { opacity:1; }
 /* 貓村民：各自在不同區域漫步 */
-.v1 { animation: wander1 12s linear infinite; }
-.v2 { animation: wander2 15s linear infinite; animation-delay:-6s; }
-.v3 { animation: wander3 18s linear infinite; animation-delay:-10s; font-size:1.3rem; }
-.v4 { animation: wander4 14s linear infinite; animation-delay:-4s; font-size:1.2rem; }
-@keyframes wander1 {
-  0%   { left:5%;  bottom:22%; transform:scaleX(1); }
-  25%  { left:30%; bottom:28%; transform:scaleX(1); }
-  49%  { left:55%; bottom:20%; transform:scaleX(1); }
-  50%  { left:55%; bottom:20%; transform:scaleX(-1); }
-  75%  { left:30%; bottom:26%; transform:scaleX(-1); }
-  99%  { left:5%;  bottom:22%; transform:scaleX(-1); }
-  100% { left:5%;  bottom:22%; transform:scaleX(1); }
-}
-@keyframes wander2 {
-  0%   { left:60%; bottom:25%; transform:scaleX(-1); }
-  24%  { left:35%; bottom:30%; transform:scaleX(-1); }
-  25%  { left:35%; bottom:30%; transform:scaleX(1); }
-  50%  { left:65%; bottom:22%; transform:scaleX(1); }
-  74%  { left:80%; bottom:26%; transform:scaleX(1); }
-  75%  { left:80%; bottom:26%; transform:scaleX(-1); }
-  99%  { left:60%; bottom:25%; transform:scaleX(-1); }
-  100% { left:60%; bottom:25%; transform:scaleX(-1); }
-}
-@keyframes wander3 {
-  0%   { left:15%; bottom:18%; transform:scaleX(1); }
-  32%  { left:60%; bottom:24%; transform:scaleX(1); }
-  33%  { left:60%; bottom:24%; transform:scaleX(1); }
-  65%  { left:80%; bottom:20%; transform:scaleX(1); }
-  66%  { left:80%; bottom:20%; transform:scaleX(-1); }
-  99%  { left:15%; bottom:18%; transform:scaleX(-1); }
-  100% { left:15%; bottom:18%; transform:scaleX(1); }
-}
-@keyframes wander4 {
-  0%   { left:80%; bottom:28%; transform:scaleX(-1); }
-  30%  { left:55%; bottom:20%; transform:scaleX(-1); }
-  59%  { left:10%; bottom:22%; transform:scaleX(-1); }
-  60%  { left:10%; bottom:22%; transform:scaleX(1); }
-  99%  { left:80%; bottom:28%; transform:scaleX(1); }
-  100% { left:80%; bottom:28%; transform:scaleX(-1); }
-}
+.v1 { font-size:1.6rem; }
+.v2 { font-size:1.6rem; }
+.v3 { font-size:1.3rem; }
+.v4 { font-size:1.2rem; }
 /* 地圖告示牌 */
 .land-sign { position: absolute; left: 6%; bottom: 32%; z-index: 4; background: #fffaf0; border: 2px solid #876f4b; border-radius: 6px; padding: 4px 8px; font-size: .72rem; font-weight: 900; color: #5a4020; white-space: nowrap; box-shadow: 0 3px 0 rgba(80,67,43,.18); }
 .land-sign::before { content: ""; position: absolute; left: -8px; top: 50%; width: 8px; height: 2px; background: #876f4b; transform: translateY(-50%); }
