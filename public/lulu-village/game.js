@@ -8,11 +8,6 @@ const buildings = {
   home:       { name: "小屋",     steps: 35, emoji: "🏠", done: "小屋完成！村莊終於有人住的感覺了。" },
 };
 
-const gatherText = {
-  wood: ["撿到木頭，可以用來跳過問題！", "木頭 +1。存著備用，難題時救援。"],
-  food: ["找到食物！可以幫你跳過一道難題。", "食物 +1。魯魯說這是策略性儲糧。"],
-  stone: ["搬到石頭。很重，但很有跳過的安全感。", "石頭 +1。難題剋星。"],
-};
 
 const hints = [
   "最簡單的先蓋貓窩（15步），給魯魯一個家！",
@@ -25,7 +20,6 @@ const hints = [
 function defaultState() {
   return {
     day: 1,
-    resources: { wood: 2, food: 2, stone: 1 },
     built: [],
     progress: { home: 0, kitchen: 0, greenhouse: 0, garden: 0, bed: 0 },
     clicks: 0,
@@ -57,24 +51,7 @@ function setSpeech(text) {
 
 function render() {
   document.querySelector("#dayCount").textContent = state.day;
-  document.querySelector("#woodCount").textContent = state.resources.wood;
-  document.querySelector("#foodCount").textContent = state.resources.food;
-  document.querySelector("#stoneCount").textContent = state.resources.stone;
-  const woodPile = document.querySelector(".wood-pile span");
-  const foodPile = document.querySelector(".food-pile span");
-  const stonePile = document.querySelector(".stone-pile span");
-  if (woodPile) woodPile.textContent = `木${state.resources.wood}`;
-  if (foodPile) foodPile.textContent = `食${state.resources.food}`;
-  if (stonePile) stonePile.textContent = `石${state.resources.stone}`;
-
   renderVillageStage();
-
-  const totalSkips = state.resources.wood + state.resources.food + state.resources.stone;
-  const skipBtn = document.querySelector("#quizSkip");
-  if (skipBtn) {
-    skipBtn.textContent = `跳過（消耗資源，剩 ${totalSkips} 個）`;
-    skipBtn.disabled = totalSkips <= 0;
-  }
 
   Object.keys(buildings).forEach((id) => {
     const b = buildings[id];
@@ -145,16 +122,6 @@ function renderVillageStage() {
   document.querySelector("#restoreFill").style.width = `${restorePercent}%`;
 }
 
-function gather(type, target) {
-  state.resources[type] += 1;
-  state.clicks += 1;
-  if (state.clicks % 12 === 0) state.day += 1;
-  saveState();
-  render();
-  const texts = gatherText[type];
-  setSpeech(texts[Math.floor(Math.random() * texts.length)]);
-  floatText("+1跳過券", target);
-}
 
 function startBuild(id) {
   if (state.built.includes(id)) {
@@ -356,14 +323,8 @@ function skipQuestion() {
 }
 
 // 事件綁定
-document.querySelectorAll("[data-gather]").forEach((button) => {
-  button.addEventListener("click", () => gather(button.dataset.gather, button));
-});
 document.querySelectorAll(".plot[data-building]").forEach((button) => {
   button.addEventListener("click", () => startBuild(button.dataset.building));
-});
-document.querySelectorAll(".mgather").forEach((button) => {
-  button.addEventListener("click", () => gather(button.dataset.gather, button));
 });
 document.querySelectorAll(".mplot").forEach((button) => {
   button.addEventListener("click", () => startBuild(button.dataset.building));
@@ -378,8 +339,6 @@ document.querySelector("#resetGame").addEventListener("click", () => {
   render();
   setSpeech("村莊重置好了。魯魯假裝這一切都在計畫內。");
 });
-document.querySelector("#quizSkip").addEventListener("click", skipQuestion);
-
 // 教學說明
 const tutorialOverlay = document.querySelector("#tutorialOverlay");
 const TUTORIAL_KEY = "lulu-village-tutorial-seen";

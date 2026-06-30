@@ -13,20 +13,6 @@
           <p class="eyebrow">第 <span id="dayCount">1</span> 天 · <span id="phaseName">廢墟期</span></p>
           <h1>魯魯末日村</h1>
         </div>
-        <div class="resources" aria-label="資源">
-          <button class="resource" data-resource="wood" type="button" aria-label="木頭" title="木頭（ㄇㄨˋ ㄊㄡˊ）— 點我收集！">
-            <span class="resource-icon wood">木</span>
-            <strong id="woodCount">0</strong>
-          </button>
-          <button class="resource" data-resource="food" type="button" aria-label="食物" title="食物（ㄕˊ ㄨˋ）— 點我收集！">
-            <span class="resource-icon food">食</span>
-            <strong id="foodCount">0</strong>
-          </button>
-          <button class="resource" data-resource="stone" type="button" aria-label="石頭" title="石頭（ㄕˊ ㄊㄡˊ）— 點我收集！">
-            <span class="resource-icon stone">石</span>
-            <strong id="stoneCount">0</strong>
-          </button>
-        </div>
       </section>
 
       <!-- 說明按鈕 -->
@@ -67,15 +53,6 @@
           <span class="sprout sprout-c"></span>
           <span class="lamp lamp-a"></span>
           <span class="lamp lamp-b"></span>
-          <button class="gather pile wood-pile" data-gather="wood" type="button" aria-label="收集木頭">
-            <span>木</span>
-          </button>
-          <button class="gather pile food-pile" data-gather="food" type="button" aria-label="收集食物">
-            <span>食</span>
-          </button>
-          <button class="gather pile stone-pile" data-gather="stone" type="button" aria-label="收集石頭">
-            <span>石</span>
-          </button>
           <button class="plot plot-home" data-building="home" type="button" aria-label="小屋" title="小屋（ㄒㄧㄠˇ ㄨ）🏠 需要：木頭8＋石頭4">
             <span class="building-icon"><img src="/lulu-village/assets/home.png" alt="小屋"></span>
             <span class="plot-label">🏠 小屋</span>
@@ -104,12 +81,6 @@
 
       <div class="speech" id="speech">你終於回來了，我才沒有等你喔。</div>
 
-      <!-- 手機版收集按鈕（speech正下方，桌機隱藏） -->
-      <div class="mobile-gather">
-        <button class="mgather wood" data-gather="wood" type="button">🪵 收集木頭</button>
-        <button class="mgather food" data-gather="food" type="button">🍎 收集食物</button>
-        <button class="mgather stone" data-gather="stone" type="button">🪨 收集石頭</button>
-      </div>
 
       <section class="panel">
         <div class="actions">
@@ -164,7 +135,6 @@
           <p class="quiz-question" id="quizQuestion"></p>
           <div class="quiz-options" id="quizOptions"></div>
           <p class="quiz-feedback" id="quizFeedback"></p>
-          <button id="quizSkip" class="quiz-skip-btn" type="button">跳過（消耗資源）</button>
         </div>
       </div>
 
