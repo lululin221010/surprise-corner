@@ -111,11 +111,10 @@ function render() {
     const card = document.querySelector(`[data-card="${id}"]`);
     if (card) {
       card.classList.toggle("done", done);
+      const span = document.querySelector(`#card-prog-${id}`);
+      if (span) span.textContent = prog;
       const p = card.querySelector("p");
-      if (p) {
-        if (done) p.textContent = "✅ 完成！";
-        else p.textContent = `進度 ${prog} ／ ${b.steps} 步`;
-      }
+      if (p && done) p.textContent = "✅ 完成！";
     }
   });
 }
