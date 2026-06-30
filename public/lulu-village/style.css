@@ -47,15 +47,15 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .restore-meter i { grid-column: 1/3; display: block; height: 10px; overflow: hidden; border-radius: 999px; background: rgba(91,80,58,.18); }
 .restore-meter b { display: block; width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#ffcf67,#75bb67); transition: width 420ms ease; }
 .village-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 3px rgba(255,250,240,.5),inset 0 -24px 40px rgba(86,79,55,.12); }
-.sky { position: absolute; inset: 0 0 auto; height: 42%; background: radial-gradient(circle at 11% 21%,#fff0a6 0 34px,#ffd36d 35px 42px,transparent 43px),linear-gradient(180deg,var(--sky),#d8f1de 86%); }
-.village { position: relative; height: min(72vh,620px); min-height: 530px; min-width: 900px; overflow: hidden; background: radial-gradient(ellipse at 48% 54%,rgba(255,250,220,.36) 0 16%,transparent 32%),linear-gradient(168deg,transparent 0 35%,#b7d98d 35% 62%,#82b86f 62% 100%); }
+.sky { display: none; }
+.village { position: relative; height: min(72vh,620px); min-height: 530px; min-width: 900px; overflow: hidden; background: url(/lulu-village/assets/bg.png) center/cover no-repeat; }
 .village.restore-0 { filter: saturate(1); }
 .village.restore-2,.village.restore-3 { filter: saturate(1.05) brightness(1.03); }
 .village.restore-4,.village.restore-5 { filter: saturate(1.14) brightness(1.07); }
 .village-wrap.phase-evening .sky { background: radial-gradient(circle at 14% 20%,#ffcc75 0 34px,#f18f67 35px 42px,transparent 43px),linear-gradient(180deg,#f7b98a,#d5d89d 86%); }
 .village-wrap.phase-night .sky { background: radial-gradient(circle at 15% 20%,#fff6c4 0 24px,transparent 25px),linear-gradient(180deg,#6f8aa2,#a8c4bf 86%); }
-.village::before { content: ""; position: absolute; left: -8%; right: -8%; bottom: -8%; z-index: 1; height: 42%; background: radial-gradient(circle at 18% 28%,rgba(255,255,255,.14) 0 8px,transparent 9px),radial-gradient(circle at 62% 38%,rgba(255,255,255,.16) 0 9px,transparent 10px),#b9a070; border-top: 8px solid #78634b; transform: rotate(-2deg); }
-.village::after { content: ""; position: absolute; left: -6%; right: -6%; bottom: 3%; z-index: 1; height: 13%; background: repeating-linear-gradient(90deg,rgba(101,86,62,.46) 0 42px,rgba(80,69,53,.62) 42px 48px),linear-gradient(180deg,rgba(255,255,255,.14),transparent); opacity: .8; transform: rotate(1deg); }
+.village::before { display: none; }
+.village::after { display: none; }
 .cloud { position: absolute; z-index: 1; width: 90px; height: 28px; border-radius: 999px; background: rgba(255,255,255,.82); box-shadow: 26px 0 0 rgba(255,255,255,.82),13px -15px 0 rgba(255,255,255,.82); }
 .cloud-a { left: 28%; top: 12%; transform: scale(.86); }
 .cloud-b { right: 14%; top: 18%; transform: scale(.62); opacity: .74; }
@@ -100,117 +100,24 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .building-icon::before { content: "+"; font-size: 1.4rem; }
 .plot-label { position: relative; z-index: 1; padding: 2px 8px; border-radius: 999px; background: rgba(255,250,240,.82); font-size: .85rem; font-weight: 900; }
 
-/* === 蓋好後的真實建築形狀 === */
-.plot.built .building-icon { border: none; overflow: visible; }
-
-/* 🏠 小屋：紅屋頂 + 黃牆 + 窗 */
-.plot[data-building="home"].built .building-icon {
-  width: 72px; height: 46px;
-  background: #e8c56a;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+/* === 蓋好後：使用真實圖片 === */
+.plot.built .building-icon {
+  border: none;
+  background: transparent !important;
+  overflow: visible;
+  width: 150px; height: 140px;
 }
-.plot[data-building="home"].built .building-icon::before {
-  content: "";
-  position: absolute; top: -26px; left: -10px;
-  width: 0; height: 0;
-  border-left: 46px solid transparent;
-  border-right: 46px solid transparent;
-  border-bottom: 28px solid #c94f35;
-  filter: drop-shadow(0 -2px 0 #a03828);
-}
-.plot[data-building="home"].built .building-icon::after {
-  content: "";
-  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-  width: 18px; height: 16px;
-  background: #aee1ec;
-  border: 2px solid #7a6040;
-  border-radius: 2px;
+.plot.built .building-icon::before { content: none !important; }
+.plot.built .building-icon::after { content: none !important; }
+.plot.built .building-icon img {
+  width: 150px; height: 140px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,.22));
 }
 
-/* 🍳 廚房：橙牆 + 磚紅煙囪 + 煙 */
-.plot[data-building="kitchen"].built .building-icon {
-  width: 68px; height: 50px;
-  background: #d4764a;
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 6px 0 rgba(0,0,0,.12);
-}
-.plot[data-building="kitchen"].built .building-icon::before {
-  content: "";
-  position: absolute; top: -32px; right: 10px;
-  width: 14px; height: 34px;
-  background: #8b4c2c;
-  border-radius: 2px 2px 0 0;
-  box-shadow: inset -3px 0 0 rgba(0,0,0,.15);
-}
-.plot[data-building="kitchen"].built .building-icon::after {
-  content: "〰";
-  position: absolute; top: -52px; right: 2px;
-  font-size: .9rem; color: rgba(200,200,200,.8);
-  animation: float 2s ease-in-out infinite;
-}
-
-/* 🌿 溫室：玻璃圓頂 + 底座 + 花 */
-.plot[data-building="greenhouse"].built .building-icon {
-  width: 72px; height: 44px;
-  background: rgba(180,232,176,.55);
-  border: 3px solid #5fa35d;
-  border-bottom-width: 6px;
-  border-radius: 50% 50% 6px 6px;
-  box-shadow: 0 6px 0 rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.4);
-}
-.plot[data-building="greenhouse"].built .building-icon::before {
-  content: "🌱";
-  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
-  font-size: 1.1rem;
-}
-.plot[data-building="greenhouse"].built .building-icon::after {
-  content: "";
-  position: absolute; top: 6px; left: 12px;
-  width: 18px; height: 24px;
-  background: rgba(255,255,255,.25);
-  border-radius: 50%;
-  transform: rotate(-20deg);
-}
-
-/* 🌸 花圃：草地 + 滿版花朵 */
-.plot[data-building="garden"].built .building-icon {
-  width: 80px; height: 52px;
-  border-radius: 6px;
-  background:
-    radial-gradient(circle at 18% 45%, #ff8fa8 0 8px, transparent 9px),
-    radial-gradient(circle at 45% 28%, #ffd46b 0 8px, transparent 9px),
-    radial-gradient(circle at 72% 48%, #ff6e9c 0 8px, transparent 9px),
-    radial-gradient(circle at 30% 72%, #ffb0d0 0 7px, transparent 8px),
-    radial-gradient(circle at 62% 72%, #ffd46b 0 7px, transparent 8px),
-    #7ec86a;
-  box-shadow: 0 6px 0 rgba(0,0,0,.1);
-}
-.plot[data-building="garden"].built .building-icon::before { content: ""; }
-
-/* 🐱 貓窩：橙色圓頂 + 拱門入口 + 貓耳 */
-.plot[data-building="bed"].built .building-icon {
-  width: 66px; height: 50px;
-  background: #f0a840;
-  border-radius: 50% 50% 4px 4px;
-  box-shadow: 0 6px 0 rgba(0,0,0,.12);
-}
-.plot[data-building="bed"].built .building-icon::before {
-  content: "";
-  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 24px; height: 26px;
-  background: #2e1f0e;
-  border-radius: 50% 50% 0 0;
-}
-.plot[data-building="bed"].built .building-icon::after {
-  content: "";
-  position: absolute; top: -14px; left: 8px;
-  width: 0; height: 0;
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-bottom: 16px solid #f0a840;
-  filter: drop-shadow(28px 0 0 #f0a840);
-}
+/* 未蓋：灰底加號，圖片隱藏 */
+.plot:not(.built) .building-icon img { display: none; }
 
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 .lulu { left: 50%; bottom: 30%; width: 118px; height: 128px; transform: translateX(-50%); }
