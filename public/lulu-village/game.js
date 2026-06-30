@@ -522,32 +522,6 @@ if (!getPlayerCat()) {
 }
 renderPlayerVillager();
 
-// JS 貓村民移動系統
-const npcCats = [
-  { el: document.querySelector(".v1"), x: 10, y: 22, dx: 0.06, dy: 0.02 },
-  { el: document.querySelector(".v2"), x: 60, y: 26, dx:-0.07, dy: 0.015 },
-  { el: document.querySelector(".v3"), x: 35, y: 20, dx: 0.05, dy:-0.02 },
-  { el: document.querySelector(".v4"), x: 75, y: 24, dx:-0.04, dy: 0.025 },
-];
-function moveCats() {
-  const allCats = [...npcCats];
-  const pEl = document.querySelector("#playerVillager");
-  if (pEl) allCats.push({ el: pEl, x: 45, y: 28, dx: 0.055, dy:-0.015, _init: true });
-  allCats.forEach(cat => {
-    if (cat._init) { cat.x = 45; cat.y = 28; cat._init = false; }
-    cat.x += cat.dx;
-    cat.y += cat.dy;
-    if (cat.x < 2 || cat.x > 82) { cat.dx *= -1; cat.x = Math.max(2, Math.min(82, cat.x)); }
-    if (cat.y < 18 || cat.y > 32) { cat.dy *= -1; cat.y = Math.max(18, Math.min(32, cat.y)); }
-    if (cat.el) {
-      cat.el.style.left = cat.x + "%";
-      cat.el.style.bottom = cat.y + "%";
-      cat.el.style.transform = cat.dx > 0 ? "scaleX(1)" : "scaleX(-1)";
-    }
-  });
-  requestAnimationFrame(moveCats);
-}
-moveCats();
 
 document.querySelector("#tutorialClose").addEventListener("click", () => {
   tutorialOverlay.style.display = "none";
