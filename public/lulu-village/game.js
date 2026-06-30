@@ -193,8 +193,129 @@ function showShareCard() {
   document.querySelector("#shareDialog").showModal();
 }
 
+// ===== 答題系統 =====
+const QUESTIONS = [
+  // 📐 數學
+  { s:"📐 數學", q:"23 + 45 = ？", o:["68","58","78","88"], a:0 },
+  { s:"📐 數學", q:"72 - 39 = ？", o:["41","33","43","31"], a:1 },
+  { s:"📐 數學", q:"6 × 7 = ？", o:["36","48","42","54"], a:2 },
+  { s:"📐 數學", q:"56 ÷ 8 = ？", o:["6","9","8","7"], a:3 },
+  { s:"📐 數學", q:"100 - 37 = ？", o:["73","53","63","83"], a:2 },
+  { s:"📐 數學", q:"9 × 8 = ？", o:["63","81","72","64"], a:2 },
+  { s:"📐 數學", q:"一個三角形有幾個角？", o:["2","4","3","5"], a:2 },
+  { s:"📐 數學", q:"48 ÷ 6 = ？", o:["6","9","7","8"], a:3 },
+  // 📖 語文
+  { s:"📖 語文", q:"「高興」的反義詞是？", o:["快樂","開心","難過","興奮"], a:2 },
+  { s:"📖 語文", q:"「笑」的反義詞是？", o:["跑","哭","跳","唱"], a:1 },
+  { s:"📖 語文", q:"「美麗」的同義詞是？", o:["醜陋","普通","漂亮","平凡"], a:2 },
+  { s:"📖 語文", q:"「一石二鳥」是什麼意思？", o:["丟石頭打鳥","一次解決兩件事","石頭比鳥重要","兩隻鳥在石頭上"], a:1 },
+  { s:"📖 語文", q:"下面哪個字是「木」字旁？", o:["海","明","桌","說"], a:2 },
+  { s:"📖 語文", q:"「太陽」的注音第一個字是？", o:["ㄉ","ㄊ","ㄋ","ㄌ"], a:1 },
+  { s:"📖 語文", q:"「勇敢」的反義詞是？", o:["開心","害怕","聰明","活潑"], a:1 },
+  { s:"📖 語文", q:"下面哪個詞形容天氣晴朗？", o:["烏雲密布","狂風暴雨","晴空萬里","大雪紛飛"], a:2 },
+  // 🌌 天文
+  { s:"🌌 天文", q:"太陽系最大的行星是？", o:["土星","火星","木星","天王星"], a:2 },
+  { s:"🌌 天文", q:"地球繞太陽一圈要多久？", o:["一個月","一週","一天","一年"], a:3 },
+  { s:"🌌 天文", q:"月亮繞地球一圈約要多久？", o:["一年","一天","一個月","一週"], a:2 },
+  { s:"🌌 天文", q:"太陽系有幾顆行星？", o:["9","6","10","8"], a:3 },
+  { s:"🌌 天文", q:"北極星指向哪個方向？", o:["南","東","西","北"], a:3 },
+  { s:"🌌 天文", q:"最靠近太陽的行星是？", o:["金星","地球","火星","水星"], a:3 },
+  { s:"🌌 天文", q:"地球是太陽系第幾顆行星？", o:["第一","第二","第四","第三"], a:3 },
+  // 🌍 地理
+  { s:"🌍 地理", q:"台灣最高的山是？", o:["阿里山","合歡山","玉山","雪山"], a:2 },
+  { s:"🌍 地理", q:"台灣的首都是？", o:["台中","高雄","台南","台北"], a:3 },
+  { s:"🌍 地理", q:"世界最高的山是？", o:["富士山","聖母峰","阿爾卑斯山","玉山"], a:1 },
+  { s:"🌍 地理", q:"日本的首都是？", o:["大阪","京都","北海道","東京"], a:3 },
+  { s:"🌍 地理", q:"台灣四面環什麼？", o:["山","沙漠","平原","海洋"], a:3 },
+  { s:"🌍 地理", q:"世界上最大的洲是？", o:["歐洲","非洲","美洲","亞洲"], a:3 },
+  { s:"🌍 地理", q:"台灣最長的河流是？", o:["淡水河","高屏溪","濁水溪","大甲溪"], a:2 },
+  // 🌿 自然
+  { s:"🌿 自然", q:"植物進行光合作用需要什麼？", o:["泥土和風","月光和雨水","陽光和水","石頭和空氣"], a:2 },
+  { s:"🌿 自然", q:"毛毛蟲長大後會變成？", o:["蜜蜂","蚱蜢","蜘蛛","蝴蝶"], a:3 },
+  { s:"🌿 自然", q:"水在幾度C會結冰？", o:["10度","0度","-10度","100度"], a:1 },
+  { s:"🌿 自然", q:"蜜蜂採什麼來做蜂蜜？", o:["樹葉","花蜜","果汁","露水"], a:1 },
+  { s:"🌿 自然", q:"人體最硬的部位是？", o:["骨頭","指甲","牙齒","頭髮"], a:2 },
+  { s:"🌿 自然", q:"下面哪種動物會飛？", o:["企鵝","鴕鳥","蝙蝠","海豚"], a:2 },
+  // 🏛️ 社會與節日
+  { s:"🏛️ 社會", q:"中秋節吃什麼？", o:["粽子","湯圓","月餅","元宵"], a:2 },
+  { s:"🏛️ 社會", q:"端午節吃什麼？", o:["月餅","湯圓","粽子","年糕"], a:2 },
+  { s:"🏛️ 社會", q:"元宵節吃什麼？", o:["粽子","湯圓","月餅","年糕"], a:1 },
+  { s:"🏛️ 社會", q:"台灣的國花是？", o:["玫瑰","蓮花","梅花","菊花"], a:2 },
+  { s:"🏛️ 社會", q:"台灣國慶日是幾月幾日？", o:["1月1日","10月10日","10月1日","9月9日"], a:1 },
+  { s:"🏛️ 社會", q:"一週有幾天？", o:["5天","6天","8天","7天"], a:3 },
+  // 🧹 實作技能
+  { s:"🧹 生活技能", q:"洗手要搓幾秒才夠乾淨？", o:["5秒","10秒","30秒","20秒以上"], a:3 },
+  { s:"🧹 生活技能", q:"吃飯前要做什麼？", o:["看電視","玩遊戲","洗手","喝飲料"], a:2 },
+  { s:"🧹 生活技能", q:"垃圾應該丟在哪裡？", o:["地上","路邊","水溝","垃圾桶"], a:3 },
+  { s:"🧹 生活技能", q:"睡覺前一定要做什麼？", o:["吃零食","刷牙","看手機","喝可樂"], a:1 },
+  // 🤝 品德與禮貌
+  { s:"🤝 品德", q:"同學跌倒了，你應該？", o:["笑他","走開","扶起來問他還好嗎","假裝沒看到"], a:2 },
+  { s:"🤝 品德", q:"長輩說話時，你應該？", o:["插嘴","玩手機","安靜聆聽","去睡覺"], a:2 },
+  { s:"🤝 品德", q:"借別人的東西用完後要？", o:["留著用","扔掉","還回去並說謝謝","忘記還"], a:2 },
+  { s:"🤝 品德", q:"在公共場所應該？", o:["大聲喧嘩","亂丟垃圾","保持安靜不吵鬧","推擠別人"], a:2 },
+];
+
+const quizState = { q: null, attempts: 0, type: null, target: null };
+const quizDialog = document.querySelector("#quizDialog");
+
+function showQuiz(type, target) {
+  quizState.type = type;
+  quizState.target = target;
+  quizState.attempts = 0;
+  quizState.q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+  renderQuiz();
+  quizDialog.showModal();
+}
+
+function renderQuiz() {
+  const q = quizState.q;
+  document.querySelector("#quizSubject").textContent = q.s;
+  document.querySelector("#quizQuestion").textContent = q.q;
+  document.querySelector("#quizAttemptsLeft").textContent = 3 - quizState.attempts;
+  document.querySelector("#quizFeedback").textContent = "";
+  const opts = document.querySelector("#quizOptions");
+  opts.innerHTML = "";
+  q.o.forEach((text, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.onclick = () => handleAnswer(i, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function handleAnswer(i, btn) {
+  const q = quizState.q;
+  const fb = document.querySelector("#quizFeedback");
+  if (i === q.a) {
+    btn.classList.add("correct");
+    fb.style.color = "#4d7f45";
+    fb.textContent = "✅ 答對了！資源 +3";
+    document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
+    setTimeout(() => {
+      quizDialog.close();
+      gather(quizState.type, quizState.target);
+      gather(quizState.type, quizState.target);
+      gather(quizState.type, quizState.target);
+    }, 900);
+  } else {
+    btn.classList.add("wrong");
+    quizState.attempts++;
+    const left = 3 - quizState.attempts;
+    document.querySelector("#quizAttemptsLeft").textContent = left;
+    if (left <= 0) {
+      fb.style.color = "#c94f35";
+      fb.textContent = "💬 沒關係，去問爸媽或老師！";
+      document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
+      setTimeout(() => quizDialog.close(), 1800);
+    } else {
+      fb.style.color = "#c94f35";
+      fb.textContent = `❌ 再想想，還有 ${left} 次機會`;
+    }
+  }
+}
+
 document.querySelectorAll("[data-gather]").forEach((button) => {
-  button.addEventListener("click", () => gather(button.dataset.gather, button));
+  button.addEventListener("click", () => showQuiz(button.dataset.gather, button));
 });
 document.querySelectorAll("[data-building]").forEach((button) => {
   button.addEventListener("click", () => build(button.dataset.building));
@@ -202,7 +323,7 @@ document.querySelectorAll("[data-building]").forEach((button) => {
 
 // 手機版按鈕
 document.querySelectorAll(".mgather").forEach((button) => {
-  button.addEventListener("click", () => gather(button.dataset.gather, button));
+  button.addEventListener("click", () => showQuiz(button.dataset.gather, button));
 });
 document.querySelectorAll(".mplot").forEach((button) => {
   button.addEventListener("click", () => build(button.dataset.building));
