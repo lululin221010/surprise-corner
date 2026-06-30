@@ -93,11 +93,11 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .plot:not(.built):hover { background: rgba(255,250,240,.22); }
 /* 蓋好後完全透明，建築直接長在草地上 */
 .plot.built { border: none; background: transparent; animation: pop 360ms ease; overflow: visible; }
-.plot-home { left: 5%; bottom: 38%; }
-.plot-kitchen { left: 18%; bottom: 14%; }
-.plot-greenhouse { right: 7%; bottom: 27%; }
-.plot-garden { left: 38%; top: 28%; }
-.plot-bed { right: 29%; top: 22%; }
+.plot-home { left: 3%; top: 26%; }
+.plot-kitchen { left: 4%; bottom: 10%; }
+.plot-greenhouse { right: 3%; bottom: 12%; }
+.plot-garden { left: 20%; bottom: 5%; }
+.plot-bed { right: 23%; top: 17%; }
 
 /* 未蓋好：小加號標記 */
 .building-icon { position: relative; display: grid; place-items: center; width: 40px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.45); color: rgba(65,55,38,.55); font-weight: 900; border: 2px dashed rgba(98,84,61,.3); }
