@@ -49,7 +49,7 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .village-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 3px rgba(255,250,240,.5),inset 0 -24px 40px rgba(86,79,55,.12); }
 .sky { position: absolute; inset: 0 0 auto; height: 42%; background: radial-gradient(circle at 11% 21%,#fff0a6 0 34px,#ffd36d 35px 42px,transparent 43px),linear-gradient(180deg,var(--sky),#d8f1de 86%); }
 .village { position: relative; height: min(72vh,620px); min-height: 530px; min-width: 900px; overflow: hidden; background: radial-gradient(ellipse at 48% 54%,rgba(255,250,220,.36) 0 16%,transparent 32%),linear-gradient(168deg,transparent 0 35%,#b7d98d 35% 62%,#82b86f 62% 100%); }
-.village.restore-0 { filter: saturate(.82); }
+.village.restore-0 { filter: saturate(1); }
 .village.restore-2,.village.restore-3 { filter: saturate(1.05) brightness(1.03); }
 .village.restore-4,.village.restore-5 { filter: saturate(1.14) brightness(1.07); }
 .village-wrap.phase-evening .sky { background: radial-gradient(circle at 14% 20%,#ffcc75 0 34px,#f18f67 35px 42px,transparent 43px),linear-gradient(180deg,#f7b98a,#d5d89d 86%); }
