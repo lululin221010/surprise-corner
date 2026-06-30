@@ -1,79 +1,49 @@
-const STORAGE_KEY = "lulu-apocalypse-village-v1";
+const STORAGE_KEY = "lulu-village-v2";
 
 const buildings = {
-  home: {
-    name: "小屋",
-    cost: { wood: 8, stone: 4 },
-    done: "小屋完成！從今天起，漏雨只有一半機率了。",
-  },
-  kitchen: {
-    name: "廚房",
-    cost: { wood: 10, food: 6, stone: 5 },
-    done: "廚房完成！本村長宣布，晚餐要多一口魚。",
-  },
-  greenhouse: {
-    name: "溫室",
-    cost: { wood: 12, food: 10, stone: 6 },
-    done: "溫室完成！末日也要有新鮮葉子，這很合理。",
-  },
-  garden: {
-    name: "花圃",
-    cost: { food: 8, stone: 3 },
-    done: "花圃完成！廢墟長花了，我們贏一點點。",
-  },
-  bed: {
-    name: "魯魯貓窩",
-    cost: { wood: 6, food: 6 },
-    done: "貓窩完成！這不是我的，是村莊公共柔軟設施。",
-  },
+  bed:        { name: "魯魯貓窩", steps: 15, emoji: "🐱", done: "貓窩完成！這是村莊的公共柔軟設施。" },
+  garden:     { name: "花圃",     steps: 20, emoji: "🌸", done: "花圃完成！廢墟長花了，我們贏一點點。" },
+  kitchen:    { name: "廚房",     steps: 25, emoji: "🍳", done: "廚房完成！從今天起不只是活著，是在過日子。" },
+  greenhouse: { name: "溫室",     steps: 30, emoji: "🌿", done: "溫室完成！末日也要有新鮮葉子，這很合理。" },
+  home:       { name: "小屋",     steps: 35, emoji: "🏠", done: "小屋完成！村莊終於有人住的感覺了。" },
 };
 
 const gatherText = {
-  wood: ["撿到木頭。這根看起來很適合當門框。", "木頭 +1。魯魯說這是戰略性樹枝。"],
-  food: ["找到食物。魯魯假裝沒有流口水。", "食物 +1。末日料理開始有希望了。"],
-  stone: ["搬到石頭。很重，但很有安全感。", "石頭 +1。這顆看起來很會當地基。"],
+  wood: ["撿到木頭，可以用來跳過問題！", "木頭 +1。存著備用，難題時救援。"],
+  food: ["找到食物！可以幫你跳過一道難題。", "食物 +1。魯魯說這是策略性儲糧。"],
+  stone: ["搬到石頭。很重，但很有跳過的安全感。", "石頭 +1。難題剋星。"],
 };
 
 const hints = [
-  "先幫魯魯蓋個貓窩吧，村長需要柔軟的思考基地。",
-  "小屋可以讓村莊看起來真的有人住。",
-  "花圃是末日裡最不講理、也最可愛的東西。",
-  "廚房做好後，大家就不只是活著，是在過日子。",
-  "溫室會讓村莊開始像一個長期計畫。",
+  "最簡單的先蓋貓窩（15步），給魯魯一個家！",
+  "花圃只要20步，末日也要有花。",
+  "廚房25步，蓋好就有飯香。",
+  "溫室30步，末日農業基地。",
+  "小屋35步，最難但最有成就感！",
 ];
-
-const state = loadState();
 
 function defaultState() {
   return {
     day: 1,
-    resources: { wood: 4, food: 4, stone: 2 },
+    resources: { wood: 2, food: 2, stone: 1 },
     built: [],
+    progress: { home: 0, kitchen: 0, greenhouse: 0, garden: 0, bed: 0 },
     clicks: 0,
   };
 }
 
+const state = loadState();
+
 function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return saved || defaultState();
-  } catch {
+    if (saved && saved.progress) return saved;
     return defaultState();
-  }
+  } catch { return defaultState(); }
 }
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-function canAfford(cost) {
-  return Object.entries(cost).every(([key, amount]) => state.resources[key] >= amount);
-}
-
-function spend(cost) {
-  Object.entries(cost).forEach(([key, amount]) => {
-    state.resources[key] -= amount;
-  });
 }
 
 function setSpeech(text) {
@@ -90,23 +60,73 @@ function render() {
   document.querySelector("#woodCount").textContent = state.resources.wood;
   document.querySelector("#foodCount").textContent = state.resources.food;
   document.querySelector("#stoneCount").textContent = state.resources.stone;
-  // 地圖上的資源堆顯示數量
   const woodPile = document.querySelector(".wood-pile span");
   const foodPile = document.querySelector(".food-pile span");
   const stonePile = document.querySelector(".stone-pile span");
   if (woodPile) woodPile.textContent = `木${state.resources.wood}`;
   if (foodPile) foodPile.textContent = `食${state.resources.food}`;
   if (stonePile) stonePile.textContent = `石${state.resources.stone}`;
+
   renderVillageStage();
+
+  const totalSkips = state.resources.wood + state.resources.food + state.resources.stone;
+  const skipBtn = document.querySelector("#quizSkip");
+  if (skipBtn) {
+    skipBtn.textContent = `跳過（消耗資源，剩 ${totalSkips} 個）`;
+    skipBtn.disabled = totalSkips <= 0;
+  }
+
   Object.keys(buildings).forEach((id) => {
-    const built = state.built.includes(id);
-    document.querySelectorAll(`[data-building="${id}"]`).forEach((el) => {
-      el.classList.toggle("built", built);
-      el.classList.toggle("done", built);
-      el.disabled = built;
+    const b = buildings[id];
+    const prog = state.progress[id] || 0;
+    const done = state.built.includes(id);
+
+    // 地圖上的建築
+    document.querySelectorAll(`.plot[data-building="${id}"]`).forEach((el) => {
+      el.classList.toggle("built", done);
+      el.classList.toggle("in-progress", !done && prog > 0);
+      el.disabled = done;
+
+      const img = el.querySelector(".building-icon img");
+      if (img) {
+        if (done) {
+          img.style.clipPath = "inset(0 0 0 0)";
+          img.style.display = "block";
+        } else if (prog > 0) {
+          const hideTop = Math.round((1 - prog / b.steps) * 100);
+          img.style.clipPath = `inset(${hideTop}% 0 0 0)`;
+          img.style.display = "block";
+        } else {
+          img.style.display = "none";
+        }
+      }
+
+      const label = el.querySelector(".plot-label");
+      if (label) {
+        if (done) label.textContent = `✅ ${b.name}`;
+        else if (prog > 0) label.textContent = `🔨 ${prog}/${b.steps}`;
+        else label.textContent = `${b.emoji} ${b.name}`;
+      }
     });
+
+    // 手機版按鈕
+    document.querySelectorAll(`.mplot[data-building="${id}"]`).forEach((el) => {
+      el.classList.toggle("done", done);
+      el.disabled = done;
+      const small = el.querySelector("small");
+      if (small) small.textContent = done ? "✅ 完成" : `${prog}／${b.steps} 步`;
+    });
+
+    // 建築卡片
     const card = document.querySelector(`[data-card="${id}"]`);
-    if (card) card.classList.toggle("done", built);
+    if (card) {
+      card.classList.toggle("done", done);
+      const p = card.querySelector("p");
+      if (p) {
+        if (done) p.textContent = "✅ 完成！";
+        else p.textContent = `進度 ${prog} ／ ${b.steps} 步`;
+      }
+    }
   });
 }
 
@@ -125,41 +145,50 @@ function renderVillageStage() {
   document.querySelector("#restoreFill").style.width = `${restorePercent}%`;
 }
 
-function costLabel(cost) {
-  const names = { wood: "木頭", food: "食物", stone: "石頭" };
-  return Object.entries(cost).map(([key, amount]) => `${names[key]} ${amount}`).join("、");
-}
-
 function gather(type, target) {
   state.resources[type] += 1;
   state.clicks += 1;
-  if (state.clicks > 0 && state.clicks % 18 === 0) state.day += 1;
+  if (state.clicks % 12 === 0) state.day += 1;
   saveState();
   render();
   const texts = gatherText[type];
   setSpeech(texts[Math.floor(Math.random() * texts.length)]);
-  floatText("+1", target);
+  floatText("+1跳過券", target);
 }
 
-function build(id) {
-  const item = buildings[id];
-  if (state.built.includes(id)) { setSpeech(`${item.name}已經完成了。魯魯正在假裝監工。`); return; }
-  if (!canAfford(item.cost)) { setSpeech(`欸，${item.name}還差一點材料。需要：${costLabel(item.cost)}。`); return; }
-  spend(item.cost);
-  state.built.push(id);
-  state.day += 1;
-  saveState();
-  render();
-  setSpeech(item.done);
-  document.querySelector("#lulu").animate(
-    [
-      { transform: "translateX(-50%) rotate(0deg)" },
-      { transform: "translateX(-50%) rotate(-8deg)" },
-      { transform: "translateX(-50%) rotate(8deg)" },
-      { transform: "translateX(-50%) rotate(0deg)" },
-    ],
-    { duration: 500, easing: "ease-in-out" }
-  );
+function startBuild(id) {
+  if (state.built.includes(id)) {
+    setSpeech(`${buildings[id].name}已經完成了。魯魯正在假裝監工。`);
+    return;
+  }
+  quizState.mode = "build";
+  quizState.buildId = id;
+  showQuiz();
+}
+
+function completeBuildStep(id) {
+  state.progress[id] = (state.progress[id] || 0) + 1;
+  const b = buildings[id];
+  const prog = state.progress[id];
+  if (prog >= b.steps) {
+    state.built.push(id);
+    state.day += 1;
+    saveState();
+    render();
+    setSpeech(b.done);
+    document.querySelector("#lulu").animate(
+      [{ transform: "translateX(-50%) rotate(0deg)" },
+       { transform: "translateX(-50%) rotate(-8deg)" },
+       { transform: "translateX(-50%) rotate(8deg)" },
+       { transform: "translateX(-50%) rotate(0deg)" }],
+      { duration: 500, easing: "ease-in-out" }
+    );
+  } else {
+    saveState();
+    render();
+    const left = b.steps - prog;
+    setSpeech(`${b.name} 進度 ${prog}/${b.steps}！還差 ${left} 步就完成了。`);
+  }
 }
 
 function floatText(text, target) {
@@ -178,9 +207,11 @@ function floatText(text, target) {
 
 function showNextHint() {
   const next = Object.keys(buildings).find((id) => !state.built.includes(id));
-  if (!next) { setSpeech("村莊第一階段完成！我沒有感動，只是眼睛有點亮亮的。"); return; }
-  const index = Math.max(0, Object.keys(buildings).indexOf(next));
-  setSpeech(hints[index]);
+  if (!next) { setSpeech("村莊第一階段完成！魯魯的眼睛有點亮亮的。"); return; }
+  const b = buildings[next];
+  const prog = state.progress[next] || 0;
+  if (prog > 0) setSpeech(`繼續蓋${b.name}！已完成 ${prog}/${b.steps} 步，點它繼續答題。`);
+  else setSpeech(hints[Object.keys(buildings).indexOf(next)] || `下一個目標：${b.name}`);
 }
 
 function showShareCard() {
@@ -195,7 +226,6 @@ function showShareCard() {
 
 // ===== 答題系統 =====
 const QUESTIONS = [
-  // 📐 數學
   { s:"📐 數學", q:"23 + 45 = ？", o:["68","58","78","88"], a:0 },
   { s:"📐 數學", q:"72 - 39 = ？", o:["41","33","43","31"], a:1 },
   { s:"📐 數學", q:"6 × 7 = ？", o:["36","48","42","54"], a:2 },
@@ -204,7 +234,6 @@ const QUESTIONS = [
   { s:"📐 數學", q:"9 × 8 = ？", o:["63","81","72","64"], a:2 },
   { s:"📐 數學", q:"一個三角形有幾個角？", o:["2","4","3","5"], a:2 },
   { s:"📐 數學", q:"48 ÷ 6 = ？", o:["6","9","7","8"], a:3 },
-  // 📖 語文
   { s:"📖 語文", q:"「高興」的反義詞是？", o:["快樂","開心","難過","興奮"], a:2 },
   { s:"📖 語文", q:"「笑」的反義詞是？", o:["跑","哭","跳","唱"], a:1 },
   { s:"📖 語文", q:"「美麗」的同義詞是？", o:["醜陋","普通","漂亮","平凡"], a:2 },
@@ -213,7 +242,6 @@ const QUESTIONS = [
   { s:"📖 語文", q:"「太陽」的注音第一個字是？", o:["ㄉ","ㄊ","ㄋ","ㄌ"], a:1 },
   { s:"📖 語文", q:"「勇敢」的反義詞是？", o:["開心","害怕","聰明","活潑"], a:1 },
   { s:"📖 語文", q:"下面哪個詞形容天氣晴朗？", o:["烏雲密布","狂風暴雨","晴空萬里","大雪紛飛"], a:2 },
-  // 🌌 天文
   { s:"🌌 天文", q:"太陽系最大的行星是？", o:["土星","火星","木星","天王星"], a:2 },
   { s:"🌌 天文", q:"地球繞太陽一圈要多久？", o:["一個月","一週","一天","一年"], a:3 },
   { s:"🌌 天文", q:"月亮繞地球一圈約要多久？", o:["一年","一天","一個月","一週"], a:2 },
@@ -221,7 +249,6 @@ const QUESTIONS = [
   { s:"🌌 天文", q:"北極星指向哪個方向？", o:["南","東","西","北"], a:3 },
   { s:"🌌 天文", q:"最靠近太陽的行星是？", o:["金星","地球","火星","水星"], a:3 },
   { s:"🌌 天文", q:"地球是太陽系第幾顆行星？", o:["第一","第二","第四","第三"], a:3 },
-  // 🌍 地理
   { s:"🌍 地理", q:"台灣最高的山是？", o:["阿里山","合歡山","玉山","雪山"], a:2 },
   { s:"🌍 地理", q:"台灣的首都是？", o:["台中","高雄","台南","台北"], a:3 },
   { s:"🌍 地理", q:"世界最高的山是？", o:["富士山","聖母峰","阿爾卑斯山","玉山"], a:1 },
@@ -229,38 +256,32 @@ const QUESTIONS = [
   { s:"🌍 地理", q:"台灣四面環什麼？", o:["山","沙漠","平原","海洋"], a:3 },
   { s:"🌍 地理", q:"世界上最大的洲是？", o:["歐洲","非洲","美洲","亞洲"], a:3 },
   { s:"🌍 地理", q:"台灣最長的河流是？", o:["淡水河","高屏溪","濁水溪","大甲溪"], a:2 },
-  // 🌿 自然
   { s:"🌿 自然", q:"植物進行光合作用需要什麼？", o:["泥土和風","月光和雨水","陽光和水","石頭和空氣"], a:2 },
   { s:"🌿 自然", q:"毛毛蟲長大後會變成？", o:["蜜蜂","蚱蜢","蜘蛛","蝴蝶"], a:3 },
   { s:"🌿 自然", q:"水在幾度C會結冰？", o:["10度","0度","-10度","100度"], a:1 },
   { s:"🌿 自然", q:"蜜蜂採什麼來做蜂蜜？", o:["樹葉","花蜜","果汁","露水"], a:1 },
   { s:"🌿 自然", q:"人體最硬的部位是？", o:["骨頭","指甲","牙齒","頭髮"], a:2 },
   { s:"🌿 自然", q:"下面哪種動物會飛？", o:["企鵝","鴕鳥","蝙蝠","海豚"], a:2 },
-  // 🏛️ 社會與節日
   { s:"🏛️ 社會", q:"中秋節吃什麼？", o:["粽子","湯圓","月餅","元宵"], a:2 },
   { s:"🏛️ 社會", q:"端午節吃什麼？", o:["月餅","湯圓","粽子","年糕"], a:2 },
   { s:"🏛️ 社會", q:"元宵節吃什麼？", o:["粽子","湯圓","月餅","年糕"], a:1 },
   { s:"🏛️ 社會", q:"台灣的國花是？", o:["玫瑰","蓮花","梅花","菊花"], a:2 },
   { s:"🏛️ 社會", q:"台灣國慶日是幾月幾日？", o:["1月1日","10月10日","10月1日","9月9日"], a:1 },
   { s:"🏛️ 社會", q:"一週有幾天？", o:["5天","6天","8天","7天"], a:3 },
-  // 🧹 實作技能
-  { s:"🧹 生活技能", q:"洗手要搓幾秒才夠乾淨？", o:["5秒","10秒","30秒","20秒以上"], a:3 },
-  { s:"🧹 生活技能", q:"吃飯前要做什麼？", o:["看電視","玩遊戲","洗手","喝飲料"], a:2 },
-  { s:"🧹 生活技能", q:"垃圾應該丟在哪裡？", o:["地上","路邊","水溝","垃圾桶"], a:3 },
-  { s:"🧹 生活技能", q:"睡覺前一定要做什麼？", o:["吃零食","刷牙","看手機","喝可樂"], a:1 },
-  // 🤝 品德與禮貌
+  { s:"🧹 生活", q:"洗手要搓幾秒才夠乾淨？", o:["5秒","10秒","30秒","20秒以上"], a:3 },
+  { s:"🧹 生活", q:"吃飯前要做什麼？", o:["看電視","玩遊戲","洗手","喝飲料"], a:2 },
+  { s:"🧹 生活", q:"垃圾應該丟在哪裡？", o:["地上","路邊","水溝","垃圾桶"], a:3 },
+  { s:"🧹 生活", q:"睡覺前一定要做什麼？", o:["吃零食","刷牙","看手機","喝可樂"], a:1 },
   { s:"🤝 品德", q:"同學跌倒了，你應該？", o:["笑他","走開","扶起來問他還好嗎","假裝沒看到"], a:2 },
   { s:"🤝 品德", q:"長輩說話時，你應該？", o:["插嘴","玩手機","安靜聆聽","去睡覺"], a:2 },
   { s:"🤝 品德", q:"借別人的東西用完後要？", o:["留著用","扔掉","還回去並說謝謝","忘記還"], a:2 },
   { s:"🤝 品德", q:"在公共場所應該？", o:["大聲喧嘩","亂丟垃圾","保持安靜不吵鬧","推擠別人"], a:2 },
 ];
 
-const quizState = { q: null, attempts: 0, type: null, target: null };
+const quizState = { q: null, attempts: 0, mode: "build", buildId: null };
 const quizOverlay = document.querySelector("#quizOverlay");
 
-function showQuiz(type, target) {
-  quizState.type = type;
-  quizState.target = target;
+function showQuiz() {
   quizState.attempts = 0;
   quizState.q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
   renderQuiz();
@@ -281,21 +302,28 @@ function renderQuiz() {
     btn.onclick = () => handleAnswer(i, btn);
     opts.appendChild(btn);
   });
+  // 顯示建築進度提示
+  if (quizState.mode === "build" && quizState.buildId) {
+    const id = quizState.buildId;
+    const b = buildings[id];
+    const prog = state.progress[id] || 0;
+    document.querySelector("#quizBuildHint").textContent =
+      `🔨 蓋${b.name}：${prog} ／ ${b.steps} 步`;
+  }
 }
 
 function handleAnswer(i, btn) {
   const q = quizState.q;
   const fb = document.querySelector("#quizFeedback");
+  document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
+
   if (i === q.a) {
     btn.classList.add("correct");
     fb.style.color = "#4d7f45";
-    fb.textContent = "✅ 答對了！資源 +3";
-    document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
+    fb.textContent = "✅ 答對了！建築進步一步！";
     setTimeout(() => {
       quizOverlay.style.display = "none";
-      gather(quizState.type, quizState.target);
-      gather(quizState.type, quizState.target);
-      gather(quizState.type, quizState.target);
+      completeBuildStep(quizState.buildId);
     }, 900);
   } else {
     btn.classList.add("wrong");
@@ -305,29 +333,42 @@ function handleAnswer(i, btn) {
     if (left <= 0) {
       fb.style.color = "#c94f35";
       fb.textContent = "💬 沒關係，去問爸媽或老師！";
-      document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = true);
       setTimeout(() => { quizOverlay.style.display = "none"; }, 1800);
     } else {
       fb.style.color = "#c94f35";
       fb.textContent = `❌ 再想想，還有 ${left} 次機會`;
+      document.querySelector("#quizOptions").querySelectorAll("button").forEach(b => b.disabled = false);
+      btn.disabled = true;
     }
   }
 }
 
-document.querySelectorAll("[data-gather]").forEach((button) => {
-  button.addEventListener("click", () => showQuiz(button.dataset.gather, button));
-});
-document.querySelectorAll("[data-building]").forEach((button) => {
-  button.addEventListener("click", () => build(button.dataset.building));
-});
+function skipQuestion() {
+  const total = state.resources.wood + state.resources.food + state.resources.stone;
+  if (total <= 0) return;
+  if (state.resources.wood > 0) state.resources.wood--;
+  else if (state.resources.food > 0) state.resources.food--;
+  else state.resources.stone--;
+  saveState();
+  quizOverlay.style.display = "none";
+  completeBuildStep(quizState.buildId);
+  setSpeech("用資源跳過了一題，建築繼續！");
+}
 
-// 手機版按鈕
+// 事件綁定
+document.querySelectorAll("[data-gather]").forEach((button) => {
+  button.addEventListener("click", () => gather(button.dataset.gather, button));
+});
+document.querySelectorAll(".plot[data-building]").forEach((button) => {
+  button.addEventListener("click", () => startBuild(button.dataset.building));
+});
 document.querySelectorAll(".mgather").forEach((button) => {
-  button.addEventListener("click", () => showQuiz(button.dataset.gather, button));
+  button.addEventListener("click", () => gather(button.dataset.gather, button));
 });
 document.querySelectorAll(".mplot").forEach((button) => {
-  button.addEventListener("click", () => build(button.dataset.building));
+  button.addEventListener("click", () => startBuild(button.dataset.building));
 });
+
 document.querySelector("#nextHint").addEventListener("click", showNextHint);
 document.querySelector("#shareCard").addEventListener("click", showShareCard);
 document.querySelector("#resetGame").addEventListener("click", () => {
@@ -337,24 +378,25 @@ document.querySelector("#resetGame").addEventListener("click", () => {
   render();
   setSpeech("村莊重置好了。魯魯假裝這一切都在計畫內。");
 });
+document.querySelector("#quizSkip").addEventListener("click", skipQuestion);
 
 render();
 
-// 作弊按鈕（點魯魯5下觸發）
+// 作弊：點魯魯5下
 let luluTaps = 0;
 document.querySelector("#lulu").addEventListener("click", () => {
   luluTaps++;
   if (luluTaps >= 5) {
     luluTaps = 0;
-    state.resources.wood += 50;
-    state.resources.food += 50;
-    state.resources.stone += 50;
+    state.resources.wood += 10;
+    state.resources.food += 10;
+    state.resources.stone += 10;
     saveState();
     render();
-    setSpeech("⋯魯魯假裝不知道你剛才做了什麼。（資源+50）");
+    setSpeech("⋯魯魯假裝不知道你剛才做了什麼。（跳過券+30）");
   }
 });
 
 const style = document.createElement("style");
-style.textContent = `.float-text { position: fixed; z-index: 10; pointer-events: none; color: #263238; font-weight: 900; text-shadow: 0 1px 0 #fffdf7; }`;
+style.textContent = `.float-text { position: fixed; z-index: 10; pointer-events: none; color: #263238; font-weight: 900; text-shadow: 0 1px 0 #fffdf7; font-size:.85rem; }`;
 document.head.appendChild(style);

@@ -172,7 +172,10 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .quiz-options button:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(80,67,43,.12); }
 .quiz-options button.correct { background: #d4f5c0; border-color: #5fa350; }
 .quiz-options button.wrong { background: #ffd6d0; border-color: #c94f35; }
+.quiz-build-hint { margin: 0 0 10px; font-size: .88rem; font-weight: 900; color: #5a7a40; background: #efffdc; padding: 6px 10px; border-radius: 6px; }
 .quiz-feedback { min-height: 28px; margin: 14px 0 0; font-size: 1rem; font-weight: 900; text-align: center; color: var(--coral); }
+.quiz-skip-btn { width: 100%; margin-top: 10px; min-height: 42px; padding: 8px; border: 2px dashed rgba(125,104,72,.4); border-radius: 8px; background: rgba(255,250,240,.7); font-size: .88rem; font-weight: 900; color: var(--muted); }
+.quiz-skip-btn:disabled { opacity: .4; cursor: not-allowed; }
 
 @media (max-width:760px) {
   .game-shell { padding: 10px; }
