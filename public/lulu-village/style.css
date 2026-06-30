@@ -124,7 +124,7 @@ h1 { margin: 0; color: #3d3428; font-size: clamp(1.7rem,5vw,2.7rem); text-shadow
 .plot:not(.built) .building-icon img { display: none; }
 
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-.lulu { left: 50%; bottom: 30%; width: 118px; height: 128px; transform: translateX(-50%); }
+.lulu { left: 6%; bottom: 12%; width: 118px; height: 128px; transform: none; z-index:6; }
 .lulu::before { content: ""; position: absolute; left: 50%; top: 8px; width: 106px; height: 106px; border-radius: 50%; background: radial-gradient(circle,rgba(255,244,181,.82),rgba(255,244,181,0)); transform: translateX(-50%); }
 .lulu::after { content: "村長"; position: absolute; left: 50%; bottom: 0; display: block; width: max-content; padding: 4px 9px; border: 2px solid rgba(125,104,72,.32); border-radius: 999px; background: rgba(255,250,240,.86); font-size: .76rem; font-weight: 900; transform: translateX(-50%); }
 .lulu-photo { position: relative; display: block; width: 104px; height: 104px; margin: 4px auto 0; border: 5px solid #fffaf0; border-radius: 50%; object-fit: cover; object-position: 52% 42%; background: #fffaf0; box-shadow: 0 0 0 3px rgba(125,104,72,.35),0 11px 0 rgba(64,52,38,.14),0 16px 24px rgba(65,55,38,.22); animation: breathe 2.5s ease-in-out infinite; }
@@ -247,27 +247,40 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
 .villager { position:absolute; font-size:1.6rem; z-index:5; cursor:default; user-select:none; filter:drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
 .villager::after { content:attr(data-name); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.55); color:#fff; font-size:.55rem; font-weight:700; padding:2px 6px; border-radius:8px; white-space:nowrap; opacity:0; transition:opacity .2s; pointer-events:none; }
 .villager:hover::after { opacity:1; }
-/* 路徑區：底部35~55%，左右遊走 */
-.v1 { bottom:36%; animation: walkA 14s linear infinite; }
-.v2 { bottom:40%; animation: walkB 18s linear infinite; animation-delay:-6s; }
-.v3 { bottom:44%; animation: walkA 22s linear infinite; animation-delay:-10s; font-size:1.3rem; }
-.v4 { bottom:38%; animation: walkB 16s linear infinite; animation-delay:-3s; font-size:1.2rem; }
-@keyframes walkA {
-  0%   { left:-6%; transform:scaleX(1); }
-  49%  { left:90%; transform:scaleX(1); }
-  50%  { left:90%; transform:scaleX(-1); }
-  99%  { left:-6%; transform:scaleX(-1); }
-  100% { left:-6%; transform:scaleX(1); }
+/* 貓村民：各自在不同區域漫步 */
+.v1 { animation: wander1 18s ease-in-out infinite; }
+.v2 { animation: wander2 22s ease-in-out infinite; animation-delay:-8s; }
+.v3 { animation: wander3 26s ease-in-out infinite; animation-delay:-14s; font-size:1.3rem; }
+.v4 { animation: wander4 20s ease-in-out infinite; animation-delay:-5s; font-size:1.2rem; }
+@keyframes wander1 {
+  0%   { left:5%;  bottom:22%; transform:scaleX(1); }
+  25%  { left:30%; bottom:28%; transform:scaleX(1); }
+  50%  { left:55%; bottom:20%; transform:scaleX(1); }
+  75%  { left:30%; bottom:26%; transform:scaleX(-1); }
+  100% { left:5%;  bottom:22%; transform:scaleX(-1); }
 }
-@keyframes walkB {
-  0%   { left:90%; transform:scaleX(-1); }
-  49%  { left:-6%; transform:scaleX(-1); }
-  50%  { left:-6%; transform:scaleX(1); }
-  99%  { left:90%; transform:scaleX(1); }
-  100% { left:90%; transform:scaleX(-1); }
+@keyframes wander2 {
+  0%   { left:70%; bottom:25%; transform:scaleX(-1); }
+  25%  { left:50%; bottom:30%; transform:scaleX(-1); }
+  50%  { left:20%; bottom:22%; transform:scaleX(-1); }
+  75%  { left:45%; bottom:28%; transform:scaleX(1); }
+  100% { left:70%; bottom:25%; transform:scaleX(1); }
+}
+@keyframes wander3 {
+  0%   { left:15%; bottom:18%; transform:scaleX(1); }
+  33%  { left:60%; bottom:24%; transform:scaleX(1); }
+  66%  { left:80%; bottom:20%; transform:scaleX(-1); }
+  100% { left:15%; bottom:18%; transform:scaleX(-1); }
+}
+@keyframes wander4 {
+  0%   { left:80%; bottom:28%; transform:scaleX(-1); }
+  30%  { left:55%; bottom:20%; transform:scaleX(-1); }
+  60%  { left:25%; bottom:26%; transform:scaleX(-1); }
+  80%  { left:10%; bottom:22%; transform:scaleX(1); }
+  100% { left:80%; bottom:28%; transform:scaleX(1); }
 }
 /* 地圖告示牌 */
-.land-sign { position: absolute; left: 50%; bottom: 18%; z-index: 4; transform: translateX(38px); background: #fffaf0; border: 2px solid #876f4b; border-radius: 6px; padding: 4px 8px; font-size: .72rem; font-weight: 900; color: #5a4020; white-space: nowrap; box-shadow: 0 3px 0 rgba(80,67,43,.18); }
+.land-sign { position: absolute; left: 6%; bottom: 32%; z-index: 4; background: #fffaf0; border: 2px solid #876f4b; border-radius: 6px; padding: 4px 8px; font-size: .72rem; font-weight: 900; color: #5a4020; white-space: nowrap; box-shadow: 0 3px 0 rgba(80,67,43,.18); }
 .land-sign::before { content: ""; position: absolute; left: -8px; top: 50%; width: 8px; height: 2px; background: #876f4b; transform: translateY(-50%); }
 .tutorial-start-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b55243; }
 
@@ -302,7 +315,7 @@ dialog::backdrop { background: rgba(38,50,56,.42); }
   .mobile-gather { display: flex; }
   .cloud { display: none; }
   .ruin { width: 52px; height: 36px; }
-  .lulu { width: 72px; height: 80px; bottom: 28%; }
+  .lulu { width: 72px; height: 80px; left: 4%; bottom: 10%; }
   .lulu-photo { width: 64px; height: 64px; }
   .lulu::after { font-size: .65rem; padding: 2px 6px; }
   .plot { width: 80px; height: 68px; padding: 5px; }
