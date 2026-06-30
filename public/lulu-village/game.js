@@ -77,14 +77,24 @@ document.querySelector("#donateBtn").addEventListener("click", () => {
 document.querySelector("#donateClose").addEventListener("click", () => {
   donateOverlay.style.display = "none";
 });
+const DONATE_DATE_KEY = "lulu-village-donate-date";
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+function hasDonatedToday() { return localStorage.getItem(DONATE_DATE_KEY) === todayStr(); }
+
 document.querySelector("#donateConfirm").addEventListener("click", () => {
   const amt = parseInt(document.querySelector("#donateAmount").value);
   const coin = getLuluCoin();
   const fb = document.querySelector("#donateFeedback");
+  if (hasDonatedToday()) {
+    fb.style.color = "#c47d10";
+    fb.textContent = "感謝您的愛心！期待您明日的捐款 🙏";
+    return;
+  }
   if (!amt || amt <= 0) { fb.style.color = "#c0392b"; fb.textContent = "請輸入捐款金額！"; return; }
   if (amt > coin) { fb.style.color = "#c0392b"; fb.textContent = "魯魯幣不夠啦！"; return; }
   localStorage.setItem(COIN_KEY, String(coin - amt));
   setFund(getFund() + amt);
+  localStorage.setItem(DONATE_DATE_KEY, todayStr());
   renderCoin();
   renderFund();
   document.querySelector("#donateCurrentCoin").textContent = getLuluCoin().toLocaleString();
