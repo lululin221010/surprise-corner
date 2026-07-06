@@ -9,12 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: baseUrl,                      lastModified: new Date(), changeFrequency: 'daily',   priority: 1.0 },
     { url: `${baseUrl}/ai-news`,         lastModified: new Date(), changeFrequency: 'daily',   priority: 0.9 },
-    { url: `${baseUrl}/podcast`,         lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${baseUrl}/tools`,           lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/novels`,          lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },
-    { url: `${baseUrl}/random`,          lastModified: new Date(), changeFrequency: 'daily',   priority: 0.7 },
     { url: `${baseUrl}/wall`,            lastModified: new Date(), changeFrequency: 'daily',   priority: 0.7 },
-    { url: `${baseUrl}/creator`,         lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${baseUrl}/classroom/bonus`, lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.7 },
     { url: `${baseUrl}/privacy`,         lastModified: new Date(), changeFrequency: 'yearly',  priority: 0.3 },
   ];
 }

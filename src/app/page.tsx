@@ -341,7 +341,7 @@ export default function Home() {
               maxWidth: '560px', width: '100%',
             }}>
               {/* Card 1：驚喜好料 */}
-              <a href="/random" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(168,85,247,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
+              <a href="/classroom/bonus" style={{ flex: '1 1 150px', minWidth: '140px', maxWidth: '175px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(168,85,247,0.35)', borderRadius: '16px', padding: '1rem 0.8rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', textAlign: 'center' }}>
                 <span style={{ fontSize: '1.4rem' }}>🍭</span>
                 <span style={{ color: '#a855f7', fontWeight: 700, fontSize: '0.85rem' }}>驚喜好料</span>
                 <span style={{ color: '#5a5278', fontSize: '0.72rem', lineHeight: 1.5 }}>免費試讀・小舖好康</span>
