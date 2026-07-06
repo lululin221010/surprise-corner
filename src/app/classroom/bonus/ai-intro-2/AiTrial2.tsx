@@ -9,7 +9,7 @@ const META: AiSeriesMeta = {
   seriesTitle: 'AI解剖學',
   seriesEmoji: '🔬',
   seriesNum: 2,
-  storePath: '/digital',
+  storePath: '/digital/6a47bc744e0cc8f9369a4136',
   catalog: {
     basic: {
       label: '解剖入門冊',

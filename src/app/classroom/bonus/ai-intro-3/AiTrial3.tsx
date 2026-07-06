@@ -9,7 +9,7 @@ const META: AiSeriesMeta = {
   seriesTitle: 'AI溝通學',
   seriesEmoji: '💬',
   seriesNum: 3,
-  storePath: '/digital',
+  storePath: '/digital/6a48dfbe3312259471fbc020',
   catalog: {
     basic: {
       label: '溝通入門冊',
