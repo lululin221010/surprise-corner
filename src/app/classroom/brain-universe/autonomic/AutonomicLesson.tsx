@@ -10,9 +10,11 @@ interface Props {
   lesson: AutonomicLesson;
   onBack: () => void;
   cta?: { text: string; url: string; seriesNote: string };
+  bookTitle?: string;
+  allLessonTitles?: string[];
 }
 
-export default function AutonomicLessonViewer({ lesson, onBack, cta }: Props) {
+export default function AutonomicLessonViewer({ lesson, onBack, cta, bookTitle, allLessonTitles }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
@@ -38,6 +40,26 @@ export default function AutonomicLessonViewer({ lesson, onBack, cta }: Props) {
               <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
                 {cta.seriesNote}
               </p>
+              {allLessonTitles && allLessonTitles.length > 0 && (
+                <div style={{ textAlign: 'left', marginBottom: '1.4rem' }}>
+                  <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
+                    📖 {bookTitle ? `《${bookTitle}》` : ''}完整目錄
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                    {allLessonTitles.map((title, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.45rem 0.7rem', borderRadius: '8px', background: i === 0 ? 'rgba(124,58,237,0.08)' : '#f9fafb', border: i === 0 ? '1px solid rgba(124,58,237,0.25)' : '1px solid #f3f4f6' }}>
+                        <span style={{ color: i === 0 ? '#7c3aed' : '#9ca3af', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>
+                          {i === 0 ? '✅' : `第${i + 1}堂`}
+                        </span>
+                        <span style={{ color: i === 0 ? '#4c1d95' : '#6b7280', fontSize: '0.82rem' }}>{title}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: '0.8rem', padding: '0.6rem 0.8rem', background: 'rgba(124,58,237,0.06)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#6b7280', fontSize: '0.78rem' }}>
+                    ✨ 以上精彩內容，前往小舖解鎖
+                  </div>
+                </div>
+              )}
               <a
                 href={cta.url}
                 target="_blank"

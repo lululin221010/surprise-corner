@@ -146,6 +146,9 @@ export default function AutonomicAcademy() {
     );
   }
 
+  const unlockedVolumes = autonomicVolumes.filter(v => unlockedVols.has(UNLOCK_KEYS[v.vol]));
+  const hasAnyUnlock = unlockedVolumes.length > 0;
+
   return (
     <div className="classroom-content">
       <div style={{ maxWidth: 680, margin: '0 auto' }}>
@@ -164,21 +167,47 @@ export default function AutonomicAcademy() {
           <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>🧬</div>
           <h1 style={{ color: '#1e1b4b', fontSize: '1.6rem', fontWeight: 800, margin: 0 }}>自律神經學系</h1>
           <p style={{ color: '#4b5563', fontSize: '0.92rem', marginTop: '0.5rem', lineHeight: 1.6 }}>
-            7冊完整系列・每冊10堂・從了解症狀到找回平衡<br />
-            每冊第一堂免費試讀，購買本書解鎖完整10堂
+            這裡收錄已購買讀者的完整課程內容
           </p>
         </div>
 
-        {/* 7冊列表 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem', marginBottom: '2rem' }}>
-          {autonomicVolumes.map(volume => {
-            const isUnlocked = unlockedVols.has(UNLOCK_KEYS[volume.vol]);
-            return (
+        {/* 解鎖碼輸入 */}
+        <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem' }}>
+          <div style={{ color: '#5b21b6', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+            🔑 輸入解鎖碼開通已購買的冊
+          </div>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.4rem' }}>
+            <input
+              type="text"
+              value={unlockCode}
+              onChange={e => { setUnlockCode(e.target.value.toUpperCase()); setUnlockStatus('idle'); }}
+              placeholder="SS-XXXX-XXXX"
+              onKeyDown={e => e.key === 'Enter' && handleVerifyCode()}
+              style={{ flex: 1, padding: '8px 10px', fontSize: '0.85rem', borderRadius: '8px', border: '1px solid rgba(124,58,237,0.35)', background: 'rgba(255,255,255,0.8)', color: '#1e1b4b', outline: 'none', fontFamily: 'monospace', letterSpacing: '1px' }}
+            />
+            <button onClick={handleVerifyCode} disabled={unlockStatus === 'loading'}
+              style={{ padding: '8px 14px', background: '#7c3aed', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.82rem', cursor: 'pointer', fontWeight: 700, whiteSpace: 'nowrap' }}>
+              {unlockStatus === 'loading' ? '…' : '解鎖'}
+            </button>
+          </div>
+          {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: 0 }}>解鎖碼無效，請確認後再試</p>}
+          {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: 0 }}>✅ 解鎖成功！</p>}
+          {!hasAnyUnlock && (
+            <p style={{ color: '#6b7280', fontSize: '0.78rem', margin: '0.6rem 0 0' }}>
+              還沒讀過試讀？<Link href="/classroom/bonus" style={{ color: '#7c3aed' }}>前往好康書院 →</Link>
+            </p>
+          )}
+        </div>
+
+        {/* 已解鎖的冊列表（未解鎖的完全不顯示） */}
+        {hasAnyUnlock && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem', marginBottom: '2rem' }}>
+            {unlockedVolumes.map(volume => (
               <button
                 key={volume.vol}
                 onClick={() => setActiveVolume(volume)}
                 style={{
-                  background: '#faf5ff', border: `1px solid ${isUnlocked ? 'rgba(34,197,94,0.3)' : '#c4b5fd'}`,
+                  background: '#faf5ff', border: '1px solid rgba(34,197,94,0.3)',
                   borderRadius: '12px', padding: '1rem 1.2rem',
                   display: 'flex', alignItems: 'center', gap: '0.9rem',
                   cursor: 'pointer', textAlign: 'left',
@@ -195,17 +224,13 @@ export default function AutonomicAcademy() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem', flexShrink: 0 }}>
-                  {isUnlocked ? (
-                    <span style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>✅ 已解鎖</span>
-                  ) : (
-                    <span style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.3)', color: '#7c3aed', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>第1堂免費</span>
-                  )}
+                  <span style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>✅ 已解鎖</span>
                   <span style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700 }}>開始 →</span>
                 </div>
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* 返回 */}
         <div style={{ textAlign: 'center' }}>

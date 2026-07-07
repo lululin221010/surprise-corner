@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { PSYCH_SERIES, FREE_LESSONS } from '../psychology/courses-data';
 import type { PsychLesson } from '../psychology/courses-data';
 import BonusLesson from './BonusLesson';
+import autonomicVolumes from '../brain-universe/autonomic/courses';
+import type { AutonomicVolume } from '../brain-universe/autonomic/courses';
+import AutonomicLessonViewer from '../brain-universe/autonomic/AutonomicLesson';
 import '../classroom.css';
 
 interface ActiveItem {
@@ -65,6 +68,7 @@ const AI_SERIES = [
 
 export default function BonusAcademy() {
   const [active, setActive] = useState<ActiveItem | null>(null);
+  const [activeVolume, setActiveVolume] = useState<AutonomicVolume | null>(null);
   const [psychFilter, setPsychFilter] = useState<string>(PSYCH_SERIES[0].id);
   const [mounted, setMounted] = useState(false);
   // 在 client 端才隨機選一個學系（避免 SSR hydration mismatch）
@@ -82,6 +86,18 @@ export default function BonusAcademy() {
         bookTitle={active.bookTitle}
         allGroupTitles={active.allGroupTitles}
         onBack={() => setActive(null)}
+      />
+    );
+  }
+
+  if (activeVolume) {
+    return (
+      <AutonomicLessonViewer
+        lesson={activeVolume.lessons[0]}
+        bookTitle={activeVolume.title}
+        allLessonTitles={activeVolume.lessons.map(l => l.title)}
+        cta={activeVolume.cta}
+        onBack={() => setActiveVolume(null)}
       />
     );
   }
@@ -135,16 +151,20 @@ export default function BonusAcademy() {
                 </div>
               </Link>
             ) : section.id === 'autonomic' ? (
-              <Link href="/classroom/brain-universe/autonomic" style={{ textDecoration: 'none' }}>
-                <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
-                  <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🧬</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>自律神經學系 7冊試讀</div>
-                    <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>每冊各1堂試讀 · 4頁 + 2題測驗 · 全部免費</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {autonomicVolumes.map(volume => (
+                  <div key={volume.vol}
+                    onClick={() => setActiveVolume(volume)}
+                    style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
+                    <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{volume.emoji}</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem' }}>{volume.title}</div>
+                      <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.1rem' }}>第1堂試讀 · 免費</div>
+                    </div>
+                    <div style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>→</div>
                   </div>
-                  <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>進入 →</div>
-                </div>
-              </Link>
+                ))}
+              </div>
             ) : section.id === 'ai' ? (
               <>
                 {/* AI 系列分組 tab */}
