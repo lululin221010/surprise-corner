@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePreview } from '../../PreviewContext';
 import autonomicVolumes from './courses';
 import type { AutonomicVolume, AutonomicLesson } from './courses';
 import AutonomicLessonViewer from './AutonomicLesson';
@@ -19,15 +20,19 @@ const UNLOCK_KEYS: Record<string, string> = {
 };
 
 export default function AutonomicAcademy() {
+  const isPreview = usePreview();
+
   const [activeVolume, setActiveVolume] = useState<AutonomicVolume | null>(null);
   const [activeLesson, setActiveLesson] = useState<AutonomicLesson | null>(null);
   const [unlockCode, setUnlockCode] = useState('');
   const [unlockStatus, setUnlockStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [unlockedVols, setUnlockedVols] = useState<Set<string>>(() => {
+  const [unlockedCodes, setUnlockedCodes] = useState<Set<string>>(() => {
     if (typeof window === 'undefined') return new Set();
     const keys = Object.values(UNLOCK_KEYS);
     return new Set(keys.filter(k => localStorage.getItem(`sc_autonomic_unlock_${k}`) === 'true'));
   });
+
+  const unlockedVols = isPreview ? new Set(Object.values(UNLOCK_KEYS)) : unlockedCodes;
 
   async function handleVerifyCode() {
     const code = unlockCode.trim().toUpperCase();
@@ -38,7 +43,7 @@ export default function AutonomicAcademy() {
       const data = await res.json();
       if (data.valid) {
         localStorage.setItem(`sc_autonomic_unlock_${data.target}`, 'true');
-        setUnlockedVols(prev => new Set(prev).add(data.target));
+        setUnlockedCodes(prev => new Set(prev).add(data.target));
         setUnlockStatus('success');
       } else {
         setUnlockStatus('error');
