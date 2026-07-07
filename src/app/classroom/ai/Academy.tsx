@@ -133,7 +133,7 @@ export default function Academy() {
         {!isTrial && !isUnlocked && (
           <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', padding: '1rem', marginBottom: '1.2rem' }}>
             <div style={{ color: '#b45309', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-              🔑 輸入解鎖碼，或購買電子書解鎖本課程
+              🔑 輸入解鎖碼，或直接購買解鎖本課程（含完整電子書）
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.6rem' }}>
               <input
@@ -155,7 +155,7 @@ export default function Academy() {
               href={PURCHASE_URLS[activeCourse.id] ?? 'https://still-time-corner.vercel.app/ebooks'}
               target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
-              購買電子書解鎖（{PRICES[activeCourse.id] ?? 'NT$249'}） →
+              立即解鎖本課程（{PRICES[activeCourse.id] ?? 'NT$249'}） →
             </a>
           </div>
         )}
