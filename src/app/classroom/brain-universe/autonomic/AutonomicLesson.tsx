@@ -2,7 +2,6 @@
 // 📄 路徑：src/app/classroom/brain-universe/autonomic/AutonomicLesson.tsx
 
 import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import type { AutonomicLesson } from './courses';
 import '../../classroom.css';
@@ -10,9 +9,10 @@ import '../../classroom.css';
 interface Props {
   lesson: AutonomicLesson;
   onBack: () => void;
+  cta?: { text: string; url: string; seriesNote: string };
 }
 
-export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
+export default function AutonomicLessonViewer({ lesson, onBack, cta }: Props) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
@@ -31,29 +31,37 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
         <div style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', paddingTop: '2rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
           <h2 style={{ color: '#1e1b4b', fontSize: '1.4rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-            Vol.{lesson.vol} 試讀完成！
+            {lesson.isFree ? '試讀完成！' : '本堂完成！'}
           </h2>
-          <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-            {lesson.cta.seriesNote}
-          </p>
-          <a
-            href={lesson.cta.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'block', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
-              color: '#fff', fontWeight: 700, fontSize: '0.95rem',
-              borderRadius: '30px', padding: '0.8rem 1.5rem',
-              textDecoration: 'none', marginBottom: '1rem',
-            }}
-          >
-            {lesson.cta.text} →
-          </a>
+          {cta ? (
+            <>
+              <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                {cta.seriesNote}
+              </p>
+              <a
+                href={cta.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+                  color: '#fff', fontWeight: 700, fontSize: '0.95rem',
+                  borderRadius: '30px', padding: '0.8rem 1.5rem',
+                  textDecoration: 'none', marginBottom: '1rem',
+                }}
+              >
+                {cta.text} →
+              </a>
+            </>
+          ) : (
+            <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+              繼續下一堂，或返回課程列表。
+            </p>
+          )}
           <button
             onClick={onBack}
             style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.88rem', cursor: 'pointer' }}
           >
-            ← 返回自律神經學系
+            ← 返回課程列表
           </button>
         </div>
       </div>
@@ -147,7 +155,7 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
 
       <div style={{ marginBottom: '1rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.75rem', color: '#9ca3af' }}>
-          <span>🧬 {lesson.subtitle}</span>
+          <span>🧬 {lesson.title}</span>
           <span>{slideIndex + 1} / {lesson.slides.length}</span>
         </div>
         <div className="prog-wrap">
@@ -161,18 +169,20 @@ export default function AutonomicLessonViewer({ lesson, onBack }: Props) {
             <span className="slide-num-badge">SLIDE {String(slideIndex + 1).padStart(2, '0')} · {lesson.slides.length}</span>
           </div>
           <h2 className="slide-title">{slide.title}</h2>
-          <div
-            style={{ width: '100%', marginBottom: '1rem', borderRadius: '10px', overflow: 'hidden' }}
-            dangerouslySetInnerHTML={{ __html: slide.visual }}
-          />
+          {slide.visual && (
+            <div
+              style={{ width: '100%', marginBottom: '1rem', borderRadius: '10px', overflow: 'hidden' }}
+              dangerouslySetInnerHTML={{ __html: slide.visual }}
+            />
+          )}
           <div className="slide-body" style={{ whiteSpace: 'pre-line' }}>
             {slide.content}
           </div>
         </div>
-        {(slide as any).lulu && (
+        {slide.lulu && (
           <div className="lulu-strip">
             <span style={{ fontSize: '20px', flexShrink: 0 }}>🐱</span>
-            <span className="lulu-strip-text">魯魯說：{(slide as any).lulu}</span>
+            <span className="lulu-strip-text">魯魯說：{slide.lulu}</span>
           </div>
         )}
       </div>
