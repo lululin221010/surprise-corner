@@ -183,7 +183,7 @@ export default function Academy() {
           <span>AI解剖書院</span>
         </div>
         <h1 style={{ color: '#164e63', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.3rem' }}>
-          🔬 AI解剖書院
+          🔬 AI解剖書院・系列2
         </h1>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>
           這裡收錄已購買讀者的完整課程內容

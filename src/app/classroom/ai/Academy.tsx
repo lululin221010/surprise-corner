@@ -198,7 +198,7 @@ export default function Academy() {
           <span>AI書院</span>
         </div>
         <h1 style={{ color: '#1e1b4b', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.3rem' }}>
-          🤖 AI書院
+          🤖 AI書院・系列1
         </h1>
         <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>
           這裡收錄已購買讀者的完整課程內容
