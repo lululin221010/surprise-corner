@@ -112,7 +112,7 @@ export default function Academy() {
         ) && (
           <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', padding: '1rem', marginBottom: '1.2rem' }}>
             <div style={{ color: '#b45309', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-              🔑 輸入解鎖碼，或購買電子書解鎖本課程
+              🔑 輸入解鎖碼，或直接購買解鎖本課程（含完整電子書）
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.6rem' }}>
               <input
