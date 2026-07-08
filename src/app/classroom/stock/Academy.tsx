@@ -27,6 +27,54 @@ function getPurchaseInfo(courseId: string): { url: string; price: string } {
   return { url: 'https://still-time-corner.vercel.app/digital/6a2965ef6a2fdbc340cab167', price: 'NT$249' };
 }
 
+// 理財調查局全五案結案畫面用（不是獨立第六堂課，五案全部完成後顯示一次）
+const INVESTIGATION_FRAMEWORKS = [
+  { title: '框架一｜看總費用率，不看配息率', body: '配息率是現金流工具，不是報酬率指標。選ETF前先找總費用率，這個數字每天在扣，複利30年差距可達百萬以上。' },
+  { title: '框架二｜查成分股重疊，不買重複的籃子', body: '持有多檔ETF前先比對前十大持股。同一檔重複出現在多個籃子裡，你買的不是分散，是集中加上多份管理費。' },
+  { title: '框架三｜費用是確定的損失，超額報酬是不確定的期望', body: '每年多付1%的費用，30年差距超過300萬。任何投資決策前，先問：這筆費用換來的，值不值得？' },
+  { title: '框架四｜你的時間框架，決定你適合哪條路', body: '三年內要用的錢，保本優先。五年以上不會動的錢，讓複利跑，波動是代價不是損失。' },
+  { title: '框架五｜工具賺了多少，和你拿到多少，是兩件事', body: '決定你最終報酬的，不只是你選了什麼，而是你在每個關鍵時刻做了什麼。' },
+];
+
+function InvestigationFinale({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="classroom-content">
+      <div style={{ maxWidth: 560, margin: '0 auto', padding: '1rem' }}>
+        <div style={{ background: 'linear-gradient(135deg, #fef3c7, #fde68a)', border: '2px solid #f59e0b', borderRadius: '16px', padding: '1.4rem', marginBottom: '1.4rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '2.2rem', marginBottom: '0.4rem' }}>🏅</div>
+          <div style={{ color: '#92400e', fontWeight: 800, fontSize: '1.1rem', marginBottom: '0.3rem' }}>理財調查局 全冊結案</div>
+          <div style={{ color: '#78350f', fontSize: '0.8rem', lineHeight: 1.6 }}>五宗疑案，五份鑑識報告，全部結案</div>
+        </div>
+
+        <div style={{ marginBottom: '1.4rem' }}>
+          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.7rem' }}>
+            📖 調查局的五個最終框架
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            {INVESTIGATION_FRAMEWORKS.map(f => (
+              <div key={f.title} style={{ padding: '0.7rem 0.9rem', borderRadius: '10px', background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.15)' }}>
+                <div style={{ color: '#5b21b6', fontWeight: 700, fontSize: '0.82rem', marginBottom: '0.25rem' }}>{f.title}</div>
+                <div style={{ color: '#6b7280', fontSize: '0.78rem', lineHeight: 1.6 }}>{f.body}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ marginBottom: '1.4rem', padding: '1rem 1.1rem', background: 'rgba(124,58,237,0.08)', borderRadius: '12px', borderLeft: '3px solid #7c3aed' }}>
+          <div style={{ color: '#5b21b6', fontSize: '0.85rem', lineHeight: 1.7 }}>
+            🐱 魯魯最終宣告：「理財調查局，全冊結案。五宗疑案，五份鑑識報告。答案從來在你手裡——調查局只是把證據攤開，剩下的，是你的判決。」
+          </div>
+        </div>
+
+        <button onClick={onClose}
+          style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer' }}>
+          返回理財調查局系列 →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Academy() {
   const isPreview = usePreview();
 
@@ -34,6 +82,7 @@ export default function Academy() {
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [activeSeries, setActiveSeries] = useState<'stock' | 'investigation'>('stock');
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
+  const [showInvestigationFinale, setShowInvestigationFinale] = useState(false);
   const [unlockCode, setUnlockCode] = useState('');
   const [unlockStatus, setUnlockStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [unlockedCourses, setUnlockedCourses] = useState<Set<string>>(() => {
@@ -70,7 +119,21 @@ export default function Academy() {
   function handleLessonComplete() {
     if (!activeLesson) return;
     setCompletedLessons(prev => new Set(prev).add(activeLesson.id));
+    const isInvestigation = activeCourse && investigationCourses.some(c => c.id === activeCourse.id);
+    const isFinalCase = activeCourse && activeLesson.id === activeCourse.lessons[activeCourse.lessons.length - 1]?.id;
+    if (isInvestigation && isFinalCase) {
+      setShowInvestigationFinale(true);
+    }
     setActiveLesson(null);
+  }
+
+  // 理財調查局五案全部完成 — 顯示結案總結畫面（不是獨立第六堂課）
+  if (showInvestigationFinale) {
+    return (
+      <InvestigationFinale
+        onClose={() => { setShowInvestigationFinale(false); setActiveCourse(null); }}
+      />
+    );
   }
 
   // 上課中 — 交給 AcademyLesson 自己管背景
@@ -368,7 +431,7 @@ export default function Academy() {
           )}
 
           <p style={{ color: '#9ca3af', fontSize: '0.78rem', textAlign: 'center' }}>
-            案002~005陸續加入，外匯、虛擬貨幣等更多主題也將陸續開案 🕵️
+            五宗ETF疑案全數結案，外匯、虛擬貨幣等更多主題陸續開案 🕵️
           </p>
         </>
       )}
