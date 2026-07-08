@@ -170,16 +170,16 @@ export default function BonusAcademy() {
                     </Link>
                   )}
                   {(financeFilter === 'all' || financeFilter === 'investigation') && (
-                    <a href="https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    <Link href="/classroom/stock/trial-investigation" style={{ textDecoration: 'none' }}>
                       <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
                         <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🕵️</div>
                         <div style={{ flex: 1 }}>
-                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>理財調查局：ETF完全解案</div>
-                          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>電子書已上架・互動課程製作中</div>
+                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>理財調查局 ETF系列試讀本</div>
+                          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>案號001完整開放 · 免費</div>
                         </div>
-                        <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>前往購買 →</div>
+                        <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
                       </div>
-                    </a>
+                    </Link>
                   )}
                 </div>
               </>

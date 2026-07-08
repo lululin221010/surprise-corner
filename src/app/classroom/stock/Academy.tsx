@@ -7,8 +7,25 @@ import Link from 'next/link';
 import { usePreview } from '../PreviewContext';
 import courses from './courses';
 import type { Course, Lesson } from './courses';
+import investigationCourses from './investigation-courses';
 import AcademyLesson from './AcademyLesson';
 import '../classroom.css';
+
+// 課程id → SS解鎖key；理財調查局系列以後新增案件都掛在同一個key(ss-etf-001)，買一次解鎖全部案件
+function getUnlockKey(courseId: string): string {
+  if (courseId === 'stock-advanced') return 'ss-stock-advanced';
+  if (courseId === 'stock-master') return 'ss-stock-master';
+  if (courseId === 'etf-investigation') return 'ss-etf-001';
+  return 'ss-stock-intro';
+}
+
+// 課程id → ST商品購買連結 + 顯示價格
+function getPurchaseInfo(courseId: string): { url: string; price: string } {
+  if (courseId === 'stock-master') return { url: 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa', price: 'NT$449' };
+  if (courseId === 'stock-advanced') return { url: 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9', price: 'NT$349' };
+  if (courseId === 'etf-investigation') return { url: 'https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506', price: 'NT$199' };
+  return { url: 'https://still-time-corner.vercel.app/digital/6a2965ef6a2fdbc340cab167', price: 'NT$249' };
+}
 
 export default function Academy() {
   const isPreview = usePreview();
@@ -21,13 +38,13 @@ export default function Academy() {
   const [unlockStatus, setUnlockStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [unlockedCourses, setUnlockedCourses] = useState<Set<string>>(() => {
     if (typeof window === 'undefined') return new Set();
-    const keys = ['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master'];
+    const keys = ['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master', 'ss-etf-001'];
     return new Set(keys.filter(k => localStorage.getItem(`sc_stock_unlock_${k}`) === 'true'));
   });
 
   // preview=1 時視同全解鎖
   const effectiveUnlocked = isPreview
-    ? new Set(['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master'])
+    ? new Set(['ss-stock-intro', 'ss-stock-advanced', 'ss-stock-master', 'ss-etf-001'])
     : unlockedCourses;
 
   async function handleVerifyCode() {
@@ -71,16 +88,18 @@ export default function Academy() {
 
   // 課程列表（選了某個課程）
   if (activeCourse) {
+    const seriesLabel = investigationCourses.some(c => c.id === activeCourse.id) ? '理財書院 › 理財調查局系列' : '理財書院 › 台股系列';
+    const purchaseInfo = getPurchaseInfo(activeCourse.id);
     return (
       <div className="classroom-content">
         {/* 返回 + 麵包屑 */}
         <button onClick={() => setActiveCourse(null)} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.85rem', cursor: 'pointer', marginBottom: '0.5rem', padding: 0 }}>
-          ← 返回理財書院 › 台股系列
+          ← 返回{seriesLabel}
         </button>
         <div className="classroom-breadcrumb" style={{ marginBottom: '1rem' }}>
           <Link href="/classroom" className="classroom-back" style={{ display: 'inline' }}>小教室</Link>
           <span style={{ margin: '0 0.4rem' }}>›</span>
-          <button onClick={() => setActiveCourse(null)} className="classroom-back" style={{ fontSize: '12px' }}>理財書院 › 台股系列</button>
+          <button onClick={() => setActiveCourse(null)} className="classroom-back" style={{ fontSize: '12px' }}>{seriesLabel}</button>
           <span style={{ margin: '0 0.4rem' }}>›</span>
           <span>{activeCourse.title}</span>
         </div>
@@ -91,10 +110,7 @@ export default function Academy() {
         <p style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{activeCourse.description}</p>
 
         {/* 未解鎖時的 inline 解鎖區塊 */}
-        {activeCourse.id !== 'stock-trial' && !effectiveUnlocked.has(
-          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
-          : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro'
-        ) && (
+        {activeCourse.id !== 'stock-trial' && !effectiveUnlocked.has(getUnlockKey(activeCourse.id)) && (
           <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', padding: '1rem', marginBottom: '1.2rem' }}>
             <div style={{ color: '#b45309', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
               🔑 輸入解鎖碼，或購買本書解鎖本課程
@@ -117,24 +133,17 @@ export default function Academy() {
             {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>✅ 解鎖成功！</p>}
             <div style={{ display: 'flex', gap: '0.6rem' }}>
               <a
-                href={activeCourse.id === 'stock-master'
-                  ? 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa'
-                  : activeCourse.id === 'stock-advanced'
-                  ? 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9'
-                  : 'https://still-time-corner.vercel.app/digital/6a2965ef6a2fdbc340cab167'}
+                href={purchaseInfo.url}
                 target="_blank" rel="noopener noreferrer"
                 style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
-                轉帳購買{activeCourse.id === 'stock-master' ? '（NT$449）' : activeCourse.id === 'stock-advanced' ? '（NT$349）' : '（NT$249）'} →
+                轉帳購買（{purchaseInfo.price}） →
               </a>
             </div>
           </div>
         )}
 
         {/* 已解鎖提示 */}
-        {activeCourse.id !== 'stock-trial' && effectiveUnlocked.has(
-          activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
-          : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro'
-        ) && (
+        {activeCourse.id !== 'stock-trial' && effectiveUnlocked.has(getUnlockKey(activeCourse.id)) && (
           <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '10px', padding: '0.5rem 0.8rem', marginBottom: '1.2rem', color: '#16a34a', fontSize: '0.8rem' }}>
             ✅ 已解鎖，全部課程開放閱讀
           </div>
@@ -144,9 +153,7 @@ export default function Academy() {
           {activeCourse.lessons.map((lesson, i) => {
             const done = completedLessons.has(lesson.id);
             const isFree = activeCourse.id === 'stock-trial';
-            const courseUnlockKey = activeCourse.id === 'stock-advanced' ? 'ss-stock-advanced'
-              : activeCourse.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
-            const locked = !isFree && !effectiveUnlocked.has(courseUnlockKey);
+            const locked = !isFree && !effectiveUnlocked.has(getUnlockKey(activeCourse.id));
             return (
               <button
                 key={lesson.id}
@@ -180,12 +187,10 @@ export default function Academy() {
   }
 
   // 主頁：所有課程總覽
-  const unlockedRealCourses = courses.filter(c => {
-    const unlockKey = c.id === 'stock-advanced' ? 'ss-stock-advanced'
-      : c.id === 'stock-master' ? 'ss-stock-master' : 'ss-stock-intro';
-    return effectiveUnlocked.has(unlockKey);
-  });
+  const unlockedRealCourses = courses.filter(c => effectiveUnlocked.has(getUnlockKey(c.id)));
   const hasAnyUnlock = unlockedRealCourses.length > 0;
+  const unlockedInvestigationCourses = investigationCourses.filter(c => effectiveUnlocked.has(getUnlockKey(c.id)));
+  const hasAnyInvestigationUnlock = unlockedInvestigationCourses.length > 0;
 
   return (
     <div className="classroom-content">
@@ -298,25 +303,72 @@ export default function Academy() {
         </>
       ) : (
         <>
-          {/* 理財調查局系列：ETF書已上架，互動課程尚未製作 */}
-          <div style={{ background: 'rgba(124,58,237,0.05)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '14px', padding: '1.3rem', marginBottom: '1rem' }}>
-            <div style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>🕵️</div>
-            <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '1rem', marginBottom: '0.4rem' }}>
-              理財調查局：ETF完全解案
+          {/* 解鎖碼輸入 */}
+          <div style={{ background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem' }}>
+            <div style={{ color: '#b45309', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+              🔑 輸入解鎖碼開通已購買的案件
             </div>
-            <p style={{ color: '#6b7280', fontSize: '0.82rem', lineHeight: 1.6, marginBottom: '1rem' }}>
-              五宗投資疑案，破解ETF背後的獲利邏輯。高股息迷思、存股vs ETF、停利模擬器……電子書已上架，互動課程製作中。
-            </p>
-            <a
-              href="https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506"
-              target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.85rem', borderRadius: '20px', padding: '0.6rem', textDecoration: 'none', textAlign: 'center' }}
-            >
-              前往小舖購買電子書（NT$199）→
-            </a>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.4rem' }}>
+              <input
+                type="text"
+                value={unlockCode}
+                onChange={e => { setUnlockCode(e.target.value.toUpperCase()); setUnlockStatus('idle'); }}
+                placeholder="SS-XXXX-XXXX"
+                onKeyDown={e => e.key === 'Enter' && handleVerifyCode()}
+                style={{ flex: 1, padding: '8px 10px', fontSize: '0.85rem', borderRadius: '8px', border: '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.7)', color: '#1e1b4b', outline: 'none', fontFamily: 'monospace', letterSpacing: '1px' }}
+              />
+              <button onClick={handleVerifyCode} disabled={unlockStatus === 'loading'}
+                style={{ padding: '8px 14px', background: '#f59e0b', color: '#1c1917', border: 'none', borderRadius: '8px', fontSize: '0.82rem', cursor: 'pointer', fontWeight: 700, whiteSpace: 'nowrap' }}>
+                {unlockStatus === 'loading' ? '…' : '解鎖'}
+              </button>
+            </div>
+            {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: 0 }}>解鎖碼無效，請確認後再試</p>}
+            {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: 0 }}>✅ 解鎖成功！</p>}
+            {!hasAnyInvestigationUnlock && (
+              <p style={{ color: '#6b7280', fontSize: '0.78rem', margin: '0.6rem 0 0' }}>
+                還沒讀過試讀？<Link href="/classroom/bonus" style={{ color: '#7c3aed' }}>前往好康書院 →</Link>
+              </p>
+            )}
           </div>
+
+          {/* 案件卡片 */}
+          {hasAnyInvestigationUnlock && (
+            <>
+              <p style={{ color: '#a78bfa', fontSize: '0.72rem', letterSpacing: '0.1em', margin: '0 0 0.8rem 0.2rem', fontWeight: 600 }}>
+                已解鎖案件
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '1.5rem' }}>
+                {unlockedInvestigationCourses.map(course => (
+                  <button
+                    key={course.id}
+                    onClick={() => setActiveCourse(course)}
+                    className="course-list-item"
+                    style={{ padding: '1.2rem 1.4rem', borderRadius: '14px', border: '1px solid rgba(34,197,94,0.3)' }}
+                  >
+                    <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>{course.emoji}</span>
+                    <div style={{ flex: 1, textAlign: 'left' }}>
+                      <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>
+                        {course.title}
+                      </div>
+                      <div style={{ color: '#6b7280', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                        {course.description}
+                      </div>
+                      <div style={{ color: '#a78bfa', fontSize: '0.72rem', marginTop: '0.4rem' }}>
+                        {course.lessons.length} 案
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem', flexShrink: 0 }}>
+                      <span style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a', fontSize: '0.7rem', padding: '0.15rem 0.5rem', borderRadius: '10px' }}>✅ 已解鎖</span>
+                      <span style={{ color: '#7c3aed', fontSize: '0.8rem' }}>→</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
           <p style={{ color: '#9ca3af', fontSize: '0.78rem', textAlign: 'center' }}>
-            外匯、虛擬貨幣等更多主題陸續加入 🕵️
+            案002~005陸續加入，外匯、虛擬貨幣等更多主題也將陸續開案 🕵️
           </p>
         </>
       )}
