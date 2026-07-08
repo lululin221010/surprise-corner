@@ -29,7 +29,7 @@ function CaseDonePage({ onContinue }: { onContinue: () => void }) {
         <div style={{ marginBottom: '1.4rem' }}>
           <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.5rem' }}>
             📖 理財調查局：ETF完全解案 完整目錄
-            <span style={{ color: '#9ca3af', fontWeight: 400, fontSize: '0.78rem', marginLeft: '0.5rem' }}>NT$199</span>
+            <span style={{ color: '#9ca3af', fontWeight: 400, fontSize: '0.78rem', marginLeft: '0.5rem' }}>NT$299</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: 'rgba(124,58,237,0.08)' }}>
@@ -60,7 +60,7 @@ function CaseDonePage({ onContinue }: { onContinue: () => void }) {
         {/* 購買按鈕 */}
         <a href="https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506" target="_blank" rel="noopener noreferrer"
           style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', borderRadius: '30px', padding: '0.75rem', textDecoration: 'none', textAlign: 'center', marginBottom: '0.8rem' }}>
-          前往小舖購買完整版（NT$199） →
+          前往小舖購買完整版（NT$299） →
         </a>
 
         <div style={{ textAlign: 'center' }}>
@@ -134,7 +134,7 @@ export default function InvestigationTrial() {
         {/* 底部 CTA */}
         <div style={{ marginTop: '1.5rem', padding: '1.2rem', background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '14px', textAlign: 'center' }}>
           <div style={{ color: '#7c3aed', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.4rem' }}>想看剩下四案怎麼結案？</div>
-          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginBottom: '1rem' }}>購買電子書即可解鎖全部五案，NT$199</div>
+          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginBottom: '1rem' }}>購買電子書即可解鎖全部五案，NT$299</div>
           <a href="https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506" target="_blank" rel="noopener noreferrer"
             style={{ display: 'inline-block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.9rem', padding: '0.6rem 1.8rem', borderRadius: '30px', textDecoration: 'none' }}>
             前往小舖購買 →

@@ -23,7 +23,7 @@ function getUnlockKey(courseId: string): string {
 function getPurchaseInfo(courseId: string): { url: string; price: string } {
   if (courseId === 'stock-master') return { url: 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa', price: 'NT$449' };
   if (courseId === 'stock-advanced') return { url: 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9', price: 'NT$349' };
-  if (courseId === 'etf-investigation') return { url: 'https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506', price: 'NT$199' };
+  if (courseId === 'etf-investigation') return { url: 'https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506', price: 'NT$299' };
   return { url: 'https://still-time-corner.vercel.app/digital/6a2965ef6a2fdbc340cab167', price: 'NT$249' };
 }
 
