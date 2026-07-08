@@ -12,7 +12,7 @@ const AI_SERIES = [
   { n: 4, emoji: '🤔', title: 'AI與人類思考差異', desc: '搞懂AI跟人類想事情的根本不同', href: '/classroom/ai-thinking', live: true },
   { n: 5, emoji: '🤝', title: '互動共存', desc: '工作、信任、教育——AI時代怎麼當一個人', href: '/classroom/ai-coexist', live: true },
   { n: 6, emoji: '🧬', title: 'AI心理學', desc: '自我意識、幻覺、偏見的心理拆解', href: '/classroom/ai-psychology-hub', live: true },
-  { n: 7, emoji: '🛠️', title: 'DIY AI 實作', desc: '從免費工具到自架本地AI', href: '', live: false },
+  { n: 7, emoji: '🛠️', title: 'DIY AI 實作', desc: '從免費工具到自架本地AI', href: '/classroom/ai-diy', live: true },
   { n: 8, emoji: '🛡️', title: 'AI世界局勢', desc: '安全、失控邊界、國家競爭', href: '', live: false },
   { n: 9, emoji: '🤖', title: '機器人／具身智能', desc: '機器人怎麼動、怎麼想、會取代誰', href: '', live: false },
 ];
@@ -34,7 +34,7 @@ export default function AiAcademyHub() {
           <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>🤖</div>
           <h1 style={{ color: '#1e1b4b', fontSize: '1.6rem', fontWeight: 800, margin: 0 }}>AI書院</h1>
           <p style={{ color: '#4b5563', fontSize: '0.92rem', marginTop: '0.5rem', lineHeight: 1.6 }}>
-            9大系列，從AI原理到實作，全面理解AI時代。系列1~6已上線，更多系列陸續開課。
+            9大系列，從AI原理到實作，全面理解AI時代。系列1~7已上線，更多系列陸續開課。
           </p>
         </div>
 
