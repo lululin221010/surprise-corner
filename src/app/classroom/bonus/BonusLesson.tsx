@@ -23,17 +23,17 @@ function BonusQuiz({ question, options, answerIndex, explanation, onPass, onRetr
       <div style={{ color: '#a78bfa', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
         隨堂測驗
       </div>
-      <p style={{ color: '#e2e8f0', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.2rem', whiteSpace: 'pre-wrap' }}>
+      <p style={{ color: '#1e1b4b', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.2rem', whiteSpace: 'pre-wrap' }}>
         {question}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         {options.map((opt, i) => {
-          let bg = 'rgba(255,255,255,0.05)';
-          let border = '1px solid rgba(255,255,255,0.1)';
-          let color = '#cbd5e1';
+          let bg = '#ffffff';
+          let border = '1px solid #e8e4ff';
+          let color = '#374151';
           if (selected !== null) {
-            if (i === answerIndex) { bg = 'rgba(34,197,94,0.15)'; border = '1px solid #22c55e'; color = '#86efac'; }
-            else if (i === selected) { bg = 'rgba(239,68,68,0.15)'; border = '1px solid #ef4444'; color = '#fca5a5'; }
+            if (i === answerIndex) { bg = '#f0fdf4'; border = '1px solid #22c55e'; color = '#15803d'; }
+            else if (i === selected) { bg = '#fef2f2'; border = '1px solid #ef4444'; color = '#b91c1c'; }
           }
           return (
             <button key={i} disabled={selected !== null} onClick={() => setSelected(i)}
@@ -51,21 +51,21 @@ function BonusQuiz({ question, options, answerIndex, explanation, onPass, onRetr
               alt={correct ? '魯魯高興' : '魯魯沮喪'} width={48} height={48}
               style={{ borderRadius: '50%', flexShrink: 0 }}
             />
-            <div style={{ color: correct ? '#86efac' : '#fca5a5', fontWeight: 700 }}>
+            <div style={{ color: correct ? '#15803d' : '#b91c1c', fontWeight: 700 }}>
               {correct ? '✅ 答對了！' : '❌ 再想想看'}
             </div>
           </div>
-          <p style={{ color: '#94a3b8', fontSize: '0.83rem', lineHeight: 1.6, margin: 0 }}>{explanation}</p>
+          <p style={{ color: '#4b5563', fontSize: '0.83rem', lineHeight: 1.6, margin: 0 }}>{explanation}</p>
           {correct ? (
             <button onClick={onPass} style={{ marginTop: '0.8rem', width: '100%', background: 'linear-gradient(135deg, #7c3aed, #06b6d4)', color: '#fff', fontWeight: 700, fontSize: '0.9rem', border: 'none', borderRadius: '30px', padding: '0.6rem', cursor: 'pointer' }}>
               完成！看完整課程 →
             </button>
           ) : (
             <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.8rem' }}>
-              <button onClick={onRetry} style={{ flex: 1, background: 'rgba(124,58,237,0.2)', color: '#a78bfa', fontWeight: 700, fontSize: '0.85rem', border: '1px solid rgba(124,58,237,0.4)', borderRadius: '30px', padding: '0.55rem', cursor: 'pointer' }}>
+              <button onClick={onRetry} style={{ flex: 1, background: 'rgba(124,58,237,0.2)', color: '#7c3aed', fontWeight: 700, fontSize: '0.85rem', border: '1px solid rgba(124,58,237,0.4)', borderRadius: '30px', padding: '0.55rem', cursor: 'pointer' }}>
                 再試一次
               </button>
-              <button onClick={onReread} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', color: '#94a3b8', fontWeight: 700, fontSize: '0.85rem', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '30px', padding: '0.55rem', cursor: 'pointer' }}>
+              <button onClick={onReread} style={{ flex: 1, background: '#f3f4f6', color: '#4b5563', fontWeight: 700, fontSize: '0.85rem', border: '1px solid #e5e7eb', borderRadius: '30px', padding: '0.55rem', cursor: 'pointer' }}>
                 重新看講義
               </button>
             </div>
@@ -94,16 +94,16 @@ function PurchaseGuide({ bookTitle, allGroupTitles, onBack }: { bookTitle: strin
 
         {/* 本書目錄 */}
         <div style={{ marginBottom: '1.4rem' }}>
-          <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
+          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
             📖 《{bookTitle}》完整目錄
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
             {allGroupTitles.map((title, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.45rem 0.7rem', borderRadius: '8px', background: i === 0 ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.03)', border: i === 0 ? '1px solid rgba(124,58,237,0.3)' : '1px solid transparent' }}>
-                <span style={{ color: i === 0 ? '#a78bfa' : '#475569', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.45rem 0.7rem', borderRadius: '8px', background: i === 0 ? 'rgba(124,58,237,0.15)' : '#f9fafb', border: i === 0 ? '1px solid rgba(124,58,237,0.3)' : '1px solid transparent' }}>
+                <span style={{ color: i === 0 ? '#7c3aed' : '#475569', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>
                   {i === 0 ? '✅' : `第${i + 1}組`}
                 </span>
-                <span style={{ color: i === 0 ? '#c4b5fd' : '#64748b', fontSize: '0.82rem' }}>{title}</span>
+                <span style={{ color: i === 0 ? '#5b21b6' : '#64748b', fontSize: '0.82rem' }}>{title}</span>
               </div>
             ))}
           </div>
