@@ -4,10 +4,10 @@ import AiAcademyHub from './AiAcademyHub';
 
 export const metadata: Metadata = {
   title: 'AI書院｜驚喜角落',
-  description: '9大系列，從AI原理到實作，全面理解AI時代。系列1~8已上線。',
+  description: '9大系列，從AI原理到實作，全面理解AI時代。9大系列全部上線。',
   openGraph: {
     title: '🤖 AI書院',
-    description: '9大系列，從AI原理到實作，全面理解AI時代。系列1~8已上線。',
+    description: '9大系列，從AI原理到實作，全面理解AI時代。9大系列全部上線。',
     url: 'https://surprise-corner.vercel.app/classroom/ai-academy',
     siteName: '驚喜角落',
     locale: 'zh_TW',
