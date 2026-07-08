@@ -21,7 +21,7 @@ interface ActiveItem {
 const ACADEMY_SECTIONS = [
   {
     id: 'stock',
-    label: '理財書院好康-台股系列',
+    label: '理財書院好康',
     emoji: '📈',
     comingSoon: false,
     items: [] as { lesson: PsychLesson; bookTitle: string; subtitle: string }[],
@@ -35,7 +35,7 @@ const ACADEMY_SECTIONS = [
   },
   {
     id: 'autonomic',
-    label: '自律神經學系好康',
+    label: '腦中宇宙書院好康',
     emoji: '🧬',
     comingSoon: false,
     items: [] as { lesson: PsychLesson; bookTitle: string; subtitle: string }[],
@@ -78,6 +78,8 @@ export default function BonusAcademy() {
     setMounted(true);
   }, []);
   const [aiFilter, setAiFilter] = useState<string>('1-3');
+  const [financeFilter, setFinanceFilter] = useState<string>('all');
+  const [brainFilter, setBrainFilter] = useState<string>('all');
 
   if (active) {
     return (
@@ -140,31 +142,87 @@ export default function BonusAcademy() {
             </div>
 
             {section.id === 'stock' ? (
-              <Link href="/classroom/stock/trial" style={{ textDecoration: 'none' }}>
-                <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
-                  <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>理財書院 台股系列試讀本</div>
-                    <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
-                  </div>
-                  <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
+              <>
+                {/* 理財書院系列分組 tab */}
+                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
+                  {[
+                    { key: 'all', label: '全部 2' },
+                    { key: 'taiwan', label: '📈 台股系列' },
+                    { key: 'investigation', label: '🕵️ 理財調查局系列' },
+                  ].map(tab => (
+                    <button key={tab.key} onClick={() => setFinanceFilter(tab.key)}
+                      style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: financeFilter === tab.key ? '#ede9fe' : '#f3f4f6', border: financeFilter === tab.key ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: financeFilter === tab.key ? '#5b21b6' : '#374151' }}>
+                      {tab.label}
+                    </button>
+                  ))}
                 </div>
-              </Link>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  {(financeFilter === 'all' || financeFilter === 'taiwan') && (
+                    <Link href="/classroom/stock/trial" style={{ textDecoration: 'none' }}>
+                      <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
+                        <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>📈</div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>理財書院 台股系列試讀本</div>
+                          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>入門 3 堂 × 進階 2 堂 × 高階 1 堂 · 免費</div>
+                        </div>
+                        <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>開始 →</div>
+                      </div>
+                    </Link>
+                  )}
+                  {(financeFilter === 'all' || financeFilter === 'investigation') && (
+                    <a href="https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                      <div style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
+                        <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🕵️</div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem' }}>理財調查局：ETF完全解案</div>
+                          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '0.2rem' }}>電子書已上架・互動課程製作中</div>
+                        </div>
+                        <div style={{ color: '#7c3aed', fontSize: '0.88rem', fontWeight: 700, flexShrink: 0 }}>前往購買 →</div>
+                      </div>
+                    </a>
+                  )}
+                </div>
+              </>
             ) : section.id === 'autonomic' ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {autonomicVolumes.map(volume => (
-                  <div key={volume.vol}
-                    onClick={() => setActiveVolume(volume)}
-                    style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
-                    <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{volume.emoji}</div>
+              <>
+                {/* 腦中宇宙書院分組 tab */}
+                <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.8rem' }}>
+                  {[
+                    { key: 'all', label: `全部 ${autonomicVolumes.length}` },
+                    { key: 'autonomic', label: '🧬 自律神經學系' },
+                    { key: 'future', label: '🔮 未來新系列' },
+                  ].map(tab => (
+                    <button key={tab.key} onClick={() => setBrainFilter(tab.key)}
+                      style={{ padding: '0.35rem 0.9rem', borderRadius: '20px', fontSize: '0.82rem', cursor: 'pointer', background: brainFilter === tab.key ? '#ede9fe' : '#f3f4f6', border: brainFilter === tab.key ? '1px solid #7c3aed' : '1px solid #e5e7eb', color: brainFilter === tab.key ? '#5b21b6' : '#374151' }}>
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+                {brainFilter === 'future' ? (
+                  <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '1rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+                    <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🔮</div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem' }}>{volume.title}</div>
-                      <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.1rem' }}>第1堂試讀 · 免費</div>
+                      <div style={{ color: '#6b7280', fontWeight: 700, fontSize: '0.95rem' }}>更多學系籌備中</div>
+                      <div style={{ color: '#9ca3af', fontSize: '0.82rem', marginTop: '0.2rem' }}>腦中宇宙書院陸續加入新主題，敬請期待</div>
                     </div>
-                    <div style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>→</div>
                   </div>
-                ))}
-              </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {autonomicVolumes.map(volume => (
+                      <div key={volume.vol}
+                        onClick={() => setActiveVolume(volume)}
+                        style={{ background: '#faf5ff', border: '1px solid #c4b5fd', borderRadius: '12px', padding: '0.8rem 1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer' }}>
+                        <div style={{ fontSize: '1.2rem', flexShrink: 0 }}>{volume.emoji}</div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.9rem' }}>{volume.title}</div>
+                          <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.1rem' }}>第1堂試讀 · 免費</div>
+                        </div>
+                        <div style={{ color: '#7c3aed', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>→</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             ) : section.id === 'ai' ? (
               <>
                 {/* AI 系列分組 tab */}
