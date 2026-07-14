@@ -78,6 +78,7 @@ export function SceneView({
             <button
               onClick={() => onHotspotClick(h)}
               aria-label={h.label}
+              title={h.label}
               className={`flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm shadow-md shadow-black/40 transition-colors ${
                 isActive
                   ? 'border-amber-300 bg-amber-300/40'
@@ -92,12 +93,6 @@ export function SceneView({
                 <span aria-hidden>🔍</span>
               )}
             </button>
-
-            {!isActive && (
-              <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-amber-300/40 bg-black/90 px-2.5 py-1 text-xs font-medium text-amber-100 shadow-lg shadow-black/50">
-                {h.label}
-              </span>
-            )}
 
             {isActive && (
               <div
@@ -136,6 +131,7 @@ export function SceneView({
           <button
             onClick={() => onNpcMarkerClick(npc.id)}
             aria-label={npc.name}
+            title={npc.name}
             className={`flex h-9 w-9 items-center justify-center rounded-full border-2 text-base shadow-md shadow-black/40 transition-colors ${
               activeNpcId === npc.id
                 ? 'border-sky-300 bg-sky-300/30'
@@ -144,9 +140,6 @@ export function SceneView({
           >
             🧍
           </button>
-          <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-sky-300/40 bg-black/90 px-2.5 py-1 text-xs font-medium text-sky-100 shadow-lg shadow-black/50">
-            {npc.name}
-          </span>
         </div>
       ))}
     </div>
