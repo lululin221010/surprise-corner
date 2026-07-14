@@ -41,14 +41,6 @@ export type Scene = {
   hotspots: Hotspot[];
 };
 
-export type Hypothesis = {
-  id: string;
-  label: string;
-  color?: string;
-  /** 玩家選了這個假說時，結案要顯示的反思文字——解釋大腦為什麼會這樣拼，不是宣判對錯 */
-  reflection: string;
-};
-
 export type ReflectionSection = {
   title: string;
   content?: string;
@@ -68,6 +60,8 @@ export type DeductionBlank = {
   /** 空格後的句子片段 */
   promptAfter: string;
   correctOptionId: string;
+  /** 答對時顯示：為什麼這是對的，不只是打勾而已 */
+  correctExplanation: string;
   options: DeductionOption[];
 };
 
@@ -83,7 +77,6 @@ export type Mission = {
   scenes: Scene[];
   npcs: Npc[];
   clues: Clue[];
-  hypotheses: Hypothesis[];
   /** 結案前的填空驗證關卡，把「拼湊真相」變成真的要動腦組合，而不是選一個大方向的假說就結束 */
   deduction: Deduction;
   /** 通用反思短文，所有玩家看到的內容一樣，不因假說不同而變，穿插在個人化reflection跟Truth之間 */

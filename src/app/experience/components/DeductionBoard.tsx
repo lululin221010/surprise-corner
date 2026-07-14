@@ -82,6 +82,10 @@ export function DeductionBoard({
                 ))}
               </div>
 
+              {showResult && isCorrect && (
+                <p className="mt-3 text-xs leading-relaxed text-emerald-300/80">✓ {blank.correctExplanation}</p>
+              )}
+
               {showResult && !isCorrect && (
                 <p className="mt-3 text-xs leading-relaxed text-rose-300/80">
                   {misledClue

@@ -6,7 +6,6 @@ import { useMissionState } from './useMissionState';
 import { SceneView } from './components/SceneView';
 import { NpcDialogue } from './components/NpcDialogue';
 import { ClueInventory } from './components/ClueInventory';
-import { HypothesisTool } from './components/HypothesisTool';
 import { ConclusionScreen } from './components/ConclusionScreen';
 import { DeductionBoard } from './components/DeductionBoard';
 import type { Hotspot } from './types';
@@ -20,9 +19,6 @@ export default function ExperiencePage() {
     collectClue,
     showConclusion,
     setShowConclusion,
-    hypothesisHistory,
-    currentHypothesisId,
-    submitHypothesis,
     showFirstClueHintBanner,
     dismissFirstClueHint,
   } = useMissionState(mission);
@@ -30,8 +26,6 @@ export default function ExperiencePage() {
   const [exploredHotspotIds, setExploredHotspotIds] = useState<string[]>([]);
   const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
   const [activeNpcId, setActiveNpcId] = useState<string | null>(null);
-  const [hypothesisPicking, setHypothesisPicking] = useState(false);
-  const [concludeBlockedMessage, setConcludeBlockedMessage] = useState<string | null>(null);
   const [deductionAnswers, setDeductionAnswers] = useState<Record<string, string>>({});
   const [deductionHasSubmitted, setDeductionHasSubmitted] = useState(false);
   const [boardExpanded, setBoardExpanded] = useState(false);
@@ -51,20 +45,6 @@ export default function ExperiencePage() {
     setCurrentSceneId(id);
     setActiveHotspot(null);
     setActiveNpcId(null);
-  }
-
-  function handleHypothesisSubmit(id: string) {
-    submitHypothesis(id);
-    setConcludeBlockedMessage(null);
-  }
-
-  function handleConcludeClick() {
-    if (!currentHypothesisId) {
-      setHypothesisPicking(true);
-      setConcludeBlockedMessage('請先提出你的案件假說，才能查看結案結果。');
-      return;
-    }
-    setShowConclusion(true);
   }
 
   function handleDeductionSelectOption(blankId: string, optionId: string) {
@@ -92,7 +72,6 @@ export default function ExperiencePage() {
           <ConclusionScreen
             mission={mission}
             collectedClueIds={collectedClueIds}
-            hypothesisHistory={hypothesisHistory}
             deductionAnswers={deductionAnswers}
             onBack={() => setShowConclusion(false)}
           />
@@ -119,27 +98,16 @@ export default function ExperiencePage() {
               </div>
             )}
 
-            <div className="mt-4">
-              <HypothesisTool
-                hypotheses={mission.hypotheses}
-                currentHypothesisId={currentHypothesisId}
-                onSubmit={handleHypothesisSubmit}
-                picking={hypothesisPicking}
-                onPickingChange={setHypothesisPicking}
-                promptMessage={concludeBlockedMessage}
-              />
-            </div>
-
             {showFirstClueHintBanner && (
               <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-xs text-amber-200">
-                <span>你已取得第一條證據。可以在上方「案件假說」先講你的直覺，或打開下方「📌 案件公告欄」把目前想到的都填進去，之後想到新的還能再改。</span>
+                <span>你已取得第一條證據。可以打開下方「📌 案件公告欄」把目前想到的都填進去，之後想到新的還能再改。</span>
                 <button onClick={dismissFirstClueHint} className="shrink-0 text-amber-300 hover:text-amber-100">
                   知道了
                 </button>
               </div>
             )}
 
-            <div className="mt-8">
+            <div className="mt-4">
               <ClueInventory clues={mission.clues} collectedClueIds={collectedClueIds} />
             </div>
 
@@ -170,7 +138,7 @@ export default function ExperiencePage() {
 
             <div className="mt-8 text-center">
               <button
-                onClick={handleConcludeClick}
+                onClick={() => setShowConclusion(true)}
                 className="rounded-full border border-amber-400/50 px-6 py-2 text-sm text-amber-300 hover:border-amber-400"
               >
                 我認為我知道真相了

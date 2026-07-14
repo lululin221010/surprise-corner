@@ -407,130 +407,102 @@ export const mission001: Mission = {
     {
       id: 'pink-shoe',
       title: '粉紅色童鞋',
-      firstInterpretation: '玩家直覺認為這就是失蹤女孩掉落的鞋子，她很可能是在這裡被強行帶走。',
+      firstInterpretation: '一隻鞋孤零零躺在花圃旁——她是不是就是在這裡出事的？',
       finalInterpretation:
-        '這雙鞋屬於另一位年紀相近的小女孩，只是在散場混亂中遺失，與本案沒有直接關係。真正誤導玩家的，是大家都把「年齡相近」當成了「就是同一個人」。',
+        '這雙鞋屬於另一位年紀相近的小女孩，只是在散場混亂中遺失，與本案沒有直接關係。真正造成誤會的，是大家都把「年齡相近」當成了「就是同一個人」。',
     },
     {
       id: 'broadcast-note',
       title: '第一次廣播時間',
-      firstInterpretation: '家長不到兩分鐘就報案，代表女孩一定是在中庭突然消失。',
+      firstInterpretation: '家長這麼快就報案——是不是代表她真的是在這裡突然不見的？',
       finalInterpretation: '廣播時間只能證明家長很快發現孩子不見，無法證明女孩是在中庭失蹤，更不能證明她遭人帶走。',
     },
     {
       id: 'adult-man',
       title: '陌生男子目擊',
-      firstInterpretation: '有證人看到女孩跟著陌生男子離開，陌生男子很可能就是關鍵人物。',
+      firstInterpretation: '有人說看到她跟著一個陌生男子走——那個人會不會就是關鍵？',
       finalInterpretation:
         '證人距離太遠，只看到一高一矮的身影，就自然把旁邊的成年男子與女孩聯想在一起。事後確認，那是一對正在逛街的父女，與本案毫無關係。',
     },
     {
       id: 'blind-angle',
       title: '展示架視線死角',
-      firstInterpretation: '女孩可能利用展示架後方離開，因此沒有人知道她去了哪裡。',
+      firstInterpretation: '如果她繞到展示架後面——是不是就沒有人看得到她往哪走了？',
       finalInterpretation: '真正造成混亂的不是女孩消失，而是不同位置的人看到的方向完全不同，每個人都以為自己看見了完整經過。',
     },
     {
       id: 'assumed-father',
       title: '被誤認的父親',
-      firstInterpretation: '女孩曾經跟著一位成年男子行動，那人很可能就是帶走她的人。',
+      firstInterpretation: '店員說她身邊那個男的「看起來像爸爸」——但真的是嗎？',
       finalInterpretation: '店員事後才意識到，自己只是把一位剛好經過的男子，自然而然認成女孩的父親。她從來沒有真正確認兩人有任何關係。',
     },
     {
       id: 'limited-view',
       title: '休息區視角',
-      firstInterpretation: '如果女孩一直待在這裡，家長應該很容易找到她。',
+      firstInterpretation: '如果她真的一直在這裡——為什麼家長會找不到？',
       finalInterpretation: '這裡只能看到中庭入口，看不到其他出口；而家長很可能一直在其他方向尋找，雙方其實彼此都不在對方的視線內。',
     },
     {
       id: 'waiting-girl',
       title: '等待中的女孩',
-      firstInterpretation: '女孩可能停留片刻後，又繼續往別處移動。',
+      firstInterpretation: '清潔人員說她安靜地站著往人群裡看——她在等誰？等多久了？',
       finalInterpretation:
         '女孩沒有驚慌，也沒有急著到處找人。她一直遵守「留在原地等待」的觀念，只是她認定的「原地」，和父母認定的「原地」並不是同一個地方。',
     },
     {
       id: 'split-flow',
       title: '分流動線',
-      firstInterpretation: '女孩可能是在分流時，被人帶往另一個出口。',
+      firstInterpretation: '散場時人潮被分成兩股方向——她會不會就是被沖散到另一邊了？',
       finalInterpretation: '真正分開的不是女孩與陌生人，而是女孩與父母。三個人都順著不同的人流前進，並各自相信很快就會再見面。',
     },
     {
       id: 'stayed-behind',
       title: '停在原地的小女孩',
-      firstInterpretation: '女孩停下來，是因為她不知道該往哪裡走。',
+      firstInterpretation: '工作人員說她停在原地一直往人群裡看——她是不是根本不知道該往哪走？',
       finalInterpretation:
         '女孩其實知道自己該做什麼——她一直遵守「留在原地等爸爸媽媽」。只是她認定的原地，是她最後看見父母的位置；而父母認定的原地，則是表演開始前約好的集合點。',
     },
     {
       id: 'timeline',
       title: '事件時間板',
-      firstInterpretation: '大家的證詞互相矛盾。',
+      firstInterpretation: '每個人講的時間點都對不太上——是不是有人在說謊？',
       finalInterpretation: '每份證詞都描述了不同時間點，因此可以同時成立。',
     },
     {
       id: 'searchRoutes',
       title: '搜尋路線圖',
-      firstInterpretation: '大家一直找錯方向。',
+      firstInterpretation: '搜尋路線這麼分散——是不是搜救的方向從一開始就錯了？',
       finalInterpretation: '每個人都從自己認定的「原地」開始搜尋，因此路線自然不同。',
     },
     {
       id: 'broadcastRecord',
       title: '尋人廣播紀錄',
-      firstInterpretation: '女孩沒有聽見廣播，所以一直沒有出現。',
+      firstInterpretation: '廣播都放了兩次了——她會不會其實根本沒聽到？',
       finalInterpretation: '即使聽見廣播，女孩也可能不知道服務台就是父母等待的地方。',
     },
     {
       id: 'mallGuideMap',
       title: '商場導覽圖',
-      firstInterpretation: '商場太大，所以彼此找不到。',
+      firstInterpretation: '商場這麼大——是不是純粹只是因為地方太大才找不到彼此？',
       finalInterpretation: '真正造成錯過的，不是商場大小，而是每個人心中的「原地」並不相同。',
     },
     {
       id: 'waterBottle',
       title: '放在長椅旁的水壺',
-      firstInterpretation: '女孩在這裡停留很久，可能不知道該去哪裡。',
+      firstInterpretation: '水壺放在長椅旁，看起來她待了不短的時間——她是不知道該去哪，還是在等人？',
       finalInterpretation: '女孩不是迷路，而是相信父母會回到她認定的集合地點，所以選擇等待。',
     },
     {
       id: 'directionBoard',
       title: '商場指示牌',
-      firstInterpretation: '商場動線太複雜，所以大家一直錯過。',
+      firstInterpretation: '指示牌同時指向三個地方——會不會就是這樣讓大家錯過彼此的？',
       finalInterpretation: '不同的人，對同一個地點有不同的理解，因此每個人都認為自己走的是正確方向。',
     },
     {
       id: 'stageMarker',
       title: '集合點 A',
-      firstInterpretation: '這只是活動留下的貼紙。',
+      firstInterpretation: '這張「集合點A」的貼紙活動結束後也沒人撕掉——對她來說，這裡是不是有特別的意義？',
       finalInterpretation: '對女孩而言，這就是最後一次和父母站在一起的位置，因此她自然把這裡當成「原地」。',
-    },
-  ],
-  hypotheses: [
-    {
-      id: 'abduction',
-      label: '被陌生人帶走',
-      color: '#ef4444',
-      reflection: '人看到「鞋子」「陌生男子」「協尋」時，很容易把它們串成一個完整故事，即使三件事之間沒有證據證明彼此有關。',
-    },
-    {
-      id: 'ranAway',
-      label: '自己亂跑',
-      color: '#eab308',
-      reflection: '孩子突然離開父母視線時，我們很容易認為是孩子亂跑，而忽略了父母也可能同時改變了位置。',
-    },
-    {
-      id: 'missedParents',
-      label: '她和父母在人群中錯過了',
-      color: '#3b82f6',
-      reflection:
-        '這個假說最接近事件的方向，但你可能仍然把「錯過」想成某一方看漏、走太快，或沒有注意另一方。當人群突然移動時，大腦很容易用平常的經驗補齊看不見的部分：父母以為孩子仍跟在身邊，孩子也以為父母很快會回到剛才的位置。雙方都沒有真正確認，卻都把自己的預期當成了現場事實。',
-    },
-    {
-      id: 'unclear',
-      label: '目前還無法判斷',
-      color: '#9ca3af',
-      reflection:
-        '選擇暫時不下結論，代表你注意到現有證據仍可能支持不只一種說法。這不是逃避判斷，而是在抵抗大腦急著把零散資訊拼成完整故事的衝動。不過，即使選擇保留，你在探索途中仍可能曾經偏向某個答案；真正值得回看的，是哪些畫面、話語或既有經驗，曾悄悄把你的注意力推向那個方向。',
     },
   ],
   deduction: {
@@ -542,6 +514,7 @@ export const mission001: Mission = {
         promptBefore: '表演結束後，人群同時往四周散開，美玲最後停留等待的地方是',
         promptAfter: '。',
         correctOptionId: 'stage',
+        correctExplanation: '地上的「集合點A」貼紙活動結束後一直沒拆——那是她最後一次和父母站在一起的位置，她自然把這裡當成該等待的「原地」。',
         options: [
           { id: 'stage', text: '表演舞台附近（她認定的「集合點A」）' },
           { id: 'info-desk', text: '服務台（家長廣播請她去的地方）', misledByClueId: 'broadcastRecord' },
@@ -554,6 +527,7 @@ export const mission001: Mission = {
         promptBefore: '曾被目擊出現在她附近的成年男子，其實是',
         promptAfter: '。',
         correctOptionId: 'stranger',
+        correctExplanation: '目擊者站的位置太遠、人潮又擁擠，只看到一高一矮的身影就自然把兩個沒有關聯的人聯想成一組。',
         options: [
           { id: 'stranger', text: '剛好經過、與她毫無關係的路人' },
           { id: 'abductor', text: '帶走她的可疑人士', misledByClueId: 'adult-man' },
@@ -566,6 +540,7 @@ export const mission001: Mission = {
         promptBefore: '你在中庭撿到的粉紅色童鞋，屬於',
         promptAfter: '。',
         correctOptionId: 'other-girl',
+        correctExplanation: '現場好幾個年紀相近的孩子，掉鞋子的不一定是她——「年齡相近」不代表「就是同一個人」。',
         options: [
           { id: 'other-girl', text: '另一位年紀相近、混亂中遺失鞋子的小女孩' },
           { id: 'meiling', text: '美玲本人，代表她曾在此掙扎', misledByClueId: 'pink-shoe' },
@@ -578,6 +553,7 @@ export const mission001: Mission = {
         promptBefore: '美玲和父母真正錯過彼此的原因，是',
         promptAfter: '。',
         correctOptionId: 'different-spot',
+        correctExplanation: '表演結束後人潮同時往四周散開，父母以為她跟在身邊、她以為父母只是先走幾步很快會回來，兩邊都朝不同方向前進，卻都相信對方仍在原地——這才是真正的「錯過」。',
         options: [
           { id: 'different-spot', text: '雙方對「原地」的理解不同，各自等在不同地方' },
           { id: 'abducted', text: '美玲被陌生人帶走', misledByClueId: 'adult-man' },
@@ -590,6 +566,7 @@ export const mission001: Mission = {
         promptBefore: '整起事件裡，需要負責的人是',
         promptAfter: '。',
         correctOptionId: 'noone',
+        correctExplanation: '每位目擊者說的都是自己看到的那一小段時間，單獨看像是互相矛盾，但把時間軸拼起來，其實每一段都是真的。',
         options: [
           { id: 'noone', text: '沒有人蓄意犯錯，這是一場單純的誤會' },
           { id: 'man', text: '目擊的陌生男子', misledByClueId: 'adult-man' },

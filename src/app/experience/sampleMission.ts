@@ -105,26 +105,6 @@ export const sampleMission: Mission = {
       finalInterpretation: '巨響其實是隔壁店家的促銷活動音效，跟案件無關。',
     },
   ],
-  hypotheses: [
-    {
-      id: 'guess-a',
-      label: '有人闖入',
-      color: '#ef4444',
-      reflection: '（測試用假資料）看到紙條和腳印時，很容易先往「有人闖入」這個方向想。',
-    },
-    {
-      id: 'guess-b',
-      label: '只是意外',
-      color: '#3b82f6',
-      reflection: '（測試用假資料）巨響+空抽屜也可能只是日常巧合，不代表發生了什麼事。',
-    },
-    {
-      id: 'guess-unclear',
-      label: '尚無法判斷',
-      color: '#9ca3af',
-      reflection: '（測試用假資料）保留判斷也是一種立場。',
-    },
-  ],
   deduction: {
     title: '（測試用假資料）重建經過',
     intro: '（測試用假資料）用收集到的線索填完這句話。',
@@ -134,6 +114,7 @@ export const sampleMission: Mission = {
         promptBefore: '造成巨響的原因是',
         promptAfter: '。',
         correctOptionId: 'promo',
+        correctExplanation: '（測試用假資料）時間點對得上隔壁店家的促銷活動。',
         options: [
           { id: 'promo', text: '隔壁店家的促銷音效' },
           { id: 'intruder', text: '有人闖入', misledByClueId: 'clue-3' },
