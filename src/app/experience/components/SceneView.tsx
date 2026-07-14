@@ -43,7 +43,7 @@ export function SceneView({
             >
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
             </button>
-            <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/75 px-2 py-0.5 text-[10px] text-slate-200">
+            <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-amber-300/40 bg-black/90 px-2.5 py-1 text-xs font-medium text-amber-100 shadow-lg shadow-black/50">
               {h.label}
             </span>
           </div>
@@ -67,7 +67,7 @@ export function SceneView({
           >
             🧍
           </button>
-          <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/75 px-2 py-0.5 text-[10px] text-sky-200">
+          <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-sky-300/40 bg-black/90 px-2.5 py-1 text-xs font-medium text-sky-100 shadow-lg shadow-black/50">
             {npc.name}
           </span>
         </div>

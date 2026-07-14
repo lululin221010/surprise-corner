@@ -67,7 +67,13 @@ export default function ExperiencePage() {
   return (
     <main className="min-h-screen bg-[#0d0820] px-6 py-10 text-slate-300">
       <div className="mx-auto max-w-3xl">
-        <p className="mb-6 text-xs tracking-[0.25em] text-slate-500">{mission.title}</p>
+        <p className="mb-2 text-xs tracking-[0.25em] text-slate-500">{mission.title}</p>
+
+        {!showConclusion && (
+          <p className="mb-6 text-sm leading-relaxed text-slate-400">
+            點擊場景裡的物件或人物來探索案發經過。你可以自由決定探索順序，也可以隨時在下方提出你認為的案件假說——沒有標準答案，跟著你的直覺走，之後也能隨時修改。
+          </p>
+        )}
 
         {showConclusion ? (
           <ConclusionScreen
