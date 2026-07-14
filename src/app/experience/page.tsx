@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { mission001 } from './missions/mission-001';
 import { useMissionState } from './useMissionState';
-import { SceneList } from './components/SceneList';
 import { SceneView } from './components/SceneView';
 import { NpcDialogue } from './components/NpcDialogue';
 import { ClueInventory } from './components/ClueInventory';
 import { HypothesisTool } from './components/HypothesisTool';
 import { ConclusionScreen } from './components/ConclusionScreen';
+import { DeductionBoard } from './components/DeductionBoard';
 import type { Hotspot } from './types';
 
 export default function ExperiencePage() {
@@ -32,18 +32,18 @@ export default function ExperiencePage() {
   const [activeNpcId, setActiveNpcId] = useState<string | null>(null);
   const [hypothesisPicking, setHypothesisPicking] = useState(false);
   const [concludeBlockedMessage, setConcludeBlockedMessage] = useState<string | null>(null);
+  const [deductionAnswers, setDeductionAnswers] = useState<Record<string, string>>({});
+  const [deductionHasSubmitted, setDeductionHasSubmitted] = useState(false);
+  const [boardExpanded, setBoardExpanded] = useState(false);
 
   const currentScene = mission.scenes.find(s => s.id === currentSceneId) ?? mission.scenes[0];
   const sceneNpcs = mission.npcs.filter(n => n.sceneId === currentScene?.id);
   const activeNpc = sceneNpcs.find(n => n.id === activeNpcId) ?? null;
-
-  const activeReveal = activeHotspot
-    ? { label: activeHotspot.label, text: activeHotspot.revealText, gotClue: !!activeHotspot.givesClueId }
-    : null;
+  const deductionFilledCount = mission.deduction.blanks.filter(b => deductionAnswers[b.id]).length;
 
   function handleHotspotClick(h: Hotspot) {
     setExploredHotspotIds(prev => (prev.includes(h.id) ? prev : [...prev, h.id]));
-    setActiveHotspot(h);
+    setActiveHotspot(prev => (prev?.id === h.id ? null : h));
     collectClue(h.givesClueId);
   }
 
@@ -67,6 +67,10 @@ export default function ExperiencePage() {
     setShowConclusion(true);
   }
 
+  function handleDeductionSelectOption(blankId: string, optionId: string) {
+    setDeductionAnswers(prev => ({ ...prev, [blankId]: optionId }));
+  }
+
   return (
     <main className="min-h-screen bg-[#0d0820] px-6 py-10 text-slate-300">
       <div className="mx-auto max-w-3xl">
@@ -86,27 +90,23 @@ export default function ExperiencePage() {
             mission={mission}
             collectedClueIds={collectedClueIds}
             hypothesisHistory={hypothesisHistory}
+            deductionAnswers={deductionAnswers}
             onBack={() => setShowConclusion(false)}
           />
         ) : (
           <>
-            <div className="mb-4">
-              <SceneList
-                scenes={mission.scenes}
-                currentSceneId={currentScene?.id ?? ''}
-                onSelect={handleSceneChange}
-              />
-            </div>
-
             {currentScene && (
               <SceneView
                 scene={currentScene}
+                scenes={mission.scenes}
+                onSceneSelect={handleSceneChange}
                 npcs={sceneNpcs}
                 exploredHotspotIds={exploredHotspotIds}
                 onHotspotClick={handleHotspotClick}
+                activeHotspotId={activeHotspot?.id ?? null}
+                onCloseReveal={() => setActiveHotspot(null)}
                 activeNpcId={activeNpcId}
                 onNpcMarkerClick={id => setActiveNpcId(prev => (prev === id ? null : id))}
-                activeReveal={activeReveal}
               />
             )}
 
@@ -138,6 +138,31 @@ export default function ExperiencePage() {
 
             <div className="mt-8">
               <ClueInventory clues={mission.clues} collectedClueIds={collectedClueIds} />
+            </div>
+
+            <div className="mt-4 rounded-lg border border-white/10 bg-white/5">
+              <button
+                onClick={() => setBoardExpanded(prev => !prev)}
+                className="flex w-full items-center justify-between px-4 py-3 text-left"
+              >
+                <span className="text-sm font-medium text-slate-200">📌 案件公告欄</span>
+                <span className="flex items-center gap-2 text-xs text-slate-500">
+                  {deductionFilledCount}/{mission.deduction.blanks.length} 已整理
+                  <span className="text-slate-600">{boardExpanded ? '︿' : '﹀'}</span>
+                </span>
+              </button>
+              {boardExpanded && (
+                <div className="border-t border-white/10 px-4 py-4">
+                  <DeductionBoard
+                    deduction={mission.deduction}
+                    clues={mission.clues}
+                    answers={deductionAnswers}
+                    onSelectOption={handleDeductionSelectOption}
+                    hasSubmitted={deductionHasSubmitted}
+                    onSubmit={() => setDeductionHasSubmitted(true)}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="mt-8 text-center">

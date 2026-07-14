@@ -125,6 +125,22 @@ export const sampleMission: Mission = {
       reflection: '（測試用假資料）保留判斷也是一種立場。',
     },
   ],
+  deduction: {
+    title: '（測試用假資料）重建經過',
+    intro: '（測試用假資料）用收集到的線索填完這句話。',
+    blanks: [
+      {
+        id: 'blank-1',
+        promptBefore: '造成巨響的原因是',
+        promptAfter: '。',
+        correctOptionId: 'promo',
+        options: [
+          { id: 'promo', text: '隔壁店家的促銷音效' },
+          { id: 'intruder', text: '有人闖入', misledByClueId: 'clue-3' },
+        ],
+      },
+    ],
+  },
   reflectionEssay: {
     title: '（測試用假資料）回頭看看',
     intro: '（測試用假資料）在揭曉之前，先想想你是怎麼推理的。',

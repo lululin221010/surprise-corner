@@ -6,20 +6,38 @@ export function ConclusionScreen({
   mission,
   collectedClueIds,
   hypothesisHistory,
+  deductionAnswers,
   onBack,
 }: {
   mission: Mission;
   collectedClueIds: string[];
   hypothesisHistory: string[];
+  deductionAnswers: Record<string, string>;
   onBack: () => void;
 }) {
   const collected = mission.clues.filter(c => collectedClueIds.includes(c.id));
   const finalHypothesisId = hypothesisHistory[hypothesisHistory.length - 1] ?? null;
   const finalHypothesis = mission.hypotheses.find(h => h.id === finalHypothesisId) ?? null;
+  const deductionCorrectCount = mission.deduction.blanks.filter(
+    b => deductionAnswers[b.id] === b.correctOptionId
+  ).length;
+  const deductionTotal = mission.deduction.blanks.length;
 
   return (
     <div className="mx-auto max-w-xl text-center">
       <p className="mb-2 text-xs tracking-widest text-slate-500">案件已完成</p>
+
+      <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
+        <p className="mb-1 text-xs tracking-wide text-slate-500">案件重建驗證</p>
+        <p className="text-lg font-medium text-amber-300">
+          {deductionCorrectCount} / {deductionTotal} 題
+        </p>
+        <p className="mt-1 text-xs text-slate-500">
+          {deductionCorrectCount === deductionTotal
+            ? '你完整重建了整起事件，沒有被任何一個第一印象帶偏。'
+            : '有些空格你當下的判斷跟後來確認的事實不同，這很正常——這正是這個案子真正想讓你看見的事。'}
+        </p>
+      </div>
 
       <div className="mb-6 text-left">
         <p className="mb-2 text-center text-xs tracking-wide text-slate-500">你的推理歷程</p>

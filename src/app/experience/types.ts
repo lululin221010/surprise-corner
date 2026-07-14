@@ -54,6 +54,29 @@ export type ReflectionSection = {
   content?: string;
 };
 
+export type DeductionOption = {
+  id: string;
+  text: string;
+  /** 答錯時顯示：這個選項對應到哪條線索的第一印象，讓玩家看見自己剛剛是被什麼誤導 */
+  misledByClueId?: string;
+};
+
+export type DeductionBlank = {
+  id: string;
+  /** 空格前的句子片段 */
+  promptBefore: string;
+  /** 空格後的句子片段 */
+  promptAfter: string;
+  correctOptionId: string;
+  options: DeductionOption[];
+};
+
+export type Deduction = {
+  title: string;
+  intro: string;
+  blanks: DeductionBlank[];
+};
+
 export type Mission = {
   id: string;
   title: string;
@@ -61,6 +84,8 @@ export type Mission = {
   npcs: Npc[];
   clues: Clue[];
   hypotheses: Hypothesis[];
+  /** 結案前的填空驗證關卡，把「拼湊真相」變成真的要動腦組合，而不是選一個大方向的假說就結束 */
+  deduction: Deduction;
   /** 通用反思短文，所有玩家看到的內容一樣，不因假說不同而變，穿插在個人化reflection跟Truth之間 */
   reflectionEssay: {
     title: string;

@@ -2,57 +2,127 @@
 
 import type { Hotspot, Npc, Scene } from '../types';
 
+const SCENE_ICONS: Record<string, string> = {
+  atrium: '🎪',
+  'info-desk': '🛎️',
+  'toy-store': '🧸',
+  'family-lounge': '🛋️',
+  'information-corridor': '🚶',
+  securityOffice: '🛡️',
+  findingRoom: '📢',
+  'scene-final-location': '📍',
+};
+
 export function SceneView({
   scene,
+  scenes,
+  onSceneSelect,
   npcs,
   exploredHotspotIds,
   onHotspotClick,
+  activeHotspotId,
+  onCloseReveal,
   activeNpcId,
   onNpcMarkerClick,
-  activeReveal,
 }: {
   scene: Scene;
+  scenes: Scene[];
+  onSceneSelect: (id: string) => void;
   npcs: Npc[];
   exploredHotspotIds: string[];
   onHotspotClick: (h: Hotspot) => void;
+  activeHotspotId: string | null;
+  onCloseReveal: () => void;
   activeNpcId: string | null;
   onNpcMarkerClick: (npcId: string) => void;
-  activeReveal: { label: string; text: string; gotClue: boolean } | null;
 }) {
   return (
-    <div
-      className="relative w-full overflow-hidden rounded-xl border border-white/10"
-      style={{ aspectRatio: '3 / 2' }}
-    >
+    <div className="relative w-full" style={{ aspectRatio: '3 / 2' }}>
       <img
         src={scene.image}
         alt={scene.name}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full rounded-xl border border-white/10 object-cover"
         style={{ filter: 'brightness(1.35) contrast(1.05)' }}
       />
 
+      <div className="absolute left-2 right-2 top-2 z-40 flex flex-wrap gap-1.5 rounded-full bg-black/40 p-1.5 backdrop-blur-sm">
+        {scenes.map(s => (
+          <button
+            key={s.id}
+            onClick={() => onSceneSelect(s.id)}
+            title={s.name}
+            aria-label={s.name}
+            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs transition-all ${
+              s.id === scene.id
+                ? 'scale-110 border-amber-300 bg-amber-300/30'
+                : 'border-white/20 bg-black/30 opacity-70 hover:opacity-100'
+            }`}
+          >
+            {SCENE_ICONS[s.id] ?? '📍'}
+          </button>
+        ))}
+      </div>
+
       {scene.hotspots.map(h => {
         const explored = exploredHotspotIds.includes(h.id);
+        const isActive = activeHotspotId === h.id;
+        const openUp = h.position.yPct > 55;
+        const hAlign = h.position.xPct < 22 ? 'left' : h.position.xPct > 78 ? 'right' : 'center';
+
         return (
           <div
             key={h.id}
             className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: `${h.position.xPct}%`, top: `${h.position.yPct}%` }}
+            style={{ left: `${h.position.xPct}%`, top: `${h.position.yPct}%`, zIndex: isActive ? 30 : 10 }}
           >
             <button
               onClick={() => onHotspotClick(h)}
               aria-label={h.label}
-              className={`flex h-7 w-7 items-center justify-center rounded-full border-2 transition-colors ${
-                explored
+              className={`flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm shadow-md shadow-black/40 transition-colors ${
+                isActive
+                  ? 'border-amber-300 bg-amber-300/40'
+                  : explored
                   ? 'border-white/30 bg-white/10'
-                  : 'animate-pulse border-amber-300 bg-amber-300/25'
+                  : 'animate-pulse border-amber-300 bg-amber-300/30'
               }`}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              {explored ? (
+                <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+              ) : (
+                <span aria-hidden>🔍</span>
+              )}
             </button>
-            <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-amber-300/40 bg-black/90 px-2.5 py-1 text-xs font-medium text-amber-100 shadow-lg shadow-black/50">
-              {h.label}
-            </span>
+
+            {!isActive && (
+              <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-amber-300/40 bg-black/90 px-2.5 py-1 text-xs font-medium text-amber-100 shadow-lg shadow-black/50">
+                {h.label}
+              </span>
+            )}
+
+            {isActive && (
+              <div
+                className={`absolute w-56 rounded-lg border border-amber-300/50 bg-black/95 p-3 shadow-xl shadow-black/70 backdrop-blur-sm ${
+                  openUp ? 'bottom-full mb-2' : 'top-full mt-2'
+                } ${hAlign === 'left' ? 'left-0' : hAlign === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'}`}
+              >
+                <div className="mb-1 flex items-start justify-between gap-2">
+                  <p className="text-xs tracking-wide text-amber-300">{h.label}</p>
+                  <button
+                    onClick={onCloseReveal}
+                    aria-label="關閉"
+                    className="shrink-0 text-slate-500 hover:text-slate-300"
+                  >
+                    ✕
+                  </button>
+                </div>
+                {!!h.givesClueId && (
+                  <span className="mb-1 inline-block rounded-full border border-emerald-400/40 bg-emerald-400/15 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+                    🔍 獲得新線索
+                  </span>
+                )}
+                <p className="text-sm leading-relaxed text-slate-100">{h.revealText}</p>
+              </div>
+            )}
           </div>
         );
       })}
@@ -61,12 +131,12 @@ export function SceneView({
         <div
           key={npc.id}
           className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${npc.position.xPct}%`, top: `${npc.position.yPct}%` }}
+          style={{ left: `${npc.position.xPct}%`, top: `${npc.position.yPct}%`, zIndex: activeNpcId === npc.id ? 20 : 10 }}
         >
           <button
             onClick={() => onNpcMarkerClick(npc.id)}
             aria-label={npc.name}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border-2 text-base transition-colors ${
+            className={`flex h-9 w-9 items-center justify-center rounded-full border-2 text-base shadow-md shadow-black/40 transition-colors ${
               activeNpcId === npc.id
                 ? 'border-sky-300 bg-sky-300/30'
                 : 'border-sky-400/60 bg-sky-400/15'
@@ -79,18 +149,6 @@ export function SceneView({
           </span>
         </div>
       ))}
-
-      {activeReveal && (
-        <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/85 px-4 py-3 backdrop-blur-sm">
-          {activeReveal.gotClue && (
-            <span className="mb-1 inline-block rounded-full border border-emerald-400/40 bg-emerald-400/15 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
-              🔍 獲得新線索
-            </span>
-          )}
-          <p className="mb-0.5 text-xs tracking-wide text-amber-300">{activeReveal.label}</p>
-          <p className="text-sm leading-relaxed text-slate-100">{activeReveal.text}</p>
-        </div>
-      )}
     </div>
   );
 }

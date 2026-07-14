@@ -2,14 +2,15 @@ import type { Mission } from '../types';
 
 // 正式 Mission 001 內容檔，由內容端（GPT）產出，CC負責補上position/image等工程欄位後wire進來。
 // 場景圖是妹用AI生圖工具產出的正式美術，存在 public/images/experience/，取代原本CC手刻的SVG佔位圖。
-const atriumImage = '/images/experience/atrium.png';
-const infoDeskImage = '/images/experience/info-desk.png';
-const toyStoreImage = '/images/experience/toy-store.png';
-const familyLoungeImage = '/images/experience/family-lounge.png';
-const corridorImage = '/images/experience/information-corridor.png';
-const securityOfficeImage = '/images/experience/security-office.png';
-const findingRoomImage = '/images/experience/finding-room.png';
-const waitingAreaImage = '/images/experience/waiting-area.png';
+// 2026-07-15：原始PNG每張1.6-1.9MB(8張共13MB)拖慢載入速度，壓縮成webp後共0.35MB，原始PNG保留在資料夾未刪除
+const atriumImage = '/images/experience/atrium.webp';
+const infoDeskImage = '/images/experience/info-desk.webp';
+const toyStoreImage = '/images/experience/toy-store.webp';
+const familyLoungeImage = '/images/experience/family-lounge.webp';
+const corridorImage = '/images/experience/information-corridor.webp';
+const securityOfficeImage = '/images/experience/security-office.webp';
+const findingRoomImage = '/images/experience/finding-room.webp';
+const waitingAreaImage = '/images/experience/waiting-area.webp';
 
 export const mission001: Mission = {
   id: 'mission-001',
@@ -532,6 +533,72 @@ export const mission001: Mission = {
         '選擇暫時不下結論，代表你注意到現有證據仍可能支持不只一種說法。這不是逃避判斷，而是在抵抗大腦急著把零散資訊拼成完整故事的衝動。不過，即使選擇保留，你在探索途中仍可能曾經偏向某個答案；真正值得回看的，是哪些畫面、話語或既有經驗，曾悄悄把你的注意力推向那個方向。',
     },
   ],
+  deduction: {
+    title: '案件公告欄',
+    intro: '想通了幾格就填幾格，隨時可以回來改。填完全部再驗證，答錯也能重新選，不限次數。',
+    blanks: [
+      {
+        id: 'blank-location',
+        promptBefore: '表演結束後，人群同時往四周散開，美玲最後停留等待的地方是',
+        promptAfter: '。',
+        correctOptionId: 'stage',
+        options: [
+          { id: 'stage', text: '表演舞台附近（她認定的「集合點A」）' },
+          { id: 'info-desk', text: '服務台（家長廣播請她去的地方）', misledByClueId: 'broadcastRecord' },
+          { id: 'toy-store', text: '玩具店門口（她曾經站過的地方）', misledByClueId: 'assumed-father' },
+          { id: 'parking', text: '停車場入口（人群疏散的主要方向）', misledByClueId: 'split-flow' },
+        ],
+      },
+      {
+        id: 'blank-man',
+        promptBefore: '曾被目擊出現在她附近的成年男子，其實是',
+        promptAfter: '。',
+        correctOptionId: 'stranger',
+        options: [
+          { id: 'stranger', text: '剛好經過、與她毫無關係的路人' },
+          { id: 'abductor', text: '帶走她的可疑人士', misledByClueId: 'adult-man' },
+          { id: 'father', text: '她的父親', misledByClueId: 'assumed-father' },
+          { id: 'security', text: '商場保全人員' },
+        ],
+      },
+      {
+        id: 'blank-shoe',
+        promptBefore: '你在中庭撿到的粉紅色童鞋，屬於',
+        promptAfter: '。',
+        correctOptionId: 'other-girl',
+        options: [
+          { id: 'other-girl', text: '另一位年紀相近、混亂中遺失鞋子的小女孩' },
+          { id: 'meiling', text: '美玲本人，代表她曾在此掙扎', misledByClueId: 'pink-shoe' },
+          { id: 'display', text: '玩具店的展示商品' },
+          { id: 'lost-and-found', text: '服務台失物招領的物品' },
+        ],
+      },
+      {
+        id: 'blank-reason',
+        promptBefore: '美玲和父母真正錯過彼此的原因，是',
+        promptAfter: '。',
+        correctOptionId: 'different-spot',
+        options: [
+          { id: 'different-spot', text: '雙方對「原地」的理解不同，各自等在不同地方' },
+          { id: 'abducted', text: '美玲被陌生人帶走', misledByClueId: 'adult-man' },
+          { id: 'ranaway', text: '美玲自己亂跑，不聽話', misledByClueId: 'blind-angle' },
+          { id: 'bad-luck', text: '商場動線太複雜，純粹運氣不好', misledByClueId: 'mallGuideMap' },
+        ],
+      },
+      {
+        id: 'blank-blame',
+        promptBefore: '整起事件裡，需要負責的人是',
+        promptAfter: '。',
+        correctOptionId: 'noone',
+        options: [
+          { id: 'noone', text: '沒有人蓄意犯錯，這是一場單純的誤會' },
+          { id: 'man', text: '目擊的陌生男子', misledByClueId: 'adult-man' },
+          { id: 'meiling-self', text: '美玲自己', misledByClueId: 'stayed-behind' },
+          { id: 'mall', text: '商場的保全與廣播系統', misledByClueId: 'broadcastRecord' },
+        ],
+      },
+    ],
+  },
   reflectionEssay: {
     title: '回頭看看，你是怎麼推理的？',
     intro: '在揭曉案件之前，先不要急著看答案。\n\n請回頭看看，你一路是怎麼把這些片段拼成一個故事的。',
