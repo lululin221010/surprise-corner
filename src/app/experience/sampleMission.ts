@@ -118,6 +118,12 @@ export const sampleMission: Mission = {
       color: '#3b82f6',
       reflection: '（測試用假資料）巨響+空抽屜也可能只是日常巧合，不代表發生了什麼事。',
     },
+    {
+      id: 'guess-unclear',
+      label: '尚無法判斷',
+      color: '#9ca3af',
+      reflection: '（測試用假資料）保留判斷也是一種立場。',
+    },
   ],
   truth: {
     revealText: '（這裡會顯示真相文字——測試用假資料，正式內容由 Mission 001 資料檔取代。）',

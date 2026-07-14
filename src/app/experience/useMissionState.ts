@@ -8,6 +8,7 @@ type SavedState = {
   collectedClueIds: string[];
   showConclusion: boolean;
   hypothesisHistory: string[];
+  hasShownFirstClueHint: boolean;
 };
 
 export function useMissionState(mission: Mission) {
@@ -17,6 +18,8 @@ export function useMissionState(mission: Mission) {
   const [collectedClueIds, setCollectedClueIds] = useState<string[]>([]);
   const [showConclusion, setShowConclusion] = useState(false);
   const [hypothesisHistory, setHypothesisHistory] = useState<string[]>([]);
+  const [hasShownFirstClueHint, setHasShownFirstClueHint] = useState(false);
+  const [showFirstClueHintBanner, setShowFirstClueHintBanner] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,6 +31,7 @@ export function useMissionState(mission: Mission) {
         setCollectedClueIds(saved.collectedClueIds || []);
         setShowConclusion(saved.showConclusion || false);
         setHypothesisHistory(saved.hypothesisHistory || []);
+        setHasShownFirstClueHint(saved.hasShownFirstClueHint || false);
       } catch {
         // 忽略壞掉的存檔，用預設值
       }
@@ -38,17 +42,31 @@ export function useMissionState(mission: Mission) {
 
   useEffect(() => {
     if (!loaded) return;
-    const state: SavedState = { currentSceneId, collectedClueIds, showConclusion, hypothesisHistory };
+    const state: SavedState = {
+      currentSceneId,
+      collectedClueIds,
+      showConclusion,
+      hypothesisHistory,
+      hasShownFirstClueHint,
+    };
     window.localStorage.setItem(storageKey, JSON.stringify(state));
-  }, [loaded, storageKey, currentSceneId, collectedClueIds, showConclusion, hypothesisHistory]);
+  }, [loaded, storageKey, currentSceneId, collectedClueIds, showConclusion, hypothesisHistory, hasShownFirstClueHint]);
 
   function collectClue(clueId?: string) {
     if (!clueId) return;
+    if (collectedClueIds.length === 0 && !collectedClueIds.includes(clueId) && !hasShownFirstClueHint) {
+      setHasShownFirstClueHint(true);
+      setShowFirstClueHintBanner(true);
+    }
     setCollectedClueIds(prev => (prev.includes(clueId) ? prev : [...prev, clueId]));
   }
 
   function submitHypothesis(hypothesisId: string) {
     setHypothesisHistory(prev => (prev[prev.length - 1] === hypothesisId ? prev : [...prev, hypothesisId]));
+  }
+
+  function dismissFirstClueHint() {
+    setShowFirstClueHintBanner(false);
   }
 
   return {
@@ -61,5 +79,7 @@ export function useMissionState(mission: Mission) {
     hypothesisHistory,
     currentHypothesisId: hypothesisHistory[hypothesisHistory.length - 1] ?? null,
     submitHypothesis,
+    showFirstClueHintBanner,
+    dismissFirstClueHint,
   };
 }

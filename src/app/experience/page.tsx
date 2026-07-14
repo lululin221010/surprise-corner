@@ -24,11 +24,15 @@ export default function ExperiencePage() {
     hypothesisHistory,
     currentHypothesisId,
     submitHypothesis,
+    showFirstClueHintBanner,
+    dismissFirstClueHint,
   } = useMissionState(mission);
 
   const [exploredHotspotIds, setExploredHotspotIds] = useState<string[]>([]);
   const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
   const [activeNpcId, setActiveNpcId] = useState<string | null>(null);
+  const [hypothesisPicking, setHypothesisPicking] = useState(false);
+  const [concludeBlockedMessage, setConcludeBlockedMessage] = useState<string | null>(null);
 
   const currentScene = mission.scenes.find(s => s.id === currentSceneId) ?? mission.scenes[0];
   const sceneNpcs = mission.npcs.filter(n => n.sceneId === currentScene?.id);
@@ -46,6 +50,20 @@ export default function ExperiencePage() {
     setActiveNpcId(null);
   }
 
+  function handleHypothesisSubmit(id: string) {
+    submitHypothesis(id);
+    setConcludeBlockedMessage(null);
+  }
+
+  function handleConcludeClick() {
+    if (!currentHypothesisId) {
+      setHypothesisPicking(true);
+      setConcludeBlockedMessage('請先提出你的案件假說，才能查看結案結果。');
+      return;
+    }
+    setShowConclusion(true);
+  }
+
   return (
     <main className="min-h-screen bg-[#0d0820] px-6 py-10 text-slate-300">
       <div className="mx-auto max-w-3xl">
@@ -60,11 +78,23 @@ export default function ExperiencePage() {
           />
         ) : (
           <>
+            {showFirstClueHintBanner && (
+              <div className="mb-4 flex items-center justify-between gap-3 rounded-lg border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-xs text-amber-200">
+                <span>你已取得第一條證據。你可以隨時在「案件假說」提出或修改目前的推測，不必等到有把握。</span>
+                <button onClick={dismissFirstClueHint} className="shrink-0 text-amber-300 hover:text-amber-100">
+                  知道了
+                </button>
+              </div>
+            )}
+
             <div className="mb-4">
               <HypothesisTool
                 hypotheses={mission.hypotheses}
                 currentHypothesisId={currentHypothesisId}
-                onSubmit={submitHypothesis}
+                onSubmit={handleHypothesisSubmit}
+                picking={hypothesisPicking}
+                onPickingChange={setHypothesisPicking}
+                promptMessage={concludeBlockedMessage}
               />
             </div>
 
@@ -98,7 +128,7 @@ export default function ExperiencePage() {
 
             <div className="mt-8 text-center">
               <button
-                onClick={() => setShowConclusion(true)}
+                onClick={handleConcludeClick}
                 className="rounded-full border border-amber-400/50 px-6 py-2 text-sm text-amber-300 hover:border-amber-400"
               >
                 我認為我知道真相了
