@@ -77,11 +77,14 @@ export default function ExperiencePage() {
         <p className="mb-2 text-xs tracking-[0.25em] text-slate-500">{mission.title}</p>
 
         {!showConclusion && (
-          <div className="mb-4 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
+          <div className="mb-4 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
             <p className="text-sm leading-relaxed text-slate-200">
               📢「請各位來賓協助留意，一名七歲女童與家人失散。女孩身穿紅色上衣，背著白色兔子背包。如有發現，請通知服務台。」
             </p>
-            <p className="mt-1 text-xs text-slate-500">點擊圖片中的圓點探索場景，隨時可在下方提出你的推測。</p>
+            <div className="mt-2 space-y-1 border-t border-white/10 pt-2 text-xs leading-relaxed text-slate-400">
+              <p>🔍 點圖片裡的圓點探索場景、🧍 是可以問話的人，圖片上方一排小圖示可以切換場景</p>
+              <p>📌 想到什麼推理，隨時打開下方「案件公告欄」整理起來，想通了再按「我認為我知道真相了」結案</p>
+            </div>
           </div>
         )}
 
@@ -129,7 +132,7 @@ export default function ExperiencePage() {
 
             {showFirstClueHintBanner && (
               <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-xs text-amber-200">
-                <span>你已取得第一條證據。你可以隨時在上方「案件假說」提出或修改目前的推測，不必等到有把握。</span>
+                <span>你已取得第一條證據。可以在上方「案件假說」先講你的直覺，或打開下方「📌 案件公告欄」把目前想到的都填進去，之後想到新的還能再改。</span>
                 <button onClick={dismissFirstClueHint} className="shrink-0 text-amber-300 hover:text-amber-100">
                   知道了
                 </button>
