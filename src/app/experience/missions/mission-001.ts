@@ -31,6 +31,31 @@ const infoDeskImage = svgDataUri(`
 </svg>
 `);
 
+const toyStoreImage = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#1c1330"/>
+  <rect x="0" y="320" width="600" height="80" fill="#241c3d"/>
+  <rect x="40" y="140" width="160" height="140" rx="6" fill="#3a2d5c"/>
+  <rect x="250" y="220" width="120" height="60" rx="4" fill="#2c2350"/>
+  <rect x="270" y="205" width="80" height="18" rx="3" fill="#5a4d85"/>
+  <rect x="430" y="100" width="130" height="180" rx="6" fill="#33264f"/>
+  <circle cx="470" cy="150" r="16" fill="#f0c9dd"/>
+  <circle cx="510" cy="160" r="20" fill="#e8b8d0"/>
+</svg>
+`);
+
+const familyLoungeImage = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#161228"/>
+  <rect x="0" y="320" width="600" height="80" fill="#201a34"/>
+  <rect x="60" y="220" width="130" height="70" rx="8" fill="#3a2d5c"/>
+  <circle cx="100" cy="215" r="10" fill="#f0c9a0"/>
+  <circle cx="150" cy="215" r="10" fill="#a0c9f0"/>
+  <rect x="240" y="250" width="150" height="30" rx="6" fill="#2c2350"/>
+  <rect x="470" y="130" width="90" height="120" rx="4" fill="#2a2145"/>
+</svg>
+`);
+
 export const mission001: Mission = {
   id: 'mission-001',
   title: '中庭走失事件（草稿標題，待定案）',
@@ -103,6 +128,64 @@ export const mission001: Mission = {
         },
       ],
     },
+    {
+      id: 'toy-store',
+      name: '玩具店',
+      image: toyStoreImage,
+      hotspots: [
+        {
+          id: 'toy-demo',
+          label: '查看玩具展示區',
+          kind: 'observe',
+          revealText: '展示區聚集不少親子試玩。幾名孩子在不同貨架間來回奔跑，大人則站在外圍等待。有時孩子離開視線十幾秒，大人也沒有立刻追上。',
+          position: { xPct: 20, yPct: 53 },
+        },
+        {
+          id: 'checkout-camera-sign',
+          label: '查看收銀台公告',
+          kind: 'observe',
+          revealText: '公告寫著：「本店監視設備僅供安全管理使用，不提供現場調閱。」旁邊還貼著活動期間人潮眾多的提醒。',
+          position: { xPct: 52, yPct: 63 },
+        },
+        {
+          id: 'plush-display',
+          label: '查看大型玩偶展示架',
+          kind: 'observe',
+          revealText: '展示架後方形成一小塊視線死角。站在不同位置的人，很容易誤以為另一個人已經往不同方向離開。',
+          givesClueId: 'blind-angle',
+          position: { xPct: 83, yPct: 47 },
+        },
+      ],
+    },
+    {
+      id: 'family-lounge',
+      name: '親子休息區',
+      image: familyLoungeImage,
+      hotspots: [
+        {
+          id: 'kids-table',
+          label: '查看兒童閱讀桌',
+          kind: 'observe',
+          revealText: '閱讀桌上散落著幾本童書和彩色鉛筆。附近家長提醒孩子：「如果跟爸爸媽媽走散，就留在原地，不要亂跑。」另一位孩子立刻回答：「老師也是這樣教我們。」',
+          position: { xPct: 21, yPct: 64 },
+        },
+        {
+          id: 'rest-bench',
+          label: '查看休息長椅',
+          kind: 'observe',
+          revealText: '長椅正對著中庭入口。坐在這裡的人可以一直看著入口，但看不到通往餐飲區和玩具店的走道。',
+          givesClueId: 'limited-view',
+          position: { xPct: 53, yPct: 66 },
+        },
+        {
+          id: 'direction-sign',
+          label: '查看指示牌',
+          kind: 'observe',
+          revealText: '指示牌寫著：「服務台 ←」「中庭 ↑」「親子休息區 →」。從不同方向過來的人，很可能認為自己回到了同一個地方，但其實彼此隔著一整個轉角。',
+          position: { xPct: 86, yPct: 48 },
+        },
+      ],
+    },
   ],
   npcs: [
     {
@@ -127,6 +210,50 @@ export const mission001: Mission = {
         },
       ],
     },
+    {
+      id: 'npc-toy-clerk',
+      name: '玩具店店員',
+      sceneId: 'toy-store',
+      position: { xPct: 30, yPct: 68 },
+      whyTheyThinkThis: '她當時正在門口整理商品，只看到人群經過的十幾秒。',
+      lines: [
+        {
+          label: '你有看到那個女孩嗎？',
+          text: '我看到一個差不多年紀的小女孩站在門口往後看，好像在找人。我低頭整理商品，再抬頭時她就不見了。',
+        },
+        {
+          label: '有人陪著她嗎？',
+          text: '我第一眼以為旁邊那位先生是她爸爸，但現在回想，其實我沒有看到他們交談，也沒有牽手，只是剛好走在附近而已。',
+          givesClueId: 'assumed-father',
+        },
+        {
+          label: '她看起來害怕嗎？',
+          text: '沒有。她沒有哭，也沒有大喊，只是不停看向後方，好像在等誰。',
+        },
+      ],
+    },
+    {
+      id: 'npc-cleaner',
+      name: '清潔人員',
+      sceneId: 'family-lounge',
+      position: { xPct: 65, yPct: 70 },
+      whyTheyThinkThis: '她負責親子休息區與中庭之間的清潔，只會不斷來回巡視，沒有看見完整經過。',
+      lines: [
+        {
+          label: '你有注意到那個女孩嗎？',
+          text: '有個小女孩在入口附近站了一陣子，一直往中庭方向看。我以為她是在等家人，所以沒有特別在意。',
+        },
+        {
+          label: '她有哭嗎？',
+          text: '沒有。她看起來很安靜，只是偶爾踮腳看看人群，好像怕錯過什麼。',
+        },
+        {
+          label: '後來她去哪裡了？',
+          text: '我推著清潔車去另一邊，再回來時她已經不在了。我不知道她是等到家人，還是自己離開。',
+          givesClueId: 'waiting-girl',
+        },
+      ],
+    },
   ],
   clues: [
     {
@@ -148,6 +275,31 @@ export const mission001: Mission = {
       firstInterpretation: '有證人看到女孩跟著陌生男子離開，陌生男子很可能就是關鍵人物。',
       finalInterpretation:
         '證人距離太遠，只看到一高一矮的身影，就自然把旁邊的成年男子與女孩聯想在一起。事後確認，那是一對正在逛街的父女，與本案毫無關係。',
+    },
+    {
+      id: 'blind-angle',
+      title: '展示架視線死角',
+      firstInterpretation: '女孩可能利用展示架後方離開，因此沒有人知道她去了哪裡。',
+      finalInterpretation: '真正造成混亂的不是女孩消失，而是不同位置的人看到的方向完全不同，每個人都以為自己看見了完整經過。',
+    },
+    {
+      id: 'assumed-father',
+      title: '被誤認的父親',
+      firstInterpretation: '女孩曾經跟著一位成年男子行動，那人很可能就是帶走她的人。',
+      finalInterpretation: '店員事後才意識到，自己只是把一位剛好經過的男子，自然而然認成女孩的父親。她從來沒有真正確認兩人有任何關係。',
+    },
+    {
+      id: 'limited-view',
+      title: '休息區視角',
+      firstInterpretation: '如果女孩一直待在這裡，家長應該很容易找到她。',
+      finalInterpretation: '這裡只能看到中庭入口，看不到其他出口；而家長很可能一直在其他方向尋找，雙方其實彼此都不在對方的視線內。',
+    },
+    {
+      id: 'waiting-girl',
+      title: '等待中的女孩',
+      firstInterpretation: '女孩可能停留片刻後，又繼續往別處移動。',
+      finalInterpretation:
+        '女孩沒有驚慌，也沒有急著到處找人。她一直遵守「留在原地等待」的觀念，只是她認定的「原地」，和父母認定的「原地」並不是同一個地方。',
     },
   ],
   truth: {
