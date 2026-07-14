@@ -1,110 +1,15 @@
 import type { Mission } from '../types';
 
 // 正式 Mission 001 內容檔，由內容端（GPT）產出，CC負責補上position/image等工程欄位後wire進來。
-// 尚未完整：目前只有第一個場景+一條線索，truth是根據已定案的案件真相寫的草稿，等正式潤飾文字。
-function svgDataUri(svg: string): string {
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
-const atriumImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#181026"/>
-  <rect x="0" y="320" width="600" height="80" fill="#221a34"/>
-  <rect x="30" y="170" width="150" height="100" rx="6" fill="#33264f"/>
-  <rect x="410" y="50" width="140" height="170" rx="4" fill="#2c2350"/>
-  <ellipse cx="290" cy="345" rx="60" ry="18" fill="#24361f"/>
-  <circle cx="300" cy="338" r="6" fill="#f6a8c0"/>
-  <rect x="470" y="250" width="70" height="100" rx="4" fill="#2a2145"/>
-</svg>
-`);
-
-const infoDeskImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#171224"/>
-  <rect x="0" y="310" width="600" height="90" fill="#211a34"/>
-  <rect x="200" y="150" width="220" height="70" rx="6" fill="#3a2d5c"/>
-  <rect x="220" y="130" width="180" height="24" rx="4" fill="#4a3d75"/>
-  <rect x="460" y="120" width="110" height="140" rx="4" fill="#2c2350"/>
-  <circle cx="490" cy="150" r="10" fill="#8a7cc0"/>
-  <rect x="510" y="145" width="30" height="20" rx="3" fill="#8a7cc0"/>
-  <rect x="40" y="230" width="120" height="10" rx="5" fill="#4b3f75" opacity="0.7"/>
-</svg>
-`);
-
-const toyStoreImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#1c1330"/>
-  <rect x="0" y="320" width="600" height="80" fill="#241c3d"/>
-  <rect x="40" y="140" width="160" height="140" rx="6" fill="#3a2d5c"/>
-  <rect x="250" y="220" width="120" height="60" rx="4" fill="#2c2350"/>
-  <rect x="270" y="205" width="80" height="18" rx="3" fill="#5a4d85"/>
-  <rect x="430" y="100" width="130" height="180" rx="6" fill="#33264f"/>
-  <circle cx="470" cy="150" r="16" fill="#f0c9dd"/>
-  <circle cx="510" cy="160" r="20" fill="#e8b8d0"/>
-</svg>
-`);
-
-const familyLoungeImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#161228"/>
-  <rect x="0" y="320" width="600" height="80" fill="#201a34"/>
-  <rect x="60" y="220" width="130" height="70" rx="8" fill="#3a2d5c"/>
-  <circle cx="100" cy="215" r="10" fill="#f0c9a0"/>
-  <circle cx="150" cy="215" r="10" fill="#a0c9f0"/>
-  <rect x="240" y="250" width="150" height="30" rx="6" fill="#2c2350"/>
-  <rect x="470" y="130" width="90" height="120" rx="4" fill="#2a2145"/>
-</svg>
-`);
-
-const corridorImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#191228"/>
-  <rect x="0" y="330" width="600" height="70" fill="#221a34"/>
-  <rect x="60" y="120" width="90" height="140" rx="4" fill="#3a2d5c"/>
-  <rect x="230" y="90" width="200" height="130" rx="4" fill="#2c2350"/>
-  <rect x="250" y="110" width="60" height="45" rx="2" fill="#5a4d85"/>
-  <rect x="320" y="110" width="60" height="45" rx="2" fill="#5a4d85"/>
-  <rect x="250" y="165" width="60" height="45" rx="2" fill="#5a4d85"/>
-  <polygon points="480,340 510,320 540,340 525,340 525,360 495,360 495,340" fill="#4b3f75" opacity="0.8"/>
-</svg>
-`);
-
-const securityOfficeImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#151020"/>
-  <rect x="0" y="310" width="600" height="90" fill="#1e1830"/>
-  <rect x="60" y="80" width="200" height="140" rx="4" fill="#2c2350"/>
-  <rect x="80" y="100" width="160" height="12" fill="#5a4d85" opacity="0.6"/>
-  <rect x="80" y="125" width="120" height="12" fill="#5a4d85" opacity="0.6"/>
-  <rect x="80" y="150" width="140" height="12" fill="#5a4d85" opacity="0.6"/>
-  <rect x="360" y="80" width="180" height="160" rx="4" fill="#33264f"/>
-  <path d="M 380 100 L 480 220" stroke="#ef4444" stroke-width="2" opacity="0.6"/>
-  <path d="M 400 90 L 500 200" stroke="#eab308" stroke-width="2" opacity="0.6"/>
-  <rect x="220" y="260" width="140" height="60" rx="6" fill="#241c3d"/>
-</svg>
-`);
-
-const findingRoomImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#140f22"/>
-  <rect x="0" y="320" width="600" height="80" fill="#1d1730"/>
-  <rect x="80" y="140" width="150" height="90" rx="6" fill="#2c2350"/>
-  <circle cx="155" cy="185" r="20" fill="#5a4d85" opacity="0.7"/>
-  <rect x="360" y="90" width="170" height="150" rx="4" fill="#33264f"/>
-  <rect x="380" y="110" width="130" height="110" rx="2" fill="#241c3d"/>
-</svg>
-`);
-
-const waitingAreaImage = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#181229"/>
-  <rect x="0" y="330" width="600" height="70" fill="#221a34"/>
-  <rect x="180" y="270" width="160" height="30" rx="6" fill="#2c2350"/>
-  <circle cx="220" cy="262" r="8" fill="#8a7cc0"/>
-  <rect x="470" y="110" width="80" height="130" rx="4" fill="#2a2145"/>
-  <circle cx="300" cy="345" r="18" fill="#4b3f75" opacity="0.7"/>
-</svg>
-`);
+// 場景圖是妹用AI生圖工具產出的正式美術，存在 public/images/experience/，取代原本CC手刻的SVG佔位圖。
+const atriumImage = '/images/experience/atrium.png';
+const infoDeskImage = '/images/experience/info-desk.png';
+const toyStoreImage = '/images/experience/toy-store.png';
+const familyLoungeImage = '/images/experience/family-lounge.png';
+const corridorImage = '/images/experience/information-corridor.png';
+const securityOfficeImage = '/images/experience/security-office.png';
+const findingRoomImage = '/images/experience/finding-room.png';
+const waitingAreaImage = '/images/experience/waiting-area.png';
 
 export const mission001: Mission = {
   id: 'mission-001',
