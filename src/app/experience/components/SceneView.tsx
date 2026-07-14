@@ -22,7 +22,12 @@ export function SceneView({
       className="relative w-full overflow-hidden rounded-xl border border-white/10"
       style={{ aspectRatio: '3 / 2' }}
     >
-      <img src={scene.image} alt={scene.name} className="absolute inset-0 h-full w-full object-cover" />
+      <img
+        src={scene.image}
+        alt={scene.name}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ filter: 'brightness(1.35) contrast(1.05)' }}
+      />
 
       {scene.hotspots.map(h => {
         const explored = exploredHotspotIds.includes(h.id);
