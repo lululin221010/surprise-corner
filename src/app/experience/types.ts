@@ -49,6 +49,11 @@ export type Hypothesis = {
   reflection: string;
 };
 
+export type ReflectionSection = {
+  title: string;
+  content?: string;
+};
+
 export type Mission = {
   id: string;
   title: string;
@@ -56,5 +61,16 @@ export type Mission = {
   npcs: Npc[];
   clues: Clue[];
   hypotheses: Hypothesis[];
+  /** 通用反思短文，所有玩家看到的內容一樣，不因假說不同而變，穿插在個人化reflection跟Truth之間 */
+  reflectionEssay: {
+    title: string;
+    intro: string;
+    sections: ReflectionSection[];
+  };
   truth: { revealText: string };
+  /** 結案後的收尾語，把主題從「案件解開了」拉高到「你調查的其實是自己」 */
+  missionEnding: {
+    title: string;
+    summary: string;
+  };
 };

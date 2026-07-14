@@ -69,6 +69,43 @@ const corridorImage = svgDataUri(`
 </svg>
 `);
 
+const securityOfficeImage = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#151020"/>
+  <rect x="0" y="310" width="600" height="90" fill="#1e1830"/>
+  <rect x="60" y="80" width="200" height="140" rx="4" fill="#2c2350"/>
+  <rect x="80" y="100" width="160" height="12" fill="#5a4d85" opacity="0.6"/>
+  <rect x="80" y="125" width="120" height="12" fill="#5a4d85" opacity="0.6"/>
+  <rect x="80" y="150" width="140" height="12" fill="#5a4d85" opacity="0.6"/>
+  <rect x="360" y="80" width="180" height="160" rx="4" fill="#33264f"/>
+  <path d="M 380 100 L 480 220" stroke="#ef4444" stroke-width="2" opacity="0.6"/>
+  <path d="M 400 90 L 500 200" stroke="#eab308" stroke-width="2" opacity="0.6"/>
+  <rect x="220" y="260" width="140" height="60" rx="6" fill="#241c3d"/>
+</svg>
+`);
+
+const findingRoomImage = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#140f22"/>
+  <rect x="0" y="320" width="600" height="80" fill="#1d1730"/>
+  <rect x="80" y="140" width="150" height="90" rx="6" fill="#2c2350"/>
+  <circle cx="155" cy="185" r="20" fill="#5a4d85" opacity="0.7"/>
+  <rect x="360" y="90" width="170" height="150" rx="4" fill="#33264f"/>
+  <rect x="380" y="110" width="130" height="110" rx="2" fill="#241c3d"/>
+</svg>
+`);
+
+const waitingAreaImage = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#181229"/>
+  <rect x="0" y="330" width="600" height="70" fill="#221a34"/>
+  <rect x="180" y="270" width="160" height="30" rx="6" fill="#2c2350"/>
+  <circle cx="220" cy="262" r="8" fill="#8a7cc0"/>
+  <rect x="470" y="110" width="80" height="130" rx="4" fill="#2a2145"/>
+  <circle cx="300" cy="345" r="18" fill="#4b3f75" opacity="0.7"/>
+</svg>
+`);
+
 export const mission001: Mission = {
   id: 'mission-001',
   title: '中庭走失事件（草稿標題，待定案）',
@@ -228,6 +265,84 @@ export const mission001: Mission = {
         },
       ],
     },
+    {
+      id: 'securityOffice',
+      name: '保全辦公室',
+      image: securityOfficeImage,
+      hotspots: [
+        {
+          id: 'timelineBoard',
+          label: '查看事件時間板',
+          kind: 'observe',
+          revealText:
+            '白板上依時間記錄著各目擊資訊。15:40 接獲通報；15:41 服務台收到家長詢問；15:43 玩具店店員回報女孩曾經獨自站在門口；15:45 清潔人員發現童鞋。',
+          givesClueId: 'timeline',
+          position: { xPct: 26.6, yPct: 37.5 },
+        },
+        {
+          id: 'searchMap',
+          label: '查看搜尋路線',
+          kind: 'observe',
+          revealText: '地圖上畫著不同顏色的搜尋路線。每一條路線都從不同位置開始，最後卻都圍繞著中央中庭。',
+          givesClueId: 'searchRoutes',
+          position: { xPct: 75, yPct: 40 },
+        },
+      ],
+    },
+    {
+      id: 'findingRoom',
+      name: '尋人廣播室',
+      image: findingRoomImage,
+      hotspots: [
+        {
+          id: 'broadcastLog',
+          label: '查看廣播紀錄',
+          kind: 'observe',
+          revealText: '15:42 發出第一次尋人廣播，內容請女孩前往服務台。15:47 再次廣播，同樣沒有回應。',
+          givesClueId: 'broadcastRecord',
+          position: { xPct: 25.8, yPct: 46 },
+        },
+        {
+          id: 'mallMap',
+          label: '查看商場導覽圖',
+          kind: 'observe',
+          revealText: '導覽圖上標示著中央中庭、服務台、玩具店與親子休息區。每個區域都有人習慣稱它為「中間」。',
+          givesClueId: 'mallGuideMap',
+          position: { xPct: 74, yPct: 41 },
+        },
+      ],
+    },
+    {
+      id: 'scene-final-location',
+      name: '女孩等待的地方',
+      image: waitingAreaImage,
+      hotspots: [
+        {
+          id: 'waitingBench',
+          label: '查看休息長椅',
+          kind: 'observe',
+          revealText: '長椅旁放著一個小水壺，旁邊還有一張商場活動摺頁。沒有凌亂，也沒有掙扎痕跡。',
+          givesClueId: 'waterBottle',
+          position: { xPct: 43.3, yPct: 71.25 },
+        },
+        {
+          id: 'directionSign',
+          label: '查看指示牌',
+          kind: 'observe',
+          revealText: '指示牌上同時標示著「中央中庭」、「服務台」與「表演舞台」。三個方向都距離不遠。',
+          givesClueId: 'directionBoard',
+          position: { xPct: 85, yPct: 43.75 },
+        },
+        {
+          id: 'floorMark',
+          label: '查看地面標誌',
+          kind: 'observe',
+          revealText: '地面留著表演活動使用過的定位貼紙，上面寫著「集合點 A」。活動結束後並沒有拆除。',
+          givesClueId: 'stageMarker',
+          position: { xPct: 50, yPct: 86.25 },
+        },
+      ],
+    },
   ],
   npcs: [
     {
@@ -318,6 +433,69 @@ export const mission001: Mission = {
         },
       ],
     },
+    {
+      id: 'securityChief',
+      name: '值班保全',
+      sceneId: 'securityOffice',
+      position: { xPct: 48, yPct: 72.5 },
+      whyTheyThinkThis: '他負責整合所有回報，習慣依時間排序，而不是依照誰說得比較有把握。',
+      lines: [
+        {
+          label: '目前找到什麼？',
+          text: '目前沒有任何證據顯示有人強行帶走女孩。每個人的說法都是真的，只是發生在不同時間。',
+        },
+        {
+          label: '為什麼一直找不到？',
+          text: '有時候不是找錯地方，而是大家找的「原地」根本不是同一個地方。',
+        },
+        {
+          label: '有人說謊嗎？',
+          text: '到目前為止，我還沒有發現任何人故意說謊。',
+        },
+      ],
+    },
+    {
+      id: 'broadcastStaff',
+      name: '廣播人員',
+      sceneId: 'findingRoom',
+      position: { xPct: 25.8, yPct: 62.5 },
+      whyTheyThinkThis: '她每天協助尋人，知道很多人聽見廣播後，並不一定會前往服務台。',
+      lines: [
+        {
+          label: '女孩有沒有聽見廣播？',
+          text: '不能確定。商場很吵，而且不是每個孩子都知道服務台在哪裡。',
+        },
+        {
+          label: '如果是你，你會去哪裡？',
+          text: '大部分孩子會去自己認為父母最容易找到自己的地方。',
+        },
+        {
+          label: '尋人廣播通常有效嗎？',
+          text: '如果家長和孩子對「集合地點」有共識，通常很快就能找到彼此。',
+        },
+      ],
+    },
+    {
+      id: 'elderlyWitness',
+      name: '坐在長椅的老先生',
+      sceneId: 'scene-final-location',
+      position: { xPct: 31.6, yPct: 66.25 },
+      whyTheyThinkThis: '他從頭到尾都坐在同一張長椅，只看見自己眼前發生的事情。',
+      lines: [
+        {
+          label: '你有看到女孩嗎？',
+          text: '有，她一直都在附近。她沒有哭，也沒有亂跑，只是一直東張西望。',
+        },
+        {
+          label: '有人跟她說話嗎？',
+          text: '沒有。我看見幾個人經過，但沒有人停下來。',
+        },
+        {
+          label: '她在等什麼？',
+          text: '我不知道。但她一直看著剛才表演的方向，好像認為有人會回來。',
+        },
+      ],
+    },
   ],
   clues: [
     {
@@ -378,6 +556,48 @@ export const mission001: Mission = {
       finalInterpretation:
         '女孩其實知道自己該做什麼——她一直遵守「留在原地等爸爸媽媽」。只是她認定的原地，是她最後看見父母的位置；而父母認定的原地，則是表演開始前約好的集合點。',
     },
+    {
+      id: 'timeline',
+      title: '事件時間板',
+      firstInterpretation: '大家的證詞互相矛盾。',
+      finalInterpretation: '每份證詞都描述了不同時間點，因此可以同時成立。',
+    },
+    {
+      id: 'searchRoutes',
+      title: '搜尋路線圖',
+      firstInterpretation: '大家一直找錯方向。',
+      finalInterpretation: '每個人都從自己認定的「原地」開始搜尋，因此路線自然不同。',
+    },
+    {
+      id: 'broadcastRecord',
+      title: '尋人廣播紀錄',
+      firstInterpretation: '女孩沒有聽見廣播，所以一直沒有出現。',
+      finalInterpretation: '即使聽見廣播，女孩也可能不知道服務台就是父母等待的地方。',
+    },
+    {
+      id: 'mallGuideMap',
+      title: '商場導覽圖',
+      firstInterpretation: '商場太大，所以彼此找不到。',
+      finalInterpretation: '真正造成錯過的，不是商場大小，而是每個人心中的「原地」並不相同。',
+    },
+    {
+      id: 'waterBottle',
+      title: '放在長椅旁的水壺',
+      firstInterpretation: '女孩在這裡停留很久，可能不知道該去哪裡。',
+      finalInterpretation: '女孩不是迷路，而是相信父母會回到她認定的集合地點，所以選擇等待。',
+    },
+    {
+      id: 'directionBoard',
+      title: '商場指示牌',
+      firstInterpretation: '商場動線太複雜，所以大家一直錯過。',
+      finalInterpretation: '不同的人，對同一個地點有不同的理解，因此每個人都認為自己走的是正確方向。',
+    },
+    {
+      id: 'stageMarker',
+      title: '集合點 A',
+      firstInterpretation: '這只是活動留下的貼紙。',
+      finalInterpretation: '對女孩而言，這就是最後一次和父母站在一起的位置，因此她自然把這裡當成「原地」。',
+    },
   ],
   hypotheses: [
     {
@@ -407,8 +627,36 @@ export const mission001: Mission = {
         '選擇暫時不下結論，代表你注意到現有證據仍可能支持不只一種說法。這不是逃避判斷，而是在抵抗大腦急著把零散資訊拼成完整故事的衝動。不過，即使選擇保留，你在探索途中仍可能曾經偏向某個答案；真正值得回看的，是哪些畫面、話語或既有經驗，曾悄悄把你的注意力推向那個方向。',
     },
   ],
+  reflectionEssay: {
+    title: '回頭看看，你是怎麼推理的？',
+    intro: '在揭曉案件之前，先不要急著看答案。\n\n請回頭看看，你一路是怎麼把這些片段拼成一個故事的。',
+    sections: [
+      {
+        title: '第一眼的力量',
+        content: '看到童鞋時，大部分人的第一個念頭都是：「一定發生了不好的事。」\n\n這不是因為證據足夠，而是因為大腦會優先尋找最容易解釋眼前畫面的故事。',
+      },
+      {
+        title: '人會把空白補滿',
+        content:
+          '每一位目擊者都只看到事件的一小部分。\n\n當資訊不足時，大腦會自動用過去的經驗，把缺少的部分補成一個完整故事。\n\n於是，每個人都很有把握地相信自己看見了全部。',
+      },
+      {
+        title: '你並沒有做錯',
+        content:
+          '如果你曾經懷疑陌生人、懷疑女孩亂跑，甚至一路保留觀望，這都不是錯誤。\n\n因為人類的大腦，本來就是依靠有限資訊快速做判斷。\n\n真正重要的，不是第一個答案，而是願不願意在新證據出現後重新修正自己的想法。',
+      },
+      {
+        title: '現在，再看一次真相。',
+      },
+    ],
+  },
   truth: {
     revealText:
-      '表演散場後，人群同時往不同方向移動。父母以為女孩仍跟在身旁，便沿著走廊往服務台方向尋找；女孩則以為父母會回到剛才觀看表演的位置，所以走到她記得的「原地」等待。她沒有被陌生人帶走，也沒有任性亂跑。父母和孩子都在做自己認為最合理的事，只是他們心中的「原地」並不是同一個地方。這起事件真正造成失聯的，不是誰看見了錯誤的畫面，而是每個人都把自己沒有確認的部分，當成了已經親眼看見的事實。',
+      '15:40，商場表演結束。\n\n大量人潮同時離開中庭。\n\n父母回頭時，以為美玲仍跟在身後；美玲則以為父母只是往前走，很快就會回到剛才一起看表演的位置。\n\n父母開始沿著商場尋找孩子。\n\n美玲則一直留在自己認定的「原地」等待。\n\n沒有人故意離開。\n\n沒有人被帶走。\n\n沒有人說謊。\n\n真正錯過彼此的，是每個人心中的「原地」並不是同一個地方。\n\n父母相信自己看見孩子一直跟著。\n\n孩子相信父母一定會回來找自己。\n\n他們都沒有親眼確認。\n\n卻都把「我以為」，當成了「我看見」。\n\n保全最後在表演舞台旁找到美玲時，她第一句話不是「我迷路了」。\n\n而是：「爸爸媽媽是不是找不到我？」',
+  },
+  missionEnding: {
+    title: 'Mission Complete',
+    summary:
+      '你完成了一起沒有犯人、沒有陰謀，也沒有英雄的案件。\n\n但你真正調查的，不是這起走失事件。\n\n而是自己的推理過程。\n\n下一次，當你第一眼就相信某件事時，也許會多問自己一句：\n\n「這是我親眼看見的，還是我以為自己看見的？」',
   },
 };

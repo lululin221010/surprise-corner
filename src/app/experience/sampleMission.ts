@@ -125,7 +125,19 @@ export const sampleMission: Mission = {
       reflection: '（測試用假資料）保留判斷也是一種立場。',
     },
   ],
+  reflectionEssay: {
+    title: '（測試用假資料）回頭看看',
+    intro: '（測試用假資料）在揭曉之前，先想想你是怎麼推理的。',
+    sections: [
+      { title: '第一段', content: '（測試用假資料）示範內容。' },
+      { title: '結尾轉場（無內容）' },
+    ],
+  },
   truth: {
     revealText: '（這裡會顯示真相文字——測試用假資料，正式內容由 Mission 001 資料檔取代。）',
+  },
+  missionEnding: {
+    title: 'Mission Complete',
+    summary: '（測試用假資料）結尾收束文字。',
   },
 };
