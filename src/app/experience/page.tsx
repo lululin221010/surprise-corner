@@ -70,9 +70,17 @@ export default function ExperiencePage() {
         <p className="mb-2 text-xs tracking-[0.25em] text-slate-500">{mission.title}</p>
 
         {!showConclusion && (
-          <p className="mb-6 text-sm leading-relaxed text-slate-400">
-            點擊場景裡的物件或人物來探索案發經過。你可以自由決定探索順序，也可以隨時在下方提出你認為的案件假說——沒有標準答案，跟著你的直覺走，之後也能隨時修改。
-          </p>
+          <>
+            <div className="mb-4 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
+              <p className="mb-1 text-xs tracking-wide text-slate-500">📢 商場廣播</p>
+              <p className="text-sm leading-relaxed text-slate-200">
+                「請各位來賓協助留意，一名七歲女童與家人失散。女孩身穿紅色上衣，背著白色兔子背包。如有發現，請通知服務台。」
+              </p>
+            </div>
+            <p className="mb-6 text-sm leading-relaxed text-slate-400">
+              點擊場景裡的物件或人物來探索案發經過。你可以自由決定探索順序，也可以隨時在下方提出你認為的案件假說——沒有標準答案，跟著你的直覺走，之後也能隨時修改。
+            </p>
+          </>
         )}
 
         {showConclusion ? (
