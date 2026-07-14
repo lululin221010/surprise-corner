@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { sampleMission } from './sampleMission';
+import { mission001 } from './missions/mission-001';
 import { useMissionState } from './useMissionState';
 import { SceneList } from './components/SceneList';
 import { SceneView } from './components/SceneView';
@@ -12,7 +12,7 @@ import { ConclusionScreen } from './components/ConclusionScreen';
 import type { Hotspot } from './types';
 
 export default function ExperiencePage() {
-  const mission = sampleMission;
+  const mission = mission001;
   const {
     currentSceneId,
     setCurrentSceneId,
