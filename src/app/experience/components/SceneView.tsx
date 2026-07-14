@@ -9,6 +9,7 @@ export function SceneView({
   onHotspotClick,
   activeNpcId,
   onNpcMarkerClick,
+  activeReveal,
 }: {
   scene: Scene;
   npcs: Npc[];
@@ -16,6 +17,7 @@ export function SceneView({
   onHotspotClick: (h: Hotspot) => void;
   activeNpcId: string | null;
   onNpcMarkerClick: (npcId: string) => void;
+  activeReveal: { label: string; text: string; gotClue: boolean } | null;
 }) {
   return (
     <div
@@ -77,6 +79,18 @@ export function SceneView({
           </span>
         </div>
       ))}
+
+      {activeReveal && (
+        <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/85 px-4 py-3 backdrop-blur-sm">
+          {activeReveal.gotClue && (
+            <span className="mb-1 inline-block rounded-full border border-emerald-400/40 bg-emerald-400/15 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+              🔍 獲得新線索
+            </span>
+          )}
+          <p className="mb-0.5 text-xs tracking-wide text-amber-300">{activeReveal.label}</p>
+          <p className="text-sm leading-relaxed text-slate-100">{activeReveal.text}</p>
+        </div>
+      )}
     </div>
   );
 }
