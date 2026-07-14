@@ -1,3 +1,5 @@
+export type Position = { xPct: number; yPct: number };
+
 export type Clue = {
   id: string;
   title: string;
@@ -10,6 +12,7 @@ export type Hotspot = {
   kind: 'observe' | 'search';
   revealText: string;
   givesClueId?: string;
+  position: Position;
 };
 
 export type NpcLine = {
@@ -22,12 +25,14 @@ export type Npc = {
   id: string;
   name: string;
   sceneId: string;
+  position: Position;
   lines: NpcLine[];
 };
 
 export type Scene = {
   id: string;
   name: string;
+  image: string;
   hotspots: Hotspot[];
 };
 

@@ -1,11 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import { sampleMission } from './sampleMission';
 import { useMissionState } from './useMissionState';
 import { SceneList } from './components/SceneList';
-import { InteractionPanel } from './components/InteractionPanel';
+import { SceneView } from './components/SceneView';
+import { HotspotReveal } from './components/HotspotReveal';
+import { NpcDialogue } from './components/NpcDialogue';
 import { ClueInventory } from './components/ClueInventory';
 import { ConclusionScreen } from './components/ConclusionScreen';
+import type { Hotspot } from './types';
 
 export default function ExperiencePage() {
   const mission = sampleMission;
@@ -18,8 +22,25 @@ export default function ExperiencePage() {
     setShowConclusion,
   } = useMissionState(mission);
 
+  const [exploredHotspotIds, setExploredHotspotIds] = useState<string[]>([]);
+  const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
+  const [activeNpcId, setActiveNpcId] = useState<string | null>(null);
+
   const currentScene = mission.scenes.find(s => s.id === currentSceneId) ?? mission.scenes[0];
   const sceneNpcs = mission.npcs.filter(n => n.sceneId === currentScene?.id);
+  const activeNpc = sceneNpcs.find(n => n.id === activeNpcId) ?? null;
+
+  function handleHotspotClick(h: Hotspot) {
+    setExploredHotspotIds(prev => (prev.includes(h.id) ? prev : [...prev, h.id]));
+    setActiveHotspot(h);
+    collectClue(h.givesClueId);
+  }
+
+  function handleSceneChange(id: string) {
+    setCurrentSceneId(id);
+    setActiveHotspot(null);
+    setActiveNpcId(null);
+  }
 
   return (
     <main className="min-h-screen bg-[#0d0820] px-6 py-10 text-slate-300">
@@ -34,21 +55,29 @@ export default function ExperiencePage() {
           />
         ) : (
           <>
-            <div className="mb-6">
+            <div className="mb-4">
               <SceneList
                 scenes={mission.scenes}
                 currentSceneId={currentScene?.id ?? ''}
-                onSelect={setCurrentSceneId}
+                onSelect={handleSceneChange}
               />
             </div>
 
             {currentScene && (
-              <InteractionPanel
-                hotspots={currentScene.hotspots}
+              <SceneView
+                scene={currentScene}
                 npcs={sceneNpcs}
-                onReveal={collectClue}
+                exploredHotspotIds={exploredHotspotIds}
+                onHotspotClick={handleHotspotClick}
+                activeNpcId={activeNpcId}
+                onNpcMarkerClick={id => setActiveNpcId(prev => (prev === id ? null : id))}
               />
             )}
+
+            <div className="mt-4 space-y-3">
+              {activeHotspot && <HotspotReveal hotspot={activeHotspot} />}
+              {activeNpc && <NpcDialogue npc={activeNpc} onSelectLine={collectClue} />}
+            </div>
 
             <div className="mt-8">
               <ClueInventory clues={mission.clues} collectedClueIds={collectedClueIds} />
