@@ -41,11 +41,20 @@ export type Scene = {
   hotspots: Hotspot[];
 };
 
+export type Hypothesis = {
+  id: string;
+  label: string;
+  color?: string;
+  /** 玩家選了這個假說時，結案要顯示的反思文字——解釋大腦為什麼會這樣拼，不是宣判對錯 */
+  reflection: string;
+};
+
 export type Mission = {
   id: string;
   title: string;
   scenes: Scene[];
   npcs: Npc[];
   clues: Clue[];
+  hypotheses: Hypothesis[];
   truth: { revealText: string };
 };

@@ -105,6 +105,20 @@ export const sampleMission: Mission = {
       finalInterpretation: '巨響其實是隔壁店家的促銷活動音效，跟案件無關。',
     },
   ],
+  hypotheses: [
+    {
+      id: 'guess-a',
+      label: '有人闖入',
+      color: '#ef4444',
+      reflection: '（測試用假資料）看到紙條和腳印時，很容易先往「有人闖入」這個方向想。',
+    },
+    {
+      id: 'guess-b',
+      label: '只是意外',
+      color: '#3b82f6',
+      reflection: '（測試用假資料）巨響+空抽屜也可能只是日常巧合，不代表發生了什麼事。',
+    },
+  ],
   truth: {
     revealText: '（這裡會顯示真相文字——測試用假資料，正式內容由 Mission 001 資料檔取代。）',
   },

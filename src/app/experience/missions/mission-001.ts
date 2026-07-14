@@ -56,6 +56,19 @@ const familyLoungeImage = svgDataUri(`
 </svg>
 `);
 
+const corridorImage = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#191228"/>
+  <rect x="0" y="330" width="600" height="70" fill="#221a34"/>
+  <rect x="60" y="120" width="90" height="140" rx="4" fill="#3a2d5c"/>
+  <rect x="230" y="90" width="200" height="130" rx="4" fill="#2c2350"/>
+  <rect x="250" y="110" width="60" height="45" rx="2" fill="#5a4d85"/>
+  <rect x="320" y="110" width="60" height="45" rx="2" fill="#5a4d85"/>
+  <rect x="250" y="165" width="60" height="45" rx="2" fill="#5a4d85"/>
+  <polygon points="480,340 510,320 540,340 525,340 525,360 495,360 495,340" fill="#4b3f75" opacity="0.8"/>
+</svg>
+`);
+
 export const mission001: Mission = {
   id: 'mission-001',
   title: '中庭走失事件（草稿標題，待定案）',
@@ -186,6 +199,35 @@ export const mission001: Mission = {
         },
       ],
     },
+    {
+      id: 'information-corridor',
+      name: '中庭連接走廊',
+      image: corridorImage,
+      hotspots: [
+        {
+          id: 'event-sign',
+          label: '查看活動動線指示牌',
+          kind: 'observe',
+          revealText: '活動期間增設的臨時指示牌將人流分成左右兩側。表演散場時，左側引導前往停車場，右側引導前往餐飲區，兩股人流幾乎不會再交會。',
+          givesClueId: 'split-flow',
+          position: { xPct: 18, yPct: 48 },
+        },
+        {
+          id: 'family-photo-wall',
+          label: '查看活動照片展示牆',
+          kind: 'observe',
+          revealText: '展示牆上的活動照片裡，許多家長都回頭確認孩子是否跟上。有些孩子則停下腳步，看著前面的父母逐漸走遠。只要人群一擋住視線，彼此很快就會失去蹤影。',
+          position: { xPct: 55, yPct: 39 },
+        },
+        {
+          id: 'floor-arrows',
+          label: '觀察地面的導引箭頭',
+          kind: 'observe',
+          revealText: '不同顏色的箭頭通往不同出口。第一次來的遊客，很容易把「出口」和「剛才集合的地方」混為一談。',
+          position: { xPct: 85, yPct: 86 },
+        },
+      ],
+    },
   ],
   npcs: [
     {
@@ -254,6 +296,28 @@ export const mission001: Mission = {
         },
       ],
     },
+    {
+      id: 'npc-event-staff',
+      name: '活動工作人員',
+      sceneId: 'information-corridor',
+      position: { xPct: 66, yPct: 70 },
+      whyTheyThinkThis: '他負責散場動線，只看見人潮離開的過程，沒有參與後續尋人。',
+      lines: [
+        {
+          label: '散場時現場發生了什麼？',
+          text: '表演一結束，人群同時往四周散開。我一直提醒大家慢慢走，但只要有人停下來，後面的人就會自動繞過去。',
+        },
+        {
+          label: '你有看到那個女孩嗎？',
+          text: '我記得有個小女孩停在原地，一直往人群裡看。我當時以為她是在等家人，所以沒有過去詢問。',
+          givesClueId: 'stayed-behind',
+        },
+        {
+          label: '她看起來像迷路嗎？',
+          text: '老實說，不像。真正迷路的小朋友通常會邊走邊哭，她比較像是在等一個她相信一定會回來的人。',
+        },
+      ],
+    },
   ],
   clues: [
     {
@@ -300,6 +364,45 @@ export const mission001: Mission = {
       firstInterpretation: '女孩可能停留片刻後，又繼續往別處移動。',
       finalInterpretation:
         '女孩沒有驚慌，也沒有急著到處找人。她一直遵守「留在原地等待」的觀念，只是她認定的「原地」，和父母認定的「原地」並不是同一個地方。',
+    },
+    {
+      id: 'split-flow',
+      title: '分流動線',
+      firstInterpretation: '女孩可能是在分流時，被人帶往另一個出口。',
+      finalInterpretation: '真正分開的不是女孩與陌生人，而是女孩與父母。三個人都順著不同的人流前進，並各自相信很快就會再見面。',
+    },
+    {
+      id: 'stayed-behind',
+      title: '停在原地的小女孩',
+      firstInterpretation: '女孩停下來，是因為她不知道該往哪裡走。',
+      finalInterpretation:
+        '女孩其實知道自己該做什麼——她一直遵守「留在原地等爸爸媽媽」。只是她認定的原地，是她最後看見父母的位置；而父母認定的原地，則是表演開始前約好的集合點。',
+    },
+  ],
+  hypotheses: [
+    {
+      id: 'abduction',
+      label: '被陌生人帶走',
+      color: '#ef4444',
+      reflection: '人看到「鞋子」「陌生男子」「協尋」時，很容易把它們串成一個完整故事，即使三件事之間沒有證據證明彼此有關。',
+    },
+    {
+      id: 'ranAway',
+      label: '自己亂跑',
+      color: '#eab308',
+      reflection: '孩子突然離開父母視線時，我們很容易認為是孩子亂跑，而忽略了父母也可能同時改變了位置。',
+    },
+    {
+      id: 'missedParents',
+      label: '跟父母錯過',
+      color: '#3b82f6',
+      reflection: '（反思草稿，待正式潤飾）就算猜到方向是對的，也很容易停在「錯過」這個詞上，而沒有繼續追問：為什麼會錯過？兩人各自認定的「原地」是不是根本不同？',
+    },
+    {
+      id: 'unclear',
+      label: '尚無法判斷',
+      color: '#9ca3af',
+      reflection: '（反思草稿，待正式潤飾）保留判斷聽起來很理性，但也可能只是還沒意識到，自己其實已經被前面的線索不知不覺帶往某個方向。',
     },
   ],
   truth: {

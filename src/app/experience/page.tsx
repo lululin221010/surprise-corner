@@ -8,6 +8,7 @@ import { SceneView } from './components/SceneView';
 import { HotspotReveal } from './components/HotspotReveal';
 import { NpcDialogue } from './components/NpcDialogue';
 import { ClueInventory } from './components/ClueInventory';
+import { HypothesisTool } from './components/HypothesisTool';
 import { ConclusionScreen } from './components/ConclusionScreen';
 import type { Hotspot } from './types';
 
@@ -20,6 +21,9 @@ export default function ExperiencePage() {
     collectClue,
     showConclusion,
     setShowConclusion,
+    hypothesisHistory,
+    currentHypothesisId,
+    submitHypothesis,
   } = useMissionState(mission);
 
   const [exploredHotspotIds, setExploredHotspotIds] = useState<string[]>([]);
@@ -51,10 +55,19 @@ export default function ExperiencePage() {
           <ConclusionScreen
             mission={mission}
             collectedClueIds={collectedClueIds}
+            hypothesisHistory={hypothesisHistory}
             onBack={() => setShowConclusion(false)}
           />
         ) : (
           <>
+            <div className="mb-4">
+              <HypothesisTool
+                hypotheses={mission.hypotheses}
+                currentHypothesisId={currentHypothesisId}
+                onSubmit={submitHypothesis}
+              />
+            </div>
+
             <div className="mb-4">
               <SceneList
                 scenes={mission.scenes}
