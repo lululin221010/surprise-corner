@@ -27,36 +27,50 @@ export function SceneView({
       {scene.hotspots.map(h => {
         const explored = exploredHotspotIds.includes(h.id);
         return (
-          <button
+          <div
             key={h.id}
-            onClick={() => onHotspotClick(h)}
-            title={h.label}
-            className={`absolute flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 transition-colors ${
-              explored
-                ? 'border-white/30 bg-white/10'
-                : 'animate-pulse border-amber-300 bg-amber-300/25'
-            }`}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
             style={{ left: `${h.position.xPct}%`, top: `${h.position.yPct}%` }}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-white" />
-          </button>
+            <button
+              onClick={() => onHotspotClick(h)}
+              aria-label={h.label}
+              className={`flex h-7 w-7 items-center justify-center rounded-full border-2 transition-colors ${
+                explored
+                  ? 'border-white/30 bg-white/10'
+                  : 'animate-pulse border-amber-300 bg-amber-300/25'
+              }`}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+            </button>
+            <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/75 px-2 py-0.5 text-[10px] text-slate-200">
+              {h.label}
+            </span>
+          </div>
         );
       })}
 
       {npcs.map(npc => (
-        <button
+        <div
           key={npc.id}
-          onClick={() => onNpcMarkerClick(npc.id)}
-          title={npc.name}
-          className={`absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 text-base transition-colors ${
-            activeNpcId === npc.id
-              ? 'border-sky-300 bg-sky-300/30'
-              : 'border-sky-400/60 bg-sky-400/15'
-          }`}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
           style={{ left: `${npc.position.xPct}%`, top: `${npc.position.yPct}%` }}
         >
-          🧍
-        </button>
+          <button
+            onClick={() => onNpcMarkerClick(npc.id)}
+            aria-label={npc.name}
+            className={`flex h-9 w-9 items-center justify-center rounded-full border-2 text-base transition-colors ${
+              activeNpcId === npc.id
+                ? 'border-sky-300 bg-sky-300/30'
+                : 'border-sky-400/60 bg-sky-400/15'
+            }`}
+          >
+            🧍
+          </button>
+          <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/75 px-2 py-0.5 text-[10px] text-sky-200">
+            {npc.name}
+          </span>
+        </div>
       ))}
     </div>
   );
