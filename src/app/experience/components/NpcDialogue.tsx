@@ -14,8 +14,11 @@ export function NpcDialogue({
 
   return (
     <div className="rounded-lg border border-sky-300/30 bg-sky-300/5 p-3">
-      <p className="mb-2 text-xs tracking-wide text-sky-300">{npc.name}</p>
-      <div className="space-y-2">
+      <p className="text-xs tracking-wide text-sky-300">{npc.name}</p>
+      {npc.whyTheyThinkThis && (
+        <p className="mb-2 text-xs italic text-slate-500">（{npc.whyTheyThinkThis}）</p>
+      )}
+      <div className="mt-2 space-y-2">
         {npc.lines.map((line, idx) => (
           <div key={idx}>
             <button

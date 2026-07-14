@@ -35,6 +35,7 @@ export const sampleMission: Mission = {
       id: 'scene-a',
       name: '地點A',
       image: sceneAImage,
+      sceneGoal: '讓玩家以為紙條就是關鍵地址',
       hotspots: [
         {
           id: 'h1',
@@ -57,6 +58,7 @@ export const sampleMission: Mission = {
       id: 'scene-b',
       name: '地點B',
       image: sceneBImage,
+      sceneGoal: '讓玩家開始懷疑腳印跟紙條是同一個人留下的',
       hotspots: [
         {
           id: 'h3',
@@ -75,6 +77,7 @@ export const sampleMission: Mission = {
       name: '目擊者',
       sceneId: 'scene-a',
       position: { xPct: 85, yPct: 55 },
+      whyTheyThinkThis: '只在遠處聽到聲音，沒有親眼看到現場',
       lines: [
         {
           label: '詢問當時發生什麼事',
@@ -85,9 +88,24 @@ export const sampleMission: Mission = {
     },
   ],
   clues: [
-    { id: 'clue-1', title: '模糊的紙條', description: '字跡難以辨認，但看得出是某種地址。' },
-    { id: 'clue-2', title: '腳印', description: '指向出口方向的新鮮腳印。' },
-    { id: 'clue-3', title: '目擊者證詞', description: '目擊者提到一聲巨響。' },
+    {
+      id: 'clue-1',
+      title: '模糊的紙條',
+      firstInterpretation: '字跡難以辨認，但看得出是某種地址，可能是關鍵線索。',
+      finalInterpretation: '其實只是舊的收據，跟案件無關。',
+    },
+    {
+      id: 'clue-2',
+      title: '腳印',
+      firstInterpretation: '指向出口方向的新鮮腳印，像是有人急著離開。',
+      finalInterpretation: '是清潔人員巡場時留下的，時間點對不上案發時刻。',
+    },
+    {
+      id: 'clue-3',
+      title: '目擊者證詞',
+      firstInterpretation: '目擊者提到一聲巨響，聽起來像意外。',
+      finalInterpretation: '巨響其實是隔壁店家的促銷活動音效，跟案件無關。',
+    },
   ],
   truth: {
     revealText: '（這裡會顯示真相文字——測試用假資料，正式內容由 Mission 001 資料檔取代。）',

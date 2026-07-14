@@ -23,7 +23,7 @@ export function ClueInventory({
           {collected.map(c => (
             <li key={c.id} className="text-sm">
               <span className="font-medium text-amber-300">{c.title}</span>
-              <p className="text-slate-400">{c.description}</p>
+              <p className="text-slate-400">{c.firstInterpretation}</p>
             </li>
           ))}
         </ul>
