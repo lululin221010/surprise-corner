@@ -65,6 +65,7 @@ export function SceneView({
 
       {scene.hotspots.map(h => {
         const explored = exploredHotspotIds.includes(h.id);
+        const hasClue = !!h.givesClueId;
         const isActive = activeHotspotId === h.id;
         const openUp = h.position.yPct > 55;
         const hAlign = h.position.xPct < 22 ? 'left' : h.position.xPct > 78 ? 'right' : 'center';
@@ -78,17 +79,23 @@ export function SceneView({
             <button
               onClick={() => onHotspotClick(h)}
               aria-label={h.label}
-              title={h.label}
+              title={explored ? (hasClue ? `${h.label}（已取得線索）` : `${h.label}（無線索）`) : h.label}
               className={`flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm shadow-md shadow-black/40 transition-colors ${
                 isActive
                   ? 'border-amber-300 bg-amber-300/40'
                   : explored
-                  ? 'border-white/30 bg-white/10'
+                  ? hasClue
+                    ? 'border-emerald-400/50 bg-emerald-400/10'
+                    : 'border-white/30 bg-white/10'
                   : 'animate-pulse border-amber-300 bg-amber-300/30'
               }`}
             >
               {explored ? (
-                <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+                hasClue ? (
+                  <span aria-hidden className="text-emerald-300">✓</span>
+                ) : (
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
+                )
               ) : (
                 <span aria-hidden>🔍</span>
               )}
