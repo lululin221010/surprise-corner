@@ -38,8 +38,6 @@ export type Scene = {
   id: string;
   name: string;
   image: string;
-  /** 作者用，不顯示給玩家：這一幕要改變玩家對案件的什麼認知 */
-  sceneGoal?: string;
   hotspots: Hotspot[];
 };
 

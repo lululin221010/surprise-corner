@@ -35,7 +35,6 @@ export const sampleMission: Mission = {
       id: 'scene-a',
       name: '地點A',
       image: sceneAImage,
-      sceneGoal: '讓玩家以為紙條就是關鍵地址',
       hotspots: [
         {
           id: 'h1',
@@ -58,7 +57,6 @@ export const sampleMission: Mission = {
       id: 'scene-b',
       name: '地點B',
       image: sceneBImage,
-      sceneGoal: '讓玩家開始懷疑腳印跟紙條是同一個人留下的',
       hotspots: [
         {
           id: 'h3',
