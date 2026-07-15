@@ -1,6 +1,8 @@
 'use client';
 
-import type { Hotspot, Npc, Scene } from '../types';
+import type { Hotspot, Position, Scene } from '../types';
+
+type NpcMarker = { id: string; name: string; position: Position };
 
 const SCENE_ICONS: Record<string, string> = {
   atrium: '🎪',
@@ -28,7 +30,7 @@ export function SceneView({
   scene: Scene;
   scenes: Scene[];
   onSceneSelect: (id: string) => void;
-  npcs: Npc[];
+  npcs: NpcMarker[];
   exploredHotspotIds: string[];
   onHotspotClick: (h: Hotspot) => void;
   activeHotspotId: string | null;
