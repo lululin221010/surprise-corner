@@ -27,7 +27,6 @@ export default function ExperiencePage() {
   const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
   const [activeNpcId, setActiveNpcId] = useState<string | null>(null);
   const [deductionAnswers, setDeductionAnswers] = useState<Record<string, string>>({});
-  const [deductionHasSubmitted, setDeductionHasSubmitted] = useState(false);
   const [boardExpanded, setBoardExpanded] = useState(false);
 
   const currentScene = mission.scenes.find(s => s.id === currentSceneId) ?? mission.scenes[0];
@@ -126,11 +125,8 @@ export default function ExperiencePage() {
                 <div className="border-t border-white/10 px-4 py-4">
                   <DeductionBoard
                     deduction={mission.deduction}
-                    clues={mission.clues}
                     answers={deductionAnswers}
                     onSelectOption={handleDeductionSelectOption}
-                    hasSubmitted={deductionHasSubmitted}
-                    onSubmit={() => setDeductionHasSubmitted(true)}
                   />
                 </div>
               )}

@@ -14,39 +14,55 @@ export function ConclusionScreen({
   onBack: () => void;
 }) {
   const collected = mission.clues.filter(c => collectedClueIds.includes(c.id));
-  const deductionCorrectCount = mission.deduction.blanks.filter(
-    b => deductionAnswers[b.id] === b.correctOptionId
-  ).length;
-  const deductionTotal = mission.deduction.blanks.length;
 
   return (
     <div className="mx-auto max-w-xl text-center">
       <p className="mb-2 text-xs tracking-widest text-slate-500">案件已完成</p>
 
-      <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
-        <p className="mb-1 text-xs tracking-wide text-slate-500">案件重建驗證</p>
-        <p className="text-lg font-medium text-amber-300">
-          {deductionCorrectCount} / {deductionTotal} 題
-        </p>
-        <p className="mt-1 text-xs text-slate-500">
-          {deductionCorrectCount === deductionTotal
-            ? '你完整重建了整起事件，沒有被任何一個第一印象帶偏。'
-            : '有些空格你當下的判斷跟後來確認的事實不同，這很正常——這正是這個案子真正想讓你看見的事。'}
-        </p>
-      </div>
-
       <div className="mb-8 text-left">
-        <p className="mb-3 text-center text-sm font-medium text-slate-200">{mission.reflectionEssay.title}</p>
-        <p className="mb-4 whitespace-pre-line text-sm leading-relaxed text-slate-400">{mission.reflectionEssay.intro}</p>
+        <p className="mb-1 text-center text-sm font-medium text-slate-200">{mission.reflectionEssay.title}</p>
+        <p className="mb-5 whitespace-pre-line text-center text-xs leading-relaxed text-slate-500">
+          {mission.reflectionEssay.intro}
+        </p>
+
         <div className="space-y-4">
-          {mission.reflectionEssay.sections.map((section, idx) => (
-            <div key={idx}>
-              <p className="mb-1 text-xs tracking-wide text-amber-300">{section.title}</p>
-              {section.content && (
-                <p className="whitespace-pre-line text-sm leading-relaxed text-slate-300">{section.content}</p>
-              )}
-            </div>
-          ))}
+          {mission.deduction.blanks.map(blank => {
+            const selectedOption = blank.options.find(o => o.id === deductionAnswers[blank.id]);
+            const correctOption = blank.options.find(o => o.id === blank.correctOptionId);
+            const misledClue = selectedOption?.misledByClueId
+              ? mission.clues.find(c => c.id === selectedOption.misledByClueId)
+              : null;
+
+            return (
+              <div key={blank.id} className="rounded-lg border border-white/10 bg-white/5 p-4">
+                <div className="mb-3">
+                  <p className="mb-1 text-[10px] tracking-wide text-slate-500">你相信的版本</p>
+                  <p className="text-sm leading-relaxed text-slate-300">
+                    {blank.promptBefore}
+                    <span className="font-medium text-amber-300">
+                      {selectedOption ? selectedOption.text : '（那時候你還沒想到這裡）'}
+                    </span>
+                    {blank.promptAfter}
+                  </p>
+                  {misledClue && (
+                    <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                      這個念頭，呼應了「{misledClue.title}」帶給你的第一印象。
+                    </p>
+                  )}
+                </div>
+
+                <div className="border-t border-white/10 pt-3">
+                  <p className="mb-1 text-[10px] tracking-wide text-slate-500">後來確認的版本</p>
+                  <p className="text-sm leading-relaxed text-slate-300">
+                    {blank.promptBefore}
+                    <span className="font-medium text-emerald-300">{correctOption?.text}</span>
+                    {blank.promptAfter}
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-500">{blank.correctExplanation}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

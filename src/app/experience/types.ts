@@ -49,7 +49,7 @@ export type ReflectionSection = {
 export type DeductionOption = {
   id: string;
   text: string;
-  /** 答錯時顯示：這個選項對應到哪條線索的第一印象，讓玩家看見自己剛剛是被什麼誤導 */
+  /** 如果玩家選了這個、而它不是 correctOptionId：結案雙欄比對時，用來標示「這個念頭呼應了哪條線索的第一印象」——不是判定對錯，只是讓玩家看見這個念頭從哪裡來 */
   misledByClueId?: string;
 };
 
@@ -59,8 +59,9 @@ export type DeductionBlank = {
   promptBefore: string;
   /** 空格後的句子片段 */
   promptAfter: string;
+  /** 後來確認的事實版本用的選項id，結案時放在「後來確認的版本」欄，不做評分用途 */
   correctOptionId: string;
-  /** 答對時顯示：為什麼這是對的，不只是打勾而已 */
+  /** 結案雙欄比對時，「後來確認的版本」那一欄用來補充說明 */
   correctExplanation: string;
   options: DeductionOption[];
 };
@@ -77,9 +78,9 @@ export type Mission = {
   scenes: Scene[];
   npcs: Npc[];
   clues: Clue[];
-  /** 結案前的填空驗證關卡，把「拼湊真相」變成真的要動腦組合，而不是選一個大方向的假說就結束 */
+  /** 案件公告欄：玩家在探索過程中隨時填寫、修改，寫下自己目前相信的版本，不評分、沒有標準答案的壓力 */
   deduction: Deduction;
-  /** 通用反思短文，所有玩家看到的內容一樣，不因假說不同而變，穿插在個人化reflection跟Truth之間 */
+  /** 結案前的過渡文字，穿插在雙欄比對跟Truth之間 */
   reflectionEssay: {
     title: string;
     intro: string;
