@@ -200,8 +200,8 @@ export default async function NovelPage({ params }: Props) {
           )}
 
           <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-            <Link href="/novels" style={{ fontSize: '0.82rem', color: '#5a4a3a', textDecoration: 'none', letterSpacing: '0.05em' }}>
-              ← 返回小說列表
+            <Link href="/feeling" style={{ fontSize: '0.82rem', color: '#5a4a3a', textDecoration: 'none', letterSpacing: '0.05em' }}>
+              ← 返回連載故事
             </Link>
           </div>
         </div>

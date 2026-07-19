@@ -337,7 +337,7 @@ export default function SoulJourneyChapter1({ isLocked = false }: Props) {
 
           <div className="pt-4">
             <Link
-              href="/novels"
+              href="/novels/soul-journey"
               className="text-gray-600 hover:text-purple-400 text-xs transition-colors"
             >
               ← 返回連載列表

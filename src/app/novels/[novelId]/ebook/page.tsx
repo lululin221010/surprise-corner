@@ -561,7 +561,7 @@ export default function EbookPage() {
 
         <nav className="ebook-nav">
           <div className="ebook-nav-left">
-            <Link href={isSerial ? '/novels' : `/novels/${novelId}`} className="btn-back">← 小說列表</Link>
+            <Link href={isSerial ? '/feeling' : `/novels/${novelId}`} className="btn-back">← 小說列表</Link>
             <span className="ebook-nav-title">{novel.title}</span>
             <span className="nav-divider">/</span>
             <span className="ebook-badge">電子書</span>
@@ -756,7 +756,7 @@ export default function EbookPage() {
                   >
                     前往小舖購買完整版 →
                   </a>
-                  <Link href="/novels" className="footer-browse">
+                  <Link href="/feeling" className="footer-browse">
                     繼續逛驚喜角落 →
                   </Link>
                 </div>
