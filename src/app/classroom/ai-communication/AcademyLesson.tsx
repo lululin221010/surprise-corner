@@ -6,6 +6,7 @@ import type { Lesson } from './courses';
 import AcademyQuiz from '../ai/AcademyQuiz';
 import '../classroom.css';
 import { getCurrentEmail, awardLessonBonus } from '../coins';
+import { renderAiCommunicationChart } from './charts/AiCommunicationCharts';
 
 interface Props {
   lesson: Lesson;
@@ -71,6 +72,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
           </div>
         </div>
         <AcademyQuiz
+          key={quizIndex}
           quiz={quiz}
           certInfo={{ lessonId: lesson.id, lessonTitle: lesson.title, quizIndex }}
           isLast={quizIndex === lesson.quizzes.length - 1}
@@ -109,6 +111,11 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
         <div style={{ color: '#374151', fontSize: '0.9rem', lineHeight: 1.8, whiteSpace: 'pre-line' }}>
           {slide.body.replace(/\*\*(.+?)\*\*/g, '$1')}
         </div>
+        {slide.chart && (
+          <div style={{ marginTop: '1.2rem' }}>
+            {renderAiCommunicationChart(slide.chart)}
+          </div>
+        )}
       </div>
 
       <div style={{ display: 'flex', gap: '0.6rem' }}>

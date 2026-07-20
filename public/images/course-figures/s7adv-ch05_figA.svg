@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="428.94pt" height="165.744pt" viewBox="0 0 428.94 165.744" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:22.152117</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 165.744 
+L 428.94 165.744 
+L 428.94 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 23.197304 130.354729 
+L 134.182696 130.354729 
+Q 138.905478 130.354729 138.905478 126.963106 
+L 138.905478 43.020424 
+Q 138.905478 39.6288 134.182696 39.6288 
+L 23.197304 39.6288 
+Q 18.474522 39.6288 18.474522 43.020424 
+L 18.474522 126.963106 
+Q 18.474522 130.354729 23.197304 130.354729 
+z
+" clip-path="url(#p9c34da77aa)" style="fill: #dbeafe; stroke: #2563eb; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 158.977304 130.354729 
+L 269.962696 130.354729 
+Q 274.685478 130.354729 274.685478 126.963106 
+L 274.685478 43.020424 
+Q 274.685478 39.6288 269.962696 39.6288 
+L 158.977304 39.6288 
+Q 154.254522 39.6288 154.254522 43.020424 
+L 154.254522 126.963106 
+Q 154.254522 130.354729 158.977304 130.354729 
+z
+" clip-path="url(#p9c34da77aa)" style="fill: #dcfce7; stroke: #16a34a; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 294.757304 130.354729 
+L 405.742696 130.354729 
+Q 410.465478 130.354729 410.465478 126.963106 
+L 410.465478 43.020424 
+Q 410.465478 39.6288 405.742696 39.6288 
+L 294.757304 39.6288 
+Q 290.034522 39.6288 290.034522 43.020424 
+L 290.034522 126.963106 
+Q 290.034522 130.354729 294.757304 130.354729 
+z
+" clip-path="url(#p9c34da77aa)" style="fill: #ffedd5; stroke: #ea580c; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="214.47" y="29.792261" transform="rotate(-0 214.47 29.792261)">三種「慢」的診斷</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(61.49 71.77894)">硬體不足</text>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(78.69 82.166396)"/>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(56.848016 92.553852)">換更好GPU</text>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(57.19 102.941308)">或用小模型</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(197.27 76.972668)">模型太大</text>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(214.47 87.360124)"/>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(192.97 97.74758)">改用量化版</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(333.05 76.972668)">設定不當</text>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(350.25 87.360124)"/>
+    <text style="font-size: 8.6px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(324.45 97.74758)">調整批次大小</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9c34da77aa">
+   <rect x="10.8" y="10.8" width="407.34" height="144.144"/>
+  </clipPath>
+ </defs>
+</svg>

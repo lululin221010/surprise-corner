@@ -1,9 +1,15 @@
 // 📄 路徑：src/app/classroom/ai-communication/courses.ts
 // S3 AI溝通學系列課程（Prompt理解／Agent行動／AI記憶）
 
+export interface SlideChart {
+  type: 'memory-methods-compare' | 'rag-vs-finetune' | 'model-memory-compare' | 'svg-figure'
+  config?: Record<string, unknown>
+}
+
 export interface Slide {
   title: string
   body: string
+  chart?: SlideChart
 }
 
 export interface Quiz {
@@ -63,9 +69,8 @@ export const promptIntroCourse: Course = {
 
     **AI理解語言的方式,比較像是在拼拼圖,不是在「讀懂」一篇文章。**
 
-    [圖A:一句話被切成token碎片,再轉成數字的示意]
-
     [魯魯:驚喜] 原來我打的字,在AI眼裡根本不是「字」,是一串數字啊!`,
+          chart: { type: 'svg-figure', config: { file: 's3intro-ch01_figA.svg' } },
         },
         {
           title: '比喻一下:Token就像把一句話拆成樂高積木',
@@ -2517,9 +2522,8 @@ export const promptMasterCourse: Course = {
     同一次對話裡，你說過的話、AI回過的內容，都暫時保存在「上下文視窗」中。AI看得見這些內容，所以能「記住」你這次說的話——但只在這個視窗範圍內。
 
     **第三種：跨對話記憶**
-    需要特別設計的系統才有：在對話結束後，把某些資訊儲存下來，下次對話時再帶入。不是所有AI都有，有些需要使用者主動開啟。
-
-    [圖A：三種記憶的層次圖示——訓練知識（底層固定）、對話上下文（臨時視窗）、跨對話記憶（需外部儲存）]`,
+    需要特別設計的系統才有：在對話結束後，把某些資訊儲存下來，下次對話時再帶入。不是所有AI都有，有些需要使用者主動開啟。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch01_figA.svg' } },
         },
         {
           title: '真正的誤解在這裡：AI的「記得」不是在回想',
@@ -2649,9 +2653,8 @@ export const promptMasterCourse: Course = {
 
     **所有這些加在一起，都要塞進這個有限制的視窗裡。**
 
-    視窗的大小用「token」來計量。一個token大約等於中文的1-2個字，英文約4個字母。
-
-    [圖A：上下文視窗示意圖——視窗內可見、視窗外不可見，視窗容量以token計]`,
+    視窗的大小用「token」來計量。一個token大約等於中文的1-2個字，英文約4個字母。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch02_figA.svg' } },
         },
         {
           title: '視窗有多大？不同AI差很多',
@@ -2666,9 +2669,8 @@ export const promptMasterCourse: Course = {
     **1M tokens大概等於多少？**
     大約是一本600頁的書，或約五十萬個中文字。
 
-    [圖B：視窗大小演進時間軸——從2K到1M+ tokens]
-
     但視窗大不代表無限，而且視窗越大，運算成本也越高，速度可能越慢。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch02_figB.svg' } },
         },
         {
           title: '輸入和輸出都佔視窗：這個細節很多人沒注意到',
@@ -2794,9 +2796,8 @@ export const promptMasterCourse: Course = {
 
     不是「它記得但不說」，不是「它存在某個角落等你要求才拿出來」——而是它根本看不見那些內容，就像你讓朋友幫你記一件事，但你沒告訴他，他不知道你想讓他記。
 
-    視窗就是AI的當下感知範圍。視窗外，沒有記憶可言。
-
-    [圖A：時間軸上的視窗移動示意——隨著對話推進，最早的內容被移出視窗]`,
+    視窗就是AI的當下感知範圍。視窗外，沒有記憶可言。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch03_figA.svg' } },
         },
         {
           title: '「忘記」發生的三種常見情境',
@@ -2931,9 +2932,8 @@ export const promptMasterCourse: Course = {
     **1. 儲存問題：怎麼把資訊存起來？存什麼格式？存在哪裡？**
     **2. 查詢問題：用的時候怎麼找到對的資訊？不是把所有記憶都塞進視窗，那樣還是塞不下。**
 
-    解決這兩個問題，是長期記憶系統設計的核心挑戰。
-
-    [圖A：長期記憶系統架構示意——外部記憶庫 → 查詢機制 → 相關片段進入視窗]`,
+    解決這兩個問題，是長期記憶系統設計的核心挑戰。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch04_figA.svg' } },
         },
         {
           title: '方法一：關鍵事實提取與儲存',
@@ -2971,20 +2971,14 @@ export const promptMasterCourse: Course = {
     **這有什麼用？**
     當你問AI一個問題，系統可以把你的問題也轉成向量，然後在記憶庫裡找出「語意最相近」的記憶條目，再把那些條目帶入視窗。
 
-    **這解決了一個關鍵問題：**不需要記憶關鍵字，可以根據「意思」來搜索記憶。
-
-    [圖B：向量搜索示意——問題向量 vs 記憶庫向量，找出最接近的記憶條目]`,
+    **這解決了一個關鍵問題：**不需要記憶關鍵字，可以根據「意思」來搜索記憶。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch04_figB.svg' } },
         },
         {
           title: '三種做法的比較',
-          body: `|做法|記錄什麼|查詢方式|適合用途|
-    |---|---|---|---|
-    |關鍵事實提取|使用者的基本資訊、偏好|直接帶入|個人化設定、使用者背景|
-    |摘要記憶庫|對話的精華大意|關鍵字或向量|長期專案追蹤、服務記錄|
-    |向量資料庫|全文、文件片段|語意搜索|大量資料的智慧查詢（RAG）|
-
-    **實際的長期記憶系統，通常是三種方式的組合：**
+          body: `**實際的長期記憶系統，通常是三種方式的組合：**
     基本事實用結構化儲存，重要對話用摘要，大量文件用向量庫。`,
+          chart: { type: 'memory-methods-compare' },
         },
         {
           title: '長期記憶的實際限制',
@@ -3083,9 +3077,8 @@ export const promptMasterCourse: Course = {
     **三個步驟：**
     1. **Retrieval（檢索）**：根據你的問題，從資料庫裡找出最相關的文件片段
     2. **Augmentation（增強）**：把找到的片段加入AI的上下文視窗
-    3. **Generation（生成）**：AI根據這些資料，生成你的問題的答案
-
-    [圖A：RAG三步驟流程圖——問題 → 向量搜索找相關段落 → 段落進入視窗 → AI生成答案]`,
+    3. **Generation（生成）**：AI根據這些資料，生成你的問題的答案`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch05_figA.svg' } },
         },
         {
           title: '關鍵技術：向量嵌入讓「找相關」變得可能',
@@ -3097,9 +3090,8 @@ export const promptMasterCourse: Course = {
 
     把每個文件片段轉成一組數字（向量），代表它的語意位置。你的問題也被轉成向量。然後在向量空間裡搜索：「哪些文件的向量，跟這個問題的向量最接近？」
 
-    「最接近」= 語意最相關，不需要精確的關鍵字匹配。
-
-    [圖B：向量嵌入示意——文件和問題都轉成向量，在語意空間裡找最接近的]`,
+    「最接近」= 語意最相關，不需要精確的關鍵字匹配。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch05_figB.svg' } },
         },
         {
           title: 'RAG和一般AI的差別：哪些事情只有RAG做得到？',
@@ -3119,15 +3111,8 @@ export const promptMasterCourse: Course = {
           title: 'RAG vs 微調（Fine-tuning）：兩種讓AI了解你資料的方式',
           body: `讓AI了解你的特定資料，有兩種主要做法，各有適用情境：
 
-    |比較|RAG|微調（Fine-tuning）|
-    |---|---|---|
-    |做法|即時查詢外部資料庫|把資料「訓練進」模型參數|
-    |更新資料|加入資料庫，馬上生效|需要重新訓練|
-    |可解釋性|能引用具體來源|來源隱含在模型裡，不易追蹤|
-    |成本|較低（運算成本在查詢時）|較高（訓練成本）|
-    |適合|即時更新的知識庫、個人文件|特定風格或任務的固化能力|
-
     **大多數「讓AI讀自己資料」的應用，用RAG就夠了，不需要微調。**`,
+          chart: { type: 'rag-vs-finetune' },
         },
         {
           title: 'RAG的實際應用場景',
@@ -3414,20 +3399,12 @@ export const promptMasterCourse: Course = {
         },
         {
           title: '四家比較總表與選擇建議',
-          body: `[對比卡：ChatGPT / Claude / Gemini / Copilot——四個維度比較]
-
-    |維度|ChatGPT|Claude|Gemini|Copilot|
-    |---|---|---|---|---|
-    |記憶透明度|高（條目可見）|中（可查看概覽）|中（依授權範圍）|低（情境感知為主）|
-    |使用者控制|高（可手動管理）|中高（可設定）|中（依Google設定）|低（企業IT管理）|
-    |整合廣度|獨立（GPTs分開）|Projects為主|Google生態|Microsoft 365|
-    |適合情境|個人偏好管理|長期任務工作流|Google生態用戶|企業Microsoft用戶|
-
-    **選擇建議：**
+          body: `**選擇建議：**
     - 重視控制和透明度 → ChatGPT
     - 有長期特定工作任務 → Claude Projects
     - 深度Google用戶 → Gemini（注意授權範圍）
     - 企業Microsoft環境 → Copilot`,
+          chart: { type: 'model-memory-compare' },
         },
         {
           title: '本堂重點整理',
@@ -3513,9 +3490,8 @@ export const promptMasterCourse: Course = {
     **好的做法：**
     「我是一位獨立設計師，主要服務中小型電商品牌，這份提案是向一個預算有限但想做高品質視覺的客戶說明合作方案的，語氣要專業但親切……」
 
-    **為什麼有效：**AI沒有「猜背景」的義務，你告訴它越清楚，它帶入上下文的品質越高，你不需要後來一直修正。
-
-    [圖A：對比示意——模糊指令 vs 帶背景的清楚指令，輸出品質差異]`,
+    **為什麼有效：**AI沒有「猜背景」的義務，你告訴它越清楚，它帶入上下文的品質越高，你不需要後來一直修正。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch08_figA.svg' } },
         },
         {
           title: '技巧二：建立你的「個人背景說明文件」',
@@ -3655,9 +3631,8 @@ export const promptMasterCourse: Course = {
     視窗越大，AI在回答時要同時考慮的資訊越多。有研究顯示，對很長的視窗，AI對「中間部分」的注意力會比頭尾弱——資訊放在視窗的「中間」可能比頭尾更容易被忽略。
 
     **所以未來不只是「更大」，而是「更智慧的注意力分配」——**
-    AI要學會更準確地分辨哪些過去的內容在回答當前問題時真的重要。
-
-    [圖A：視窗大小演進 + 注意力分配問題示意]`,
+    AI要學會更準確地分辨哪些過去的內容在回答當前問題時真的重要。`,
+          chart: { type: 'svg-figure', config: { file: 's3mst-ch09_figA.svg' } },
         },
         {
           title: '演進方向二：更智慧的記憶壓縮與管理',

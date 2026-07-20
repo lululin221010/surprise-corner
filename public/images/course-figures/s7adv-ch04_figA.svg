@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="585.18pt" height="154.656pt" viewBox="0 0 585.18 154.656" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:22.115956</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 154.656 
+L 585.18 154.656 
+L 585.18 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 22.63518 103.1076 
+L 111.68082 103.1076 
+Q 116.18946 103.1076 116.18946 99.7812 
+L 116.18946 54.8748 
+Q 116.18946 51.5484 111.68082 51.5484 
+L 22.63518 51.5484 
+Q 18.12654 51.5484 18.12654 54.8748 
+L 18.12654 99.7812 
+Q 18.12654 103.1076 22.63518 103.1076 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #f3f4f6; stroke: #2563eb; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 117.064275 77.328 
+Q 123.518076 77.328 128.406631 77.328 
+" clip-path="url(#p32a7b49dd4)" style="fill: none; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 122.806631 74.528 
+L 128.406631 77.328 
+L 122.806631 80.128 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #555555; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 135.35118 103.1076 
+L 224.39682 103.1076 
+Q 228.90546 103.1076 228.90546 99.7812 
+L 228.90546 54.8748 
+Q 228.90546 51.5484 224.39682 51.5484 
+L 135.35118 51.5484 
+Q 130.84254 51.5484 130.84254 54.8748 
+L 130.84254 99.7812 
+Q 130.84254 103.1076 135.35118 103.1076 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #f3f4f6; stroke: #16a34a; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 229.780275 77.328 
+Q 236.234076 77.328 241.122631 77.328 
+" clip-path="url(#p32a7b49dd4)" style="fill: none; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 235.522631 74.528 
+L 241.122631 77.328 
+L 235.522631 80.128 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #555555; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 248.06718 103.1076 
+L 337.11282 103.1076 
+Q 341.62146 103.1076 341.62146 99.7812 
+L 341.62146 54.8748 
+Q 341.62146 51.5484 337.11282 51.5484 
+L 248.06718 51.5484 
+Q 243.55854 51.5484 243.55854 54.8748 
+L 243.55854 99.7812 
+Q 243.55854 103.1076 248.06718 103.1076 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #f3f4f6; stroke: #ea580c; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 342.496275 77.328 
+Q 348.950076 77.328 353.838631 77.328 
+" clip-path="url(#p32a7b49dd4)" style="fill: none; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 348.238631 74.528 
+L 353.838631 77.328 
+L 348.238631 80.128 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #555555; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 360.78318 103.1076 
+L 449.82882 103.1076 
+Q 454.33746 103.1076 454.33746 99.7812 
+L 454.33746 54.8748 
+Q 454.33746 51.5484 449.82882 51.5484 
+L 360.78318 51.5484 
+Q 356.27454 51.5484 356.27454 54.8748 
+L 356.27454 99.7812 
+Q 356.27454 103.1076 360.78318 103.1076 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #f3f4f6; stroke: #7c3aed; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 455.212275 77.328 
+Q 461.666076 77.328 466.554631 77.328 
+" clip-path="url(#p32a7b49dd4)" style="fill: none; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 460.954631 74.528 
+L 466.554631 77.328 
+L 460.954631 80.128 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #555555; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 473.49918 103.1076 
+L 562.54482 103.1076 
+Q 567.05346 103.1076 567.05346 99.7812 
+L 567.05346 54.8748 
+Q 567.05346 51.5484 562.54482 51.5484 
+L 473.49918 51.5484 
+Q 468.99054 51.5484 468.99054 54.8748 
+L 468.99054 99.7812 
+Q 468.99054 103.1076 473.49918 103.1076 
+z
+" clip-path="url(#p32a7b49dd4)" style="fill: #f3f4f6; stroke: #2563eb; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="292.59" y="29.588437" transform="rotate(-0 292.59 29.588437)">簡易RAG流程</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="67.158" y="79.751437" transform="rotate(-0 67.158 79.751437)">文件</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="179.874" y="79.751437" transform="rotate(-0 179.874 79.751437)">索引</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="292.59" y="79.751437" transform="rotate(-0 292.59 79.751437)">提問</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="405.306" y="79.751437" transform="rotate(-0 405.306 79.751437)">查找</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="518.022" y="79.751437" transform="rotate(-0 518.022 79.751437)">回答</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p32a7b49dd4">
+   <rect x="10.8" y="10.8" width="563.58" height="133.056"/>
+  </clipPath>
+ </defs>
+</svg>

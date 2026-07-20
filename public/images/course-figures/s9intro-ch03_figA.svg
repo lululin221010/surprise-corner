@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="378.72pt" height="165.744pt" viewBox="0 0 378.72 165.744" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:22.567275</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 165.744 
+L 378.72 165.744 
+L 378.72 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 23.65632 119.62872 
+L 169.36128 119.62872 
+Q 172.21824 119.62872 172.21824 116.74584 
+L 172.21824 48.99816 
+Q 172.21824 46.11528 169.36128 46.11528 
+L 23.65632 46.11528 
+Q 20.79936 46.11528 20.79936 48.99816 
+L 20.79936 116.74584 
+Q 20.79936 119.62872 23.65632 119.62872 
+z
+" clip-path="url(#pf0e8fd418d)" style="fill: #dbeafe; stroke: #2563eb; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 209.35872 119.62872 
+L 355.06368 119.62872 
+Q 357.92064 119.62872 357.92064 116.74584 
+L 357.92064 48.99816 
+Q 357.92064 46.11528 355.06368 46.11528 
+L 209.35872 46.11528 
+Q 206.50176 46.11528 206.50176 48.99816 
+L 206.50176 116.74584 
+Q 206.50176 119.62872 209.35872 119.62872 
+z
+" clip-path="url(#pf0e8fd418d)" style="fill: #dcfce7; stroke: #16a34a; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="189.36" y="30.403925" transform="rotate(-0 189.36 30.403925)">重心 vs 支撐多邊形</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(87.0088 68.276438)">重心</text>
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(96.5088 79.750953)"/>
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(75.527902 91.225469)">身體/機器</text>
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(72.7588 102.699984)">重量中心點</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(258.4612 68.276438)">支撐多邊形</text>
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(282.2112 79.750953)"/>
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(261.230302 91.225469)">腳底/輪子</text>
+    <text style="font-size: 9.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(248.9612 102.699984)">構成的支撐範圍</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #6b7280" x="189.36" y="86.452078" transform="rotate(-0 189.36 86.452078)">vs</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pf0e8fd418d">
+   <rect x="10.8" y="10.8" width="357.12" height="144.144"/>
+  </clipPath>
+ </defs>
+</svg>

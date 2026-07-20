@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="289.44pt" height="149.112pt" viewBox="0 0 289.44 149.112" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:22.337242</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 149.112 
+L 289.44 149.112 
+L 289.44 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 77.76 97.74 
+C 86.639 97.74 95.155534 94.381133 101.433935 88.40315 
+C 107.712336 82.425167 111.24 74.316144 111.24 65.862 
+C 111.24 57.407856 107.712336 49.298833 101.433935 43.32085 
+C 95.155534 37.342867 86.639 33.984 77.76 33.984 
+C 68.881 33.984 60.364466 37.342867 54.086065 43.32085 
+C 47.807664 49.298833 44.28 57.407856 44.28 65.862 
+C 44.28 74.316144 47.807664 82.425167 54.086065 88.40315 
+C 60.364466 94.381133 68.881 97.74 77.76 97.74 
+z
+" clip-path="url(#pe7629b7f96)" style="fill: #ffffff; stroke: #2563eb; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 211.68 97.74 
+C 220.559 97.74 229.075534 94.381133 235.353935 88.40315 
+C 241.632336 82.425167 245.16 74.316144 245.16 65.862 
+C 245.16 57.407856 241.632336 49.298833 235.353935 43.32085 
+C 229.075534 37.342867 220.559 33.984 211.68 33.984 
+C 202.801 33.984 194.284466 37.342867 188.006065 43.32085 
+C 181.727664 49.298833 178.2 57.407856 178.2 65.862 
+C 178.2 74.316144 181.727664 82.425167 188.006065 88.40315 
+C 194.284466 94.381133 202.801 97.74 211.68 97.74 
+z
+" clip-path="url(#pe7629b7f96)" style="fill: #ffffff; stroke: #16a34a; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="144.72" y="30.785438" transform="rotate(-0 144.72 30.785438)">更新頻率建議</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 16px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="77.76" y="67.37025" transform="rotate(-0 77.76 67.37025)">🔄</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8.3px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #374151" x="77.76" y="111.617742" transform="rotate(-0 77.76 111.617742)">Ollama每1-2月</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 16px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="211.68" y="67.37025" transform="rotate(-0 211.68 67.37025)">🔄</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.3px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #374151" x="211.68" y="111.617742" transform="rotate(-0 211.68 111.617742)">模型每2-3月</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe7629b7f96">
+   <rect x="10.8" y="10.8" width="267.84" height="127.512"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="389.88pt" height="195.225437pt" viewBox="0 0 389.88 195.225437" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:11.614551</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 195.225437 
+L 389.88 195.225437 
+L 389.88 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="table_1">
+    <g id="patch_2">
+     <path d="M 10.8 85.209437 
+L 194.94 85.209437 
+L 194.94 63.609437 
+L 10.8 63.609437 
+z
+" style="fill: #dbeafe; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_1">
+     <text style="font-weight: 700; font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1e3a8a" x="102.87" y="76.887953" transform="rotate(-0 102.87 76.887953)">模式</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 194.94 85.209437 
+L 379.08 85.209437 
+L 379.08 63.609437 
+L 194.94 63.609437 
+z
+" style="fill: #dbeafe; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_2">
+     <text style="font-weight: 700; font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1e3a8a" x="287.01" y="76.887953" transform="rotate(-0 287.01 76.887953)">特色與適用場景</text>
+    </g>
+    <g id="patch_4">
+     <path d="M 10.8 106.809438 
+L 194.94 106.809438 
+L 194.94 85.209438 
+L 10.8 85.209438 
+z
+" style="fill: #ffffff; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="102.87" y="98.487953" transform="rotate(-0 102.87 98.487953)">租賃</text>
+    </g>
+    <g id="patch_5">
+     <path d="M 194.94 106.809438 
+L 379.08 106.809438 
+L 379.08 85.209438 
+L 194.94 85.209438 
+z
+" style="fill: #ffffff; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="287.01" y="98.487953" transform="rotate(-0 287.01 98.487953)">降低導入門檻，適合中小企業</text>
+    </g>
+    <g id="patch_6">
+     <path d="M 10.8 128.409437 
+L 194.94 128.409437 
+L 194.94 106.809438 
+L 10.8 106.809438 
+z
+" style="fill: #f9fafb; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="102.87" y="120.087953" transform="rotate(-0 102.87 120.087953)">銷售</text>
+    </g>
+    <g id="patch_7">
+     <path d="M 194.94 128.409437 
+L 379.08 128.409437 
+L 379.08 106.809438 
+L 194.94 106.809438 
+z
+" style="fill: #f9fafb; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="287.01" y="120.087953" transform="rotate(-0 287.01 120.087953)">一次性買斷，適合大量部署</text>
+    </g>
+    <g id="patch_8">
+     <path d="M 10.8 150.009437 
+L 194.94 150.009437 
+L 194.94 128.409437 
+L 10.8 128.409437 
+z
+" style="fill: #ffffff; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="102.87" y="141.687953" transform="rotate(-0 102.87 141.687953)">服務費(RaaS)</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 194.94 150.009437 
+L 379.08 150.009437 
+L 379.08 128.409437 
+L 194.94 128.409437 
+z
+" style="fill: #ffffff; stroke: #d1d5db; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 9px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="287.01" y="141.687953" transform="rotate(-0 287.01 141.687953)">按使用量計費，適合彈性需求</text>
+    </g>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="194.94" y="19.193437" transform="rotate(-0 194.94 19.193437)">機器人新創三種商業模式</text>
+   </g>
+  </g>
+ </g>
+</svg>

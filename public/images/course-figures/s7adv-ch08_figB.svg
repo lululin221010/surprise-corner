@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="289.44pt" height="243.36pt" viewBox="0 0 289.44 243.36" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:22.376976</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 243.36 
+L 289.44 243.36 
+L 289.44 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 77.76 96.092308 
+C 86.639 96.092308 95.155534 92.797098 101.433935 86.93241 
+C 107.712336 81.067722 111.24 73.112382 111.24 64.818462 
+C 111.24 56.524541 107.712336 48.569201 101.433935 42.704513 
+C 95.155534 36.839825 86.639 33.544615 77.76 33.544615 
+C 68.881 33.544615 60.364466 36.839825 54.086065 42.704513 
+C 47.807664 48.569201 44.28 56.524541 44.28 64.818462 
+C 44.28 73.112382 47.807664 81.067722 54.086065 86.93241 
+C 60.364466 92.797098 68.881 96.092308 77.76 96.092308 
+z
+" clip-path="url(#p3b5ab30cae)" style="fill: #ffffff; stroke: #2563eb; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 211.68 96.092308 
+C 220.559 96.092308 229.075534 92.797098 235.353935 86.93241 
+C 241.632336 81.067722 245.16 73.112382 245.16 64.818462 
+C 245.16 56.524541 241.632336 48.569201 235.353935 42.704513 
+C 229.075534 36.839825 220.559 33.544615 211.68 33.544615 
+C 202.801 33.544615 194.284466 36.839825 188.006065 42.704513 
+C 181.727664 48.569201 178.2 56.524541 178.2 64.818462 
+C 178.2 73.112382 181.727664 81.067722 188.006065 86.93241 
+C 194.284466 92.797098 202.801 96.092308 211.68 96.092308 
+z
+" clip-path="url(#p3b5ab30cae)" style="fill: #ffffff; stroke: #16a34a; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 77.76 181.384615 
+C 86.639 181.384615 95.155534 178.089406 101.433935 172.224718 
+C 107.712336 166.36003 111.24 158.40469 111.24 150.110769 
+C 111.24 141.816848 107.712336 133.861508 101.433935 127.996821 
+C 95.155534 122.132133 86.639 118.836923 77.76 118.836923 
+C 68.881 118.836923 60.364466 122.132133 54.086065 127.996821 
+C 47.807664 133.861508 44.28 141.816848 44.28 150.110769 
+C 44.28 158.40469 47.807664 166.36003 54.086065 172.224718 
+C 60.364466 178.089406 68.881 181.384615 77.76 181.384615 
+z
+" clip-path="url(#p3b5ab30cae)" style="fill: #ffffff; stroke: #ea580c; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 211.68 181.384615 
+C 220.559 181.384615 229.075534 178.089406 235.353935 172.224718 
+C 241.632336 166.36003 245.16 158.40469 245.16 150.110769 
+C 245.16 141.816848 241.632336 133.861508 235.353935 127.996821 
+C 229.075534 122.132133 220.559 118.836923 211.68 118.836923 
+C 202.801 118.836923 194.284466 122.132133 188.006065 127.996821 
+C 181.727664 133.861508 178.2 141.816848 178.2 150.110769 
+C 178.2 158.40469 181.727664 166.36003 188.006065 172.224718 
+C 194.284466 178.089406 202.801 181.384615 211.68 181.384615 
+z
+" clip-path="url(#p3b5ab30cae)" style="fill: #ffffff; stroke: #7c3aed; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="144.72" y="30.565745" transform="rotate(-0 144.72 30.565745)">本地AI擅長的任務</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 16px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="77.76" y="66.381635" transform="rotate(-0 77.76 66.381635)">📄</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8.3px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #374151" x="77.76" y="109.750358" transform="rotate(-0 77.76 109.750358)">文件整理</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 16px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="211.68" y="66.381635" transform="rotate(-0 211.68 66.381635)">🔒</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.3px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #374151" x="211.68" y="109.750358" transform="rotate(-0 211.68 109.750358)">機密資料處理</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 16px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="77.76" y="151.673942" transform="rotate(-0 77.76 151.673942)">💬</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 8.3px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #374151" x="77.76" y="195.042665" transform="rotate(-0 77.76 195.042665)">離線對話</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 16px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle" x="211.68" y="151.673942" transform="rotate(-0 211.68 151.673942)">🎨</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 8.3px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #374151" x="211.68" y="195.042665" transform="rotate(-0 211.68 195.042665)">客製化角色</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3b5ab30cae">
+   <rect x="10.8" y="10.8" width="267.84" height="221.76"/>
+  </clipPath>
+ </defs>
+</svg>

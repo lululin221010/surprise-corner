@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="267.12pt" height="154.656pt" viewBox="0 0 267.12 154.656" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-09T00:11:11.558507</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 154.656 
+L 267.12 154.656 
+L 267.12 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 23.6898 103.1076 
+L 120.6702 103.1076 
+Q 125.5806 103.1076 125.5806 99.7812 
+L 125.5806 54.8748 
+Q 125.5806 51.5484 120.6702 51.5484 
+L 23.6898 51.5484 
+Q 18.7794 51.5484 18.7794 54.8748 
+L 18.7794 99.7812 
+Q 18.7794 103.1076 23.6898 103.1076 
+z
+" clip-path="url(#p0cfb664ac0)" style="fill: #f3f4f6; stroke: #2563eb; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 126.353544 77.328 
+Q 133.560478 77.328 139.202164 77.328 
+" clip-path="url(#p0cfb664ac0)" style="fill: none; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+    <path d="M 133.602164 74.528 
+L 139.202164 77.328 
+L 133.602164 80.128 
+z
+" clip-path="url(#p0cfb664ac0)" style="fill: #555555; stroke: #555555; stroke-width: 1.4; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 146.4498 103.1076 
+L 243.4302 103.1076 
+Q 248.3406 103.1076 248.3406 99.7812 
+L 248.3406 54.8748 
+Q 248.3406 51.5484 243.4302 51.5484 
+L 146.4498 51.5484 
+Q 141.5394 51.5484 141.5394 54.8748 
+L 141.5394 99.7812 
+Q 141.5394 103.1076 146.4498 103.1076 
+z
+" clip-path="url(#p0cfb664ac0)" style="fill: #f3f4f6; stroke: #16a34a; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; text-anchor: middle; fill: #1f2937" x="133.56" y="29.588437" transform="rotate(-0 133.56 29.588437)">從分層合作到深度整合</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(33.735687 74.436925)">語言模型+控制系統</text>
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(54.58 85.06595)">分層合作</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(160.99675 74.436925)">AI助理深度理解+</text>
+    <text style="font-size: 8.8px; font-family: 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif; fill: #1f2937" transform="translate(155.34 85.06595)">機器人身體深度整合</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0cfb664ac0">
+   <rect x="10.8" y="10.8" width="245.52" height="133.056"/>
+  </clipPath>
+ </defs>
+</svg>

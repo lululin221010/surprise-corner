@@ -134,6 +134,32 @@ function DistillationFlowChart() {
   );
 }
 
+function MessageJourneyChart() {
+  const nodes = [
+    { label: '你打字', bg: '#ede9fe', stroke: '#7c3aed' },
+    { label: 'API', bg: '#dbeafe', stroke: '#2563eb' },
+    { label: '模型推論', bg: '#fef3c7', stroke: '#d97706' },
+    { label: '串流回傳', bg: '#dcfce7', stroke: '#16a34a' },
+    { label: '你看到字', bg: '#fee2e2', stroke: '#dc2626' },
+  ];
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', padding: '0.4rem 0' }}>
+      <div style={{ fontSize: '0.68rem', color: '#7c3aed', fontWeight: 700 }}>構造 → 產生 → 操作，三冊概念的完整旅程</div>
+      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3rem' }}>
+        {nodes.map((n, i) => (
+          <React.Fragment key={n.label}>
+            {i > 0 && <span style={{ color: '#9ca3af', fontSize: '1rem' }}>→</span>}
+            <div style={{ background: n.bg, border: `1.5px solid ${n.stroke}`, borderRadius: 8, padding: '0.4rem 0.6rem', fontSize: '0.68rem', fontWeight: 600, color: '#374151' }}>
+              {n.label}
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+      <div style={{ fontSize: '0.62rem', color: '#9ca3af' }}>每個節點對應系列二不同一冊講過的概念</div>
+    </div>
+  );
+}
+
 export function renderAiAnatomyChart(chart: SlideChart): React.ReactNode {
   switch (chart.type) {
     case 'neural-network':    return <NeuralNetworkChart />;
@@ -141,6 +167,7 @@ export function renderAiAnatomyChart(chart: SlideChart): React.ReactNode {
     case 'transformer-block': return <TransformerBlockChart />;
     case 'attention-map':     return <AttentionMapChart />;
     case 'distillation-flow': return <DistillationFlowChart />;
+    case 'message-journey':   return <MessageJourneyChart />;
     default:                  return renderS1Chart(chart as any);
   }
 }
