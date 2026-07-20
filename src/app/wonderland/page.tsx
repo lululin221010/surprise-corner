@@ -208,6 +208,24 @@ export default function Wonderland() {
           ))}
         </div>
 
+        <section className="mt-8 mb-8">
+          <Link href="/promo/index.html" className="group block rounded-2xl p-6 md:p-8 border border-amber-400/30 backdrop-blur transition-all duration-300 hover:border-amber-300/60 hover:shadow-[0_0_32px_rgba(251,191,36,0.22)]" style={{ background: 'rgba(22,14,50,0.88)' }}>
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div className="inline-flex items-center rounded-full border border-amber-300/30 bg-amber-400/10 px-3 py-1 text-sm font-semibold text-amber-100">
+                  🌙 暗夜觀察日記
+                </div>
+                <p className="mt-4 text-base md:text-lg leading-relaxed text-amber-50/85">
+                  魯魯的觀察日記——13個日常裡的心理學現象
+                </p>
+              </div>
+              <div className="shrink-0 text-sm md:text-base font-bold text-amber-200 transition-transform duration-300 group-hover:translate-x-1">
+                進入觀察日記 →
+              </div>
+            </div>
+          </Link>
+        </section>
+
         <p className="text-center mt-12 pb-8 text-purple-300/50 text-sm">
           好奇心沒有盡頭，每天都有新發現 💖
         </p>
