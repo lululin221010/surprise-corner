@@ -36,6 +36,18 @@ function saveCert(email: string, info: CertInfo) {
   }
 }
 
+function shuffleOptions(options: string[], answerIndex: number) {
+  const order = options.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return {
+    options: order.map(i => options[i]),
+    answerIndex: order.indexOf(answerIndex),
+  };
+}
+
 export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, onPass, onRetry }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const [email, setEmail] = useState('');
@@ -44,6 +56,16 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, on
   const [account, setAccount] = useState<UserAccount | null>(null);
   const [coinMsg, setCoinMsg] = useState('');
   const [skipped, setSkipped] = useState(false);
+  const [shuffled, setShuffled] = useState(() => shuffleOptions(quiz.options, quiz.answerIndex));
+
+  // 換題時重置作答狀態並重新洗牌選項。
+  // 部分書院的AcademyLesson沒有對本元件加key={quizIndex}，換題不會重新掛載，
+  // 沒有這段的話上一題的已選答案會殘留，看起來像「自動答題」。
+  useEffect(() => {
+    setSelected(null);
+    setSkipped(false);
+    setShuffled(shuffleOptions(quiz.options, quiz.answerIndex));
+  }, [quiz]);
 
   useEffect(() => {
     const em = getCurrentEmail();
@@ -55,12 +77,12 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, on
   }, [certInfo.lessonId, certInfo.quizIndex]);
 
   const answered = selected !== null || skipped;
-  const isCorrect = skipped || (answered && selected === quiz.answerIndex);
+  const isCorrect = skipped || (answered && selected === shuffled.answerIndex);
 
   function handleSelect(i: number) {
     if (answered) return;
     setSelected(i);
-    const correct = i === quiz.answerIndex;
+    const correct = i === shuffled.answerIndex;
     if (correct && email) {
       const { awarded, totalCoins } = awardQuizCoin(email, certInfo.lessonId, certInfo.quizIndex);
       setAccount(getAccount(email));
@@ -116,13 +138,13 @@ export default function AcademyQuiz({ quiz, certInfo, isLast, isFree = false, on
       )}
 
       <div style={{ marginBottom: '0.8rem' }}>
-        {quiz.options.map((opt, i) => {
+        {shuffled.options.map((opt, i) => {
           let extraClass = '';
           if (answered && !skipped) {
-            if (i === quiz.answerIndex) extraClass = ' correct';
+            if (i === shuffled.answerIndex) extraClass = ' correct';
             else if (i === selected) extraClass = ' wrong';
           }
-          if (answered && skipped && i === quiz.answerIndex) extraClass = ' correct';
+          if (answered && skipped && i === shuffled.answerIndex) extraClass = ' correct';
           return (
             <button key={i} className={`quiz-option${extraClass}`} onClick={() => handleSelect(i)} style={{ cursor: answered ? 'default' : 'pointer' }}>
               {opt}

@@ -71,6 +71,7 @@ export default function AcademyLesson({ lesson, onComplete, onBack, isFree = fal
           </div>
         </div>
         <AcademyQuiz
+          key={quizIndex}
           quiz={quiz}
           certInfo={{ lessonId: lesson.id, lessonTitle: lesson.title, quizIndex }}
           isLast={quizIndex === lesson.quizzes.length - 1}
