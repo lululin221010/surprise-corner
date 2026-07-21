@@ -10,13 +10,9 @@ import AutonomicLessonViewer from './AutonomicLesson';
 import '../../classroom.css';
 
 const UNLOCK_KEYS: Record<string, string> = {
-  '01': 'ss-autonomic-vol01',
-  '02': 'ss-autonomic-vol02',
-  '03': 'ss-autonomic-vol03',
-  '04': 'ss-autonomic-vol04',
-  '05': 'ss-autonomic-vol05',
-  '06': 'ss-autonomic-vol06',
-  '07': 'ss-autonomic-vol07',
+  '01': 'ss-autonomic-new01',
+  '02': 'ss-autonomic-new02',
+  '03': 'ss-autonomic-new03',
 };
 
 export default function AutonomicAcademy() {
@@ -109,14 +105,14 @@ export default function AutonomicAcademy() {
               {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>✅ 解鎖成功！</p>}
               <a href={activeVolume.cta.url} target="_blank" rel="noopener noreferrer"
                 style={{ display: 'block', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
-                購買本書解鎖課程（NT$199） →
+                購買本書解鎖課程 →
               </a>
             </div>
           )}
 
           {isUnlocked && (
             <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '10px', padding: '0.5rem 0.8rem', marginBottom: '1.2rem', color: '#16a34a', fontSize: '0.8rem' }}>
-              ✅ 已解鎖，全部10堂開放閱讀
+              ✅ 已解鎖，全部{activeVolume.lessons.length}堂開放閱讀
             </div>
           )}
 
