@@ -16,15 +16,15 @@ const UNLOCK_KEYS: Record<string, string> = {
 };
 
 const PURCHASE_URLS: Record<string, string> = {
-  'anatomy-intro':    'https://still-time-corner.vercel.app/digital',
-  'anatomy-advanced': 'https://still-time-corner.vercel.app/digital',
-  'anatomy-master':   'https://still-time-corner.vercel.app/digital',
+  'anatomy-intro':    'https://still-time-corner.vercel.app/digital/6a47bc744e0cc8f9369a4136',
+  'anatomy-advanced': 'https://still-time-corner.vercel.app/digital/6a47bc744e0cc8f9369a4137',
+  'anatomy-master':   'https://still-time-corner.vercel.app/digital/6a47bc744e0cc8f9369a4138',
 };
 
 const PRICES: Record<string, string> = {
   'anatomy-intro':    'NT$249',
-  'anatomy-advanced': 'NT$349',
-  'anatomy-master':   'NT$449',
+  'anatomy-advanced': 'NT$249',
+  'anatomy-master':   'NT$249',
 };
 
 export default function Academy() {

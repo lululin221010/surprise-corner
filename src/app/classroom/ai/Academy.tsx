@@ -17,15 +17,15 @@ const UNLOCK_KEYS: Record<string, string> = {
 };
 
 const PURCHASE_URLS: Record<string, string> = {
-  'ai-intro':    'https://still-time-corner.vercel.app/ebooks',
-  'ai-advanced': 'https://still-time-corner.vercel.app/ebooks',
-  'ai-master':   'https://still-time-corner.vercel.app/ebooks',
+  'ai-intro':    'https://still-time-corner.vercel.app/digital/6a3cff188bbf86db8ae82257',
+  'ai-advanced': 'https://still-time-corner.vercel.app/digital/6a47ad5c06e0bde7f56e41df',
+  'ai-master':   'https://still-time-corner.vercel.app/digital/6a47ad5c06e0bde7f56e41e0',
 };
 
 const PRICES: Record<string, string> = {
   'ai-intro':    'NT$249',
-  'ai-advanced': 'NT$349',
-  'ai-master':   'NT$449',
+  'ai-advanced': 'NT$249',
+  'ai-master':   'NT$249',
 };
 
 export default function Academy() {
