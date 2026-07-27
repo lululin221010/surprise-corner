@@ -6,11 +6,8 @@ import PwaUpdateBanner from '@/components/PwaUpdateBanner';
 import DonateButton from '@/components/DonateButton';
 import { OwnerProvider } from '@/components/OwnerProvider';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'),
@@ -85,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config', 'G-SKM2EF5QTC');
         `}} />
       </head>
-      <body className={inter.className}>
+      <body>
         <Suspense>
           <OwnerProvider>
             <Navbar />
