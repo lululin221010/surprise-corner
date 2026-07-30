@@ -1,0 +1,16 @@
+<svg width="480" height="300" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#9ca3af"/>
+    </marker></defs>
+  <rect width="480" height="300" fill="#ffffff"/>
+  <text x="240" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#374151">急性壓力與慢性微壓力</text>
+  <rect x="42" y="58" width="170" height="36" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/><text x="127" y="81" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">急性壓力</text>
+  <rect x="268" y="58" width="170" height="36" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/><text x="353" y="81" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">慢性微壓力</text>
+  <rect x="52" y="104" width="150" height="22" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/><text x="127" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">短暫升高</text>
+  <rect x="278" y="104" width="150" height="22" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/><text x="353" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">反覆疊加</text>
+  <rect x="52" y="132" width="150" height="22" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/><text x="127" y="148" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">回到基線</text>
+  <rect x="278" y="132" width="150" height="22" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/><text x="353" y="148" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">基線墊高</text>
+  <rect x="52" y="160" width="150" height="22" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/><text x="127" y="176" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">恢復明確</text>
+  <rect x="278" y="160" width="150" height="22" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/><text x="353" y="176" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">恢復不足</text>
+  <text x="240" y="206" text-anchor="middle" font-size="12" fill="#6b7280">急性壓力可回到基線，慢性微壓力則會讓基線持續墊高。</text>
+</svg>

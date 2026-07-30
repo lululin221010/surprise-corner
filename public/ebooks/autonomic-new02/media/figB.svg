@@ -1,0 +1,17 @@
+<svg width="480" height="300" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#9ca3af"/>
+    </marker></defs>
+  <rect width="480" height="300" fill="#ffffff"/>
+  <text x="240" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#374151">症狀理解流程圖</text>
+  <rect x="16" y="77" width="90" height="62" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/><text x="61" y="113" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">症狀出現</text>
+  <rect x="195" y="77" width="90" height="62" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/><text x="240" y="113" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">評估嚴重度</text>
+  <rect x="374" y="77" width="90" height="62" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/><text x="419" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">排除結構</text><text x="419" y="121" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">性問題</text>
+  <rect x="374" y="179" width="90" height="62" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/><text x="419" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">理解功能</text><text x="419" y="223" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">性根源</text>
+  <rect x="16" y="179" width="90" height="62" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/><text x="61" y="215" text-anchor="middle" font-size="12" font-weight="bold" fill="#581c87">建立應對策略</text>
+  <line x1="104" y1="108" x2="197" y2="108" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="283" y1="108" x2="376" y2="108" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="419" y1="137" x2="419" y2="181" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="376" y1="210" x2="104" y2="210" stroke="#9ca3af" stroke-width="1.8" marker-end="url(#a)"/>
+  <text x="240" y="267" text-anchor="middle" font-size="12" fill="#6b7280">理解症狀需要先排除危險與結構性問題，再回到功能性調節根源。</text>
+</svg>
