@@ -22,15 +22,6 @@ const CARDS = [
     border: 'rgba(8,145,178,0.4)',
     glow: 'rgba(8,145,178,0.2)',
   },
-  {
-    icon: '💰',
-    label: '理財測驗',
-    desc: '你是哪種財務人格？9 題看穿你的投資模式',
-    href: '/quiz/finance-personality',
-    color: '#f59e0b',
-    border: 'rgba(245,158,11,0.4)',
-    glow: 'rgba(245,158,11,0.2)',
-  },
 ];
 
 export default function PlayPage() {
