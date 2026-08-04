@@ -1,5 +1,7 @@
 # 驚喜角落（Surprise Corner）- 專案文件
 
+**跨專案SOP查`C:\Users\user\Desktop\MyProjects01\AIOS\06_Operations\README.md`總索引（2026-08-04建立）**——電子書出版/繪本製作/影片製作/社群經營/內容品質/AI Agent安全制度都連結在這，先查這裡再問人。
+
 ## 📋 規劃文件更新流程（C & CC 必讀）
 
 **規劃文件位置：** `G:\我的雲端硬碟\總策畫\`（同步於 Google Drive，手機/桌機都可存取）
