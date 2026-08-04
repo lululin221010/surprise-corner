@@ -1,6 +1,6 @@
 'use client';
 // 📄 路徑：src/app/classroom/stock/Academy.tsx
-// 股市書院主介面 — 課程列表 + 課程進入點
+// 理財書院主介面 — 課程列表 + 課程進入點
 
 import { useState } from 'react';
 import Link from 'next/link';
