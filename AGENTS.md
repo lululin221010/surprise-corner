@@ -39,3 +39,14 @@ For any task involving Buffer analysis, social post metrics, Facebook Graph API,
 `C:\Users\user\Desktop\MyProjects01\surprise-corner-src`
 
 Do not look for these credentials in unrelated folders such as `Documents` projects or the ST project; those locations are not expected to contain the relevant settings.
+
+## Existing Weekly Buffer Analysis Automation (2026-08-04 discovered)
+
+Before writing any new Buffer analysis script, check first: a working weekly analysis already exists as a Codex scheduled automation, not a repo script.
+
+- Location: `C:\Users\user\.codex\automations\buffer-2\automation.toml` (kind = cron, runs every Monday 9am)
+- It uses **Buffer's GraphQL API** to pull Facebook/Instagram/Threads published posts — **not** the legacy REST API (`api.bufferapp.com/1/...`). The `BUFFER_API_KEY` in `.env.local` is a "Public API token" that the legacy REST API rejects with 401; only the GraphQL endpoint works with it.
+- It writes/refreshes these files directly in this repo's root: `buffer_link_analysis_report.md`, `buffer_posts_raw.csv`, `buffer_link_group_summary.csv`, `buffer_keyword_posts.csv`
+- Its own run log is `C:\Users\user\.codex\automations\buffer-2\memory.md`
+- **Known gap**: this automation runs silently — it does not push any notification when done, so nobody knows it ran unless someone manually checks the report files. A CC session doing the periodic `content-batch-restock-reminder` task should check these files for updates as part of that routine.
+- A related but separate automation, `C:\Users\user\.codex\automations\buffer\automation.toml` (heartbeat, weekly Monday 9:30), checks Buffer queue levels and drafts new posts when low — this overlaps somewhat with ST-side `content-batch-restock-reminder` scheduled task; worth discussing consolidation with 妹 at some point.
