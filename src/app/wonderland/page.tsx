@@ -213,7 +213,7 @@ export default function Wonderland() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="inline-flex items-center rounded-full border border-amber-300/30 bg-amber-400/10 px-3 py-1 text-sm font-semibold text-amber-100">
-                  🌙 暗夜觀察日記
+                  🌙 讀心日記 · 暗夜觀察日記
                 </div>
                 <p className="mt-4 text-base md:text-lg leading-relaxed text-amber-50/85">
                   魯魯的觀察日記——13個日常裡的心理學現象
