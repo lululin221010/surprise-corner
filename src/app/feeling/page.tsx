@@ -67,13 +67,20 @@ const SERIES: Record<number, { name:string; tagline:string; emoji:string; color:
 }
 
 // ─────────────────────────────────────────────────────────────────
-// 本週新感覺（每週手動換這裡就好）
+// 本週新感覺（依週次自動從 35 本輪選 3 本，不用手動維護）
 // ─────────────────────────────────────────────────────────────────
-const THIS_WEEK = [
-  { title:'你離開身體的那一刻', series:'靈魂與意識', trial:'/that-feeling-1-vol1-trial.html', color:'#6b4fa0', why:'靈魂出竅真的發生過嗎？本週最推首讀。' },
-  { title:'詛咒是真的嗎',       series:'詛咒心理',   trial:'/that-feeling-3-vol1-trial.html', color:'#2c3e50', why:'詛咒的科學解釋，比你以為的更可怕。' },
-  { title:'你為什麼怕死',       series:'死亡不死',   trial:'/that-feeling-4-vol1-trial.html', color:'#5d6d7e', why:'每個人都該讀一次的死亡課。' },
-]
+function getThisWeek() {
+  const start = new Date(new Date().getFullYear(), 0, 1)
+  const dayOfYear = Math.floor((Date.now() - start.getTime()) / 86400000)
+  const weekSeed = Math.floor(dayOfYear / 7)
+  const n = BOOKS.length
+  const step = Math.floor(n / 3) // 間隔跨系列，避免選到同系列3本
+  return [0, 1, 2].map(i => {
+    const book = BOOKS[(weekSeed + i * step) % n]
+    const meta = SERIES[book.s]
+    return { title: book.title, series: meta.name, trial: book.trial, color: meta.color, why: meta.tagline }
+  })
+}
 
 // ─────────────────────────────────────────────────────────────────
 // 情緒工具箱
@@ -229,6 +236,7 @@ const MORE_CORNERS = [
 export default function FeelingPage() {
   const [openSeries,   setOpenSeries]   = useState<number | null>(null)
   const [moreExpanded, setMoreExpanded] = useState(false)
+  const thisWeek = getThisWeek()
 
   return (
     <main style={{ minHeight:'100vh', background:'#faf7f2', paddingBottom:80, fontFamily:'sans-serif' }}>
@@ -280,14 +288,14 @@ export default function FeelingPage() {
       <div style={{ maxWidth:880, margin:'0 auto', padding:'28px 18px 0' }}>
 
         {/* ══ 本週新感覺 ══════════════════════════════════════════
-            ★ 維護：每週只改上方 THIS_WEEK 陣列即可              */}
+            自動輪替：依週次從 35 本輪選 3 本，不用手動維護        */}
         <section>
           <div style={{ marginBottom:14, display:'flex', alignItems:'baseline', gap:10 }}>
             <p style={{ margin:0, fontSize:'0.68rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 本週新感覺</p>
             <span style={{ fontSize:'0.73rem', color:'#b08040', background:'rgba(200,150,50,0.1)', padding:'2px 9px', borderRadius:9, border:'1px solid rgba(200,150,50,0.22)' }}>每週更新</span>
           </div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))', gap:10 }}>
-            {THIS_WEEK.map((item,i) => (
+            {thisWeek.map((item,i) => (
               <a key={i} href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
                 style={{ display:'block', padding:'16px 15px', borderRadius:11, background:'#fff', border:`2px solid ${item.color}28`, textDecoration:'none', position:'relative', overflow:'hidden' }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${item.color},${item.color}80)` }} />
