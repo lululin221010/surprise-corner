@@ -1,6 +1,8 @@
 # 驚喜角落（Surprise Corner）- 專案文件
 
-**跨專案SOP查`C:\Users\user\Desktop\MyProjects01\AIOS\06_Operations\README.md`總索引（2026-08-04建立）**——電子書出版/繪本製作/影片製作/社群經營/內容品質/AI Agent安全制度都連結在這，先查這裡再問人。
+**不管問題主題是什麼，只要是「跨專案通用」的SOP/制度問題，一律先查`C:\Users\user\Desktop\MyProjects01\AIOS\06_Operations\README.md`總索引，不要憑感覺判斷「這個主題應該沒有SOP」——這份索引持續在新增分類，先查再問人。**
+
+**⚠️每次呼叫`codex exec`前都要看`AIOS\06_Operations\發包Co前安全檢查SOP.md`**：CPU delta雙重確認法，避免撞上平行執行造成的中文亂碼bug（實測驗證過的真實故障，不是理論風險）。
 
 ## 📋 規劃文件更新流程（C & CC 必讀）
 
