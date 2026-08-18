@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章｜你打字之後，AI在做什麼｜《AI怎麼被使用．操作篇》試閱</title>
+<meta property="og:title" content="第1章｜你打字之後，AI在做什麼【免費試閱】《AI怎麼被使用．操作篇》">
+<meta property="og:description" content="你按下Enter後不到一秒就出字。這短短時間裡，AI其實走了四個步驟。">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第1章｜你打字之後，AI在做什麼</h1>
+<div class="subtitle">《AI怎麼被使用．操作篇》S2高階冊・免費試閱</div>
+
+<div class="hook">你按下Enter後不到一秒就出字。這短短時間裡，AI其實走了四個步驟。</div>
+
+<p>你在對話框裡打字，按下Enter，不到一秒，螢幕就跳出第一個字。這短短一秒鐘裡，AI其實走過了好幾個步驟，遠比看起來的複雜。這一章，我們把這條從你按下Enter，到看到回答的完整路徑，一步一步拆開來看。</p>
+<p>在開始之前，有一個概念要先分清楚：訓練（training）跟推論（inference）是完全不同的兩件事。前一冊講的「訓練」，是AI出生前的養成過程，動輒要花好幾個月，動用成千上萬張GPU，這是模型還沒出生之前的事。而你打字之後發生的，叫做「推論」——已經訓練好、已經畢業上線的模型，現場根據你的輸入，即時生成回答，這個過程通常只花幾秒鐘。訓練像是一個人從小到大的學習與成長，推論則像是這個人出社會後，每天上班回答客人提出的問題。搞懂這個區分，後面的內容會清楚很多。</p>
+<p>那麼，推論這幾秒鐘裡，具體發生了什麼事？大致可以拆成四個步驟。</p>
+<p><strong>第一步：把文字拆成token。</strong>你打的中文字、英文字，不會被模型直接「讀」進去，而是會先被拆解成模型看得懂的最小單位，這個單位叫做token，這是入門冊提過的概念。一句話、一個句子，常常會被拆成好幾個token，拆法跟語言、字詞結構都有關係。</p>
+<p><strong>第二步：送進模型做推論。</strong>拆好的token會被送進已經訓練完成的模型裡，模型根據它在訓練階段學到的語言規律與知識，開始「猜」下一個token應該是什麼。這裡的「猜」不是隨機亂猜，而是根據機率分布，從所有可能的選項裡，挑出機率最高、最合理的那一個。</p>
+<p><strong>第三步：一個字接一個字生成。</strong>模型猜完一個token之後，會把這個剛猜出來的結果，加進原本的輸入裡，組成一個新的、稍微長一點的輸入，再拿這個新輸入去猜下一個token——也就是說，模型一次只猜一個token，猜完才能猜下一個。這也是為什麼AI的回答看起來是一個字一個字蹦出來的，而不是整段話一次性出現。下一章，我們會專門深入講解這個「串流輸出」的技術機制。</p>
+<p><strong>第四步：傳回你看到的畫面。</strong>每當模型生成出一個新的token，這個結果就會即時透過網路傳回你的裝置，組合成你眼睛看到的那一行行文字。整個過程是：你的輸入被拆成token，送進模型做推論，模型一個字接一個字生成，每生成一個就即時傳回畫面——這四個步驟環環相扣，缺一不可，全部發生在短短幾秒鐘之內。</p>
+<p>這裡有兩個常見的疑問值得釐清。第一，AI會不會先在背後把整段答案想好，再一次性顯示出來給你看？答案是不會。AI是真的一個字一個字「邊想邊講」，並沒有一份預先寫好、藏在背後的完整答案，等著被一次性吐出來——這跟很多人直覺想像的運作方式不太一樣。第二，每次問AI同樣的問題，得到的回答會不會一模一樣？答案是不一定。因為模型每一步的「猜測」都帶有機率成分，從一堆可能的下一個字裡挑選，所以同樣的問題，在不同次的對話裡，可能會得到用詞、句子結構略有差異的回答，這是模型運作機制本身的特性，而不是系統出了故障。</p>
+<p>值得一提的是，「推論」這個詞，接下來幾章你還會反覆遇到，因為高階冊接下來要講的API、串流、計費、伺服器負載，全部都是建立在「推論」這個動作之上展開的不同面向。你可以把推論想成這一整冊的主軸，後面幾章只是從不同角度，去看這個主軸怎麼被包裝成API、用什麼方式傳送結果、怎麼計費、怎麼在大量使用者同時湧入時還能穩定運作。</p>
+<p>理解了「訓練」跟「推論」的差別，再加上拆token、推論、逐字生成、傳回畫面這四個步驟，你應該已經能夠在腦中描繪出一條清楚的路徑：從你按下Enter的那一刻，到螢幕上跳出第一個字，AI到底在背後做了什麼事。這不是什麼魔法，而是一連串環環相扣、有跡可循的技術步驟。</p>
+<p>下一章，我們要回答一個常見的問題：開發者要怎麼把這整套能力，接進自己開發的App或網站裡？答案的關鍵字是：API。</p>
+
+<div class="cta-box">
+  <h3>訓練完才是推論開始</h3>
+  <p>第一章拆完你打字後發生的事。真正操作細節與常見疑問，後面才講透。永久解鎖整本書。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a47bc744e0cc8f9369a4138" target="_blank">👉 永久解鎖《AI怎麼被使用．操作篇》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC1%E7%AB%A0%EF%BD%9C%E4%BD%A0%E6%89%93%E5%AD%97%E4%B9%8B%E5%BE%8C%EF%BC%8CAI%E5%9C%A8%E5%81%9A%E4%BB%80%E9%BA%BC%E3%80%8AAI%E6%80%8E%E9%BA%BC%E8%A2%AB%E4%BD%BF%E7%94%A8%EF%BC%8E%E6%93%8D%E4%BD%9C%E7%AF%87%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s2-master.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s2-master.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>

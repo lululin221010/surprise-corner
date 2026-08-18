@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章｜從零開始做一個AI，第一步是什麼｜《AI怎麼被養大．產生篇》試閱</title>
+<meta property="og:title" content="第1章｜從零開始做一個AI，第一步是什麼【免費試閱】《AI怎麼被養大．產生篇》">
+<meta property="og:description" content="做一個App幾週就上線，做一個AI卻要燒半年上億。從零開始，第一步到底是什麼？">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第1章｜從零開始做一個AI，第一步是什麼</h1>
+<div class="subtitle">《AI怎麼被養大．產生篇》S2進階冊・免費試閱</div>
+
+<div class="hook">做一個App幾週就上線，做一個AI卻要燒半年上億。從零開始，第一步到底是什麼？</div>
+
+<p>&gt; 可以去複習入門冊全部內容，再開始這一章。</p>
+<p>某家AI公司花了半年、燒了上億預算，才把一個新模型訓練出來。半年，做一個App通常幾個禮拜就能上線，為什麼AI要這麼久？</p>
+<p>入門冊我們拆過AI的零件：神經網路、參數、Transformer。這一章要說的是，這些零件是怎麼從無到有「長」出來的。一個AI模型的誕生不是寫完程式碼就結束，而是一條很長的生產線。</p>
+<hr>
+<h2>五個節點，從目標到上線</h2>
+<p><strong>第一步：定義目標。</strong> 這個模型要做什麼——回答問題、寫程式、看圖說故事？目標不同，後面所有步驟都不同，這通常發生在第0天。</p>
+<p><strong>第二步：收集資料。</strong> 從網路文章、書籍、對話紀錄、程式碼倉庫，蒐集成千上萬份「教材」，資料量常以TB（兆位元組）計算，這個階段大約耗時一個月。</p>
+<p><strong>第三步：資料清洗。</strong> 把蒐集到的資料去蕪存菁，去掉重複、錯誤、不適合的內容，通常也要花上一個月左右。</p>
+<p><strong>第四步：訓練。</strong> 把清洗過的資料餵給神經網路，讓它反覆學習、調整參數。這一步最燒算力、最花時間，可能長達數個月。</p>
+<p><strong>第五步：評測與微調。</strong> 測試模型表現，針對弱點再加強訓練，直到品質達標才能上線。</p>
+<hr>
+<h2>為什麼要這麼久</h2>
+<p>是不是錢砸越多、做越久，模型就一定越強？不完全是。時間長短取決於幾個變因：資料量越多越廣，蒐集和清洗就越花時間；模型參數量越大，訓練需要的運算次數呈倍數增加；目標品質要求越高，需要的精準度也越苛刻；訓練過程常常不是一路順利,發現問題要回頭修正,這也會拖長時間。</p>
+<p>半年、上億預算的新聞，背後其實是資料規模、模型規模、反覆修正三者疊加出來的結果。</p>
+<hr>
+<h2>一般人能自己訓練AI嗎</h2>
+<p>理論上可以做一個很小、很陽春的模型，但要做出像日常在用的那種AI助理，光是算力成本，一般人和小公司就難以負擔。這也是為什麼能做出頂尖大模型的公司，全世界只有少數幾家——「養大一個AI」的門檻，已經把大多數玩家擋在門外。</p>
+<hr>
+<h2>本章重點</h2>
+<p>一個AI模型的誕生，是「定義目標→收集資料→清洗資料→訓練→評測微調」五個節點串起來的生產線。下一章，我們把生產線裡最燒錢的部分——算力，單獨拆開來看清楚。</p>
+
+<div class="cta-box">
+  <h3>五個節點，一條長生產線</h3>
+  <p>第一章講完定義到訓練的流程。真正時間成本與誰能自己做，後面才展開。永久解鎖整本書。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a47bc744e0cc8f9369a4137" target="_blank">👉 永久解鎖《AI怎麼被養大．產生篇》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC1%E7%AB%A0%EF%BD%9C%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B%E5%81%9A%E4%B8%80%E5%80%8BAI%EF%BC%8C%E7%AC%AC%E4%B8%80%E6%AD%A5%E6%98%AF%E4%BB%80%E9%BA%BC%E3%80%8AAI%E6%80%8E%E9%BA%BC%E8%A2%AB%E9%A4%8A%E5%A4%A7%EF%BC%8E%E7%94%A2%E7%94%9F%E7%AF%87%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s2-advanced.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s2-advanced.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>

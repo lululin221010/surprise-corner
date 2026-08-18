@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章：預訓練是什麼｜《AI是怎麼訓練的》試閱</title>
+<meta property="og:title" content="第1章：預訓練是什麼【免費試閱】《AI是怎麼訓練的》">
+<meta property="og:description" content="同一個AI為什麼能聊天氣、看程式碼又講歷史？它沒上過專門課，秘密全在最初那個最燒錢的階段。">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第1章：預訓練是什麼</h1>
+<div class="subtitle">《AI是怎麼訓練的》S1進階冊・免費試閱</div>
+
+<div class="hook">同一個AI為什麼能聊天氣、看程式碼又講歷史？它沒上過專門課，秘密全在最初那個最燒錢的階段。</div>
+
+<p>📖 先修提醒：本章會用到「訓練」（入門冊第4章）與「參數／記憶」（入門冊第5章）的概念。</p>
+<p>還不熟可以先回《AI是怎麼想的》對應章節複習，再回來。</p>
+<p>你有沒有想過，同一個AI模型，為什麼可以跟你聊天氣、幫你看程式碼，還能聊聊歷史典故？它沒有上過這些「專門課程」，怎麼什麼都能接得上幾句？</p>
+<p>答案要從AI生命中最初、也是規模最龐大的一個階段說起——預訓練（pretraining）。</p>
+<p>入門冊第4章提過，AI是靠「餵資料、練習」變聰明的。但這句話背後其實藏著好幾個階段，預訓練是第一步，也是最吃資源的一步。它做的事情，說穿了意外地簡單：把網路上能蒐集到的海量文字——維基百科、書籍、新聞、論壇貼文、程式碼——丟給AI，讓它反覆練習一件事：猜下一個字是什麼。</p>
+<p>舉個例子，AI讀到「今天天氣很」，要猜接下來最可能出現的字。猜完之後，直接跟原文比對——猜對了，這個猜法被強化；猜錯了，參數做一點點調整。這個過程，在數兆個字上重複幾億次。</p>
+<p>這種學習方式有個專有名詞，叫自監督學習（self-supervised learning）。它的特別之處在於：不需要任何人坐在旁邊批改考卷、告訴AI「這題答對了」——文字本身，就是天然的標準答案。AI讀過的每一句話，前半句和後半句的關係，就是一份現成的練習題。</p>
+<p>也正因為這種學習方式不需要人工標註，AI才有可能在合理的時間內，吃下入門冊第5章提過、藏在參數裡的那種規模——數千億甚至上兆個參數，對應的是數兆個Token的訓練資料。這個量級，遠遠超過一個人一輩子能讀完的文字量。</p>
+<p>但預訓練追求的，不是「記住每一句話」，而是廣度。資料涵蓋的主題越多元，AI在各個方向上累積的語言規律和常識就越完整。這也解釋了一個你可能遇過的現象：同一個AI，聊主流話題還算靠譜，但問到某個很冷門的在地小眾話題，常常開始語焉不詳，甚至講錯細節。很可能的原因不是AI「故意亂講」，而是這塊知識在預訓練資料裡出現的次數太少，沒有足夠的練習量把規律學紮實。</p>
+<p>這裡有個容易被誤解的地方，值得停下來說清楚：預訓練學到的，不是「理解」，而是統計上的關聯規律——什麼字後面常接什麼字、什麼概念常常一起出現。這跟人類理解一件事、背後有意圖和情境感受，是不同層次的東西。這個區別之所以重要，是因為它解釋了AI一個常見的行為模式：有時候講得頭頭是道、邏輯卻兜不太起來——因為它學到的是「聽起來合理的話該怎麼接」，不是先有理解才開口。後面第7章講到Prompt和推論機制時，會再從不同角度深入這個現象。</p>
+<p>知道了這些，下次AI在冷門領域講得模糊或可疑時，你多了一個判斷依據：通用常識、主流知識，預訓練覆蓋通常比較紮實；冷門、小眾、或近期才發生的事，覆蓋可能不足，建議多查證一手資料。另外要記得，預訓練資料本質上有一個時間截止點——這也是為什麼AI對「最新消息」這類問題，常常需要額外連網搜尋輔助，而不能只靠預訓練階段學到的東西。</p>
+<hr>
+<h2>本章重點</h2>
+<ul class="recap">
+  <li>預訓練＝用海量文字反覆練習「猜下一個字」，從中累積語言規律與世界知識</li>
+  <li>這種不靠人工標答案的學習方式叫自監督學習</li>
+  <li>預訓練追求的是廣度，覆蓋越完整，AI在該領域越穩定</li>
+  <li>預訓練學到的是統計規律，不等於「理解」——這是後面講幻覺和推理限制的重要基礎</li>
+</ul>
+
+<div class="cta-box">
+  <h3>預訓練只是起點</h3>
+  <p>第一章講完「怎麼餵資料」。真正訓練細節與常見誤解，後面章節才展開。永久解鎖整本書，隨時重讀。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a47ad5c06e0bde7f56e41df" target="_blank">👉 永久解鎖《AI是怎麼訓練的》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC1%E7%AB%A0%EF%BC%9A%E9%A0%90%E8%A8%93%E7%B7%B4%E6%98%AF%E4%BB%80%E9%BA%BC%E3%80%8AAI%E6%98%AF%E6%80%8E%E9%BA%BC%E8%A8%93%E7%B7%B4%E7%9A%84%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s1-advanced.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s1-advanced.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>

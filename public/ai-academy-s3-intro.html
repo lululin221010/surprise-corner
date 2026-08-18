@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第01章｜你說的話,AI怎麼拆解｜《Prompt是怎麼被理解的》試閱</title>
+<meta property="og:title" content="第01章｜你說的話,AI怎麼拆解【免費試閱】《Prompt是怎麼被理解的》">
+<meta property="og:description" content="AI不是「讀」你的話，是把句子拆成token碎片再拼意思。用錯詞，它就容易猜錯。">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第01章｜你說的話,AI怎麼拆解</h1>
+<div class="subtitle">《Prompt是怎麼被理解的》S3入門冊・免費試閱</div>
+
+<div class="hook">AI不是「讀」你的話，是把句子拆成token碎片再拼意思。用錯詞，它就容易猜錯。</div>
+
+<p>你有沒有想過,當你打出「幫我寫一封請假信」這幾個字,AI是怎麼「聽懂」的?它真的看懂了你的意思,還是只是在玩一場很厲害的文字接龍?</p>
+<p>這一章,我們從最基本的地方開始:一句話從你打出來,到AI開始回答之間,到底發生了什麼事。</p>
+<hr>
+<h2>AI不是「讀」你的話,是把話拆成碎片</h2>
+<p>人類讀一句話,是把整句話當成一個完整的意思來理解。但AI不是這樣運作的。</p>
+<p>AI看到的,其實是被切成一小塊一小塊的「token」(可以理解成字詞碎片)。「幫我寫一封請假信」這句話,可能會被切成「幫」「我」「寫」「一封」「請假」「信」這樣的小單位,每個單位再被轉換成一串數字。AI靠著這些數字之間的關係,去推測你想表達什麼。</p>
+<p>換句話說,<strong>AI理解語言的方式,比較像是在拼拼圖,而不是在「讀懂」一篇文章。</strong></p>
+<hr>
+<h2>比喻一下:Token就像樂高積木</h2>
+<p>想像你說的每一句話,都是用樂高積木搭出來的城堡。AI不認識「城堡」這個整體概念,但它認得每一塊積木的形狀,以及積木跟積木常常怎麼接在一起。</p>
+<p>「請假信」這三個字,常常跟「主管」「事由」「日期」這些詞同時出現。AI靠著大量閱讀過的文字資料,記住了這種「積木常常怎麼搭」的規律。所以當你打出「請假」,AI腦中浮現的不是「請假是什麼感覺」,而是「根據過去看過的資料,接在『請假』後面最常出現的字詞是什麼」。</p>
+<hr>
+<h2>中文的token切法,有時候很意外</h2>
+<p>中文沒有空格分詞,所以token的切法有時候會讓人意外。「西瓜」可能被當成一個token,也可能被切成「西」「瓜」兩個。這也是為什麼有時候你打的詞很短,AI卻好像會錯意——因為切法不同,拼出來的「意思積木」就不一樣了。</p>
+<p>相對來說,英文用空格自然分詞,切起來比較穩定,這也是某些情況下用英文問問題,AI回答品質會比較一致的原因之一。</p>
+<hr>
+<h2>最容易誤解的地方:AI不是先想好答案才回答</h2>
+<p>很多人以為AI是先在心裡「理解」整個問題,把答案想清楚之後,才一次打出來。但實際情況更接近:AI一邊看著你輸入的token,一邊猜「下一個最可能出現的token」是什麼,一個字一個字往下接,接出一整句回答。</p>
+<p>它並沒有先在腦中構思好整段答案,而是邊接龍邊生成。這也是為什麼AI有時候講到一半會「跑題」,或前後邏輯有點怪——因為它是逐字接龍接出來的,不是先寫好草稿再唸給你聽。</p>
+<hr>
+<h2>知道這件事,對你打字有什麼幫助?</h2>
+<p>既然AI是靠「常一起出現的字詞」來猜你的意思,那麼:</p>
+<ul class="recap">
+  <li>用詞越精準、越具體,AI拼湊出的意思就越準確</li>
+  <li>太短、太模糊的詞(像只打「那個」「幫我弄一下」),AI能依靠的線索就少,容易猜錯</li>
+  <li>中文打字時,適度用標點分句,可以幫助AI更準確切出你要的token組合</li>
+</ul>
+<p>這不是要你立刻學什麼厲害技巧,只是理解「它怎麼拆解你的話」之後,自然會打得更清楚。</p>
+<hr>
+<h2>本章重點</h2>
+<ul class="recap">
+  <li>AI看到的不是完整句子,而是被切成token的碎片</li>
+  <li>Token會轉成數字,AI靠數字之間的關係推測意思</li>
+  <li>中文沒有空格分詞,token切法有時跟你想的不一樣</li>
+  <li>AI是「邊接龍邊生成」答案,不是先想好整段再說</li>
+</ul>
+
+<div class="cta-box">
+  <h3>拆得越準，答得越準</h3>
+  <p>第一章講完AI怎麼拆解你的話。真正寫好Prompt的技巧與常見踩坑，後面才展開。永久解鎖整本書。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a48dfbe3312259471fbc020" target="_blank">👉 永久解鎖《Prompt是怎麼被理解的》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC01%E7%AB%A0%EF%BD%9C%E4%BD%A0%E8%AA%AA%E7%9A%84%E8%A9%B1%2CAI%E6%80%8E%E9%BA%BC%E6%8B%86%E8%A7%A3%E3%80%8APrompt%E6%98%AF%E6%80%8E%E9%BA%BC%E8%A2%AB%E7%90%86%E8%A7%A3%E7%9A%84%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s3-intro.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s3-intro.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>

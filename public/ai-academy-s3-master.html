@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第01章｜AI真的有記憶嗎｜《AI記憶與上下文的秘密》試閱</title>
+<meta property="og:title" content="第01章｜AI真的有記憶嗎【免費試閱】《AI記憶與上下文的秘密》">
+<meta property="og:description" content="AI真的有記憶嗎？答案是三種完全不同的「記得」，多數人搞混了。">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第01章｜AI真的有記憶嗎</h1>
+<div class="subtitle">《AI記憶與上下文的秘密》S3高階冊・免費試閱</div>
+
+<div class="hook">AI真的有記憶嗎？答案是三種完全不同的「記得」，多數人搞混了。</div>
+
+<p>你告訴AI你是設計師，它馬上在接下來的回答裡帶入這個前提，給你的建議都考慮到了設計師的視角。你心想：「不錯，它記住我了。」</p>
+<p>但隔天你重開對話，它又問：「請問有什麼我可以幫你的？」</p>
+<p>這中間發生了什麼事？「記得」跟「不記得」的分界線到底在哪裡？這一章，我們把「AI的記憶」這件事完整拆開來看。</p>
+<hr>
+<h2>先分清楚：AI有三種「記憶」</h2>
+<p>談AI的記憶之前，要先弄清楚一件事：你說的「AI記住了我的話」，指的是哪種記憶？因為這三件事完全不同，混淆三者，只會讓理解越來越困難。</p>
+<p><strong>第一種：訓練知識</strong></p>
+<p>這是AI在訓練過程中，從海量資料裡學到的所有東西——歷史事件、語言規律、各種領域的知識、寫作風格。這些能力和資訊「固化」在模型的參數裡，不會因為你的對話改變，也不會因為對話結束而消失。AI知道台灣在哪裡、番茄炒蛋怎麼做、什麼叫做設計原則——這些都是訓練知識。</p>
+<p><strong>第二種：對話上下文</strong></p>
+<p>同一次對話裡，你說過的話、AI回過的內容，都暫時保存在一個叫做「上下文視窗」的空間裡。AI在回答你的問題時，會把整個視窗裡的內容都考慮進去，所以它能「記住」你這次說過的事——但只要對話結束、視窗關閉，這些都消失了。</p>
+<p><strong>第三種：跨對話記憶</strong></p>
+<p>需要特別設計的系統才有的功能：在對話結束後，把重要資訊儲存到外部資料庫，下次對話開始時再帶入。這不是所有AI都有，有些平台需要使用者主動開啟。</p>
+<hr>
+<h2>AI的「記得」不是在回想，是在看</h2>
+<p>這個差異說起來簡單，但它改變了你理解AI的整個框架。</p>
+<p>人類說「我記得你告訴我你是設計師」，指的是大腦從記憶系統中提取了之前儲存的資訊，那個資訊跟你現在的感官輸入是分開的。</p>
+<p>AI說「你之前提到你是設計師」，指的是那段話現在還在它能讀取的範圍裡——在上下文視窗裡。</p>
+<p><strong>它不是在回想，它是在看。</strong></p>
+<p>只要資訊還在視窗裡，它就能「記得」；一旦視窗結束或內容因為太長而被截斷，它就什麼都不知道了。這不是AI「健忘」或「不夠聰明」，而是它的架構本來就不是生物式的記憶系統。</p>
+<hr>
+<h2>比喻：AI是每次都拿到當天劇本的演員</h2>
+<p>想像一個演員每次上台前，都會收到一份「今天的劇本」，裡面寫著這場戲你們之前說過什麼、有什麼背景設定。他在台上能完全「記得」劇本裡的內容——因為他現在手上有那份紙。但演出結束後，如果下次沒有人把之前的劇情記錄下來放進新的劇本，他就不會知道上次發生了什麼。</p>
+<p>AI就是那個演員。上下文視窗就是那份劇本。每次新對話，都是全新的劇本、全新的演出。</p>
+<p>這個比喻也說明了「跨對話記憶系統」在做什麼：它就像是有個助理坐在後台，每次演出結束後幫演員整理「下次需要知道的重點」，讓下一場戲可以繼續。</p>
+<hr>
+<h2>訓練知識和個人記憶是兩件完全不同的事</h2>
+<p>這裡有個常見的混淆值得特別說清楚。</p>
+<p>AI懂很多——它知道歷史、懂語言、能分析各種問題。這些能力讓人覺得它是一個「淵博的朋友」，也讓人誤以為它對你這個人也同樣熟悉。</p>
+<p>但這是兩件事。訓練知識是共用的能力和資訊，所有使用這個AI的人都能存取。它知道設計師的工作特性，不是因為它記得你告訴過它——而是因為有關設計師的資訊出現在它的訓練資料裡。</p>
+<p><strong>在大多數主流AI服務的預設設定下，你的個人對話不會被用來更新訓練知識。</strong>你說的話不會讓AI「學到」你這個人是誰，除非有特別設計的記憶系統在運作。</p>
+<hr>
+<h2>跨對話記憶：需要外部系統的支撐</h2>
+<p>一些AI平台提供了「記憶功能」（各主流AI平台均陸續推出記憶功能），讓AI能跨對話記住你的某些資訊。這不是AI突然有了類人類的記憶，而是有個外部系統在背後運作：</p>
+<p>1. 對話進行中，系統判斷哪些資訊值得保留</p>
+<p>2. 把這些資訊提取、摘要後儲存到外部資料庫</p>
+<p>3. 下次對話開始時，把相關的記憶條目帶入新的上下文</p>
+<p>本質上，就是「幫你準備好下一次對話的劇本補充資料」。</p>
+<p>這樣的系統讓使用體驗更連貫，但也帶來新的問題：系統怎麼判斷哪些值得記？記錯了怎麼辦？儲存的資訊會被誰看見？——這些問題我們會在第6章的隱私辯論中詳細討論。</p>
+<hr>
+<h2>為什麼理解這三層這麼重要？</h2>
+<p>如果你不清楚這三種記憶的差異，你就很難搞懂：</p>
+<ul class="recap">
+  <li>為什麼你告訴AI你的偏好，下次卻要重說一遍（因為跨對話記憶沒開）</li>
+  <li>為什麼長對話到後來AI好像「忘了」前面說的話（因為視窗容量有限）</li>
+  <li>為什麼AI對某個領域知識豐富，但對你個人一無所知（因為訓練知識≠個人記憶）</li>
+</ul>
+<p>搞清楚這三層，不只是滿足好奇心，而是讓你在使用AI時，能做出更有效的溝通決策：什麼時候要重申背景、什麼時候要開記憶功能、什麼時候不必擔心AI「記太多」。</p>
+<p>接下來幾章，我們會把每一層都拆得更細——從上下文視窗的運作機制，到外部記憶系統的設計原理，一步一步把這個問題看清楚。</p>
+<hr>
+<h2>本章重點</h2>
+<ul class="recap">
+  <li>AI的記憶分三種：訓練知識、對話上下文、跨對話記憶，完全是不同的東西</li>
+  <li>對話中的「記得」=視窗裡的資訊還在，不是在「回想」</li>
+  <li>訓練知識是共用能力，不是對你個人的記憶</li>
+  <li>跨對話記憶需要外部系統，不是AI的自然能力</li>
+  <li>理解三層架構，才能做出更聰明的AI溝通決策</li>
+</ul>
+
+<div class="cta-box">
+  <h3>三種記憶，三種限制</h3>
+  <p>第一章拆完訓練知識、上下文、跨對話記憶。真正怎麼善用與避開忘記，後面才展開。永久解鎖整本書。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a48e81cca89f630636fe208" target="_blank">👉 永久解鎖《AI記憶與上下文的秘密》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC01%E7%AB%A0%EF%BD%9CAI%E7%9C%9F%E7%9A%84%E6%9C%89%E8%A8%98%E6%86%B6%E5%97%8E%E3%80%8AAI%E8%A8%98%E6%86%B6%E8%88%87%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E7%A7%98%E5%AF%86%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s3-master.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s3-master.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第01章｜訓練一個小模型，需要準備什麼｜《訓練一個迷你AI模型》試閱</title>
+<meta property="og:title" content="第01章｜訓練一個小模型，需要準備什麼【免費試閱】《訓練一個迷你AI模型》">
+<meta property="og:description" content="想訓練自己的小模型，一搜全是嚇人的GPU叢集需求。其實你真正需要的可能只是「微調」。">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第01章｜訓練一個小模型，需要準備什麼</h1>
+<div class="subtitle">《訓練一個迷你AI模型》S7高階冊・免費試閱</div>
+
+<div class="hook">想訓練自己的小模型，一搜全是嚇人的GPU叢集需求。其實你真正需要的可能只是「微調」。</div>
+
+<p>阿志在一家中型電商公司擔任數據分析師，某天他向主管提案：「如果我們能訓練一個屬於自己的小型語言模型，專門回答顧客的退換貨問題，客服成本應該能降低不少。」主管點頭，說：「聽起來不錯，你去研究一下，下週提報告。」</p>
+<p>阿志回到座位，打開搜尋引擎，輸入「如何訓練語言模型」，螢幕上跳出幾千條結果，有人說要準備 GPU 叢集，有人說至少要幾百 GB 的資料，有人說光是環境設定就要一週。阿志盯著螢幕，開始懷疑自己是不是說了什麼大話。</p>
+<p>事實上，阿志的情況很典型。大多數人對「訓練模型」的想像，來自新聞報導裡那種動用幾千張 GPU、花費上億美元的超大規模訓練。但那是從零開始訓練一個全新模型。阿志真正需要的，是另一件事：微調（fine-tuning），也就是在一個已經訓練好的模型基礎上，用少量的專業資料繼續調整，讓它學會特定領域的語氣和知識。</p>
+<p>這兩件事的資源需求，差距可以達到幾千倍。</p>
+<p><strong>硬體：你真正需要什麼</strong></p>
+<p>微調一個小型模型，最低配置是一張現代 GPU，例如 NVIDIA RTX 3090 或 4090。如果你只是在 7B 參數以下的模型上進行低秩微調（LoRA），一張消費級顯示卡就能跑起來。記憶體是關鍵瓶頸：模型本身佔一部分，訓練過程的梯度和優化器狀態佔另一部分，加在一起往往是模型大小的三到四倍。</p>
+<p>如果沒有 GPU，也有替代方案。Google Colab 提供免費的 T4 GPU 配額，足以讓你跑幾個小時的訓練實驗。Kaggle 也有類似資源。雲端方案（AWS、GCP、Lambda Labs）則按小時計費，適合需要穩定算力的場合。阿志的情況，建議先從 Colab 試水，確認流程之後再決定是否投資硬體。</p>
+<p>CPU 訓練不是不可以，但速度會慢到讓人崩潰——同樣的訓練工作，GPU 可能一小時完成，CPU 要跑三天。</p>
+<p><strong>軟體環境：工具鏈的選擇</strong></p>
+<p>訓練模型需要幾個層次的工具。最底層是深度學習框架，目前主流是 PyTorch；大多數開源模型和微調工具都建立在它之上。上面一層是 Hugging Face 的 `transformers` 函式庫，它把各種模型的載入、推理和訓練邏輯都包裝好了，讓你不用從頭寫。</p>
+<p>對於微調，`peft`（Parameter-Efficient Fine-Tuning）和 `trl`（Transformer Reinforcement Learning）這兩個函式庫很常用。前者實現了 LoRA 等方法，讓你只訓練模型的一小部分參數；後者提供了 SFT（監督式微調）的訓練迴圈。</p>
+<p>環境管理建議用 `conda` 或 `venv`，確保不同專案的套件不互相干擾。版本衝突是初學者最常遇到的坑，事先用虛擬環境隔離，能省掉很多除錯時間。</p>
+<p><strong>資料：最容易被低估的部分</strong></p>
+<p>很多人把大量時間花在工具設定上，卻忽略了資料才是微調成功的關鍵。對於一個退換貨客服模型，你需要的是真實的問答對：顧客問了什麼，客服回答了什麼，這個回答是好的還是不好的。</p>
+<p>資料量不需要很大。高品質的 500 到 2000 筆問答對，往往比低品質的 10 萬筆更有用。品質的定義是：回答準確、語氣一致、格式統一。阿志可以從公司的客服記錄裡篩選出最具代表性的案例，再做一些清理和格式化。</p>
+<p>阿志後來發現，真正讓他花最多時間的不是 GPU 配置，也不是程式碼，而是在整理那 800 筆客服記錄。這很正常。</p>
+<hr>
+<h2>本章重點</h2>
+<ul class="recap">
+  <li>微調（fine-tuning）和從零訓練是完全不同的事，前者資源需求低得多</li>
+  <li>消費級 GPU 或 Colab 免費配額，足以啟動小型微調專案</li>
+  <li>資料品質遠比資料數量重要，從少量高品質資料開始</li>
+</ul>
+
+<div class="cta-box">
+  <h3>從零訓練 vs 微調，差幾千倍</h3>
+  <p>第一章講完真正需要的硬體、軟體與資料。真正怎麼整理資料與開始微調，後面才展開。永久解鎖整本書。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a4e093526746b18ddee804b" target="_blank">👉 永久解鎖《訓練一個迷你AI模型》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC01%E7%AB%A0%EF%BD%9C%E8%A8%93%E7%B7%B4%E4%B8%80%E5%80%8B%E5%B0%8F%E6%A8%A1%E5%9E%8B%EF%BC%8C%E9%9C%80%E8%A6%81%E6%BA%96%E5%82%99%E4%BB%80%E9%BA%BC%E3%80%8A%E8%A8%93%E7%B7%B4%E4%B8%80%E5%80%8B%E8%BF%B7%E4%BD%A0AI%E6%A8%A1%E5%9E%8B%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s7-master.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s7-master.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>

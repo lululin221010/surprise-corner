@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第01章｜AI沒有大腦，但有「神經網路」｜《AI長什麼樣．構造篇》試閱</title>
+<meta property="og:title" content="第01章｜AI沒有大腦，但有「神經網路」【免費試閱】《AI長什麼樣．構造篇》">
+<meta property="og:description" content="新聞常說AI用「神經網路」打造，聽起來像裝了顆迷你大腦。其實兩者差很遠。">
+<style>
+  body { max-width: 680px; margin: 0 auto; padding: 2rem 1.2rem 4rem; font-family: "Microsoft JhengHei", sans-serif; color: #1c2333; background: #f7f9fc; line-height: 1.9; }
+  h1 { font-size: 1.6rem; font-weight: bold; border-bottom: 2px solid #3ab0c8; padding-bottom: 0.4em; margin-bottom: 0.3em; }
+  .subtitle { color: #7a8699; font-size: 0.9rem; margin-bottom: 1rem; }
+  .hook { color: #35506e; font-size: 1rem; background: #eaf6fa; border-left: 3px solid #3ab0c8; padding: 0.9rem 1.1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+  h2 { font-size: 1.1rem; font-weight: bold; margin-top: 2rem; margin-bottom: 0.4rem; color: #1a3a6a; }
+  p { margin: 0.6em 0; }
+  hr { border: none; border-top: 1px solid #dbe4ee; margin: 2rem 0; }
+  ul.recap { padding-left: 1.2rem; }
+  ul.recap li { margin: 0.4em 0; }
+  .cta-box { background: #16213e; color: #fff; border-radius: 12px; padding: 1.6rem 1.4rem; margin-top: 2.4rem; text-align: center; }
+  .cta-box h3 { color: #6de0ff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+  .cta-box p { color: #cbd3e6; font-size: 0.9rem; margin: 0.3rem 0; }
+  .cta-btn { display: inline-block; margin-top: 1rem; background: #3ab0c8; color: #0e1526; font-weight: bold; padding: 0.7rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1rem; }
+  .back { display: inline-block; margin-bottom: 1.5rem; color: #888; text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: #444; }
+  .series-badge { display: inline-block; background: #e2f3f7; color: #1a7a94; font-size: 0.8rem; padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<a href="https://surprise-corner.vercel.app" class="back">← 回驚喜站</a>
+<div class="series-badge">🤖 AI書院・解剖學系列・試閱</div>
+<h1>第01章｜AI沒有大腦，但有「神經網路」</h1>
+<div class="subtitle">《AI長什麼樣．構造篇》S2入門冊・免費試閱</div>
+
+<div class="hook">新聞常說AI用「神經網路」打造，聽起來像裝了顆迷你大腦。其實兩者差很遠。</div>
+
+<p>你滑開AI對話框，打了一句話過去，幾秒後答案就跑出來了。你有沒有想過，這幾秒鐘裡到底發生了什麼事？</p>
+<p>新聞、課程廣告很愛說一句話：「這個AI是用神經網路打造的」，聽起來好像AI裡面藏著一顆迷你大腦，正在認真思考要怎麼回答你。但事實沒有那麼浪漫——神經網路跟你腦袋裡那顆灰白色、軟綿綿的器官，其實是兩種完全不同的東西。</p>
+<p><strong>神經網路，是借了一個名字的計算結構</strong></p>
+<p>神經網路的英文是Neural Network，這個名字的確來自生物學——科學家最早設計這套運算方式時，參考了大腦神經元彼此連接、互相傳遞訊號的概念。但「參考」跟「複製」是兩回事。神經網路只是借用了這個「連接傳訊」的概念，去設計一套用數學運算堆疊起來的結構，跟真正的大腦運作方式完全不一樣。</p>
+<p>把它想成一張超大的接力傳球網會比較好理解。網路裡每一個節點（也就是「人造神經元」），收到上一個節點丟過來的訊號後，會做一個簡單判斷：這個訊號要不要往下傳、要傳多強。這個「決定強度」的數字，就是下一章要拆解的「參數」。一層一層傳下去，傳到最後一層，輸出的結果，就是AI回你的那句話。</p>
+<p><strong>跟真正的大腦，差在哪裡</strong></p>
+<p>人腦的神經元，靠電化學訊號溝通，而且這套系統會「自己長新連結」——你學會一個新技能、認識一個新朋友，腦袋裡的神經連結就會跟著改變。更重要的是，人腦可以同時處理視覺、聽覺、情緒、平衡感，是一套活生生、持續在變化的系統。</p>
+<p>人造神經網路完全不是這樣。它在訓練完成之後，整個結構基本上就固定下來了，不會自己長出新連結。每一次你跟AI對話，它都是針對「這次輸入的內容」做一輪固定的數學計算，算完就結束，下一輪對話從頭再算一次，不會像人腦一樣持續累積、自己長出新東西。</p>
+<p><strong>最容易誤解的地方</strong></p>
+<p>很多人聽到「神經網路」，會直接腦補成「AI裡面裝了一顆數位版的大腦」。但人腦怎麼真正產生思考、產生意識，科學界自己都還沒有完全搞懂答案，AI當然也不可能是照著「複製」出來的——它只是借用了一個生物學的概念，去設計一套純數學的運算方式。</p>
+<p>所以下次再看到廣告寫著「類腦設計，更聰明」，可以保持一點理性。AI的「聰明」，來自一層一層數學運算疊加堆出來的結果，不是真的有一個會思考、有意識的小腦袋藏在裡面運作。</p>
+<hr>
+<h2>本章重點</h2>
+<ul class="recap">
+  <li>神經網路是受大腦啟發、用數學模擬訊號傳遞的計算結構，不是大腦的複製品</li>
+  <li>可以想像成一張接力傳球網，節點之間傳遞訊號的強度由「參數」決定</li>
+  <li>人腦會自己長新連結、同時處理多種任務；人造神經網路訓練完結構基本固定</li>
+  <li>「類腦」多半是行銷用語，AI的聰明來自運算疊加，不是真的有意識在思考</li>
+</ul>
+
+<div class="cta-box">
+  <h3>神經網路不是大腦</h3>
+  <p>第一章釐清常見誤解。真正構造與參數怎麼運作，後面章節才細講。永久解鎖整本書。</p>
+  <p style="margin-top:0.8rem; color:#6de0ff;">定價 NT&#36;249，單本永久閱讀權</p>
+  <a class="cta-btn" href="https://still-time-corner.vercel.app/digital/6a47bc744e0cc8f9369a4136" target="_blank">👉 永久解鎖《AI長什麼樣．構造篇》</a>
+  <div style="margin-top:1rem; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://line.me/R/msg/text/?%E3%80%90AI%E6%9B%B8%E9%99%A2%E3%80%91%E7%AC%AC01%E7%AB%A0%EF%BD%9CAI%E6%B2%92%E6%9C%89%E5%A4%A7%E8%85%A6%EF%BC%8C%E4%BD%86%E6%9C%89%E3%80%8C%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E3%80%8D%E3%80%8AAI%E9%95%B7%E4%BB%80%E9%BA%BC%E6%A8%A3%EF%BC%8E%E6%A7%8B%E9%80%A0%E7%AF%87%E3%80%8B%E5%85%8D%E8%B2%BB%E8%A9%A6%E9%96%B1%EF%BD%9Chttps%3A%2F%2Fsurprise-corner.vercel.app%2Fai-academy-s2-intro.html"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;padding:.45rem 1.2rem;border-radius:20px;background:#06c755;color:#fff;font-weight:700;font-size:.85rem;text-decoration:none;font-family:sans-serif;">LINE 分享</a>
+    <button onclick="(function(){navigator.clipboard.writeText('https://surprise-corner.vercel.app/ai-academy-s2-intro.html').then(function(){var b=document.querySelector('.copy-btn-ai');b.textContent='已複製 ✓';setTimeout(function(){b.textContent='複製連結'},2000)})})()" class="copy-btn-ai"
+       style="padding:.45rem 1.2rem;border-radius:20px;background:#4a4a6a;color:#fff;font-weight:700;font-size:.85rem;border:none;cursor:pointer;font-family:sans-serif;">複製連結</button>
+  </div>
+</div>
+</body>
+</html>
