@@ -4,8 +4,12 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import ShareButtons from '@/components/ShareButtons'
 import { Suspense } from 'react'
+import luluFindsRaw from '@/data/lulu-finds.json'
 
 const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false })
+
+type LuluFind = { id: string; date: string; title: string; desc: string; link: string; status: 'active' | 'dead' }
+const luluFinds = luluFindsRaw as LuluFind[]
 
 // 7 張卡片，從正上方（-90°）順時針均分，間隔約 51.4°
 const STEP = 360 / 7
@@ -24,6 +28,10 @@ const SPARKS = ['✨','🌟','💫','⭐','🎇','🎆','🌠','💥','🎉','�
 
 export default function Wonderland() {
   const R = 340 // 環繞半徑（px）
+
+  const activeFinds = luluFinds.filter(f => f.status === 'active')
+  const latestFind = activeFinds[activeFinds.length - 1]
+  const deadFinds = luluFinds.filter(f => f.status === 'dead')
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{
@@ -208,6 +216,7 @@ export default function Wonderland() {
           ))}
         </div>
 
+        {/* 2026-08-25暫時下架：暗夜觀察日記13篇8頁版正在重做2-3頁懸念版+付費商品，做好一本恢復一本的連結，不要整段刪除，之後直接取消註解即可
         <section className="mt-8 mb-8">
           <Link href="/promo/index.html" className="group block rounded-2xl p-6 md:p-8 border border-amber-400/30 backdrop-blur transition-all duration-300 hover:border-amber-300/60 hover:shadow-[0_0_32px_rgba(251,191,36,0.22)]" style={{ background: 'rgba(22,14,50,0.88)' }}>
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -224,6 +233,49 @@ export default function Wonderland() {
               </div>
             </div>
           </Link>
+        </section>
+        */}
+
+        {/* ── 魯魯撿到（策展外部小玩具，隨時可能失效） ── */}
+        <section className="mt-8 mb-8">
+          {latestFind ? (
+            <a
+              href={latestFind.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block rounded-2xl p-6 md:p-8 border border-emerald-400/30 backdrop-blur transition-all duration-300 hover:border-emerald-300/60 hover:shadow-[0_0_32px_rgba(52,211,153,0.22)]"
+              style={{ background: 'rgba(22,14,50,0.88)' }}
+            >
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <div className="inline-flex items-center rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-sm font-semibold text-emerald-100">
+                    🐾 魯魯今天撿到
+                  </div>
+                  <p className="mt-4 text-lg md:text-xl font-bold text-emerald-50">{latestFind.title}</p>
+                  <p className="mt-2 text-sm md:text-base leading-relaxed text-emerald-50/70">{latestFind.desc}</p>
+                  <p className="mt-3 text-xs text-emerald-200/50">⚠️ 這是別人家的玩具，哪天消失魯魯不負責🤣</p>
+                </div>
+                <div className="shrink-0 text-sm md:text-base font-bold text-emerald-200 transition-transform duration-300 group-hover:translate-x-1">
+                  趁它還在，去玩 →
+                </div>
+              </div>
+            </a>
+          ) : (
+            <div className="rounded-2xl p-6 md:p-8 border border-white/10 text-center text-purple-200/50" style={{ background: 'rgba(22,14,50,0.6)' }}>
+              🐾 魯魯還在外面挖寶，晚點回來看
+            </div>
+          )}
+
+          {deadFinds.length > 0 && (
+            <details className="mt-3 text-xs text-purple-300/40">
+              <summary className="cursor-pointer select-none hover:text-purple-300/70">☠️ 撿到過的墓園（{deadFinds.length}）</summary>
+              <ul className="mt-2 space-y-1 pl-4">
+                {deadFinds.map(f => (
+                  <li key={f.id}>{f.date} — {f.title}（魯魯回去找，它不見了）</li>
+                ))}
+              </ul>
+            </details>
+          )}
         </section>
 
         <p className="text-center mt-12 pb-8 text-purple-300/50 text-sm">

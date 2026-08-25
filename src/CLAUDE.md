@@ -155,7 +155,7 @@ Get-Content "完整路徑\檔案名稱" -Encoding UTF8
 
 | 專案 | 路徑 |
 |------|------|
-| 驚喜站 | `C:\Users\user\Desktop\MyProjects01\surprise-corner-src` |
+| 驚喜角落 | `C:\Users\user\Desktop\MyProjects01\surprise-corner-src` |
 | 小舖 | `C:\Users\user\Desktop\MyProjects01\my-bookstore-next-V2` |
 
 ## 連載小說章節規範
