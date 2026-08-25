@@ -309,7 +309,7 @@ export default function Home() {
               margin: '0 0 28px',
               textAlign: 'center',
             }}>
-              七大神秘區域，每天都有新發現 ❤️
+              好幾個神秘區域，每天都有新發現 ❤️
             </p>
 
             {/* 進入按鈕 */}
