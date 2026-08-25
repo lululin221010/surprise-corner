@@ -1,4 +1,4 @@
-/* 📄 檔案路徑：src/app/globals.css */
+/* 檔案路徑：src/app/globals.css */
 /* 功能：全域樣式 + Tailwind CSS */
 
 @import "tailwindcss";
@@ -14,7 +14,7 @@
   }
 }
 
-/* 🖥️ PWA 獨立模式：隱藏導覽列 logo（系統標題列已顯示 App 名稱，避免重複） */
+/* PWA 獨立模式：隱藏導覽列 logo（系統標題列已顯示 App 名稱，避免重複） */
 @media (display-mode: standalone) {
   .site-logo {
     display: none;
