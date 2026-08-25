@@ -186,6 +186,26 @@ export default function SharePage() {
           </p>
         </div>
 
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 mb-6">
+          <p className="text-xs font-semibold text-amber-200/80 mb-3 tracking-wide">還沒有照片？先照這4步走一遍</p>
+          <ol className="space-y-2.5">
+            {[
+              '到「魯魯今天撿到」卡片點連結，玩外部的小工具',
+              '玩出結果後，把滑鼠移到圖片上，點右下角的下載／分享圖示存下來',
+              '回到這一頁，點下面的上傳框，選你剛存的圖',
+              '完成！自動加框，下面就能一鍵分享或下載',
+            ].map((step, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-xs text-purple-100/80 leading-relaxed">
+                <span className="shrink-0 w-4 h-4 rounded-full bg-emerald-400/20 text-emerald-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
+          <p className="mt-3 pt-3 border-t border-white/10 text-xs text-purple-300/50 leading-relaxed">
+            💡 玩到外語的工具看不懂介面？瀏覽器網址列通常有「翻譯」按鈕，點一下整頁翻成中文就能玩了。
+          </p>
+        </div>
+
         <input
           ref={fileInputRef}
           type="file"
