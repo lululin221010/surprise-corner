@@ -99,6 +99,7 @@ export default function SharePage() {
   const [ready, setReady] = useState(false)
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState('')
+  const [justDownloaded, setJustDownloaded] = useState(false)
 
   const handleFile = useCallback((file: File | undefined) => {
     if (!file) return
@@ -140,6 +141,10 @@ export default function SharePage() {
     link.download = 'lulu-find.png'
     link.href = canvas.toDataURL('image/png')
     link.click()
+    navigator.clipboard.writeText(CAPTION).then(() => {
+      setJustDownloaded(true)
+      setTimeout(() => setJustDownloaded(false), 3000)
+    })
   }
 
   async function handleShare() {
@@ -245,9 +250,13 @@ export default function SharePage() {
                 onClick={handleDownload}
                 className="flex-1 rounded-full border border-purple-400/30 text-purple-100 font-semibold text-sm py-3"
               >
-                下載圖片
+                {justDownloaded ? '已下載＋文字已複製 ✓' : '下載圖片'}
               </button>
             </div>
+
+            <p className="text-xs text-amber-200/50 leading-relaxed">
+              ⚠️ 圖片上的網址只是印上去的文字，不能點——分享時記得把下面這段文字也一起貼上，連結才點得到
+            </p>
 
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex items-center justify-between gap-3">
               <p className="text-xs text-purple-200/70 leading-relaxed">{CAPTION}</p>
