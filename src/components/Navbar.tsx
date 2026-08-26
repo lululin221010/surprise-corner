@@ -73,9 +73,9 @@ export default function Navbar() {
         <Image
           src="/logo.png"
           alt="Surprise Corner"
-          width={240}
+          width={58}
           height={58}
-          style={{ objectFit: 'contain', display: 'block' }}
+          style={{ objectFit: 'contain', display: 'block', borderRadius: '50%' }}
           priority
         />
       </Link>
