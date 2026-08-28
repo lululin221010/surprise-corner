@@ -122,21 +122,21 @@ function FreeDonePage({
 
         {/* 完整目錄 */}
         <div style={{ marginBottom: '1.4rem' }}>
-          <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
+          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.88rem', marginBottom: '0.6rem' }}>
             📖 《{bookTitle}》完整目錄
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
             {allGroupTitles.map((title, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.45rem 0.7rem', borderRadius: '8px', background: i === 0 ? 'rgba(124,58,237,0.15)' : 'rgba(255,255,255,0.03)', border: i === 0 ? '1px solid rgba(124,58,237,0.3)' : '1px solid transparent' }}>
-                <span style={{ color: i === 0 ? '#a78bfa' : '#475569', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>
+                <span style={{ color: i === 0 ? '#5b21b6' : '#6b7280', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>
                   {i === 0 ? '✅' : `第${i + 1}組`}
                 </span>
-                <span style={{ color: i === 0 ? '#c4b5fd' : '#64748b', fontSize: '0.82rem' }}>{title}</span>
+                <span style={{ color: i === 0 ? '#5b21b6' : '#6b7280', fontSize: '0.82rem' }}>{title}</span>
               </div>
             ))}
           </div>
           {allGroupTitles.length > 1 && (
-            <div style={{ marginTop: '0.8rem', padding: '0.6rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#94a3b8', fontSize: '0.78rem' }}>
+            <div style={{ marginTop: '0.8rem', padding: '0.6rem 0.8rem', background: 'rgba(124,58,237,0.08)', borderRadius: '8px', borderLeft: '3px solid #7c3aed', color: '#6b7280', fontSize: '0.78rem' }}>
               ✨ 以上精彩內容，解鎖{seriesLabel}即可繼續
             </div>
           )}
@@ -144,7 +144,7 @@ function FreeDonePage({
 
         {/* 解鎖碼輸入 */}
         <div style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.25)', borderRadius: '14px', padding: '1rem', marginBottom: '0.8rem' }}>
-          <div style={{ color: '#a78bfa', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.6rem' }}>
+          <div style={{ color: '#5b21b6', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.6rem' }}>
             🔑 已有解鎖碼？直接輸入
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -153,7 +153,7 @@ function FreeDonePage({
               value={codeInput}
               onChange={e => { setCodeInput(e.target.value); setError(''); }}
               placeholder="PSYCH-XXXX-XXXX"
-              style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', borderRadius: '8px', border: error ? '1px solid #ef4444' : '1px solid rgba(124,58,237,0.4)', background: 'rgba(255,255,255,0.05)', color: '#e2e8f0', outline: 'none' }}
+              style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', borderRadius: '8px', border: error ? '1px solid #ef4444' : '1px solid rgba(124,58,237,0.4)', background: 'rgba(255,255,255,0.05)', color: '#1e1b4b', outline: 'none' }}
               onKeyDown={e => e.key === 'Enter' && handleUnlock()}
             />
             <button onClick={handleUnlock} disabled={verifying}
@@ -185,7 +185,7 @@ function FreeDonePage({
         )}
 
         <div style={{ textAlign: 'center' }}>
-          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '0.85rem', cursor: 'pointer' }}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#6b7280', fontSize: '0.85rem', cursor: 'pointer' }}>
             ← 回心理學書院繼續逛
           </button>
         </div>
@@ -225,14 +225,14 @@ function LockedPreviewPage({
 
         {/* 預覽卡 */}
         <div style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '16px', padding: '1.4rem', marginBottom: '1.4rem' }}>
-          <div style={{ color: '#94a3b8', fontSize: '0.75rem', marginBottom: '0.4rem' }}>
+          <div style={{ color: '#6b7280', fontSize: '0.75rem', marginBottom: '0.4rem' }}>
             《{bookTitle}》第{lesson.groupNum}組
           </div>
-          <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.6rem' }}>
+          <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.6rem' }}>
             {lesson.emoji} {lesson.title}
           </div>
           {lesson.slides[0] && (
-            <div style={{ color: '#64748b', fontSize: '0.82rem', lineHeight: 1.6, borderLeft: '2px solid rgba(124,58,237,0.3)', paddingLeft: '0.8rem' }}>
+            <div style={{ color: '#6b7280', fontSize: '0.82rem', lineHeight: 1.6, borderLeft: '2px solid rgba(124,58,237,0.3)', paddingLeft: '0.8rem' }}>
               第一頁：{lesson.slides[0].title}…
             </div>
           )}
@@ -243,8 +243,8 @@ function LockedPreviewPage({
           style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: '12px', padding: '1rem 1.1rem', textDecoration: 'none', marginBottom: '1rem' }}>
           <div style={{ fontSize: '1.4rem', flexShrink: 0 }}>🎁</div>
           <div style={{ flex: 1 }}>
-            <div style={{ color: '#a78bfa', fontWeight: 700, fontSize: '0.92rem' }}>先去好康書院試讀</div>
-            <div style={{ color: '#64748b', fontSize: '0.78rem', marginTop: '0.15rem' }}>免費精選體驗，找到感覺再購買</div>
+            <div style={{ color: '#5b21b6', fontWeight: 700, fontSize: '0.92rem' }}>先去好康書院試讀</div>
+            <div style={{ color: '#6b7280', fontSize: '0.78rem', marginTop: '0.15rem' }}>免費精選體驗，找到感覺再購買</div>
           </div>
           <div style={{ color: '#7c3aed', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>→</div>
         </Link>
@@ -260,7 +260,7 @@ function LockedPreviewPage({
               value={codeInput}
               onChange={e => { setCodeInput(e.target.value); setError(''); }}
               placeholder="PSYCH-XXXX-XXXX"
-              style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', borderRadius: '8px', border: error ? '1px solid #ef4444' : '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.04)', color: '#e2e8f0', outline: 'none' }}
+              style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', borderRadius: '8px', border: error ? '1px solid #ef4444' : '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.04)', color: '#1e1b4b', outline: 'none' }}
               onKeyDown={e => e.key === 'Enter' && handleUnlock()}
             />
             <button onClick={handleUnlock} disabled={verifying}
@@ -270,13 +270,13 @@ function LockedPreviewPage({
           </div>
           {error && <p style={{ color: '#f87171', fontSize: '0.75rem', marginTop: '4px', marginBottom: 0 }}>{error}</p>}
           <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
-            style={{ display: 'block', textAlign: 'center', color: '#a78bfa', fontSize: '0.78rem', marginTop: '0.7rem', textDecoration: 'underline' }}>
+            style={{ display: 'block', textAlign: 'center', color: '#5b21b6', fontSize: '0.78rem', marginTop: '0.7rem', textDecoration: 'underline' }}>
             還沒購買？前往小舖 →
           </a>
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#64748b', fontSize: '0.85rem', cursor: 'pointer' }}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#6b7280', fontSize: '0.85rem', cursor: 'pointer' }}>
             ← 回書本
           </button>
         </div>
@@ -426,17 +426,17 @@ export default function PsychAcademy() {
           {/* 麵包屑 */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.2rem', flexWrap: 'wrap' }}>
             <Link href="/classroom" style={{ color: '#7c3aed', fontSize: '0.8rem', textDecoration: 'none' }}>驚喜學院</Link>
-            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
+            <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>›</span>
             <button onClick={() => setView({ t: 'series-list' })} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>心理學書院</button>
-            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
+            <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>›</span>
             <button onClick={() => setView({ t: 'book-list', series })} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>{series.emoji} {series.label}</button>
-            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
-            <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{book.title}</span>
+            <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>›</span>
+            <span style={{ color: '#6b7280', fontSize: '0.8rem' }}>{book.title}</span>
           </div>
 
           <div style={{ marginBottom: '1.4rem' }}>
             <div style={{ fontSize: '1.6rem', marginBottom: '0.3rem' }}>{book.emoji}</div>
-            <h2 style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 800, margin: '0 0 0.2rem' }}>{book.title}</h2>
+            <h2 style={{ color: '#1e1b4b', fontSize: '1.2rem', fontWeight: 800, margin: '0 0 0.2rem' }}>{book.title}</h2>
             {allDoneInBook && (
               <div style={{ display: 'inline-block', background: 'rgba(99,102,241,0.15)', border: '1px solid #6366f1', color: '#a5b4fc', fontSize: '0.75rem', padding: '0.2rem 0.7rem', borderRadius: '20px' }}>
                 🏅 已完課
@@ -452,7 +452,7 @@ export default function PsychAcademy() {
               </div>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <input type="text" placeholder="PSYCH-XXXX-XXXX"
-                  style={{ flex: 1, padding: '7px 10px', fontSize: '0.82rem', borderRadius: '8px', border: '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.04)', color: '#e2e8f0', outline: 'none' }}
+                  style={{ flex: 1, padding: '7px 10px', fontSize: '0.82rem', borderRadius: '8px', border: '1px solid rgba(251,191,36,0.4)', background: 'rgba(255,255,255,0.04)', color: '#1e1b4b', outline: 'none' }}
                   value={expandUnlock === series.id ? codeInput : ''}
                   onChange={e => { setExpandUnlock(series.id); setCodeInput(e.target.value); setCodeError(''); }}
                   onKeyDown={async e => {
@@ -501,10 +501,10 @@ export default function PsychAcademy() {
                     {completed ? '✅' : lesson.emoji}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.9rem' }}>
+                    <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem' }}>
                       第{idx + 1}組：{lesson.title}
                     </div>
-                    <div style={{ color: '#64748b', fontSize: '0.75rem', marginTop: '0.1rem' }}>
+                    <div style={{ color: '#6b7280', fontSize: '0.75rem', marginTop: '0.1rem' }}>
                       {lesson.slides.length} 頁
                     </div>
                   </div>
@@ -530,15 +530,15 @@ export default function PsychAcademy() {
           {/* 麵包屑 */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.2rem', flexWrap: 'wrap' }}>
             <Link href="/classroom" style={{ color: '#7c3aed', fontSize: '0.8rem', textDecoration: 'none' }}>驚喜學院</Link>
-            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
+            <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>›</span>
             <button onClick={() => setView({ t: 'series-list' })} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: '0.8rem', cursor: 'pointer', padding: 0 }}>心理學書院</button>
-            <span style={{ color: '#475569', fontSize: '0.75rem' }}>›</span>
-            <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{series.emoji} {series.label}</span>
+            <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>›</span>
+            <span style={{ color: '#6b7280', fontSize: '0.8rem' }}>{series.emoji} {series.label}</span>
           </div>
 
           <div style={{ marginBottom: '1.4rem' }}>
             <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>{series.emoji}</div>
-            <h2 style={{ color: '#fff', fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.4rem' }}>{series.label}</h2>
+            <h2 style={{ color: '#1e1b4b', fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.4rem' }}>{series.label}</h2>
             {seriesUnlocked && (
               <div style={{ display: 'inline-block', background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#86efac', fontSize: '0.78rem', padding: '0.2rem 0.7rem', borderRadius: '20px' }}>
                 ✅ 已解鎖全系
@@ -549,7 +549,7 @@ export default function PsychAcademy() {
           {/* 未解鎖時的解鎖區塊 */}
           {!seriesUnlocked && (
             <div style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.25)', borderRadius: '12px', padding: '0.9rem 1rem', marginBottom: '1.2rem' }}>
-              <div style={{ color: '#a78bfa', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+              <div style={{ color: '#5b21b6', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>
                 🔑 輸入解鎖碼 · 解鎖本學系全部 {series.books.length} 本完整內容
               </div>
               <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.6rem' }}>
@@ -564,7 +564,7 @@ export default function PsychAcademy() {
                       if (!ok) setCodeError('解鎖碼不正確');
                     }
                   }}
-                  style={{ flex: 1, padding: '8px 10px', fontSize: '0.82rem', borderRadius: '8px', border: '1px solid rgba(124,58,237,0.4)', background: 'rgba(255,255,255,0.04)', color: '#e2e8f0', outline: 'none' }}
+                  style={{ flex: 1, padding: '8px 10px', fontSize: '0.82rem', borderRadius: '8px', border: '1px solid rgba(124,58,237,0.4)', background: 'rgba(255,255,255,0.04)', color: '#1e1b4b', outline: 'none' }}
                 />
                 <button disabled={verifying}
                   onClick={async () => {
@@ -607,8 +607,8 @@ export default function PsychAcademy() {
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '0.9rem 1.1rem', display: 'flex', alignItems: 'center', gap: '0.9rem', cursor: 'pointer' }}>
                   <div style={{ fontSize: '1.5rem', flexShrink: 0 }}>{book.emoji}</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.2rem' }}>{book.title}</div>
-                    <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
+                    <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.2rem' }}>{book.title}</div>
+                    <div style={{ color: '#6b7280', fontSize: '0.78rem' }}>
                       {completedCount > 0 ? `${completedCount}/${totalGroups} 組已完成` : `${totalGroups} 組`}
                     </div>
                   </div>
@@ -639,8 +639,8 @@ export default function PsychAcademy() {
             <Link href="/classroom" style={{ color: '#7c3aed', fontSize: '0.8rem', textDecoration: 'none' }}>← 驚喜學院</Link>
           </div>
           <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>🧠</div>
-          <h1 style={{ color: '#fff', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.4rem' }}>心理學書院</h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.88rem', margin: 0 }}>
+          <h1 style={{ color: '#1e1b4b', fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.4rem' }}>心理學書院</h1>
+          <p style={{ color: '#6b7280', fontSize: '0.88rem', margin: 0 }}>
             6大學系 · 28本 · 購買電子書取得解鎖碼，解鎖整個學系的完整課程。
           </p>
         </div>
@@ -648,12 +648,12 @@ export default function PsychAcademy() {
         {/* 學系篩選 */}
         <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
           <button onClick={() => setFilter('all')}
-            style={{ padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', background: filter === 'all' ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)', border: filter === 'all' ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.08)', color: filter === 'all' ? '#a78bfa' : '#64748b' }}>
+            style={{ padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', background: filter === 'all' ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)', border: filter === 'all' ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.08)', color: filter === 'all' ? '#5b21b6' : '#6b7280' }}>
             全部 {PSYCH_SERIES.length}
           </button>
           {seriesForFilter.map(s => (
             <button key={s.id} onClick={() => setFilter(s.id)}
-              style={{ padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', background: filter === s.id ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)', border: filter === s.id ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.08)', color: filter === s.id ? '#a78bfa' : '#64748b' }}>
+              style={{ padding: '0.3rem 0.8rem', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', background: filter === s.id ? 'rgba(124,58,237,0.25)' : 'rgba(255,255,255,0.04)', border: filter === s.id ? '1px solid #7c3aed' : '1px solid rgba(255,255,255,0.08)', color: filter === s.id ? '#5b21b6' : '#6b7280' }}>
               {s.emoji} {s.label}
             </button>
           ))}
@@ -672,8 +672,8 @@ export default function PsychAcademy() {
                 style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${seriesUnlocked ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.08)'}`, borderRadius: '14px', padding: '1rem 1.2rem', display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}>
                 <div style={{ fontSize: '1.8rem', flexShrink: 0 }}>{series.emoji}</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.98rem', marginBottom: '0.2rem' }}>{series.label}</div>
-                  <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
+                  <div style={{ color: '#1e1b4b', fontWeight: 700, fontSize: '0.98rem', marginBottom: '0.2rem' }}>{series.label}</div>
+                  <div style={{ color: '#6b7280', fontSize: '0.78rem' }}>
                     {totalBooks} 本 · {seriesUnlocked ? `${completedBooks}/${totalBooks} 本已完課` : `${totalBooks} 本`}
                   </div>
                 </div>
@@ -690,8 +690,8 @@ export default function PsychAcademy() {
 
         {/* 底部 CTA */}
         <div style={{ marginTop: '1.5rem', background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '14px', padding: '1.2rem', textAlign: 'center' }}>
-          <div style={{ color: '#a78bfa', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.3rem' }}>想解鎖完整內容？</div>
-          <div style={{ color: '#64748b', fontSize: '0.82rem', marginBottom: '1rem' }}>購買電子書取得學系解鎖碼，也可用魯魯積分兌換</div>
+          <div style={{ color: '#5b21b6', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.3rem' }}>想解鎖完整內容？</div>
+          <div style={{ color: '#6b7280', fontSize: '0.82rem', marginBottom: '1rem' }}>購買電子書取得學系解鎖碼，也可用魯魯積分兌換</div>
           <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center' }}>
             <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, maxWidth: 200, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.65rem', textDecoration: 'none', textAlign: 'center' }}>
@@ -711,7 +711,7 @@ export default function PsychAcademy() {
 
         {/* 返回 */}
         <div style={{ textAlign: 'center', marginTop: '1.2rem' }}>
-          <Link href="/classroom" style={{ color: '#475569', fontSize: '0.85rem', textDecoration: 'none' }}>
+          <Link href="/classroom" style={{ color: '#6b7280', fontSize: '0.85rem', textDecoration: 'none' }}>
             ← 回驚喜學院
           </Link>
         </div>
