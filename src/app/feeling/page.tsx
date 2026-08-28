@@ -8,7 +8,7 @@ import ShareButtons from '@/components/ShareButtons'
 const StarCanvas = dynamic(() => import('@/components/StarCanvas'), { ssr: false })
 
 // ─────────────────────────────────────────────────────────────────
-// 35 本書（MD frontmatter 來源，death 系列無 Vol.4）
+// 36 本書
 // soul=S1 taiwan=S2 curse=S3 death=S4 collective=S5 science=S6
 // ─────────────────────────────────────────────────────────────────
 const BOOKS = [
@@ -36,6 +36,7 @@ const BOOKS = [
   { s:4, v:1, title:'你為什麼怕死',             trial:'/that-feeling-4-vol1-trial.html' },
   { s:4, v:2, title:'瀕死之後',                 trial:'/that-feeling-4-vol2-trial.html' },
   { s:4, v:3, title:'與死者同在',               trial:'/that-feeling-4-vol3-trial.html' },
+  { s:4, v:4, title:'轉世的案例',               trial:'/that-feeling-4-vol4-trial.html' },
   { s:4, v:5, title:'不死的執念',               trial:'/that-feeling-4-vol5-trial.html' },
   { s:4, v:6, title:'好好告別',                 trial:'/that-feeling-4-vol6-trial.html' },
 
@@ -54,6 +55,11 @@ const BOOKS = [
   { s:6, v:6, title:'那些論文，最後沒有寄出去',     trial:'/that-feeling-6-vol6-trial.html' },
 ] as const
 
+// 每本書真正的完整正文（不是試讀版，不是ST），供CTA/連結共用
+function bookHref(book: { s: number; v: number }) {
+  return `/that-feeling-${book.s}-vol${book.v}.html`
+}
+
 // ─────────────────────────────────────────────────────────────────
 // 系列 meta
 // ─────────────────────────────────────────────────────────────────
@@ -67,7 +73,7 @@ const SERIES: Record<number, { name:string; tagline:string; emoji:string; color:
 }
 
 // ─────────────────────────────────────────────────────────────────
-// 本週新感覺（依週次自動從 35 本輪選 3 本，不用手動維護）
+// 本週新感覺（依週次自動從 36 本輪選 3 本，不用手動維護）
 // ─────────────────────────────────────────────────────────────────
 function getThisWeek() {
   const start = new Date(new Date().getFullYear(), 0, 1)
@@ -78,7 +84,7 @@ function getThisWeek() {
   return [0, 1, 2].map(i => {
     const book = BOOKS[(weekSeed + i * step) % n]
     const meta = SERIES[book.s]
-    return { title: book.title, series: meta.name, trial: book.trial, color: meta.color, why: meta.tagline }
+    return { title: book.title, series: meta.name, href: bookHref(book), color: meta.color, why: meta.tagline }
   })
 }
 
@@ -161,21 +167,6 @@ function BigShareBlock({ label }: { label: string }) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// 元件：導流條
-// ─────────────────────────────────────────────────────────────────
-function LeadOut({ text = '想看更深入的心理學？' }: { text?: string }) {
-  return (
-    <div style={{ marginTop:18, padding:'11px 16px', borderRadius:10, background:'rgba(255,248,230,0.82)', border:'1px solid rgba(200,150,50,0.18)', display:'flex', alignItems:'center', justifyContent:'center', gap:8, flexWrap:'wrap' }}>
-      <span style={{ color:'#8a5a20', fontSize:'0.82rem', fontFamily:'sans-serif' }}>{text}</span>
-      <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
-        style={{ color:'#c8762a', fontWeight:700, fontSize:'0.82rem', fontFamily:'sans-serif', textDecoration:'none', borderBottom:'1px solid #c8762a55' }}>
-        去有的沒的小舖 →
-      </a>
-    </div>
-  )
-}
-
-// ─────────────────────────────────────────────────────────────────
 // 元件：書卡（含展開分享）
 // ─────────────────────────────────────────────────────────────────
 function BookCard({ book }: { book: typeof BOOKS[number] }) {
@@ -201,7 +192,7 @@ function BookCard({ book }: { book: typeof BOOKS[number] }) {
           </h3>
         </div>
         <div style={{ display:'flex', gap:6, marginTop:'auto', paddingTop:6 }}>
-          <a href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
+          <a href={bookHref(book)}
             style={{ padding:'4px 11px', borderRadius:13, background:meta.color, color:'#fff', textDecoration:'none', fontSize:'0.72rem', fontFamily:'sans-serif', fontWeight:700 }}>
             🎁 免費閱讀 →
           </a>
@@ -264,7 +255,7 @@ export default function FeelingPage() {
           </h1>
 
           <p style={{ margin:'0 auto 8px', maxWidth:520, fontSize:'clamp(0.88rem,2vw,1rem)', color:'#c4b5fd', lineHeight:1.7 }}>
-            35 個靈異故事 · 測驗 · 塔羅 · 運勢 · 遊戲 · 快訊……
+            36 個靈異故事 · 測驗 · 塔羅 · 運勢 · 遊戲 · 快訊……
           </p>
           <p style={{ margin:'0 auto 20px', maxWidth:380, fontSize:'0.8rem', color:'#9ca3af', lineHeight:1.65 }}>
             這裡有很多角落，等你慢慢探索
@@ -296,7 +287,7 @@ export default function FeelingPage() {
           </div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))', gap:10 }}>
             {thisWeek.map((item,i) => (
-              <a key={i} href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
+              <a key={i} href={item.href}
                 style={{ display:'block', padding:'16px 15px', borderRadius:11, background:'#fff', border:`2px solid ${item.color}28`, textDecoration:'none', position:'relative', overflow:'hidden' }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${item.color},${item.color}80)` }} />
                 <span style={{ fontSize:'0.66rem', color:item.color, fontWeight:700, letterSpacing:'0.08em', display:'block', marginBottom:4 }}>{item.series}</span>
@@ -308,11 +299,11 @@ export default function FeelingPage() {
           </div>
         </section>
 
-        {/* ══ 那個感覺 35 本（手風琴）═══════════════════════════ */}
+        {/* ══ 那個感覺 36 本（手風琴）═══════════════════════════ */}
         <section id="tf-series" style={{ marginTop:38 }}>
           <div style={{ marginBottom:16 }}>
             <p style={{ margin:'0 0 3px', fontSize:'0.68rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 那個感覺 系列</p>
-            <p style={{ margin:0, color:'#8a6030', fontSize:'0.82rem' }}>6 大系列 · 35 冊，點系列標題展開，點書名直接進入</p>
+            <p style={{ margin:0, color:'#8a6030', fontSize:'0.82rem' }}>6 大系列 · 36 冊，點系列標題展開，點書名直接進入</p>
           </div>
 
           {[1,2,3,4,5,6].map(sid => {
@@ -444,16 +435,9 @@ export default function FeelingPage() {
           </div>
         </section>
 
-        {/* ══ 底部分享 + 一次導流 ═════════════════════════════════ */}
+        {/* ══ 底部分享 ══════════════════════════════════════════════ */}
         <section style={{ marginTop:52 }}>
           <BigShareBlock label="分享這個角落給朋友" />
-          <p style={{ marginTop:14, textAlign:'center', color:'#b0a090', fontSize:'0.75rem' }}>
-            想看更深入的心理學？
-            <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
-              style={{ color:'#c8762a', marginLeft:4, textDecoration:'none', borderBottom:'1px solid rgba(200,120,42,0.28)' }}>
-              去有的沒的小舖 →
-            </a>
-          </p>
         </section>
 
       </div>
