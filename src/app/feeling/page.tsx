@@ -16,8 +16,8 @@ const BOOKS = [
   { s:1, v:2, title:'你不是你以為的你',          trial:'/that-feeling-1-vol2-trial.html' },
   { s:1, v:3, title:'睡著之後你去了哪裡',        trial:'/that-feeling-1-vol3-trial.html' },
   { s:1, v:4, title:'另一個人的記憶',            trial:'/that-feeling-1-vol4-trial.html' },
-  { s:1, v:5, title:'意識的邊界在哪裡',          trial:'/that-feeling-1-vol5-trial.html' },
-  { s:1, v:6, title:'你和你之間的距離',          trial:'/that-feeling-1-vol6-trial.html' },
+  { s:1, v:5, title:'你和你之間的距離',          trial:'/that-feeling-1-vol5-trial.html' },
+  { s:1, v:6, title:'意識的邊界在哪裡',          trial:'/that-feeling-1-vol6-trial.html' },
 
   { s:2, v:1, title:'這裡本來就不一樣',          trial:'/that-feeling-2-vol1-trial.html' },
   { s:2, v:2, title:'那些廟在說什麼',            trial:'/that-feeling-2-vol2-trial.html' },
@@ -30,7 +30,7 @@ const BOOKS = [
   { s:3, v:2, title:'你被詛咒了嗎',             trial:'/that-feeling-3-vol2-trial.html' },
   { s:3, v:3, title:'世界怎麼詛咒人',           trial:'/that-feeling-3-vol3-trial.html' },
   { s:3, v:4, title:'家族的咒',                 trial:'/that-feeling-3-vol4-trial.html' },
-  { s:3, v:5, title:'詛咒怎麼殺人・解咒之道',   trial:'/that-feeling-3-vol5-trial.html' },
+  { s:3, v:5, title:'詛咒怎麼殺人',             trial:'/that-feeling-3-vol5-trial.html' },
   { s:3, v:6, title:'解咒',                     trial:'/that-feeling-3-vol6-trial.html' },
 
   { s:4, v:1, title:'你為什麼怕死',             trial:'/that-feeling-4-vol1-trial.html' },
@@ -42,7 +42,7 @@ const BOOKS = [
 
   { s:5, v:1, title:'你們都看見了',             trial:'/that-feeling-5-vol1-trial.html' },
   { s:5, v:2, title:'都市傳說解剖',             trial:'/that-feeling-5-vol2-trial.html' },
-  { s:5, v:3, title:'UFO 與我們',               trial:'/that-feeling-5-vol3-trial.html' },
+  { s:5, v:3, title:'UFO與我們',                trial:'/that-feeling-5-vol3-trial.html' },
   { s:5, v:4, title:'恐慌怎麼擴散',             trial:'/that-feeling-5-vol4-trial.html' },
   { s:5, v:5, title:'邪教的邏輯',               trial:'/that-feeling-5-vol5-trial.html' },
   { s:5, v:6, title:'你記錯了，我們一起記錯了', trial:'/that-feeling-5-vol6-trial.html' },
@@ -50,9 +50,9 @@ const BOOKS = [
   { s:6, v:1, title:'儀器測到了，但科學家不敢說',   trial:'/that-feeling-6-vol1-trial.html' },
   { s:6, v:2, title:'那個實驗從來沒有結論',         trial:'/that-feeling-6-vol2-trial.html' },
   { s:6, v:3, title:'你的大腦在你死後還在運作',     trial:'/that-feeling-6-vol3-trial.html' },
-  { s:6, v:4, title:'當科學碰到邊界',               trial:'/that-feeling-6-vol4-trial.html' },
-  { s:6, v:5, title:'他們研究這個，然後不說話了',   trial:'/that-feeling-6-vol5-trial.html' },
-  { s:6, v:6, title:'那些論文，最後沒有寄出去',     trial:'/that-feeling-6-vol6-trial.html' },
+  { s:6, v:4, title:'物理學家相信鬼',               trial:'/that-feeling-6-vol4-trial.html' },
+  { s:6, v:5, title:'地球上有個地方科學解釋不了',   trial:'/that-feeling-6-vol5-trial.html' },
+  { s:6, v:6, title:'他們研究這個，然後不說話了',   trial:'/that-feeling-6-vol6-trial.html' },
 ] as const
 
 // 每本書真正的完整正文（不是試讀版，不是ST），供CTA/連結共用
