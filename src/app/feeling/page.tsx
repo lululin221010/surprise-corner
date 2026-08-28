@@ -262,7 +262,7 @@ export default function FeelingPage() {
           </p>
 
           <p style={{ margin:'0 auto 24px', fontSize:'0.79rem', color:'#c4b5fd', background:'rgba(124,58,237,0.18)', display:'inline-block', padding:'5px 18px', borderRadius:18, border:'1px solid rgba(167,139,250,0.3)' }}>
-            🎁 免費註冊，立即閱讀完整版
+            🎁 36 本完整免費閱讀
           </p>
 
           <a href="#tf-series" style={{
@@ -293,7 +293,7 @@ export default function FeelingPage() {
                 <span style={{ fontSize:'0.66rem', color:item.color, fontWeight:700, letterSpacing:'0.08em', display:'block', marginBottom:4 }}>{item.series}</span>
                 <h3 style={{ margin:'0 0 5px', fontSize:'0.93rem', fontWeight:700, color:'#1a0f05', lineHeight:1.4 }}>{item.title}</h3>
                 <p style={{ margin:'0 0 9px', fontSize:'0.77rem', color:'#7a5a38', lineHeight:1.5 }}>{item.why}</p>
-                <span style={{ fontSize:'0.73rem', color:item.color, fontWeight:700 }}>🎁 免費註冊即可閱讀 →</span>
+                <span style={{ fontSize:'0.73rem', color:item.color, fontWeight:700 }}>📖 直接免費閱讀 →</span>
               </a>
             ))}
           </div>
