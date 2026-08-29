@@ -8,10 +8,15 @@ import './classroom.css';
 
 const LIVE_ACADEMIES = [
   { icon: '🎁', title: '好康書院', desc: '各書院精選第一組，完全免費。心理學、股市、AI……喜歡再去小舖買完整版。', href: '/classroom/bonus' },
-  { icon: '💰', title: '理財書院', desc: 'K線怎麼看？ETF存股怎麼選？台股系列＋理財調查局系列，帶你看懂理財工具的真相。', href: '/classroom/stock' },
-  { icon: '🧠', title: '心理學書院', desc: '6大學系 28本，每本第一組永久免費。讀懂自己，讀懂人。購買電子書後輸入解鎖碼，解鎖整個學系。', href: '/classroom/psychology' },
-  { icon: '🤖', title: 'AI書院', desc: '9大系列：解剖學、溝通學、思考力、共存學……從AI原理到實作，全面理解AI時代。', href: '/classroom/ai-academy' },
-  { icon: '🧬', title: '腦中宇宙書院', desc: '自律神經學系 7冊系列・從了解症狀到找回平衡。買電子書解鎖完整10堂，試讀請先到好康書院。', href: '/classroom/brain-universe/autonomic' },
+];
+
+// 2026-08-29：SS北極星原則定案（純免費，不導購不解鎖），這幾個書院的付費解鎖內容暫時搬家整理中，
+// 入口卡片先不可點擊；免費試讀內容（好康書院）不受影響。
+const MOVING_ACADEMIES = [
+  { icon: '💰', title: '理財書院' },
+  { icon: '🧠', title: '心理學書院' },
+  { icon: '🤖', title: 'AI書院' },
+  { icon: '🧬', title: '腦中宇宙書院' },
 ];
 
 const COMING_TOPICS = [
@@ -60,6 +65,27 @@ export default function ClassroomPage() {
               </div>
             </div>
           </Link>
+        ))}
+      </div>
+
+      {/* 搬家整理中 */}
+      <p style={{ color: '#a78bfa', fontSize: '0.72rem', letterSpacing: '0.1em', margin: '0 0 0.8rem 0.2rem', fontWeight: 600 }}>
+        搬家整理中
+      </p>
+      <div style={{ marginBottom: '1.5rem' }}>
+        {MOVING_ACADEMIES.map(t => (
+          <div key={t.title} className="course-list-item locked" style={{ padding: '1rem 1.4rem', borderRadius: '12px' }}>
+            <span style={{ fontSize: '1.6rem', flexShrink: 0 }}>{t.icon}</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ color: '#1e1b4b', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.15rem' }}>
+                {t.title}
+              </div>
+              <div style={{ color: '#9ca3af', fontSize: '0.8rem', lineHeight: 1.5 }}>
+                內容整理搬家中，敬請期待新家
+              </div>
+            </div>
+            <div style={{ color: '#c4b5fd', fontSize: '0.72rem', flexShrink: 0 }}>🚧 整理中</div>
+          </div>
         ))}
       </div>
 
