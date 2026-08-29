@@ -106,9 +106,8 @@ function LoginContent() {
             {/* 新學員說明 */}
             <div className="bg-indigo-950/50 border border-indigo-800/40 rounded-xl p-3">
               <p className="text-xs text-indigo-300 leading-relaxed">
-                🎁 <strong>驚喜學院 × 有的沒的小舖</strong><br/>
-                註冊學院帳號，同時自動開通小舖書架——<br/>
-                同一個 email，兩邊都能用，不需要分開註冊。
+                🎁 <strong>驚喜學院</strong><br/>
+                註冊後即可使用驚喜學院的學習紀錄與課程功能。
               </p>
             </div>
 
