@@ -100,6 +100,10 @@ export default function AdminCommentsPage() {
   const [authed, setAuthed] = useState(false);
   const [pwInput, setPwInput] = useState('');
   const [pwError, setPwError] = useState(false);
+  const [ownerEmail, setOwnerEmail] = useState('');
+  const [ownerLoading, setOwnerLoading] = useState(false);
+  const [ownerSent, setOwnerSent] = useState(false);
+  const [ownerError, setOwnerError] = useState('');
 
   useEffect(() => {
     fetch('/api/admin/check-session')
@@ -117,6 +121,24 @@ export default function AdminCommentsPage() {
     const data = await res.json();
     if (data.success) { setAuthed(true); setPwError(false); }
     else { setPwError(true); setPwInput(''); }
+  }
+
+  async function handleOwnerLogin() {
+    setOwnerError('');
+    setOwnerLoading(true);
+    try {
+      const res = await fetch('/api/admin/owner-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: ownerEmail }),
+      });
+      if (res.ok) setOwnerSent(true);
+      else setOwnerError('Email 不符合，無法登入');
+    } catch {
+      setOwnerError('登入時發生錯誤');
+    } finally {
+      setOwnerLoading(false);
+    }
   }
 
   // 站長發文
@@ -231,6 +253,35 @@ export default function AdminCommentsPage() {
         <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 16, padding: '2rem', width: '100%', maxWidth: 340, border: '1px solid rgba(232,200,128,0.2)', textAlign: 'center' }}>
           <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🔐</div>
           <h2 style={{ color: '#e8c880', margin: '0 0 1.5rem', fontSize: '1.1rem' }}>後台入口</h2>
+
+          {ownerSent ? (
+            <div style={{ marginBottom: '1.25rem', background: 'rgba(80,200,120,0.1)', border: '1px solid rgba(80,200,120,0.3)', color: '#8fd9a8', padding: '0.7rem 0.9rem', borderRadius: 8, fontSize: '0.82rem' }}>
+              📬 驗證信已寄出，請至信箱點擊連結完成登入（10分鐘內有效）
+            </div>
+          ) : (
+            <div style={{ marginBottom: '1.25rem', textAlign: 'left' }}>
+              <input
+                type="email"
+                value={ownerEmail}
+                onChange={e => setOwnerEmail(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleOwnerLogin()}
+                placeholder="輸入你的 Email"
+                disabled={ownerLoading}
+                style={{ width: '100%', padding: '0.6rem 1rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 8, color: '#eee', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box', marginBottom: '0.6rem' }}
+              />
+              <button onClick={handleOwnerLogin} disabled={ownerLoading || !ownerEmail} style={{ width: '100%', padding: '0.6rem', background: 'linear-gradient(135deg, #b49050, #e8c880)', color: '#1a1208', border: 'none', borderRadius: 8, fontSize: '0.9rem', fontWeight: 700, cursor: ownerLoading ? 'not-allowed' : 'pointer', opacity: ownerLoading ? 0.6 : 1 }}>
+                {ownerLoading ? '寄送中...' : '📧 寄送登入連結'}
+              </button>
+              {ownerError && <p style={{ color: '#fca5a5', fontSize: '0.78rem', margin: '0.5rem 0 0' }}>{ownerError}</p>}
+            </div>
+          )}
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', margin: '1rem 0' }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.1)' }} />
+            <span style={{ color: '#666', fontSize: '0.72rem' }}>或用密碼</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.1)' }} />
+          </div>
+
           <input
             type="password"
             autoComplete="new-password"
