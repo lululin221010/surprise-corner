@@ -1,14 +1,17 @@
 // POST /api/auth/magic-link
 // 輸入 email + nickname → 寄出一次性登入連結（15 分鐘有效）
 // 若 email 不存在 → 自動建立帳號（首次註冊），同時在 ST BookStoreDB 建立帳號
+//
+// 原本走Resend，但寄件網域still-time-corner.vercel.app是Vercel配的子網域，
+// 沒有DNS控制權，無法在Resend驗證，寄信一律靜默失敗（resend SDK失敗時只回傳
+// {error}不會throw，這裡又沒檢查，所以一直回傳success但讀者根本收不到信）。
+// 改走跟admin owner-login同一套Gmail SMTP，已實測可用。
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { dbConnect } from '@/lib/dbConnect';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
-const FROM   = '有的沒的小舖 <noreply@still-time-corner.vercel.app>';
 
 export async function POST(request: Request) {
   try {
@@ -74,8 +77,18 @@ export async function POST(request: Request) {
 
     const loginUrl = `${SS_URL}/api/auth/verify-magic?token=${token}`;
 
-    await resend.emails.send({
-      from:    FROM,
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+      port: parseInt(process.env.EMAIL_PORT || '587'),
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from:    `"驚喜學院" <${process.env.EMAIL_USER}>`,
       to:      cleanEmail,
       subject: '【驚喜學院】一鍵登入連結',
       html: `
