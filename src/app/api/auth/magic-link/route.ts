@@ -15,6 +15,7 @@ import { dbConnect } from '@/lib/dbConnect';
 const resend = new Resend(process.env.RESEND_API_KEY);
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
 const FROM   = '驚喜學院 <lulu@stilltimecorner.com>';
+const COOLDOWN_MS = 60 * 1000; // 同一個email 60秒內只能申請一次，避免被拿去洗信件轟炸
 
 export async function POST(request: Request) {
   try {
@@ -29,6 +30,13 @@ export async function POST(request: Request) {
 
     let user    = await ssUsers.findOne({ email: cleanEmail });
     let isNew   = false;
+
+    if (user?.lastMagicLinkSentAt && Date.now() - new Date(user.lastMagicLinkSentAt).getTime() < COOLDOWN_MS) {
+      return NextResponse.json(
+        { success: false, error: '請稍等一下再重新申請登入連結' },
+        { status: 429 }
+      );
+    }
 
     if (!user) {
       isNew = true;
@@ -75,7 +83,7 @@ export async function POST(request: Request) {
 
     await ssUsers.updateOne(
       { email: cleanEmail },
-      { $set: { magicToken: token, magicTokenExpiry: expiry } }
+      { $set: { magicToken: token, magicTokenExpiry: expiry, lastMagicLinkSentAt: new Date() } }
     );
 
     const loginUrl = `${SS_URL}/api/auth/verify-magic?token=${token}`;

@@ -10,7 +10,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   try {
     const client = await clientPromise;
     const db = client.db();
-    const post = await db.collection('wall').findOne({ _id: new ObjectId(id) });
+    const post = await db.collection('wall').findOne({ _id: new ObjectId(id), approved: true });
     if (!post) return NextResponse.json({ error: '找不到作品' }, { status: 404 });
     return NextResponse.json({ ...post, _id: post._id.toString() });
   } catch {
