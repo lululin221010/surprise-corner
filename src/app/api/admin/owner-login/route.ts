@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     const verifyUrl = `${SS_URL}/api/admin/owner-login/verify?token=${token}`;
 
-    await resend.emails.send({
+    const { error: sendError } = await resend.emails.send({
       from: FROM,
       to: normalized,
       subject: '【驚喜角落】後台登入驗證連結（10分鐘有效）',
@@ -52,6 +52,16 @@ export async function POST(request: Request) {
         </div>
       `,
     });
+
+    if (sendError) {
+      console.error('❌ Resend寄信失敗:', sendError);
+      // token已寫入DB但信沒寄出，清掉避免留下一個永遠用不到的有效token
+      await db.collection('adminLoginTokens').deleteOne({ token });
+      return NextResponse.json(
+        { error: `寄送驗證信失敗：${sendError.message || sendError.name || '未知錯誤'}` },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ ok: true, message: '驗證信已寄出，請至信箱點擊連結完成登入' });
   } catch (error) {

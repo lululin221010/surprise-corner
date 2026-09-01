@@ -132,8 +132,9 @@ export default function AdminCommentsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: ownerEmail }),
       });
+      const data = await res.json();
       if (res.ok) setOwnerSent(true);
-      else setOwnerError('Email 不符合，無法登入');
+      else setOwnerError(data.error || 'Email 不符合，無法登入');
     } catch {
       setOwnerError('登入時發生錯誤');
     } finally {
