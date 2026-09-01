@@ -53,7 +53,7 @@ export async function GET(req: Request) {
   const db = client.db();
   const query: Record<string, any> = { approved: true };
   if (label) query.label = label;
-  const posts = await db.collection("wall").find(query)
+  const posts = await db.collection("wall").find(query, { projection: { ip: 0, creatorId: 0 } })
     .sort({ createdAt: -1 }).limit(50).toArray();
   return NextResponse.json(posts);
 }

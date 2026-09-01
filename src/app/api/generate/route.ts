@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { checkDailyIpLimit } from "@/lib/rateLimit";
+
+const DAILY_LIMIT = 100;
 
 const PROMPTS: Record<string, (input: string) => string> = {
   love:     (name) => `用繁體中文寫一段真誠感人的告白給「${name}」，50字以內，不要用引號包住。`,
@@ -8,8 +11,14 @@ const PROMPTS: Record<string, (input: string) => string> = {
 };
 
 export async function POST(req: Request) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
+  const allowed = await checkDailyIpLimit('generateRateLimits', ip, DAILY_LIMIT);
+  if (!allowed) {
+    return NextResponse.json({ error: '今日額度已用完，請明天再試' }, { status: 429 });
+  }
+
   const { type, input } = await req.json();
-  if (!PROMPTS[type] || !input) {
+  if (!PROMPTS[type] || !input || String(input).length > 100) {
     return NextResponse.json({ error: "參數錯誤" }, { status: 400 });
   }
   try {

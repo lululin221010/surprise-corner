@@ -42,15 +42,38 @@ const RSS_FEEDS = [
   },
 ];
 
-async function fetchOgImage(url: string): Promise<string> {
+// 防SSRF：只允許http/https，排除內網/雲端metadata常見位址範圍
+function isSafeUrl(urlStr: string): boolean {
   try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 5000);
+    const url = new URL(urlStr);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+    const host = url.hostname.toLowerCase();
+    if (host === 'localhost' || host === '0.0.0.0' || host === '::1') return false;
+    if (
+      /^127\./.test(host) ||
+      /^10\./.test(host) ||
+      /^192\.168\./.test(host) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
+      /^169\.254\./.test(host) ||
+      host.startsWith('fc') || host.startsWith('fd')
+    ) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function fetchOgImage(url: string): Promise<string> {
+  if (!isSafeUrl(url)) return '';
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+  try {
     const res = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'text/html' },
       signal: controller.signal,
     });
-    clearTimeout(timer);
     if (!res.ok) return '';
     const reader = res.body?.getReader();
     if (!reader) return '';
@@ -70,7 +93,11 @@ async function fetchOgImage(url: string): Promise<string> {
     const twitterMatch = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
     if (twitterMatch?.[1]?.startsWith('http')) return twitterMatch[1];
     return '';
-  } catch { return ''; }
+  } catch {
+    return '';
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 function parseRSS(xml: string, source: string, keywords: string[]) {
@@ -123,17 +150,19 @@ export async function GET() {
 
     await Promise.allSettled(
       RSS_FEEDS.map(async (feed) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
         try {
-          const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 8000);
           const res = await fetch(feed.url, { headers: FETCH_HEADERS, signal: controller.signal });
-          clearTimeout(timer);
           if (!res.ok) return;
-          const xml = await res.text();
+          let xml = await res.text();
+          if (xml.length > 5_000_000) xml = xml.slice(0, 5_000_000); // 異常巨大回應防呆
           const items = parseRSS(xml, feed.source, feed.keywords);
           allNews.push(...items);
         } catch (err) {
           console.warn(`[baseball] ${feed.source} 失敗:`, err instanceof Error ? err.message : err);
+        } finally {
+          clearTimeout(timer);
         }
       })
     );

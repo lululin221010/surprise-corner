@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     const db = await dbConnect();
     const comments = await db
       .collection('chapter_comments')
-      .find({ chapterId, approved: true })
+      .find({ chapterId, approved: true }, { projection: { ip: 0 } })
       .sort({ createdAt: 1 })
       .toArray();
 
@@ -47,6 +47,16 @@ export async function POST(req: NextRequest) {
     }
 
     const db = await dbConnect();
+
+    const ip = req.headers.get('x-forwarded-for') || 'unknown';
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000);
+    const recent = await db.collection('chapter_comments').countDocuments({
+      ip, createdAt: { $gt: oneMinuteAgo },
+    });
+    if (recent >= 3) {
+      return NextResponse.json({ error: '太頻繁，請稍後再試' }, { status: 429 });
+    }
+
     const result = await db.collection('chapter_comments').insertOne({
       chapterId: chapterId.trim(),
       novelId: novelId.trim(),
@@ -54,6 +64,7 @@ export async function POST(req: NextRequest) {
       petName: petName ? petName.trim() : '',
       content: content.trim(),
       approved: false,
+      ip,
       createdAt: new Date(),
     });
 

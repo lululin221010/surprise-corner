@@ -7,7 +7,7 @@ export async function GET() {
     const db = await dbConnect();
     const feedbacks = await db
       .collection('reminderFeedback')
-      .find({})
+      .find({}, { projection: { ip: 0 } })
       .sort({ createdAt: -1 })
       .limit(10)
       .toArray();
@@ -34,9 +34,20 @@ export async function POST(req: NextRequest) {
     }
 
     const db = await dbConnect();
+
+    const ip = req.headers.get('x-forwarded-for') || 'unknown';
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000);
+    const recent = await db.collection('reminderFeedback').countDocuments({
+      ip, createdAt: { $gt: oneMinuteAgo },
+    });
+    if (recent >= 3) {
+      return NextResponse.json({ error: '太頻繁，請稍後再試' }, { status: 429 });
+    }
+
     await db.collection('reminderFeedback').insertOne({
       nickname: nickname.trim(),
       content: content.trim(),
+      ip,
       createdAt: new Date(),
     });
 

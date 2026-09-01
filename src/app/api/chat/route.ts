@@ -1,35 +1,15 @@
 // 📄 src/app/api/chat/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import { checkDailyIpLimit } from '@/lib/rateLimit';
 
 const DAILY_LIMIT = 60; // 3 次 session × 20 則
 
-async function checkIpLimit(req: NextRequest): Promise<boolean> {
-  try {
-    const ip =
-      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-      req.headers.get('x-real-ip') ||
-      'unknown';
-    // 台灣時間 UTC+8
-    const taiwanDate = new Date(Date.now() + 8 * 60 * 60 * 1000)
-      .toISOString()
-      .slice(0, 10);
-
-    const client = await clientPromise;
-    const col = client.db().collection('chatRateLimits');
-
-    const record = await col.findOne({ ip, date: taiwanDate });
-    if (record && record.count >= DAILY_LIMIT) return false; // 超過上限
-
-    await col.updateOne(
-      { ip, date: taiwanDate },
-      { $inc: { count: 1 }, $setOnInsert: { ip, date: taiwanDate } },
-      { upsert: true }
-    );
-    return true;
-  } catch {
-    return true; // MongoDB 掛掉時不擋用戶
-  }
+function getIp(req: NextRequest): string {
+  return (
+    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    req.headers.get('x-real-ip') ||
+    'unknown'
+  );
 }
 
 const CHARACTERS = {
@@ -75,7 +55,7 @@ const CHARACTERS = {
 
 export async function POST(req: NextRequest) {
   try {
-    const allowed = await checkIpLimit(req);
+    const allowed = await checkDailyIpLimit('chatRateLimits', getIp(req), DAILY_LIMIT);
     if (!allowed) {
       return NextResponse.json({ error: 'daily_limit' }, { status: 429 });
     }
@@ -83,6 +63,14 @@ export async function POST(req: NextRequest) {
     const { messages, character } = await req.json();
     const char = CHARACTERS[character as keyof typeof CHARACTERS];
     if (!char) return NextResponse.json({ error: '找不到角色' }, { status: 400 });
+
+    if (!Array.isArray(messages) || messages.length === 0 || messages.length > 20) {
+      return NextResponse.json({ error: '對話內容格式錯誤' }, { status: 400 });
+    }
+    const totalChars = messages.reduce((sum: number, m: { content?: string }) => sum + (m?.content?.length || 0), 0);
+    if (totalChars > 4000) {
+      return NextResponse.json({ error: '對話內容過長' }, { status: 400 });
+    }
 
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',

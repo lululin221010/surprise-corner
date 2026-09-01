@@ -2,14 +2,23 @@
 // 呼叫 Groq Whisper API 轉換音訊檔案為文字
 
 import { NextRequest, NextResponse } from 'next/server';
+import { checkDailyIpLimit } from '@/lib/rateLimit';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
+const DAILY_LIMIT = 20;
 
 export async function POST(req: NextRequest) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: '未設定 GROQ_API_KEY' }, { status: 500 });
+  }
+
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
+  const allowed = await checkDailyIpLimit('audioToTextRateLimits', ip, DAILY_LIMIT);
+  if (!allowed) {
+    return NextResponse.json({ error: '今日轉換額度已用完，請明天再試' }, { status: 429 });
   }
 
   try {

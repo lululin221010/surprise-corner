@@ -71,6 +71,29 @@ const IMAGE_BLACKLIST = [
   'udn.com/img/nophoto',
 ];
 
+// 防SSRF：只允許http/https，排除內網/雲端metadata常見位址範圍
+function isSafeUrl(urlStr: string): boolean {
+  try {
+    const url = new URL(urlStr);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+    const host = url.hostname.toLowerCase();
+    if (host === 'localhost' || host === '0.0.0.0' || host === '::1') return false;
+    if (
+      /^127\./.test(host) ||
+      /^10\./.test(host) ||
+      /^192\.168\./.test(host) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
+      /^169\.254\./.test(host) ||
+      host.startsWith('fc') || host.startsWith('fd')
+    ) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function isValidImage(url: string): boolean {
   if (!url || !url.startsWith('http')) return false;
   const lower = url.toLowerCase();
@@ -122,11 +145,11 @@ function parseRSS(xml: string, source: string, keywords: string[], category: str
 }
 
 async function fetchOgImage(url: string): Promise<string> {
+  if (!isSafeUrl(url)) return '';
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
   try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 5000);
     const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'text/html' }, signal: controller.signal });
-    clearTimeout(timer);
     if (!res.ok) return '';
     const reader = res.body?.getReader();
     if (!reader) return '';
@@ -146,7 +169,11 @@ async function fetchOgImage(url: string): Promise<string> {
     if (tw?.[1] && isValidImage(tw[1])) return tw[1];
 
     return '';
-  } catch { return ''; }
+  } catch {
+    return '';
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 export async function GET() {
@@ -154,18 +181,20 @@ export async function GET() {
     const allNews: { title: string; link: string; pubDate: string; source: string; description: string; category: string; image: string; }[] = [];
     await Promise.allSettled(
       RSS_FEEDS.map(async (feed) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
         try {
-          const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 8000);
           const res = await fetch(feed.url, { headers: FETCH_HEADERS, signal: controller.signal, next: { revalidate: 3600 } });
-          clearTimeout(timer);
           if (!res.ok) { console.warn('[ai-news] ' + feed.source + ' ' + res.status); return; }
-          const xml = await res.text();
+          let xml = await res.text();
+          if (xml.length > 5_000_000) xml = xml.slice(0, 5_000_000); // 異常巨大回應防呆
           const items = parseRSS(xml, feed.source, feed.keywords, feed.category);
           console.log('[ai-news] ' + feed.source + ' (' + feed.category + ') => ' + items.length + ' 則');
           allNews.push(...items);
         } catch (err) {
           console.warn('[ai-news] ' + feed.source + ' 失敗:', err instanceof Error ? err.message : err);
+        } finally {
+          clearTimeout(timer);
         }
       })
     );
