@@ -14,7 +14,7 @@ import { dbConnect } from '@/lib/dbConnect';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
-const FROM   = '驚喜學院 <noreply@stilltimecorner.com>';
+const FROM   = '驚喜學院 <lulu@stilltimecorner.com>';
 
 export async function POST(request: Request) {
   try {

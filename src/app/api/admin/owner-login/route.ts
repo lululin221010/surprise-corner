@@ -13,7 +13,7 @@ import clientPromise from '@/lib/mongodb';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
-const FROM = '驚喜角落後台 <noreply@stilltimecorner.com>';
+const FROM = '驚喜角落後台 <lulu@stilltimecorner.com>';
 const EXPIRE_MS = 10 * 60 * 1000; // 10分鐘
 
 export async function POST(request: Request) {
