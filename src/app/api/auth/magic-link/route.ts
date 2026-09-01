@@ -1,6 +1,8 @@
 // POST /api/auth/magic-link
 // 輸入 email + nickname → 寄出一次性登入連結（15 分鐘有效）
-// 若 email 不存在 → 自動建立帳號（首次註冊），同時在 ST BookStoreDB 建立帳號
+// 若 email 不存在 → 自動建立SS學院帳號（首次註冊）；ST BookStoreDB的鏡射帳號
+// 延後到verify-magic真的驗證過token才建立，避免任意email在沒證明擁有權前就
+// 被拿去建立一個能登入書店的帳號
 //
 // 原本FROM寫的是still-time-corner.vercel.app（Vercel配的子網域，打錯字/舊網域，
 // 從未驗證過），實際在Resend驗證過的是stilltimecorner.com——兩個完全是不同
@@ -16,6 +18,15 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
 const FROM   = '驚喜學院 <lulu@stilltimecorner.com>';
 const COOLDOWN_MS = 60 * 1000; // 同一個email 60秒內只能申請一次，避免被拿去洗信件轟炸
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 export async function POST(request: Request) {
   try {
@@ -40,9 +51,10 @@ export async function POST(request: Request) {
 
     if (!user) {
       isNew = true;
-      const nick = (nickname || '').trim() || cleanEmail.split('@')[0];
+      const nick = ((nickname || '').trim() || cleanEmail.split('@')[0]).slice(0, 30);
 
-      // 1. 建立 SS 學院帳號
+      // 建立 SS 學院帳號（ST BookStoreDB 的鏡射帳號延後到verify-magic驗證過
+      // token才建立，見該檔案）
       await ssUsers.insertOne({
         email:              cleanEmail,
         nickname:           nick,
@@ -51,28 +63,6 @@ export async function POST(request: Request) {
         completedAcademies: [],
         createdAt:          new Date(),
       });
-
-      // 2. 同時在 ST BookStoreDB.users 建立帳號（若不存在）
-      try {
-        const stDb    = await dbConnect('BookStoreDB');
-        const stUsers = stDb.collection('users');
-        const exists  = await stUsers.findOne({ email: cleanEmail });
-        if (!exists) {
-          await stUsers.insertOne({
-            email,
-            // 隨機無法使用的密碼雜湊，讓用戶只能走 magic link 登入
-            password:    '$2b$10$' + crypto.randomBytes(22).toString('base64').slice(0, 53),
-            name:        nick,
-            fullAccess:  false,
-            createdAt:   new Date(),
-            updatedAt:   new Date(),
-            fromAcademy: true,  // 標記從學院註冊
-          });
-        }
-      } catch (stErr) {
-        // ST 建帳失敗不影響 SS 流程，只記 log
-        console.warn('⚠️ ST 建帳失敗（不影響 SS）:', stErr);
-      }
 
       user = await ssUsers.findOne({ email: cleanEmail });
     }
@@ -111,7 +101,7 @@ export async function POST(request: Request) {
         <tr>
           <td style="padding:36px;">
             <p style="color:#e2e8f0;font-size:15px;line-height:1.8;margin:0 0 24px;">
-              你好，<strong style="color:#c4b5fd;">${user!.nickname}</strong>！<br/>
+              你好，<strong style="color:#c4b5fd;">${escapeHtml(user!.nickname)}</strong>！<br/>
               點下方按鈕即可直接登入學院，不需要密碼。<br/>
               <span style="color:#64748b;font-size:13px;">連結 15 分鐘內有效，使用一次後失效。</span>
             </p>
@@ -160,7 +150,9 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, isNew });
+    // 不回傳isNew：避免任何人拿任意email來試，就能從回應探測出這個email
+    // 是不是已經註冊過（帳號列舉風險）
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('❌ SS magic-link 失敗:', error);
     return NextResponse.json({ success: false, error: '寄信失敗，請稍後再試' }, { status: 500 });
