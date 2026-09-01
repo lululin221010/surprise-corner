@@ -2,9 +2,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbConnect } from '@/lib/dbConnect';
 import { ObjectId } from 'mongodb';
+import { isAdminAuthed } from '@/lib/adminAuth';
 
 // GET /api/admin/comments?approved=false (or true, or all)
 export async function GET(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   const { searchParams } = new URL(req.url);
   const filter = searchParams.get('approved'); // 'true' | 'false' | 'all'
 
@@ -31,6 +36,10 @@ export async function GET(req: NextRequest) {
 // PATCH /api/admin/comments — approve or reject
 // Body: { id, approved: boolean }
 export async function PATCH(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   try {
     const { id, approved, reply } = await req.json();
     if (!id) return NextResponse.json({ error: '缺少 id' }, { status: 400 });
@@ -55,6 +64,10 @@ export async function PATCH(req: NextRequest) {
 // DELETE /api/admin/comments
 // Body: { id }
 export async function DELETE(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   try {
     const { id } = await req.json();
     if (!id) return NextResponse.json({ error: '缺少 id' }, { status: 400 });
@@ -71,6 +84,10 @@ export async function DELETE(req: NextRequest) {
 
 // POST /api/admin/comments - 站長直接發文，自動 approved
 export async function POST(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   try {
     const { chapterId, novelId, nickname, content } = await req.json();
     if (!chapterId || !content) return NextResponse.json({ error: '缺少欄位' }, { status: 400 });

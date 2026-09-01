@@ -3,9 +3,14 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { isAdminAuthed } from '@/lib/adminAuth';
 
 export async function POST(request: NextRequest) {
   try {
+    if (!isAdminAuthed(request)) {
+      return NextResponse.json({ error: '未授權' }, { status: 401 });
+    }
+
     const body = await request.json();
     const { date, type, message, toolUrl, story, imageUrl } = body;
 

@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { isAdminAuthed } from '@/lib/adminAuth';
 
 // 30 天的驚喜內容庫存
 const surprisesData = [
@@ -215,8 +216,12 @@ const surprisesData = [
   },
 ];
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
+    if (!isAdminAuthed(request)) {
+      return NextResponse.json({ error: '未授權' }, { status: 401 });
+    }
+
     const client = await clientPromise;
     const db = client.db('SurpriseCornerDB');
     const collection = db.collection('surprises');

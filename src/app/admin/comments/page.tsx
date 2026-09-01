@@ -101,6 +101,13 @@ export default function AdminCommentsPage() {
   const [pwInput, setPwInput] = useState('');
   const [pwError, setPwError] = useState(false);
 
+  useEffect(() => {
+    fetch('/api/admin/check-session')
+      .then(res => res.json())
+      .then(data => { if (data.authed) setAuthed(true); })
+      .catch(() => {});
+  }, []);
+
   async function handleLogin() {
     const res = await fetch('/api/admin/auth', {
       method: 'POST',

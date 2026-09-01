@@ -1,9 +1,14 @@
 // 📁 路徑：src/app/api/admin/wall/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { isAdminAuthed } from '@/lib/adminAuth';
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   const { searchParams } = new URL(req.url);
   const approved = searchParams.get('approved'); // 'true' | 'false' | 'all'
   const client = await clientPromise;
@@ -16,7 +21,11 @@ export async function GET(req: Request) {
   return NextResponse.json({ posts });
 }
 
-export async function PATCH(req: Request) {
+export async function PATCH(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   const body = await req.json();
   const { id, approved, reply } = body;
   if (!id) return NextResponse.json({ error: '缺少 id' }, { status: 400 });
@@ -32,7 +41,11 @@ export async function PATCH(req: Request) {
   return NextResponse.json({ ok: true });
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
+  if (!isAdminAuthed(req)) {
+    return NextResponse.json({ error: '未授權' }, { status: 401 });
+  }
+
   const body = await req.json();
   const { id } = body;
   if (!id) return NextResponse.json({ error: '缺少 id' }, { status: 400 });
