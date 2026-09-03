@@ -1,0 +1,23 @@
+{
+  "run_id": "gaslighting-v2",
+  "jobs": [
+    {
+      "id": "lulu",
+      "label": "魯魯（貓）",
+      "imagePath": "C:\\Users\\user\\Desktop\\有的沒的小舖\\魯魯\\寫實生圖規格包\\00_official_refs\\lulu_ref_face.jpg",
+      "outputPath": "..\\..\\veo_test_lulu.mp4",
+      "duration": "4s",
+      "prompt": "The cat blinks slowly once and turns its head slightly to the side, calm and still, photorealistic, no background change, maintain the exact same fur pattern, eye color, and facial proportions as the reference image, subtle natural motion only",
+      "negative_prompt": "stripe pattern changes, color changes, distorted face, extra limbs, background change"
+    },
+    {
+      "id": "couple",
+      "label": "男女主角（人物）",
+      "imagePath": "C:\\Users\\user\\Desktop\\有的沒的小舖\\推廣\\心理學\\讀心日記\\暗黑心理學\\操控與控制\\煤氣效應\\gaslighting-v2\\characters\\human_reference_photos\\couple_official_reference_page01.png",
+      "outputPath": "..\\..\\veo_test_couple.mp4",
+      "duration": "4s",
+      "prompt": "The two characters remain in their positions with gentle natural breathing motion and subtle eye movement, calm scene, maintain the exact same facial features, hairstyles, and clothing as the reference image, no dramatic action, subtle motion only",
+      "negative_prompt": "face distortion, feature changes, extra people, background change"
+    }
+  ]
+}

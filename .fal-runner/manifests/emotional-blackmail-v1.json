@@ -1,0 +1,14 @@
+{
+  "run_id": "emotional-blackmail-v1-stress-test",
+  "jobs": [
+    {
+      "id": "panel1",
+      "label": "情緒勒索 v1 panel1（1254x1254舊格式，壓力測試用）",
+      "imagePath": "C:\\Users\\user\\Desktop\\有的沒的小舖\\推廣\\心理學\\讀心日記\\暗黑心理學\\操控與控制\\情緒勒索\\00_原始圖檔\\no_text_panels\\panel1.png",
+      "outputPath": "..\\..\\veo_test_trackb_panel1.mp4",
+      "duration": "4s",
+      "prompt": "Gentle subtle motion only, calm cinematic scene, maintain the exact same characters, colors, composition, and details as the reference image, no new elements, no background change",
+      "negative_prompt": "distorted face, extra limbs, color changes, added objects, background change"
+    }
+  ]
+}
