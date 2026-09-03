@@ -1,0 +1,8 @@
+# 每行填一個路徑片段（子字串比對，不是正規表示式/glob）
+# Edit或Write符合這裡任一行的檔案前，Claude Code會先跳出來要求確認，
+# 不會直接改。要保護哪個檔案，取消對應行的註解，或照格式新增一行即可。
+#
+# 範例（目前全部是註解=沒有真的在保護任何東西，先手動打開需要的）：
+# src/lib/mongodb.ts
+# middleware.ts
+# src/lib/adminAuth.ts
