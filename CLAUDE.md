@@ -83,15 +83,8 @@
 
 ## ✅ 已完成功能
 
-### 工具箱（/tools）
-- 入口頁：`src/app/tools/page.tsx`
-- **文字工具**（先前已有）
-- **媒體工具**：
-  - 🎙️ 音訊轉文字：`src/app/tools/audio-to-text/page.tsx` + `src/app/api/tools/audio-to-text/route.ts`
-    - 使用 Groq Whisper Large V3 Turbo
-    - 支援 mp3、mp4、wav、m4a，最大 25MB
-  - 🖼️ 圖片加浮水印：`src/app/tools/watermark/page.tsx`（純前端 Canvas，6 種位置 + 平鋪）
-  - 🪪 證件照製作：`src/app/tools/id-photo/page.tsx`（純前端 Canvas，4 種尺寸、4 種背景色）
+### ⚠️ 工具箱（已於2026-06-09移除，2026-09-05發現文件未同步更新）
+`/tools`及其子頁（音訊轉文字/浮水印/證件照）已在commit `1dd1eec`中全數刪除，程式碼不存在。詳見[[project_ss_stale_docs_after_20260609_refactor_20260905]]。
 
 ### 電子書促銷
 - `src/components/AIBookPromo.tsx` — 電子書促銷元件，引入於 AI 快訊頁底部
@@ -100,48 +93,15 @@
 - `src/app/ai-news/page.tsx` — 頁面底部引入 `<AIBookPromo />`
 - `public/ebook/` — 電子書 HTML 檔案：`ai-ebook-free.html`、`ai-ebook-full.html`、`ai-ebook-epub.html`
 
-### Podcast（/podcast）
-- 頁面：`src/app/podcast/page.tsx`
-- 集數資料直接寫在 `page.tsx` 的 `EPISODES` 陣列（episodes.json 目前未使用）
-- 音頻儲存於 **Vercel Blob**（`88lwhikbeo2pkibc.public.blob.vercel-storage.com/podcast/`）
-- 嵌入式 `AudioPlayer` 元件：進度條可點擊跳轉、播放/暫停、時間顯示、音波動畫
-- Ko-fi 贊助連結整合於 Podcast 頁面
-- Spotify 上架：用 podcasters.spotify.com，免費，上傳 MP3 即可，SS 音檔已備妥 ✅
+### ⚠️ Podcast（已於2026-06-09移除，2026-09-05發現文件未同步更新）
+`/podcast` 頁面已在commit `1dd1eec`（整理舊頁面重構）中刪除，程式碼不存在。此段原描述8集MP3、Spotify上架流程等內容已過時，Google還在檢索`/podcast`回傳404就是這個原因（見[[project_ss_stale_docs_after_20260609_refactor_20260905]]）。已上傳的MP3音檔仍留在Vercel Blob（`88lwhikbeo2pkibc.public.blob.vercel-storage.com/podcast/`），若日後要復活這個功能，音檔素材還在，只是沒有頁面呈現。
 
-**目前已上傳 8 集（~155MB，Hobby 方案 512MB 上限，剩約 357MB）：**
-- ep01-surprise-corner-intro.mp3（AI 驚喜與兔崽子書店）
-- ep02-side-hustle-map.mp3（上班族低風險副業實戰地圖）
-- ep03-taiwan-stock.mp3（台股紅綠燈：戰勝投資心魔）
-- ep04-ai-loneliness.mp3（AI 從打字停頓讀懂你的孤獨）
-- ep05-taipei-ruin.mp3（台北廢墟收到的太空求救）
-- ep06-ai-film.mp3（用 AI 一人拍大片）
-- ep07（長照路上的崩潰與解脫）
-- ep08（離世是靈魂計畫好的畢業）
-- 贊助文字已改為「請魯魯吃罐罐」
-
-**新增集數流程：**
-1. NotebookLM 上傳書籍前 1/5 內容，新增記事寫限制指令（只介紹前幾章，結尾導流小舖）
-2. 生成語音摘要 → 下載 m4a → cloudconvert.com 轉 mp3
-3. 上傳 MP3 到 Vercel Blob → 取得 URL（或用 `upload-podcasts.mjs`，小舖專案根目錄）
-4. `EPISODES` 陣列新增一筆，填入 `audioUrl`（`${BASE}/ep0X-xxx.mp3`）
-
-Podcast 開場腳本原則：
-- 只用書籍前 1/3 內容（或前 1/5），不爆雷
-- 結尾導流到小舖：`still-time-corner.vercel.app`
-- 已完成五本書腳本（台股紅綠燈、斜槓致富方程式、影音AI工具完全指南、最後的信號、Lulu的日記）
-
-### 角色聊天（2026-03 新增）
-- API：`src/app/api/chat/route.ts`（Groq llama-3.3-70b-versatile，max_tokens 200，temperature 0.85）
-- **角色清單**（route.ts 的 CHARACTERS 物件）：
-  - `lulu` 🐱：來自《Lulu的日記》→ `/chat/lulu`，紫色主題，溫柔細膩
-  - `signal` 📡：來自《最後的信號》→ `/chat/signal`，藍色主題，廢土滄桑感
-- 入口位置：首頁探索卡片 + 各小說頁面按鈕
-- 新本小說上線 → CHARACTERS 加一筆 + 新建對應頁面
-- 小說正確路徑：`/novels/lulu-diary`、`/novels/the-last-signal`
-- **關鍵檔案**：
-  - `src/app/api/chat/route.ts` — 聊天 API，含所有角色 system prompt
-  - `src/app/chat/lulu/page.tsx` — Lulu 聊天頁面
-  - `src/app/chat/signal/page.tsx` — 林悅聊天頁面
+### ⚠️ 角色聊天（2026-03新增，2026-06-09重構受影響，2026-09-05修復+重新盤點）
+- API：`src/app/api/chat/route.ts`（Groq llama-3.3-70b-versatile，max_tokens 200，temperature 0.85）仍存在且可用
+- **`/chat/lulu`（默默聊天頁）**：2026-06-09重構把正確位置的檔案刪了，但有一份誤放在`src/app/api/chat/lulu/page.tsx`的重複檔案沒被清到，意外存活近3個月（Next.js把它當成一般頁面渲染，URL變成`/api/chat/lulu`能正常運作，只是完全沒人連得到）。**2026-09-05已修復**：搬回正確路徑`src/app/chat/lulu/page.tsx`，並修掉頁內「看小說」按鈕原本連到不存在的`/novels/lulu`，改成正確的`/novels/lulu-diary`
+- **`/chat/signal`（林悅聊天頁）**：2026-06-09真的刪除，沒有備份，現在要用需要重寫
+- **入口缺口**：`src/components/CoffeeCorner.js` 是一個完整寫好、含「和默默聊聊」`/chat/lulu`+「和林悅說說話」`/chat/signal`兩個按鈕的元件，但**目前沒有任何頁面import它**，是完全孤兒的UI元件。也就是說即使`/chat/lulu`現在能動了，網站上仍然沒有任何地方讓訪客點得進去
+- 是否要把`CoffeeCorner`重新接回某個頁面（例如`/feeling`）、要不要花時間重建`/chat/signal`，待決定，見[[project_ss_stale_docs_after_20260609_refactor_20260905]]
 
 ### 二手市集（/secondhand）（2026-03 新增）
 - **商業模式**：
@@ -240,7 +200,8 @@ Podcast 開場腳本原則：
 
 ### 架構說明
 電子書閱讀頁為**靜態 HTML**，放在 `public/` 資料夾，Vercel 直接伺服（不經 Next.js）。
-讀者入口：`/novels` 頁面 → 「認識小舖的書」區塊 → 點卡片進入。
+~~讀者入口：`/novels` 頁面 → 「認識小舖的書」區塊 → 點卡片進入。~~
+**⚠️ 2026-09-05發現：此列表頁（`/novels/page.tsx`）已於2026-06-09同一次重構中刪除，「認識小舖的書」卡片區塊目前沒有任何頁面顯示，包括連到`daodu.html`（`category: "guide"`）這類導讀內容在內都已無入口，只能靠直接網址存取。是否要在`/feeling`或其他現有頁面補回這個入口，待決定。**
 
 ### novels.json 卡片系統
 - `category: "guide"` → 顯示在「認識小舖的書」區塊

@@ -22,49 +22,27 @@
 
 ## ✅ 已完成功能
 
-### 工具箱（/tools）
-- 入口頁：`src/app/tools/page.tsx`
-- 音訊轉文字：`src/app/tools/audio-to-text/page.tsx` + `src/app/api/tools/audio-to-text/route.ts`
-  - 使用 Groq Whisper Large V3 Turbo，支援 mp3/mp4/wav/m4a，最大 25MB
-- 圖片加浮水印：`src/app/tools/watermark/page.tsx`（純前端 Canvas）
-- 證件照製作：`src/app/tools/id-photo/page.tsx`（純前端 Canvas）
+### ⚠️ 工具箱（已於2026-06-09移除，2026-09-05發現文件未同步更新）
+`/tools`及其子頁已在commit `1dd1eec`中全數刪除，程式碼不存在。詳見[[project_ss_stale_docs_after_20260609_refactor_20260905]]。
 
 ### 電子書促銷
 - `src/components/AIBookPromo.tsx` — 促銷元件，引入於 AI 快訊頁底部
 - `public/ebook/` — ai-ebook-free.html / ai-ebook-full.html / ai-ebook-epub.html
 
-### Podcast（/podcast）
-- 頁面：`src/app/podcast/page.tsx`
-- 集數資料寫在 `EPISODES` 陣列（episodes.json 目前未使用）
-- 音頻使用 **Vercel Blob 儲存 MP3**，上傳後取得 URL 填入 EPISODES
-- Ko-fi 贊助連結整合於 Podcast 頁面
-- 新增集數流程：
-  1. NotebookLM 上傳書籍前 1/5 內容
-  2. 新增記事寫限制指令（只介紹前幾章，結尾導流小舖）
-  3. 生成語音摘要 → 下載 m4a → cloudconvert.com 轉 mp3
-  4. 上傳 MP3 到 Vercel Blob → 取得 URL
-  5. EPISODES 陣列新增一筆，填入 audioUrl
-- 已完成六集（台股紅綠燈、斜槓致富方程式、影音AI工具完全指南、最後的信號、Lulu的日記 + 1集）
-- 腳本原則：只用前 1/5，不爆雷，結尾導流 still-time-corner.vercel.app
+### ⚠️ Podcast（已於2026-06-09移除，2026-09-05發現文件未同步更新）
+`/podcast` 頁面已在commit `1dd1eec`（整理舊頁面重構）中刪除，程式碼不存在，此段原內容已過時。MP3音檔仍在Vercel Blob，頁面沒了。
 
-### 角色聊天（2026-03 新增）
-- API：`src/app/api/chat/route.ts`（Groq llama-3.3-70b-versatile，max_tokens 200，temperature 0.85）
-- 角色清單（route.ts 的 CHARACTERS 物件）：
-  - `lulu` 🐱：來自《Lulu的日記》→ `/chat/lulu`，紫色主題，溫柔細膩
-  - `signal` 📡：來自《最後的信號》→ `/chat/signal`，藍色主題，廢土滄桑感
-- 入口位置：首頁探索卡片 + 各小說頁面按鈕
-- 新本小說上線 → CHARACTERS 加一筆 + 新建對應頁面
-- 小說正確路徑：`/novels/lulu-diary`、`/novels/the-last-signal`
+### ⚠️ 角色聊天（2026-03新增，2026-06-09重構受影響，2026-09-05修復+重新盤點）
+- API：`src/app/api/chat/route.ts` 仍存在且可用
+- `/chat/lulu`：正確位置的檔案曾在2026-06-09被刪，但有一份誤放在`src/app/api/chat/lulu/page.tsx`的重複檔案存活下來（Next.js照樣渲染，只是URL變成沒人知道的`/api/chat/lulu`）。2026-09-05已搬回正確路徑`src/app/chat/lulu/page.tsx`，並修正頁內連到不存在`/novels/lulu`的按鈕，改為正確的`/novels/lulu-diary`
+- `/chat/signal`：2026-06-09真的刪除，沒有備份，要用需重寫
+- **入口仍是缺口**：`src/components/CoffeeCorner.js`是寫好的「和默默聊聊/和林悅說說話」進入按鈕元件，但沒有任何頁面import它，Navbar也一直沒接（見下方待做清單早就列著），所以就算`/chat/lulu`修好了，現在網站上還是沒人點得進去
 
 ### 待做（聊天功能）
+- [ ] 決定要不要把`CoffeeCorner`重新接回某頁面（例如`/feeling`），或整條功能線判定不值得維護
+- [ ] 若要保留，`/chat/signal`需要重寫（原檔已不可考）
 - [ ] 對話記憶（localStorage，重新整理不忘記）
 - [ ] 引流優化（聊幾句後自動出現前往小舖提示）
-- [ ] Navbar 加聊天入口
-
-### 關鍵檔案（角色聊天）
-- `src/app/api/chat/route.ts` - 聊天 API，含所有角色 system prompt
-- `src/app/chat/lulu/page.tsx` - Lulu 聊天頁面
-- `src/app/chat/signal/page.tsx` - 林悅聊天頁面
 
 ### 二手市集（/secondhand）（2026-03 新增）
 - 商業模式：

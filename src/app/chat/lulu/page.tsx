@@ -72,7 +72,7 @@ export default function LuluChatPage() {
           <div style={{ color: '#a78bfa', fontSize: '0.75rem' }}>一隻記住你每句話的 AI</div>
         </div>
         <div style={{ marginLeft: 'auto' }}>
-          <a href="/novels/lulu" style={{
+          <a href="/novels/lulu-diary" style={{
             background: 'rgba(124,58,237,0.25)',
             border: '1px solid rgba(167,139,250,0.35)',
             color: '#e9d5ff', padding: '0.4rem 1rem', borderRadius: '20px',

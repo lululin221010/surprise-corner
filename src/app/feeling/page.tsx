@@ -303,7 +303,10 @@ export default function FeelingPage() {
         <section id="tf-series" style={{ marginTop:38 }}>
           <div style={{ marginBottom:16 }}>
             <p style={{ margin:'0 0 3px', fontSize:'0.68rem', letterSpacing:'0.35em', color:'#b08040', fontWeight:700 }}>■ 那個感覺 系列</p>
-            <p style={{ margin:0, color:'#8a6030', fontSize:'0.82rem' }}>6 大系列 · 36 冊，點系列標題展開，點書名直接進入</p>
+            <p style={{ margin:'0 0 8px', color:'#8a6030', fontSize:'0.82rem' }}>6 大系列 · 36 冊，點系列標題展開，點書名直接進入</p>
+            <a href="/daodu.html" style={{ display:'inline-block', fontSize:'0.76rem', color:'#7c3aed', background:'rgba(124,58,237,0.08)', border:'1px solid rgba(124,58,237,0.25)', borderRadius:14, padding:'4px 12px', textDecoration:'none', fontWeight:600 }}>
+              📖 還沒決定從哪本開始？先看六大世界導讀 →
+            </a>
           </div>
 
           {[1,2,3,4,5,6].map(sid => {
