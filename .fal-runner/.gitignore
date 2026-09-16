@@ -1,6 +1,0 @@
-node_modules/
-.npm-cache/
-output/
-*.mp4
-*_result_*.txt
-!pipeline_smoke_test_result.txt
