@@ -15,23 +15,28 @@ const IG_GRAPH = 'https://graph.instagram.com/v21.0';
 const LOOKBACK_DAYS = 14; // 只看最近兩週發的貼文
 const IG_REFRESH_DAYS = 7;
 
-type Found = { id: string; platform: 'FB' | 'IG'; postText: string; text: string; who: string; at: string; link: string };
+type Found = { id: string; platform: 'FB' | 'IG' | 'Threads'; postText: string; text: string; who: string; at: string; link: string };
 
-async function getIgToken(db: any): Promise<string | null> {
+// IG / Threads 長效 token 約 60 天，存在 socialTokens，超過7天自動換新；首次用 env
+const REFRESH = {
+  ig: { env: 'IG_ACCESS_TOKEN', url: (t: string) => `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${t}` },
+  threads: { env: 'THREADS_ACCESS_TOKEN', url: (t: string) => `https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=${t}` },
+};
+async function getToken(db: any, key: 'ig' | 'threads'): Promise<string | null> {
   const col = db.collection('socialTokens');
-  const doc = await col.findOne({ _id: 'ig' } as any);
-  let token: string | undefined = doc?.token || process.env.IG_ACCESS_TOKEN;
+  const doc = await col.findOne({ _id: key } as any);
+  let token: string | undefined = doc?.token || process.env[REFRESH[key].env];
   if (!token) return null;
   const last = doc?.refreshedAt ? new Date(doc.refreshedAt).getTime() : 0;
   if (Date.now() - last > IG_REFRESH_DAYS * 86400000) {
-    const r = await fetch(`https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${token}`, { cache: 'no-store' });
+    const r = await fetch(REFRESH[key].url(token), { cache: 'no-store' });
     const j = await r.json().catch(() => ({}));
     if (j.access_token) {
       token = j.access_token;
-      await col.updateOne({ _id: 'ig' } as any, { $set: { token, refreshedAt: new Date(), expiresIn: j.expires_in } }, { upsert: true });
+      await col.updateOne({ _id: key } as any, { $set: { token, refreshedAt: new Date(), expiresIn: j.expires_in } }, { upsert: true });
     } else if (!doc) {
       // 新發的 token 24 小時內不能 refresh，先記下來，下次再換
-      await col.updateOne({ _id: 'ig' } as any, { $set: { token, refreshedAt: new Date(0) } }, { upsert: true });
+      await col.updateOne({ _id: key } as any, { $set: { token, refreshedAt: new Date(0) } }, { upsert: true });
     }
   }
   return token || null;
@@ -74,7 +79,7 @@ export async function GET(request: Request) {
 
   // --- IG ---
   try {
-    const igToken = await getIgToken(db);
+    const igToken = await getToken(db, 'ig');
     if (igToken) {
       const me = await (await fetch(`${IG_GRAPH}/me?fields=username&access_token=${igToken}`, { cache: 'no-store' })).json();
       const fields = 'timestamp,caption,permalink,comments.limit(50){id,text,username,timestamp,replies{id,text,username,timestamp}}';
@@ -92,6 +97,28 @@ export async function GET(request: Request) {
     }
   } catch (e: any) {
     errors.push(`IG: ${e.message}`);
+  }
+
+  // --- Threads ---
+  try {
+    const thToken = await getToken(db, 'threads');
+    if (thToken) {
+      const TH = 'https://graph.threads.net/v1.0';
+      const me = await (await fetch(`${TH}/me?fields=username&access_token=${thToken}`, { cache: 'no-store' })).json();
+      const res = await fetch(`${TH}/me/threads?fields=id,timestamp,text,permalink&since=${since}&limit=30&access_token=${thToken}`, { cache: 'no-store' });
+      const data = await res.json();
+      if (!res.ok || data.error) errors.push(`Threads: ${data.error?.message || res.status}`);
+      for (const p of data.data || []) {
+        if (new Date(p.timestamp).getTime() < sinceMs) continue;
+        const r = await (await fetch(`${TH}/${p.id}/conversation?fields=id,text,username,timestamp,permalink&access_token=${thToken}`, { cache: 'no-store' })).json();
+        for (const c of r.data || []) {
+          if (me.username && c.username === me.username) continue; // 自己的回覆不算
+          found.push({ id: `th_${c.id}`, platform: 'Threads', postText: p.text || '', text: c.text || '(圖片或貼圖)', who: c.username ? `@${c.username}` : '（名字未提供）', at: c.timestamp, link: c.permalink || p.permalink || '' });
+        }
+      }
+    }
+  } catch (e: any) {
+    errors.push(`Threads: ${e.message}`);
   }
 
   const col = db.collection('fbCommentsSeen');
