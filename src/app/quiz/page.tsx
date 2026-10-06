@@ -149,6 +149,40 @@ export default function QuizListPage() {
           </p>
         </div>
 
+        {/* 魯魯測驗大卡片 */}
+        <Link href="/quiz/which-lulu" style={{ textDecoration: 'none', display: 'block', marginBottom: '1.5rem' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #fff8ee 0%, #ffe3d1 100%)',
+            borderRadius: '22px', overflow: 'hidden',
+            boxShadow: '0 10px 32px rgba(240,138,93,0.3)',
+            display: 'flex', flexWrap: 'wrap', alignItems: 'stretch',
+            transition: 'transform 0.2s',
+          }}
+            onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
+            onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/quiz/which-lulu/zoomies.jpg" alt="魯魯" style={{ width: '100%', maxWidth: '300px', flex: '1 1 220px', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }} />
+            <div style={{ flex: '1 1 260px', padding: '1.6rem 1.6rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ fontSize: '0.68rem', color: '#f08a5d', fontWeight: 800, letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
+                新 · 30 秒就能測完
+              </div>
+              <h2 style={{ color: '#4a3428', fontWeight: 900, fontSize: '1.35rem', margin: '0 0 0.5rem', lineHeight: 1.3 }}>
+                你今天是哪隻魯魯？
+              </h2>
+              <p style={{ color: '#7a5f4d', fontSize: '0.9rem', lineHeight: 1.7, margin: '0 0 1rem' }}>
+                魯魯有 6 種今天：曬到光就不動、半夜跑酷、叫名字假裝沒聽到……你是哪一隻？
+              </p>
+              <span style={{
+                alignSelf: 'flex-start', background: '#f08a5d', color: '#fff',
+                borderRadius: '30px', padding: '0.55rem 1.6rem', fontSize: '0.9rem', fontWeight: 800,
+              }}>
+                我是哪一隻 →
+              </span>
+            </div>
+          </div>
+        </Link>
+
         {/* 引導測驗入口 */}
         <Link href="/quiz/intro" style={{ textDecoration: 'none', display: 'block', marginBottom: '2.5rem' }}>
           <div style={{
