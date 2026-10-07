@@ -38,6 +38,37 @@ const POSITIONS = [
   { key: 'tile',          label: '平鋪' },
 ];
 
+// 把 JPEG 位元組包成單頁 PDF（不依賴外部套件）
+function buildPdf(jpeg: Uint8Array, w: number, h: number): Blob {
+  const scale = Math.min(595 / w, 842 / h);
+  const pw = (w * scale).toFixed(2);
+  const ph = (h * scale).toFixed(2);
+  const enc = new TextEncoder();
+  const content = `q ${pw} 0 0 ${ph} 0 0 cm /Im0 Do Q`;
+  const chunks: Uint8Array[] = [];
+  const offsets: number[] = [];
+  let len = 0;
+  const push = (d: Uint8Array | string) => {
+    const b = typeof d === 'string' ? enc.encode(d) : d;
+    chunks.push(b); len += b.length;
+  };
+  push('%PDF-1.4\n');
+  const obj = (n: number, body: string) => { offsets[n] = len; push(`${n} 0 obj\n${body}\nendobj\n`); };
+  obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  obj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+  obj(3, `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pw} ${ph}] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>`);
+  obj(4, `<< /Length ${content.length} >>\nstream\n${content}\nendstream`);
+  offsets[5] = len;
+  push(`5 0 obj\n<< /Type /XObject /Subtype /Image /Width ${w} /Height ${h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>\nstream\n`);
+  push(jpeg);
+  push('\nendstream\nendobj\n');
+  const xref = len;
+  let x = 'xref\n0 6\n0000000000 65535 f \n';
+  for (let i = 1; i <= 5; i++) x += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
+  push(x + `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`);
+  return new Blob(chunks as BlobPart[], { type: 'application/pdf' });
+}
+
 export default function WatermarkPage() {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
@@ -45,6 +76,8 @@ export default function WatermarkPage() {
   const [position, setPosition] = useState('bottom-right');
   const [opacity, setOpacity] = useState(60);
   const [fontSize, setFontSize] = useState(32);
+  const [spacing, setSpacing] = useState(100);
+  const [imgW, setImgW] = useState(0);
   const [color, setColor] = useState('#ffd700');
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [imgInfo, setImgInfo] = useState('');
@@ -63,6 +96,8 @@ export default function WatermarkPage() {
       imgRef.current = img;
       setImgSrc(url);
       setImgInfo(`${img.naturalWidth} × ${img.naturalHeight} px`);
+      setImgW(img.naturalWidth);
+      setFontSize(Math.max(16, Math.round(img.naturalWidth * 0.04))); // 依圖片寬度給預設大小
       setResultUrl(null);
       setInputKey(k => k + 1);
       setLoadMsg(`✅ 已載入：${f.name}`);
@@ -92,13 +127,16 @@ export default function WatermarkPage() {
     const H = canvas.height;
 
     if (position === 'tile') {
-      const stepX = tw + fontSize * 4;
-      const stepY = fontSize * 3;
+      const k = spacing / 100;
+      const stepX = tw + fontSize * 4 * k;
+      const stepY = fontSize * 3 * k;
       ctx.save();
       ctx.rotate(-Math.PI / 6);
-      for (let y = -H; y < H * 2; y += stepY) {
+      let row = 0;
+      for (let y = -H; y < H * 2; y += stepY, row++) {
+        const off = row % 2 ? stepX / 2 : 0; // 隔行錯開，較均勻
         for (let x = -W; x < W * 2; x += stepX) {
-          ctx.fillText(text, x, y);
+          ctx.fillText(text, x + off, y);
         }
       }
       ctx.restore();
@@ -123,21 +161,48 @@ export default function WatermarkPage() {
       const pCtx = prev.getContext('2d')!;
       pCtx.drawImage(canvas, 0, 0, prev.width, prev.height);
     }
-  }, [text, position, opacity, fontSize, color]);
+  }, [text, position, opacity, fontSize, color, spacing]);
 
   useEffect(() => {
     if (imgRef.current) drawWatermark();
   }, [drawWatermark, imgSrc]);
 
-  function handleDownload() {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const url = canvas.toDataURL('image/png');
-    setResultUrl(url);
+  function saveBlob(blob: Blob, filename: string) {
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'watermarked.png';
+    a.download = filename;
+    document.body.appendChild(a);
     a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  }
+
+  function handleDownload(kind: 'png' | 'jpg' | 'pdf') {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    // 同時顯示結果圖，手機/內建瀏覽器擋下載時可長按圖片儲存
+    setResultUrl(canvas.toDataURL('image/jpeg', 0.95));
+    if (kind === 'png') {
+      canvas.toBlob(b => b && saveBlob(b, 'watermarked.png'), 'image/png');
+    } else if (kind === 'jpg') {
+      canvas.toBlob(b => b && saveBlob(b, 'watermarked.jpg'), 'image/jpeg', 0.95);
+    } else {
+      canvas.toBlob(async b => {
+        if (!b) return;
+        const bytes = new Uint8Array(await b.arrayBuffer());
+        saveBlob(buildPdf(bytes, canvas.width, canvas.height), 'watermarked.pdf');
+      }, 'image/jpeg', 0.95);
+    }
+  }
+
+  function applyIdPreset() {
+    setText('僅供申請外勞使用');
+    setPosition('tile');
+    setColor('#dc1414');
+    setOpacity(55);
+    setSpacing(150);
+    if (imgW) setFontSize(Math.round(imgW * 0.05));
   }
 
   return (
@@ -190,6 +255,11 @@ export default function WatermarkPage() {
               <input value={text} onChange={e => setText(e.target.value)}
                 placeholder="輸入浮水印文字..." style={{ ...inputStyle, marginBottom: '1rem' }} />
 
+              <button onClick={applyIdPreset}
+                style={{ background: 'rgba(124,58,237,0.25)', color: '#e9d5ff', border: '1px solid #7c3aed', borderRadius: '10px', padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.85rem', marginBottom: '1rem' }}>
+                🪪 證件用範本（紅字・平鋪・較淡）
+              </button>
+
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                 {/* 位置 */}
                 <div>
@@ -233,16 +303,29 @@ export default function WatermarkPage() {
               </div>
 
               {/* 字體大小 */}
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ marginBottom: '1rem' }}>
                 <label style={labelStyle}>字體大小　<span style={{ color: '#f3f4f6' }}>{fontSize}px</span></label>
-                <input type="range" min={12} max={120} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
+                <input type="range" min={12} max={Math.max(120, Math.round(imgW * 0.15))} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
                   style={{ width: '100%', accentColor: '#7c3aed' }} />
               </div>
 
-              <button onClick={handleDownload} disabled={!text.trim()}
-                style={{ ...btnPrimary, width: '100%', fontSize: '1rem', padding: '0.8rem', opacity: !text.trim() ? 0.5 : 1 }}>
-                ⬇️ 下載結果圖片
-              </button>
+              {/* 疏密（平鋪時有效） */}
+              {position === 'tile' && (
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={labelStyle}>疏密（越大越疏）　<span style={{ color: '#f3f4f6' }}>{spacing}%</span></label>
+                  <input type="range" min={50} max={400} value={spacing} onChange={e => setSpacing(Number(e.target.value))}
+                    style={{ width: '100%', accentColor: '#7c3aed' }} />
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                {([['jpg', '⬇️ 下載 JPG'], ['png', '⬇️ PNG'], ['pdf', '📄 下載 PDF']] as const).map(([k, label], i) => (
+                  <button key={k} onClick={() => handleDownload(k)} disabled={!text.trim()}
+                    style={{ ...btnPrimary, flex: i === 0 ? 2 : 1, fontSize: '1rem', padding: '0.8rem', opacity: !text.trim() ? 0.5 : 1 }}>
+                    {label}
+                  </button>
+                ))}
+              </div>
             </>
           )}
         </div>
@@ -253,6 +336,16 @@ export default function WatermarkPage() {
             <h2 style={{ color: '#e9d5ff', margin: '0 0 1rem', fontSize: '1rem' }}>👁 即時預覽</h2>
             <canvas ref={previewCanvasRef}
               style={{ width: '100%', borderRadius: '10px', display: 'block', border: '1px solid rgba(167,139,250,0.2)' }} />
+          </div>
+        )}
+
+        {/* 結果圖：下載被擋時可長按/右鍵另存 */}
+        {resultUrl && (
+          <div style={{ ...cardStyle, marginTop: '1.5rem' }}>
+            <h2 style={{ color: '#e9d5ff', margin: '0 0 0.5rem', fontSize: '1rem' }}>💾 結果圖</h2>
+            <p style={{ color: '#a78bfa', fontSize: '0.8rem', margin: '0 0 0.8rem' }}>若沒有自動下載，請在圖片上長按（手機）或按右鍵（電腦）選「儲存圖片」，存的是完整解析度。</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={resultUrl} alt="浮水印結果" style={{ width: '100%', borderRadius: '10px', display: 'block' }} />
           </div>
         )}
 
