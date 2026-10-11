@@ -7,13 +7,14 @@ export const metadata: Metadata = {
   keywords: ['注意力測試', '選擇性注意力', '注意力實驗', '你剛剛有看到嗎', '注意力小遊戲', '視覺注意力', '免費小實驗'],
   openGraph: {
     title: '你剛剛有看到嗎？',
-    description: '我明明一直盯著螢幕，結果……算了，你自己試。',
-    images: [{ url: '/og-default.png', width: 1200, height: 630 }],
+    description: '測測你的專注力，你數得出來嗎？免費、約 30 秒。',
+    images: [{ url: '/lab/attention/og.png', width: 1200, height: 630, alt: '你剛剛有看到嗎？專注力小遊戲' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '你剛剛有看到嗎？',
-    description: '我明明一直盯著螢幕，結果……算了，你自己試。',
+    description: '測測你的專注力，你數得出來嗎？免費、約 30 秒。',
+    images: ['/lab/attention/og.png'],
   },
 };
 
