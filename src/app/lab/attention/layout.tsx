@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '你剛剛有看到嗎？',
-  description: '一個一分鐘的小實驗：盯住任務的時候，畫面裡還發生了另一件事。免登入、免費玩。',
+  description: '一分鐘的專注力小遊戲：盯住畫面、數一個數字，看你有沒有漏掉什麼。免登入、免費玩。',
   // 覆蓋全站預設的心理測驗／命理關鍵字，讓這頁的搜尋描述跟內容對得上
   keywords: ['注意力測試', '選擇性注意力', '注意力實驗', '你剛剛有看到嗎', '注意力小遊戲', '視覺注意力', '免費小實驗'],
   openGraph: {

@@ -24,22 +24,50 @@ const CAT_T1 = CAT_T0 + CLIP_SEC;   // 魯魯離場時間（秒）
 const CAT_Y = 0.9;          // 腳底落在舞台高度的位置（0～1），可調
 
 // 回合一：5 個圓點，前兩顆是目標（座標 y 用「以舞台寬為 1」的單位）
-const R1_DOTS: P[] = [
-  { cx: 0.3842, ax: 0.1871, wx: 0.5067, px: 1.5653, cy: 0.3652, ay: 0.1623, wy: 0.529, py: 2.0238 },
-  { cx: 0.3989, ax: 0.1665, wx: 0.6745, px: 0.0313, cy: 0.4146, ay: 0.2332, wy: 0.8323, py: 3.0468 },
-  { cx: 0.5784, ax: 0.17, wx: 0.8116, px: 5.2943, cy: 0.4459, ay: 0.1494, wy: 0.6363, py: 0.6228 },
-  { cx: 0.4139, ax: 0.1754, wx: 0.3861, px: 3.8503, cy: 0.3361, ay: 0.1625, wy: 0.4276, py: 1.9666 },
-  { cx: 0.5501, ax: 0.2163, wx: 0.7906, px: 4.6687, cy: 0.4163, ay: 0.1591, wy: 0.7648, py: 3.338 },
+// 多個預先編排好的版本，每次遊玩隨機挑一個，答案不會永遠是同一個數字（正確答案由軌跡算出）
+const R1_VARIANTS: P[][] = [
+  [   // 碰 3 次
+    { cx: 0.3842, ax: 0.1871, wx: 0.5067, px: 1.5653, cy: 0.3652, ay: 0.1623, wy: 0.529, py: 2.0238 },
+    { cx: 0.3989, ax: 0.1665, wx: 0.6745, px: 0.0313, cy: 0.4146, ay: 0.2332, wy: 0.8323, py: 3.0468 },
+    { cx: 0.5784, ax: 0.17, wx: 0.8116, px: 5.2943, cy: 0.4459, ay: 0.1494, wy: 0.6363, py: 0.6228 },
+    { cx: 0.4139, ax: 0.1754, wx: 0.3861, px: 3.8503, cy: 0.3361, ay: 0.1625, wy: 0.4276, py: 1.9666 },
+    { cx: 0.5501, ax: 0.2163, wx: 0.7906, px: 4.6687, cy: 0.4163, ay: 0.1591, wy: 0.7648, py: 3.338 },
+  ],
+  [   // 碰 2 次（目標與干擾圓點重疊也較少）
+    { cx: 0.41, ax: 0.3271, wx: 0.4982, px: 1.4774, cy: 0.288, ay: 0.1873, wy: 0.5287, py: 3.7657 },
+    { cx: 0.3343, ax: 0.308, wx: 0.4543, px: 3.6474, cy: 0.3664, ay: 0.114, wy: 0.4731, py: 4.9629 },
+    { cx: 0.6733, ax: 0.2069, wx: 0.752, px: 0.5564, cy: 0.3936, ay: 0.112, wy: 0.4188, py: 2.3196 },
+    { cx: 0.6858, ax: 0.23, wx: 0.3638, px: 4.0909, cy: 0.3344, ay: 0.1159, wy: 0.556, py: 5.9091 },
+    { cx: 0.6597, ax: 0.1686, wx: 0.7553, px: 5.5526, cy: 0.4506, ay: 0.1128, wy: 0.8265, py: 0.2128 },
+  ],
 ];
 
 // 回合二：6 個圖形，前三個是目標；y 用「以舞台高為 1」的單位
-const R2_SHAPES: P[] = [
-  { cx: 0.4519, ax: 0.2775, wx: 0.4503, px: 4.3706, cy: 0.3051, ay: 0.0615, wy: 0.7094, py: 1.4998 },
-  { cx: 0.5009, ax: 0.1532, wx: 0.5571, px: 0.4607, cy: 0.5242, ay: 0.0454, wy: 0.3803, py: 5.9957 },
-  { cx: 0.5271, ax: 0.16, wx: 0.3639, px: 0.2473, cy: 0.7434, ay: 0.0611, wy: 0.6764, py: 4.8619 },
-  { cx: 0.4356, ax: 0.2399, wx: 0.4793, px: 3.1426, cy: 0.2893, ay: 0.0663, wy: 0.3623, py: 5.4065 },
-  { cx: 0.4754, ax: 0.3013, wx: 0.7498, px: 3.2116, cy: 0.5311, ay: 0.0828, wy: 0.6246, py: 1.9329 },
-  { cx: 0.4687, ax: 0.1629, wx: 0.4551, px: 6.2792, cy: 0.7441, ay: 0.0582, wy: 0.324, py: 2.778 },
+const R2_VARIANTS: P[][] = [
+  [   // 共穿過 5 次
+    { cx: 0.4519, ax: 0.2775, wx: 0.4503, px: 4.3706, cy: 0.3051, ay: 0.0615, wy: 0.7094, py: 1.4998 },
+    { cx: 0.5009, ax: 0.1532, wx: 0.5571, px: 0.4607, cy: 0.5242, ay: 0.0454, wy: 0.3803, py: 5.9957 },
+    { cx: 0.5271, ax: 0.16, wx: 0.3639, px: 0.2473, cy: 0.7434, ay: 0.0611, wy: 0.6764, py: 4.8619 },
+    { cx: 0.4356, ax: 0.2399, wx: 0.4793, px: 3.1426, cy: 0.2893, ay: 0.0663, wy: 0.3623, py: 5.4065 },
+    { cx: 0.4754, ax: 0.3013, wx: 0.7498, px: 3.2116, cy: 0.5311, ay: 0.0828, wy: 0.6246, py: 1.9329 },
+    { cx: 0.4687, ax: 0.1629, wx: 0.4551, px: 6.2792, cy: 0.7441, ay: 0.0582, wy: 0.324, py: 2.778 },
+  ],
+  [   // 共穿過 4 次
+    { cx: 0.4855, ax: 0.3533, wx: 0.3265, px: 2.8104, cy: 0.2718, ay: 0.0619, wy: 0.6424, py: 3.3363 },
+    { cx: 0.4765, ax: 0.2727, wx: 0.3726, px: 0.3428, cy: 0.4902, ay: 0.072, wy: 0.4577, py: 1.9336 },
+    { cx: 0.5637, ax: 0.161, wx: 0.3255, px: 4.4262, cy: 0.7358, ay: 0.0443, wy: 0.6408, py: 2.9034 },
+    { cx: 0.5146, ax: 0.2699, wx: 0.5153, px: 3.2747, cy: 0.3121, ay: 0.041, wy: 0.6159, py: 5.0751 },
+    { cx: 0.5654, ax: 0.3269, wx: 0.387, px: 1.5903, cy: 0.5458, ay: 0.0702, wy: 0.5457, py: 6.2083 },
+    { cx: 0.5549, ax: 0.1696, wx: 0.5157, px: 4.4981, cy: 0.7156, ay: 0.0356, wy: 0.3361, py: 1.6119 },
+  ],
+  [   // 共穿過 6 次
+    { cx: 0.5308, ax: 0.1485, wx: 0.5281, px: 0.4705, cy: 0.3158, ay: 0.0637, wy: 0.5434, py: 1.0161 },
+    { cx: 0.4669, ax: 0.2616, wx: 0.3975, px: 0.525, cy: 0.5328, ay: 0.0634, wy: 0.6969, py: 5.525 },
+    { cx: 0.4753, ax: 0.2919, wx: 0.4434, px: 4.221, cy: 0.7416, ay: 0.0882, wy: 0.57, py: 0.0729 },
+    { cx: 0.5528, ax: 0.2083, wx: 0.7684, px: 4.8316, cy: 0.2952, ay: 0.08, wy: 0.3772, py: 2.3106 },
+    { cx: 0.5312, ax: 0.1403, wx: 0.3042, px: 3.0038, cy: 0.5418, ay: 0.0722, wy: 0.641, py: 4.938 },
+    { cx: 0.5118, ax: 0.268, wx: 0.3355, px: 2.338, cy: 0.7419, ay: 0.0887, wy: 0.5065, py: 2.9137 },
+  ],
 ];
 
 const posOf = (p: P, t: number): [number, number] => [
@@ -48,23 +76,23 @@ const posOf = (p: P, t: number): [number, number] => [
 ];
 
 // 正確答案由軌跡本身算出來，畫面看到什麼、答案就是什麼
-function countR1(): number {
+function countR1(dots: P[]): number {
   let on = false;
   let c = 0;
   for (let i = 0; i <= R1_SEC * 60; i++) {
     const t = i / 60;
-    const a = posOf(R1_DOTS[0], t);
-    const b = posOf(R1_DOTS[1], t);
+    const a = posOf(dots[0], t);
+    const b = posOf(dots[1], t);
     const d = Math.hypot(a[0] - b[0], a[1] - b[1]);
     if (!on && d < 2 * R) { on = true; c++; }
     else if (on && d > 2 * R + 0.01) on = false;
   }
   return c;
 }
-function countR2(): number {
+function countR2(shapes: P[]): number {
   let total = 0;
   for (let k = 0; k < 3; k++) {
-    const p = R2_SHAPES[k];
+    const p = shapes[k];
     let prev = Math.sign(posOf(p, 0)[0] - 0.5);
     for (let i = 1; i <= R2_SEC * 60; i++) {
       const s = Math.sign(posOf(p, i / 60)[0] - 0.5);
@@ -73,8 +101,8 @@ function countR2(): number {
   }
   return total;
 }
-const R1_ANSWER = countR1();
-const R2_ANSWER = countR2();
+const R1_ANSWERS = R1_VARIANTS.map(countR1);
+const R2_ANSWERS = R2_VARIANTS.map(countR2);
 
 /* ───────────── 埋點 ───────────── */
 declare global {
@@ -130,7 +158,7 @@ function drawShape(ctx: CanvasRenderingContext2D, kind: number, x: number, y: nu
   ctx.fill();
 }
 
-function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1 | 2, t: number) {
+function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1 | 2, t: number, set: P[]) {
   ctx.clearRect(0, 0, W, H);
   const g = ctx.createLinearGradient(0, 0, 0, H);
   g.addColorStop(0, '#222a43'); g.addColorStop(1, '#141a2c');
@@ -139,7 +167,7 @@ function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1
   const pulse = 0.5 + 0.5 * Math.sin(t * 8);
 
   if (round === 1) {
-    R1_DOTS.forEach((p, i) => {
+    set.forEach((p, i) => {
       const [x, y] = posOf(p, t);
       const px = x * W, py = y * W;
       ctx.beginPath(); ctx.fillStyle = '#e9edf7'; ctx.arc(px, py, R * W, 0, Math.PI * 2); ctx.fill();
@@ -152,7 +180,7 @@ function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1
     drawWindow(ctx, W, H, t);
     ctx.setLineDash([6, 8]); ctx.strokeStyle = 'rgba(255,255,255,0.28)'; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(W / 2, H * 0.22); ctx.lineTo(W / 2, H); ctx.stroke(); ctx.setLineDash([]);
-    R2_SHAPES.forEach((p, i) => {
+    set.forEach((p, i) => {
       const [x, y] = posOf(p, t);
       const px = x * W, py = y * H, s = 0.045 * W;
       ctx.fillStyle = '#e9edf7';
@@ -208,8 +236,9 @@ const btnMain = `${btn} bg-amber-400 text-slate-900 hover:bg-amber-300`;
 const btnSub = `${btn} bg-white/10 text-white hover:bg-white/20 border border-white/15`;
 const card = 'rounded-2xl border border-white/10 bg-white/5 p-5 text-white';
 
-function numberOptions(answer: number, count: number): number[] {
-  const start = Math.max(0, answer - Math.floor(count / 2));
+// 連續 count 個數字，正確答案落在其中的哪一格由 offset 決定（隨機），避免永遠擺在正中間
+function numberOptions(answer: number, count: number, offset: number): number[] {
+  const start = Math.max(0, answer - Math.min(offset, count - 1));
   return Array.from({ length: count }, (_, i) => start + i);
 }
 
@@ -268,6 +297,13 @@ export default function AttentionPage() {
   const [r2Seen, setR2Seen] = useState<string | null>(null);
   const [skippedR2, setSkippedR2] = useState(false);
   const [cd, setCd] = useState<number | null>(null);   // 開始前倒數
+  // 每次遊玩隨機挑軌跡版本與選項位置（初始值固定，掛載後才隨機，避免伺服器與瀏覽器畫面不一致）
+  const [r1v, setR1v] = useState(0);
+  const [r2v, setR2v] = useState(0);
+  const [r1off, setR1off] = useState(2);
+  const [r2off, setR2off] = useState(2);
+  const r1Answer = R1_ANSWERS[r1v];
+  const r2Answer = R2_ANSWERS[r2v];
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const catCanvasRef = useRef<HTMLCanvasElement>(null);   // 魯魯影片（去綠幕後逐格畫在這裡）
@@ -283,6 +319,19 @@ export default function AttentionPage() {
     if (firedRef.current.has(key)) return;
     firedRef.current.add(key);
     track(name, params);
+  }, []);
+
+  // 隨機挑版本與選項位置；avoidR1 給「再數一次」用，確保換成不同的軌跡
+  const reshuffle = useCallback((avoidR1: number | null = null) => {
+    const randInt = (n: number) => Math.floor(Math.random() * n);
+    let v = randInt(R1_VARIANTS.length);
+    if (avoidR1 !== null && R1_VARIANTS.length > 1) {
+      while (v === avoidR1) v = randInt(R1_VARIANTS.length);
+    }
+    setR1v(v);
+    setR1off(randInt(5));
+    setR2v(randInt(R2_VARIANTS.length));
+    setR2off(randInt(5));
   }, []);
 
   // 排除自己人：網址帶 ?internal=1 之後這台裝置不再送事件，?internal=0 解除
@@ -311,11 +360,11 @@ export default function AttentionPage() {
     const id = setTimeout(() => {
       if (cd > 1) { setCd(cd - 1); return; }
       setCd(null);
-      if (phase === 'r1-brief') { setPhase('r1-run'); fireOnce('start', 'attn_start', { round: 1 }); }
+      if (phase === 'r1-brief') { setPhase('r1-run'); fireOnce('start', 'attn_start', { round: 1, variant: r1v }); }
       else if (phase === 'r2-brief') setPhase('r2-run');
     }, 1000);
     return () => clearTimeout(id);
-  }, [cd, phase, fireOnce]);
+  }, [cd, phase, fireOnce, r1v]);
 
   // 動畫迴圈
   useEffect(() => {
@@ -345,7 +394,7 @@ export default function AttentionPage() {
         setPhase(round === 1 ? 'r1-count' : 'r2-count');
         return;
       }
-      drawScene(ctx, stageW, stageH, round, t);
+      drawScene(ctx, stageW, stageH, round, t, round === 1 ? R1_VARIANTS[r1v] : R2_VARIANTS[r2v]);
 
       // 魯魯：影片時間 = 舞台時間 - 進場時間；影片「彩色在上、透明度在下」，逐格合成
       const catCv = catCanvasRef.current;
@@ -404,7 +453,7 @@ export default function AttentionPage() {
     };
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [running, frozen, phase, stageW, stageH]);
+  }, [running, frozen, phase, stageW, stageH, r1v, r2v]);
 
   // 在使用者按下按鈕的當下先「解鎖」影片播放（iOS Safari 要求第一次播放來自使用者操作）
   const unlockVideo = () => {
@@ -422,7 +471,8 @@ export default function AttentionPage() {
     const seen = s === 'yes';
     fireOnce('r1_answer', 'attn_r1_answer', {
       round: 1,
-      primary_correct: r1Count === R1_ANSWER,
+      primary_correct: r1Count === r1Answer,
+      variant: r1v,
       unexpected_seen: seen,
       unexpected_choice: s,
       cat_unavailable: catFailedRef.current,   // true＝這個人的裝置沒播出魯魯，分析時要排除
@@ -442,6 +492,7 @@ export default function AttentionPage() {
   const retryR1 = () => {
     setR1Count(null);
     setR1Seen(null);
+    reshuffle(r1v);   // 換一個不同的軌跡，答案也跟著不同，不能靠記憶
     setPhase('r1-brief');
   };
 
@@ -451,7 +502,8 @@ export default function AttentionPage() {
     setR2Seen(id);
     fireOnce('r2_answer', 'attn_r2_answer', {
       round: 2,
-      primary_correct: r2Count === R2_ANSWER,
+      primary_correct: r2Count === r2Answer,
+      variant: r2v,
       unexpected_seen: id === 'dusk',
       unexpected_choice: id,
     });
@@ -480,8 +532,8 @@ export default function AttentionPage() {
   /* ── 結果文字（只描述實際發生的事，不給能力標籤） ── */
   const seen1 = r1Seen === 'yes';
   const seen2 = r2Seen === 'dusk';
-  const ok1 = r1Count === R1_ANSWER;
-  const ok2 = r2Count === R2_ANSWER;
+  const ok1 = r1Count === r1Answer;
+  const ok2 = r2Count === r2Answer;
   let headline = '';
   if (skippedR2) headline = seen1 ? '第一次我就抓到魯魯了。' : '第一次我盯著圓點，魯魯從旁邊走過去了。';
   else if (!seen1 && seen2) headline = '第一次我漏掉魯魯。第二次，我開始防你了。';
@@ -521,7 +573,7 @@ export default function AttentionPage() {
       <div className="mx-auto flex flex-col" style={{ maxWidth: 440 }}>
         <div className="mb-3 flex items-center justify-between text-sm text-white/60" style={{ order: -2 }}>
           <Link href="/tools" className="hover:text-white">← 工具</Link>
-          <span>小實驗 · 約 1 分鐘</span>
+          <span>專注力小遊戲 · 約 1 分鐘</span>
         </div>
 
         {/* 舞台：只在播放與回放時出現，問答時隱藏，避免對著停格畫面數。
@@ -587,13 +639,9 @@ export default function AttentionPage() {
 
         {phase === 'intro' && (
           <section className={card}>
-            <h1 className="mb-2 text-2xl font-bold">你剛剛有看到嗎？</h1>
-            <p className="mb-4 leading-relaxed text-white/80">
-              一個一分鐘的小實驗。你只要盯住一個小任務，數一個數字。
-              做完之後，我再告訴你畫面裡還發生了什麼。
-            </p>
-            <p className="mb-5 text-sm text-white/55">不用登入、不用下載，也不需要聲音。手機直式最順。</p>
-            <button className={btnMain} onClick={() => setPhase('r1-brief')}>開始</button>
+            <h1 className="mb-1 text-2xl font-bold">你剛剛有看到嗎？</h1>
+            <p className="mb-5 text-lg text-white/80">測試你的專注力</p>
+            <button className={btnMain} onClick={() => { reshuffle(); setPhase('r1-brief'); }}>開始</button>
           </section>
         )}
 
@@ -616,7 +664,7 @@ export default function AttentionPage() {
           <section className={card}>
             <h2 className="mb-4 text-xl font-bold">剛才橘框的那兩顆，互相碰到幾次？</h2>
             <div className="grid grid-cols-5 gap-2">
-              {numberOptions(R1_ANSWER, 5).map(n => (
+              {numberOptions(r1Answer, 5, r1off).map(n => (
                 <button key={n} className={btnSub} onClick={() => answerR1Count(n)}>{n}</button>
               ))}
             </div>
@@ -653,15 +701,14 @@ export default function AttentionPage() {
               <>
                 <h2 className="mb-2 text-2xl font-bold">魯魯剛剛散步經過了。</h2>
                 <p className="mb-2 leading-relaxed text-white/85">
-                  你不是沒看畫面。你剛才忙著追那兩顆圓點。
-                  有些東西就在眼前，注意力卻不一定會把它留下來。
+                  不是你沒在看。你剛剛專心盯著圓點，眼前的東西就容易被漏掉。
                 </p>
               </>
             )}
             <p className="mb-4 text-white/85">
               {ok1
-                ? (seen1 ? `🎉 圓點碰了 ${R1_ANSWER} 次，你數對了——兩邊都顧到了！` : `🎉 圓點碰了 ${R1_ANSWER} 次，你數對了，盯得很準！`)
-                : (seen1 ? `圓點其實碰了 ${R1_ANSWER} 次。抓到魯魯了，圓點倒是趁機跑掉了，這題本來就容易數花眼。` : `圓點其實碰了 ${R1_ANSWER} 次。這題本來就容易數花眼，數不中很正常。`)}
+                ? (seen1 ? `🎉 圓點碰了 ${r1Answer} 次，你數對了——兩邊都顧到了！` : `🎉 圓點碰了 ${r1Answer} 次，你數對了，盯得很準！`)
+                : (seen1 ? `圓點其實碰了 ${r1Answer} 次。抓到魯魯了，圓點倒是趁機跑掉了，這題本來就容易數花眼。` : `圓點其實碰了 ${r1Answer} 次。這題本來就容易數花眼，數不中很正常。`)}
             </p>
             {!ok1 && (
               <div className="mb-4 rounded-xl bg-white/5 p-3 text-sm text-white/80">
@@ -703,7 +750,7 @@ export default function AttentionPage() {
             <h2 className="mb-1 text-xl font-bold">那三個圖形，一共穿過中間線幾次？</h2>
             <p className="mb-4 text-sm text-white/55">三個加起來算，來回都算一次。</p>
             <div className="grid grid-cols-5 gap-2">
-              {numberOptions(R2_ANSWER, 5).map(n => (
+              {numberOptions(r2Answer, 5, r2off).map(n => (
                 <button key={n} className={btnSub} onClick={() => answerR2Count(n)}>{n}</button>
               ))}
             </div>
@@ -736,7 +783,7 @@ export default function AttentionPage() {
                 : '這次數字沒數中，這遊戲本來就容易看花眼。再玩一次，或找朋友來比比看？'}
             </p>
             <p className="text-sm text-white/55">
-              這只是一個小遊戲的兩次結果，不代表你的注意力能力——同樣的畫面換一天、換個心情，可能就不一樣。
+              這只是個小遊戲，不代表你的專注力好壞。換個心情再玩，結果可能就不一樣。
             </p>
             <div onClickCapture={(e) => {
               if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { rounds: skippedR2 ? 1 : 2 });
