@@ -183,7 +183,8 @@ function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1
     ctx.beginPath(); ctx.moveTo(W / 2, H * 0.22); ctx.lineTo(W / 2, H); ctx.stroke(); ctx.setLineDash([]);
     set.forEach((p, i) => {
       const [x, y] = posOf(p, t);
-      const px = x * W, py = y * H, s = 0.045 * W;
+      // 圖形整體往上收（y 只影響位置，不影響「穿過虛線幾次」），留出下方給魯魯走過去
+      const px = x * W, py = (0.18 + y * 0.55) * H, s = 0.045 * W;
       ctx.fillStyle = '#e9edf7';
       drawShape(ctx, i % 3, px, py, s);
       if (marking && i < 3) {
@@ -210,13 +211,13 @@ const SEEN1_OPTS: { id: Seen1; label: string }[] = [
 const SPEED_STEP = 0.25;
 const MAX_LEVEL = 3;
 
-// 魔王關＝原本的方形版（圖形穿過虛線＋窗外變暗）：不放在主流程裡，打完第 3 關才出現，想挑戰的人才會看到
+// 魔王關＝方形版（圖形穿過虛線）＋兩件事同時發生：魯魯走過去、窗外變暗。
+// 不放在主流程裡，打完第 3 關才出現；最後可複選「剛剛還發生了什麼」，其中「圖形變大」是沒發生的陷阱選項
 const SEEN2_OPTS: { id: string; label: string }[] = [
-  { id: 'grow', label: '有個圖形變大了' },
+  { id: 'cat', label: '魯魯走過去了' },
   { id: 'dusk', label: '窗外的天色變暗了' },
-  { id: 'animal', label: '有動物走過去' },
+  { id: 'grow', label: '有個圖形變大了' },
   { id: 'none', label: '什麼也沒發生' },
-  { id: 'unsure', label: '不確定' },
 ];
 
 const btn = 'w-full rounded-xl px-4 py-3 text-base font-semibold transition-colors active:scale-[0.99]';
@@ -282,7 +283,7 @@ export default function AttentionPage() {
   const [r1Count, setR1Count] = useState<number | null>(null);
   const [r1Seen, setR1Seen] = useState<Seen1 | null>(null);
   const [r2Count, setR2Count] = useState<number | null>(null);
-  const [r2Seen, setR2Seen] = useState<string | null>(null);
+  const [r2Picks, setR2Picks] = useState<string[]>([]);   // 魔王關「剛剛還發生了什麼」勾選的項目
   const [cd, setCd] = useState<number | null>(null);   // 開始前倒數
   // 每次遊玩隨機挑軌跡版本與選項位置（初始值固定，掛載後才隨機，避免伺服器與瀏覽器畫面不一致）
   const [r1v, setR1v] = useState(0);
@@ -394,9 +395,9 @@ export default function AttentionPage() {
       const vid = vidRef.current;
       const ringEl = ringRef.current;
       const tv = t - catT0;
-      const catOn = round === 1 && !frozen && tv >= 0 && tv <= CLIP_SEC;
+      const catOn = !frozen && tv >= 0 && tv <= CLIP_SEC;   // 第 1～3 關與魔王關都會有魯魯走過去
       // 影片載入失敗（例如部分內建瀏覽器擋影片）：標記起來，這一回合不算「沒看到魯魯」
-      if (round === 1 && !frozen && !replay && tv > 0.8 && vid && (vid.error || vid.readyState < 2)) {
+      if (!frozen && !replay && tv > 0.8 && vid && (vid.error || vid.readyState < 2)) {
         if (!catFailedRef.current) { catFailedRef.current = true; setCatFailed(true); }
       }
       if (catCv) {
@@ -536,17 +537,31 @@ export default function AttentionPage() {
     setPhase('r2-notice');
   };
 
-  const answerR2Seen = (id: string) => {
-    if (tooSoon()) return;
-    setR2Seen(id);
+  // 勾選／取消勾選；「什麼也沒發生」跟其他項目互斥
+  const toggleR2 = (id: string) => {
+    setR2Picks(prev => {
+      if (id === 'none') return prev.includes('none') ? [] : ['none'];
+      const next = prev.filter(x => x !== 'none');
+      return next.includes(id) ? next.filter(x => x !== id) : [...next, id];
+    });
+  };
+
+  const confirmR2 = () => {
+    if (tooSoon() || r2Picks.length === 0) return;
+    const dusk = r2Picks.includes('dusk');
+    const cat = r2Picks.includes('cat');
     fireOnce('r2_answer', 'attn_r2_answer', {
       round: 2,
       primary_correct: r2Count === r2Answer,
       variant: r2v,
-      unexpected_seen: id === 'dusk',
-      unexpected_choice: id,
+      unexpected_seen: dusk,
+      cat_seen: cat,
+      picks: r2Picks.join('+'),
+      cat_unavailable: catFailedRef.current,
     });
-    fireOnce('boss_complete', 'attn_boss_complete', { boss_correct: r2Count === r2Answer, boss_seen: id === 'dusk', variant: r2v });
+    fireOnce('boss_complete', 'attn_boss_complete', {
+      boss_correct: r2Count === r2Answer, boss_seen_dusk: dusk, boss_seen_cat: cat, variant: r2v,
+    });
     setPhase('result');
   };
 
@@ -560,7 +575,9 @@ export default function AttentionPage() {
     playRef.current += 1;
     firedRef.current = new Set();
     setR2Count(null);
-    setR2Seen(null);
+    setR2Picks([]);
+    catFailedRef.current = false;
+    setCatFailed(false);
     reshuffle(r1v);
     track('attn_replay', { play: playRef.current, boss: true });
     setPhase('r2-brief');
@@ -573,7 +590,7 @@ export default function AttentionPage() {
     catFailedRef.current = false;
     setCatFailed(false);
     setLevel(1);
-    setR1Count(null); setR1Seen(null); setR2Count(null); setR2Seen(null);
+    setR1Count(null); setR1Seen(null); setR2Count(null); setR2Picks([]);
     reshuffle(r1v);
     track('attn_replay', { play: playRef.current, level: 1, from_boss: true });
     setPhase('r1-brief');
@@ -581,15 +598,18 @@ export default function AttentionPage() {
 
   /* ── 結果文字（只描述實際發生的事，不給能力標籤） ── */
   const seen1 = r1Seen === 'yes';
-  const seen2 = r2Seen === 'dusk';
+  const seen2 = r2Picks.includes('dusk');      // 魔王關：有看到窗外變暗
+  const seenCat2 = r2Picks.includes('cat');    // 魔王關：有看到魯魯走過去
   const ok1 = r1Count === r1Answer;
   const ok2 = r2Count === r2Answer;
+  // 魔王關過關＝數字數對，而且兩件事都看到（魯魯影片沒播出時，魯魯那項不計）
+  const bossPass = ok2 && seen2 && (seenCat2 || catFailed);
   const nextLabel = level < MAX_LEVEL ? `挑戰第 ${level + 1} 關` : '挑戰魔王';
   const goNext = () => (level < MAX_LEVEL ? playAgain(true) : goBoss());
 
   const showStage = running || frozen;
   const compact = frozen || phase === 'r1-reveal';   // 說明頁與揭曉頁：舞台縮小，讓文字與舞台同一屏看得到
-  const showCat = phase === 'r1-run' || phase === 'r1-reveal';
+  const showCat = phase === 'r1-run' || phase === 'r1-reveal' || phase === 'r2-run';
 
   // 記下每次換畫面的時間（誤觸保護用）
   useEffect(() => {
@@ -798,24 +818,45 @@ export default function AttentionPage() {
 
         {phase === 'r2-notice' && (
           <section className={card}>
-            <h2 className="mb-4 text-xl font-bold">剛剛畫面還發生了什麼？</h2>
+            <h2 className="mb-1 text-xl font-bold">剛剛畫面還發生了什麼？</h2>
+            <p className="mb-4 text-sm text-white/55">可以選多個。</p>
             <div className="flex flex-col gap-2">
-              {SEEN2_OPTS.map(o => (
-                <button key={o.id} className={btnSub} onClick={() => answerR2Seen(o.id)}>{o.label}</button>
-              ))}
+              {SEEN2_OPTS.map(o => {
+                const on = r2Picks.includes(o.id);
+                return (
+                  <button
+                    key={o.id}
+                    className={`${btn} border ${on ? 'border-amber-300 bg-amber-400/25 text-white' : 'border-white/15 bg-white/10 text-white hover:bg-white/20'}`}
+                    onClick={() => toggleR2(o.id)}
+                    aria-pressed={on}
+                  >
+                    {on ? '✓ ' : ''}{o.label}
+                  </button>
+                );
+              })}
             </div>
+            <button
+              className={`${btnMain} mt-4 ${r2Picks.length === 0 ? 'opacity-40' : ''}`}
+              onClick={confirmR2}
+              disabled={r2Picks.length === 0}
+            >
+              確定
+            </button>
           </section>
         )}
 
         {phase === 'result' && (
           <section className={card}>
-            <h2 className="mb-2 text-2xl font-bold">{ok2 ? '魔王關過關 🎉' : '魔王關沒過'}</h2>
-            <p className="mb-1 text-white/85">{`圖形一共穿過 ${r2Answer} 次。${ok2 ? '你數對了。' : `你數 ${r2Count}。`}`}</p>
-            <p className="mb-4 text-white/85">{seen2 ? '窗外的天色變暗了，你有看到。' : '窗外的天色變暗了，你沒看到。'}</p>
+            <h2 className="mb-3 text-2xl font-bold">{bossPass ? '魔王關過關 🎉' : '魔王關沒過'}</h2>
+            <ul className="mb-4 space-y-1 text-white/85">
+              <li>{`圖形穿過 ${r2Answer} 次：${ok2 ? '✓ 你數對了' : `✕ 你數 ${r2Count}`}`}</li>
+              <li>{catFailed ? '魯魯走過去：影片沒播出來，不計' : `魯魯走過去：${seenCat2 ? '✓ 你有看到' : '✕ 沒看到'}`}</li>
+              <li>{`窗外變暗：${seen2 ? '✓ 你有看到' : '✕ 沒看到'}`}</li>
+            </ul>
             <button className={btnMain} onClick={bossAgain}>再挑戰魔王</button>
             <button className={`${btnSub} mt-2`} onClick={backToStart}>回第 1 關</button>
             <div onClickCapture={(e) => {
-              if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { boss: true, correct: ok2, seen: seen2, play: playRef.current });
+              if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { boss: true, correct: ok2, seen: seen2 && seenCat2, play: playRef.current });
             }}>
               <ShareButtons
                 title="你剛剛有看到嗎？"
