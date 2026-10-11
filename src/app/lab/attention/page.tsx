@@ -274,6 +274,8 @@ export default function AttentionPage() {
   const vidRef = useRef<HTMLVideoElement>(null);
   const offRef = useRef<HTMLCanvasElement | null>(null);   // 解碼用的離屏畫布（上半彩色、下半透明度）
   const ringRef = useRef<HTMLDivElement>(null);
+  const catFailedRef = useRef(false);                       // 魯魯影片是否沒能播出來（給事件處理用）
+  const [catFailed, setCatFailed] = useState(false);        // 同上（給畫面顯示用）
   const firedRef = useRef<Set<string>>(new Set());
 
   const fireOnce = useCallback((key: string, name: string, params: Record<string, string | number | boolean> = {}) => {
@@ -350,6 +352,10 @@ export default function AttentionPage() {
       const ringEl = ringRef.current;
       const tv = t - CAT_T0;
       const catOn = round === 1 && !frozen && tv >= 0 && tv <= CLIP_SEC;
+      // 影片載入失敗（例如部分內建瀏覽器擋影片）：標記起來，這一回合不算「沒看到魯魯」
+      if (round === 1 && !frozen && !replay && tv > 0.8 && vid && (vid.error || vid.readyState < 2)) {
+        if (!catFailedRef.current) { catFailedRef.current = true; setCatFailed(true); }
+      }
       if (catCv) {
         const fw = stageW, fh = Math.round(stageW / CLIP_AR);
         if (catCv.width !== fw || catCv.height !== fh) { catCv.width = fw; catCv.height = fh; }
@@ -418,7 +424,9 @@ export default function AttentionPage() {
       primary_correct: r1Count === R1_ANSWER,
       unexpected_seen: seen,
       unexpected_choice: s,
+      cat_unavailable: catFailedRef.current,   // true＝這個人的裝置沒播出魯魯，分析時要排除
     });
+    if (catFailedRef.current) fireOnce('cat_unavailable', 'attn_cat_unavailable', { round: 1 });
     setPhase('r1-reveal');
     fireOnce('reveal', 'attn_reveal', { round: 1, unexpected_seen: seen });
   };
@@ -462,6 +470,8 @@ export default function AttentionPage() {
 
   const restart = () => {
     firedRef.current = new Set();
+    catFailedRef.current = false;
+    setCatFailed(false);
     setR1Count(null); setR1Seen(null); setR2Count(null); setR2Seen(null); setSkippedR2(false);
     setPhase('intro');
   };
@@ -483,16 +493,25 @@ export default function AttentionPage() {
 
   return (
     <main className="min-h-screen px-4 py-6" style={{ background: 'linear-gradient(180deg,#0f1224 0%,#1a1740 100%)' }}>
-      <div className="mx-auto" style={{ maxWidth: 440 }}>
-        <div className="mb-3 flex items-center justify-between text-sm text-white/60">
+      <div className="mx-auto flex flex-col" style={{ maxWidth: 440 }}>
+        <div className="mb-3 flex items-center justify-between text-sm text-white/60" style={{ order: -2 }}>
           <Link href="/tools" className="hover:text-white">← 工具</Link>
           <span>小實驗 · 約 1 分鐘</span>
         </div>
 
-        {/* 舞台：只在播放與回放時出現，問答時隱藏，避免對著停格畫面數 */}
+        {/* 舞台：只在播放與回放時出現，問答時隱藏，避免對著停格畫面數。
+            說明頁（frozen）時縮小成 60%，並讓說明卡片排在舞台上方，手機第一眼就看得到說明 */}
+        <div style={{ height: frozen ? Math.round(stageH * 0.6) : undefined }}>
         <div
           className="relative mx-auto overflow-hidden rounded-2xl border border-white/10"
-          style={{ width: stageW, height: showStage ? stageH : 0, display: showStage ? 'block' : 'none', touchAction: 'manipulation' }}
+          style={{
+            width: stageW,
+            height: showStage ? stageH : 0,
+            display: showStage ? 'block' : 'none',
+            touchAction: 'manipulation',
+            transform: frozen ? 'scale(0.6)' : undefined,
+            transformOrigin: 'top center',
+          }}
           aria-label="注意力實驗舞台"
         >
           <canvas ref={canvasRef} style={{ width: stageW, height: stageH, display: 'block' }} />
@@ -539,6 +558,7 @@ export default function AttentionPage() {
             </div>
           )}
         </div>
+        </div>
 
         {phase === 'intro' && (
           <section className={card}>
@@ -553,10 +573,10 @@ export default function AttentionPage() {
         )}
 
         {phase === 'r1-brief' && (
-          <section className={card}>
+          <section className={`${card} mb-3`} style={{ order: -1 }}>
             <h2 className="mb-2 text-xl font-bold">第一回合：盯住橘框的兩顆</h2>
             <p className="mb-2 leading-relaxed text-white/85">
-              上面的圓點等一下會開始慢慢移動，橘框只會亮幾秒。
+              下面的圓點等一下會開始慢慢移動，橘框只會亮幾秒。
               請一直盯著那<b className="text-amber-300">兩顆</b>，看它們<b>互相碰到幾次</b>。
             </p>
             <RuleCard round={1} />
@@ -591,7 +611,15 @@ export default function AttentionPage() {
 
         {phase === 'r1-reveal' && (
           <section className={`${card} mt-3`}>
-            {seen1 ? (
+            {catFailed ? (
+              <>
+                <h2 className="mb-2 text-2xl font-bold">魯魯這次沒能走出來</h2>
+                <p className="mb-2 leading-relaxed text-white/85">
+                  你的瀏覽器沒有成功播放魯魯的影片，所以這一題「有沒有看到」不算數。
+                  如果想完整玩，可以改用 Safari 或 Chrome 直接開這個網址。
+                </p>
+              </>
+            ) : seen1 ? (
               <>
                 <h2 className="mb-2 text-2xl font-bold">抓到了。😏</h2>
                 <p className="mb-2 text-white/85">你有看到魯魯。那主任務呢？</p>
@@ -631,7 +659,7 @@ export default function AttentionPage() {
         )}
 
         {phase === 'r2-brief' && (
-          <section className={card}>
+          <section className={`${card} mb-3`} style={{ order: -1 }}>
             <h2 className="mb-2 text-xl font-bold">第二回合：盯住橘框的三個</h2>
             <p className="mb-2 leading-relaxed text-white/85">
               這次有 6 個圖形在動，橘框只會亮幾秒。請一直盯著那<b className="text-amber-300">三個</b>，
