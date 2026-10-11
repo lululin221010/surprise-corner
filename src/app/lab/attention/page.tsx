@@ -274,6 +274,7 @@ export default function AttentionPage() {
   const vidRef = useRef<HTMLVideoElement>(null);
   const offRef = useRef<HTMLCanvasElement | null>(null);   // 解碼用的離屏畫布（上半彩色、下半透明度）
   const ringRef = useRef<HTMLDivElement>(null);
+  const stageWrapRef = useRef<HTMLDivElement>(null);
   const catFailedRef = useRef(false);                       // 魯魯影片是否沒能播出來（給事件處理用）
   const [catFailed, setCatFailed] = useState(false);        // 同上（給畫面顯示用）
   const firedRef = useRef<Set<string>>(new Set());
@@ -489,7 +490,31 @@ export default function AttentionPage() {
   else headline = '兩次都盯著主任務走。魯魯倒是很自在地路過了。';
 
   const showStage = running || frozen;
+  const compact = frozen || phase === 'r1-reveal';   // 說明頁與揭曉頁：舞台縮小，讓文字與舞台同一屏看得到
   const showCat = phase === 'r1-run' || phase === 'r1-reveal';
+
+  // 手機上舞台常在第一屏之外：開始倒數與正式播放時把舞台捲到最上面；其他畫面回到頂端
+  useEffect(() => {
+    const toStage = cd !== null || phase === 'r1-run' || phase === 'r2-run';
+    const id = requestAnimationFrame(() => {
+      const el = stageWrapRef.current;
+      if (toStage && el) {
+        // 網站頂端有固定導覽列，舞台要排在它下面，不能被蓋住
+        let fixedTop = 0;
+        let node = document.elementFromPoint(window.innerWidth / 2, 2) as HTMLElement | null;
+        while (node && node !== document.body) {
+          const pos = getComputedStyle(node).position;
+          if (pos === 'fixed' || pos === 'sticky') { fixedTop = node.getBoundingClientRect().bottom; break; }
+          node = node.parentElement;
+        }
+        const top = el.getBoundingClientRect().top + window.scrollY - fixedTop - 8;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+    });
+    return () => cancelAnimationFrame(id);
+  }, [phase, cd]);
 
   return (
     <main className="min-h-screen px-4 py-6" style={{ background: 'linear-gradient(180deg,#0f1224 0%,#1a1740 100%)' }}>
@@ -501,7 +526,7 @@ export default function AttentionPage() {
 
         {/* 舞台：只在播放與回放時出現，問答時隱藏，避免對著停格畫面數。
             說明頁（frozen）時縮小成 60%，並讓說明卡片排在舞台上方，手機第一眼就看得到說明 */}
-        <div style={{ height: frozen ? Math.round(stageH * 0.6) : undefined }}>
+        <div ref={stageWrapRef} style={{ height: compact ? Math.round(stageH * 0.6) : undefined }}>
         <div
           className="relative mx-auto overflow-hidden rounded-2xl border border-white/10"
           style={{
@@ -509,7 +534,7 @@ export default function AttentionPage() {
             height: showStage ? stageH : 0,
             display: showStage ? 'block' : 'none',
             touchAction: 'manipulation',
-            transform: frozen ? 'scale(0.6)' : undefined,
+            transform: compact ? 'scale(0.6)' : undefined,
             transformOrigin: 'top center',
           }}
           aria-label="注意力實驗舞台"
