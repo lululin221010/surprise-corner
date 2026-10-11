@@ -20,8 +20,7 @@ const CLIP_SEC = 6.29;      // 魯魯走路影片長度（原 10 秒，後製加
 const CAT_WIN = 0.62;       // 魯魯影片窗口佔舞台寬的比例（越小貓越小）；窗口會從右緣滑到左緣，貓才走得完整個舞台
 const CLIP_AR = 752 / 416;  // 影片寬高比（16:9 橫式，綠幕已去背成「彩色＋透明度」疊圖）
 const CLIP_FEET = 0.91;     // 腳底在影片畫面高度的比例
-const CAT_T0 = 6.5;         // 魯魯進場時間（秒）
-const CAT_T1 = CAT_T0 + CLIP_SEC;   // 魯魯離場時間（秒）
+const CAT_T0 = 6.5;         // 魯魯進場時間（秒，1 倍速時；加快時會等比例提早）
 const CAT_Y = 0.9;          // 腳底落在舞台高度的位置（0～1），可調
 
 // 回合一：5 個圓點，前兩顆是目標（座標 y 用「以舞台寬為 1」的單位）
@@ -159,7 +158,8 @@ function drawShape(ctx: CanvasRenderingContext2D, kind: number, x: number, y: nu
   ctx.fill();
 }
 
-function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1 | 2, t: number, set: P[]) {
+// speed：只加快圓點／圖形的移動（同一條軌跡，用更短的時間走完，所以答案不變）；橘框與魯魯仍用真實時間
+function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1 | 2, t: number, set: P[], speed = 1) {
   ctx.clearRect(0, 0, W, H);
   const g = ctx.createLinearGradient(0, 0, 0, H);
   g.addColorStop(0, '#222a43'); g.addColorStop(1, '#141a2c');
@@ -169,7 +169,7 @@ function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1
 
   if (round === 1) {
     set.forEach((p, i) => {
-      const [x, y] = posOf(p, t);
+      const [x, y] = posOf(p, t * speed);
       const px = x * W, py = y * W;
       ctx.beginPath(); ctx.fillStyle = '#e9edf7'; ctx.arc(px, py, R * W, 0, Math.PI * 2); ctx.fill();
       if (marking && i < 2) {
@@ -205,8 +205,12 @@ const SEEN1_OPTS: { id: Seen1; label: string }[] = [
   { id: 'no', label: '沒有' },
 ];
 
-// 第二關（窗外變暗）先收起來：朋友回饋「太複雜」，現在只玩第一關。要打開把這個改成 true 即可
-const ENABLE_R2 = false as boolean;
+// 關卡：第 1 關 1 倍、第 2 關 1.25 倍、第 3 關 1.5 倍。同一條軌跡用更短的時間走完（答案不變）。
+// 最快 1.5 倍時，第一次碰撞（路徑時間 7.7 秒）在真實時間約 5.1 秒，仍在橘框消失之後。
+const SPEED_STEP = 0.25;
+const MAX_LEVEL = 3;
+
+// 魔王關＝原本的方形版（圖形穿過虛線＋窗外變暗）：不放在主流程裡，打完第 3 關才出現，想挑戰的人才會看到
 const SEEN2_OPTS: { id: string; label: string }[] = [
   { id: 'grow', label: '有個圖形變大了' },
   { id: 'dusk', label: '窗外的天色變暗了' },
@@ -279,13 +283,14 @@ export default function AttentionPage() {
   const [r1Seen, setR1Seen] = useState<Seen1 | null>(null);
   const [r2Count, setR2Count] = useState<number | null>(null);
   const [r2Seen, setR2Seen] = useState<string | null>(null);
-  const [skippedR2, setSkippedR2] = useState(false);
   const [cd, setCd] = useState<number | null>(null);   // 開始前倒數
   // 每次遊玩隨機挑軌跡版本與選項位置（初始值固定，掛載後才隨機，避免伺服器與瀏覽器畫面不一致）
   const [r1v, setR1v] = useState(0);
   const [r2v, setR2v] = useState(0);
   const [r1off, setR1off] = useState(2);
   const [r2off, setR2off] = useState(2);
+  const [level, setLevel] = useState(1);                   // 目前第幾關（1～3）
+  const speed = 1 + SPEED_STEP * (level - 1);              // 關卡越高，圓點越快
   const r1Answer = R1_ANSWERS[r1v];
   const r2Answer = R2_ANSWERS[r2v];
 
@@ -346,11 +351,11 @@ export default function AttentionPage() {
     const id = setTimeout(() => {
       if (cd > 1) { setCd(cd - 1); return; }
       setCd(null);
-      if (phase === 'r1-brief') { setPhase('r1-run'); fireOnce('start', 'attn_start', { round: 1, variant: r1v }); }
-      else if (phase === 'r2-brief') setPhase('r2-run');
+      if (phase === 'r1-brief') { setPhase('r1-run'); fireOnce('start', 'attn_start', { round: 1, variant: r1v, speed }); }
+      else if (phase === 'r2-brief') { setPhase('r2-run'); fireOnce('boss_start', 'attn_boss_start', { variant: r2v }); }
     }, 1000);
     return () => clearTimeout(id);
-  }, [cd, phase, fireOnce, r1v]);
+  }, [cd, phase, fireOnce, r1v, r2v, speed]);
 
   // 動畫迴圈
   useEffect(() => {
@@ -365,9 +370,11 @@ export default function AttentionPage() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const round: 1 | 2 = phase === 'r2-run' || phase === 'r2-brief' ? 2 : 1;
-    const duration = round === 1 ? R1_SEC : R2_SEC;
+    const spd = round === 1 ? speed : 1;                 // 第幾次玩決定快慢（只影響回合一）
+    const duration = round === 1 ? R1_SEC / spd : R2_SEC;
+    const catT0 = CAT_T0 / spd;                          // 加快時魯魯也提早進場，整段才放得進較短的回合
     const replay = phase === 'r1-reveal';
-    const REPLAY_FROM = CAT_T0 - 0.6, REPLAY_LEN = CAT_T1 - CAT_T0 + 1.2;
+    const REPLAY_FROM = catT0 - 0.6, REPLAY_LEN = CLIP_SEC + 1.2;
     const start = performance.now();
     let raf = 0;
 
@@ -380,13 +387,13 @@ export default function AttentionPage() {
         setPhase(round === 1 ? 'r1-count' : 'r2-count');
         return;
       }
-      drawScene(ctx, stageW, stageH, round, t, round === 1 ? R1_VARIANTS[r1v] : R2_VARIANTS[r2v]);
+      drawScene(ctx, stageW, stageH, round, t, round === 1 ? R1_VARIANTS[r1v] : R2_VARIANTS[r2v], spd);
 
       // 魯魯：影片時間 = 舞台時間 - 進場時間；影片「彩色在上、透明度在下」，逐格合成
       const catCv = catCanvasRef.current;
       const vid = vidRef.current;
       const ringEl = ringRef.current;
-      const tv = t - CAT_T0;
+      const tv = t - catT0;
       const catOn = round === 1 && !frozen && tv >= 0 && tv <= CLIP_SEC;
       // 影片載入失敗（例如部分內建瀏覽器擋影片）：標記起來，這一回合不算「沒看到魯魯」
       if (round === 1 && !frozen && !replay && tv > 0.8 && vid && (vid.error || vid.readyState < 2)) {
@@ -461,7 +468,7 @@ export default function AttentionPage() {
     };
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [running, frozen, phase, stageW, stageH, r1v, r2v]);
+  }, [running, frozen, phase, stageW, stageH, r1v, r2v, speed]);
 
   // 在使用者按下按鈕的當下先「解鎖」影片播放（iOS Safari 要求第一次播放來自使用者操作）
   const unlockVideo = () => {
@@ -496,28 +503,30 @@ export default function AttentionPage() {
     if (catFailedRef.current) fireOnce('cat_unavailable', 'attn_cat_unavailable', { round: 1 });
     setPhase('r1-reveal');
     fireOnce('reveal', 'attn_reveal', { round: 1, unexpected_seen: seen });
-    if (!ENABLE_R2) {   // 只玩第一關時，看到揭曉就算完成
-      fireOnce('complete', 'attn_complete', { rounds: 1 });
-      fireOnce('result_view', 'attn_result_view', { rounds: 1 });
-    }
+    // 看到揭曉就算主流程完成
+    fireOnce('complete', 'attn_complete', { rounds: 1, level });
+    fireOnce('result_view', 'attn_result_view', { rounds: 1, level });
   };
 
-  const goR2Brief = () => {
+  // 魔王關（原方形版）
+  const goBoss = () => {
     setPhase('r2-brief');
-    fireOnce('retry', 'attn_retry', { round: 2 });
+    fireOnce('boss_enter', 'attn_boss_enter', { level });
   };
-  const startR2 = () => setCd(3);
+  const startR2 = () => { unlockVideo(); setCd(3); };
 
-  // 再玩一次：換一個不同的軌跡（答案也不同），事件重新計一輪並標上第幾次玩
-  const playAgain = () => {
+  // 再來一次（同一關）或挑戰下一關（更快）：換一個不同的軌跡，事件重新計一輪並標上第幾次玩
+  const playAgain = (nextLevel: boolean) => {
     playRef.current += 1;
+    const lv = nextLevel ? Math.min(MAX_LEVEL, level + 1) : level;
+    setLevel(lv);
     firedRef.current = new Set();
     catFailedRef.current = false;
     setCatFailed(false);
     setR1Count(null);
     setR1Seen(null);
     reshuffle(r1v);
-    track('attn_replay', { play: playRef.current });
+    track('attn_replay', { play: playRef.current, next_level: nextLevel, level: lv });
     setPhase('r1-brief');
   };
 
@@ -537,20 +546,37 @@ export default function AttentionPage() {
       unexpected_seen: id === 'dusk',
       unexpected_choice: id,
     });
-    fireOnce('complete', 'attn_complete', { rounds: 2 });
+    fireOnce('boss_complete', 'attn_boss_complete', { boss_correct: r2Count === r2Answer, boss_seen: id === 'dusk', variant: r2v });
     setPhase('result');
   };
 
+  // 魔王關結果頁一出現就記一次
   useEffect(() => {
-    if (phase === 'result') fireOnce('result_view', 'attn_result_view', { rounds: skippedR2 ? 1 : 2 });
-  }, [phase, skippedR2, fireOnce]);
+    if (phase === 'result') fireOnce('boss_result_view', 'attn_result_view', { boss: true });
+  }, [phase, fireOnce]);
 
-  const restart = () => {
+  // 再挑戰一次魔王
+  const bossAgain = () => {
+    playRef.current += 1;
+    firedRef.current = new Set();
+    setR2Count(null);
+    setR2Seen(null);
+    reshuffle(r1v);
+    track('attn_replay', { play: playRef.current, boss: true });
+    setPhase('r2-brief');
+  };
+
+  // 回到第 1 關重新開始
+  const backToStart = () => {
+    playRef.current += 1;
     firedRef.current = new Set();
     catFailedRef.current = false;
     setCatFailed(false);
-    setR1Count(null); setR1Seen(null); setR2Count(null); setR2Seen(null); setSkippedR2(false);
-    setPhase('intro');
+    setLevel(1);
+    setR1Count(null); setR1Seen(null); setR2Count(null); setR2Seen(null);
+    reshuffle(r1v);
+    track('attn_replay', { play: playRef.current, level: 1, from_boss: true });
+    setPhase('r1-brief');
   };
 
   /* ── 結果文字（只描述實際發生的事，不給能力標籤） ── */
@@ -558,12 +584,8 @@ export default function AttentionPage() {
   const seen2 = r2Seen === 'dusk';
   const ok1 = r1Count === r1Answer;
   const ok2 = r2Count === r2Answer;
-  let headline = '';
-  if (skippedR2) headline = seen1 ? '第一次我就抓到魯魯了。' : '第一次我盯著圓點，魯魯從旁邊走過去了。';
-  else if (!seen1 && seen2) headline = '第一次我漏掉魯魯。第二次，我開始防你了。';
-  else if (seen1 && seen2) headline = '你抓到了我藏的兩件事。下次得換招了。';
-  else if (seen1 && !seen2) headline = '魯魯抓到了，窗外的天色倒是溜走了。';
-  else headline = '兩次都盯著主任務走。魯魯倒是很自在地路過了。';
+  const nextLabel = level < MAX_LEVEL ? `挑戰第 ${level + 1} 關` : '挑戰魔王';
+  const goNext = () => (level < MAX_LEVEL ? playAgain(true) : goBoss());
 
   const showStage = running || frozen;
   const compact = frozen || phase === 'r1-reveal';   // 說明頁與揭曉頁：舞台縮小，讓文字與舞台同一屏看得到
@@ -602,7 +624,7 @@ export default function AttentionPage() {
       <div className="mx-auto flex flex-col" style={{ maxWidth: 440 }}>
         <div className="mb-3 flex items-center justify-between text-sm text-white/60" style={{ order: -2 }}>
           <Link href="/tools" className="hover:text-white">← 工具</Link>
-          <span>專注力小遊戲 · 約 30 秒</span>
+          <span>專注力小遊戲 · {phase.startsWith('r2') || phase === 'result' ? '魔王關' : `第 ${level} 關`}</span>
         </div>
 
         {/* 舞台：只在播放與回放時出現，問答時隱藏，避免對著停格畫面數。
@@ -727,7 +749,18 @@ export default function AttentionPage() {
                 </p>
               </>
             )}
-            <button className={btnMain} onClick={playAgain}>再玩一次</button>
+            {/* 數對了：主按鈕＝挑戰下一關（打完第 3 關是魔王）；沒數對：主按鈕＝再來一次 */}
+            {ok1 ? (
+              <>
+                <button className={btnMain} onClick={goNext}>{nextLabel}</button>
+                <button className={`${btnSub} mt-2`} onClick={() => playAgain(false)}>再來一次</button>
+              </>
+            ) : (
+              <>
+                <button className={btnMain} onClick={() => playAgain(false)}>再來一次</button>
+                <button className={`${btnSub} mt-2`} onClick={goNext}>{nextLabel}</button>
+              </>
+            )}
             <div onClickCapture={(e) => {
               if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { rounds: 1, correct: ok1, seen: seen1, play: playRef.current });
             }}>
@@ -736,31 +769,25 @@ export default function AttentionPage() {
                 content="測測你的專注力，你數得出來嗎？"
               />
             </div>
-            {ENABLE_R2 && (
-              <button className="mt-3 w-full text-sm text-white/50 underline" onClick={goR2Brief}>再來第二關</button>
-            )}
           </section>
         )}
 
         {phase === 'r2-brief' && (
           <section className={`${card} mb-3`} style={{ order: -1 }}>
-            <h2 className="mb-2 text-xl font-bold">第二回合：盯住橘框的三個</h2>
-            <p className="mb-2 leading-relaxed text-white/85">
-              這次有 6 個圖形在動，橘框只會亮幾秒。請一直盯著那<b className="text-amber-300">三個</b>，
-              數它們<b>一共穿過中間虛線幾次</b>（來回都算，三個加起來）。
+            <h2 className="mb-2 text-xl font-bold">魔王關：盯住橘框的三個圖形</h2>
+            <p className="mb-3 leading-relaxed text-white/85">
+              數它們<b className="text-amber-300">一共穿過中間虛線幾次</b>（三個加起來，來回都算）。
             </p>
             <RuleCard round={2} />
-            <p className="mb-5 text-sm text-white/55">這次你知道畫面裡不只有圖形。約 16 秒。</p>
             {cd === null
-              ? <button className={btnMain} onClick={startR2}>我懂了，開始倒數</button>
+              ? <button className={btnMain} onClick={startR2}>開始</button>
               : <p className="text-center text-white/60">準備…</p>}
           </section>
         )}
 
         {phase === 'r2-count' && (
           <section className={card}>
-            <h2 className="mb-1 text-xl font-bold">那三個圖形，一共穿過中間線幾次？</h2>
-            <p className="mb-4 text-sm text-white/55">三個加起來算，來回都算一次。</p>
+            <h2 className="mb-4 text-xl font-bold">那三個一共穿過虛線幾次？</h2>
             <div className="grid grid-cols-5 gap-2">
               {numberOptions(r2Answer, 5, r2off).map(n => (
                 <button key={n} className={btnSub} onClick={() => answerR2Count(n)}>{n}</button>
@@ -771,7 +798,7 @@ export default function AttentionPage() {
 
         {phase === 'r2-notice' && (
           <section className={card}>
-            <h2 className="mb-4 text-xl font-bold">這次畫面還發生了什麼？</h2>
+            <h2 className="mb-4 text-xl font-bold">剛剛畫面還發生了什麼？</h2>
             <div className="flex flex-col gap-2">
               {SEEN2_OPTS.map(o => (
                 <button key={o.id} className={btnSub} onClick={() => answerR2Seen(o.id)}>{o.label}</button>
@@ -782,30 +809,19 @@ export default function AttentionPage() {
 
         {phase === 'result' && (
           <section className={card}>
-            <h2 className="mb-1 text-xl font-bold">{headline}</h2>
-            <ul className="my-4 space-y-2 text-white/85">
-              <li>第一回合：主任務 {ok1 ? '✓' : '✕'}　魯魯 {seen1 ? '✓ 看到' : r1Seen === 'maybe' ? '？不確定' : '✕ 沒看到'}</li>
-              {!skippedR2 && <li>第二回合：主任務 {ok2 ? '✓' : '✕'}　窗外的變化 {seen2 ? '✓ 看到' : '✕ 沒抓到'}</li>}
-            </ul>
-            <p className="mb-3 text-white/90">
-              {skippedR2
-                ? (ok1 ? '🎉 這題數對了，盯得很準！' : '這題數不中很正常。再玩一次，或找朋友來比比看？')
-                : ok1 && ok2 ? '🎉 兩回合的數字都數對了，盯得很準！'
-                : ok1 || ok2 ? '🎉 有一回合數對了。想拿滿分的話，再玩一次，或找朋友來比比看？'
-                : '這次數字沒數中，這遊戲本來就容易看花眼。再玩一次，或找朋友來比比看？'}
-            </p>
-            <p className="text-sm text-white/55">
-              這只是個小遊戲，不代表你的專注力好壞。換個心情再玩，結果可能就不一樣。
-            </p>
+            <h2 className="mb-2 text-2xl font-bold">{ok2 ? '魔王關過關 🎉' : '魔王關沒過'}</h2>
+            <p className="mb-1 text-white/85">{`圖形一共穿過 ${r2Answer} 次。${ok2 ? '你數對了。' : `你數 ${r2Count}。`}`}</p>
+            <p className="mb-4 text-white/85">{seen2 ? '窗外的天色變暗了，你有看到。' : '窗外的天色變暗了，你沒看到。'}</p>
+            <button className={btnMain} onClick={bossAgain}>再挑戰魔王</button>
+            <button className={`${btnSub} mt-2`} onClick={backToStart}>回第 1 關</button>
             <div onClickCapture={(e) => {
-              if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { rounds: skippedR2 ? 1 : 2 });
+              if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { boss: true, correct: ok2, seen: seen2, play: playRef.current });
             }}>
               <ShareButtons
                 title="你剛剛有看到嗎？"
-                content="我明明一直盯著螢幕，結果……算了，你自己試。👀（不劇透）"
+                content="我挑戰到魔王關了，你能過嗎？"
               />
             </div>
-            <button className={`${btnSub} mt-5`} onClick={restart}>再玩一次</button>
           </section>
         )}
       </div>
