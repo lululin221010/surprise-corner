@@ -16,9 +16,10 @@ const R = 0.035;            // 圓點半徑（以舞台寬為 1）
 const R1_SEC = 20;
 const R2_SEC = 16;
 const MARK_SEC = 4;         // 前 4 秒繼續標出目標（說明頁與倒數時也先停格看過一次）
-const CLIP_SEC = 6.28;      // 魯魯走路影片長度（原 10 秒，後製加速 1.6 倍）
+const CLIP_SEC = 6.29;      // 魯魯走路影片長度（原 10 秒，後製加速 1.6 倍）
+const CAT_WIN = 0.62;       // 魯魯影片窗口佔舞台寬的比例（越小貓越小）；窗口會從右緣滑到左緣，貓才走得完整個舞台
 const CLIP_AR = 752 / 416;  // 影片寬高比（16:9 橫式，綠幕已去背成「彩色＋透明度」疊圖）
-const CLIP_FEET = 0.9;      // 腳底在影片畫面高度的比例
+const CLIP_FEET = 0.91;     // 腳底在影片畫面高度的比例
 const CAT_T0 = 6.5;         // 魯魯進場時間（秒）
 const CAT_T1 = CAT_T0 + CLIP_SEC;   // 魯魯離場時間（秒）
 const CAT_Y = 0.9;          // 腳底落在舞台高度的位置（0～1），可調
@@ -193,25 +194,6 @@ function drawScene(ctx: CanvasRenderingContext2D, W: number, H: number, round: 1
   }
 }
 
-// 魯魯（回合一）：影片本身就是從右走到左的完整畫面。這裡只需要「貓的大約位置」來放揭曉時的橘圈。
-// 取樣自原影片（秒, 貓身體中心的 x 比例），查表時時間已換算成加速後的影片時間
-const CAT_X: [number, number][] = [
-  [0.25, 0.964], [0.5, 0.915], [1.0, 0.832], [1.5, 0.777], [2.0, 0.734], [2.5, 0.678], [3.0, 0.604],
-  [3.5, 0.511], [4.0, 0.496], [4.5, 0.5], [5.0, 0.485], [5.5, 0.463], [6.0, 0.423], [6.5, 0.327],
-  [7.0, 0.308], [7.5, 0.213], [8.0, 0.185], [8.5, 0.125], [9.0, 0.064], [9.5, 0.019],
-].map(([s, x]) => [s / 1.6, x] as [number, number]);
-
-function catCenterX(tv: number): number {
-  if (tv <= CAT_X[0][0]) return CAT_X[0][1];
-  for (let i = 1; i < CAT_X.length; i++) {
-    if (tv <= CAT_X[i][0]) {
-      const [t0, x0] = CAT_X[i - 1], [t1, x1] = CAT_X[i];
-      return x0 + (x1 - x0) * ((tv - t0) / (t1 - t0));
-    }
-  }
-  return CAT_X[CAT_X.length - 1][1];
-}
-
 /* ───────────── 畫面 ───────────── */
 type Phase =
   | 'intro' | 'r1-brief' | 'r1-run' | 'r1-count' | 'r1-notice' | 'r1-reveal'
@@ -219,10 +201,12 @@ type Phase =
 
 type Seen1 = 'yes' | 'maybe' | 'no';
 const SEEN1_OPTS: { id: Seen1; label: string }[] = [
-  { id: 'yes', label: '有，我看到了' },
-  { id: 'maybe', label: '好像有，但不確定' },
-  { id: 'no', label: '沒有，只有圓點' },
+  { id: 'yes', label: '有' },
+  { id: 'no', label: '沒有' },
 ];
+
+// 第二關（窗外變暗）先收起來：朋友回饋「太複雜」，現在只玩第一關。要打開把這個改成 true 即可
+const ENABLE_R2 = false as boolean;
 const SEEN2_OPTS: { id: string; label: string }[] = [
   { id: 'grow', label: '有個圖形變大了' },
   { id: 'dusk', label: '窗外的天色變暗了' },
@@ -311,6 +295,8 @@ export default function AttentionPage() {
   const offRef = useRef<HTMLCanvasElement | null>(null);   // 解碼用的離屏畫布（上半彩色、下半透明度）
   const ringRef = useRef<HTMLDivElement>(null);
   const stageWrapRef = useRef<HTMLDivElement>(null);
+  const playRef = useRef(1);                                // 第幾次玩
+  const phaseAtRef = useRef(0);                             // 畫面換到目前這一步的時間，用來擋「畫面一換、手指剛好點到」的誤觸
   const catFailedRef = useRef(false);                       // 魯魯影片是否沒能播出來（給事件處理用）
   const [catFailed, setCatFailed] = useState(false);        // 同上（給畫面顯示用）
   const firedRef = useRef<Set<string>>(new Set());
@@ -318,7 +304,7 @@ export default function AttentionPage() {
   const fireOnce = useCallback((key: string, name: string, params: Record<string, string | number | boolean> = {}) => {
     if (firedRef.current.has(key)) return;
     firedRef.current.add(key);
-    track(name, params);
+    track(name, { ...params, play: playRef.current });   // play＝這個人第幾次玩（再玩一次會 +1）
   }, []);
 
   // 隨機挑版本與選項位置；avoidR1 給「再數一次」用，確保換成不同的軌跡
@@ -407,9 +393,14 @@ export default function AttentionPage() {
         if (!catFailedRef.current) { catFailedRef.current = true; setCatFailed(true); }
       }
       if (catCv) {
-        const fw = stageW, fh = Math.round(stageW / CLIP_AR);
+        // 魯魯的影片窗口（寬 = 舞台寬 × CAT_WIN）從右緣一路滑到左緣：貓在窗口裡從右走到左，加上窗口位移，整個舞台都走得完
+        const winW = stageW * CAT_WIN, winH = winW / CLIP_AR;
+        const sc = Math.min(2, window.devicePixelRatio || 1);
+        const fw = Math.round(winW * sc), fh = Math.round(winH * sc);
         if (catCv.width !== fw || catCv.height !== fh) { catCv.width = fw; catCv.height = fh; }
         const cctx = catCv.getContext('2d');
+        // 貓在畫面上真正出現的範圍（影片窗口內的像素座標）；沒有貓時為 null，橘圈就不顯示
+        let bb: { x0: number; x1: number; y0: number; y1: number } | null = null;
         if (cctx && vid && catOn && vid.readyState >= 2) {
           if (vid.paused || Math.abs(vid.currentTime - tv) > 0.35) {
             vid.currentTime = Math.min(tv, CLIP_SEC - 0.05);
@@ -424,30 +415,47 @@ export default function AttentionPage() {
             const src = octx.getImageData(0, 0, fw, fh * 2).data;
             const out = cctx.createImageData(fw, fh);
             const d = out.data, half = fw * fh * 4;
+            let x0 = fw, x1 = -1, y0 = fh, y1 = -1;
             for (let i = 0; i < half; i += 4) {
               d[i] = src[i]; d[i + 1] = src[i + 1]; d[i + 2] = src[i + 2];
-              d[i + 3] = src[half + i];            // 下半部的紅色通道＝透明度
+              const a = src[half + i];             // 下半部的紅色通道＝透明度
+              d[i + 3] = a;
+              if (a > 128) {
+                const p = i >> 2, x = p % fw, y = (p / fw) | 0;
+                if (x < x0) x0 = x;
+                if (x > x1) x1 = x;
+                if (y < y0) y0 = y;
+                if (y > y1) y1 = y;
+              }
             }
             cctx.putImageData(out, 0, 0);
+            if (x1 - x0 > fw * 0.06) bb = { x0: x0 / sc, x1: x1 / sc, y0: y0 / sc, y1: y1 / sc };
           }
         } else if (cctx) {
           cctx.clearRect(0, 0, fw, fh);
           if (vid && !vid.paused && !catOn) vid.pause();
         }
-        const top = stageH * CAT_Y - fh * CLIP_FEET;
-        catCv.style.transform = `translateY(${top}px)`;
-      }
-      if (ringEl) {
-        if (replay && catOn) {
-          const fh = stageW / CLIP_AR;
-          const top = stageH * CAT_Y - fh * CLIP_FEET;
-          const cx = catCenterX(tv) * stageW;
-          const rw = stageW * 0.5, rh = fh * 0.62;
-          ringEl.style.opacity = '1';
-          ringEl.style.width = `${rw}px`;
-          ringEl.style.height = `${rh}px`;
-          ringEl.style.transform = `translate(${cx - rw / 2}px, ${top + fh * 0.6 - rh / 2}px)`;
-        } else ringEl.style.opacity = '0';
+        // 窗口位移跟著「影片實際播到哪」走，貓跟窗口才不會錯開
+        const vt = vid && vid.readyState >= 2 && catOn ? Math.min(CLIP_SEC, Math.max(0, vid.currentTime)) : tv;
+        const slideX = (stageW - winW) * (1 - Math.min(1, Math.max(0, vt / CLIP_SEC)));
+        const top = stageH * CAT_Y - winH * CLIP_FEET;
+        catCv.style.width = `${winW}px`;
+        catCv.style.height = `${winH}px`;
+        catCv.style.transform = `translate(${slideX}px, ${top}px)`;
+        // 橘圈：只在揭曉回放、而且畫面上真的有貓時才出現，位置直接取自貓的實際範圍
+        if (ringEl) {
+          if (replay && bb) {
+            const pad = 8;
+            const rx = slideX + bb.x0 - pad, ry = top + bb.y0 - pad;
+            const rw = bb.x1 - bb.x0 + pad * 2, rh = bb.y1 - bb.y0 + pad * 2;
+            ringEl.style.opacity = '1';
+            ringEl.style.width = `${rw}px`;
+            ringEl.style.height = `${rh}px`;
+            ringEl.style.transform = `translate(${rx}px, ${ry}px)`;
+          } else ringEl.style.opacity = '0';
+        }
+      } else if (ringEl) {
+        ringEl.style.opacity = '0';
       }
       raf = requestAnimationFrame(frame);
     };
@@ -464,9 +472,17 @@ export default function AttentionPage() {
   };
   const startR1 = () => { unlockVideo(); setCd(3); };
 
-  const answerR1Count = (n: number) => { setR1Count(n); setPhase('r1-notice'); };
+  // 問題頁剛出現的 0.8 秒內忽略點擊：避免使用者手指還停在螢幕上，畫面一換就被當成作答
+  const tooSoon = useCallback(() => performance.now() - phaseAtRef.current < 800, []);
+
+  const answerR1Count = (n: number) => {
+    if (tooSoon()) return;
+    setR1Count(n);
+    setPhase('r1-notice');
+  };
 
   const answerR1Seen = (s: Seen1) => {
+    if (tooSoon()) return;
     setR1Seen(s);
     const seen = s === 'yes';
     fireOnce('r1_answer', 'attn_r1_answer', {
@@ -480,6 +496,10 @@ export default function AttentionPage() {
     if (catFailedRef.current) fireOnce('cat_unavailable', 'attn_cat_unavailable', { round: 1 });
     setPhase('r1-reveal');
     fireOnce('reveal', 'attn_reveal', { round: 1, unexpected_seen: seen });
+    if (!ENABLE_R2) {   // 只玩第一關時，看到揭曉就算完成
+      fireOnce('complete', 'attn_complete', { rounds: 1 });
+      fireOnce('result_view', 'attn_result_view', { rounds: 1 });
+    }
   };
 
   const goR2Brief = () => {
@@ -488,17 +508,27 @@ export default function AttentionPage() {
   };
   const startR2 = () => setCd(3);
 
-  // 第一題數錯時，重新數一次（這次已經知道魯魯會來，所以不再計入事件）
-  const retryR1 = () => {
+  // 再玩一次：換一個不同的軌跡（答案也不同），事件重新計一輪並標上第幾次玩
+  const playAgain = () => {
+    playRef.current += 1;
+    firedRef.current = new Set();
+    catFailedRef.current = false;
+    setCatFailed(false);
     setR1Count(null);
     setR1Seen(null);
-    reshuffle(r1v);   // 換一個不同的軌跡，答案也跟著不同，不能靠記憶
+    reshuffle(r1v);
+    track('attn_replay', { play: playRef.current });
     setPhase('r1-brief');
   };
 
-  const answerR2Count = (n: number) => { setR2Count(n); setPhase('r2-notice'); };
+  const answerR2Count = (n: number) => {
+    if (tooSoon()) return;
+    setR2Count(n);
+    setPhase('r2-notice');
+  };
 
   const answerR2Seen = (id: string) => {
+    if (tooSoon()) return;
     setR2Seen(id);
     fireOnce('r2_answer', 'attn_r2_answer', {
       round: 2,
@@ -508,12 +538,6 @@ export default function AttentionPage() {
       unexpected_choice: id,
     });
     fireOnce('complete', 'attn_complete', { rounds: 2 });
-    setPhase('result');
-  };
-
-  const skipToResult = () => {
-    setSkippedR2(true);
-    fireOnce('complete', 'attn_complete', { rounds: 1 });
     setPhase('result');
   };
 
@@ -545,6 +569,11 @@ export default function AttentionPage() {
   const compact = frozen || phase === 'r1-reveal';   // 說明頁與揭曉頁：舞台縮小，讓文字與舞台同一屏看得到
   const showCat = phase === 'r1-run' || phase === 'r1-reveal';
 
+  // 記下每次換畫面的時間（誤觸保護用）
+  useEffect(() => {
+    phaseAtRef.current = performance.now();
+  }, [phase]);
+
   // 手機上舞台常在第一屏之外：開始倒數與正式播放時把舞台捲到最上面；其他畫面回到頂端
   useEffect(() => {
     const toStage = cd !== null || phase === 'r1-run' || phase === 'r2-run';
@@ -573,7 +602,7 @@ export default function AttentionPage() {
       <div className="mx-auto flex flex-col" style={{ maxWidth: 440 }}>
         <div className="mb-3 flex items-center justify-between text-sm text-white/60" style={{ order: -2 }}>
           <Link href="/tools" className="hover:text-white">← 工具</Link>
-          <span>專注力小遊戲 · 約 1 分鐘</span>
+          <span>專注力小遊戲 · 約 30 秒</span>
         </div>
 
         {/* 舞台：只在播放與回放時出現，問答時隱藏，避免對著停格畫面數。
@@ -598,7 +627,7 @@ export default function AttentionPage() {
           />
           <canvas
             ref={catCanvasRef}
-            style={{ position: 'absolute', left: 0, top: 0, width: stageW, height: Math.round(stageW / CLIP_AR), pointerEvents: 'none', display: showCat ? 'block' : 'none' }}
+            style={{ position: 'absolute', left: 0, top: 0, width: stageW * CAT_WIN, height: (stageW * CAT_WIN) / CLIP_AR, pointerEvents: 'none', display: showCat ? 'block' : 'none' }}
           />
           <video
             ref={vidRef}
@@ -626,7 +655,7 @@ export default function AttentionPage() {
           )}
           {phase === 'r1-run' && (
             <div className="pointer-events-none absolute bottom-3 left-0 right-0 text-center text-xs text-white/70">
-              盯住剛才橘框的那兩顆，數它們互相碰到幾次
+              數橘框那兩顆碰到幾次
             </div>
           )}
           {phase === 'r2-run' && (
@@ -647,22 +676,20 @@ export default function AttentionPage() {
 
         {phase === 'r1-brief' && (
           <section className={`${card} mb-3`} style={{ order: -1 }}>
-            <h2 className="mb-2 text-xl font-bold">第一回合：盯住橘框的兩顆</h2>
-            <p className="mb-2 leading-relaxed text-white/85">
-              下面的圓點等一下會開始慢慢移動，橘框只會亮幾秒。
-              請一直盯著那<b className="text-amber-300">兩顆</b>，看它們<b>互相碰到幾次</b>。
+            <h2 className="mb-2 text-xl font-bold">盯住橘框的兩顆圓點</h2>
+            <p className="mb-3 leading-relaxed text-white/85">
+              圓點等一下會開始移動，數它們<b className="text-amber-300">碰到幾次</b>。
             </p>
             <RuleCard round={1} />
-            <p className="mb-5 text-sm text-white/55">只要看、不用點，約 20 秒。看完我會問你幾次。</p>
             {cd === null
-              ? <button className={btnMain} onClick={startR1}>我懂了，開始倒數</button>
+              ? <button className={btnMain} onClick={startR1}>開始</button>
               : <p className="text-center text-white/60">準備…</p>}
           </section>
         )}
 
         {phase === 'r1-count' && (
           <section className={card}>
-            <h2 className="mb-4 text-xl font-bold">剛才橘框的那兩顆，互相碰到幾次？</h2>
+            <h2 className="mb-4 text-xl font-bold">那兩顆碰到幾次？</h2>
             <div className="grid grid-cols-5 gap-2">
               {numberOptions(r1Answer, 5, r1off).map(n => (
                 <button key={n} className={btnSub} onClick={() => answerR1Count(n)}>{n}</button>
@@ -673,7 +700,7 @@ export default function AttentionPage() {
 
         {phase === 'r1-notice' && (
           <section className={card}>
-            <h2 className="mb-4 text-xl font-bold">剛剛的畫面裡，除了圓點，還有出現別的東西嗎？</h2>
+            <h2 className="mb-4 text-xl font-bold">剛剛除了圓點，你還有看到別的嗎？</h2>
             <div className="flex flex-col gap-2">
               {SEEN1_OPTS.map(o => (
                 <button key={o.id} className={btnSub} onClick={() => answerR1Seen(o.id)}>{o.label}</button>
@@ -686,47 +713,32 @@ export default function AttentionPage() {
           <section className={`${card} mt-3`}>
             {catFailed ? (
               <>
-                <h2 className="mb-2 text-2xl font-bold">魯魯這次沒能走出來</h2>
-                <p className="mb-2 leading-relaxed text-white/85">
-                  你的瀏覽器沒有成功播放魯魯的影片，所以這一題「有沒有看到」不算數。
-                  如果想完整玩，可以改用 Safari 或 Chrome 直接開這個網址。
+                <h2 className="mb-2 text-2xl font-bold">魯魯沒有播出來</h2>
+                <p className="mb-3 leading-relaxed text-white/85">
+                  影片在這個瀏覽器沒播成功，這次不計分。改用 Safari 或 Chrome 打開試試。
                 </p>
-              </>
-            ) : seen1 ? (
-              <>
-                <h2 className="mb-2 text-2xl font-bold">抓到了。😏</h2>
-                <p className="mb-2 text-white/85">你有看到魯魯。那主任務呢？</p>
               </>
             ) : (
               <>
-                <h2 className="mb-2 text-2xl font-bold">魯魯剛剛散步經過了。</h2>
-                <p className="mb-2 leading-relaxed text-white/85">
-                  不是你沒在看。你剛剛專心盯著圓點，眼前的東西就容易被漏掉。
+                <h2 className="mb-2 text-2xl font-bold">{seen1 ? '你有看到魯魯 🐱' : '魯魯剛剛走過去了 🐱'}</h2>
+                <p className="mb-4 text-white/85">
+                  {`圓點碰了 ${r1Answer} 次。`}
+                  {ok1 ? '你數對了 🎉' : `你數 ${r1Count}，差一點。`}
                 </p>
               </>
             )}
-            <p className="mb-4 text-white/85">
-              {ok1
-                ? (seen1 ? `🎉 圓點碰了 ${r1Answer} 次，你數對了——兩邊都顧到了！` : `🎉 圓點碰了 ${r1Answer} 次，你數對了，盯得很準！`)
-                : (seen1 ? `圓點其實碰了 ${r1Answer} 次。抓到魯魯了，圓點倒是趁機跑掉了，這題本來就容易數花眼。` : `圓點其實碰了 ${r1Answer} 次。這題本來就容易數花眼，數不中很正常。`)}
-            </p>
-            {!ok1 && (
-              <div className="mb-4 rounded-xl bg-white/5 p-3 text-sm text-white/80">
-                想扳回一城？
-                <button className="ml-1 font-semibold text-amber-300 underline" onClick={retryR1}>這題再數一次</button>
-                ，或者先<b>找朋友來試試</b>，看他們數幾次、有沒有看到魯魯。
-                <div onClickCapture={(e) => {
-                  if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { rounds: 1, from: 'wrong_answer' });
-                }}>
-                  <ShareButtons
-                    title="你剛剛有看到嗎？"
-                    content="我數錯了……你來試試看，你數得出幾次嗎？👀（不劇透）"
-                  />
-                </div>
-              </div>
+            <button className={btnMain} onClick={playAgain}>再玩一次</button>
+            <div onClickCapture={(e) => {
+              if ((e.target as HTMLElement).closest('button')) track('attn_share_click', { rounds: 1, correct: ok1, seen: seen1, play: playRef.current });
+            }}>
+              <ShareButtons
+                title="你剛剛有看到嗎？"
+                content="測測你的專注力，你數得出來嗎？"
+              />
+            </div>
+            {ENABLE_R2 && (
+              <button className="mt-3 w-full text-sm text-white/50 underline" onClick={goR2Brief}>再來第二關</button>
             )}
-            <button className={btnMain} onClick={goR2Brief}>不信？再來一次。這次你知道我會搞鬼了</button>
-            <button className="mt-3 w-full text-sm text-white/50 underline" onClick={skipToResult}>先看結果就好</button>
           </section>
         )}
 
