@@ -78,12 +78,9 @@ export default function DonateButton() {
                 {/* Step 1：顯示帳號 */}
                 <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🥫</div>
                 <h3 style={{ color: '#fcd34d', fontWeight: 800, fontSize: '1.15rem', margin: '0 0 0.3rem' }}>
-                  謝謝你想請魯魯吃罐罐！
+                  請魯魯吃罐罐
                 </h3>
-                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', margin: '0 0 1.4rem', lineHeight: 1.6 }}>
-                  直接轉帳就好，不需要加 LINE、不需要私訊。<br />
-                  一罐 NT$50 起，數量不限 🐱
-                </p>
+                <div style={{ height: '1rem' }} />
 
                 {/* 帳號卡片 */}
                 <div style={{
@@ -146,19 +143,9 @@ export default function DonateButton() {
                 {/* Step 2：感謝 */}
                 <div style={{ fontSize: '4rem', marginBottom: '0.5rem' }}>🐈</div>
                 <h3 style={{ color: '#fcd34d', fontWeight: 800, fontSize: '1.2rem', margin: '0 0 0.6rem' }}>
-                  魯魯感謝你！！
+                  魯魯說：罐罐好吃，謝謝！
                 </h3>
-                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', lineHeight: 1.8, margin: '0 0 0.5rem' }}>
-                  你的罐罐已收到<br />
-                  魯魯會繼續霸佔鍵盤、貢獻靈感
-                </p>
-                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem', margin: '0 0 1.5rem' }}>
-                  如需收據或聯絡，請 LINE ：
-                  <a href="https://line.me/R/ti/p/@983agawb" target="_blank" rel="noopener noreferrer"
-                    style={{ color: '#06c755', textDecoration: 'underline' }}>
-                    @983agawb
-                  </a>
-                </p>
+                <div style={{ height: '1rem' }} />
                 <button
                   onClick={() => setStep('closed')}
                   style={{
