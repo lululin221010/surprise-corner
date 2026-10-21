@@ -12,9 +12,7 @@ import type { PsychSeries, PsychBook, PsychLesson } from './courses-data';
 import PsychGroupLesson from './PsychGroupLesson';
 import '../classroom.css';
 
-// ── 解鎖碼 SHA-256 哈希（勿公開碼本身，只存 hash）──────────
-// 碼：PSYCH-PERSON-2026 / PSYCH-GROWTH-2026 / PSYCH-DARK-2026
-//      PSYCH-UNCON-2026 / PSYCH-COGNI-2026 / PSYCH-RELAT-2026
+// 解鎖碼已視為外洩作廢（2026-10-21）；重新上架前須改走 ST 伺服器驗證
 const SERIES_HASHES: Record<string, string> = {
   personality:  '43ea063aedb584e46c807e8a6d53edb009b10bfac397b3e8107ddab9e7ae4e37',
   growth:       '25ff4c7571429ba3578233bbfaa8226a2110bbfa6473c496a5b2c3b365a7923f',
