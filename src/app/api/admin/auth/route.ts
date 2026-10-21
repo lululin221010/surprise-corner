@@ -1,23 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  ADMIN_COOKIE_NAME,
+  createAdminSessionToken,
+  isAdminPasswordCorrect,
+  setAdminSessionCookie,
+} from '@/lib/adminAuth';
 
 export async function POST(req: NextRequest) {
-  const { password } = await req.json();
-  if (password === process.env.ADMIN_PASSWORD) {
-    const res = NextResponse.json({ success: true });
-    res.cookies.set('admin_token', process.env.ADMIN_PASSWORD || '', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 60 * 60 * 8, // 8小時
-      path: '/',
-    });
-    return res;
+  const { password } = await req.json().catch(() => ({}));
+  if (!isAdminPasswordCorrect(password)) {
+    return NextResponse.json({ success: false }, { status: 401 });
   }
-  return NextResponse.json({ success: false }, { status: 401 });
+  // cookie 存簽章 token（8小時到期），不再存 ADMIN_PASSWORD 明文
+  const token = createAdminSessionToken();
+  if (!token) {
+    // JWT_SECRET 未設定或太短：fail-closed，不發 cookie
+    return NextResponse.json({ success: false, error: 'server misconfigured' }, { status: 500 });
+  }
+  const res = NextResponse.json({ success: true });
+  setAdminSessionCookie(res, token);
+  return res;
 }
 
 export async function DELETE() {
   const res = NextResponse.json({ success: true });
-  res.cookies.delete('admin_token');
+  res.cookies.delete(ADMIN_COOKIE_NAME);
   return res;
 }
