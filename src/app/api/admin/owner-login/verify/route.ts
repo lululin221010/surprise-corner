@@ -2,6 +2,7 @@
 // 驗證owner-login寄出的一次性連結，通過才發admin_token session cookie
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { createAdminSessionToken, setAdminSessionCookie } from '@/lib/adminAuth';
 
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
 
@@ -15,8 +16,9 @@ export async function GET(request: Request) {
     return NextResponse.redirect(loginUrl);
   }
 
-  const validToken = process.env.ADMIN_PASSWORD;
-  if (!validToken) {
+  // 先簽好 session token：JWT_SECRET 未設定或太短就直接失敗，不消耗一次性連結
+  const sessionToken = createAdminSessionToken();
+  if (!sessionToken) {
     loginUrl.searchParams.set('ownerError', '1');
     return NextResponse.redirect(loginUrl);
   }
@@ -39,13 +41,8 @@ export async function GET(request: Request) {
   await tokens.updateOne({ _id: record._id }, { $set: { used: true } });
 
   const response = NextResponse.redirect(new URL('/admin', SS_URL));
-  response.cookies.set('admin_token', validToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 60 * 60 * 8, // 8小時，跟/api/admin/auth的密碼登入一致
-    path: '/',
-  });
+  // cookie 存簽章 token（8小時到期，跟/api/admin/auth的密碼登入一致），不再存 ADMIN_PASSWORD 明文
+  setAdminSessionCookie(response, sessionToken);
 
   return response;
 }
