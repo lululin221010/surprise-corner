@@ -168,7 +168,11 @@ export default function DetectivePage() {
         {step !== 'reveal' && step !== 'discuss' && step !== 'end' && (
           <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', border: '1px solid #ecd9b8' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img} alt="廚房桌上：倒掉的牛奶、少了一塊的餅乾，和坐在桌邊的魯魯" style={{ display: 'block', width: '100%' }} />
+            <img
+              src={step === 'intro' ? '/lab/detective/before.jpg' : img}
+              alt={step === 'intro' ? '廚房桌上：三塊餅乾、一杯牛奶，魯魯乖乖坐在桌邊' : '廚房桌上：倒掉的牛奶、少了一塊的餅乾，和坐在桌邊的魯魯'}
+              style={{ display: 'block', width: '100%' }}
+            />
             {step === 'clues' && SPOTS.map((s) => (
               <button
                 key={s.id}
@@ -184,6 +188,11 @@ export default function DetectivePage() {
             ))}
             {step === 'intro' && (
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, background: 'linear-gradient(transparent, rgba(40,25,10,0.85))', color: '#fff', padding: '40px 16px 16px' }}>
+                <div style={{ fontSize: 22, fontWeight: 700 }}>你只離開了一下下……</div>
+              </div>
+            )}
+            {step === 'belief' && (
+              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, background: 'linear-gradient(transparent, rgba(40,25,10,0.85))', color: '#fff', padding: '40px 16px 16px' }}>
                 <div style={{ fontSize: 22, fontWeight: 700 }}>魯魯說：「不是我。」</div>
               </div>
             )}
@@ -192,14 +201,14 @@ export default function DetectivePage() {
 
         {step === 'intro' && (
           <div>
-            <div style={card}>桌上原本有 3 塊餅乾和一杯牛奶。現在餅乾少了一塊，牛奶倒了。魯魯一臉淡定地說不是他。你來查。</div>
-            <button style={main} onClick={start}>我來查</button>
+            <div style={card}>桌上有 3 塊餅乾和一杯牛奶，魯魯乖乖坐在桌邊。你轉身去倒個水，回頭一看——</div>
+            <button style={main} onClick={start}>回頭一看</button>
           </div>
         )}
 
         {step === 'belief' && (
           <div>
-            <div style={card}><b>先憑直覺：你信魯魯嗎？</b></div>
+            <div style={card}>餅乾少了一塊，牛奶倒了。魯魯一臉淡定。<br /><b>先憑直覺：你信魯魯嗎？</b></div>
             <button style={btn} onClick={() => choose('trust')}>🐱 我信他</button>
             <button style={btn} onClick={() => choose('doubt')}>🔍 我不信</button>
           </div>
