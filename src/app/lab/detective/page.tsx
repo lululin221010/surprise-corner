@@ -75,7 +75,7 @@ const TRUTH: Record<Ver, { cookie: 'lulu' | 'other'; milk: 'lulu' | 'other' }> =
 };
 const REVEAL_IMG: Record<Ver, string> = { A: 'reveal_A', B: 'reveal_B', C: 'reveal_A' };
 const REVEAL_LINE: Record<Ver, string> = {
-  A: '餅乾，真的是魯魯吃的。但牛奶不是他打翻的——是住在櫥櫃裡的小老鼠，趁他吃餅乾的時候撞倒了杯子。魯魯說「不是我」，只說對了一半。',
+  A: '餅乾，真的是魯魯吃的。但牛奶不是他打翻的——是住在櫥櫃裡的小老鼠，趁他吃餅乾的時候撞倒了杯子。所以「餅乾不是我吃的」是假話，「牛奶不是我打翻的」是真話，魯魯只說對了一半。',
   B: '魯魯從頭到尾都是冤枉的。餅乾和牛奶都是小老鼠做的——牠抱著餅乾，正要躲回縫隙。魯魯早就知道，只是懶得拆穿。',
   C: '餅乾，是魯魯吃的（他還叼著牙籤）。牛奶是櫥櫃裡的小老鼠打翻的。魯魯：「……我只是剔個牙。」',
 };
@@ -193,7 +193,7 @@ export default function DetectivePage() {
             )}
             {step === 'belief' && (
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, background: 'linear-gradient(transparent, rgba(40,25,10,0.85))', color: '#fff', padding: '40px 16px 16px' }}>
-                <div style={{ fontSize: 22, fontWeight: 700 }}>魯魯說：「不是我。」</div>
+                <div style={{ fontSize: 20, fontWeight: 700 }}>魯魯說：「餅乾不是我吃的，牛奶也不是我打翻的。」</div>
               </div>
             )}
           </div>
@@ -208,9 +208,13 @@ export default function DetectivePage() {
 
         {step === 'belief' && (
           <div>
-            <div style={card}>餅乾少了一塊，牛奶倒了。魯魯一臉淡定。<br /><b>先憑直覺：你信魯魯嗎？</b></div>
-            <button style={btn} onClick={() => choose('trust')}>🐱 我信他</button>
-            <button style={btn} onClick={() => choose('doubt')}>🔍 我不信</button>
+            <div style={card}>
+              餅乾少了一塊，牛奶倒了。你問魯魯，他說：<br />
+              <b>「餅乾不是我吃的，牛奶也不是我打翻的。」</b><br />
+              先憑直覺：你信他說的話嗎？
+            </div>
+            <button style={btn} onClick={() => choose('trust')}>🐱 我信他，他沒說謊</button>
+            <button style={btn} onClick={() => choose('doubt')}>🔍 我不信，他在說謊</button>
           </div>
         )}
 
