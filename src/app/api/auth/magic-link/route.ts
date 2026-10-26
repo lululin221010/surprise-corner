@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     // 🔒 防洗信：同IP／同email 60秒冷卻＋每email每小時5次（in-memory，擋在DB查詢之前；同步自ST 10/25）
     if (!checkMailSendLimit('magic-link', { ip: getClientIP(request), email: cleanEmail })) {
-      return NextResponse.json({ success: false, error: '請稍後再試' }, { status: 429 });
+      return NextResponse.json({ success: false, error: '登入連結剛寄出,請到信箱查收(含垃圾信匣);若要重寄請等 1 分鐘後再試' }, { status: 429 });
     }
 
     // ── SS 學院 DB ──
