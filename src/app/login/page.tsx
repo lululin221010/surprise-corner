@@ -1,5 +1,5 @@
 'use client';
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -11,14 +11,21 @@ function LoginContent() {
   const [nickname, setNickname] = useState('');
   const [loading,  setLoading]  = useState(false);
   const [sent,     setSent]     = useState(false);
+  const [cooldown, setCooldown]  = useState(0); // 重寄倒數秒數，對應後端60秒冷卻
   const [error,    setError]    = useState(
     errorParam === 'expired' ? '登入連結已過期，請重新申請' :
     errorParam === 'invalid' ? '無效的登入連結' :
     errorParam === 'server'  ? '系統錯誤，請稍後再試' : ''
   );
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setTimeout(() => setCooldown(c => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown]);
+
+  const sendLink = async () => {
+    if (cooldown > 0) return;
     setError('');
     setLoading(true);
     try {
@@ -30,7 +37,9 @@ function LoginContent() {
       const data = await res.json();
       if (data.success) {
         setSent(true);
+        setCooldown(60);
       } else {
+        if (res.status === 429) setCooldown(60);
         setError(data.error || '發生錯誤，請稍後再試');
       }
     } catch {
@@ -38,6 +47,11 @@ function LoginContent() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendLink();
   };
 
   return (
@@ -61,12 +75,22 @@ function LoginContent() {
               點信中的「進入學院」按鈕即可登入。<br/>
               <span className="text-slate-500 text-xs">連結 15 分鐘內有效。</span>
             </p>
+            {error && <p className="text-red-400 text-sm">⚠️ {error}</p>}
             <button
-              onClick={() => { setSent(false); setEmail(''); setNickname(''); }}
-              className="text-purple-400 underline text-sm"
+              onClick={sendLink}
+              disabled={cooldown > 0 || loading}
+              className="text-purple-400 underline text-sm disabled:opacity-50 disabled:no-underline"
             >
-              重新寄送
+              {loading ? '寄出中...' : cooldown > 0 ? `重新寄送（${cooldown} 秒後可用）` : '重新寄送'}
             </button>
+            <div>
+              <button
+                onClick={() => { setSent(false); setError(''); }}
+                className="text-slate-500 underline text-xs"
+              >
+                email 填錯了?改填其他 email
+              </button>
+            </div>
           </div>
         ) : (
           /* 登入表單 */
@@ -115,13 +139,13 @@ function LoginContent() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || cooldown > 0}
               className="w-full py-3 bg-gradient-to-r from-violet-600 to-indigo-600
                          hover:from-violet-500 hover:to-indigo-500
                          text-white font-bold rounded-xl transition-all
                          disabled:opacity-50 text-sm"
             >
-              {loading ? '寄出中...' : '寄出一鍵登入連結 →'}
+              {loading ? '寄出中...' : cooldown > 0 ? `請稍候 ${cooldown} 秒再寄` : '寄出一鍵登入連結 →'}
             </button>
           </form>
         )}
