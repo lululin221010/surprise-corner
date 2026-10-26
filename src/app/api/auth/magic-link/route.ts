@@ -13,6 +13,7 @@ import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { Resend } from 'resend';
 import { dbConnect } from '@/lib/dbConnect';
+import { checkMailSendLimit, getClientIP } from '@/lib/rateLimit';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const SS_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://surprise-corner.vercel.app';
@@ -34,6 +35,11 @@ export async function POST(request: Request) {
     if (!email) return NextResponse.json({ success: false, error: '請輸入 email' }, { status: 400 });
 
     const cleanEmail = email.toLowerCase().trim();
+
+    // 🔒 防洗信：同IP／同email 60秒冷卻＋每email每小時5次（in-memory，擋在DB查詢之前；同步自ST 10/25）
+    if (!checkMailSendLimit('magic-link', { ip: getClientIP(request), email: cleanEmail })) {
+      return NextResponse.json({ success: false, error: '請稍後再試' }, { status: 429 });
+    }
 
     // ── SS 學院 DB ──
     const ssDb    = await dbConnect('SurpriseCornerDB');
