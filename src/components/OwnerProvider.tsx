@@ -1,63 +1,35 @@
 'use client';
 // 📄 路徑：src/components/OwnerProvider.tsx
-// 全站老闆模式：從 ST /my 點過來帶 ?email=xxx → 驗證 → 寫 cookie 永久（9999-12-31）
-// 任何 SS 頁面都能觸發，不限教室
+// 全站老闆模式：以「驚喜角落後台用信箱連結登入後」的簽章 cookie 為準，由伺服器確認。
+//
+// 🔒 2026-11-04 改版：原本有三條旁門——
+//   1) 網址 ?owner=（寫死在前端程式，瀏覽器就看得到）
+//   2) 瀏覽器自己寫的 sc_owner_v1 cookie（任何人都能手動寫）
+//   3) 網址 ?email= 去 ST 比對信箱字（信箱不是秘密）
+// 全部移除。現在只認 /api/admin/check-session 回報「已登入後台」（需點信箱連結取得簽章 cookie）。
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 
-const COOKIE_NAME = 'sc_owner_v1';
-const OWNER_SECRET = '19730113';
-const ST_API = 'https://still-time-corner.vercel.app/api/subscription/activate';
-
+const LEGACY_COOKIE = 'sc_owner_v1';
 const OwnerContext = createContext(false);
 
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null;
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? decodeURIComponent(match[2]) : null;
-}
-
-function setOwnerCookie() {
-  document.cookie = `${COOKIE_NAME}=1; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; SameSite=Lax`;
-}
-
 export function OwnerProvider({ children }: { children: React.ReactNode }) {
-  const searchParams = useSearchParams();
   const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
-    // 先查 cookie（清快取不影響）
-    if (getCookie(COOKIE_NAME) === '1') {
-      setIsOwner(true);
-      return;
-    }
+    // 清掉舊版留在瀏覽器的老闆標記（不再被認）
+    try {
+      document.cookie = `${LEGACY_COOKIE}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+      localStorage.removeItem('sc_owner');
+    } catch { /* 沒有儲存空間也能用 */ }
 
-    // ?owner=19730113 直接後門（隨時可恢復）
-    if (searchParams.get('owner') === OWNER_SECRET) {
-      setOwnerCookie();
-      setIsOwner(true);
-      return;
-    }
-
-    // ?email= 帶過來時，去 ST 驗證身份
-    const email = searchParams.get('email');
-    if (!email) return;
-
-    fetch(ST_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    })
+    let alive = true;
+    fetch('/api/admin/check-session', { cache: 'no-store', credentials: 'same-origin' })
       .then(r => r.json())
-      .then(data => {
-        if (data.ok && data.plan === 'owner') {
-          setOwnerCookie();
-          setIsOwner(true);
-        }
-      })
+      .then(d => { if (alive) setIsOwner(!!d?.authed); })
       .catch(() => {});
-  }, [searchParams]);
+    return () => { alive = false; };
+  }, []);
 
   return <OwnerContext.Provider value={isOwner}>{children}</OwnerContext.Provider>;
 }
