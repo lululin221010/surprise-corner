@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKM2EF5QTC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SKM2EF5QTC");</script>
+<title>眼見不為憑｜你的眼睛會被騙多少？</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#fbf6ec;--ink:#2b2a33;--mute:#6d6a78;--ref:#3d5a80;--you:#e07a3f;--card:#fff;--ok:#2e8b57;--bad:#c0392b}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.5}
+main{max-width:480px;margin:0 auto;padding:14px 16px 28px;min-height:100vh}
+h1{font-size:26px;margin:6px 0 2px;text-align:center}
+.sub{text-align:center;color:var(--mute);margin:0 0 10px;font-size:15px}
+.card{background:var(--card);border-radius:16px;padding:10px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+svg{width:100%;height:auto;display:block}
+button{font:inherit;font-size:18px;font-weight:700;border:0;border-radius:999px;padding:13px 22px;background:var(--you);color:#fff;cursor:pointer;width:100%;margin-top:12px;min-height:48px}
+button.g{background:#fff;color:var(--ink);border:2px solid var(--you);margin-top:8px;font-size:17px;text-align:left;padding:10px 18px}
+button.g small{display:block;font-weight:500;font-size:13px;color:var(--mute)}
+button.alt{background:#fff;color:var(--ink);border:2px solid #d9d2c3}
+a.btn{display:block;text-align:center;text-decoration:none;font-size:18px;font-weight:700;border-radius:999px;padding:13px 22px;margin-top:12px;min-height:48px;background:#fff;color:var(--you);border:2px solid var(--you)}
+button:disabled{opacity:.4}
+.hide{display:none}
+.dots{display:flex;gap:6px;justify-content:center;margin:2px 0 6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#d9d2c3}
+.dots i.on{background:var(--you)}
+.dots i.done{background:var(--ref)}
+h2{font-size:20px;margin:4px 0}
+p.ask{margin:4px 0 8px;font-size:17px}
+input[type=range]{width:100%;height:44px;margin:6px 0 0;accent-color:var(--you)}
+.res{margin-top:10px;font-size:16px}
+.res b{font-size:22px}
+.note{font-size:14px;color:var(--mute);margin-top:6px}
+.big{font-size:56px;font-weight:800;text-align:center;margin:0;color:var(--you)}
+.rows{width:100%;border-collapse:collapse;margin:8px 0;font-size:15px}
+.rows td{padding:6px 4px;border-bottom:1px solid #eee}
+.rows td:last-child{text-align:right;font-weight:700}
+.chal{background:#fff3e0;border-radius:12px;padding:8px 12px;margin:0 0 10px;text-align:center;font-size:15px}
+.why{margin-top:8px;font-size:15px;color:var(--mute)}
+.why summary{display:inline-block;cursor:pointer;border:1.5px solid #d9d2c3;border-radius:999px;padding:4px 14px;color:var(--ink);font-weight:700;list-style:none}
+.why summary::-webkit-details-marker{display:none}
+.why[open] summary{margin-bottom:6px}
+</style>
+</head>
+<body>
+<main>
+<section id="intro">
+  <h1>眼見不為憑</h1>
+  <p class="sub" id="edsub"></p>
+  <div id="chal" class="chal hide"></div>
+  <div class="card"><svg id="demo" viewBox="0 0 340 130" role="img" aria-label="兩條橫線，上面那條看起來比下面那條長"></svg></div>
+  <p class="ask" style="text-align:center;margin-top:12px;font-weight:800;font-size:19px">你覺得自己的眼睛會被騙嗎？</p>
+  <button class="g" data-g="0" style="text-align:center">不會，我很準</button>
+  <button class="g" data-g="1" style="text-align:center">會，我大概會被騙</button>
+  <p class="sub" style="margin-top:12px">規則：不用尺，<b>只用眼睛</b>，把橘色調到你覺得跟藍色一樣長（圓形：一樣大）。</p>
+</section>
+
+<section id="game" class="hide">
+  <div class="dots" id="dots"></div>
+  <h2 id="rtitle"></h2>
+  <p class="ask" id="rask"></p>
+  <div class="card"><svg id="stage" viewBox="0 0 340 200"></svg></div>
+  <div id="ctl">
+    <input type="range" id="sl" min="0" max="100" step="0.5" aria-label="調整橘色圖形">
+    <button id="lock">我覺得一樣了，揭曉！</button>
+  </div>
+  <div id="rev" class="hide">
+    <div class="res" id="rtext"></div>
+    <button class="alt" id="showEq">再看一次</button>
+    <button id="next">下一關</button>
+  </div>
+</section>
+
+<section id="final" class="hide">
+  <h1>測驗結果</h1>
+  <div id="fchal" class="chal hide"></div>
+  <p class="sub" style="font-size:17px;color:var(--ink)">你調整後，平均跟藍色差了</p>
+  <p class="big" id="score"></p>
+  <p class="sub" id="fguess" style="color:var(--you);font-weight:800;font-size:18px"></p>
+  <p class="sub">大多數人都會被騙一些，這是眼睛的正常反應。</p>
+  <div class="card"><table class="rows" id="rows"></table></div>
+  <details class="note"><summary>怎麼算分？</summary>看你憑眼睛調的，跟尺量的真正一樣長差多少，<span id="nround"></span> 關平均。</details>
+  <button id="savecard">存成「成績卡」圖片</button>
+  <button class="alt" id="share">複製挑戰文字，傳給朋友</button>
+  <button class="alt" id="again">再玩一次</button>
+  <a class="btn alt" id="cross" href="#"></a>
+  <p class="note" id="sharemsg" aria-live="polite"></p>
+</section>
+</main>
+<script>
+/* ===== 入口設定（接進驚喜角落時改這兩個網址）=====
+   ?ed=basic → 入門版 3 關（箭頭、圍繞圓、直橫）；不帶或 ?ed=pro → 進階版 5 關 */
+var BASIC_URL='/lab/illusion/play.html?ed=basic';
+var PRO_URL='/lab/illusion/play.html?ed=pro';
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var REF="#3d5a80",YOU="#e07a3f";
+function $(i){return document.getElementById(i)}
+function circ(x,y,r,fill,op){return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+fill+'"'+(op!=null?' class="fade" style="opacity:'+op+'"':'')+'/>'}
+function ln(x1,y1,x2,y2,c,w,cls,op){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+c+'" stroke-width="'+w+'" stroke-linecap="round"'+(cls?' class="'+cls+'" style="opacity:'+op+'"':'')+'/>'}
+function lbl(x,y,t,c){return '<text x="'+x+'" y="'+y+'" font-size="13" fill="'+c+'" font-weight="700" text-anchor="middle">'+t+'</text>'}
+
+/* ---- 五個錯覺的繪圖函式 ----
+   s＝橘色相對藍色的比例；ind＝背景（誘導圖形）的不透明度；
+   m＝0 是遊戲時的位置，1 是揭曉時「並排、起點對齊」的比較位置 */
+function mix(a,b,m){return a+(b-a)*m}
+// 對齊用細線（階段二「尺量確認」時出現），讓「量起來一樣長」可以用眼睛對
+function guide(x1,y1,x2,y2,op){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#2b2a33" stroke-width="1.2" style="opacity:'+(0.8*op)+'"/>'}
+function dash(x1,y1,x2,y2,op){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#2b2a33" stroke-width="1.5" stroke-dasharray="4 4" style="opacity:'+op+'"/>'}
+function lblo(x,y,t,c,op){return '<text x="'+x+'" y="'+y+'" font-size="13" fill="'+c+'" font-weight="700" text-anchor="middle" style="opacity:'+op+'">'+t+'</text>'}
+// 揭曉時貼在圖上的小標籤（TAG＝文字；不透明度跟著 m，回到原位時自動消失）
+var TAG='';
+// 橘色小字：還是玩家調的形狀時寫「你調」；換成系統畫的真正相等之後改寫「橘線／橘圓」
+var OL='你調';
+// GD＝1：階段二「尺量確認」，顯示對齊細線
+var GD=0;
+function tag(x,y,anchor,op){if(!TAG||op<=0)return '';return '<text x="'+x+'" y="'+y+'" font-size="18" font-weight="800" fill="#2b2a33" stroke="#fff" stroke-width="9" paint-order="stroke" stroke-linejoin="round" text-anchor="'+anchor+'" style="opacity:'+op+'">'+TAG+'</text>'}
+// 差距標示：紅色半透明粗線，從橘色終點連到藍色終點
+function gap(x1,y1,x2,y2,op){return Math.abs(x2-x1)+Math.abs(y2-y1)<1?'':'<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#c0392b" stroke-width="10" stroke-linecap="butt" style="opacity:'+(0.45*op)+'"/>'}
+function drawML(s,ind,m){
+  // 箭頭錯覺：兩端箭羽向外的線，看起來比箭頭向內的線長
+  var L=180,w=16,o='',a=L*s;
+  var bx=mix(80,30,m),by=mix(55,60,m);           // 藍線左端
+  var ox=mix(170-a/2,30,m),oy=mix(140,125,m);     // 橘線左端
+  o+=ln(bx,by,bx+L,by,REF,5);
+  [[bx,-1],[bx+L,1]].forEach(function(e){o+=ln(e[0],by,e[0]+e[1]*w,by-w,REF,4,'f',ind)+ln(e[0],by,e[0]+e[1]*w,by+w,REF,4,'f',ind);});
+  o+=gap(ox+a,oy,bx+L,oy,m);
+  o+=ln(ox,oy,ox+a,oy,YOU,5);
+  [[ox,1],[ox+a,-1]].forEach(function(e){o+=ln(e[0],oy,e[0]+e[1]*w,oy-w,YOU,4,'f',ind)+ln(e[0],oy,e[0]+e[1]*w,oy+w,YOU,4,'f',ind);});
+  o+=GD?guide(bx,by-14,bx,oy+14,m)+guide(bx+L,by-14,bx+L,oy+14,m):dash(bx+L,by-14,bx+L,oy+14,m);
+  o+=lblo(26,by+4,'基準',REF,1-m)+lblo(26,oy+4,OL,YOU,1-m);
+  o+=tag(30,oy-16,'start',m);
+  return o;
+}
+function drawEB(s,ind,m){
+  // 圍繞圓錯覺：被大圓圍著的圓看起來比較小
+  var R=20,o='',i,ang,r=R*s;
+  for(i=0;i<6;i++){ang=i*Math.PI/3;o+=circ(85+32*Math.cos(ang),100+32*Math.sin(ang),6,'#9aa5b1',ind);}
+  for(i=0;i<6;i++){ang=i*Math.PI/3+Math.PI/6;o+=circ(255+58*Math.cos(ang),100+58*Math.sin(ang),22,'#9aa5b1',ind);}
+  var base=165,top=base-2*R;                     // 比較時兩個圓「底部對齊」；虛線＝藍圓頂端
+  var ocx=mix(255,130+R+12+r,m);
+  o+=circ(mix(85,130,m),mix(100,base-R,m),R,REF);
+  o+=circ(ocx,mix(100,base-r,m),r,YOU);
+  o+=gap(ocx,top,ocx,base-2*r,m);
+  o+=GD?guide(95,top,250,top,m)+guide(95,base,250,base,m):dash(95,top,250,top,m);
+  o+=lblo(85,190,'基準',REF,1-m)+lblo(255,194,OL,YOU,1-m);
+  o+=tag(ocx,Math.min(top,base-2*r)-16,'middle',m);
+  return o;
+}
+// 一條線段：從 (x,y) 出發、角度 ang、長度 len
+function seg(x,y,ang,len,c,w,op){return ln(x,y,x+len*Math.cos(ang),y+len*Math.sin(ang),c,w,op!=null?'f':null,op)}
+// 線的關共用：並排時藍線、橘線都橫放、左端對齊在 x＝40（藍在 y＝80、橘在 y＝125）
+function cmpLines(Lb,a,m){
+  var o='',bx=40,by=80,oy=125;
+  o+=gap(bx+a,oy,bx+Lb,oy,m);
+  o+=GD?guide(bx,by-14,bx,oy+14,m)+guide(bx+Lb,by-14,bx+Lb,oy+14,m):dash(bx+Lb,by-14,bx+Lb,oy+14,m);
+  o+=tag(bx,oy-16,'start',m);
+  return o;
+}
+function drawVH(s,ind,m){
+  // 直橫錯覺：直線看起來比一樣長的橫線長。藍＝直線 120；橘＝橫線 120×s（倒 T 字）
+  var L=120,a=L*s,o='';
+  var bxs=mix(170,40,m),bys=mix(170,80,m),bang=mix(-Math.PI/2,0,m); // 藍線：直立→轉成橫放
+  var oxs=mix(170-a/2,40,m),oys=mix(170,125,m);
+  o+=seg(bxs,bys,bang,L,REF,6);
+  o+=ln(oxs,oys,oxs+a,oys,YOU,6);
+  if(m>0)o+=cmpLines(L,a,m);
+  o+=lblo(200,62,'基準',REF,1-m)+lblo(170,194,OL,YOU,1-m);
+  return o;
+}
+function drawDB(s,ind,m){
+  // 同心圓錯覺：內圓一樣大；外圈很貼的看起來較大，外圈很大的看起來較小。藍＝半徑 20（外圈 25）；橘＝半徑 20×s（外圈 48）
+  var R=20,r=R*s,o='';
+  o+='<circle cx="90" cy="100" r="25" fill="none" stroke="#9aa5b1" stroke-width="3" style="opacity:'+ind+'"/>';
+  o+='<circle cx="250" cy="100" r="48" fill="none" stroke="#9aa5b1" stroke-width="3" style="opacity:'+ind+'"/>';
+  var base=165,top=base-2*R,ocx=mix(250,130+R+12+r,m);
+  o+=circ(mix(90,130,m),mix(100,base-R,m),R,REF);
+  o+=circ(ocx,mix(100,base-r,m),r,YOU);
+  o+=gap(ocx,top,ocx,base-2*r,m);
+  o+=GD?guide(95,top,250,top,m)+guide(95,base,250,base,m):dash(95,top,250,top,m);
+  o+=lblo(90,186,'基準',REF,1-m)+lblo(250,186,OL,YOU,1-m);
+  o+=tag(ocx,Math.min(top,base-2*r)-16,'middle',m);
+  return o;
+}
+var SD_LB=Math.sqrt(105*105+60*60); // 桑德：藍色斜線長度（約 120.9）
+function drawSD(s,ind,m){
+  // 桑德平行四邊形：大平行四邊形裡的斜線看起來比小的裡面那條長。
+  // 底邊 y＝150、頂邊 y＝90；左邊大塊寬 150、右邊小塊寬 W2（隨 s 變）；頂邊往左錯開 45。
+  // 藍＝左塊斜線（左下角→分隔線頂端），橘＝右塊斜線（分隔線頂端→右下角）；W2＝60 時兩條一樣長
+  var a=SD_LB*s,W2=Math.sqrt(a*a-3600)-45,o='',g='#9aa5b1';
+  var BL=[50,150],DB=[200,150],BR=[200+W2,150],TL=[5,90],DT=[155,90],TR=[155+W2,90];
+  o+=ln(TL[0],TL[1],TR[0],TR[1],g,2.5,'f',ind)+ln(BL[0],BL[1],BR[0],BR[1],g,2.5,'f',ind)+ln(TL[0],TL[1],BL[0],BL[1],g,2.5,'f',ind)+ln(DT[0],DT[1],DB[0],DB[1],g,2.5,'f',ind)+ln(TR[0],TR[1],BR[0],BR[1],g,2.5,'f',ind);
+  var bang=Math.atan2(DT[1]-BL[1],DT[0]-BL[0]),oang=Math.atan2(BR[1]-DT[1],BR[0]-DT[0]);
+  o+=seg(mix(BL[0],40,m),mix(BL[1],80,m),mix(bang,0,m),SD_LB,REF,5);
+  o+=seg(mix(DT[0],40,m),mix(DT[1],125,m),mix(oang,0,m),a,YOU,5);
+  if(m>0)o+=cmpLines(SD_LB,a,m);
+  o+=lblo(95,172,'基準',REF,1-m)+lblo(200+W2/2+20,172,OL,YOU,1-m);
+  return o;
+}
+var ROUNDS=[
+ {name:'箭頭錯覺',draw:drawML,lo:.7,hi:1.6,dir:1,
+  ask:'憑眼睛：把<b style="color:#e07a3f">橘線</b>調到你覺得跟<b style="color:#3d5a80">藍線</b>一樣長。',
+  o:'橘線',b:'藍線',big:'長',small:'短',fact:'旁邊的箭頭，會讓一樣長的線看起來不一樣長。'},
+ {name:'圍繞圓錯覺',draw:drawEB,lo:.7,hi:1.7,dir:1,
+  ask:'憑眼睛：把<b style="color:#e07a3f">橘圓</b>調到你覺得跟<b style="color:#3d5a80">藍圓</b>一樣大。',
+  o:'橘圓',b:'藍圓',big:'大',small:'小',fact:'旁邊圍著大圓，中間的圓就看起來比較小。'},
+ {name:'直橫錯覺',draw:drawVH,lo:.7,hi:1.6,dir:1,
+  ask:'憑眼睛：把橫的<b style="color:#e07a3f">橘線</b>調到你覺得跟直的<b style="color:#3d5a80">藍線</b>一樣長。',
+  o:'橘線',b:'藍線',big:'長',small:'短',fact:'直的線，常常看起來比一樣長的橫線長。'},
+ {name:'同心圓錯覺',draw:drawDB,lo:.7,hi:1.6,dir:1,
+  ask:'憑眼睛：把<b style="color:#e07a3f">橘圓</b>調到你覺得跟<b style="color:#3d5a80">藍圓</b>一樣大。',
+  o:'橘圓',b:'藍圓',big:'大',small:'小',fact:'外圈很貼，圓看起來比較大；外圈很大，圓看起來比較小。'},
+ {name:'平行四邊形錯覺',draw:drawSD,lo:.7,hi:1.5,dir:1,
+  ask:'憑眼睛：把<b style="color:#e07a3f">橘色斜線</b>調到你覺得跟<b style="color:#3d5a80">藍色斜線</b>一樣長。',
+  o:'橘線',b:'藍線',big:'長',small:'短',fact:'放在大格子裡的斜線，看起來比小格子裡的長。'}
+];
+// 版本：入門版只玩前 3 關（不放鐵軌），進階版 5 關；規則與判定完全相同
+var ED=/[?&]ed=basic(&|$)/.test(location.search||'')?'basic':'pro';
+if(ED==='basic')ROUNDS=ROUNDS.slice(0,3);
+var EDNAME=ED==='basic'?'入門版':'進階版';
+document.title='眼見不為憑・'+EDNAME+'｜你的眼睛會被騙多少？';
+$('edsub').textContent=ED==='basic'?'3 個小測驗':'5 個小測驗・進階';
+$('nround').textContent=ROUNDS.length;
+$('cross').textContent=ED==='basic'?'想挑戰進階版？':'想先玩簡單的？';
+$('cross').href=ED==='basic'?PRO_URL:BASIC_URL;
+var cur=0,results=[],chal=null,sNow=1;
+
+// GA4 事件：window.gtag 存在才送；網址 ?internal=1 讓這台裝置不送（記在本機），?internal=0 解除
+var INKEY='ss_internal';
+(function(){var q=/[?&]internal=([01])/.exec(location.search||'');if(!q)return;
+  try{if(q[1]==='1')localStorage.setItem(INKEY,'1');else localStorage.removeItem(INKEY)}catch(e){}})();
+function isInternal(){try{return localStorage.getItem(INKEY)==='1'}catch(e){return /[?&]internal=1/.test(location.search||'')}}
+function track(name,params){if(isInternal())return;params=params||{};params.edition=ED;try{if(typeof window.gtag==='function')window.gtag('event',name,params)}catch(e){}}
+function guessName(){return guess===0?'no':guess===1?'yes':'none'}
+
+function show(id){['intro','game','final'].forEach(function(k){$(k).classList.toggle('hide',k!==id)});window.scrollTo(0,0)}
+function fmt1(p){return Math.round(p*10)/10}
+
+// 開場先猜：0＝不會（很準），1＝會（大概會被騙）
+var guess=null;
+$('intro').addEventListener('click',function(e){var b=e.target.closest('button[data-g]');if(!b)return;guess=+b.getAttribute('data-g');track('ill_start',{guess:guessName()});cur=0;results=[];show('game');startRound()});
+// 結果對照：只有一條界線 8%（暫定，沒有研究根據）；界線上下 2% 內（6～10%）一律說「跟你想的差不多」
+var LINE=8,NEAR=2;
+function guessTxt(avg){
+  if(guess==null)return null;
+  var near=Math.abs(avg-LINE)<=NEAR,low=avg<LINE;
+  if(near)return {page:'跟你想的差不多',share:'我猜自己'+(guess?'會':'不會')+'被騙，結果跟我想的差不多。'};
+  if(guess===0)return low?{page:'你猜對了，你的眼睛很準',share:'我猜自己不會被騙，猜對了。'}:{page:'你比自己想的更好騙',share:'我以為自己不會被騙，結果被騙得比想的多。'};
+  return low?{page:'你比自己想的更準',share:'我以為自己會被騙，結果比想的更準。'}:{page:'你猜對了，眼睛真的會被騙',share:'我猜自己會被騙，猜對了。'};
+}
+// 開場示範：ML 兩條線其實等長，不剝露答案
+(function(){
+  var L=180,cx=170,w=14,y1=35,y2=95,o='';
+  o+=ln(cx-L/2,y1,cx+L/2,y1,REF,5);
+  [[cx-L/2,-1],[cx+L/2,1]].forEach(function(e){o+=ln(e[0],y1,e[0]+e[1]*w,y1-w,REF,4)+ln(e[0],y1,e[0]+e[1]*w,y1+w,REF,4)});
+  o+=ln(cx-L/2,y2,cx+L/2,y2,YOU,5);
+  [[cx-L/2,1],[cx+L/2,-1]].forEach(function(e){o+=ln(e[0],y2,e[0]+e[1]*w,y2-w,YOU,4)+ln(e[0],y2,e[0]+e[1]*w,y2+w,YOU,4)});
+  $('demo').innerHTML=o;
+})();
+
+// 朋友挑戰：網址 #c=數字（只放在網址 hash，不送出任何資料）
+(function(){
+  var m=/[#&]c=(\d{1,2}(?:\.\d)?)/.exec(location.hash||'');
+  if(m){chal=parseFloat(m[1]);
+    $('chal').textContent='朋友調整後平均差了 '+chal+'%，你能比朋友更接近嗎？';$('chal').classList.remove('hide');}
+})();
+
+function startRound(){
+  var r=ROUNDS[cur];
+  $('dots').innerHTML=ROUNDS.map(function(_,i){return '<i class="'+(i===cur?'on':i<cur?'done':'')+'"></i>'}).join('');
+  $('rtitle').textContent='第 '+(cur+1)+' 關・'+r.name;
+  $('rask').innerHTML=r.ask;
+  $('ctl').classList.remove('hide');$('rev').classList.add('hide');
+  $('rtext').innerHTML='';TAG='';OL='你調';GD=0;
+  // 起點：離「真正相等」20～30%，方向隨機（不會一開始就落在答案上）
+  var off=(Math.random()<.5?-1:1)*(0.20+Math.random()*0.10);
+  $('sl').value=((1+off)-r.lo)/(r.hi-r.lo)*100;$('sl').disabled=false;
+  $('lock').disabled=true;$('lock').textContent='先拖一下滑桿';
+  draw();
+}
+function sFromSlider(){var r=ROUNDS[cur];return r.lo+(r.hi-r.lo)*($('sl').value/100)}
+function draw(ind,s,m){
+  var r=ROUNDS[cur];
+  $('stage').innerHTML=r.draw(s==null?sFromSlider():s,ind==null?1:ind,m||0);
+}
+$('sl').addEventListener('input',function(){draw();if($('lock').disabled&&!$('sl').disabled){$('lock').disabled=false;$('lock').textContent='我覺得一樣了，揭曉！'}});
+
+$('lock').addEventListener('click',function(){
+  var r=ROUNDS[cur];sNow=sFromSlider();
+  $('sl').disabled=true;$('lock').disabled=true;
+  var pct=(sNow-1)*100,ap=fmt1(Math.abs(pct));results[cur]={name:r.name,diff:ap,more:pct>0,r:r};track('ill_round',{level:cur+1,diff:ap});
+  // 圖上標籤：你剛剛調的＋長／短了多少（最短的一句，讓人看得出方向和多少）
+  var word=r.big==='大'?'一樣大':'一樣長';
+  // 揭曉整段只用「尺量」一個標準；眼睛的部分只放在最後一句
+  r.mineTag='你剛剛調的：用尺量，'+(ap<2?'幾乎'+word:'橘色比較'+(pct>0?r.big:r.small));
+  setTimeout(function(){$('rtext').innerHTML='';$('ctl').classList.add('hide');$('rev').classList.remove('hide');
+    $('next').textContent=cur===ROUNDS.length-1?'看結果':'下一關';
+    $('next').classList.add('hide');$('showEq').classList.add('hide');
+    runEqual(r);},300);
+});
+
+// 揭曉（必經，約 4 秒）：①把你剛剛調的橘色移到藍色旁邊、起點對齊（看見差多少）
+// ②在旁邊把它變成真正相等 ③放回原位、背景回來（真正相等又被看成不一樣）。播完才出現「下一關」。
+function tween(dur,fn,done,tok){
+  var t0=null;
+  function step(ts){
+    if(tok!=null&&tok!==eqToken)return; // 已按下一關／重播：舊動畫立刻停止，不再畫圖
+    if(t0==null)t0=ts;var k=Math.min(1,(ts-t0)/dur);
+    fn(k);
+    if(k<1)requestAnimationFrame(step);else if(done)done();
+  }
+  requestAnimationFrame(step);
+}
+var eqToken=0;
+function later(ms,my,fn){setTimeout(function(){if(my===eqToken)fn()},ms)}
+function runEqual(r){
+  var my=++eqToken,from=sNow,word=r.big==='大'?'一樣大':'一樣長';
+  $('showEq').classList.add('hide');$('next').classList.add('hide');
+  $('rtext').innerHTML='';
+  TAG=r.mineTag;OL='你調';GD=0;draw(1,from,0); // 立刻換回玩家調的樣子，不留一格舊畫面
+  tween(700,function(k){draw(1-k,from,k)},function(){
+    if(my!==eqToken)return;
+    later(1800,my,function(){
+      TAG='現在橘色跟藍色'+word+'，尺量確認！';OL=r.o;GD=1;
+      tween(600,function(k){draw(0,from+(1-from)*k,1)},function(){
+        if(my!==eqToken)return;
+        later(900,my,function(){
+          tween(700,function(k){draw(k,1,1-k)},function(){
+            if(my!==eqToken)return;
+            TAG='';draw(1,1,0);
+            $('rtext').innerHTML='<b style="font-size:17px">明明量起來'+word+'，眼睛卻覺得不一樣。<br>這就是視覺錯覺！</b>'+
+              '<details class="why"><summary>為什麼會這樣？</summary>'+r.fact+'</details>';
+            $('next').classList.remove('hide');
+            $('showEq').textContent='再看一次';$('showEq').classList.remove('hide');$('showEq').disabled=false;
+          },my);
+        });
+      },my);
+    });
+  },my);
+}
+
+$('showEq').addEventListener('click',function(){
+  this.disabled=true;
+  runEqual(ROUNDS[cur]);
+  $('next').classList.remove('hide'); // 重播時不擋住「下一關」
+});
+
+$('next').addEventListener('click',function(){
+  eqToken++;
+  cur++;
+  if(cur<ROUNDS.length){startRound();window.scrollTo(0,0)}else finish();
+});
+
+function finish(){
+  var sum=0;results.forEach(function(x){sum+=x.diff});
+  var avg=fmt1(sum/results.length);
+  $('score').textContent=avg+'%';
+  $('rows').innerHTML=results.map(function(x){return '<tr><td>'+x.name+'<br><small style="color:var(--mute)">'+howTxt(x)+'</small></td><td>'+rowTxt(x)+'</td></tr>'}).join('');
+  if(chal!=null){
+    $('fchal').textContent=avg<chal?'你比朋友（差 '+chal+'%）更接近，贏了！':avg>chal?'朋友（差 '+chal+'%）比你接近，下次再戰。':'跟朋友（差 '+chal+'%）平手！';
+    $('fchal').classList.remove('hide');
+  }
+  $('sharemsg').textContent='';
+  show('final');
+  window.__avg=avg;
+  window.__g=guessTxt(avg);
+  track('ill_finish',{avg:avg,guess:guessName()});
+  $('fguess').textContent=window.__g?window.__g.page:'';$('fguess').classList.toggle('hide',!window.__g);
+}
+function rowTxt(x){return '差 '+x.diff+'%'}
+function howTxt(x){return x.diff<2?'幾乎一樣':'調得太'+(x.more?x.r.big:x.r.small)}
+function shareText(){
+  var t='我玩《眼見不為憑》'+EDNAME+'，調整後平均跟藍色差了 '+window.__avg+'%（'+results.map(function(x){return x.name+' '+rowTxt(x)}).join('、')+'）。'+(window.__g?window.__g.share:'')+'你能比我更接近嗎？';
+  // 直接開本機檔案時沒有能給朋友的網址，也不要把電腦裡的檔案路徑傳出去
+  if(/^https?:$/.test(location.protocol))t+='\n'+location.origin+location.pathname+'?ed='+ED+'#c='+window.__avg; // 帶版本，不帶 internal 等其他參數
+  return t;
+}
+$('share').addEventListener('click',function(){
+  track('ill_share');
+  var t=shareText();
+  function ok(){$('sharemsg').textContent=/^https?:$/.test(location.protocol)?'已複製！貼給朋友就能挑戰你的分數。':'已複製！（現在是本機檔案，沒有附網址；正式上線後才會附上挑戰網址）'}
+  function manual(){$('sharemsg').textContent='請手動複製：'+t}
+  if(navigator.share&&/Mobi|Android/i.test(navigator.userAgent)){navigator.share({text:t}).catch(function(){})}
+  else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,manual)}
+  else manual();
+});
+// 成績卡：畫成一張可儲存／分享的圖（全部在本機產生，不上傳）
+function makeCard(cb){
+  var W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;
+  var g=c.getContext('2d'),F='-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif';
+  g.fillStyle='#fbf6ec';g.fillRect(0,0,W,H);
+  g.fillStyle='#fff';g.fillRect(60,60,W-120,H-120);
+  g.strokeStyle='#e07a3f';g.lineWidth=8;g.strokeRect(60,60,W-120,H-120);
+  g.textAlign='center';
+  g.fillStyle='#6d6a78';g.font='700 44px '+F;g.fillText('眼見不為憑・'+EDNAME+'・我的成績',W/2,170);
+  g.fillStyle='#2b2a33';g.font='800 60px '+F;g.fillText('我調整後，平均跟藍色差了',W/2,320);
+  g.fillStyle='#e07a3f';g.font='800 230px '+F;g.fillText(window.__avg+'%',W/2,560);
+  g.fillStyle='#6d6a78';g.font='700 40px '+F;g.fillText('大多數人都會被騙一些，這是眼睛的正常反應',W/2,660);
+  if(window.__g){g.fillStyle='#e07a3f';g.font='800 42px '+F;g.fillText(window.__g.share.replace(/。$/,''),W/2,730);}
+  var ry=window.__g?820:780;g.textAlign='left';
+  results.forEach(function(x){
+    g.fillStyle='#2b2a33';g.font='700 46px '+F;g.fillText(x.name,140,ry);
+    g.textAlign='right';g.fillStyle='#3d5a80';g.fillText(rowTxt(x),W-140,ry);g.textAlign='left';ry+=66;});
+  g.textAlign='center';g.fillStyle='#e07a3f';g.font='800 54px '+F;
+  g.fillText('你能比我更接近嗎？',W/2,H-150);
+  g.fillStyle='#6d6a78';g.font='500 34px '+F;
+  g.fillText('明明量起來一樣，眼睛還是會被騙',W/2,H-90);
+  c.toBlob(cb,'image/png');
+}
+$('savecard').addEventListener('click',function(){
+  makeCard(function(blob){
+    if(!blob){$('sharemsg').textContent='圖片產生失敗，請改用截圖。';return}
+    var file;try{file=new File([blob],'eye-score-card-advanced.png',{type:'image/png'})}catch(e){file=null}
+    if(file&&navigator.canShare&&navigator.canShare({files:[file]})&&/Mobi|Android/i.test(navigator.userAgent)){
+      navigator.share({files:[file],text:'你能比我更接近嗎？'}).catch(function(){});return;}
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='eye-score-card-advanced.png';
+    document.body.appendChild(a);a.click();a.remove();
+    $('sharemsg').textContent='已存成圖片，傳給朋友吧！';
+  });
+});
+$('again').addEventListener('click',function(){track('ill_replay');cur=0;results=[];guess=null;show('intro')});
+
+})();
+</script>
+</body>
+</html>
