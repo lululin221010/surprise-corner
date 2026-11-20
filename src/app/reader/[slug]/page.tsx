@@ -237,7 +237,7 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
               購買後可在小舖自助取件，永久下載。
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-              <BuyButton href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'} className="btn-buy" />
+              <BuyButton href={trial.shopUrl ?? 'https://stilltimecorner.com/digital'} className="btn-buy" />
               <Link href={`/${seriesSlug}.html`} className="link-back">← 回到系列頁</Link>
             </div>
           </div>
@@ -246,7 +246,7 @@ export default async function ReaderPage({ params }: { params: Promise<{ slug: s
       </div>
 
       <div className="fixed-bar">
-        <BuyButton href={trial.shopUrl ?? 'https://still-time-corner.vercel.app/digital'} className="btn-buy" />
+        <BuyButton href={trial.shopUrl ?? 'https://stilltimecorner.com/digital'} className="btn-buy" />
         <Link href={`/${seriesSlug}.html`} className="link-back">← 回到系列頁</Link>
       </div>
     </>

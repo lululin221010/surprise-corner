@@ -17,9 +17,9 @@ const UNLOCK_KEYS: Record<string, string> = {
 };
 
 const PURCHASE_URLS: Record<string, string> = {
-  'ai-intro':    'https://still-time-corner.vercel.app/digital/6a3cff188bbf86db8ae82257',
-  'ai-advanced': 'https://still-time-corner.vercel.app/digital/6a47ad5c06e0bde7f56e41df',
-  'ai-master':   'https://still-time-corner.vercel.app/digital/6a47ad5c06e0bde7f56e41e0',
+  'ai-intro':    'https://stilltimecorner.com/digital/6a3cff188bbf86db8ae82257',
+  'ai-advanced': 'https://stilltimecorner.com/digital/6a47ad5c06e0bde7f56e41df',
+  'ai-master':   'https://stilltimecorner.com/digital/6a47ad5c06e0bde7f56e41e0',
 };
 
 const PRICES: Record<string, string> = {
@@ -51,7 +51,7 @@ export default function Academy() {
     if (!code) return;
     setUnlockStatus('loading');
     try {
-      const res = await fetch(`https://still-time-corner.vercel.app/api/verify-unlock?code=${encodeURIComponent(code)}`);
+      const res = await fetch(`https://stilltimecorner.com/api/verify-unlock?code=${encodeURIComponent(code)}`);
       const data = await res.json();
       if (data.valid) {
         localStorage.setItem(`sc_ai_unlock_${data.target}`, 'true');
@@ -133,7 +133,7 @@ export default function Academy() {
             {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>解鎖碼無效，請確認後再試</p>}
             {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>✅ 解鎖成功！</p>}
             <a
-              href={PURCHASE_URLS[activeCourse.id] ?? 'https://still-time-corner.vercel.app/ebooks'}
+              href={PURCHASE_URLS[activeCourse.id] ?? 'https://stilltimecorner.com/ebooks'}
               target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
               購買本書解鎖課程（{PRICES[activeCourse.id] ?? 'NT$249'}） →

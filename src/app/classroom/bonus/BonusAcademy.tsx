@@ -317,7 +317,7 @@ export default function BonusAcademy() {
           <div style={{ color: '#5b21b6', fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.3rem', textAlign: 'center' }}>💡 想看完整版？</div>
           <div style={{ color: '#6b7280', fontSize: '0.85rem', marginBottom: '0.9rem', textAlign: 'center' }}>購買電子書取得解鎖碼，解鎖全書所有組別＋榮譽證書</div>
           <div style={{ display: 'flex', gap: '0.6rem' }}>
-            <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+            <a href="https://stilltimecorner.com/digital" target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.6rem', textDecoration: 'none', textAlign: 'center' }}>
               前往小舖購買 →
             </a>

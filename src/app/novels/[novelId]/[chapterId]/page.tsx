@@ -146,7 +146,7 @@ export default async function ChapterPage({ params }: Props) {
           {/* 按鈕 */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center' }}>
             <a
-              href="https://still-time-corner.vercel.app/"
+              href="https://stilltimecorner.com/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -295,7 +295,7 @@ export default async function ChapterPage({ params }: Props) {
               等待期間，去小舖找找驚喜？
             </p>
             <a
-              href="https://still-time-corner.vercel.app/"
+              href="https://stilltimecorner.com/"
               target="_blank"
               rel="noopener noreferrer"
               style={{

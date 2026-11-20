@@ -21,7 +21,7 @@ const newChapters = [
 
 這本書就是那第一步。`,
   wordCount:180, publishedAt:'2026-03-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'slash-002', novelId:'slash-rich', chapterNumber:2,
   title:'第一章：找到你的斜槓定位',
@@ -41,7 +41,7 @@ const newChapters = [
 
 本章練習：拿出一張紙，把你會的事情列出來，然後問自己：「如果我要教別人這件事，他們願意付多少錢？」答案可能會讓你驚訝。`,
   wordCount:195, publishedAt:'2026-03-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'slash-003', novelId:'slash-rich', chapterNumber:3,
   title:'第二章：你已經有的，就是起點',
@@ -61,7 +61,7 @@ const newChapters = [
 
 本章重點：清點你手邊已有的資源，包括技能、人脈、工具，然後問自己：「我今天可以用什麼做出第一個試驗？」`,
   wordCount:205, publishedAt:'2026-03-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'slash-004', novelId:'slash-rich', chapterNumber:4,
   title:'第三章：AI 工具讓你一個人頂一個團隊',
@@ -81,7 +81,7 @@ const newChapters = [
 
 後面章節會逐一教你如何用這些工具打造副業產品。繼續讀下去。`,
   wordCount:200, publishedAt:'2026-03-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'slash-005', novelId:'slash-rich', chapterNumber:5,
   title:'第四章：數位產品——從零打造你的第一個產品',
@@ -101,7 +101,7 @@ const newChapters = [
 
 行動：今天就決定你的第一個數位產品主題，寫下來。`,
   wordCount:210, publishedAt:'2026-03-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'slash-006', novelId:'slash-rich', chapterNumber:6,
   title:'第五章：社群媒體——免費流量的入口',
@@ -122,7 +122,7 @@ const newChapters = [
 
 後續章節將深入定價心理學、電子報、聯盟行銷，以及七個成功案例的真實故事。完整版共 30 章，前往小舖解鎖。`,
   wordCount:220, publishedAt:'2026-03-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital' },
 
 ...['第六章：定價心理學——你的價值不只你以為的',
    '第七章：電子報的威力——最忠實的受眾在哪裡',
@@ -150,7 +150,7 @@ const newChapters = [
 ].map((title, i) => ({
   id: `slash-${String(i+7).padStart(3,'0')}`, novelId:'slash-rich', chapterNumber:i+7, title,
   content:'', wordCount:0, publishedAt:'2026-08-01', isPublished:true, isFree:false,
-  price:0, priceFullBook:199, shopUrl:'https://still-time-corner.vercel.app/digital'
+  price:0, priceFullBook:199, shopUrl:'https://stilltimecorner.com/digital'
 })),
 
 // ── 台股紅綠燈 2026（stock-signal）25 章，前 5 章免費 ────────────
@@ -173,7 +173,7 @@ const newChapters = [
 
 這套系統不保證每次都對，但可以幫你大幅減少「不該進場卻進場」的致命錯誤。讓我們開始。`,
   wordCount:200, publishedAt:'2026-02-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:249, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:249, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'stock-002', novelId:'stock-signal', chapterNumber:2,
   title:'第一章：認識台股的基本結構',
@@ -191,7 +191,7 @@ const newChapters = [
 
 理解這些基礎，你才能知道自己在看什麼、在買什麼。`,
   wordCount:195, publishedAt:'2026-02-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:249, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:249, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'stock-003', novelId:'stock-signal', chapterNumber:3,
   title:'第二章：紅綠燈系統是什麼',
@@ -213,7 +213,7 @@ const newChapters = [
 
 這個系統最大的優點是：它強迫你在「不確定的時候什麼都不做」。而「什麼都不做」往往是散戶最難做到、卻最重要的事。`,
   wordCount:210, publishedAt:'2026-02-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:249, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:249, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'stock-004', novelId:'stock-signal', chapterNumber:4,
   title:'第三章：如何看懂大盤方向',
@@ -233,7 +233,7 @@ const newChapters = [
 
 每天早上開盤前花五分鐘確認這三件事，你對當天操作方向就有了基本判斷。`,
   wordCount:200, publishedAt:'2026-02-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:249, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:249, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'stock-005', novelId:'stock-signal', chapterNumber:5,
   title:'第四章：選股的第一個指標',
@@ -255,7 +255,7 @@ const newChapters = [
 
 後續章節深入介紹 KD、MACD、外資籌碼等進階指標。完整版共 25 章，前往小舖解鎖。`,
   wordCount:215, publishedAt:'2026-02-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:249, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:249, shopUrl:'https://stilltimecorner.com/digital' },
 
 ...['第五章：移動平均線的實戰應用',
    '第六章：量能——最被散戶低估的指標',
@@ -280,7 +280,7 @@ const newChapters = [
 ].map((title, i) => ({
   id: `stock-${String(i+6).padStart(3,'0')}`, novelId:'stock-signal', chapterNumber:i+6, title,
   content:'', wordCount:0, publishedAt:'2026-08-01', isPublished:true, isFree:false,
-  price:0, priceFullBook:249, shopUrl:'https://still-time-corner.vercel.app/digital'
+  price:0, priceFullBook:249, shopUrl:'https://stilltimecorner.com/digital'
 })),
 
 // ── 影音 AI 工具完全指南（ai-tools-guide）20 章，前 4 章免費 ─────
@@ -301,7 +301,7 @@ const newChapters = [
 
 準備好了嗎？讓我們開始。`,
   wordCount:190, publishedAt:'2026-01-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:380, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:380, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'ai-002', novelId:'ai-tools-guide', chapterNumber:2,
   title:'第一章：Midjourney 圖像生成完全入門',
@@ -324,7 +324,7 @@ Prompt 寫法技巧：
 
 生成的圖可以用於電子書封面、社群圖卡、商品圖，基本方案以上可商業使用。`,
   wordCount:230, publishedAt:'2026-01-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:380, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:380, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'ai-003', novelId:'ai-tools-guide', chapterNumber:3,
   title:'第二章：Suno 讓你無需樂器就能作曲',
@@ -348,7 +348,7 @@ Prompt 寫法技巧：
 
 Suno 的限制：人聲品質有時不穩定，生成的歌詞偶爾語意奇怪。建議多生成幾次選最好的。`,
   wordCount:215, publishedAt:'2026-01-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:380, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:380, shopUrl:'https://stilltimecorner.com/digital' },
 
 { id:'ai-004', novelId:'ai-tools-guide', chapterNumber:4,
   title:'第三章：ElevenLabs 語音克隆與 AI 配音',
@@ -376,7 +376,7 @@ Suno 的限制：人聲品質有時不穩定，生成的歌詞偶爾語意奇怪
 
 後續章節將介紹 Sora、CapCut AI、HeyGen 等影片生成工具。完整版共 20 章，前往小舖解鎖。`,
   wordCount:240, publishedAt:'2026-01-01', isPublished:true, isFree:true,
-  price:0, priceFullBook:380, shopUrl:'https://still-time-corner.vercel.app/digital' },
+  price:0, priceFullBook:380, shopUrl:'https://stilltimecorner.com/digital' },
 
 ...['第四章：Sora 影片生成——現在能做什麼、不能做什麼',
    '第五章：CapCut AI——剪輯從此不再難',
@@ -397,7 +397,7 @@ Suno 的限制：人聲品質有時不穩定，生成的歌詞偶爾語意奇怪
 ].map((title, i) => ({
   id: `ai-${String(i+5).padStart(3,'0')}`, novelId:'ai-tools-guide', chapterNumber:i+5, title,
   content:'', wordCount:0, publishedAt:'2026-08-01', isPublished:true, isFree:false,
-  price:0, priceFullBook:380, shopUrl:'https://still-time-corner.vercel.app/digital'
+  price:0, priceFullBook:380, shopUrl:'https://stilltimecorner.com/digital'
 })),
 
 ]

@@ -99,42 +99,42 @@ const BOOK_PREVIEWS = [
     title: '暗黑心理學 Vol.1《操控的藝術》',
     color: '#9333ea',
     excerpt: '你有沒有想過，為什麼有些人就是特別會讓你感到愧疚？他們不需要大吼大叫，只需要沉默幾秒，或者輕描淡寫地說一句「沒事，我理解你」——然後你就開始道歉了。這種技術有個名字，叫做「情感勒索」。而它的核心，是對你的罪惡感進行精準的外科手術。',
-    buyUrl: 'https://still-time-corner.vercel.app/digital',
+    buyUrl: 'https://stilltimecorner.com/digital',
   },
   {
     series: '認知心理學',
     title: '認知心理學 Vol.1《你以為你在思考》',
     color: '#0ea5e9',
     excerpt: '你今天做的第一個決定，大概是在你還沒完全清醒的狀態下完成的。不是早餐吃什麼，而是要不要繼續賴床。你的大腦在那個瞬間啟動了一套它偏愛的預設程序——而你，幾乎沒有參與這個過程。這就是認知心理學最讓人不安的入口：我們以為自己在思考，其實只是在執行。',
-    buyUrl: 'https://still-time-corner.vercel.app/digital',
+    buyUrl: 'https://stilltimecorner.com/digital',
   },
   {
     series: '成長心理學',
     title: '成長心理學 Vol.1《為什麼努力沒有用》',
     color: '#10b981',
     excerpt: '「再努力一點就好了。」這句話你聽過多少次？說這句話的人，包括你自己。問題不在努力夠不夠，而在努力的方向有沒有根據你真正的動機結構設計。心理學告訴我們，人有兩種截然不同的動機系統——一種越燒越旺，一種越逼越熄火。你現在用的是哪一種？',
-    buyUrl: 'https://still-time-corner.vercel.app/digital',
+    buyUrl: 'https://stilltimecorner.com/digital',
   },
   {
     series: '人格心理學',
     title: '人格心理學 Vol.1《你為什麼是這樣的人》',
     color: '#f59e0b',
     excerpt: '人格不是你選的。那是你在一次又一次微小的反應中，被環境、被關係、被你根本記不得的早期經歷，一層一層塑造出來的。但這不代表你沒有辦法。真正的改變，從理解自己的人格結構開始——不是貼標籤，而是看清那些你以為是「個性」的東西，其實是一套可以被理解的防禦系統。',
-    buyUrl: 'https://still-time-corner.vercel.app/digital',
+    buyUrl: 'https://stilltimecorner.com/digital',
   },
   {
     series: '關係心理學',
     title: '關係心理學 Vol.1《為什麼愛會傷人》',
     color: '#ec4899',
     excerpt: '最傷你的人，通常不是壞人。他們只是帶著自己未被療癒的傷，走進了你的生命。而你也一樣。關係心理學不是教你找到「對的人」，而是幫你看清楚你在關係裡的模式——那些你一再重複的劇本，那些你以為對方的問題，其實更早出現在你的童年地圖裡。',
-    buyUrl: 'https://still-time-corner.vercel.app/digital',
+    buyUrl: 'https://stilltimecorner.com/digital',
   },
   {
     series: '潛意識心理學',
     title: '潛意識心理學 Vol.1《那些你以為忘了的事》',
     color: '#8b5cf6',
     excerpt: '記憶不會消失。它只是換了個地方。那些你以為自己已經放下的事，那些你說「沒關係、過去了」的經歷——它們住在你的身體反應裡，住在你莫名其妙的情緒裡，住在你選擇某些人的直覺裡。潛意識心理學的第一課，是承認：你的過去比你以為的更活躍。',
-    buyUrl: 'https://still-time-corner.vercel.app/digital',
+    buyUrl: 'https://stilltimecorner.com/digital',
   },
 ];
 
@@ -648,7 +648,7 @@ export default function Home() {
             {[
               { label: '🏫 小教室', href: '/classroom' },
               { label: '💬 互動牆', href: '/wall' },
-              { label: '🛒 小舖', href: 'https://still-time-corner.vercel.app', external: true },
+              { label: '🛒 小舖', href: 'https://stilltimecorner.com', external: true },
             ].map(l => (
               l.external
                 ? <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="footer-link">{l.label}</a>

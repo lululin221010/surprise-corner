@@ -116,7 +116,7 @@ function PurchaseGuide({ bookTitle, allGroupTitles, onBack }: { bookTitle: strin
 
         {/* 購買按鈕 */}
         <a
-          href="https://still-time-corner.vercel.app/digital"
+          href="https://stilltimecorner.com/digital"
           target="_blank"
           rel="noopener noreferrer"
           style={{ display: 'block', width: '100%', background: 'linear-gradient(135deg, #7c3aed, #06b6d4)', color: '#fff', fontWeight: 700, fontSize: '1rem', border: 'none', borderRadius: '30px', padding: '0.85rem', cursor: 'pointer', textDecoration: 'none', marginBottom: '0.8rem', textAlign: 'center' }}

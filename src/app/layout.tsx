@@ -107,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}>
               聯絡我們 LINE @983agawb
             </a>
-            <a href="https://still-time-corner.vercel.app/" target="_blank" rel="noopener noreferrer"
+            <a href="https://stilltimecorner.com/" target="_blank" rel="noopener noreferrer"
               style={{ color: '#6b7280', fontSize: '0.75rem', textDecoration: 'none' }}>
               有的沒的小舖 ✨
             </a>

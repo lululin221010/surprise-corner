@@ -569,7 +569,7 @@ export default function EbookPage() {
           <div className="ebook-nav-actions">
             {!isSerial && (novel as any).forSale !== false && (
               <a
-                href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
+                href={(novel as any).shopUrl || 'https://stilltimecorner.com/digital'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-print"
@@ -736,7 +736,7 @@ export default function EbookPage() {
                   連載更新中，歡迎繼續追蹤 🐾
                 </p>
                 <div className="footer-btns">
-                  <a href="https://still-time-corner.vercel.app/my-perks" className="footer-browse">
+                  <a href="https://stilltimecorner.com/my-perks" className="footer-browse">
                     ← 回到好康禮
                   </a>
                 </div>
@@ -749,7 +749,7 @@ export default function EbookPage() {
                 </p>
                 <div className="footer-btns">
                   <a
-                    href={(novel as any).shopUrl || 'https://still-time-corner.vercel.app/digital'}
+                    href={(novel as any).shopUrl || 'https://stilltimecorner.com/digital'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer-shop"

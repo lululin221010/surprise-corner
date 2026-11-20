@@ -122,7 +122,7 @@ const newEntries = sections.map(([id, chapterNum, title, startLine, endLine]) =>
     isFree: false,
     price: 0,
     priceFullBook: 299,
-    shopUrl: 'https://still-time-corner.vercel.app/digital'
+    shopUrl: 'https://stilltimecorner.com/digital'
   };
 });
 

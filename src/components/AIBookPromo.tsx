@@ -185,7 +185,7 @@ export default function AIBookPromo() {
 
         {/* 購買按鈕 */}
         <a
-          href="https://still-time-corner.vercel.app/digital/69a3c5f1081513b2186cc952"
+          href="https://stilltimecorner.com/digital/69a3c5f1081513b2186cc952"
           onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'ai_book_promo' })}
           style={{
             display: 'inline-flex', flexDirection: 'column' as const, alignItems: 'center', gap: '4px',
@@ -272,6 +272,6 @@ export default function AIBookPromo() {
   如果網站有 Google Fonts，請確認已載入：
   'Noto Sans TC' (weights: 400, 700, 900)
 
-  href="https://still-time-corner.vercel.app/digital" 指向數位商品購買頁面，
+  href="https://stilltimecorner.com/digital" 指向數位商品購買頁面，
   如果網址不同請修改。
 */

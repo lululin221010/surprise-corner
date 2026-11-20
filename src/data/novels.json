@@ -3,7 +3,7 @@
     "id": "lulu-life",
     "title": "魯魯來了",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/cover_lulu_life.jpg",
+    "cover": "https://stilltimecorner.com/images/cover_lulu_life.jpg",
     "genre": "生活紀錄",
     "status": "連載中",
     "category": "serial",
@@ -17,7 +17,7 @@
     "updatedAt": "2026-03-24",
     "createdAt": "2026-03-15",
     "scheduleNote": "不定期更新",
-    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "shopUrl": "https://stilltimecorner.com/digital",
     "forSale": false
   },
   {
@@ -38,7 +38,7 @@
     "updatedAt": "2026-03-17",
     "createdAt": "2026-03-15",
     "scheduleNote": "奇數日更新",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277a",
+    "shopUrl": "https://stilltimecorner.com/digital/69a6d315ca89877d9533277a",
     "freeWindow": 5
   },
   {
@@ -59,14 +59,14 @@
     "updatedAt": "2026-03-16",
     "createdAt": "2026-03-15",
     "scheduleNote": "偶數日更新",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d315ca89877d9533277b",
+    "shopUrl": "https://stilltimecorner.com/digital/69a6d315ca89877d9533277b",
     "freeWindow": 5
   },
   {
     "id": "soul-journey",
     "title": "靈魂的轉運站",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/soul-journey/cover.png",
+    "cover": "https://stilltimecorner.com/images/soul-journey/cover.png",
     "genre": "療癒散文",
     "status": "完結",
     "category": "preview",
@@ -79,7 +79,7 @@
     "totalChapters": 10,
     "updatedAt": "2026-03-15",
     "createdAt": "2026-03-15",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69b7ccbed19d71c8649988e2",
+    "shopUrl": "https://stilltimecorner.com/digital/69b7ccbed19d71c8649988e2",
     "shopPrice": "NT$ 299",
     "previewChapters": 6
   },
@@ -87,7 +87,7 @@
     "id": "slash-rich",
     "title": "斜槓致富方程式",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/cover_slash_rich.png",
+    "cover": "https://stilltimecorner.com/images/cover_slash_rich.png",
     "genre": "商業理財",
     "status": "完結",
     "category": "preview",
@@ -101,14 +101,14 @@
     "previewChapters": 6,
     "updatedAt": "2026-03-01",
     "createdAt": "2025-12-01",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d9447a23a99125e781b8",
+    "shopUrl": "https://stilltimecorner.com/digital/69a6d9447a23a99125e781b8",
     "shopPrice": "NT$ 199"
   },
   {
     "id": "stock-signal",
     "title": "台股紅綠燈 2026",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/cover_stock_signal.png",
+    "cover": "https://stilltimecorner.com/images/cover_stock_signal.png",
     "genre": "投資理財",
     "status": "完結",
     "category": "preview",
@@ -122,7 +122,7 @@
     "previewChapters": 5,
     "updatedAt": "2026-02-01",
     "createdAt": "2025-11-01",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a6d9447a23a99125e781b9",
+    "shopUrl": "https://stilltimecorner.com/digital/69a6d9447a23a99125e781b9",
     "shopPrice": "NT$ 249"
   },
   {
@@ -143,14 +143,14 @@
     "previewChapters": 4,
     "updatedAt": "2026-01-01",
     "createdAt": "2025-10-01",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69a3c5f1081513b2186cc952",
+    "shopUrl": "https://stilltimecorner.com/digital/69a3c5f1081513b2186cc952",
     "shopPrice": "NT$ 380"
   },
   {
     "id": "love-last-mile",
     "title": "愛的最後一哩路",
     "author": "盧林說的",
-    "cover": "https://still-time-corner.vercel.app/images/love-last-mile/cover.jpg",
+    "cover": "https://stilltimecorner.com/images/love-last-mile/cover.jpg",
     "genre": "生命教育",
     "status": "完結",
     "category": "preview",
@@ -164,7 +164,7 @@
     "previewChapters": 3,
     "updatedAt": "2026-03-16",
     "createdAt": "2026-03-16",
-    "shopUrl": "https://still-time-corner.vercel.app/digital/69b7d34ec287a77bbd374da0",
+    "shopUrl": "https://stilltimecorner.com/digital/69b7d34ec287a77bbd374da0",
     "shopPrice": "NT$ 199"
   },
   {
@@ -221,7 +221,7 @@
     "totalChapters": 0,
     "updatedAt": "2026-03-26",
     "createdAt": "2026-03-26",
-    "shopUrl": "https://still-time-corner.vercel.app/digital",
+    "shopUrl": "https://stilltimecorner.com/digital",
     "shopPrice": "免費",
     "directPdfUrl": "/daodu.html"
   }

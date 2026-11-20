@@ -165,7 +165,7 @@ function FreeDonePage({
         {/* 雙CTA */}
         <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.8rem' }}>
           <a
-            href="https://still-time-corner.vercel.app/digital"
+            href="https://stilltimecorner.com/digital"
             target="_blank" rel="noopener noreferrer"
             style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.65rem', textDecoration: 'none', textAlign: 'center' }}>
             轉帳購買 →
@@ -267,7 +267,7 @@ function LockedPreviewPage({
             </button>
           </div>
           {error && <p style={{ color: '#f87171', fontSize: '0.75rem', marginTop: '4px', marginBottom: 0 }}>{error}</p>}
-          <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+          <a href="https://stilltimecorner.com/digital" target="_blank" rel="noopener noreferrer"
             style={{ display: 'block', textAlign: 'center', color: '#5b21b6', fontSize: '0.78rem', marginTop: '0.7rem', textDecoration: 'underline' }}>
             還沒購買？前往小舖 →
           </a>
@@ -577,7 +577,7 @@ export default function PsychAcademy() {
               </div>
               {codeError && <p style={{ color: '#f87171', fontSize: '0.72rem', margin: '0 0 0.4rem' }}>{codeError}</p>}
               <div style={{ display: 'flex', gap: '0.6rem' }}>
-                <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+                <a href="https://stilltimecorner.com/digital" target="_blank" rel="noopener noreferrer"
                   style={{ flex: 1, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
                   轉帳購買 →
                 </a>
@@ -691,7 +691,7 @@ export default function PsychAcademy() {
           <div style={{ color: '#5b21b6', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.3rem' }}>想解鎖完整內容？</div>
           <div style={{ color: '#6b7280', fontSize: '0.82rem', marginBottom: '1rem' }}>購買電子書取得學系解鎖碼，也可用魯魯積分兌換</div>
           <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center' }}>
-            <a href="https://still-time-corner.vercel.app/digital" target="_blank" rel="noopener noreferrer"
+            <a href="https://stilltimecorner.com/digital" target="_blank" rel="noopener noreferrer"
               style={{ flex: 1, maxWidth: 200, display: 'block', background: 'linear-gradient(135deg, #7c3aed, #2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.88rem', borderRadius: '30px', padding: '0.65rem', textDecoration: 'none', textAlign: 'center' }}>
               轉帳購買 →
             </a>

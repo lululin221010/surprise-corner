@@ -42,7 +42,7 @@ export interface AutonomicVolume {
   lessons: AutonomicLesson[];
 }
 
-const ST_BASE = 'https://still-time-corner.vercel.app/digital';
+const ST_BASE = 'https://stilltimecorner.com/digital';
 
 export const autonomicVolumes: AutonomicVolume[] = [
   {

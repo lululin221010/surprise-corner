@@ -51,7 +51,7 @@ export default function ShopRedirectCard() {
           還意猶未盡？去 Still Time Corner 找更多每日驚喜 ✨
         </p>
         <a
-          href="https://still-time-corner.vercel.app/"
+          href="https://stilltimecorner.com/"
           target="_blank"
           rel="noopener noreferrer"
           style={{

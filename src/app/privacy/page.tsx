@@ -63,7 +63,7 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="三、第三方連結">
-            <P>本站包含連往 Still Time Corner（<a href="https://still-time-corner.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color:'#a78bfa' }}>still-time-corner.vercel.app</a>）等外部網站的連結。點擊後適用該網站自身的隱私權政策，本站不負相關責任。</P>
+            <P>本站包含連往 Still Time Corner（<a href="https://stilltimecorner.com/" target="_blank" rel="noopener noreferrer" style={{ color:'#a78bfa' }}>stilltimecorner.com</a>）等外部網站的連結。點擊後適用該網站自身的隱私權政策，本站不負相關責任。</P>
           </Section>
 
           <Section title="四、瀏覽器儲存（LocalStorage）">

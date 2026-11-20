@@ -181,7 +181,7 @@ export default async function NovelPage({ params }: Props) {
                 前往小舖閱讀完整故事。
               </p>
               <a
-                href={novel.shopUrl || "https://still-time-corner.vercel.app/digital"}
+                href={novel.shopUrl || "https://stilltimecorner.com/digital"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shop-btn"

@@ -95,7 +95,7 @@ export default function Navbar() {
 
       {/* 電子書（含書評角落）→ ST digital */}
       <a
-        href="https://still-time-corner.vercel.app/digital"
+        href="https://stilltimecorner.com/digital"
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => (window as any).gtag?.('event', 'click_to_ST', { event_category: 'outbound', source: 'navbar' })}

@@ -35,7 +35,7 @@ export default function AutonomicAcademy() {
     if (!code) return;
     setUnlockStatus('loading');
     try {
-      const res = await fetch(`https://still-time-corner.vercel.app/api/verify-unlock?code=${encodeURIComponent(code)}`);
+      const res = await fetch(`https://stilltimecorner.com/api/verify-unlock?code=${encodeURIComponent(code)}`);
       const data = await res.json();
       if (data.valid) {
         localStorage.setItem(`sc_autonomic_unlock_${data.target}`, 'true');

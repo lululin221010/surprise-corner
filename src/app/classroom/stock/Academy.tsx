@@ -21,10 +21,10 @@ function getUnlockKey(courseId: string): string {
 
 // 課程id → ST商品購買連結 + 顯示價格
 function getPurchaseInfo(courseId: string): { url: string; price: string } {
-  if (courseId === 'stock-master') return { url: 'https://still-time-corner.vercel.app/digital/6a2ff36082d80248e37382fa', price: 'NT$449' };
-  if (courseId === 'stock-advanced') return { url: 'https://still-time-corner.vercel.app/digital/6a2ff35f82d80248e37382f9', price: 'NT$349' };
-  if (courseId === 'etf-investigation') return { url: 'https://still-time-corner.vercel.app/digital/6a4617648dca70eb5cb46506', price: 'NT$299' };
-  return { url: 'https://still-time-corner.vercel.app/digital/6a2965ef6a2fdbc340cab167', price: 'NT$249' };
+  if (courseId === 'stock-master') return { url: 'https://stilltimecorner.com/digital/6a2ff36082d80248e37382fa', price: 'NT$449' };
+  if (courseId === 'stock-advanced') return { url: 'https://stilltimecorner.com/digital/6a2ff35f82d80248e37382f9', price: 'NT$349' };
+  if (courseId === 'etf-investigation') return { url: 'https://stilltimecorner.com/digital/6a4617648dca70eb5cb46506', price: 'NT$299' };
+  return { url: 'https://stilltimecorner.com/digital/6a2965ef6a2fdbc340cab167', price: 'NT$249' };
 }
 
 // 理財調查局全五案結案畫面用（不是獨立第六堂課，五案全部完成後顯示一次）
@@ -101,7 +101,7 @@ export default function Academy() {
     if (!code) return;
     setUnlockStatus('loading');
     try {
-      const res = await fetch(`https://still-time-corner.vercel.app/api/verify-unlock?code=${encodeURIComponent(code)}`);
+      const res = await fetch(`https://stilltimecorner.com/api/verify-unlock?code=${encodeURIComponent(code)}`);
       const data = await res.json();
       if (data.valid) {
         localStorage.setItem(`sc_stock_unlock_${data.target}`, 'true');

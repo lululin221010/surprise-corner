@@ -61,8 +61,8 @@ def make_paywall_html(product_id, price='NT$ 199', chapters=6, series_guide='/co
     <h3 class="paywall-title">繼續閱讀完整版</h3>
     <p class="paywall-desc">試閱到這裡。完整版收錄全 {chapters} 章，請至小舖購買完整版電子書。</p>
     <div class="paywall-price">{price}</div>
-    <a href="https://still-time-corner.vercel.app/digital/{product_id}" class="paywall-btn" target="_blank">前往小舖購買完整版 →</a>
-    <p class="paywall-note">購買後到 <a href="https://still-time-corner.vercel.app/my-purchases" target="_blank">我的購買</a> 自助下載 ・ <a href="{series_guide}">← 回到{series_name}導讀</a></p>
+    <a href="https://stilltimecorner.com/digital/{product_id}" class="paywall-btn" target="_blank">前往小舖購買完整版 →</a>
+    <p class="paywall-note">購買後到 <a href="https://stilltimecorner.com/my-purchases" target="_blank">我的購買</a> 自助下載 ・ <a href="{series_guide}">← 回到{series_name}導讀</a></p>
   </div>
 
 """

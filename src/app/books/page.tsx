@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ShareButtons from '@/components/ShareButtons';
 
-const ST_BASE = 'https://still-time-corner.vercel.app';
+const ST_BASE = 'https://stilltimecorner.com';
 const SS_BASE = 'https://surprise-corner.vercel.app';
 
 const SERIES = [

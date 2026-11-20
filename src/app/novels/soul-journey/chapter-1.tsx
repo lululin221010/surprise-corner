@@ -169,7 +169,7 @@ export default function SoulJourneyChapter1({ isLocked = false }: Props) {
             <div className="text-center py-10 space-y-5">
               <p className="text-purple-300 font-medium text-sm">繼續閱讀完整章節</p>
               <a
-                href="https://still-time-corner.vercel.app/digital"
+                href="https://stilltimecorner.com/digital"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-purple-600 hover:bg-purple-500 text-white font-bold px-8 py-3 rounded-full text-sm transition-all shadow-lg shadow-purple-900/40"
@@ -322,7 +322,7 @@ export default function SoulJourneyChapter1({ isLocked = false }: Props) {
         <div className="text-center space-y-5">
           <p className="text-gray-500 text-sm">喜歡這篇的你，也許還會喜歡</p>
           <a
-            href="https://still-time-corner.vercel.app/digital"
+            href="https://stilltimecorner.com/digital"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/40 text-white px-8 py-4 rounded-2xl text-sm font-medium transition-all group"

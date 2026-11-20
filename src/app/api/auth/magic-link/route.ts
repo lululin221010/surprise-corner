@@ -4,7 +4,7 @@
 // 延後到verify-magic真的驗證過token才建立，避免任意email在沒證明擁有權前就
 // 被拿去建立一個能登入書店的帳號
 //
-// 原本FROM寫的是still-time-corner.vercel.app（Vercel配的子網域，打錯字/舊網域，
+// 原本FROM寫的是stilltimecorner.com（Vercel配的子網域，打錯字/舊網域，
 // 從未驗證過），實際在Resend驗證過的是stilltimecorner.com——兩個完全是不同
 // 字串，導致Resend一直回傳「網域未驗證」，而resend SDK失敗時只回傳{error}不會
 // throw，這裡原本又沒檢查，所以一直回傳success但讀者根本收不到信。

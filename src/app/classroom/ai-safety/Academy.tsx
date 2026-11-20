@@ -15,8 +15,8 @@ const UNLOCK_KEYS: Record<string, string> = {
 };
 
 const PURCHASE_URLS: Record<string, string> = {
-  'safety-upper': 'https://still-time-corner.vercel.app/digital/6a4e0bed7cc6e59bb60d4f27',
-  'safety-lower': 'https://still-time-corner.vercel.app/digital/6a4e0bed7cc6e59bb60d4f28',
+  'safety-upper': 'https://stilltimecorner.com/digital/6a4e0bed7cc6e59bb60d4f27',
+  'safety-lower': 'https://stilltimecorner.com/digital/6a4e0bed7cc6e59bb60d4f28',
 };
 
 const PRICES: Record<string, string> = {
@@ -47,7 +47,7 @@ export default function Academy() {
     if (!code) return;
     setUnlockStatus('loading');
     try {
-      const res = await fetch(`https://still-time-corner.vercel.app/api/verify-unlock?code=${encodeURIComponent(code)}`);
+      const res = await fetch(`https://stilltimecorner.com/api/verify-unlock?code=${encodeURIComponent(code)}`);
       const data = await res.json();
       if (data.valid) {
         localStorage.setItem(`sc_ai_unlock_${data.target}`, 'true');
@@ -121,7 +121,7 @@ export default function Academy() {
             </div>
             {unlockStatus === 'error' && <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>解鎖碼無效，請確認後再試</p>}
             {unlockStatus === 'success' && <p style={{ color: '#16a34a', fontSize: '0.75rem', margin: '0 0 0.5rem' }}>✅ 解鎖成功！</p>}
-            <a href={PURCHASE_URLS[activeCourse.id] ?? 'https://still-time-corner.vercel.app/digital'}
+            <a href={PURCHASE_URLS[activeCourse.id] ?? 'https://stilltimecorner.com/digital'}
               target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', background: 'linear-gradient(135deg,#0891b2,#2563eb)', color: '#fff', fontWeight: 700, fontSize: '0.82rem', borderRadius: '20px', padding: '0.5rem', textDecoration: 'none', textAlign: 'center' }}>
               購買本書解鎖課程（{PRICES[activeCourse.id] ?? 'NT$249'}） →

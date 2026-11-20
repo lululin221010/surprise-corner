@@ -154,7 +154,7 @@ export default function LuluChatPage() {
         maxWidth: '680px', width: '100%', margin: '0 auto',
         padding: '0 1rem', position: 'relative', zIndex: 1,
       }}>
-        <a href="https://still-time-corner.vercel.app" target="_blank" rel="noopener noreferrer"
+        <a href="https://stilltimecorner.com" target="_blank" rel="noopener noreferrer"
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(168,85,247,0.1))',

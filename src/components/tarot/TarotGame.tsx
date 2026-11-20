@@ -114,7 +114,7 @@ export default function TarotGame() {
             <p className="text-purple-200 font-bold text-sm mb-1">今日占卜已完成</p>
             <p className="text-purple-400 text-xs mb-4">明天又有 {MAX_FREE_DAILY} 次機會，好好沉澱今日的牌意吧 ✨</p>
             <a
-              href="https://still-time-corner.vercel.app"
+              href="https://stilltimecorner.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-orange-400 to-pink-500 text-white px-6 py-2.5 rounded-xl font-black text-sm hover:opacity-90 transition-all"

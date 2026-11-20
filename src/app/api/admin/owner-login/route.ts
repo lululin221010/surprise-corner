@@ -2,7 +2,7 @@
 // 店長輸入 email → 寄出一次性驗證連結（10分鐘有效），取代帳號密碼登入
 // 驗證連結見 src/app/api/admin/owner-login/verify/route.ts
 //
-// 原本走Resend，但FROM寫的是still-time-corner.vercel.app（Vercel配的子網域，
+// 原本走Resend，但FROM寫的是stilltimecorner.com（Vercel配的子網域，
 // 打錯字/舊網域，從未驗證過），實際在Resend驗證過的是stilltimecorner.com——
 // 兩個完全是不同字串，導致Resend一直回傳「網域未驗證」。改回Resend，FROM
 // 改用正確的已驗證網域。
