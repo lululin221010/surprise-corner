@@ -360,6 +360,10 @@
             <h2>✅ 今天的小任務</h2>
             <p id="task"></p>
           </div>
+          <div class="block">
+            <h2>🪔 燒香徵兆</h2>
+            <p id="incense"></p>
+          </div>
           <div class="comment-box">
             <h2>🐱 魯魯的評語</h2>
             <p id="comment"></p>
@@ -463,6 +467,43 @@
           "今天買東西時選排隊人少的那一攤，把排隊運留到真正需要的時候。"
         ];
 
+        var INCENSE_LOW = [
+          "魯魯燒了一炷香，三長兩短。出門請帶傘，順便帶一點耐心。",
+          "香燒到一半，自己滅了。魯魯說：這不是壞運，是老天叫你今天先躺平。",
+          "香灰彎腰彎到快斷氣，跟你今天的運勢一樣，需要人扶一下。",
+          "三炷香燒出三種速度，魯魯看不懂，只看懂一件事：今天別衝。",
+          "香才剛點著就歪向一邊，魯魯搖搖頭：這一局，先讓別人贏。",
+          "魯魯燒香求個平安，結果香煙全往他臉上飄——好，今天在家最平安。",
+          "香燒得劈哩啪啦像放鞭炮，熱鬧是熱鬧，你在旁邊看就好，別湊過去。",
+          "一炷香燒出一個「慢」字，魯魯翻譯：急事緩辦，衰事也會緩緩來，所以先睡飽再說。",
+          "香點了三次才點著，魯魯嘆氣：連香都想罷工，你今天就別太拚了。",
+          "香灰掉得比魯魯的毛還快。今天出門，眼睛請乖乖放在路面上。"
+        ];
+
+        var INCENSE_MID = [
+          "魯魯燒了一炷香，不長不短、不歪不直，跟你今天一樣：穩穩過，就是好日子。",
+          "香燒到一半，煙往左飄一點又自己回正。魯魯說：小波折會有，結局不差。",
+          "香燒得普普通通，沒驚喜也沒驚嚇。魯魯打了個哈欠：平穩，也是一種贏。",
+          "三炷香高度差不多，魯魯點頭：今天不用求大贏，不輸就是賺。"
+        ];
+
+        var INCENSE_HIGH = [
+          "魯魯燒了一炷香，香煙筆直往上，一點都不歪——今天穩了，放心衝。",
+          "香燒得又直又旺，魯魯點頭：這個氣勢，可以去買彩券……旁邊那家飲料店。",
+          "三炷香整整齊齊一樣高，魯魯說：難得，今天連運氣都排隊聽你的。",
+          "香煙筆直衝天，像在對你比讚。魯魯蓋章認證：今日大吉，做什麼都順手。",
+          "香灰結成一朵小花，魯魯驚呼：這是好運開花的形狀，今天會有好消息。",
+          "一炷香燒得乾淨俐落、不拖泥帶水，跟你的好運一樣——今天穩穩的。",
+          "香煙直直往上飄，魯魯瞇眼笑：連風都捨不得吹歪你的運，放心出門吧。",
+          "魯魯燒香問運勢，香自己站得直挺挺的——不用問了，今天就是你的場子。"
+        ];
+
+        function incenseFor(score) {
+          if (score < 50) return pick(INCENSE_LOW);
+          if (score >= 70) return pick(INCENSE_HIGH);
+          return pick(INCENSE_MID);
+        }
+
         var frame = document.getElementById("photoFrame");
         var status = document.getElementById("sniffStatus");
         var btn = document.getElementById("sniffBtn");
@@ -525,6 +566,7 @@
             tier: tier.name,
             prophecy: pick(PROPHECIES),
             task: pick(TASKS),
+            incense: incenseFor(score),
             comment: pick(tier.comments)
           };
 
@@ -536,6 +578,7 @@
             document.getElementById("tierSub").textContent = tier.sub;
             document.getElementById("prophecy").textContent = lastResult.prophecy;
             document.getElementById("task").textContent = lastResult.task;
+            document.getElementById("incense").textContent = lastResult.incense;
             document.getElementById("comment").textContent = lastResult.comment;
             document.getElementById("paws").innerHTML = pawString(score);
             card.classList.add("show");
@@ -564,6 +607,7 @@
             "今日狗屎運指數：" + lastResult.score + "%（" + lastResult.tier + "）\n" +
             "🔮 運勢小預言：" + lastResult.prophecy + "\n" +
             "✅ 今日小任務：" + lastResult.task + "\n" +
+            "🪔 燒香徵兆：" + lastResult.incense + "\n" +
             "魯魯的評語：" + lastResult.comment;
           function done() {
             copiedMsg.classList.add("show");
