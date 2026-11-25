@@ -306,6 +306,36 @@
         font-size: 0.98rem;
       }
       .copied.show { display: block; }
+      .copy-fallback {
+        margin-top: 1rem;
+        background: var(--card);
+        border: 2px solid var(--line);
+        border-radius: 16px;
+        padding: 0.9rem 1rem 1rem;
+        text-align: left;
+      }
+      .copy-fallback[hidden] { display: none; }
+      .copy-fallback-hint {
+        margin: 0 0 0.6rem;
+        font-size: 0.92rem;
+        line-height: 1.6;
+        font-weight: 800;
+        color: var(--accent-deep);
+      }
+      .copy-fallback textarea {
+        width: 100%;
+        min-height: 11rem;
+        resize: vertical;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        background: var(--bg-soft);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        padding: 0.7rem 0.8rem;
+      }
+      .copy-fallback textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 
       @media (prefers-reduced-motion: reduce) {
         .photo-frame.sniffing, .result.show, .sniff-status .dots span { animation: none; }
@@ -376,7 +406,11 @@
         <button class="btn-ghost" id="againBtn" type="button">再嗅一次</button>
         <button class="btn-ghost" id="copyBtn" type="button">複製結果文字</button>
       </div>
-      <p class="copied" id="copiedMsg">已複製！貼給朋友，跟他比運氣吧。</p>
+      <p class="copied" id="copiedMsg" aria-live="polite">已複製！貼給朋友，跟他比運氣吧。</p>
+      <div class="copy-fallback" id="copyFallback" hidden>
+        <p class="copy-fallback-hint">自動複製沒有成功，下面這段文字已經幫你全選好了，請長按或按複製自己貼上：</p>
+        <textarea id="copyFallbackText" readonly aria-label="複製結果文字（手動複製用）"></textarea>
+      </div>
     </main>
 
     <script>
@@ -504,12 +538,15 @@
           return pick(INCENSE_MID);
         }
 
+        var GAME_URL = "https://surprise-corner.vercel.app/games-static/lulu-sniff-luck.html";
         var frame = document.getElementById("photoFrame");
         var status = document.getElementById("sniffStatus");
         var btn = document.getElementById("sniffBtn");
         var card = document.getElementById("resultCard");
         var actions = document.getElementById("actions");
         var copiedMsg = document.getElementById("copiedMsg");
+        var copyFallback = document.getElementById("copyFallback");
+        var copyFallbackText = document.getElementById("copyFallbackText");
         var lastResult = null;
         var sniffing = false;
 
@@ -554,6 +591,7 @@
           sniffing = true;
           btn.disabled = true;
           copiedMsg.classList.remove("show");
+          copyFallback.hidden = true;
           card.classList.remove("show");
           actions.classList.remove("show");
           frame.classList.add("sniffing");
@@ -608,24 +646,78 @@
             "🔮 運勢小預言：" + lastResult.prophecy + "\n" +
             "✅ 今日小任務：" + lastResult.task + "\n" +
             "🪔 燒香徵兆：" + lastResult.incense + "\n" +
-            "魯魯的評語：" + lastResult.comment;
-          function done() {
+            "魯魯的評語：" + lastResult.comment + "\n" +
+            "🎮 一起來玩：" + GAME_URL;
+
+          copiedMsg.classList.remove("show");
+          copyFallback.hidden = true;
+
+          function showSuccess() {
+            copyFallback.hidden = true;
             copiedMsg.classList.add("show");
             setTimeout(function () { copiedMsg.classList.remove("show"); }, 2600);
           }
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done, function () { fallback(); done(); });
-          } else { fallback(); done(); }
-          function fallback() {
+
+          function showManual(textToShow) {
+            copiedMsg.classList.remove("show");
+            copyFallbackText.value = textToShow;
+            copyFallback.hidden = false;
+            // 全選起來，讓使用者直接長按／快捷鍵複製，不用自己拖選
+            try {
+              copyFallbackText.focus({ preventScroll: false });
+              copyFallbackText.select();
+              copyFallbackText.setSelectionRange(0, copyFallbackText.value.length);
+            } catch (e) {}
+            copyFallback.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+
+          // 舊式備援：回傳是否真的複製成功，不再無條件當成功
+          function legacyCopy() {
             var ta = document.createElement("textarea");
             ta.value = text;
+            ta.setAttribute("readonly", "");
             ta.style.position = "fixed";
+            ta.style.top = "0";
+            ta.style.left = "0";
             ta.style.opacity = "0";
             document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand("copy"); } catch (e) {}
+            var ok = false;
+            try {
+              ta.focus();
+              ta.select();
+              ta.setSelectionRange(0, ta.value.length);
+              ok = document.execCommand("copy");
+            } catch (e) {
+              ok = false;
+            }
             document.body.removeChild(ta);
+            return ok === true;
           }
+
+          function tryLegacy() {
+            if (legacyCopy()) {
+              showSuccess();
+            } else {
+              showManual(text);
+            }
+          }
+
+          if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+            navigator.clipboard.writeText(text).then(showSuccess, function () {
+              // 新版剪貼簿被拒絕（權限／非安全環境／iframe 限制）→ 走備援
+              tryLegacy();
+            });
+          } else {
+            // 沒有新版剪貼簿功能 → 直接走備援
+            tryLegacy();
+          }
+        });
+        // 使用者在備援框裡點一下就自動全選，方便手動複製
+        copyFallbackText.addEventListener("click", function () {
+          try { copyFallbackText.select(); } catch (e) {}
+        });
+        copyFallbackText.addEventListener("focus", function () {
+          try { copyFallbackText.select(); } catch (e) {}
         });
       })();
     </script>
